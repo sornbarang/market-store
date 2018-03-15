@@ -8,8 +8,8 @@
     <br/> 
     <h3 class="text-center">Choose</h3> 
     <br/>
-    <button type="button" class="btn btn-outline-primary btn-lg">F To F</button>
-    <button type="button" class="btn btn-outline-info btn-lg">C To C</button> 
+    <button type="button" class="btn btn-outline-primary btn-lg" title="Face To Face">F To F</button>
+    <button type="button" class="btn btn-outline-info btn-lg" title="Customer To Customer">C To C</button> 
 </div>
 
 
