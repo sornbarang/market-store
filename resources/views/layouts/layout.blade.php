@@ -15,6 +15,11 @@
         <style>
             body, html {
                 height: 100%;
+                background: linear-gradient(
+                rgba(0, 0, 0, 0.4), 
+                rgba(0, 0, 0, 0.2)
+                ),url("{{asset('/')}}imgs/bg.png");
+                color:#fff;
             }
             #flex-container {
                 display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
@@ -34,13 +39,23 @@
                 width:200px;
                 background-color: red; 
             }
+            .btncus{
+                background:#2ECC71;
+                color:#fff;
+                font-size:15px;
+            }
+            .btncus.focus, .btncus:focus{
+                box-shadow:inherit;
+            }
         </style>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body> 
+        
         <div id="flex-container">
+        
             @yield('content')
         </div>
     </body>
