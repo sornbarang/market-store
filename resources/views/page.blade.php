@@ -10,8 +10,5 @@
         <div class="p-2"><button type="button" class="btn btn-lg btncus" title="Face To Face">F To F</button></div>
         <div class="p-2"><button type="button" class="btn btn-lg btncus" title="Customer To Customer">C To C</button> </div>
     </div>
-    
-    
 </div> 
-
 @stop
