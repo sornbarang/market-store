@@ -17,11 +17,20 @@
                 height: 100%;
                 background: linear-gradient(
                 rgba(0, 0, 0, 0.4), 
-                rgba(0, 0, 0, 0.2)
+                rgba(0, 0, 0, 0.1)
                 ),url("{{asset('/')}}imgs/bg.png");
                 color:#fff;
             }
             #flex-container {
+                /* display: -webkit-box;       
+                display: -moz-box;         
+                display: -webkit-flex;      
+                display: flex;              
+                -webkit-box-flex-direction: row;
+                -moz-box-flex-direction: row;
+                -webkit-flex-direction: row;
+                flex-direction: row;
+                height:100%;   */ 
                 display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
                 display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
                 display: -webkit-flex;     /* NEW - Chrome */
@@ -30,15 +39,15 @@
                 -moz-box-flex-direction: row;
                 -webkit-flex-direction: row;
                 flex-direction: row;
-                height:100%;  
-            }
-
-            #flex-item {
-                margin: auto;
-                height:200px;
-                width:200px;
-                background-color: red; 
-            }
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow:auto;
+            }  
             .btncus{
                 background:#2ECC71;
                 color:#fff;
