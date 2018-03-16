@@ -14,6 +14,12 @@
 Route::get('/', function () {
     return view('page');
 });
+Route::prefix('c2c')->group(function () {
+    Route::get('/', function () {
+        return view('c2c/page/index');
+    });
+});
+
 
 Auth::routes();
 
