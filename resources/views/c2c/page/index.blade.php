@@ -381,115 +381,31 @@
 
         <!-- start .row -->
         <div class="row">
-            <!-- start .col-md-4 -->
-            <div class="col-md-4 col-sm-6">
-                <!-- start .single-product -->
-                <div class="product product--card product--card3">
 
-                    <div class="product__thumbnail">
-                        <img src="images/p1.jpg" alt="Product Image">
-                        <div class="prod_btn">
-                            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                        </div><!-- end /.prod_btn -->
-                    </div><!-- end /.product__thumbnail -->
+            @php
+                $categories = ['Phone & Tablets','Computers & Accessories','Electronics & Appliances','Cars And Vehicles','Fashion & Beauty'];
+            @endphp
 
-                    <div class="product-desc">
-                        <a href="#" class="product_title"><h4>Phone & Tablets</h4></a>
-                    </div><!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div><!-- end /.col-md-4 -->
-            <!-- start .col-md-4 -->
-            <div class="col-md-4 col-sm-6">
-                <!-- start .single-product -->
-                <div class="product product--card product--card3">
+            @foreach ($categories as $category)
+                <!-- start .col-md-4 -->
+                    <div class="col-md-4 col-sm-6">
+                        <!-- start .single-product -->
+                        <div class="product product--card product--card3">
 
-                    <div class="product__thumbnail">
-                        <img src="images/p1.jpg" alt="Product Image">
-                        <div class="prod_btn">
-                            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                        </div><!-- end /.prod_btn -->
-                    </div><!-- end /.product__thumbnail -->
+                            <div class="product__thumbnail">
+                                <img src="images/p1.jpg" alt="Product Image">
+                                <div class="prod_btn">
+                                    <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
+                                </div><!-- end /.prod_btn -->
+                            </div><!-- end /.product__thumbnail -->
 
-                    <div class="product-desc">
-                        <a href="#" class="product_title"><h4>Computers & Accessories</h4></a>
-                    </div><!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div><!-- end /.col-md-4 -->
-            <!-- start .col-md-4 -->
-            <div class="col-md-4 col-sm-6">
-                <!-- start .single-product -->
-                <div class="product product--card product--card3">
-
-                    <div class="product__thumbnail">
-                        <img src="images/p1.jpg" alt="Product Image">
-                        <div class="prod_btn">
-                            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                        </div><!-- end /.prod_btn -->
-                    </div><!-- end /.product__thumbnail -->
-
-                    <div class="product-desc">
-                        <a href="#" class="product_title"><h4>Electronics & Appliances</h4></a>
-                    </div><!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div><!-- end /.col-md-4 -->
-            <!-- start .col-md-4 -->
-            <div class="col-md-4 col-sm-6">
-                <!-- start .single-product -->
-                <div class="product product--card product--card3">
-
-                    <div class="product__thumbnail">
-                        <img src="images/p1.jpg" alt="Product Image">
-                        <div class="prod_btn">
-                            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                        </div><!-- end /.prod_btn -->
-                    </div><!-- end /.product__thumbnail -->
-
-                    <div class="product-desc">
-                        <a href="#" class="product_title"><h4>Cars and Vehicles</h4></a>
-                    </div><!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div><!-- end /.col-md-4 -->
-            <!-- start .col-md-4 -->
-            <div class="col-md-4 col-sm-6">
-                <!-- start .single-product -->
-                <div class="product product--card product--card3">
-
-                    <div class="product__thumbnail">
-                        <img src="images/p1.jpg" alt="Product Image">
-                        <div class="prod_btn">
-                            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                        </div><!-- end /.prod_btn -->
-                    </div><!-- end /.product__thumbnail -->
-
-                    <div class="product-desc">
-                        <a href="#" class="product_title"><h4>House & Lands</h4></a>
-                    </div><!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div><!-- end /.col-md-4 -->
-            <!-- start .col-md-4 -->
-            <div class="col-md-4 col-sm-6">
-                <!-- start .single-product -->
-                <div class="product product--card product--card3">
-
-                    <div class="product__thumbnail">
-                        <img src="images/p1.jpg" alt="Product Image">
-                        <div class="prod_btn">
-                            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                        </div><!-- end /.prod_btn -->
-                    </div><!-- end /.product__thumbnail -->
-
-                    <div class="product-desc">
-                        <a href="#" class="product_title"><h4>Fashion & Beauty</h4></a>
-                    </div><!-- end /.product-desc -->
-                </div>
-                <!-- end /.single-product -->
-            </div><!-- end /.col-md-4 -->
-
+                            <div class="product-desc">
+                                <a href="#" class="product_title"><h4>{{$category}}</h4></a>
+                            </div><!-- end /.product-desc -->
+                        </div>
+                        <!-- end /.single-product -->
+                    </div><!-- end /.col-md-4 -->
+            @endforeach
 
         </div>
 
