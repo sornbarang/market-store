@@ -388,14 +388,14 @@
 
             @foreach ($categories as $category)
                 <!-- start .col-md-4 -->
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-3 col-sm-6">
                         <!-- start .single-product -->
                         <div class="product product--card product--card3">
 
                             <div class="product__thumbnail">
                                 <img src="images/p1.jpg" alt="Product Image">
                                 <div class="prod_btn">
-                                    <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
+                                    <a href="c2c/temp/categories" class="transparent btn--sm btn--round">More Info</a>
                                 </div><!-- end /.prod_btn -->
                             </div><!-- end /.product__thumbnail -->
 

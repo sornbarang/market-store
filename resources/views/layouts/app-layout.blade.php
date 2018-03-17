@@ -44,15 +44,15 @@
                 <!-- start .col-md-3 -->
                 <div class="col-md-3 col-sm-3 col-xs-7 v_middle">
                     <div class="logo">
-                        <a href="index.html"><img src="images/logo.png" alt="logo image"></a>
+                        <a href="#"><img src="{{asset('/')}}images/logo.png" alt="logo image"></a>
                     </div>
                 </div><!-- end /.col-md-3 -->
 
                 <!-- start .col-md-5 -->
                 <div class="col-md-8 col-md-offset-1 col-xs-5 col-sm-9 v_middle">
                     <!-- start .author-area -->
-                    <div class="author-area">
-                        <a href="signup.html" class="author-area__seller-btn inline">Become a Seller</a>
+                    <div class="author-area"> 
+                        <a href="{{ url('c2c/temp/customer') }}" class="author-area__seller-btn inline">Become a Seller</a>
 
                         <div class="author__notification_area">
                             <ul>
@@ -72,7 +72,7 @@
                                             <div class="notification">
                                                 <div class="notification__info">
                                                     <div class="info_avatar">
-                                                        <img src="images/notification_head.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head.png" alt="">
                                                     </div>
                                                     <div class="info">
                                                         <p><span>Anderson</span> added to Favourite <a href="#">Mccarther Coffee Shop</a></p>
@@ -88,7 +88,7 @@
                                             <div class="notification">
                                                 <div class="notification__info">
                                                     <div class="info_avatar">
-                                                        <img src="images/notification_head2.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head2.png" alt="">
                                                     </div>
                                                     <div class="info">
                                                         <p><span>Michael</span> commented on <a href="#">MartPlace Extension Bundle</a></p>
@@ -104,7 +104,7 @@
                                             <div class="notification">
                                                 <div class="notification__info">
                                                     <div class="info_avatar">
-                                                        <img src="images/notification_head3.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head3.png" alt="">
                                                     </div>
                                                     <div class="info">
                                                         <p><span>Khamoka </span>purchased <a href="#">  Visibility Manager Subscriptions</a></p>
@@ -120,7 +120,7 @@
                                             <div class="notification">
                                                 <div class="notification__info">
                                                     <div class="info_avatar">
-                                                        <img src="images/notification_head4.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head4.png" alt="">
                                                     </div>
                                                     <div class="info">
                                                         <p><span>Anderson</span> added to Favourite <a href="#">Mccarther Coffee Shop</a></p>
@@ -151,7 +151,7 @@
                                             <a href="message.html" class="message recent">
                                                 <div class="message__actions_avatar">
                                                     <div class="avatar">
-                                                        <img src="images/notification_head4.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head4.png" alt="">
                                                     </div>
                                                 </div><!-- end /.actions -->
 
@@ -171,7 +171,7 @@
                                             <a href="message.html" class="message recent">
                                                 <div class="message__actions_avatar">
                                                     <div class="avatar">
-                                                        <img src="images/notification_head5.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head5.png" alt="">
                                                     </div>
                                                 </div><!-- end /.actions -->
 
@@ -191,7 +191,7 @@
                                             <a href="message.html" class="message">
                                                 <div class="message__actions_avatar">
                                                     <div class="avatar">
-                                                        <img src="images/notification_head6.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head6.png" alt="">
                                                     </div>
                                                 </div><!-- end /.actions -->
 
@@ -210,7 +210,7 @@
                                             <a href="message.html" class="message">
                                                 <div class="message__actions_avatar">
                                                     <div class="avatar">
-                                                        <img src="images/notification_head3.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head3.png" alt="">
                                                     </div>
                                                 </div><!-- end /.actions -->
 
@@ -229,7 +229,7 @@
                                             <a href="message.html" class="message">
                                                 <div class="message__actions_avatar">
                                                     <div class="avatar">
-                                                        <img src="images/notification_head4.png" alt="">
+                                                        <img src="{{asset('/')}}images/notification_head4.png" alt="">
                                                     </div>
                                                 </div><!-- end /.actions -->
 
@@ -258,12 +258,12 @@
                                             <div class="cart_product">
                                                 <div class="product__info">
                                                     <div class="thumbn">
-                                                        <img src="images/capro1.jpg" alt="cart product thumbnail">
+                                                        <img src="{{asset('/')}}images/capro1.jpg" alt="cart product thumbnail">
                                                     </div>
 
                                                     <div class="info">
                                                         <a class="title" href="single-product.html">Finance and Consulting Business Theme</a>
-                                                        <div class="cat"><a href="#"><img src="images/catword.png" alt="">Wordpress</a></div>
+                                                        <div class="cat"><a href="#"><img src="{{asset('/')}}images/catword.png" alt="">Wordpress</a></div>
                                                     </div>
                                                 </div>
 
@@ -275,12 +275,12 @@
                                             <div class="cart_product">
                                                 <div class="product__info">
                                                     <div class="thumbn">
-                                                        <img src="images/capro2.jpg" alt="cart product thumbnail">
+                                                        <img src="{{asset('/')}}images/capro2.jpg" alt="cart product thumbnail">
                                                     </div>
 
                                                     <div class="info">
                                                         <a class="title" href="single-product.html">Flounce - Multipurpose OpenCart Theme</a>
-                                                        <div class="cat"><a href="#"><img src="images/catword.png" alt="">Wordpress</a></div>
+                                                        <div class="cat"><a href="#"><img src="{{asset('/')}}images/catword.png" alt="">Wordpress</a></div>
                                                     </div>
                                                 </div>
 
@@ -305,7 +305,7 @@
                         <!--start .author-author__info-->
                         <div class="author-author__info inline has_dropdown">
                             <div class="author__avatar">
-                                <img src="images/usr_avatar.png" alt="user avatar">
+                                <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
 
                             </div>
                             <div class="autor__info">
@@ -342,7 +342,7 @@
                             <span class="lnr lnr-cross close_menu"></span>
                             <div class="author-author__info">
                                 <div class="author__avatar v_middle">
-                                    <img src="images/usr_avatar.png" alt="user avatar">
+                                    <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
                                 </div>
                                 <div class="autor__info v_middle">
                                     <p class="name">
@@ -649,7 +649,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="info-footer">
                         <div class="info__logo">
-                            <img src="images/flogo.png" alt="footer logo">
+                            <img src="{{asset('/')}}images/flogo.png" alt="footer logo">
                         </div>
                         <p class="info--text">Nunc placerat mi id nisi interdum they mollis. Praesent pharetra, justo ut scel erisque the mattis, leo quam.</p>
                         <ul class="info-contact">
@@ -729,16 +729,20 @@
     </div><!-- end /.footer-big -->
 
     <div class="mini-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="copyright-text">
-                        <p>© 2018 <a href="#">MartPlace</a>. All rights reserved. Created by <a href="#">Freelancer</a></p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright-text">
+                            <p>&copy; 2017 <a href="#">MartPlace</a>. All rights reserved. Created by <a href="#">AazzTech</a></p>
+                        </div>
+
+                        <div class="go_top">
+                            <span class="lnr lnr-chevron-up"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </footer>
 <!--================================
     END FOOTER AREA

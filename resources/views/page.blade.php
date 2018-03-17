@@ -7,8 +7,8 @@
     <br/>  
     <br/>  
     <div class="d-flex justify-content-center">
-        <div class="p-2"><button type="button" class="btn btn-lg btncus" title="Face To Face">F To F</button></div>
-        <div class="p-2"><button type="button" class="btn btn-lg btncus" title="Customer To Customer">C To C</button> </div>
+        <div class="p-2 ftof"><button type="button" class="btn btn-lg btncus" title="Face To Face">F To F</button></div>
+        <a href="/c2c"><div class="p-2 ctoc"><button type="button" class="btn btn-lg btncus" title="Customer To Customer">C To C</button> </div></a>
     </div>
 </div> 
 @stop
