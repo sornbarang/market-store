@@ -29,8 +29,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <form action="{{ action('CustomerController@store') }}" accept-charset="UTF-8" method="POST">
-                    {!! csrf_field() !!}
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
                     <div class="cardify signup_form">
                         <div class="login--header">
                             <h3>Create Your Account</h3>
@@ -42,27 +42,52 @@
 
                             <div class="form-group">
                                 <label for="urname">Your Name</label>
-                                <input name="name" id="urname" type="text" class="text_field" placeholder="Enter your Name">
+                                <input id="name" type="text" class="text_field form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Enter your name...">
+
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="email_ad">Email Address</label>
-                                <input name="email" id="email_ad" type="text" class="text_field" placeholder="Enter your email address">
+                                <input id="email" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="Enter your email address">
+
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="user_name">Username</label>
                                 <input name="username" id="user_name" type="text" class="text_field" placeholder="Enter your username...">
                             </div>
-
+                            <div class="form-group">
+                                <label for="user_phone">Phone number</label>
+                                <input name="phone" id="user_phone" type="text" class="text_field" placeholder="Enter your phone number...">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input name="address" id="address" type="text" class="text_field" placeholder="Enter your address...">
+                            </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input name="password" id="password" type="text" class="text_field" placeholder="Enter your password...">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Enter your password...">
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group"> 
                                 <label for="con_pass">Confirm Password</label>
-                                <input name="confirmpass" id="con_pass" type="text" class="text_field" placeholder="Confirm password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Confirm password"> 
                             </div>
 
                             <button class="btn btn--md btn--round register_btn" type="submit">Register Now</button>
