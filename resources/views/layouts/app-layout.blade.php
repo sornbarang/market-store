@@ -310,7 +310,7 @@
                             </div>
                             <div class="autor__info">
                                 <p class="name">
-                                    {{Auth::user()->name}}
+                                    {{Auth::user() && !empty(Auth::user()->name)?Auth::user()->name:'Guest'}}
                                 </p>
                                 <p class="ammount">$20.45</p>
                             </div>
