@@ -24,10 +24,8 @@ Route::prefix('c2c')->group(function () {
     Route::prefix('temp')->group(function () {
         Route::get('/categories', 'C2cController@getcategory')->name('category');
         Route::get('/product', 'C2cController@getproduct')->name('product');
-        Route::get('/productdetail', 'C2cController@getproductdetail')->name('product');
-        Route::get('/store', 'CustomerController@getuserstore')->name('store');
+        Route::get('/productdetail', 'C2cController@getproductdetail')->name('product'); 
         Route::resource('customer', 'CustomerController');
-        Route::get('signup', 'CustomerController@signup');
 
     });
 });

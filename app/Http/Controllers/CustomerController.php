@@ -13,7 +13,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customer.login');
+        return view('customer.store');
     }
 
     /**
@@ -34,7 +34,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       //
     }
 
     /**
@@ -80,19 +80,5 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function signup()
-    {
-        return view('customer.signup');
-    }
-
-    public function getuserstore()
-    {
-        return view('customer.store');
     }
 }

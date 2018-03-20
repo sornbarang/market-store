@@ -52,7 +52,7 @@
                 <div class="col-md-8 col-md-offset-1 col-xs-5 col-sm-9 v_middle">
                     <!-- start .author-area -->
                     <div class="author-area"> 
-                        <a href="{{ url('c2c/temp/customer') }}" class="author-area__seller-btn inline">Become a Seller</a>
+                        <a href="{{ route('login') }}" class="author-area__seller-btn inline">Become a Seller</a>
 
                         <div class="author__notification_area">
                             <ul>
@@ -310,7 +310,7 @@
                             </div>
                             <div class="autor__info">
                                 <p class="name">
-                                    Jhon Doe
+                                    {{Auth::user()->name}}
                                 </p>
                                 <p class="ammount">$20.45</p>
                             </div>
@@ -327,7 +327,10 @@
                                     <li><a href="dashboard-upload.html"><span class="lnr lnr-upload"></span>Upload Item</a></li>
                                     <li><a href="dashboard-manage-item.html"><span class="lnr lnr-book"></span>Manage Item</a></li>
                                     <li><a href="dashboard-withdrawal.html"><span class="lnr lnr-briefcase"></span>Withdrawals</a></li>
-                                    <li><a href="#"><span class="lnr lnr-exit"></span>Logout</a></li>
+                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span class="lnr lnr-exit"></span>Logout</a></li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </ul>
                             </div>
                         </div><!--end /.author-author__info-->
