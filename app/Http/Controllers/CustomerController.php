@@ -13,9 +13,26 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        return view('customer.dashboard');
+    }
+    /**
+     * Display a listing of the store of user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function myStore()
+    {
         return view('customer.store');
     }
-
+    /**
+     * setting of user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mySetting()
+    {
+        return view('customer.setting');
+    }
     /**
      * Show the form for creating a new resource.
      *

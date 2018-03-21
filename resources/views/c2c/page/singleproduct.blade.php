@@ -1116,7 +1116,7 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <a href="customer"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
+                                    <a href="mystore"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
                                 </div>
 
                                 <div class="author">

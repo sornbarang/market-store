@@ -318,8 +318,8 @@
                             <div class="dropdown dropdown--author">
                                 <ul>
                                     <li><a href="author.html"><span class="lnr lnr-user"></span>Profile</a></li>
-                                    <li><a href="dashboard.html"><span class="lnr lnr-home"></span> Dashboard</a></li>
-                                    <li><a href="dashboard-setting.html"><span class="lnr lnr-cog"></span> Setting</a></li>
+                                    <li><a href="customer"><span class="lnr lnr-home"></span> Dashboard</a></li>
+                                    <li><a href="mysetting"><span class="lnr lnr-cog"></span> Setting</a></li>
                                     <li><a href="cart.html"><span class="lnr lnr-cart"></span>Purchases</a></li>
                                     <li><a href="favourites.html"><span class="lnr lnr-heart"></span> Favourite</a></li>
                                     <li><a href="dashboard-add-credit.html"><span class="lnr lnr-dice"></span>Add Credits</a></li>

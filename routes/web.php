@@ -25,6 +25,8 @@ Route::prefix('c2c')->group(function () {
         Route::get('/categories', 'C2cController@getcategory')->name('category');
         Route::get('/product', 'C2cController@getproduct')->name('product');
         Route::get('/productdetail', 'C2cController@getproductdetail')->name('product'); 
+        Route::get('/mystore', 'CustomerController@myStore')->name('store'); 
+        Route::get('/mysetting', 'CustomerController@mySetting')->name('store'); 
         Route::resource('customer', 'CustomerController');
 
     });
