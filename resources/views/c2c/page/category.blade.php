@@ -66,7 +66,7 @@
                             <div class="product__thumbnail">
                                 <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
                                 <div class="prod_btn">
-                                    <a href="/c2c/temp/product" class="transparent btn--sm btn--round">More Info</a>
+                                    <a href="{{url('c2c/temp/product')}}" class="transparent btn--sm btn--round">More Info</a>
                                 </div><!-- end /.prod_btn -->
                             </div><!-- end /.product__thumbnail -->
 

@@ -317,16 +317,16 @@
 
                             <div class="dropdown dropdown--author">
                                 <ul>
-                                    <li><a href="author.html"><span class="lnr lnr-user"></span>Profile</a></li>
-                                    <li><a href="customer"><span class="lnr lnr-home"></span> Dashboard</a></li>
-                                    <li><a href="mysetting"><span class="lnr lnr-cog"></span> Setting</a></li>
-                                    <li><a href="cart.html"><span class="lnr lnr-cart"></span>Purchases</a></li>
-                                    <li><a href="favourites.html"><span class="lnr lnr-heart"></span> Favourite</a></li>
-                                    <li><a href="dashboard-add-credit.html"><span class="lnr lnr-dice"></span>Add Credits</a></li>
-                                    <li><a href="dashboard-statement.html"><span class="lnr lnr-chart-bars"></span>Sale Statement</a></li>
-                                    <li><a href="dashboard-upload.html"><span class="lnr lnr-upload"></span>Upload Item</a></li>
-                                    <li><a href="dashboard-manage-item.html"><span class="lnr lnr-book"></span>Manage Item</a></li>
-                                    <li><a href="dashboard-withdrawal.html"><span class="lnr lnr-briefcase"></span>Withdrawals</a></li>
+                                    <li><a href="{{url('c2c/temp/myprofile')}}"><span class="lnr lnr-user"></span>Profile</a></li>
+                                    <li><a href="{{url('c2c/temp/customer')}}"><span class="lnr lnr-home"></span> Dashboard</a></li>
+                                    <li><a href="{{url('c2c/temp/mysetting')}}"><span class="lnr lnr-cog"></span> Setting</a></li>
+                                    <li><a href="{{url('c2c/temp/mycart')}}"><span class="lnr lnr-cart"></span>Purchases</a></li>
+                                    <li><a href="{{url('c2c/temp/myfavorite')}}"><span class="lnr lnr-heart"></span> Favourite</a></li>
+                                    <li><a href="#"><span class="lnr lnr-dice"></span>Add Credits</a></li>
+                                    <li><a href="{{url('c2c/temp/mysale')}}"><span class="lnr lnr-chart-bars"></span>Sale Statement</a></li>
+                                    <li><a href="{{url('c2c/temp/myitemupload')}}"><span class="lnr lnr-upload"></span>Upload Item</a></li>
+                                    <li><a href="{{url('c2c/temp/mymanageitem')}}"><span class="lnr lnr-book"></span>Manage Item</a></li>
+                                    <li><a href="#"><span class="lnr lnr-briefcase"></span>Withdrawals</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span class="lnr lnr-exit"></span>Logout</a></li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -437,7 +437,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="has_dropdown">
-                                    <a href="index.html">HOME</a>
+                                    <a href="{{url('c2c')}}">HOME</a>
                                     <div class="dropdown dropdown--menu">
                                         <ul>
                                             <li><a href="index.html">Home Multi Vendor</a></li>
@@ -615,7 +615,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="contact.html">contact</a></li>
+                                <li><a href="{{ url('contact') }}">contact</a></li>
                             </ul>
                         </div><!-- /.navbar-collapse -->
 

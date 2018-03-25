@@ -98,4 +98,64 @@ class CustomerController extends Controller
     {
         //
     }
+    /**
+     * User's profile
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function myProfile()
+    {
+        return view('customer.profile');
+    }
+    /**
+     * User's card
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function myCart()
+    {
+        return view('customer.cart');
+    }
+    /**
+     * User's card
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function myFavorite()
+    {
+        return view('customer.favorite');
+    }
+    /**
+     * User's sale management
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function mySaleManagement()
+    {
+        return view('customer.sale-management');
+    }
+    /**
+     * User's card
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function myItemUpload()
+    {
+        return view('customer.item-upload');
+    }
+    /**
+     * User's card
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function myManageItem()
+    {
+        return view('customer.manage-item');
+    }
 }

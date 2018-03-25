@@ -160,7 +160,7 @@
                                         <div class="product__thumbnail">
                                             <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
                                             <div class="prod_btn">
-                                                <a href="productdetail" class="transparent btn--sm btn--round">More Info</a>
+                                                <a href="{{url('c2c/temp/productdetail')}}" class="transparent btn--sm btn--round">More Info</a>
                                                 <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
                                             </div><!-- end /.prod_btn -->
                                         </div><!-- end /.product__thumbnail -->
