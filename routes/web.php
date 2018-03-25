@@ -33,6 +33,7 @@ Route::prefix('c2c')->group(function () {
         Route::get('/mysale', 'CustomerController@mySaleManagement')->name('customer'); 
         Route::get('/myitemupload', 'CustomerController@myItemUpload')->name('customer'); 
         Route::get('/mymanageitem', 'CustomerController@myManageItem')->name('customer'); 
+        Route::get('/edititem', 'CustomerController@myEditItem')->name('customer'); 
         Route::resource('customer', 'CustomerController');
 
     });

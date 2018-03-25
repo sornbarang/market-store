@@ -26,7 +26,7 @@
     <!--================================
             START DASHBOARD AREA
     =================================-->
-    <section class="dashboard-area">
+    <section class="dashboard-area dashboard-edit">
         <div class="dashboard_menu_area">
             <div class="container">
                 <div class="row">
@@ -92,7 +92,7 @@
 
                                         <div class="options dropdown-menu" aria-labelledby="drop2">
                                             <ul>
-                                                <li><a href="edit-item.html"><span class="lnr lnr-pencil"></span>Edit</a></li>
+                                                <li><a href="{{url('c2c/temp/edititem')}}"><span class="lnr lnr-pencil"></span>Edit</a></li>
                                                 <li><a href="#"><span class="lnr lnr-eye"></span>Hide</a></li>
                                                 <li><a href="#" class="delete"><span class="lnr lnr-trash"></span>Delete</a></li>
                                             </ul>

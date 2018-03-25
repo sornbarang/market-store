@@ -158,4 +158,14 @@ class CustomerController extends Controller
     {
         return view('customer.manage-item');
     }
+    /**
+     * User's card
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function myEditItem()
+    {
+        return view('customer.edit-item');
+    }
 }
