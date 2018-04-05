@@ -65,7 +65,6 @@
                                 <a class="toggle_title" href="#collapse2" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse1">
                                     <h4>Personal Information <span class="lnr lnr-chevron-down"></span></h4>
                                 </a>
-
                                 <div class="information__set toggle_module collapse in" id="collapse2">
                                     <div class="information_wrapper form--fields">
                                         <div class="form-group">
@@ -233,7 +232,7 @@
                                 <div class="information__set profile_images toggle_module collapse" id="collapse3">
                                     <div class="information_wrapper">
                                         <div class="profile_image_area">
-                                            <img src="images/authplc.png" alt="Author profile area">
+                                            <img src="{{asset('/')}}images/authplc.png" alt="Author profile area">
                                             <div class="img_info">
                                                 <p class="bold">Profile Image</p>
                                                 <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
@@ -247,7 +246,7 @@
 
                                         <div class="prof_img_upload">
                                             <p class="bold">Cover Image</p>
-                                            <img src="images/cvrplc.jpg" alt="The great warrior of China">
+                                            <img src="{{asset('/')}}images/cvrplc.jpg" alt="The great warrior of China">
 
                                             <div  class="upload_title">
                                                 <p>JPG, GIF or PNG 750x370 px</p>
@@ -410,8 +409,7 @@
                             </div>
                         </div><!-- end /.col-md-12 -->
                     </div><!-- end /.row -->
-                </form><!-- end /form -->
-            </div><!-- end /.container -->
+                </form><!-- end /form --> 
         </div><!-- end /.dashboard_menu_area -->
     </section>
     <!--================================

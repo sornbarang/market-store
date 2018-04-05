@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Middleware\Admin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,5 +42,5 @@ Route::get('/contact', 'PageController@contact')->name('page');
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@index')->name('admin')->middleware(Admin::class);
 
