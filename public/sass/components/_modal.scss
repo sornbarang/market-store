@@ -7,6 +7,7 @@
 .modal{
   .modal-header{
     padding: 40px 30px 30px;
+    display: block;
     p{
       margin: 0;
     }
@@ -58,4 +59,16 @@
   .modal-dialog{
     top: 33%;
   }
+}
+
+.item_remove_modal{
+    .modal-header{
+        position: relative;
+        flex-direction: column;
+        button{
+            position: absolute;
+            right: 30px;
+            top: 45px;
+        }
+    }
 }

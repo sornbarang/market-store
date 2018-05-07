@@ -13,13 +13,21 @@ $ipad: 992px;
   .mainmenu__menu .navbar-nav > li{
     margin-right: 20px;
   }
+  .has_megamenu .dropdown_megamenu{
+      width: 930px;
+  }
   .searc-wrap input{
     width: 300px;
   }
   .search_box .text_field{
     width: 44%;
   }
-
+  .single_speaker .speaker__thumbnail{
+      width: 150px;
+  }
+  .single_speaker .speaker__detail{
+    width: calc(100% - 150px);
+  }
 
   /* featured area scss */
   .featured-product-slider{
@@ -83,7 +91,6 @@ $ipad: 992px;
       }
     }
   }
-
 
   /* PROPOSAL AREA */
   .proposal{
@@ -218,7 +225,7 @@ $ipad: 992px;
   .user_area{
     .user_single{
       .user__short_desc{
-        max-width: 290px;
+        max-width: 280px;
       }
       .user__short_desc, .user__meta, .user__status {
         padding: 0 22px;
@@ -293,9 +300,19 @@ $ipad: 992px;
 /* 991 */
 @media (max-width: $ipad - 1) {
 
+    .search_box form{
+        justify-content: center;
+    }
+    .search_box .text_field{
+        flex: auto;
+    }
+    .dashboard_menu_area .dashboard_menu{
+        justify-content: center;
+    }
+
   /* Main Menu ares css goes here */
   .mainmenu__menu .navbar-nav > li{
-    margin-right: 13px;
+    margin-right: 8px;
     a{
       font-size: 14px;
     }
@@ -412,11 +429,22 @@ $ipad: 992px;
   .event_detail_breadcrumb .social{
     width: 100%;
   }
+
 }
 
 /* 768 TO 992*/
 @media (min-width: $tablet) and (max-width: $ipad - 1px) {
   /*--------------- General scss goes here -------------- */
+
+  /* menu area */
+  .has_megamenu .dropdown_megamenu{
+    width: 690px;
+  }
+
+  .user_area .user_single .user__short_desc{
+      max-width: 320px;
+  }
+
   /* search area */
   .search-area{
     .search_box{
@@ -637,7 +665,7 @@ $ipad: 992px;
     margin-bottom: 40px;
     .item-navigation{
       a{
-        padding: 0 26px;
+        padding: 0 24px;
       }
     }
   }
@@ -879,12 +907,32 @@ $ipad: 992px;
   .google_map .location_address{
     left: calc((100vw - 750px) / 2);
   }
+
+  .badges.community-badges .author-badges .badge-single {
+    width: 33.33%;
+  }
 }
 
 /* 767 */
 @media  screen and (max-width: $tablet - 1) {
   .container{
     width: 450px;
+  }
+  .dashboard-area.dashboard_purchase .dashboard_menu,
+  .dashboard_menu_area .dashboard_menu{
+    justify-content: flex-start;
+    li{
+        margin-right: 15px;
+        &+li{
+            margin-left: 0;
+        }
+    }
+  }
+  .upload_wrapper .progress_wrapper{
+      padding: 15px 35px 0 0;
+  }
+  .how_it_works_module .area_image{
+      margin: 30px 0;
   }
 
   /* typography */
@@ -899,6 +947,13 @@ $ipad: 992px;
   }
 
   /*-------------- general scss ----------------*/
+  .search_box .search-btn{
+      margin-left: 0;
+  }
+  .contact_form--wrapper form{
+      padding: 0 30px;
+  }
+
   .mobile_content .menu_icon{
     display: block;
   }
@@ -946,12 +1001,22 @@ $ipad: 992px;
   }
 
   .logo {
-    padding: 10px 14px;
+    padding: 10px 14px 10px 0;
     img{
       width: 80%;
     }
   }
   /* MOBILE MENU AREA */
+  .mainmenu .navbar{
+      display: block;
+      .navbar-toggler{
+          padding: 4px;
+          margin:20px 0;
+      }
+  }
+  .has_megamenu .dropdown_megamenu{
+      width: 100%;
+  }
   .navbar-header{
     .navbar-toggle{
       z-index: 5;
@@ -993,7 +1058,8 @@ $ipad: 992px;
       height: 280px;
       background: #fff;
       padding: 0 15px;
-      box-shadow: 0 2px 20px transparentize(#6c6f73, .9);;
+      box-shadow: 0 2px 20px transparentize(#6c6f73, .9);
+      overflow: scroll;
     }
     .navbar-nav > li{
       display: block;
@@ -1333,6 +1399,7 @@ $ipad: 992px;
           display: block;
           margin: 0;
           float: none;
+          width: 100%;
           a{
             line-height: 55px;
           }
@@ -1887,11 +1954,32 @@ $ipad: 992px;
       background: #f7f7f7;
     }
   }
+
+  .author-card .author-infos .author-badges ul{
+      justify-content: center;
+  }
+
+  .badges.community-badges .author-badges .badge-single {
+    width: 50%;
+  }
 }
 
 /* 320 TO 480 */
 @media  (min-width: 320px) and (max-width: 480px) {
-  /* section padding */
+    .credit_modules .custom_amount input{
+        width: 205px;
+    }
+    .upload_wrapper .progress_wrapper{
+        width: 80%;
+    }
+    .invoice .invoice__meta .address{
+        width: 100%;
+    }
+    .invoice .invoice__meta .date_info{
+        width: 100%;
+        text-align: left;
+    }
+    /* section padding */
   .section--padding{
     padding: 80px 0;
   }
@@ -2258,7 +2346,7 @@ $ipad: 992px;
   .user_area{
     .user_single{
       .user__meta{
-        max-width: 100%;
+        width: 100%;
         display: block;
         min-height: 100%;
         margin: 15px 0 20px;
@@ -2608,5 +2696,8 @@ $ipad: 992px;
         float: none;
       }
     }
+  }
+  .badges.community-badges .author-badges .badge-single {
+    width: 100%;
   }
 }

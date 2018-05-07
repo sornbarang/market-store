@@ -244,12 +244,13 @@ $transition: 0.3s;
       position: absolute;
       min-width: 183px;
       padding: 20px 27px;
-      top: 45px;
+      top: 45px !important;
       z-index: 3;
       background: #fff;
       right: -15px;
-      left: auto;
+      left: auto !important;
       box-shadow: 0 5px 40px transparentize(#52555a, .8);
+      transform: translate3d(0, 0, 0) !important;
      // display: none;
       &.active{
         display: block;
@@ -616,6 +617,13 @@ $transition: 0.3s;
     font-size: 18px;
     color: #555;
     padding-left: 0;
+  }
+  &.with--addon{
+      align-items: center;
+    .text_field{
+        width: calc(100% - 25px);
+        margin-left: 14px;
+    }
   }
 }
 

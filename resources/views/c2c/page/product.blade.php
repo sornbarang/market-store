@@ -10,7 +10,7 @@
             </div>
             <div class="container content_above">
                 <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
+                    <div class="col-md-8 offset-md-2">
                         <div class="search">
                             <div class="search__title"><h3><span>35,270</span> website templates from our creative community</h3></div>
                             <div class="search__field">

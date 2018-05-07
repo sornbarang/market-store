@@ -18,9 +18,13 @@
   }
   .breadcrumb{
     padding-bottom: 17px;
+    ul{
+        width: 100%;
+    }
   }
   &.breadcrumb--center{
     text-align: center;
+    justify-content: center;
     padding-top: 60px;
     padding-bottom: 27px;
     .page_title{
@@ -72,5 +76,8 @@
     &.active a{
       color: #bfcad7;
     }
+  }
+  ul{
+      width: 100%;
   }
 }

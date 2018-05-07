@@ -5,18 +5,21 @@
 =================================-->
 
 <!--================================
-        START SEARCH AREA
-    =================================-->
+      START SEARCH AREA
+  =================================-->
 <section class="search-wrapper">
     <div class="search-area2 bgimage">
         <div class="bg_image_holder">
-            <img src="{{asset('/')}}images/search.jpg" alt="">
+            <img src="images/search.jpg" alt="">
         </div>
         <div class="container content_above">
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
+                <div class="col-md-8 offset-md-2">
                     <div class="search">
-                        <div class="search__title"><h3><span>35,270</span> website templates from our creative community</h3></div>
+                        <div class="search__title">
+                            <h3>
+                                <span>35,270</span> website templates from our creative community</h3>
+                        </div>
                         <div class="search__field">
                             <form action="#">
                                 <div class="field-wrapper">
@@ -27,16 +30,22 @@
                         </div>
                         <div class="breadcrumb">
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Phone & Tablets</a></li>
-                                <li class="active"><a href="#">Category</a></li>
+                                <li>
+                                    <a href="#">Home</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">All Products</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div><!-- end /.row -->
-        </div><!-- end /.container -->
-    </div><!-- end /.search-area2 -->
+            </div>
+            <!-- end /.row -->
+        </div>
+        <!-- end /.container -->
+    </div>
+    <!-- end /.search-area2 -->
 </section>
 <!--================================
     END SEARCH AREA

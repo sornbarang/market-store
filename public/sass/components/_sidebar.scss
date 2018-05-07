@@ -188,11 +188,13 @@
   // product information card
   .card--product-infos{
     padding: 0;
-   
+
     ul.infos{
       padding: 19px 30px;
      li{
       overflow: hidden;
+      display: flex;
+      justify-content: space-between;
         p{
           @include vertically_middle;
           margin: 0;
@@ -303,7 +305,7 @@
     padding:0;
   }
   .author-infos{
-    padding: 30px;
+    padding: 30px 0;
     text-align: center;
     .author_avatar{
       width: 100px;
@@ -324,10 +326,28 @@
         padding-top: 6px;
         margin: 0;
       }
-      
+
+    }
+    .author-badges{
+        margin-top: 25px;
+        padding: 0 30px 20px 30px;
+        border-bottom: 1px solid $borderColor;
+        ul{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            li{
+                margin: 0 0px 10px 0px;
+                img{
+                    width: 50px;
+                    height: 50px;
+                    display: block;
+                }
+            }
+        }
     }
     .social{
-      margin-top: 25px;
+      margin-top: 30px;
       margin-bottom: 30px;
     }
     .author-btn{
@@ -404,19 +424,19 @@
   .sidebar--post{
     .card-title ul{
       overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       li{
-        display: inline-block;
         &+li{
-          padding-left: 52px;
-        }
-        &.active{
-          a{
-            color: $pcolor;
-          }
+          padding-left: 0px;
         }
         a{
           font-size: 20px;
           color: #000;
+          &.active{
+            color: $pcolor;
+          }
         }
       }
     }

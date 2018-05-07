@@ -372,7 +372,7 @@
     transition: $transition;
     left: 0;
     position: absolute;
-    width: 100%;
+    width: 1110px;
     visibility: hidden;
     opacity: 0;
     top: calc(100% + 20px);
@@ -383,6 +383,14 @@
     border-top: 1px solid $pcolor;
   }
 }
+.badge{
+    position: absolute;
+    top: 5px;
+    left: 90%;
+    background: $pcolor;
+    font-size: 10px;
+    color: #fff;
+  }
 .megamnu_module{
   float: left;
   &+.megamnu_module{
@@ -393,6 +401,12 @@
     .menu_column{
       min-width: 200px;
       float: left;
+      ul li{
+        position: relative;
+        &.has_badge{
+          display: inline-block;
+        }
+      }
       .title{
           font-weight: 500;
           font-size: 17px;
@@ -419,4 +433,123 @@
       }
     }
   }
+}
+.custom_dropdown{
+    padding: 19px 30px;
+    min-width: 271px;
+    box-shadow: 0 5px 40px rgba(82,85,90,.2);
+    border: 0;
+    border-top: 1px solid $pcolor;
+    border-radius: 0;
+    position: relative;
+    top: 10px !important;
+    &:before{
+        content: '';
+        position: absolute;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #5867dd;
+        bottom: 100%;
+    }
+    li{
+        a{
+            font-size: 15px;
+            line-height: 32px;
+            display: block;
+            color: #747b86;
+            span{
+                padding-right: 10px;
+            }
+            &:hover{
+                color: $pcolor;
+            }
+        }
+    }
+    &.custom_drop2{
+        li a{
+            span{
+                float: right;
+                padding-right: 0;
+            }
+        }
+    }
+}
+.dropdown-toggle:after{
+    content: none;
+}
+.dropdown-menu {
+    animation-name: slidenavAnimation;
+    animation-duration:.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+
+    -webkit-animation-name: slidenavAnimation;
+    -webkit-animation-duration:.3s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+
+    -moz-animation-name: slidenavAnimation;
+    -moz-animation-duration:.3s;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: forwards;
+  }
+  @keyframes slidenavAnimation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes slidenavAnimation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .custom_dropdown{
+    padding: 19px 30px;
+    min-width: 271px;
+    box-shadow: 0 5px 40px rgba(82,85,90,.2);
+    border: 0;
+    border-top: 1px solid $pcolor;
+    border-radius: 0;
+    position: relative;
+    top: 10px !important;
+    &:before{
+        content: '';
+        position: absolute;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #5867dd;
+        bottom: 100%;
+    }
+    li{
+        a{
+            font-size: 15px;
+            line-height: 32px;
+            display: block;
+            color: #747b86;
+            span{
+                padding-right: 10px;
+            }
+            &:hover{
+                color: $pcolor;
+            }
+        }
+    }
+    &.custom_drop2{
+        li a{
+            span{
+                float: right;
+                padding-right: 0;
+            }
+        }
+    }
 }

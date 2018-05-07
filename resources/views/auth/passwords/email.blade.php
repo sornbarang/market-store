@@ -28,7 +28,7 @@
     <section class="pass_recover_area section--padding2">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+                <div class="col-lg-6 offset-lg-3">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}

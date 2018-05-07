@@ -3,29 +3,6 @@ ul.nav-tabs {
   border: 0;
   li{
     position: relative;
-    &:before{
-      content: "";
-      position: absolute;
-      height: 3px;
-      width: 100%;
-      background: $pcolor;
-      opacity: 0;
-      left: 0;
-      transition: $transition;
-      visibility: hidden;
-    }
-    &.active{
-      &:before{
-        opacity: 1;
-        visibility: visible;
-      }
-      border-bottom: 0;
-      a, a:focus, a:active, a:hover{
-        border: 0;
-        background: none;
-        color:$pcolor;
-      }
-    }
     border-bottom: 1px solid $borderColor;
     &+li{
       border-left: 1px solid $borderColor;
@@ -36,7 +13,7 @@ ul.nav-tabs {
       color: #000;
       font-size: 17px;
       text-transform: capitalize;
-      padding: 0 30px;
+      padding: 0 28px;
       display: block;
       margin-right: 0;
       line-height: 70px;
@@ -50,6 +27,27 @@ ul.nav-tabs {
       span{
         font-weight: 500;
       }
+      &:before{
+        content: "";
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: $pcolor;
+        opacity: 0;
+        left: 0;
+        transition: $transition;
+        visibility: hidden;
+      }
+      &.active{
+        &:before{
+          opacity: 1;
+          visibility: visible;
+        }
+        border-bottom: 0;
+        border: 0;
+        background: none;
+        color:$pcolor;
+      }
     }
     &:last-child>a{
       padding-right: 60px;
@@ -59,8 +57,11 @@ ul.nav-tabs {
     display: inline-block;
     margin-bottom: -4px;
    li {
-     &::before{
-       bottom: 0;
+     a{
+         padding-right: 30px;
+        &::before{
+            bottom: 0;
+        }
      }
      border: none;
    }

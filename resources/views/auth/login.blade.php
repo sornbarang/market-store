@@ -27,7 +27,7 @@
 <section class="login_area section--padding2">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-lg-6 offset-lg-3">
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                     <div class="cardify login">

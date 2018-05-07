@@ -118,7 +118,7 @@
     &:hover{
      h4{
        color: $pcolor;
-     } 
+     }
     }
     h4{
       font-size: 20px;
@@ -178,7 +178,7 @@
   }
 
   .rating{
-      
+
     }
 
   .sell{
@@ -300,7 +300,7 @@
 // PRODUCT LIST STYLES
 .product--list{
   overflow: hidden;
-  height: 210px;
+  height: 225px;
   .product__thumbnail, .product-desc, .product-meta, .product-purchase{
     @include vertically_middle;
     border-right: 1px solid $borderColor;
@@ -323,7 +323,7 @@
   }
   .product__details{
     overflow: hidden;
-    padding: 25px 0;
+    padding: 24px 0;
     .product-desc, .product-meta{
       padding: 0 30px;
     }
@@ -337,7 +337,7 @@
   }
   .product-purchase{
     border: 0;
-    width: 159px;
+    width: 155px;
     text-align: center;
     .price_love{
       float: none;
@@ -352,12 +352,11 @@
       display: block;
     }
   }
-  .product .prod_btn a{
-
-  }
 }
+
 // product list detail small
 .product--list-small{
+    height: 209px;
   .product__thumbnail{
     width: 230px;
   }
@@ -375,13 +374,13 @@
       padding: 0 20px;
     }
     .product-desc{
-      width: 258px;
+      width: 255px;
       .titlebtm{
         padding-top: 18px;
       }
     }
     .product-meta{
-      width: 206px;
+      width: 180px;
       .love-comments p + p{
         margin-left: 0;
       }
@@ -394,7 +393,7 @@
 }
 
 .product-meta{
-  width: 335px;
+  width: 310px;
   .author{
     margin-bottom: 25px;
     .auth-img{
