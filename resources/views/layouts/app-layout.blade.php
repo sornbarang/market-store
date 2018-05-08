@@ -57,7 +57,7 @@
                 <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle">
                     <!-- start .author-area -->
                     <div class="author-area">
-                        <a href="signup.html" class="author-area__seller-btn inline">Become a Seller</a>
+                        <a href="{{route('login')}}" class="author-area__seller-btn inline">Become a Seller</a>
 
                         <div class="author__notification_area">
                             <ul>
@@ -370,7 +370,13 @@
                             </div>
                             <div class="autor__info">
                                 <p class="name">
-                                    Jhon Doe
+                                @if (Route::has('login'))
+                                    @auth
+                                        {{ Auth::user()->name }}
+                                    @else
+                                        guest
+                                    @endauth 
+                                @endif
                                 </p>
                                 <p class="ammount">$20.45</p>
                             </div>
@@ -417,9 +423,31 @@
                                         <a href="dashboard-withdrawal.html">
                                             <span class="lnr lnr-briefcase"></span>Withdrawals</a>
                                     </li>
+                                    @if (Route::has('login'))
+                                        @auth
+                                            @if(Auth::user()->roles[0]->id==1)
+                                                <li>
+                                                    <a href="{{route('admin')}}">
+                                                    <span class="lnr lnr-briefcase"></span>Back office</a>
+                                                </li>
+                                            @endif
+                                        @else
+                                            guest
+                                        @endauth 
+                                    @endif
                                     <li>
-                                        <a href="#">
-                                            <span class="lnr lnr-exit"></span>Logout</a>
+                                        <a class="lnr lnr-exit" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                        <!-- <a href="">
+                                            <span class="lnr lnr-exit"></span>Logout</a> -->
+                                            
                                     </li>
                                 </ul>
                             </div>

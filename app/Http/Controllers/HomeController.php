@@ -23,6 +23,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $view="admin.elements.dashboard";
+        return view('admin.index');
+    }
+    /**
+     * Show the application ads.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ads()
+    {
+        $data['cats']=[];
+        $view="admin.elements.ads";
+        return view('admin.index',compact('view','data'));
     }
 }
