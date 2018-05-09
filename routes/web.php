@@ -40,8 +40,12 @@ Route::prefix('c2c')->group(function () {
 });
 Route::get('/contact', 'PageController@contact')->name('page');
 
-Auth::routes();
-Route::group(['prefix' => 'admin',  'middleware' => Admin::class], function(){
+
+//Route::group(['prefix' => 'admin',  'middleware' => Admin::class], function(){
+
+Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'HomeController@index')->name('admin');
     Route::get('/ads', 'HomeController@ads')->name('ads');
 });
+
+Auth::routes();
