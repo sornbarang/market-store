@@ -1772,7 +1772,7 @@
                             <span class="today small"></span>
                         </div>
                     </div>
-                </div>  
+                </div>
                 <div class="chat-message chat-message-sender">
                     <img class="chat-image chat-image-default" src="{{asset('/')}}assets/img/profiles/02.jpg" />
                     <div class="chat-message-wrapper ">

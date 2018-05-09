@@ -57,11 +57,25 @@
                 <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle">
                     <!-- start .author-area -->
                     <div class="author-area">
-                        <a href="{{route('login')}}" class="author-area__seller-btn inline">Become a Seller</a>
+                        @if (Route::has('login'))
+                            @auth
+                            <a class="author-area__seller-btn inline" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a> 
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form> 
+                            @else
+                                <a href="{{route('login')}}" class="author-area__seller-btn inline">Login</a>
+                            @endauth 
+                        @endif
+                        
 
                         <div class="author__notification_area">
                             <ul>
-                                <li class="has_dropdown">
+                                {{--<li class="has_dropdown">
                                     <div class="icon_wrap">
                                         <span class="lnr lnr-alarm"></span>
                                         <span class="notification_count noti">25</span>
@@ -165,9 +179,9 @@
                                         </div>
                                         <!-- end /.dropdown -->
                                     </div>
-                                </li>
+                                </li>--}}
 
-                                <li class="has_dropdown">
+                                {{--<li class="has_dropdown">
                                     <div class="icon_wrap">
                                         <span class="lnr lnr-envelope"></span>
                                         <span class="notification_count msg">6</span>
@@ -294,7 +308,7 @@
                                             <!-- end /.message -->
                                         </div>
                                     </div>
-                                </li>
+                                </li>--}}
                                 <li class="has_dropdown">
                                     <div class="icon_wrap">
                                         <span class="lnr lnr-cart"></span>
@@ -380,77 +394,76 @@
                                 </p>
                                 <p class="ammount">$20.45</p>
                             </div>
-
-                            <div class="dropdown dropdown--author">
-                                <ul>
-                                    <li>
-                                        <a href="author.html">
-                                            <span class="lnr lnr-user"></span>Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard.html">
-                                            <span class="lnr lnr-home"></span> Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-setting.html">
-                                            <span class="lnr lnr-cog"></span> Setting</a>
-                                    </li>
-                                    <li>
-                                        <a href="cart.html">
-                                            <span class="lnr lnr-cart"></span>Purchases</a>
-                                    </li>
-                                    <li>
-                                        <a href="favourites.html">
-                                            <span class="lnr lnr-heart"></span> Favourite</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-add-credit.html">
-                                            <span class="lnr lnr-dice"></span>Add Credits</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-statement.html">
-                                            <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-upload.html">
-                                            <span class="lnr lnr-upload"></span>Upload Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-manage-item.html">
-                                            <span class="lnr lnr-book"></span>Manage Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-withdrawal.html">
-                                            <span class="lnr lnr-briefcase"></span>Withdrawals</a>
-                                    </li>
-                                    @if (Route::has('login'))
-                                        @auth
-                                            @if(Auth::user()->roles[0]->id==1)
+                            @if (Route::has('login'))
+                                    @auth
+                                        <div class="dropdown dropdown--author">
+                                            <ul>
                                                 <li>
-                                                    <a href="{{route('admin')}}">
-                                                    <span class="lnr lnr-briefcase"></span>Back office</a>
+                                                    <a href="{{url('/c2c/temp/myprofile')}}">
+                                                        <span class="lnr lnr-user"></span>Profile</a>
                                                 </li>
-                                            @endif
-                                        @else
-                                            guest
-                                        @endauth 
-                                    @endif
-                                    <li>
-                                        <a class="lnr lnr-exit" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                                <li>
+                                                    <a href="dashboard.html">
+                                                        <span class="lnr lnr-home"></span> Dashboard</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{url('/c2c/temp/mysetting')}}">
+                                                        <span class="lnr lnr-cog"></span> Setting</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{url('/c2c/temp/mycard')}}">
+                                                        <span class="lnr lnr-cart"></span>Purchases</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{url('/c2c/temp/myfavorite')}}">
+                                                        <span class="lnr lnr-heart"></span> Favourite</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="lnr lnr-dice"></span>Add Credits</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{url('/c2c/temp/mysale')}}">
+                                                        <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{url('/c2c/temp/myitemupload')}}">
+                                                        <span class="lnr lnr-upload"></span>Upload Item</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{url('/c2c/temp/mymanageitem')}}">
+                                                        <span class="lnr lnr-book"></span>Manage Item</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="lnr lnr-briefcase"></span>Withdrawals</a>
+                                                </li>
+                                                @if (Route::has('login'))
+                                                    @auth
+                                                        @if(Auth::user()->roles[0]->id==1)
+                                                            <li>
+                                                                <a href="{{route('admin')}}">
+                                                                <span class="lnr lnr-briefcase"></span>Back office</a>
+                                                            </li>
+                                                        @endif
+                                                    @endauth 
+                                                @endif
+                                                <li>
+                                                    <a class="lnr lnr-exit" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                                        Logout
+                                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                        <!-- <a href="">
-                                            <span class="lnr lnr-exit"></span>Logout</a> -->
-                                            
-                                    </li>
-                                </ul>
-                            </div>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @endauth 
+                                @endif
+                            
                         </div>
                         <!--end /.author-author__info-->
                     </div>
@@ -468,9 +481,16 @@
                                     <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
                                 </div>
                                 <div class="autor__info v_middle">
-                                    <p class="name">
-                                        Jhon Doe
-                                    </p>
+                                    @if (Route::has('login'))
+                                        @auth
+                                            <p class="name">
+                                                {{ Auth::user()->name }}
+                                            </p>
+                                        @else
+                                            guest
+                                        @endauth 
+                                    @endif    
+                                
                                     <p class="ammount">$20.45</p>
                                 </div>
                             </div>
@@ -478,7 +498,7 @@
 
                             <div class="author__notification_area">
                                 <ul>
-                                    <li>
+                                    {{--<li>
                                         <a href="notification.html">
                                             <div class="icon_wrap">
                                                 <span class="lnr lnr-alarm"></span>
@@ -494,7 +514,7 @@
                                                 <span class="notification_count msg">6</span>
                                             </div>
                                         </a>
-                                    </li>
+                                    </li>--}}
 
                                     <li>
                                         <a href="cart.html">
@@ -507,59 +527,81 @@
                                 </ul>
                             </div>
                             <!--start .author__notification_area -->
+                            @if (Route::has('login'))
+                                    @auth
+                                    <div class="dropdown dropdown--author">
+                                        <ul>
+                                        <li>
+                                            <a href="{{url('/c2c/temp/myprofile')}}">
+                                                <span class="lnr lnr-user"></span>Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="dashboard.html">
+                                                <span class="lnr lnr-home"></span> Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/c2c/temp/mysetting')}}">
+                                                <span class="lnr lnr-cog"></span> Setting</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/c2c/temp/mycard')}}">
+                                                <span class="lnr lnr-cart"></span>Purchases</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/c2c/temp/myfavorite')}}">
+                                                <span class="lnr lnr-heart"></span> Favourite</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="lnr lnr-dice"></span>Add Credits</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/c2c/temp/mysale')}}">
+                                                <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/c2c/temp/myitemupload')}}">
+                                                <span class="lnr lnr-upload"></span>Upload Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/c2c/temp/mymanageitem')}}">
+                                                <span class="lnr lnr-book"></span>Manage Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="lnr lnr-briefcase"></span>Withdrawals</a>
+                                        </li>
+                                            <li>
+                                                @if (Route::has('login'))
+                                                    @auth
+                                                        @if(Auth::user()->roles[0]->id==1)
+                                                            <li>
+                                                                <a href="{{route('admin')}}">
+                                                                <span class="lnr lnr-briefcase"></span>Back office</a>
+                                                            </li>
+                                                        @endif
+                                                    @endauth 
+                                                @endif
+                                            <li>
+                                                <a class="lnr lnr-exit" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                                    Logout
+                                                </a>
 
-                            <div class="dropdown dropdown--author">
-                                <ul>
-                                    <li>
-                                        <a href="author.html">
-                                            <span class="lnr lnr-user"></span>Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard.html">
-                                            <span class="lnr lnr-home"></span> Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-setting.html">
-                                            <span class="lnr lnr-cog"></span> Setting</a>
-                                    </li>
-                                    <li>
-                                        <a href="cart.html">
-                                            <span class="lnr lnr-cart"></span>Purchases</a>
-                                    </li>
-                                    <li>
-                                        <a href="favourites.html">
-                                            <span class="lnr lnr-heart"></span> Favourite</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-add-credit.html">
-                                            <span class="lnr lnr-dice"></span>Add Credits</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-statement.html">
-                                            <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-upload.html">
-                                            <span class="lnr lnr-upload"></span>Upload Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-manage-item.html">
-                                            <span class="lnr lnr-book"></span>Manage Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="dashboard-withdrawal.html">
-                                            <span class="lnr lnr-briefcase"></span>Withdrawals</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="lnr lnr-exit"></span>Logout</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="text-center">
-                                <a href="signup.html" class="author-area__seller-btn inline">Become a Seller</a>
-                            </div>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                            </li>
+                                        </ul>
+                                    </div>  
+                                    @else
+                                        <div class="text-center">
+                                            <a href="{{route('login')}}" class="author-area__seller-btn inline">Become a member</a>
+                                        </div>
+                                    @endauth 
+                                @endif
                         </div>
                     </div>
                     <!-- end /.mobile_content -->
