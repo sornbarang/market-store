@@ -46,6 +46,7 @@ Route::get('/contact', 'PageController@contact')->name('page');
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'HomeController@index')->name('admin');
     Route::get('/ads', 'HomeController@ads')->name('ads');
+
 });
 
 Auth::routes();

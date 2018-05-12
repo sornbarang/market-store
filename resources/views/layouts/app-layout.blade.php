@@ -1132,7 +1132,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="copyright-text">
-                            <p>&copy; 2017 <a href="#">MartPlace</a>. All rights reserved. Created by <a href="#">AazzTech</a></p>
+                            <p>&copy; 2018 <a href="#">TreeWB</a>. All rights reserved. Created by <a href="#">TreeWB</a></p>
                         </div>
 
                         <div class="go_top">

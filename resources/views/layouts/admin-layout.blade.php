@@ -1068,7 +1068,7 @@
                                                         <input type="text" value="" placeholder="To" class="form-control" id="email-to" />
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" value="" placeholder="Subject" class="form-control" id="email-subject" //>
+                                                        <input type="text" value="" placeholder="Subject" class="form-control" id="email-subject" />
                                                     </div>
                                                     <div class="form-group">
                                                         <textarea class="form-control message" placeholder="Compose email" rows="5" id="email-message" /></textarea>
