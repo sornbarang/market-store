@@ -151,6 +151,8 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Dimsav\Translatable\TranslatableServiceProvider::class,
+        'Baum\Providers\BaumServiceProvider',
 
         /*
          * Application Service Providers...
