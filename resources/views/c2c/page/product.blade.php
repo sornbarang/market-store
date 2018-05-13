@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <div class="search">
-                            <div class="search__title"><h3><span>35,270</span> website templates from our creative community</h3></div>
+                            {{--<div class="search__title"><h3><span>35,270</span> website templates from our creative community</h3></div>--}}
                             <div class="search__field">
                                 <form action="#">
                                     <div class="field-wrapper">
@@ -161,7 +161,7 @@
                                             <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
                                             <div class="prod_btn">
                                                 <a href="{{url('c2c/temp/productdetail')}}" class="transparent btn--sm btn--round">More Info</a>
-                                                <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
+                                                {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                                             </div><!-- end /.prod_btn -->
                                         </div><!-- end /.product__thumbnail -->
                                         <div class="product-desc">
@@ -171,7 +171,7 @@
                                                     <img class="auth-img" src="{{asset('/')}}images/auth3.jpg" alt="author image">
                                                     <p><a href="#">AazzTech</a></p>
                                                 </li>
-                                                <li class="out_of_class_name">
+                                                {{--<li class="out_of_class_name">
                                                     <div class="sell"><p><span class="lnr lnr-cart"></span><span>27</span></p></div>
                                                     <div class="rating product--rating">
                                                         <ul>
@@ -182,7 +182,7 @@
                                                             <li><span class="fa fa-star-half-o"></span></li>
                                                         </ul>
                                                     </div>
-                                                </li>
+                                                </li>--}}
                                             </ul>
 
                                         </div><!-- end /.product-desc -->

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid" style="margin:auto;text-align:center;"> 
     <figure class="figure" style="margin:0;">
-        <img   width="400" height="400"  src="{{asset('/')}}imgs/logo.png" class="figure-img img-fluid rounded-circle" alt="A generic square placeholder image with rounded corners in a figure.">
+        <img   width="400" height="400"  src="{{asset('/')}}imgs/logo.png" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
     </figure>
     <br/>  
     <br/>  

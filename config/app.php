@@ -151,6 +151,8 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Dimsav\Translatable\TranslatableServiceProvider::class,
+        'Baum\Providers\BaumServiceProvider',
 
         /*
          * Application Service Providers...
@@ -160,7 +162,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Adumskis\LaravelAdvert\AdvertServiceProvider::class,
+        // Adumskis\LaravelAdvert\AdvertServiceProvider::class,
     ],
 
     /*
@@ -209,7 +211,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
+        // 'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
     ],
 
 ];

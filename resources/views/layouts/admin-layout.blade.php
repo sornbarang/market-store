@@ -23,105 +23,7 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav left-menu hidden-xs">
-                    <li>
-                        <a href="javascript:void(0)" class="nav-link">
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li class="dropdown dropdown-lg app_menu_launcher hidden-xs">
-                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown" aria-expanded="false">
-                            <span>Dropdown</span>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-lg-menu dropdown-menu-left btn-primary p-15 text-center">
-                            <li>
-                                <ul>
-                                    <li><a href="app-mail.html"><i class="zmdi zmdi-email"></i><span>Mail</span></a></li>
-                                    <li><a href="javascript:void(0)"><i class="zmdi zmdi-accounts-list"></i><span>Contacts</span></a></li>
-                                    <li><a href="javascript:void(0)"><i class="zmdi zmdi-comment-text"></i><span>Chat</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>
-                                    <li><a href="app-notes.html"><i class="mdi mdi-lightbulb"></i><span>Notes</span></a></li>
-                                    <li><a href="app-taskboard.html"><i class="zmdi zmdi-view-column"></i><span>Taskboard</span></a></li>
-                                    <li><a href="javascript:void(0)"><i class="zmdi zmdi-calendar-note"></i><span>Calendar</span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown mega">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link" aria-expanded="false">
-                            <span>Mega</span>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu full-width p-l-10">
-                            <div class="row">
-                                <div class="col-xs-2 col-sm-2 col-md-4">
-                                    <h3>Pages <span class="badge status info">10</span></h3>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <ul>
-                                                <li>
-                                                    <a href="page-profile.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i> Profile</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-invoice.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i>  Invoice</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-timeline.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i>  Timeline</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-locations.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i>  Locations</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <ul>
-                                                <li>
-                                                    <a href="page-pricing-tables.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i>  Pricing Tables</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-gallery.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i>  Gallery</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i>  Login</a>
-                                                </li>
-                                                <li>
-                                                    <a href="lock-screen.html" class="btn-primary-hover"><i class="zmdi zmdi-chevron-right m-r-5"></i>  Lock Screen</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-10 col-md-8">
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <h3 class="p-t-15 p-b-15">New Arrivals</h3>
-                                        <div class="col-xs-12">
-                                            <div id="new_arrivals_megamenu" class="row">
-                                                <div><img src="{{asset('/')}}assets/img/ecom/products/39_Ie8T.jpeg" class="col-sm-6 col-md-4 max-h-200" alt=""></div>
-                                                <div><img src="{{asset('/')}}assets/img/ecom/products/39_8wMD.jpeg" class="col-sm-6 col-md-4 max-h-200" alt=""></div>
-                                                <div><img src="{{asset('/')}}assets/img/ecom/products/39_JnFC.jpeg" class="col-sm-6 col-md-4 max-h-200" alt=""></div>
-                                                <div><img src="{{asset('/')}}assets/img/ecom/products/2830_S4ql.jpeg" class="col-sm-6 col-md-4 max-h-200" alt=""></div>
-                                                <div><img src="{{asset('/')}}assets/img/ecom/products/4107_PPxC.jpeg" class="col-sm-6 col-md-4 max-h-200" alt=""></div>
-                                                <div><img src="{{asset('/')}}assets/img/ecom/products/5764_YK7g.jpeg" class="col-sm-6 col-md-4 max-h-200" alt=""></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-6">
-                                        <h3 class="p-t-15 p-b-15">Today's Analysis</h3>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="ct-chart ct-golden-section " id="chartist_megaMenu"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown avatar-menu">
                         <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
@@ -152,9 +54,7 @@
                     <li class="select-menu hidden-xs hidden-sm">
                         <select class="select form-control country" style="display:none">
                             <option option="EN">English</option>
-                            <option option="ES">Español</option>
-                            <option option="FN"> Français</option>
-                            <option option="IT">Italiano</option>
+                            <option option="KH">Khmer</option>
                         </select>
                     </li>
                     <li>
@@ -285,208 +185,54 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li class="sidebar-header">NAVIGATION</li>
                     <li class="active"><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i>Dashboard</a></li>
-                    <li class="nav-dropdown">
-                        <a href="#"><i class="zmdi zmdi-view-quilt"></i>Page Layouts</a>
-                        <ul class="nav-sub">
-                            <li class="nav-dropdown">
-                                <a href="#">Full Width Layouts </a>
-                                <ul class="nav-sub">
-                                    <li><a href="layout-fullwidth-v1.html">Full Width v1</a></li>
-                                    <li><a href="layout-fullwidth-v2.html">Full Width v2</a></li>
-                                    <li><a href="layout-fullwidth-v3.html">Full Width v3</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-dropdown">
-                                <a href="#">Boxed Layouts</a>
-                                <ul class="nav-sub">
-                                    <li><a href="layout-boxed-v1.html">Boxed Layout v1</a></li>
-                                    <li><a href="layout-boxed-v2.html">Boxed Layout v2</a></li>
-                                    <li><a href="layout-boxed-v3.html">Boxed Layout v3</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-dropdown">
-                                <a href="#">Left Side Nav</a>
-                                <ul class="nav-sub">
-                                    <li><a href="layout-left-sidenav-v1.html">Left Side Nav v1</a></li>
-                                    <li><a href="layout-left-sidenav-v2.html">Left Side Nav v2</a></li>
 
-                                </ul>
-                            </li>
-                            <li class="nav-dropdown">
-                                <a href="#">Right Side Nav</a>
-                                <ul class="nav-sub">
-                                    <li><a href="layout-right-sidenav-v1.html">Right Side Nav v1</a></li>
-                                    <li><a href="layout-right-sidenav-v2.html">Right Side Nav v2</a></li>
-
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-widgets"></i>Cards</a>
+                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-chart"></i>Setting</a>
                         <ul class="nav-sub">
-                            <li><a href="card-templates.html">Card Templates</a></li>
-                            <li><a href="card-demos.html">Card Demos</a></li>
+                            <li><a href="#">Language</a></li>
                         </ul>
                     </li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-chart"></i>Charts</a>
-                        <ul class="nav-sub">
-                            <li><a href="charts-c3.html">C3 Charts</a></li>
-                            <li><a href="charts-chartist.html">Chartist</a></li>
-                            <li><a href="charts-chartjs.html">Chartjs</a></li>
-                            <li><a href="charts-morrisjs.html">Morris.js Charts</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-header">APP VIEWS</li>
+                    <li class="sidebar-header">Market</li>
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-shopping-cart"></i>E-Commerce</a>
                         <ul class="nav-sub">
-                            <li><a href="ecommerce-dashboard.html">Dashboard</a></li>
-                            <li><a href="ecommerce-products.html">Products</a></li>
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#l">Products</a></li>
 
-                            <li><a href="ecommerce-customers.html">Customers</a></li>
-                            <li><a href="ecommerce-settings.html">Settings</a></li>
+                            <li><a href="#">Customers</a></li>
+                            <li><a href="#">Settings</a></li>
                         </ul>
                     </li>
-                    <li><a href="app-file-manager.html"><i class="zmdi zmdi-folder"></i>File Manager</a></li>
-                    <li><a href="app-taskboard.html"><i class="zmdi zmdi-view-column"></i>Taskboard</a></li>
-                    <li><a href="app-notes.html"><i class="mdi mdi-lightbulb"></i>Notes</a></li>
-                    <li><a href="app-mail.html"><i class="zmdi zmdi-email"></i>Mail</a></li>
-                    <li class="sidebar-header">PAGE VIEWS</li>
-                    <li><a href="page-profile.html"><i class="zmdi zmdi-account"></i>Profile</a></li>
-                    <li><a href="page-invoice.html"><i class="zmdi zmdi-money"></i>Invoice</a></li>
-                    <li><a href="page-timeline.html"><i class="zmdi zmdi-time"></i>Timeline</a></li>
-                    <li><a href="page-locations.html"><i class="zmdi zmdi-pin"></i>Locations</a></li>
-                    <li><a href="page-pricing-tables.html"><i class="zmdi zmdi-view-column"></i>Pricing Tables</a></li>
-                    <li><a href="page-gallery.html"><i class="zmdi zmdi-collection-image"></i>Gallery</a></li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-lock"></i>Authentication</a>
+                    <li class="sidebar-header">Market Advertise</li>
+                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-widgets"></i>Country</a>
                         <ul class="nav-sub">
-                            <li><a href="login.html">Login &amp; Register</a></li>
-                            <li><a href="lock-screen.html">Lock Screen</a></li>
+                            <li><a href="#">List</a></li>
+                            <li><a href="#">Add</a></li>
                         </ul>
                     </li>
-                    <li class="sidebar-header">DESIGN ELEMENTS</li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>User Interface</a>
+                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-widgets"></i>Category</a>
                         <ul class="nav-sub">
-                            <li><a href="ui-alerts.html">Alerts</a></li>
-                            <li><a href="ui-animations.html">Animations</a></li>
-                            <li><a href="ui-avatars.html">Avatars</a></li>
-                            <li><a href="ui-buttons.html">Buttons</a></li>
-                            <li><a href="ui-colors.html">Colors</a></li>
-                            <li><a href="ui-grid.html">Grid System</a></li>
-                            <li><a href="ui-icons.html">Icons</a></li>
-                            <li><a href="ui-list.html">List</a></li>
-                            <li><a href="ui-preloaders.html">Preloaders</a></li>
-                            <li><a href="ui-badges-labels.html">Badges &amp; Labels</a></li>
-                            <li><a href="ui-typography.html">Typography</a></li>
+                            <li><a href="#">List</a></li>
+                            <li><a href="#">Add</a></li>
                         </ul>
                     </li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-ungroup"></i>Components</a>
+                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>User</a>
                         <ul class="nav-sub">
-                            <li><a href="component-notifications-dialogs.html">Notifications &amp; Dialogs</a></li>
-                            <li><a href="component-toolbars.html">Toolbars</a></li>
-                            <li><a href="component-collapsible.html">Collapsible</a></li>
-                            <li><a href="component-chips.html">Chips</a></li>
-                            <li><a href="component-drawers.html">Drawers</a></li>
-                            <li><a href="component-dropdowns.html">Dropdowns</a></li>
-                            <li><a href="component-modals.html">Modals</a></li>
-                            <li><a href="component-progressbars-sliders.html">Sliders &amp; Progressbars</a></li>
-                            <li><a href="component-scrollable.html">Scrollable</a></li>
-                            <li><a href="component-tabs.html">Tabs &amp; Pills</a></li>
-                            <li><a href="component-tooltips-popovers.html">Tooltips &amp; Popovers</a></li>
+                            <li><a href="#">Role</a></li>
+                            <li><a href="#">Permission</a></li>
                         </ul>
                     </li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-view-subtitles"></i>Forms</a>
+                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>Advertise</a>
                         <ul class="nav-sub">
-                            <li><a href="form-elements.html">Form Elements</a></li>
-                            <li><a href="form-components.html">Form Components</a></li>
-                            <li><a href="form-layouts.html">Form Layouts</a></li>
-                            <li><a href="form-validation.html">Form Validation</a></li>
-                            <li><a href="form-wizard.html">Form Wizard</a></li>
+                            <li><a href="#">User</a></li>
+                            <li><a href="#">Banner</a></li>
+                            <li><a href="#">Report</a></li>
                         </ul>
                     </li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-view-headline"></i>Tables</a>
+                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>Report</a>
                         <ul class="nav-sub">
-                            <li><a href="tables.html">Basic Tables</a></li>
-                            <li><a href="tables-datatables.html">Data Tables</a></li>
+                            <li><a href="#">List</a></li>
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0)" data-trigger="sidebar-overlay-open"><i class="zmdi zmdi-invert-colors"></i>Theme Settings</a></li>
-                    <li class="sidebar-header">EXTRAS</li>
-                    <li><a href="index.html"><i class="zmdi zmdi-view-web"></i>Front-end</a><span class="label label-info pull-right font-size-11">Coming soon</span></li>
-                    <li class="nav-dropdown">
-                        <a href="#" title="Menu Levels">
-                            <i class="zmdi zmdi-folder"></i>Menu Levels</a>
-                        <ul class="nav-sub">
-                            <li>
-                                <a href="javascript:;" title="Level 2.1">
-                                    <i class="fa fa-fw fa-file"></i> Level 1.1
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" title="Level 2.2">
-                                    <i class="fa fa-fw fa-file"></i> Level 1.2
-                                </a>
-                            </li>
-                            <li class="nav-dropdown">
-                                <a href="#" title="Level 2.3">
-                                    <i class="fa fa-fw fa-folder-open"></i> Level 1.3
-                                </a>
-                                <ul class="nav-sub">
-                                    <li>
-                                        <a href="javascript:;" title="Level 3.1">
-                                            <i class="fa fa-fw fa-file"></i> Level 2.1
-                                        </a>
-                                    </li>
-                                    <li class="nav-dropdown">
-                                        <a href="#" title="Level 3.2">
-                                            <i class="fa fa-fw fa-folder-open"></i> Level 2.2
-                                        </a>
-                                        <ul class="nav-sub">
-                                            <li>
-                                                <a href="javascript:;" title="Level 4.1">
-                                                    <i class="fa fa-fw fa-file"></i> Level 3.1
-                                                </a>
-                                            </li>
-                                            <li class="nav-dropdown">
-                                                <a href="#" title="Level 4.2">
-                                                    <i class="fa fa-fw fa-folder-open"></i> Level 3.2
-                                                </a>
-                                                <ul class="nav-sub">
-                                                    <li class="nav-dropdown">
-                                                        <a href="#" title="Level 5.1">
-                                                            <i class="fa fa-fw fa-folder-open"></i> Level 4.1
-                                                        </a>
-                                                        <ul class="nav-sub">
-                                                            <li>
-                                                                <a href="javascript:;" title="Level 6.1">
-                                                                    <i class="fa fa-fw fa-file"></i> Level 5.1
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:;" title="Level 6.2">
-                                                                    <i class="fa fa-fw fa-file"></i> Level 5.2
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:;" title="Level 5.2">
-                                                            <i class="fa fa-fw fa-file"></i> Level 4.2
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:;" title="Level 5.3">
-                                                            <i class="fa fa-fw fa-file"></i> Level 4.3
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="helper-classes.html"><i class="zmdi zmdi-info"></i>Helper Classes</a></li>
+
                 </ul>
             </div>
         </nav>
@@ -513,8 +259,8 @@
             </div>
             <div class="tabpanel tab-header">
                 <ul class="nav nav-tabs p-l-20">
-                    <li class="active" role="presentation"><a href="#dashboard1" data-toggle="tab">Dashboard v1</a></li>
-                    <li role="presentation"><a href="#dashboard2" data-toggle="tab">Dashboard v2</a></li>
+                    <li class="active" role="presentation"><a href="#dashboard1" data-toggle="tab">Dashboard Store</a></li>
+                    <li role="presentation"><a href="#dashboard2" data-toggle="tab">Dashboard Market Advertise</a></li>
                 </ul>
             </div>
             <div id="content" class="container-fluid">
@@ -534,7 +280,7 @@
                     <div class="card type--weather transparent">
                         <div class="card-body">
                             <header class="curr-weather">
-                                <h5>San Francisco, CA</h5>
+                                <h5>Cambodia, PP</h5>
                                 <i class="wi wi-day-cloudy"></i>
                                 <div class="curr-temp-wrapper">
                                     <span class="curr-temp">72</span>
@@ -574,78 +320,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="card card-task transparent m-t-30">
-                        <header class="card-heading">
-                            <h5>My Task</h5>
-                            <ul class="card-actions icons  right-top">
-                                <li>
-                                    <a href="javascript:void(0)" class="animate_plus_x" data-toggle="input"><i class="zmdi zmdi-plus"></i> </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" data-toggle="collapse"><i class="zmdi zmdi-chevron-down"></i> </a>
-                                </li>
-                            </ul>
-                        </header>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <input type="text" value="" placeholder="Add task" class="form-control" />
-                                </div>
-                            </form>
-                            <ul class="checklist">
-                                <li><span class="checkbox">
-													<label>
-														<input type="checkbox" value="">
-														<i class="input-helper"></i> add gulp script to project
-													</label>
-												</span>
-                                </li>
-                                <li><span class="checkbox">
-												<label>
-													<input type="checkbox" value="">
-													<i class="input-helper"></i> update style guide
-												</label>
-											</span>
-                                </li>
-                                <li><span class="checkbox">
-											<label>
-												<input type="checkbox" value="">
-												<i class="input-helper"></i> send over prototype to client
-											</label>
-										</span>
-                                </li>
-                                <li><span class="checkbox">
-										<label>
-											<input type="checkbox" value="">
-											<i class="input-helper"></i> complete Landing page
-										</label>
-									</span>
-                                </li>
-                                <li>
-									<span class="checkbox">
-										<label >
-											<input type="checkbox" value="">
-											<i class="input-helper"></i> complete SASS helper functions
-										</label>
-									</span>
-                                </li>
-                                <li><span class="checkbox">
-									<label >
-										<input type="checkbox" value="">
-										<i class="input-helper"></i> update icon sheet with @3x
-									</label>
-								</span>
-                                </li>
-                                <li><span class="checkbox">
-								<label >
-									<input type="checkbox" value="">
-									<i class="input-helper"></i> convert logo from png to svg
-								</label>
-							</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
                 </div>
             </aside>
         </div>
@@ -684,7 +359,7 @@
                 </div>
                 <div class="row copy-wrapper">
                     <div class="col-xs-8">
-                        <p class="copy">&copy; Copyright <time class="year"></time> MaterialWrap - All Rights Reserved</p>
+                        <p class="copy">&copy; Copyright <time class="year"></time> TreeWB - All Rights Reserved</p>
                     </div>
                     <div class="col-xs-4">
                         <ul class="social">

@@ -1087,7 +1087,9 @@
 	      $(this).prepend('<img src="assets/img/icons/flags/FR.png" class="max-w-20 m-r-10" alt="" />');
 	    } else if ($.trim(countryOptions) === 'Italiano') {
 	      $(this).prepend('<img src="assets/img/icons/flags/IT.png" class="max-w-20 m-r-10" alt="" />');
-	    }
+	    }else if ($.trim(countryOptions) === 'Khmer') {
+            $(this).prepend('<img src="assets/img/icons/flags/KH.png" class="max-w-20 m-r-10" alt="" />');
+        }
 	  });
 	  $(".select").dropdown({ "optionClass": "withripple" });
 	};
