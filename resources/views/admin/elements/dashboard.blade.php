@@ -1,685 +1,738 @@
-<div class="dashboard_contents">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-6">
-                <div class="author-info author-info--dashboard mcolorbg4">
-                    <p>Total Items</p>
-                    <h3>4,369</h3>
-                </div>
-            </div><!-- end /.col-md-3 -->
-
-            <div class="col-md-3 col-sm-6">
-                <div class="author-info author-info--dashboard mcolorbg2">
-                    <p>Monthly Sales</p>
-                    <h3>$273.00</h3>
-                </div>
-            </div><!-- end /.col-md-3 -->
-
-            <div class="col-md-3 col-sm-6">
-                <div class="author-info author-info--dashboard mcolorbg3">
-                    <p>Yearly Sales</p>
-                    <h3>$2,249.00</h3>
-                </div>
-            </div><!-- end /.col-md-3 -->
-
-            <div class="col-md-3 col-sm-6">
-                <div class="author-info author-info--dashboard mcolorbg1">
-                    <p>Lifetime Sales</p>
-                    <h3>$5,583.00</h3>
-                </div>
-            </div><!-- end /.col-md-3 -->
-        </div><!-- end /.row -->
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="dashboard_module statistics_module">
-                    <div class="dashboard__title">
-                        <h4>Sales and Views Statistics</h4>
-
-                        <div class="pull-right">
-                            <div id="stat_legend" class="legend"></div>
-                            <div class="select-wrap">
-                                <select name="mon" class="period_selector">
-                                    <option value="jan">Jan</option>
-                                    <option value="feb">Feb</option>
-                                    <option value="mar">Mar</option>
-                                </select>
-                                <span class="lnr lnr-chevron-down"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard__content">
-                        <canvas id="myChart"></canvas>
-
-                        <div class="statistics_data">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <div class="single_stat_data">
-                                        <h4 class="single_stat__title">478</h4>
-                                        <p>Total <span>Sales</span> This Month</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 text-center col-sm-4 col-xs-4">
-                                    <div class="single_stat_data">
-                                        <h4 class="single_stat__title">$2,478</h4>
-                                        <p>Total <span>Earnings</span> This Month</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 text-right col-sm-4 col-xs-4">
-                                    <div class="single_stat_data">
-                                        <h4 class="single_stat__title">478</h4>
-                                        <p>Total <span>Sales</span> This Month</p>
-                                    </div>
+<div class="content-body">
+    <div id="dashboard_content" class="tab-content">
+        <div class="tab-pane fade active in" id="dashboard1">
+            <div class="row">
+                <div class="col-lg-4">
+                    <ul class="card-stack-wrapper" id="chartistPathAnimationDashboard">
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q1 Orders</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-gray"><i class="zmdi zmdi-caret-down"></i> 0.05%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-PathAnimation1" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q2 Orders</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-red"><i class="zmdi zmdi-caret-down"></i> 3%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-PathAnimation2" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q3 Orders</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-green"><i class="zmdi zmdi-caret-up"></i> 23%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-PathAnimation3" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q4 Orders</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-green"><i class="zmdi zmdi-caret-up"></i> 0.25%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-PathAnimation4" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <ul class="card-stack-wrapper" id="chartistLineDashboard">
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q1 Subscriptions</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-green">16% <i class="zmdi zmdi-trending-up"></i></small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-LineChart1" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q2 Subscriptions</h2>
+                                    <ul class="card-actions icons right-top">
+                                        <li><small class="text-red">0.5% <i class="zmdi zmdi-trending-down"></i></small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-LineChart2" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Monthly Subscriptions</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-green">34% <i class="zmdi zmdi-trending-up"></i></small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-LineChart3" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Monthly Subscriptions</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-gray">0.5% <i class="zmdi zmdi-trending-up"></i></small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-LineChart4" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <ul class="card-stack-wrapper" id="chartistBarsDashboard">
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Projected Sales</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-gray"><i class="zmdi zmdi-caret-down"></i> 3%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-BarChart1" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q1 Sales</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-green"><i class="zmdi zmdi-caret-up"></i> 14%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-BarChart2" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q2 Sales</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-red"><i class="zmdi zmdi-caret-down"></i> 0.04%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-BarChart3" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="card p-b-30">
+                                <header class="card-heading p-15">
+                                    <h2 class="card-title">Q3 Sales</h2>
+                                    <ul class="card-actions icons  right-top">
+                                        <li><small class="text-gray"><i class="zmdi zmdi-caret-up"></i> 0.3%</small></li>
+                                    </ul>
+                                </header>
+                                <div class="card-body h-125">
+                                    <ul>
+                                        <li>
+                                            <div id="ct-BarChart4" class="chartist-wrapper">
+                                                <div class="ct-chart"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <header class="card-heading">
+                            <h2 class="card-title">Website Stats</h2>
+                            <small>Phasellus condimentum ipsum id auctor</small>
+                            <ul class="card-actions icons  right-top">
+                                <li>
+                                    <a href="javascript:void(0)" onClick="MaterialWrap.dashboardWebStats()" data-toggle="refresh">
+                                        <i class="zmdi zmdi-refresh-alt"></i>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" data-toggle="dropdown">
+                                        <i class="zmdi zmdi-more-vert"></i>
+                                    </a>
+                                    <ul class="dropdown-menu btn-primary dropdown-menu-right">
+                                        <li>
+                                            <a href="javascript:void(0)">Option One</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Option Two</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Option Three</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="card-body p-15">
+                            <div id="website-stats" style="position: relative;height: 320px"></div>
                         </div>
                     </div>
                 </div>
-            </div><!-- end /.col-md-12 -->
-
-            <div class="col-md-6">
-                <div class="dashboard_module chart country_statistics">
-                    <div class="dashboard__title">
-                        <h4>Country Statistics</h4>
-                        <div class="select-wrap">
-                            <select name="months" class="period_selector">
-                                <option value="jan">Jan</option>
-                                <option value="feb">Feb</option>
-                                <option value="mar">Mar</option>
-                            </select>
-                            <span class="lnr lnr-chevron-down"></span>
+                <div class="col-lg-4">
+                    <div class="card type--profile">
+                        <header class="card-heading card-background" id="card_img_01">
+                            <img src="{{asset('/')}}assets/img/profiles/large_02.jpg" alt="" class="img-circle ">
+                            <ul class="card-actions icons  right-top">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" data-toggle="dropdown">
+                                        <i class="zmdi zmdi-more-vert text-white"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right btn-primary">
+                                        <li>
+                                            <a href="javascript:void(0)">Option One</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Option Two</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Option Three</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="card-body">
+                            <h3 class="name">Allison Grayce</h3>
+                            <span class="title">UI/UX Designer</span>
+                            <button type="button" class="btn btn-primary btn-round">Connect</button>
                         </div>
-                    </div>
-
-                    <div class="dashboard__content">
-                        <table class="table table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Visitors</th>
-                                    <th>Sales</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="country_flag"><img src="images/flam.jpg" alt="Country Flag"></div>
-                                        <span>United States</span>
-                                    </td>
-                                    <td>546</td>
-                                    <td>$230</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="country_flag"><img src="images/flg2.png" alt="Country Flag"></div>
-                                        <span>United Kingdom</span>
-                                    </td>
-                                    <td>246</td>
-                                    <td>$80</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="country_flag"><img src="images/flg3.png" alt="Country Flag"></div>
-                                        <span>Canada</span>
-                                    </td>
-                                    <td>170</td>
-                                    <td>$65</td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <div class="country_flag"><img src="images/flg4.png" alt="Country Flag"></div>
-                                        <span>Newzland</span>
-                                    </td>
-                                    <td>78</td>
-                                    <td>$24</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div><!-- end /.dashboard_module -->
-            </div><!-- end /.col-md-6 -->
-
-            <div class="col-md-6">
-                <div class="dashboard_module visit_data">
-                    <div class="dashboard__content">
-                        <div class="chart_top">
-                            <div class="v_refer">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#visit_source" aria-controls="visit_source" role="tab" data-toggle="tab">Visit Source</a></li>
-                                    <li role="presentation"><a href="#referrals" aria-controls="referrals" role="tab" data-toggle="tab">Referrals</a></li>
-                                </ul>
-                                <div class="select-wrap">
-                                    <select name="month" class="period_selector">
-                                        <option value="jan">Jan</option>
-                                        <option value="feb">Feb</option>
-                                        <option value="mar">Mar</option>
-                                    </select>
-                                    <span class="lnr lnr-chevron-down"></span>
-                                </div>
+                        <footer class="card-footer border-top">
+                            <div class="row row p-t-10 p-b-10">
+                                <div class="col-xs-4"><span class="count">250</span><span>Post</span></div>
+                                <div class="col-xs-4"><span class="count">1.5m</span><span>Followers</span></div>
+                                <div class="col-xs-4"><span class="count">627</span><span>Following</span></div>
                             </div>
-
-                            <div class="charts">
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane fade in active" id="visit_source">
-                                        <canvas id="piechart"></canvas>
-
-                                        <div id="pie-legend" class="legend"></div>
-                                    </div>
-                                    <div role="tabpanel" class="tab-pane fade  referrals_data" id="referrals">
-                                        <ul>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <header class="card-heading p-15">
+                            <h2 class="card-title">Card Wall for Sprint 34</h2>
+                            <small>Sprint 34</small>
+                            <ul class="card-actions icons right-top">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="zmdi zmdi-sort"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right btn-primary">
+                                        <li>
+                                            <a href="javascript:void(0)"><span class="badge-status default"></span> Backlog</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)"><span class="badge-status warning"></span> On Hold</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)"><span class="badge-status primary"></span>In Progress</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)"><span class="badge-status danger"></span> Needs Reviewed</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)"><span class="badge-status success"></span> Complete</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="card-body card-default p-0">
+                            <ul class="scrum-group">
+                                <!-- Scrum Item -->
+                                <li class="scrum-item back-log">
+                                    <header class="scrum-header">
+                                        <h5 class="scrum-title">Add to cart animation</h5>
+                                        <small></small>
+                                        <ul class="pull-right m-r-10">
                                             <li>
-                                                <p class="site">google.com</p>
-                                                <p class="visit"><span>visitors:</span>250</p>
-                                            </li>
-
-                                            <li>
-                                                <p class="site">dribbble.com</p>
-                                                <p class="visit"><span>visitors:</span>450</p>
-                                            </li>
-
-                                            <li>
-                                                <p class="site">behance.com</p>
-                                                <p class="visit"><span>visitors:</span>341</p>
-                                            </li>
-
-                                            <li>
-                                                <p class="site">domain.com</p>
-                                                <p class="visit"><span>visitors:</span>98</p>
+                                                <span class="label label-primary">In Progress</span>
                                             </li>
                                         </ul>
+                                    </header>
+                                    <div class="scrum-body p-t-5 p-b-10">
+                                        <img src="{{asset('/')}}assets/img/profiles/01.jpg" alt="" class="img-circle" />
+                                        <img src="{{asset('/')}}assets/img/profiles/03.jpg" alt="" class="img-circle" />
+                                        <img src="{{asset('/')}}assets/img/profiles/08.jpg" alt="" class="img-circle" />
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="scrum-footer p-15">
+                                        <div class="progress primary">
+                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                                <span>60%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- End Scrum Item -->
+                                <!-- Scrum Item -->
+                                <li class="scrum-item on-hold">
+                                    <header class="scrum-header">
+                                        <h5 class="scrum-title">Product page A/B test</h5>
+                                        <small></small>
+                                        <ul class="pull-right m-r-10">
+                                            <li>
+                                                <span class="label label-warning">On Hold</span>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                    <div class="scrum-body p-t-5 p-b-10">
+                                        <img src="{{asset('/')}}assets/img/profiles/02.jpg" alt="" class="img-circle" />
+                                        <img src="{{asset('/')}}assets/img/profiles/06.jpg" alt="" class="img-circle" />
+                                    </div>
+                                    <div class="scrum-footer p-15">
+                                        <div class="progress warning">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                                                <span>30%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- End Scrum Item -->
+                                <!-- Scrum Item -->
+                                <li class="scrum-item complete">
+                                    <header class="scrum-header">
+                                        <h5 class="scrum-title">Refactor web components</h5>
+                                        <small></small>
+                                        <ul class="pull-right m-r-10">
+                                            <li>
+                                                <span class="label label-success">Completed</span>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                    <div class="scrum-body p-t-5 p-b-10">
+                                        <img src="{{asset('/')}}assets/img/profiles/07.jpg" alt="" class="img-circle" />
+                                        <img src="{{asset('/')}}assets/img/profiles/05.jpg" alt="" class="img-circle" />
+                                        <img src="{{asset('/')}}assets/img/profiles/15.jpg" alt="" class="img-circle" />
+                                    </div>
+                                    <div class="scrum-footer p-15">
+                                        <div class="progress success">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                                <span>100%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- End Scrum Item -->
+                            </ul>
                         </div>
                     </div>
-                </div><!-- end /.dashboard_module -->
-            </div><!-- end /.col-md-6 -->
-
-            <div class="col-md-8">
-                <div class="dashboard_module recent_sells">
-                    <div class="dashboard__title">
-                        <h4>Recent Items Sales</h4>
-
-                        <div class="loading"><a href="#"><span class="lnr lnr-sync"></span></a></div>
-                    </div>
-
-                    <div class="dashboard__content">
-                        <ul>
-                            <li>
-                                <div class="single_sell">
-                                    <div class="single_sell__thumb-title">
-                                        <div class="prod_thumbnail">
-                                            <img src="images/prodthumb.png" alt="product thumbnail">
-                                        </div>
-                                        <div class="prod_title">
-                                            <h4>Finance and Consulting Business Theme</h4>
-                                            <div class="category">
-                                                <img src="images/catword.png" alt="category">
-                                                <span>Wordpress</span>
-                                            </div>
-                                        </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card reveal drawer off-canvas-wrapper card-mail">
+                        <header class="card-heading app_primary_bg mail-heading p-b-20">
+                            <ul class="card-actions icons  left-top">
+                                <a href="javascript:void(0)" role="button" class="text-white" data-card-off-canvas="is-active">
+                                    <i class="zmdi zmdi-menu"></i>
+                                </a>
+                            </ul>
+                            <h2 class="card-title p-l-30 text-white">Inbox</h2>
+                            <ul class="card-actions icons right-top">
+                                <li>
+                                    <a href="javascript:void(0)" class="text-white" data-toggle="refresh">
+                                        <i class="zmdi zmdi-refresh-alt"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="card-body p-0 max-h-500 scrollbar overflow-auto">
+                            <ul class="list-group p-0">
+                                <li class="list-group-item ">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/02.jpg" alt="" class="img-circle max-w-40 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">John Smith</div>
+                                        <div class="list-group-item-text">[Dribbble] Work inquiry from John Smith.</div>
                                     </div>
-
-                                    <div class="ammount">
-                                        <p>$34.25</p>
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/03.jpg" alt="" class="img-circle max-w-40 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Mike Jones </div>
+                                        <div class="list-group-item-text">We would also require your assistance to design our backend application.</div>
                                     </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="single_sell">
-                                    <div class="single_sell__thumb-title">
-                                        <div class="prod_thumbnail">
-                                            <img src="images/prodthumb2.jpg" alt="product thumbnail">
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/05.jpg" alt="" class="img-circle max-w-40 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Allison Grayce</div>
+                                        <div class="list-group-item-text">If you don't break a few things you're not trying hard enough.</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/18.jpg" alt="" class="img-circle max-w-40 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Ashley Ford</div>
+                                        <div class="list-group-item-text">Let's touch base this Friday and go over the project requirements.</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/16.jpg" alt="" class="img-circle max-w-40 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Josh Hemsley</div>
+                                        <div class="list-group-item-text">Tree-shaking example with Typescript and Webpack</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/06.jpg" alt="" class="img-circle max-w-40 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Nikki Clark </div>
+                                        <div class="list-group-item-text">I'm thrilled to announce that Designing for Performance is now available for free online.</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item ">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/11.jpg" alt="" class="img-circle max-w-40 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Johanna Kollmann </div>
+                                        <div class="list-group-item-text">Leaving for London in one week</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card card-off-canvas">
+                            <header class="card-heading alt-heading">
+                                <div class="profile">
+                                    <h4 class="card-title">MW</h4></div>
+                                <a href="javascript:void(0)" class="info"><span>username@materialwrap.com</span></a>
+                            </header>
+                            <div class="card-body p-0">
+                                <nav class="submenu">
+                                    <ul>
+                                        <li><a href="javascript:void(0)"><i class="zmdi zmdi-inbox"></i> Inbox</a></li>
+                                        <li><a href="javascript:void(0)"><i class="zmdi zmdi-mail-send"></i> Sent</a></li>
+                                        <li><a href="javascript:void(0)"><i class="zmdi zmdi-archive"></i> Archived</a></li>
+                                        <li><a href="javascript:void(0)"><i class="zmdi zmdi-delete"></i> Trash</a></li>
+                                        <li><a href="javascript:void(0)"><i class="zmdi zmdi-settings"></i> Settings</a></li>
+                                    </ul>
+                                    <nav>
+                                    </nav>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="card card-reveal p-0">
+                            <header class="card-heading border-bottom">
+                                <ul class="card-actions icons left-top">
+                                    <li>
+                                        <a href="javascript:void(0)" data-toggle="reveal">
+                                            <i class="zmdi zmdi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="card-actions icons right-top">
+                                    <li>
+                                        <div class="icon-upload">
+                                            <label for="file-input">
+                                                <i class="zmdi zmdi-attachment"></i>
+                                            </label>
+                                            <input id="file-input" type="file">
                                         </div>
-                                        <div class="prod_title">
-                                            <h4>Best Free Responsive ReactJS Admin Themes</h4>
-                                            <div class="category">
-                                                <img src="images/catword.png" alt="category">
-                                                <span>Wordpress</span>
-                                            </div>
-                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" class="blue-text" data-toggle="reveal">
+                                            <i class="zmdi zmdi-mail-send"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </header>
+                            <div class="card-body p-0">
+                                <form class="form-horizontal email-form">
+                                    <div class="form-group">
+                                        <input type="text" value="" placeholder="To" class="form-control" id="email-to" />
                                     </div>
-
-                                    <div class="ammount">
-                                        <p>$34.25</p>
+                                    <div class="form-group">
+                                        <input type="text" value="" placeholder="Subject" class="form-control" id="email-subject" //>
                                     </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="single_sell">
-                                    <div class="single_sell__thumb-title">
-                                        <div class="prod_thumbnail">
-                                            <img src="images/prodthumb3.jpg" alt="product thumbnail">
-                                        </div>
-                                        <div class="prod_title">
-                                            <h4>Best YouTube Channels For UI/UX Designers</h4>
-                                            <div class="category">
-                                                <img src="images/catword.png" alt="category">
-                                                <span>Wordpress</span>
-                                            </div>
-                                        </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control message" placeholder="Compose email" rows="5" id="email-message" /></textarea>
                                     </div>
-
-                                    <div class="ammount">
-                                        <p>$34.25</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div><!-- end /.dashboard_module -->
-            </div><!-- end /.col-md-8 -->
-
-
-            <div class="col-md-4">
-                <div class="dashboard_module recent_buyers">
-                    <div class="dashboard__title">
-                        <h4>Recent Buyers</h4>
-                        <div class="loading"><a href="#"><span class="lnr lnr-sync"></span></a></div>
-                    </div>
-
-                    <div class="dashboard__content">
-                        <ul>
-                            <li>
-                                <div class="single_buyer">
-                                    <div class="buyer__thumb_title">
-                                        <div class="thumb">
-                                            <img src="images/buyr1.jpg" alt="Buyer Images">
-                                        </div>
-                                        <div class="title">
-                                            <h4>James Anderson</h4>
-                                            <p>United States</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="price">
-                                        <p>$29</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="single_buyer">
-                                    <div class="buyer__thumb_title">
-                                        <div class="thumb">
-                                            <img src="images/buyr2.png" alt="Buyer Images">
-                                        </div>
-                                        <div class="title">
-                                            <h4>Tarashi Hamada</h4>
-                                            <p>Japan</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="price">
-                                        <p>$26</p>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="single_buyer">
-                                    <div class="buyer__thumb_title">
-                                        <div class="thumb">
-                                            <img src="images/buyr3.jpg" alt="Buyer Images">
-                                        </div>
-                                        <div class="title">
-                                            <h4>Shah Hossain</h4>
-                                            <p>Biplobland</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="price">
-                                        <p>$19</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <ul class="more">
+                                <li>
+                                    <a href="javascript:void(0)">View More</a>
+                                </li>
+                            </ul>
+                            <ul class="card-actions icons right">
+                                <li>
+                                    <button class="btn btn-primary btn-fab" data-toggle="reveal"><i class="zmdi zmdi-edit"></i></button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div><!-- end /.col-md-4 -->
-
-            <div class="col-md-6">
-                <div class="dashboard_module recent_comment">
-                    <div class="dashboard__title">
-                        <h4>Recent Comments</h4>
-                    </div>
-
-                    <div class="dashboard__content">
-                        <div class="thread">
-                            <ul class="media-list thread-list">
-                                <li class="single-thread">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="images/m1.png" alt="Commentator Avatar">
+            </div>
+        </div>
+        <div class="tab-pane fade" id="dashboard2">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="card card-nav-tabs">
+                        <header class="card-heading heading-primary">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="active">
+                                            <a href="#cardnav5" role="tab" data-toggle="tab">
+                                                <i class="zmdi zmdi-home"></i> Home
                                             </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <div>
-                                                <div class="media-heading">
-                                                    <a href="author.html"><h4>Themexylum</h4></a>
-                                                    <span>9 Hours Ago</span>
-                                                </div>
-                                                <span class="comment-tag buyer">Purchased</span>
-                                                <a href="#" class="reply-link">Reply</a>
-                                            </div>
-                                            <p>Nunc placerat mi id nisi interdum mollis. Praesent there pharetra, justo ut sceleris que the mattis.</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- comment reply -->
-                                    <div class="media depth-2 reply-comment">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="images/m2.png" alt="Commentator Avatar">
+                                        </li>
+                                        <li>
+                                            <a href="#cardnav6" role="tab" data-toggle="tab">
+                                                <i class="zmdi zmdi-calendar-note"></i> About
                                             </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <form action="#" class="comment-reply-form">
-                                                <textarea class="bla" name="reply-comment" placeholder="Write your comment..."></textarea>
-                                                <button class="btn btn--md btn--round">Post Comment</button>
-                                            </form>
-                                        </div>
-                                    </div><!-- comment reply -->
-                                </li><!-- end single comment thread /.comment-->
-
-                                <li class="single-thread">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="images/m3.png" alt="Commentator Avatar">
+                                        </li>
+                                        <li>
+                                            <a href="#cardnav7" role="tab" data-toggle="tab">
+                                                <i class="zmdi zmdi-view-list-alt"></i> Tasks
                                             </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <div>
-                                                <div class="media-heading">
-                                                    <a href="author.html"><h4>Fierce Coder</h4></a>
-                                                    <span>9 Hours Ago</span>
-                                                </div>
-                                                <a href="#" class="reply-link">Reply</a>
-                                            </div>
-                                            <p>Nunc placerat mi id nisi interdum mollis. Praesent phare tra, justo ut sceleris que the mattis, leo quam.</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- comment reply -->
-                                    <div class="media depth-2 reply-comment">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" src="images/m2.png" alt="Commentator Avatar">
+                                        </li>
+                                        <li>
+                                            <a href="#cardnav8" role="tab" data-toggle="tab">
+                                                <i class="zmdi zmdi-settings"></i> Settings
                                             </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <form action="#" class="comment-reply-form">
-                                                <textarea name="reply-comment" placeholder="Write your comment..."></textarea>
-                                                <button class="btn btn--sm btn--round">Post Comment</button>
-                                            </form>
-                                        </div>
-                                    </div><!-- comment reply -->
-                                </li><!-- end single comment thread /.comment-->
-                            </ul><!-- end /.media-list -->
-                        </div><!-- end /.comments -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="dashboard_module recent_message">
-                    <div class="dashboard__title">
-                        <h4>Recent Message</h4>
-                        <div class="loading"><a href="#">View All</a></div>
-                    </div>
-
-                    <div class="dashboard__content">
-                        <div class="messages">
-                            <div class="message">
-                                <div class="message__actions_avatar">
-                                    <div class="actions">
-                                        <span class="fa fa-star"></span>
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="ch1">
-                                            <label for="ch1"> <span class="shadow_checkbox"></span></label>
-                                        </div>
-                                    </div>
-
-                                    <div class="avatar">
-                                        <img src="images/notification_head4.png" alt="">
-                                    </div>
-                                </div><!-- end /.actions -->
-
-                                <div class="message_data">
-                                    <div class="name_time">
-                                        <div class="name">
-                                            <p>NukeThemes</p>
-                                            <span class="lnr lnr-envelope"></span>
-                                        </div>
-
-                                        <span class="time">Just now</span>
-                                        <p>Hello John Smith! Nunc placerat mi ...</p>
-                                    </div>
-                                </div><!-- end /.message_data -->
-                            </div><!-- end /.message -->
-
-                            <div class="message">
-                                <div class="message__actions_avatar">
-                                    <div class="actions">
-                                        <span class="fa fa-star-o"></span>
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="ch2">
-                                            <label for="ch2"> <span class="shadow_checkbox"></span></label>
-                                        </div>
-                                    </div>
-
-                                    <div class="avatar">
-                                        <img src="images/notification_head5.png" alt="">
-                                    </div>
-                                </div><!-- end /.actions -->
-
-                                <div class="message_data">
-                                    <div class="name_time">
-                                        <div class="name">
-                                            <p>Crazy Coder</p>
-                                            <span class="lnr lnr-envelope"></span>
-                                        </div>
-
-                                        <span class="time">Just now</span>
-                                        <p>Hi! Nunc placerat mi id nisi interum ...</p>
-                                    </div>
-                                </div><!-- end /.message_data -->
-                            </div><!-- end /.message -->
-
-                            <div class="message_composer">
-                                <div class="composer_field" id="trumbowyg-demo"></div><!-- end /.trumbowyg-demo -->
-
-                                <div class="attached"></div>
-
-                                <div class="btns">
-                                    <button class="btn send btn--sm btn--round">Reply</button>
-                                    <label for="att"><input type="file" class="attachment_field" id="att" multiple=""> <span class="lnr lnr-paperclip"></span>Attachment</label>
-                                </div><!-- end /.message_composer -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end /.col-md-6 -->
-
-            <div class="col-md-8">
-                <div class="dashboard_module recent_notification">
-                    <div class="dashboard__title">
-                        <h4>Recent Notification</h4>
-                        <div class="loading"><a href="#">View All</a></div>
-                    </div>
-                    <div class="dashboard__content">
-                        <div class="notifications_module">
-                            <div class="notification">
-                                <span class="line"></span>
-                                <div class="notification__info">
-                                    <div class="info_avatar">
-                                        <img src="images/notification_head.png" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <p><span>Anderson</span> added to Favourite <a href="#">Mccarther Coffee Shop</a></p>
-                                        <p class="time">Just now</p>
-                                    </div>
-                                </div><!-- end /.notifications -->
-
-                                <div class="notification__icons ">
-                                    <span class="lnr lnr-heart loved noti_icon"></span>
-                                    <span class="lnr lnr-cross"></span>
-                                </div><!-- end /.notifications -->
-                            </div><!-- end /.notifications -->
-
-                            <div class="notification">
-                                <div class="notification__info">
-                                    <div class="info_avatar">
-                                        <img src="images/notification_head2.png" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <p><span>Michael Jorden</span> commented on <a href="#">MartPlace Extension Bundle</a></p>
-                                        <p class="time">Just now</p>
-                                    </div>
-                                </div><!-- end /.notifications -->
-
-                                <div class="notification__icons ">
-                                    <span class="lnr lnr-bubble commented noti_icon"></span>
-                                    <span class="lnr lnr-cross"></span>
-                                </div><!-- end /.notifications -->
-                            </div><!-- end /.notifications -->
-
-                            <div class="notification">
-                                <div class="notification__info">
-                                    <div class="info_avatar">
-                                        <img src="images/notification_head3.png" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <p><span>Khamoka </span>purchased <a href="#">  Visibility Manager Subscriptions</a></p>
-                                        <p class="time">Just now</p>
-                                    </div>
-                                </div><!-- end /.notifications -->
-
-                                <div class="notification__icons ">
-                                    <span class="lnr lnr-cart purchased noti_icon"></span>
-                                    <span class="lnr lnr-cross"></span>
-                                </div><!-- end /.notifications -->
-                            </div><!-- end /.notifications -->
-
-                            <div class="notification">
-                                <div class="notification__info">
-                                    <div class="info_avatar">
-                                        <img src="images/notification_head4.png" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <p><span>Anderson</span> added to Favourite <a href="#">Mccarther Coffee Shop</a></p>
-                                        <p class="time">Just now</p>
-                                    </div>
-                                </div><!-- end /.notifications -->
-
-                                <div class="notification__icons ">
-                                    <span class="lnr lnr-star reviewed noti_icon"></span>
-                                    <span class="lnr lnr-cross"></span>
-                                </div><!-- end /.notifications -->
-                            </div><!-- end /.notifications -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="dashboard_module product_que">
-                    <div class="dashboard__title">
-                        <h4>Product Upload Queue</h4>
-                    </div>
-
-                    <div class="dashboard__content">
-                        <ul>
-                            <li>
-                                <div class="uploaded_product">
-                                    <h4>Job Portal HTML Template</h4>
-                                    <p>8 days ago</p>
+                                        </li>
+                                    </ul>
                                 </div>
-
-                                <a href="#" class="cross" data-toggle="modal" data-target="#myModal"><span class="lnr lnr-cross"></span></a>
-                            </li>
-
-                            <li>
-                                <div class="uploaded_product">
-                                    <h4>Classic WordPress Blog Theme</h4>
-                                    <p>12 days ago</p>
+                            </div>
+                        </header>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fadeIn active" id="cardnav5">
+                                    <p>Helvetica letterpress bicycle rights banh mi keffiyeh af. Food truck shabby chic actually mixtape twee. Pabst blog messenger bag, four loko vape post-ironic paleo freegan. Twee raw denim brooklyn cornhole, polaroid cardigan 8-bit cred pinterest
+                                        biodiesel. Seitan woke vinyl, hoodie fingerstache irony bicycle rights vape sustainable DIY skateboard. Quinoa tumeric venmo, af lyft fashion axe slow-carb.</p>
                                 </div>
-
-                                <a href="#" class="cross" data-toggle="modal" data-target="#myModal"><span class="lnr lnr-cross"></span></a>
-                            </li>
-
-                            <li>
-                                <div class="uploaded_product">
-                                    <h4>Biplob Vai is Boss Public</h4>
-                                    <p>8 days ago</p>
+                                <div class="tab-pane fadeIn" id="cardnav6">
+                                    <p>Schlitz enamel pin neutra succulents bespoke, dreamcatcher tattooed flannel man bun la croix YOLO readymade chicharrones poke. Selfies ramps brooklyn microdosing church-key sustainable, keytar next level chicharrones PBR&amp;B. Mlkshk schlitz
+                                        whatever, twee wolf godard banh mi try-hard meh bitters irony. Cronut williamsburg shabby chic, typewriter vape skateboard post-ironic lo-fi YOLO shoreditch iceland.
+                                    </p>
                                 </div>
-
-                                <a href="#" class="cross" data-toggle="modal" data-target="#myModal"><span class="lnr lnr-cross"></span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="dashboard_module single_item_visitor">
-                    <div class="dashboard__title">
-                        <h4>Single Items Visitors</h4>
-                        <div class="pull-right">
-                            <div class="select-wrap">
-                                <select name="months" class="period_selector">
-                                    <option value="jan">Jan</option>
-                                    <option value="feb">Feb</option>
-                                    <option value="mar">Mar</option>
-                                </select>
-                                <span class="lnr lnr-chevron-down"></span>
+                                <div class="tab-pane fadeIn" id="cardnav7">
+                                    <p>Mlkshk tilde church-key literally jean shorts heirloom. Venmo scenester air plant narwhal ennui, ethical fashion axe small batch raclette bicycle rights asymmetrical 3 wolf moon art party listicle. Street art lo-fi snackwave, cliche chartreuse
+                                        pug drinking vinegar hashtag pok pok asymmetrical la croix. Tilde distillery meditation waistcoat vaporware, selfies mumblecore schlitz brunch try-hard gluten-free.
+                                    </p>
+                                </div>
+                                <div class="tab-pane fadeIn" id="cardnav8">
+                                    <p>Poutine tumblr wayfarers salvia. Quinoa twee raclette VHS. Enamel pin cornhole kale chips freegan meggings poutine kinfolk swag. Yuccie tumeric pok pok taxidermy affogato food truck. Enamel pin affogato next level occupy cliche, PBR&amp;B
+                                        +1 edison bulb master cleanse. Williamsburg edison bulb bitters, venmo vexillologist tattooed keffiyeh ennui four dollar toast tofu. Yr microdosing biodiesel meggings.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="dashboard__content">
-                        <canvas id="single_item_visit"></canvas>
-
-                        <div class="item_info">
-                            <div class="select-wrap">
-                                <select name="item" class="period_selector">
-                                    <option value="mattheme">Material Admin - Responsive Admin Theme</option>
-                                    <option value="reactAdmin">Best Free Responsive ReactJS Admin Themes</option>
-                                    <option value="design">Best YouTube Channels For UI/UX Designers</option>
-                                </select>
-                                <span class="lnr lnr-chevron-down"></span>
+                    <div class="row m-t-30">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="card image-over-card">
+                                <div class="card-image">
+                                    <a href="javascript:vodi(0)">
+                                        <img src="{{asset('/')}}assets/img/gallery/full/full-11.jpg">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">Raven Warwick</h4>
+                                    <h6 class="category text-gray text-center">UI/UX Designer</h6>
+                                    <div class="card-footer text-center">
+                                        <button class="btn btn-twitter btn-fab btn-fab-sm m-l-5 m-r-5"><i class="zmdi zmdi-twitter"></i></button>
+                                        <button class="btn btn-facebook btn-fab btn-fab-sm m-l-5 m-r-5"><i class="zmdi zmdi-facebook"></i></button>
+                                        <button class="btn btn-dribbble btn-fab btn-fab-sm m-l-5 m-r-5"><i class="zmdi zmdi-dribbble"></i></button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="info">
-                                <h4 class="indicate">+60%</h4>
-                                <p>Compared to Last Month</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="card image-over-card">
+                                <div class="card-image">
+                                    <a href="javascript:void(0)">
+                                        <img src="{{asset('/')}}assets/img/gallery/full/full-13.jpg">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Focus on your growing business</h4>
+                                    <h6 class="category text-gray">10 min read</h6>
+                                    <div class="card-footer">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="dashboard_module single_item_visitor">
-                    <div class="dashboard__title">
-                        <h4>Total Revenue</h4>
-                        <div id="visit_legend" class="legend"></div>
-                    </div>
-                    <div class="dashboard__content">
-                        <canvas id="revenue"></canvas>
+                <div class="col-lg-5">
+                    <div class="card type--scheduler ">
+                        <header class="card-heading">
+                            <div class="curr-date">
+                                <h3 class="curr-dd text-white"></h3>
+                                <h5 class="curr-mmmm-dd text-white"></h5>
+                            </div>
+                            <ul class="card-actions icons  alt-actions right-top">
+                                <li>
+                                    <a href="javascript:void(0)" data-toggle="refresh">
+                                        <i class="zmdi zmdi-refresh-alt"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="card-actions icons fab-action right-bottom m-b-n-30">
+                                <li>
+                                    <button type="button" class="btn btn-primary btn-fab" data-toggle="modal" data-target="#schedule_modal"><i class="zmdi zmdi-plus"></i></button>
+                                </li>
+                            </ul>
+                        </header>
+                        <div class="card-body clear-both p-0 max-h-500 scrollbar">
+                            <div class="week-container">
+                                <ul class="week top">
+                                    <li class="day day-names"><span>sun</span></li>
+                                    <li class="day day-names"><span>mon</span></li>
+                                    <li class="day day-names"><span>tue</span></li>
+                                    <li class="day day-names"><span>wed</span></li>
+                                    <li class="day day-names"><span>thu</span></li>
+                                    <li class="day day-names"><span>fri</span></li>
+                                    <li class="day day-names"><span>sat</span></li>
+                                </ul>
+                                <ul class="week bottom">
+                                    <li class="day"><span>7</span></li>
+                                    <li class="day"><span>8</span></li>
+                                    <li class="day current point"><span>9</span></li>
+                                    <li class="day"><span>10</span></li>
+                                    <li class="day"><span>11</span></li>
+                                    <li class="day point"><span>12</span></li>
+                                    <li class="day"><span>13</span></li>
+                                </ul>
+                            </div>
+                            <ul class="list-group p-0">
+                                <li class="list-group-item border-top p-t-20 p-b-20">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/01.jpg" alt="" class="img-circle max-w-50 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Design meeting with Melissa</div>
+                                        <div class="list-group-item-text">8:00 - 10:30am</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item border-top p-t-20 p-b-20">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/04.jpg" alt="" class="img-circle max-w-50 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Review mockups with Janet </div>
+                                        <div class="list-group-item-text">10:15 - 11:30am Hangouts</div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item border-top p-t-20 p-b-20">
+                                    <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/18.jpg" alt="" class="img-circle max-w-50 m-r-10"></span>
+                                    <div class="list-group-item-body">
+                                        <div class="list-group-item-heading">Catch up with Michael</div>
+                                        <div class="list-group-item-text">8:30pm Lost Forty Brewing</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div><!-- end /.row -->
-    </div><!-- end /.container -->
-</div><!-- end /.dashboard_menu_area -->
+        </div>
+    </div>
+    <!-- ENDS $dashboard_content -->
+</div>

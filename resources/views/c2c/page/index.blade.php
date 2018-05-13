@@ -344,10 +344,6 @@
 <!--================================
     END SEARCH AREA
 =================================-->
-
-<!--================================
-    START PRODUCTS AREA
-=================================-->
 <section class="products section--padding">
     <!-- start container -->
     <div class="container">
@@ -378,7 +374,6 @@
             </div><!-- end /.col-md-12 -->
         </div>--}}
         <!-- end /.row -->
-
         <!-- start .row -->
         <div class="row">
 
