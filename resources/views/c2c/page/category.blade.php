@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="search">
-                        <div class="search__title">
+                        {{--<div class="search__title">
                             <h3>
                                 <span>35,270</span> website templates from our creative community</h3>
-                        </div>
+                        </div>--}}
                         <div class="search__field">
                             <form action="#">
                                 <div class="field-wrapper">
