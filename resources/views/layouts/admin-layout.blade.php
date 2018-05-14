@@ -195,7 +195,7 @@
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-shopping-cart"></i>E-Commerce</a>
                         <ul class="nav-sub">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#l">Products</a></li>
+                            <li><a href="{{url('admin/product')}}">Products</a></li>
 
                             <li><a href="#">Customers</a></li>
                             <li><a href="#">Settings</a></li>
