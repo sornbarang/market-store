@@ -3,9 +3,6 @@
     <div class="col-xs-12">
         <div class="card card-data-tables product-table-wrapper">
         <header class="card-heading">
-        {{ AdvMng::getHTML('type') }}
-        {{ AdvMng::getHTML('type', true) }}
-s
             <h2 class="card-title">Zero configuration</h2>
             <small class="dataTables_info">DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code></small>
             
@@ -67,7 +64,7 @@ s
                     <th data-orderable="false" class="col-xs-1">Active</th>
                     <th class="col-xs-1">Stock</th>
                     <th data-orderable="false" class="col-xs-2">
-                    <button class="btn btn-primary btn-fab  animate-fab"><i class="zmdi zmdi-plus"></i></button>
+                    <a href="{{url('admin/ads/create')}}"><button class="btn btn-primary btn-fab  animate-fab"><i class="zmdi zmdi-plus"></i></button></a>
                     </th>
                 </tr>
                 </thead>

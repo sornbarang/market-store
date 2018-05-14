@@ -223,7 +223,7 @@
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>Advertise</a>
                         <ul class="nav-sub">
                             <li><a href="#">User</a></li>
-                            <li><a href="#">Banner</a></li>
+                            <li><a href="{{url('admin/ads')}}">Banner</a></li>
                             <li><a href="#">Report</a></li>
                         </ul>
                     </li>
