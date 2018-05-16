@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'HomeController@index')->name('admin');
     // Route::get('/ads', 'HomeController@ads')->name('ads');
     Route::resource('ads', 'AdsController');
+    Route::resource('product', 'ProductController');
 
 });
 
