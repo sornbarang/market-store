@@ -37,7 +37,7 @@ class ProductController extends Controller
     public function store(Request $request){
         $name = $request->name;
         $price = $request->price;
-        $active = $request->active;
+        $active = (int)$request->active??0;
         $description= $request->sumernotehidden;
         $imgappend=[];
         if($request->hasFile('photos'))
@@ -50,7 +50,7 @@ class ProductController extends Controller
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){ 
                     foreach ($request->photos as $photo) {
-                        $imgappend[] = $photo->store('products/admin');
+                        $imgappend[] = $photo->store('public');
                     } 
                 }
                 // else{
@@ -58,6 +58,7 @@ class ProductController extends Controller
                 // }
             }
         }
+        // dd($active);
         Product::create([
             'name' => $name,
             'price' => $price,

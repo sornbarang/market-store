@@ -64,7 +64,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            
                             @foreach($data['products'] as $val)
+                                @php
+                                    $arrimg=explode(',',$val->image);
+                                @endphp
                                 <tr>
                                     <td class="checkbox-cell">
                                         <span class="checkbox">
@@ -73,8 +77,8 @@
                                             <span class="checkbox-material"></span>
                                         </label>
                                         </span>
-                                    </td>
-                                    <td><img src="{{asset('/')}}assets/img/ecom/products/12252_Tgi0.jpeg" alt="" class="img-thumbnail" /></td>
+                                    </td> 
+                                    <td><img src="{{Storage::url($arrimg[0])}}" alt="" class="img-thumbnail" /></td>
                                     <td>{{$val->name}}</td>
                                     <td>#394822</td>
                                     <td>${{$val->price}}</td>
