@@ -602,6 +602,9 @@
     </div>
 </div>
 <!-- add mode -->
+<form  id="addProduct" method="post" action="{{url('admin/product')}}" enctype="multipart/form-data">
+@csrf
+<input type="hidden" id="sumernotehidden" name="sumernotehidden"> 
 <div class="modal fade" id="product_add_modal" tabindex="-1" role="dialog" aria-labelledby="tab_modal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -620,47 +623,128 @@
             <div class="tabpanel">
             <ul class="nav nav-tabs p-0">
                 <li class="active" role="presentation"><a href="#product_add_general" data-toggle="tab" aria-expanded="true">General Info</a></li>
-                <li role="presentation"><a href="#product_add_images" data-toggle="tab" aria-expanded="true">Product Images</a></li>
-                <li role="presentation"><a href="#product_add_price" data-toggle="tab" aria-expanded="true">Price</a></li>
-                <li role="presentation"><a href="#product_add_inventory" data-toggle="tab" aria-expanded="true">Inventory</a></li>
-                <li role="presentation"><a href="#product_add_shipping" data-toggle="tab" aria-expanded="true">Shipping</a></li>
+                <!-- <li role="presentation"><a href="#product_add_images" data-toggle="tab" aria-expanded="true">Product Images</a></li> -->
+                <!-- <li role="presentation"><a href="#product_add_price" data-toggle="tab" aria-expanded="true">Price</a></li> -->
+                <!-- <li role="presentation"><a href="#product_add_inventory" data-toggle="tab" aria-expanded="true">Inventory</a></li>
+                <li role="presentation"><a href="#product_add_shipping" data-toggle="tab" aria-expanded="true">Shipping</a></li> -->
             </ul>
             </div>
             <div class="tab-content">
             <div class="tab-pane fadeIn active" id="product_add_general">
                 <div class="card card p-20 p-t-10 m-b-0">
                 <div class="card-body">
-                    <form class="form-horizontal">
+                    <!-- <form class="form-horizontal"> -->
                     <div class="form-group label-floating is-empty">
                         <label class="control-label">Title</label>
-                        <input type="text" class="form-control">
+                        <input name="name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Price</label>
+                        <input name="price" type="text" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                            
+                                <img id="image_upload_preview"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos[]" id="file" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                                <img id="image_upload_preview1"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos[]" id="file1" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                                <img id="image_upload_preview2"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos[]" id="file2" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                                <img id="image_upload_preview3"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos[]" id="file3" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div id="add_product_desc">Say hello to a triangular cluster of neatly organized chaos, wrapped in a tasty cyan-to-magenta rainbow roll and deep-fried to imperfection.</div>
                     </div>
-                    <div class="chips chips-placeholder"></div>
-                    </form>
+                    <div class="form-group label-floating is-empty"> 
+                        <label class="checkbox-inline">
+                            <input name="active" type="checkbox" id="inlineCheckbox1" value="0"> Active
+                        </label>
+                    </div>
+                    {{--<div class="chips chips-placeholder"></div>--}}
+                    <!-- </form>  -->
                 </div>
                 </div>
             </div>
-            <div class="tab-pane fadeIn" id="product_add_images">
+            {{--<div class="tab-pane fadeIn" id="product_add_images">
                 <div class="card card p-20 p-t-10 m-b-0">
                 <div class="card-body">
-                    <form action="#" class="dropzone" id="product_add_images_form" enctype="multipart/form-data"></form>
+                <form id="product_add_images_form" method="post" action="{{url('admin/product')}}" class="dropzone" enctype="multipart/form-data">
+                    @csrf
+                    <div class="fallback">
+                        <input name="photo" type="file" multiple />
+                    </div>
+                </form> 
                 </div>
                 </div>
-            </div>
-            <div class="tab-pane fadeIn" id="product_add_price">
+            </div>--}}
+            {{--<div class="tab-pane fadeIn" id="product_add_price">
                 <div class="card card p-20 p-t-10 m-b-0">
                 <div class="card-body">
-                    <form>
+                    <!-- <form> -->
                     <div class="row">
                         <div class="col-md-6">
                         <div class="form-group label-floating is-empty">
                             <div class="input-group">
                             <span class="input-group-addon">$</span>
                             <label class="control-label">Price</label>
-                            <input type="text" class="form-control">
+                            <input name="price" type="text" class="form-control">
                             </div>
                         </div>
                         </div>
@@ -669,28 +753,28 @@
                             <div class="input-group">
                             <span class="input-group-addon">$</span>
                             <label class="control-label">Compare at price</label>
-                            <input type="text" class="form-control">
-                            </div>
+                            <input name="compareprice" type="text" class="form-control">
+                        </div>
                         </div>
                         </div>
                         <div class="col-xs-12">
-                        <div class="form-group">
-                            <div class="togglebutton m-b-15 ">
-                            <label>
-                                <input type="checkbox" class="toggle-info" checked>   Charge taxes on this product
-                            </label>
+                            <div class="form-group">
+                                <div class="togglebutton m-b-15 ">
+                                    <label>
+                                        <input type="checkbox" class="toggle-info" checked>   Charge taxes on this product
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        </div>
                     </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
                 </div>
-            </div>
-            <div class="tab-pane fadeIn" id="product_add_inventory">
+            </div>--}}
+            {{--<div class="tab-pane fadeIn" id="product_add_inventory">
                 <div class="card card p-20 p-t-10 m-b-0">
                 <div class="card-body">
-                    <form>
+                    <!-- <form> -->
                     <div class="row">
                         <div class="col-md-6">
                         <div class="form-group label-floating is-empty">
@@ -716,14 +800,14 @@
                         </div>
                         </div>
                     </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
                 </div>
-            </div>
-            <div class="tab-pane fadeIn" id="product_add_shipping">
+            </div>--}}
+            {{--<div class="tab-pane fadeIn" id="product_add_shipping">
                 <div class="card card p-20 p-t-10 m-b-0">
                 <div class="card-body">
-                    <form>
+                    <!-- <form> -->
                     <div class="row">
                         <div class="col-md-4">
                         <div class="form-group label-floating is-empty">
@@ -769,14 +853,14 @@
                         </div>
                         </div>
                     </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
                 </div>
-            </div>
+            </div>--}}
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Add Product</button>
+            <button type="submit" id="submitbtn" class="btn btn-primary">Add Product</button>
             </div>
         </div>
         <!-- modal-content -->
@@ -784,11 +868,11 @@
         <!-- modal-dialog -->
     </div>
 </div> 
+</form>
 
 
 
-
-{{--<aside class="drawer-right-lg mw-lightGray drawer-fixed ecom-edit-panel">
+<aside class="drawer-right-lg mw-lightGray drawer-fixed ecom-edit-panel">
     <div class="drawer-content">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
@@ -1092,4 +1176,4 @@
             </form>
         </footer>
     </section> 
-</aside>--}}
+</aside>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>MaterialWrap - jQuery full version</title>
     <link rel="stylesheet" href="{{asset('/')}}assets/css/vendor.bundle.css">
     <link rel="stylesheet" href="{{asset('/')}}assets/css/app.bundle.css">
@@ -844,6 +845,74 @@
 </div>
 <script src="{{asset('/')}}assets/js/vendor.bundle.js"></script>
 <script src="{{asset('/')}}assets/js/app.bundle.js"></script>
+<script>
+$(document).ready(function() {
+    $(document).on('click', 'form button[type=submit]', function(e) {
+        $('#sumernotehidden').val($('.note-editable').html()); 
+        // e.preventDefault();
+        
+        $(this).submit();
+    });
+    $('.note-editable').on("blur", function(){
+        var markupStr = $('#summernote').summernote('code');
+
+        // console.log($(this).html());
+        // var markupStr = $('.add_product_desc').eq(2).summernote('code');
+        console.log(markupStr);
+        });
+    // $('.note-editable.panel-body').keypress( _.debounce( function(){
+        
+    //     console.log($(this).html());
+    //     var markupStr = $('.add_product_desc').eq(2).summernote('code');
+    //     console.log(markupStr);
+    // }, 500 ) );
+
+    $('#inlineCheckbox1').click(function(){
+        if($(this).is(':checked')){
+            $(this).val(1)
+        }else{
+            $(this).val(0)
+        }
+    });
+    $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','none');
+    function readURL(input) {
+        // console.log(input.parentElement.parentElement.childNodes[0].nextSibling);
+        if (input.files && input.files[0]) {
+            input.parentElement.parentElement.childNodes[0].nextSibling.style.display = "block"
+            // $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','block');
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                input.parentElement.parentElement.childNodes[0].nextSibling.setAttribute("src", e.target.result);
+                // $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#file,#file1,#file2,#file3").change(function () {
+        readURL(this);
+    });
+    // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+    // $('#submitbtn').click(function(e){
+    //     var formData = new FormData($(this)[0]);
+    //     $.ajax({
+    //         type: "POST",
+    //         headers: {
+    //             'X-CSRF-Token':CSRF_TOKEN,
+    //         },
+    //         url: "{{url('admin/product')}}",
+    //         data: formData,
+    //         cache: false,
+    //         success: function(data){
+    //             console.log(data);
+    //         }
+    //     }); 
+
+    // });
+});
+</script>
 </body>
 
 </html>

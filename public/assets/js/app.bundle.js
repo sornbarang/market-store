@@ -5546,13 +5546,14 @@
 	  $('#add_product_desc, #edit_product_desc').summernote();
 	};
 	var triggerDropzoneEcom = function triggerDropzoneEcom() {
-	  if (!Dropzone || !Dropzone.length) {
+	  // if (!Dropzone || !Dropzone.length) {
 	    Dropzone.autoDiscover = false;
 	    $('#product_add_images_form').dropzone({
-	      url: "/assets/file/upload",
 	      addRemoveLinks: true
 	    });
-	  }
+	  // }else{
+		// 	alert();
+		// }
 	};
 	var addProductTags = function addProductTags() {
 	  $('.chips-placeholder').material_chip({

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Illuminate\Http\Request; 
+use App\Product;
 class ProductController extends Controller
 {
     /**
@@ -34,9 +34,49 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $name = $request->name;
+        $price = $request->price;
+        $active = $request->active;
+        $description= $request->sumernotehidden;
+        $imgappend=[];
+        if($request->hasFile('photos'))
+        {
+            $allowedfileExtension=['jpg','jpeg','png'];
+            $files = $request->file('photos');
+            foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){ 
+                    foreach ($request->photos as $photo) {
+                        $imgappend[] = $photo->store('products/admin');
+                    } 
+                }
+                // else{
+                //     echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
+                // }
+            }
+        }
+        Product::create([
+            'name' => $name,
+            'price' => $price,
+            'active' => $active,
+            'image' => implode(',',$imgappend),
+            'description'=>$description
+            ]);
+        return redirect()->action('ProductController@index');
+        
+        // if ($request->hasFile('photos')) {  
+        //     foreach($request->file('photos') as $image)
+        //     {
+        //         // print_r($image->getClientOriginalName());
+        //         $path = $request->file('photos')->store('products/admin'); 
+        //         return response()->json(['success'=>$path]);
+        //     }
+           
+        // }
+        // return redirect()->action('ProductController@index');
     }
 
     /**
