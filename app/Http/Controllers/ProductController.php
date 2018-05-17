@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data['cats']=[];
+        $data['products']= Product::get();
         $view="admin.products.index";
         return view('admin.index',compact('view','data'));
     }
