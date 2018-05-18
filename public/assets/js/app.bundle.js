@@ -4859,12 +4859,15 @@
 	    $('#deleteItems span').text(initCheckCount + ' ' + countGrammer + ' selected');
 	  });
 	};
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+	
 	//Confirm delete
 	var deleteItem = function deleteItem() {
 	  $('#confirmDelete').on('click', function (e) {
-	    e.stopPropagation();
-	    swal({
-	      title: "Are you sure?",
+			e.stopPropagation();
+			// my custome js sweetAlert2
+			swal({
+				title: "Are you sure?",
 	      text: "You will not be able to recover this data.",
 	      type: "warning",
 	      showCancelButton: true,
@@ -4873,15 +4876,45 @@
 	      cancelButtonText: "Cancel",
 	      closeOnConfirm: false,
 	      closeOnCancel: false
-	    }, function (isConfirm) {
-	      if (isConfirm) {
-	        swal("Deleted!", "Your data has been deleted.", "success");
+			}).then((result) => {
+				if (result) {
+					
 	        setTimeout(function () {
+						var ditem=[];
 	          $('.checkbox-cell input[id*=CheckboxId_][type=checkbox]:checked').each(function () {
+							// push id checked item on product
+							ditem.push($(this).val());
 	            $(this).prop('checked', false);
 	            $(this).closest("tr").fadeOut();
 	            $('#deleteItems').fadeOut();
-	          });
+						}); 
+						if(ditem.length > 0){
+							$.ajax({
+								url: "product/" + ditem.join(','),
+								type: 'DELETE',
+								headers: {
+										'X-CSRF-Token':CSRF_TOKEN,
+								},
+								success: function( msg ) {
+										if(msg.status){
+											swal("Deleted!", "Your data has been deleted.", "success");
+										}else{
+											swal(
+												'Cancelled',
+												'Can not delete record !',
+												'error'
+											)
+										}
+								},
+								error: function( data ) {
+									swal(
+										'Cancelled',
+										'Can not delete record)',
+										'error'
+									)
+								}
+							});
+						}
 	          if ($('#checkAll').is(":checked")) {
 	            $('#checkAll').prop('checked', false);
 	          };
@@ -4889,11 +4922,52 @@
 	        }, 600);
 	        setTimeout(function () {
 	          $('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
-	        }, 2000);
-	      } else {
-	        swal("Cancelled", "Your action has been cancelled.", "error");
-	      };
-	    });
+	        }, 2000); 
+				}
+			},function(dismiss) {
+				if (dismiss === 'cancel') { // you might also handle 'close' or 'timer' if you used those
+					swal(
+						'Cancelled',
+						'Your imaginary file is safe :)',
+						'error'
+					)
+				} else {
+					throw dismiss;
+				}
+			})
+			//  Default code sweetAlert2
+	    // swal({
+	    //   title: "Are you sure?",
+	    //   text: "You will not be able to recover this data.",
+	    //   type: "warning",
+	    //   showCancelButton: true,
+	    //   confirmButtonColor: '#DD6B55',
+	    //   confirmButtonText: 'Delete',
+	    //   cancelButtonText: "Cancel",
+	    //   closeOnConfirm: false,
+	    //   closeOnCancel: false
+	    // }, function (isConfirm) {
+			// 	alert();
+	    //   if (isConfirm) {
+	    //     swal("Deleted!", "Your data has been deleted.", "success");
+	    //     setTimeout(function () {
+	    //       $('.checkbox-cell input[id*=CheckboxId_][type=checkbox]:checked').each(function () {
+	    //         $(this).prop('checked', false);
+	    //         $(this).closest("tr").fadeOut();
+	    //         $('#deleteItems').fadeOut();
+	    //       });
+	    //       if ($('#checkAll').is(":checked")) {
+	    //         $('#checkAll').prop('checked', false);
+	    //       };
+	    //       $('#deleteItems span').text('');
+	    //     }, 600);
+	    //     setTimeout(function () {
+	    //       $('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
+	    //     }, 2000);
+	    //   } else {
+	    //     swal("Cancelled", "Your action has been cancelled.", "error");
+	    //   };
+	    // });
 	  });
 	};
 	//Re-init on pagination

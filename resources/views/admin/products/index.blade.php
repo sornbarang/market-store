@@ -90,7 +90,10 @@
                                         </div>
                                     </td>
                                     <td>1,200</td>
-                                    <td><a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a></td>
+                                    <td>
+                                        <!-- <a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a> -->
+                                        <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_add_modal"><i class="zmdi zmdi-edit"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -101,7 +104,7 @@
         </div>
     </div>
 </div>
-<!-- add mode -->
+<!-- Add mode -->
 <form  id="addProduct" method="post" action="{{url('admin/product')}}" enctype="multipart/form-data">
 @csrf
 <input type="hidden" id="sumernotehidden" name="sumernotehidden"> 
@@ -371,7 +374,7 @@
 </form>
 
 
-
+<!-- edit  -->
 <aside class="drawer-right-lg mw-lightGray drawer-fixed ecom-edit-panel">
     <div class="drawer-content">
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -464,7 +467,7 @@
         </div>
         </div>
     </div>
-    <div class="panel panel-default">
+    {{--<div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingFour">
         <h4 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -503,8 +506,8 @@
             </form>
         </div>
         </div>
-    </div>
-    <div class="panel panel-default">
+    </div>--}}
+    {{--<div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingFive">
         <h4 class="panel-title">
             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -563,7 +566,7 @@
             </form>
         </div>
         </div>
-    </div>
+    </div>--}}
     <footer class="drawer-footer">
         <button type="button" class="btn btn-default" data-dismiss="drawer">Cancel</button>
         <button type="button" class="btn btn-primary">Save changes</button>

@@ -14,6 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $data['products']= Product::get();
+        $data['active']= 'product';
         $view="admin.products.index";
         return view('admin.index',compact('view','data'));
     }
@@ -122,6 +123,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $res=Product::whereIn('id',explode(',',$id))->delete();
+        // if($res){
+        //     return response()->json(['status'=>true]);
+        // }
+        return response()->json(['status'=>false]);
     }
 }

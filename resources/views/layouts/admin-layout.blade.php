@@ -193,10 +193,10 @@
                         </ul>
                     </li>
                     <li class="sidebar-header">Market</li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-shopping-cart"></i>E-Commerce</a>
+                    <li class="nav-dropdown {{isset($data['active'])?'active open':''}}"><a href="#"><i class="zmdi zmdi-shopping-cart"></i>E-Commerce</a>
                         <ul class="nav-sub">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="{{url('admin/product')}}">Products</a></li>
+                            <li class="{{isset($data['active']) && $data['active']=='product'?'active':''}}"><a href="{{url('admin/product')}}" >Products</a></li>
 
                             <li><a href="#">Customers</a></li>
                             <li><a href="#">Settings</a></li>
@@ -847,10 +847,9 @@
 <script src="{{asset('/')}}assets/js/app.bundle.js"></script>
 <script>
 $(document).ready(function() {
-    $(document).on('click', 'form button[type=submit]', function(e) {
+    $(document).on('click', 'form#addProduct button[type=submit]', function(e) {
         $('#sumernotehidden').val($('.note-editable').html()); 
         // e.preventDefault();
-        
         $(this).submit();
     });
     $('.note-editable').on("blur", function(){
