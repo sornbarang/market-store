@@ -135,25 +135,37 @@
                     <div class="item-info">
                         <div class="item-navigation">
                             <ul class="nav nav-tabs">
-                                <li role="presentation" class="active">
-                                    <a href="#product-details" aria-controls="product-details" role="tab" data-toggle="tab">Item Details</a>
+                                <li>
+                                    <a href="#product-details" class="active" aria-controls="product-details" role="tab" data-toggle="tab">Item Details</a>
                                 </li>
-                                <li role="presentation">
+                                <li>
                                     <a href="#product-comment" aria-controls="product-comment" role="tab" data-toggle="tab">Comments </a>
                                 </li>
+                                {{--<li>
+                                    <a href="#product-review" aria-controls="product-review" role="tab" data-toggle="tab">Reviews
+                                        <span>(35)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#product-support" aria-controls="product-support" role="tab" data-toggle="tab">Support</a>
+                                </li>
+                                <li>
+                                    <a href="#product-faq" aria-controls="product-faq" role="tab" data-toggle="tab">item FAQ</a>
+                                </li>--}}
                             </ul>
-                        </div><!-- end /.item-navigation -->
+                        </div>
+                        <!-- end /.item-navigation -->
 
                         <div class="tab-content">
-                            <div class="fade in tab-pane product-tab active" id="product-details">
+                            <div class="fade show tab-pane product-tab active" id="product-details">
                                 <div class="tab-content-wrapper">
                                     <h1>Landing Page Details</h1>
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattis,
-                                        leo quam aliquet congue placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scel erisque the mattis,
-                                        leo quam aliquet congue justo ut scelerisque. Praesent pharetra, justo ut scelerisque the mattis,
-                                        leo quam aliquet congue justo ut scelerisque.</p>
+                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the
+                                        mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. Praesent pharetra,
+                                        justo ut scel erisque the mattis, leo quam aliquet congue justo ut scelerisque. Praesent
+                                        pharetra, justo ut scelerisque the mattis, leo quam aliquet congue justo ut scelerisque.</p>
                                     <h2>Features With Image:</h2>
-                                    <img src="{{asset('/')}}images/prodesc.jpg" alt="This is product description thumbnail">
+                                    <img src="{{ asset('images/prodesc.jpg') }}" alt="This is product description thumbnail">
 
                                     <h2>Features With HTML List Unordered:</h2>
                                     <ul>
@@ -174,7 +186,8 @@
                                     <h2>Features With HTML List Ordered:</h2>
                                     <iframe width="100" height="400" src="https://www.youtube.com/embed/w2zIUJrglR4" allowfullscreen></iframe>
                                 </div>
-                            </div><!-- end /.tab-content -->
+                            </div>
+                            <!-- end /.tab-content -->
 
                             <div class="fade tab-pane product-tab" id="product-comment">
                                 <div class="thread">
@@ -183,19 +196,23 @@
                                             <div class="media">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m1.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m1.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
                                                     <div>
                                                         <div class="media-heading">
-                                                            <a href="author.html"><h4>Themexylum</h4></a>
+                                                            <a href="author.html">
+                                                                <h4>Themexylum</h4>
+                                                            </a>
                                                             <span>9 Hours Ago</span>
                                                         </div>
                                                         <span class="comment-tag buyer">Purchased</span>
                                                         <a href="#" class="reply-link">Reply</a>
                                                     </div>
-                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceleris que the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. </p>
+                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut
+                                                        sceleris que the mattis, leo quam aliquet congue placerat mi id nisi
+                                                        interdum mollis. </p>
                                                 </div>
                                             </div>
 
@@ -205,7 +222,7 @@
                                                     <div class="media">
                                                         <div class="media-left">
                                                             <a href="#">
-                                                                <img class="media-object" src="{{asset('/')}}images/m2.png" alt="Commentator Avatar">
+                                                                <img class="media-object" src="{{ asset('images/m2.png') }}" alt="Commentator Avatar">
                                                             </a>
                                                         </div>
                                                         <div class="media-body">
@@ -214,7 +231,9 @@
                                                                 <span>6 Hours Ago</span>
                                                             </div>
                                                             <span class="comment-tag author">Author</span>
-                                                            <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceleris que the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. </p>
+                                                            <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra,
+                                                                justo ut sceleris que the mattis, leo quam aliquet congue
+                                                                placerat mi id nisi interdum mollis. </p>
                                                         </div>
                                                     </div>
 
@@ -223,7 +242,7 @@
                                                     <div class="media">
                                                         <div class="media-left">
                                                             <a href="#">
-                                                                <img class="media-object" src="{{asset('/')}}images/m1.png" alt="Commentator Avatar">
+                                                                <img class="media-object" src="{{ asset('images/m1.png') }}" alt="Commentator Avatar">
                                                             </a>
                                                         </div>
                                                         <div class="media-body">
@@ -232,7 +251,9 @@
                                                                 <span>9 Hours Ago</span>
                                                             </div>
                                                             <span class="comment-tag buyer">Purchased</span>
-                                                            <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceleris que the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. </p>
+                                                            <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra,
+                                                                justo ut sceleris que the mattis, leo quam aliquet congue
+                                                                placerat mi id nisi interdum mollis. </p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -242,7 +263,7 @@
                                             <div class="media depth-2 reply-comment">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m2.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m2.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
@@ -251,25 +272,31 @@
                                                         <button class="btn btn--md btn--round">Post Comment</button>
                                                     </form>
                                                 </div>
-                                            </div><!-- comment reply -->
-                                        </li><!-- end single comment thread /.comment-->
+                                            </div>
+                                            <!-- comment reply -->
+                                        </li>
+                                        <!-- end single comment thread /.comment-->
 
                                         <li class="single-thread">
                                             <div class="media">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m3.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m3.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
                                                     <div>
                                                         <div class="media-heading">
-                                                            <a href="author.html"><h4>Themexylum</h4></a>
+                                                            <a href="author.html">
+                                                                <h4>Themexylum</h4>
+                                                            </a>
                                                             <span>9 Hours Ago</span>
                                                         </div>
                                                         <a href="#" class="reply-link">Reply</a>
                                                     </div>
-                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceleris que the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. </p>
+                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut
+                                                        sceleris que the mattis, leo quam aliquet congue placerat mi id nisi
+                                                        interdum mollis. </p>
                                                 </div>
                                             </div>
 
@@ -277,7 +304,7 @@
                                             <div class="media depth-2 reply-comment">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m2.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m2.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
@@ -286,25 +313,31 @@
                                                         <button class="btn btn--sm btn--round">Post Comment</button>
                                                     </form>
                                                 </div>
-                                            </div><!-- comment reply -->
-                                        </li><!-- end single comment thread /.comment-->
+                                            </div>
+                                            <!-- comment reply -->
+                                        </li>
+                                        <!-- end single comment thread /.comment-->
 
                                         <li class="single-thread">
                                             <div class="media">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m4.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m4.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
                                                     <div>
                                                         <div class="media-heading">
-                                                            <a href="author.html"><h4>Themexylum</h4></a>
+                                                            <a href="author.html">
+                                                                <h4>Themexylum</h4>
+                                                            </a>
                                                             <span>9 Hours Ago</span>
                                                         </div>
                                                         <a href="#" class="reply-link">Reply</a>
                                                     </div>
-                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceleris que the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. </p>
+                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut
+                                                        sceleris que the mattis, leo quam aliquet congue placerat mi id nisi
+                                                        interdum mollis. </p>
                                                 </div>
                                             </div>
 
@@ -312,7 +345,7 @@
                                             <div class="media depth-2 reply-comment">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m2.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m2.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
@@ -321,25 +354,31 @@
                                                         <button class="btn btn--sm btn--round">Post Comment</button>
                                                     </form>
                                                 </div>
-                                            </div><!-- comment reply -->
-                                        </li><!-- end single comment thread /.comment-->
+                                            </div>
+                                            <!-- comment reply -->
+                                        </li>
+                                        <!-- end single comment thread /.comment-->
 
                                         <li class="single-thread">
                                             <div class="media">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m5.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m5.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
                                                     <div>
                                                         <div class="media-heading">
-                                                            <a href="author.html"><h4>Themexylum</h4></a>
+                                                            <a href="author.html">
+                                                                <h4>Themexylum</h4>
+                                                            </a>
                                                             <span>9 Hours Ago</span>
                                                         </div>
                                                         <a href="#" class="reply-link">Reply</a>
                                                     </div>
-                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceleris que the mattis, leo quam aliquet congue placerat mi id nisi interdum mollis. </p>
+                                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut
+                                                        sceleris que the mattis, leo quam aliquet congue placerat mi id nisi
+                                                        interdum mollis. </p>
                                                 </div>
                                             </div>
 
@@ -347,7 +386,7 @@
                                             <div class="media depth-2 reply-comment">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <img class="media-object" src="{{asset('/')}}images/m2.png" alt="Commentator Avatar">
+                                                        <img class="media-object" src="{{ asset('images/m2.png') }}" alt="Commentator Avatar">
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
@@ -356,9 +395,12 @@
                                                         <button class="btn btn--sm btn--round">Post Comment</button>
                                                     </form>
                                                 </div>
-                                            </div><!-- comment reply -->
-                                        </li><!-- end single comment thread /.comment-->
-                                    </ul><!-- end /.media-list -->
+                                            </div>
+                                            <!-- comment reply -->
+                                        </li>
+                                        <!-- end single comment thread /.comment-->
+                                    </ul>
+                                    <!-- end /.media-list -->
 
                                     <div class="pagination-area pagination-area2">
                                         <nav class="navigation pagination" role="navigation">
@@ -366,10 +408,13 @@
                                                 <a class="page-numbers current" href="#">1</a>
                                                 <a class="page-numbers" href="#">2</a>
                                                 <a class="page-numbers" href="#">3</a>
-                                                <a class="next page-numbers" href="#"><span class="lnr lnr-arrow-right"></span></a>
+                                                <a class="next page-numbers" href="#">
+                                                    <span class="lnr lnr-arrow-right"></span>
+                                                </a>
                                             </div>
                                         </nav>
-                                    </div><!-- end /.comment pagination area -->
+                                    </div>
+                                    <!-- end /.comment pagination area -->
 
                                     <div class="comment-form-area">
                                         <h4>Leave a comment</h4>
@@ -377,7 +422,7 @@
                                         <div class="media comment-form">
                                             <div class="media-left">
                                                 <a href="#">
-                                                    <img class="media-object" src="{{asset('/')}}images/m7.png" alt="Commentator Avatar">
+                                                    <img class="media-object" src="{{ asset('images/m7.png') }}" alt="Commentator Avatar">
                                                 </a>
                                             </div>
                                             <div class="media-body">
@@ -386,13 +431,19 @@
                                                     <button class="btn btn--sm btn--round">Post Comment</button>
                                                 </form>
                                             </div>
-                                        </div><!-- comment reply -->
-                                    </div><!-- end /.comment-form-area -->
-                                </div><!-- end /.comments -->
-                            </div><!-- end /.product-comment -->
+                                        </div>
+                                        <!-- comment reply -->
+                                    </div>
+                                    <!-- end /.comment-form-area -->
+                                </div>
+                                <!-- end /.comments -->
+                            </div>
+                            <!-- end /.product-comment -->
 
-                        </div><!-- end /.tab-content -->
-                    </div><!-- end /.item-info -->
+                        </div>
+                        <!-- end /.tab-content -->
+                    </div>
+                    <!-- end /.item-info -->
                 </div><!-- end /.col-md-8 -->
 
                 <div class="col-md-4">

@@ -817,6 +817,7 @@
 <script src="{{ asset('js/vendor/waypoints.min.js') }}"></script>
 <script src="{{ asset('js/dashboard.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
 <script src="{{ asset('js/map.js') }}"></script>
 <!-- endinject -->
 </body>
