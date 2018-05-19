@@ -847,10 +847,50 @@
 <script src="{{asset('/')}}assets/js/app.bundle.js"></script>
 <script>
 $(document).ready(function() {
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     $(document).on('click', 'form#addProduct button[type=submit]', function(e) {
         $('#sumernotehidden').val($('.note-editable').html()); 
         // e.preventDefault();
         $(this).submit();
+    });
+    $(document).on('click', '.edit-product', function(e) {
+        var id=$(this).data('id');
+        $.ajax({
+            type: "GET",
+            headers: {
+                'X-CSRF-Token':CSRF_TOKEN,
+            },
+            url: "{{url('admin/product')}}/"+id+"/edit",
+            data: $(this).data('id'),
+            dataType:'json',
+            success: function(response){
+                
+                if(response.data !=''){
+                    var imgs = response.data.image.split(',');
+                    
+                    for(var i=0;i<imgs.length;i++){ 
+                        console.log(i);
+                        var img = imgs[i].replace('public/','');
+                        var url ="{{Storage::url('')}}"+img; 
+                        if(i==0){
+                            $('#editProduct #image_upload_preview').css('display','block');
+                            $('#editProduct #image_upload_preview').attr('src',url)
+                        }else{
+                            $('#editProduct #image_upload_preview'+i).css('display','block');
+                            
+                            $('#editProduct #image_upload_preview'+i).attr('src',url)
+                        }
+                        
+                    }  
+                    $('#editProduct input[name="name"]').parent().attr('class','form-group label-floating is-empty is-focused')
+                    $('#editProduct input[name="name"]').val(response.data.name)
+                    $('#editProduct input[name="price"]').parent().attr('class','form-group label-floating is-empty is-focused')
+                    $('#editProduct input[name="price"]').val(response.data.price)
+                    
+                }
+                
+            }
+        });
     });
     $('.note-editable').on("blur", function(){
         var markupStr = $('#summernote').summernote('code');
@@ -892,7 +932,7 @@ $(document).ready(function() {
     $("#file,#file1,#file2,#file3").change(function () {
         readURL(this);
     });
-    // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    
 
     // $('#submitbtn').click(function(e){
     //     var formData = new FormData($(this)[0]);

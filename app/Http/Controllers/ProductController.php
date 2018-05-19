@@ -59,7 +59,7 @@ class ProductController extends Controller
                 // }
             }
         }
-        // dd($active);
+        // dd($imgappend);
         Product::create([
             'name' => $name,
             'price' => $price,
@@ -100,7 +100,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product= Product::find($id);
+        if($product){
+            return response()->json(['status'=>true,'data'=>$product]);   
+        }
+        return response()->json(['status'=>false,'data'=>[]]);
     }
 
     /**
