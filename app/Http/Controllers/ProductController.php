@@ -116,7 +116,39 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->name??'';
+        $price = $request->price??0;
+        $active = (int)$request->active??0;
+        $description= $request->sumernotehidden??'';
+        $imgappend=[];
+        if($request->hasFile('photos'))
+        {
+            $allowedfileExtension=['jpg','jpeg','png'];
+            $files = $request->file('photos');
+            foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){ 
+                    foreach ($request->photos as $photo) {
+                        $imgappend[] = $photo->store('public');
+                    } 
+                }
+                // else{
+                //     echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
+                // }
+            }
+        }
+        $product = Product::find($id);
+
+        $product->name = $name;
+        $product->price = $price;
+        $product->description = $description;
+        $product->image =implode(',',$imgappend);
+        $product->save();
+        if($product){
+            return redirect()->action('ProductController@index');
+        } 
     }
 
     /**

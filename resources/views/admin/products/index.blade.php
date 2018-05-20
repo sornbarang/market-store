@@ -148,8 +148,10 @@
                     <div class="row">
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
-                            
                                 <img id="image_upload_preview"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -166,6 +168,9 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview1"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file1" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -182,6 +187,9 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview2"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file2" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -198,6 +206,9 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview3"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file3" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -374,9 +385,11 @@
 </form>
 
 <!-- edit mode -->
-<form  id="editProduct" method="post"  enctype="multipart/form-data">
+<form  id="editProduct" method="post" enctype="multipart/form-data">
 @csrf
+@method('PUT')
 <input type="hidden" id="sumernotehidden" name="sumernotehidden"> 
+<input type="hidden" id="editid" name="editid"> 
 <div class="modal fade" id="product_edit_modal" tabindex="-1" role="dialog" aria-labelledby="tab_modal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

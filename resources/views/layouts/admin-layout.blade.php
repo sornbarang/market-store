@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{asset('/')}}assets/css/vendor.bundle.css">
     <link rel="stylesheet" href="{{asset('/')}}assets/css/app.bundle.css">
     <link rel="stylesheet" href="{{asset('/')}}assets/css/theme-a.css">
+    <link rel="stylesheet" href="{{asset('/')}}assets/css/admin-back.css">
 </head>
 <body>
 <div id="app_wrapper">
@@ -848,8 +849,15 @@
 <script>
 $(document).ready(function() {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    // Add New record
     $(document).on('click', 'form#addProduct button[type=submit]', function(e) {
-        $('#sumernotehidden').val($('.note-editable').html()); 
+        $('#addProduct #sumernotehidden').val($('#addProduct .note-editable').html()); 
+        // e.preventDefault();
+        $(this).submit();
+    });
+    // Edit record
+    $(document).on('click', 'form#editProduct button[type=submit]', function(e) {
+        $('#editProduct #sumernotehidden').val($('#editProduct .note-editable').html()); 
         // e.preventDefault();
         $(this).submit();
     });
@@ -864,28 +872,36 @@ $(document).ready(function() {
             data: $(this).data('id'),
             dataType:'json',
             success: function(response){
+                // clear image to empty before set new attribute
+                $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').attr('src','');
+                // display css none
+                $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','none');
                 
                 if(response.data !=''){
-                    var imgs = response.data.image.split(',');
-                    
-                    for(var i=0;i<imgs.length;i++){ 
-                        console.log(i);
+                    var imgs = response.data.image !=''?response.data.image.split(','):[]
+                    console.log(imgs);
+                    for(var i=0;i<imgs.length;i++){  
                         var img = imgs[i].replace('public/','');
                         var url ="{{Storage::url('')}}"+img; 
                         if(i==0){
+                            $('#editProduct #file').val('me');
                             $('#editProduct #image_upload_preview').css('display','block');
                             $('#editProduct #image_upload_preview').attr('src',url)
                         }else{
                             $('#editProduct #image_upload_preview'+i).css('display','block');
-                            
                             $('#editProduct #image_upload_preview'+i).attr('src',url)
                         }
                         
                     }  
-                    $('#editProduct input[name="name"]').parent().attr('class','form-group label-floating is-empty is-focused')
-                    $('#editProduct input[name="name"]').val(response.data.name)
-                    $('#editProduct input[name="price"]').parent().attr('class','form-group label-floating is-empty is-focused')
-                    $('#editProduct input[name="price"]').val(response.data.price)
+                    $('#editProduct').attr('action','{{url("admin/product")}}/'+response.data.id);
+                    if(response.data.name !='' || response.data.price !=''){
+                        $('#editProduct input[name="name"]').parent().attr('class','form-group label-floating is-empty is-focused')
+                        $('#editProduct input[name="name"]').val(response.data.name)
+                        $('#editProduct input[name="price"]').parent().attr('class','form-group label-floating is-empty is-focused')
+                        $('#editProduct input[name="price"]').val(response.data.price);
+                    }
+                    $('#editProduct .note-editable.panel-body').empty();
+                    $('#editProduct .note-editable.panel-body').html(response.data.description);
                     
                 }
                 
@@ -917,7 +933,12 @@ $(document).ready(function() {
     function readURL(input) {
         // console.log(input.parentElement.parentElement.childNodes[0].nextSibling);
         if (input.files && input.files[0]) {
+            // show preview image
             input.parentElement.parentElement.childNodes[0].nextSibling.style.display = "block"
+            // show remove image label
+            input.parentElement.parentElement.childNodes[0].parentElement.children[1].style.display = "block"
+            // console.log(input.parentElement.parentElement.childNodes[0]);
+            // console.log(input.parentElement.parentElement.childNodes[0].parentElement.children[1]);
             // $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','block');
             var reader = new FileReader();
 
