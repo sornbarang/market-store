@@ -8369,11 +8369,18 @@ span.counter {
   width: 100%;
   left: 0;
   top: 0;
-  position: absolute;
-  background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
+  position: absolute; 
+
+  /* background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
   background: -webkit-linear-gradient(right, #7347c1, #0674ec);
   background: -o-linear-gradient(right, #7347c1, #0674ec);
-  background: linear-gradient(to left, #7347c1, #0674ec);
+  background: linear-gradient(to left, #7347c1, #0674ec); */
+  background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
+  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
+  
+  background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
   opacity: .9;
 }
 
@@ -8639,10 +8646,14 @@ span.counter {
   height: 100%;
   width: 100%;
   position: absolute;
-  background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
+  /* background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
   background: -webkit-linear-gradient(right, #7347c1, #0674ec);
   background: -o-linear-gradient(right, #7347c1, #0674ec);
-  background: linear-gradient(to left, #7347c1, #0674ec);
+  background: linear-gradient(to left, #7347c1, #0674ec); */
+  /* background: -webkit-linear-gradient(linear, right top, left top, rgba(0, 0, 0, 0.18),rgba(0, 0, 0, 0.11)),url('../imgs/bg.png'); */
+  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
+  background: linear-gradient( rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
   opacity: 0.91;
   top: 0;
   left: 0;

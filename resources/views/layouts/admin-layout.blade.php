@@ -261,8 +261,8 @@
             </div>
             <div class="tabpanel tab-header">
                 <ul class="nav nav-tabs p-l-20">
-                    <li class="active" role="presentation"><a href="#dashboard1" data-toggle="tab">Dashboard Store</a></li>
-                    <li role="presentation"><a href="#dashboard2" data-toggle="tab">Dashboard Market Advertise</a></li>
+                    <li class="active" role="presentation"><a href="#dashboard1" data-toggle="tab">Dashboard {{ucfirst($data['active'])}}</a></li>
+                    <!-- <li role="presentation"><a href="#dashboard2" data-toggle="tab">Dashboard Market Advertise</a></li> -->
                 </ul>
             </div>
             <div id="content" class="container-fluid">
