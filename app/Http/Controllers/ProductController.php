@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
 use App\Product;
+use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     /**
@@ -44,31 +45,31 @@ class ProductController extends Controller
         if($request->hasFile('photos'))
         {
             $allowedfileExtension=['jpg','jpeg','png'];
-            $files = $request->file('photos');
+            $files = $request->file('photos'); 
             foreach($files as $file){
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
                 $check=in_array($extension,$allowedfileExtension);
-                if($check){ 
-                    foreach ($request->photos as $photo) {
-                        $imgappend[] = $photo->store('public');
-                    } 
+                if($check){
+                    if($check){
+                        $imgappend[] = $file->store('public'); 
+                    }
                 }
-                // else{
-                //     echo '<div class="alert alert-warning"><strong>Warning!</strong> Sorry Only Upload png , jpg , doc</div>';
-                // }
             }
         }
-        // dd($active);
-        Product::create([
+        // dd($imgappend);
+        $product = Product::create([
             'name' => $name,
             'price' => $price,
             'active' => $active,
-            'image' => implode(',',$imgappend),
+            'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
             'description'=>$description
             ]);
-        return redirect()->action('ProductController@index');
-        
+        if($product){
+            return redirect()->action('ProductController@index')->with('succeess', 'Record has been added!');
+        } 
+       
+        return redirect()->action('ProductController@index')->with('error', 'Oh snap! Change a few things up and try submitting again!');
         // if ($request->hasFile('photos')) {  
         //     foreach($request->file('photos') as $image)
         //     {
@@ -100,7 +101,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product= Product::find($id);
+        if($product){
+            return response()->json(['status'=>true,'data'=>$product]);   
+        }
+        return response()->json(['status'=>false,'data'=>[]]);
     }
 
     /**
@@ -112,7 +117,82 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        
+        if($product){
+            $imgs = explode(',',$product->image); 
+            $name = $request->name??'';
+            $price = $request->price??0;
+            $active = (int)$request->active??0;
+            $description= $request->sumernotehidden??'';
+            $imgappend=[]; 
+            $allowedfileExtension=['jpg','jpeg','png'];
+            // check if have new input file image to update
+            if($request->hasFile('photos')){
+                $file = $request->file('photos'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){
+                    // Storage::move('old/file.jpg',$file->store('public'));
+                    $imgappend[] = $file->store('public'); 
+                } 
+            }else{
+                // get default image 
+                if(isset($imgs[0])){
+                    $imgappend[] = $imgs[0];
+                }
+            }
+            if($request->hasFile('photos1')){
+                $file = $request->file('photos1'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){
+                    $imgappend[] = $file->store('public'); 
+                } 
+            }else{
+                if(isset($imgs[1])){
+                    $imgappend[] = $imgs[1];
+                }
+            }
+            if($request->hasFile('photos2')){
+                $file = $request->file('photos2'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){
+                    $imgappend[] = $file->store('public'); 
+                } 
+            }else{
+                if(isset($imgs[2])){
+                    $imgappend[] = $imgs[2];
+                }
+            }
+            if($request->hasFile('photos3')){
+                $file = $request->file('photos3'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){
+                    $imgappend[] = $file->store('public'); 
+                } 
+            }else{
+                if(isset($imgs[3])){
+                    $imgappend[] = $imgs[3];
+                } 
+            }  
+            $product->name = $name;
+            $product->price = $price;
+            $product->active = $active;
+            $product->description = $description;
+            $product->image =isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'';
+            $product->save();
+            if($product){
+                return redirect()->action('ProductController@index')->with('succeess', 'Record has been updated!');
+            }
+        } 
+        return redirect()->action('ProductController@index')->with('succeess', 'Record has been updated!');
     }
 
     /**
@@ -123,10 +203,16 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $res=Product::whereIn('id',explode(',',$id))->get(); 
         // $res=Product::whereIn('id',explode(',',$id))->delete();
-        // if($res){
-        //     return response()->json(['status'=>true]);
-        // }
-        return response()->json(['status'=>false]);
+        
+        if($res){
+            foreach($res as $val){
+                Storage::delete(explode(',',$val->image));
+            }
+            Product::whereIn('id',explode(',',$id))->delete();
+            return response()->json(['status'=>true]);
+        }
+        return response()->json(['status'=>true]);
     }
 }

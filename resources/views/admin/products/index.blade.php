@@ -1,4 +1,15 @@
 
+@if (session('succeess')) 
+    <div class="alert alert-success" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>{{ session('succeess') }}</a>.
+    </div>
+@elseif(session('error'))
+    <div class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>{{ session('error') }}</a>.
+    </div>
+@endif 
 <div class="content-body">
     <div class="row">
         <div class="col-xs-12">
@@ -92,7 +103,7 @@
                                     <td>1,200</td>
                                     <td>
                                         <!-- <a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a> -->
-                                        <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_add_modal"><i class="zmdi zmdi-edit"></i></a>
+                                        <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_edit_modal" data-id="{{$val->id}}"><i class="zmdi zmdi-edit"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -148,8 +159,10 @@
                     <div class="row">
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
-                            
                                 <img id="image_upload_preview"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -166,6 +179,9 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview1"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file1" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -182,6 +198,9 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview2"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file2" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -198,6 +217,9 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview3"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos[]" id="file3" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
@@ -373,6 +395,276 @@
 </div> 
 </form>
 
+<!-- edit mode -->
+<form  id="editProduct" method="post" enctype="multipart/form-data">
+@csrf
+@method('PUT')
+<input type="hidden" id="sumernotehidden" name="sumernotehidden"> 
+<input type="hidden" id="editid" name="editid"> 
+<div class="modal fade" id="product_edit_modal" tabindex="-1" role="dialog" aria-labelledby="tab_modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header p-b-15">
+            
+            <h4 class="modal-title">Edit Product Setup</h4>
+            <ul class="card-actions icons right-top">
+            
+            <a href="javascript:void(0)" data-dismiss="modal" class="text-white" aria-label="Close">
+                <i class="zmdi zmdi-close"></i>
+            </a>
+            
+            </ul>
+        </div>
+        <div class="modal-body p-0">
+            <div class="tabpanel">
+            <ul class="nav nav-tabs p-0">
+                <li class="active" role="presentation"><a href="#product_add_general" data-toggle="tab" aria-expanded="true">General Info</a></li>
+                <!-- <li role="presentation"><a href="#product_add_images" data-toggle="tab" aria-expanded="true">Product Images</a></li> -->
+                <!-- <li role="presentation"><a href="#product_add_price" data-toggle="tab" aria-expanded="true">Price</a></li> -->
+                <!-- <li role="presentation"><a href="#product_add_inventory" data-toggle="tab" aria-expanded="true">Inventory</a></li>
+                <li role="presentation"><a href="#product_add_shipping" data-toggle="tab" aria-expanded="true">Shipping</a></li> -->
+            </ul>
+            </div>
+            <div class="tab-content">
+            <div class="tab-pane fadeIn active" id="product_add_general">
+                <div class="card card p-20 p-t-10 m-b-0">
+                <div class="card-body">
+                    <!-- <form class="form-horizontal"> -->
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Title</label>
+                        <input name="name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Price</label>
+                        <input name="price" type="text" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                            
+                                <img id="image_upload_preview"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos" id="file" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                                <img id="image_upload_preview1"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos1" id="file1" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                                <img id="image_upload_preview2"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos2" id="file2" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-3">
+                            <div class="form-group label-floating is-empty">
+                                <img id="image_upload_preview3"  alt="your image" />
+                                <div class="input-group">
+                                    <input name="photos3" id="file3" type="file" class="form-control" placeholder="File Upload...">
+                                    <div class="input-group">
+                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <span class="input-group-btn input-group-sm">
+                                        <button type="button" class="btn btn-info btn-fab btn-fab-sm">
+                                            <i class="zmdi zmdi-attachment-alt"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="add_product_desc">Say hello to a triangular cluster of neatly organized chaos, wrapped in a tasty cyan-to-magenta rainbow roll and deep-fried to imperfection.</div>
+                    </div>
+                    <div class="form-group label-floating is-empty"> 
+                        <label class="checkbox-inline">
+                            <input name="active" type="checkbox" id="inlineCheckbox1" value="0"> Active
+                        </label>
+                    </div>
+                    {{--<div class="chips chips-placeholder"></div>--}}
+                    <!-- </form>  -->
+                </div>
+                </div>
+            </div>
+            {{--<div class="tab-pane fadeIn" id="product_add_images">
+                <div class="card card p-20 p-t-10 m-b-0">
+                <div class="card-body">
+                <form id="product_add_images_form" method="post" action="{{url('admin/product')}}" class="dropzone" enctype="multipart/form-data">
+                    @csrf
+                    <div class="fallback">
+                        <input name="photo" type="file" multiple />
+                    </div>
+                </form> 
+                </div>
+                </div>
+            </div>--}}
+            {{--<div class="tab-pane fadeIn" id="product_add_price">
+                <div class="card card p-20 p-t-10 m-b-0">
+                <div class="card-body">
+                    <!-- <form> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group label-floating is-empty">
+                            <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <label class="control-label">Price</label>
+                            <input name="price" type="text" class="form-control">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group label-floating is-empty">
+                            <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <label class="control-label">Compare at price</label>
+                            <input name="compareprice" type="text" class="form-control">
+                        </div>
+                        </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="togglebutton m-b-15 ">
+                                    <label>
+                                        <input type="checkbox" class="toggle-info" checked>   Charge taxes on this product
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+                </div>
+            </div>--}}
+            {{--<div class="tab-pane fadeIn" id="product_add_inventory">
+                <div class="card card p-20 p-t-10 m-b-0">
+                <div class="card-body">
+                    <!-- <form> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">SKU (Stock Keeping Unit)</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">Barcode (ISBN, UPC, GTIN, etc.)</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="" class="control-label">Inventory policy</label>
+                            <select class="select form-control">
+                            <option selected>Don't track inventory</option>
+                            <option>Track this product's inventory</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+                </div>
+            </div>--}}
+            {{--<div class="tab-pane fadeIn" id="product_add_shipping">
+                <div class="card card p-20 p-t-10 m-b-0">
+                <div class="card-body">
+                    <!-- <form> -->
+                    <div class="row">
+                        <div class="col-md-4">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">Width</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">Height</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        </div>
+                        <div class="col-md-4">
+                        <div class="form-group label-floating is-empty">
+                            <label class="control-label">Depth</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group label-floating is-empty">
+                            <div class="input-group">
+                            <label class="control-label">Weight</label>
+                            <input type="text" class="form-control" aria-label="...">
+                            <div class="input-group-btn suffix-select">
+                                <select class="select form-control">
+                                <option>lb</option>
+                                <option>kg</option>
+                                </select>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group label-floating is-empty">
+                            <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <label class="control-label">Extra Shipping Fee</label>
+                            <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+                </div>
+            </div>--}}
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Cancel</button>
+            <button type="submit" id="submitbtn" class="btn btn-primary">Update Product</button>
+            </div>
+        </div>
+        <!-- modal-content -->
+        </div>
+        <!-- modal-dialog -->
+    </div>
+</div> 
+</form>
 
 <!-- edit  -->
 <aside class="drawer-right-lg mw-lightGray drawer-fixed ecom-edit-panel">

@@ -4865,7 +4865,7 @@
 	var deleteItem = function deleteItem() {
 	  $('#confirmDelete').on('click', function (e) {
 			e.stopPropagation();
-			// my custome js sweetAlert2
+			// my custome js sweetAlert2 by vitou
 			swal({
 				title: "Are you sure?",
 	      text: "You will not be able to recover this data.",
@@ -4919,10 +4919,11 @@
 	            $('#checkAll').prop('checked', false);
 	          };
 	          $('#deleteItems span').text('');
-	        }, 600);
-	        setTimeout(function () {
-	          $('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
-	        }, 2000); 
+					}, 600);
+					// show element again
+	        // setTimeout(function () {
+	        //   $('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
+	        // }, 2000); 
 				}
 			},function(dismiss) {
 				if (dismiss === 'cancel') { // you might also handle 'close' or 'timer' if you used those
