@@ -31,7 +31,7 @@
                         <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
 								<span class="meta">
 									<span class="avatar">
-										<img src="{{asset('/')}}assets/img/profiles/02.jpg" alt="" class="img-circle max-w-35">
+										<img src="{{asset('assets/img/profiles/02.jpg')}}" alt="" class="img-circle max-w-35">
 										<i class="badge mini success status"></i>
 									</span>
 									<span class="name">Mike Jones</span>
@@ -844,8 +844,8 @@
     </div>
     <!-- modal-dialog -->
 </div>
-<script src="{{asset('/')}}assets/js/vendor.bundle.js"></script>
-<script src="{{asset('/')}}assets/js/app.bundle.js"></script>
+<script src="{{asset('assets/js/vendor.bundle.js')}}"></script>
+<script src="{{asset('assets/js/app.bundle.js')}}"></script>
 <script>
 $(document).ready(function() {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -973,7 +973,7 @@ $(document).ready(function() {
     //         success: function(data){
     //             console.log(data);
     //         }
-    //     }); 
+    //     });
 
     // });
 });
