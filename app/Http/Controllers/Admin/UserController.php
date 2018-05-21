@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Advert;
-class AdsController extends Controller
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +14,7 @@ class AdsController extends Controller
      */
     public function index()
     {
-        $data['cats']=[];
-        $view="admin.ads.index";
-        return view('admin.index',compact('view','data'));
+        //
     }
 
     /**
@@ -25,9 +24,7 @@ class AdsController extends Controller
      */
     public function create()
     {
-        $data['cats']=[];
-        $view="admin.ads.create";
-        return view('admin.index',compact('view','data'));
+        //
     }
 
     /**
@@ -38,16 +35,7 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-        $advert = Advert::make(
-            $request->only(['alt', 'url', 'active']), 
-            $request->file('image')
-        ); 
-        // $ads= new Advert();
-        // $ads->alt=$advert->alt;
-        // $ads->url=$advert->url;
-        // $ads->active=$advert->acitve;
-        // $ads->save();
-        return redirect()->action('AdsController@index');
+        //
     }
 
     /**

@@ -43,12 +43,61 @@ Route::get('/contact', 'PageController@contact')->name('page');
 
 //Route::group(['prefix' => 'admin',  'middleware' => Admin::class], function(){
 
-Route::group(['prefix' => 'admin'], function(){
+Route::group([
+        'prefix'     => config('base.route_prefix', 'admin'),
+        'namespace'  => 'Admin',
+    ], function(){
     Route::get('/', 'HomeController@index')->name('admin');
-    // Route::get('/ads', 'HomeController@ads')->name('ads');
-    Route::resource('ads', 'AdsController');
-    Route::resource('product', 'ProductController');
-
+    Route::resource('ads', 'AdsController',['names' =>
+        [
+            'create' => 'admin.ads.create',
+            'update' => 'admin.ads.update',
+            'edit' => 'admin.ads.edit',
+            'store' => 'admin.ads.store',
+            'show' => 'admin.ads.show',
+            'destroy' => 'admin.ads.destroy',
+        ]
+    ]);
+    Route::resource('product', 'ProductController',['names' =>
+        [
+            'create' => 'admin.product.create',
+            'update' => 'admin.product.update',
+            'edit' => 'admin.product.edit',
+            'store' => 'admin.product.store',
+            'show' => 'admin.product.show',
+            'destroy' => 'admin.product.destroy',
+        ]
+    ]);
+    Route::resource('user', 'UserController',['names' =>
+        [
+            'create' => 'admin.user.create',
+            'update' => 'admin.user.update',
+            'edit' => 'admin.user.edit',
+            'store' => 'admin.user.store',
+            'show' => 'admin.user.show',
+            'destroy' => 'admin.user.destroy',
+         ]
+    ]);
+    Route::resource('role', 'RoleController',['names' =>
+        [
+        'create' => 'admin.role.create',
+        'update' => 'admin.role.update',
+        'edit' => 'admin.role.edit',
+        'store' => 'admin.role.store',
+        'show' => 'admin.role.show',
+        'destroy' => 'admin.role.destroy',
+        ]
+    ]);
+    Route::resource('permission', 'PermissionController',['names' =>
+        [
+        'create' => 'admin.permission.create',
+        'update' => 'admin.permission.update',
+        'edit' => 'admin.permission.edit',
+        'store' => 'admin.permission.store',
+        'show' => 'admin.permission.show',
+        'destroy' => 'admin.permission.destroy',
+        ]
+    ]);
 });
 
 Auth::routes();
