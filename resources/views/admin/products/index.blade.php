@@ -1,4 +1,15 @@
 
+@if (session('succeess')) 
+    <div class="alert alert-success" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>{{ session('succeess') }}</a>.
+    </div>
+@elseif(session('error'))
+    <div class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>{{ session('error') }}</a>.
+    </div>
+@endif 
 <div class="content-body">
     <div class="row">
         <div class="col-xs-12">
@@ -433,7 +444,7 @@
                             
                                 <img id="image_upload_preview"  alt="your image" />
                                 <div class="input-group">
-                                    <input name="photos[]" id="file" type="file" class="form-control" placeholder="File Upload...">
+                                    <input name="photos" id="file" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
                                         <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
@@ -449,7 +460,7 @@
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview1"  alt="your image" />
                                 <div class="input-group">
-                                    <input name="photos[]" id="file1" type="file" class="form-control" placeholder="File Upload...">
+                                    <input name="photos1" id="file1" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
                                         <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
@@ -465,7 +476,7 @@
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview2"  alt="your image" />
                                 <div class="input-group">
-                                    <input name="photos[]" id="file2" type="file" class="form-control" placeholder="File Upload...">
+                                    <input name="photos2" id="file2" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
                                         <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
@@ -481,7 +492,7 @@
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview3"  alt="your image" />
                                 <div class="input-group">
-                                    <input name="photos[]" id="file3" type="file" class="form-control" placeholder="File Upload...">
+                                    <input name="photos3" id="file3" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
                                         <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
@@ -645,7 +656,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Cancel</button>
-            <button type="submit" id="submitbtn" class="btn btn-primary">Add Product</button>
+            <button type="submit" id="submitbtn" class="btn btn-primary">Update Product</button>
             </div>
         </div>
         <!-- modal-content -->

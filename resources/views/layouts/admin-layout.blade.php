@@ -884,21 +884,26 @@ $(document).ready(function() {
                         var img = imgs[i].replace('public/','');
                         var url ="{{Storage::url('')}}"+img; 
                         if(i==0){
-                            $('#editProduct #file').val('me');
+                            // $('#editProduct #file').next().children().first().val(url)
                             $('#editProduct #image_upload_preview').css('display','block');
                             $('#editProduct #image_upload_preview').attr('src',url)
                         }else{
+                            // $('#editProduct #file'+i).next().children().first().val(url)
                             $('#editProduct #image_upload_preview'+i).css('display','block');
                             $('#editProduct #image_upload_preview'+i).attr('src',url)
                         }
                         
                     }  
                     $('#editProduct').attr('action','{{url("admin/product")}}/'+response.data.id);
-                    if(response.data.name !='' || response.data.price !=''){
+                    if(response.data.name !='' || response.data.price !='' || response.data.active !=''){
                         $('#editProduct input[name="name"]').parent().attr('class','form-group label-floating is-empty is-focused')
                         $('#editProduct input[name="name"]').val(response.data.name)
                         $('#editProduct input[name="price"]').parent().attr('class','form-group label-floating is-empty is-focused')
                         $('#editProduct input[name="price"]').val(response.data.price);
+                        if(response.data.active==1){
+                            $('#editProduct input[name="active"]').val(response.data.active);
+                            $('#editProduct input[name="active"]').attr('checked',true);
+                        }
                     }
                     $('#editProduct .note-editable.panel-body').empty();
                     $('#editProduct .note-editable.panel-body').html(response.data.description);
@@ -922,7 +927,7 @@ $(document).ready(function() {
     //     console.log(markupStr);
     // }, 500 ) );
 
-    $('#inlineCheckbox1').click(function(){
+    $('#inlineCheckbox1,#editProduct #inlineCheckbox1').click(function(){
         if($(this).is(':checked')){
             $(this).val(1)
         }else{
@@ -936,7 +941,7 @@ $(document).ready(function() {
             // show preview image
             input.parentElement.parentElement.childNodes[0].nextSibling.style.display = "block"
             // show remove image label
-            input.parentElement.parentElement.childNodes[0].parentElement.children[1].style.display = "block"
+            // input.parentElement.parentElement.childNodes[0].parentElement.children[1].style.display = "block"
             // console.log(input.parentElement.parentElement.childNodes[0]);
             // console.log(input.parentElement.parentElement.childNodes[0].parentElement.children[1]);
             // $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','block');
