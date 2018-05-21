@@ -8,9 +8,9 @@
     <meta name="keywords" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>MaterialWrap - jQuery full version</title>
-    <link rel="stylesheet" href="{{asset('/')}}assets/css/vendor.bundle.css">
-    <link rel="stylesheet" href="{{asset('/')}}assets/css/app.bundle.css">
-    <link rel="stylesheet" href="{{asset('/')}}assets/css/theme-a.css">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor.bundle.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/app.bundle.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/theme-a.css')}}">
 </head>
 <body>
 <div id="app_wrapper">
@@ -30,7 +30,7 @@
                         <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
 								<span class="meta">
 									<span class="avatar">
-										<img src="{{asset('/')}}assets/img/profiles/02.jpg" alt="" class="img-circle max-w-35">
+										<img src="{{asset('assets/img/profiles/02.jpg')}}" alt="" class="img-circle max-w-35">
 										<i class="badge mini success status"></i>
 									</span>
 									<span class="name">Mike Jones</span>
@@ -843,8 +843,8 @@
     </div>
     <!-- modal-dialog -->
 </div>
-<script src="{{asset('/')}}assets/js/vendor.bundle.js"></script>
-<script src="{{asset('/')}}assets/js/app.bundle.js"></script>
+<script src="{{asset('assets/js/vendor.bundle.js')}}"></script>
+<script src="{{asset('assets/js/app.bundle.js')}}"></script>
 <script>
 $(document).ready(function() {
     $(document).on('click', 'form#addProduct button[type=submit]', function(e) {
@@ -907,7 +907,7 @@ $(document).ready(function() {
     //         success: function(data){
     //             console.log(data);
     //         }
-    //     }); 
+    //     });
 
     // });
 });
