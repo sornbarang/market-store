@@ -10,7 +10,7 @@
 <section class="search-wrapper">
     <div class="search-area2 bgimage">
         <div class="bg_image_holder">
-            <img src="images/search.jpg" alt="">
+            <img src="{{asset('/')}}images/search.jpg" alt="">
         </div>
         <div class="container content_above">
             <div class="row">

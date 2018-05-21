@@ -2077,23 +2077,35 @@ h6 {
           border-radius: 4px 4px 0 0;
   width: 100%;
   top: 0;
-  background-image: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
+  /* background-image: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
   background-image: -webkit-linear-gradient(right, #7347c1 0%, #0674ec 100%);
   background-image: -o-linear-gradient(right, #7347c1 0%, #0674ec 100%);
-  background-image: linear-gradient(to left, #7347c1 0%, #0674ec 100%);
+  background-image: linear-gradient(to left, #7347c1 0%, #0674ec 100%); */
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg.png");
+  background-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg.png");
+  background-image: -o-linear-gradient(right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg.png");
+  background-image: linear-gradient(to left,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg.png");
   /* Fallback (could use .jpg/.png alternatively) */
-  background-color: #7347c1;
+  /* background-color: #7347c1; */
+  background-image:url('../imgs/bg.png');
   /* SVG fallback for IE 9 (could be data URI, or could use filter) */
-  background: #0674ec;
+  background: url('../imgs/bg.png');
   /* Safari 4, Chrome 1-9, iOS 3.2-4.3, Android 2.1-3.0 */
-  background-image: -webkit-gradient(linear, left top, right top, from(#7347c1), to(#0674ec));
+  /* background-image: -webkit-gradient(linear, left top, right top, from(#7347c1), to(#0674ec));
+  background-image: -webkit-gradient(linear, left top, right top, from(#7347c1), to(#0674ec)); */
+
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg.png");
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg.png");
   /* Safari 5.1, iOS 5.0-6.1, Chrome 10-25, Android 4.0-4.3 */
-  background-image: -webkit-linear-gradient(left, #7347c1, #0674ec);
+  /* background-image: -webkit-linear-gradient(left, #7347c1, #0674ec); */
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg.png");
   /* Firefox 3.6 - 15 */
   /* Opera 11.1 - 12 */
-  background-image: -o-linear-gradient(left, #7347c1, #0674ec);
+  /* background-image: -o-linear-gradient(left, #7347c1, #0674ec); */
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg.png");
   /* Opera 15+, Chrome 25+, IE 10+, Firefox 16+, Safari 6.1+, iOS 7+, Android 4.4+ */
-  background-image: linear-gradient(to right, #7347c1, #0674ec);
+  /* background-image: linear-gradient(to right, #7347c1, #0674ec); */
+  background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg.png");
   left: 0;
 }
 
@@ -8369,18 +8381,15 @@ span.counter {
   width: 100%;
   left: 0;
   top: 0;
-  position: absolute; 
-
+  position: absolute;
   /* background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
   background: -webkit-linear-gradient(right, #7347c1, #0674ec);
   background: -o-linear-gradient(right, #7347c1, #0674ec);
   background: linear-gradient(to left, #7347c1, #0674ec); */
   background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
-  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
-  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
-  
-  background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.16) ),url('../imgs/bg.png');
+  background: -webkit-linear-gradient(right,rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg.png);
+  background: -o-linear-gradient(right,rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg.png);
+  background: linear-gradient( rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg.png);
   opacity: .9;
 }
 
@@ -8650,7 +8659,7 @@ span.counter {
   background: -webkit-linear-gradient(right, #7347c1, #0674ec);
   background: -o-linear-gradient(right, #7347c1, #0674ec);
   background: linear-gradient(to left, #7347c1, #0674ec); */
-  /* background: -webkit-linear-gradient(linear, right top, left top, rgba(0, 0, 0, 0.18),rgba(0, 0, 0, 0.11)),url('../imgs/bg.png'); */
+  /* background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec)); */
   background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
   background: -o-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
   background: linear-gradient( rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
