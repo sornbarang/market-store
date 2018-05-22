@@ -14,7 +14,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.permission.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.permission.edit');
     }
 
     /**

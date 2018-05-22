@@ -95,7 +95,7 @@
                                     <div class="card-body">
                                         <ul class="list-group ">
                                             <li class="list-group-item ">
-                                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/11.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                                <span class="pull-left"><img src="{{asset('assets/img/profiles/11.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                                 <div class="list-group-item-body">
                                                     <div class="list-group-item-heading">Dakota Johnson</div>
                                                     <div class="list-group-item-text">Do you want to grab some sushi for lunch?</div>
@@ -113,7 +113,7 @@
                                     <div class="card-body">
                                         <ul class="list-group ">
                                             <li class="list-group-item ">
-                                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/07.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                                <span class="pull-left"><img src="{{asset('assets/img/profiles/07.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                                 <div class="list-group-item-body">
                                                     <div class="list-group-item-heading">Todd Cook</div>
                                                     <div class="list-group-item-text">Let's schedule a meeting with our design team at 10am.</div>
@@ -131,7 +131,7 @@
                                     <div class="card-body">
                                         <ul class="list-group ">
                                             <li class="list-group-item ">
-                                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/05.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                                <span class="pull-left"><img src="{{asset('assets/img/profiles/05.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                                 <div class="list-group-item-body">
                                                     <div class="list-group-item-heading">Jennifer Ross</div>
                                                     <div class="list-group-item-text">We're looking to hire two more protypers to our team.</div>
@@ -216,10 +216,11 @@
                             <li><a href="#">Add</a></li>
                         </ul>
                     </li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>User</a>
+                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-accounts-alt"></i>Users</a>
                         <ul class="nav-sub">
-                            <li><a href="#">Role</a></li>
-                            <li><a href="#">Permission</a></li>
+                            <li><a href="{{ action('Admin\UserController@index') }}">Users</a></li>
+                            <li><a href="{{ action('Admin\RoleController@index') }}">Roles</a></li>
+                            <li><a href="{{ action('Admin\RoleController@index') }}">Permissions</a></li>
                         </ul>
                     </li>
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>Advertise</a>
@@ -240,8 +241,8 @@
         </nav>
     </aside>
     <section id="content_outer_wrapper" class="">
-        <div id="content_wrapper" class="rightnav_v2">
-            <div id="header_wrapper" class="header-sm">
+        <div id="content_wrapper" class="rightnav_v2 card-overlay">
+            {{--<div id="header_wrapper" class="header-sm">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-12">
@@ -258,15 +259,41 @@
                         </a>
                     </li>
                 </ul>
-            </div>
-            <div class="tabpanel tab-header">
+            </div>--}}
+            {{--<div class="tabpanel tab-header">
                 <ul class="nav nav-tabs p-l-20">
-                    <li class="active" role="presentation"><a href="#dashboard1" data-toggle="tab">Dashboard {{ucfirst($data['active'])}}</a></li>
+                    <li class="active" role="presentation"><a href="#dashboard1" data-toggle="tab">Dashboard ucfirst($data['active'])</a></li>
                     <!-- <li role="presentation"><a href="#dashboard2" data-toggle="tab">Dashboard Market Advertise</a></li> -->
                 </ul>
+            </div>--}}
+
+            <div id="header_wrapper" class="header-md ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <header id="header">
+                                <h1>Form Validation</h1>
+                                <ol class="breadcrumb">
+                                    <li><a href="index.html">Dashboard</a></li>
+                                    <li><a href="javascript:void(0)">Forms</a></li>
+                                    <li class="active">Form Validation</li>
+                                </ol>
+                            </header>
+                        </div>
+                    </div>
+                </div>
+                <ul class="card-actions icons lg alt-actions right-top">
+                    <li>
+                        <a href="javascript:void(0)" class="drawer-trigger" data-drawer="toggle-right">
+                            <i class="zmdi zmdi-menu"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div id="content" class="container-fluid">
+            <div id="content" class="container-fluid container">
+
                 @yield('content')
+
             </div>
             <!-- ENDS $content -->
             <aside id="rightnav">
@@ -408,7 +435,7 @@
                         </ul>
                         <ul class="list-group p-0">
                             <li class="list-group-item" data-chat="open" data-chat-name="John Smith">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/07.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/07.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini success status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">John Smith</div>
@@ -416,7 +443,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item" data-chat="open" data-chat-name="Allison Grayce">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/05.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/05.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini success status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">Allison Grayce</div>
@@ -424,7 +451,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item" data-chat="open" data-chat-name="Ashley Ford">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/18.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/18.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini success status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">Ashley Ford</div>
@@ -432,7 +459,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item" data-chat="open" data-chat-name="Johanna Kollmann">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/11.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/11.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini success status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">Johanna Kollmann </div>
@@ -447,7 +474,7 @@
                         </ul>
                         <ul class="list-group p-0">
                             <li class="list-group-item" data-chat="open" data-chat-name="Mike Jones">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/03.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/03.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini warning status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">Mike Jones </div>
@@ -455,7 +482,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item" data-chat="open" data-chat-name="Nikki Clark">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/06.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/06.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini warning status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">Nikki Clark </div>
@@ -463,7 +490,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item" data-chat="open" data-chat-name="Jason Kendall">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/15.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/15.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini warning status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">Jason Kendall </div>
@@ -478,7 +505,7 @@
                         </ul>
                         <ul class="list-group p-0">
                             <li class="list-group-item" data-chat="open" data-chat-name="Josh Hemsley">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/16.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/16.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini danger status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">Josh Hemsley</div>
@@ -486,7 +513,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item" data-chat="open" data-chat-name="James Hart">
-                                <span class="pull-left"><img src="{{asset('/')}}assets/img/profiles/09.jpg" alt="" class="img-circle max-w-40 m-r-10 "></span>
+                                <span class="pull-left"><img src="{{asset('assets/img/profiles/09.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini danger status"></i>
                                 <div class="list-group-item-body">
                                     <div class="list-group-item-heading">James Hart</div>
@@ -703,7 +730,7 @@
         <div class="chat-wrapper scrollbar">
             <div class="chat-message ">
                 <div class="chat-message chat-message-recipient">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}assets/img/profiles/05.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/05.jpg')}}" />
                     <div class="chat-message-wrapper">
                         <div class="chat-message-content">
                             <p>Hey Mike, we have funding for our new project!</p>
@@ -714,7 +741,7 @@
                     </div>
                 </div>
                 <div class="chat-message chat-message-sender">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}assets/img/profiles/02.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/02.jpg')}}" />
                     <div class="chat-message-wrapper ">
                         <div class="chat-message-content">
                             <p>Awesome! Photo booth banh mi pitchfork kickstarter whatever, prism godard ethical 90"s cray selvage.</p>
@@ -727,7 +754,7 @@
 
 
                 <div class="chat-message chat-message-recipient">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}assets/img/profiles/05.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/05.jpg')}}" />
                     <div class="chat-message-wrapper">
                         <div class="chat-message-content">
                             <p> Artisan glossier vaporware meditation paleo humblebrag forage small batch.</p>
@@ -738,7 +765,7 @@
                     </div>
                 </div>
                 <div class="chat-message chat-message-sender">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}assets/img/profiles/02.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/02.jpg')}}" />
                     <div class="chat-message-wrapper">
                         <div class="chat-message-content">
                             <p>Bushwick letterpress vegan craft beer dreamcatcher kickstarter.</p>
@@ -749,7 +776,7 @@
                     </div>
                 </div>
                 <div class="chat-message chat-message-recipient">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}assets/img/profiles/05.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/05.jpg')}}" />
                     <div class="chat-message-wrapper">
                         <div class="chat-message-content">
                             <p> Artisan glossier vaporware meditation paleo humblebrag forage small batch.</p>
@@ -760,7 +787,7 @@
                     </div>
                 </div>
                 <div class="chat-message chat-message-sender">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}/img/profiles/02.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/02.jpg')}}" />
                     <div class="chat-message-wrapper">
                         <div class="chat-message-content">
                             <p>Bushwick letterpress vegan craft beer dreamcatcher kickstarter.</p>
@@ -771,7 +798,7 @@
                     </div>
                 </div>
                 <div class="chat-message chat-message-recipient">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}/img/profiles/05.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/05.jpg')}}" />
                     <div class="chat-message-wrapper">
                         <div class="chat-message-content">
                             <p> Artisan glossier vaporware meditation paleo humblebrag forage small batch.</p>
@@ -782,7 +809,7 @@
                     </div>
                 </div>
                 <div class="chat-message chat-message-sender">
-                    <img class="chat-image chat-image-default" src="{{asset('/')}}/img/profiles/02.jpg" />
+                    <img class="chat-image chat-image-default" src="{{asset('assets/img/profiles/02.jpg')}}" />
                     <div class="chat-message-wrapper">
                         <div class="chat-message-content">
                             <p>Bushwick letterpress vegan craft beer dreamcatcher kickstarter.</p>
@@ -978,6 +1005,7 @@ $(document).ready(function() {
     // });
 });
 </script>
+@yield('javascript')
 </body>
 
 </html>

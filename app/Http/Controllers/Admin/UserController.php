@@ -14,7 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $data = [];
+        $view = "admin.user.index";
+        return view('admin.user.index',compact('view','data'));
     }
 
     /**
@@ -24,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.add');
     }
 
     /**
@@ -46,7 +48,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -57,7 +59,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.user.edit');
     }
 
     /**

@@ -14,7 +14,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.role.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.role.add');
     }
 
     /**
@@ -57,7 +57,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.role.edit');
     }
 
     /**

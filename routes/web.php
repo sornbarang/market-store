@@ -50,6 +50,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('admin');
     Route::resource('ads', 'AdsController',['names' =>
         [
+            'index' => 'admin.ads.index',
             'create' => 'admin.ads.create',
             'update' => 'admin.ads.update',
             'edit' => 'admin.ads.edit',
@@ -60,6 +61,7 @@ Route::group([
     ]);
     Route::resource('product', 'ProductController',['names' =>
         [
+            'index' => 'admin.product.index',
             'create' => 'admin.product.create',
             'update' => 'admin.product.update',
             'edit' => 'admin.product.edit',
@@ -70,6 +72,7 @@ Route::group([
     ]);
     Route::resource('user', 'UserController',['names' =>
         [
+            'index' => 'admin.user.index',
             'create' => 'admin.user.create',
             'update' => 'admin.user.update',
             'edit' => 'admin.user.edit',
@@ -80,22 +83,24 @@ Route::group([
     ]);
     Route::resource('role', 'RoleController',['names' =>
         [
-        'create' => 'admin.role.create',
-        'update' => 'admin.role.update',
-        'edit' => 'admin.role.edit',
-        'store' => 'admin.role.store',
-        'show' => 'admin.role.show',
-        'destroy' => 'admin.role.destroy',
+            'index' => 'admin.role.index',
+            'create' => 'admin.role.create',
+            'update' => 'admin.role.update',
+            'edit' => 'admin.role.edit',
+            'store' => 'admin.role.store',
+            'show' => 'admin.role.show',
+            'destroy' => 'admin.role.destroy',
         ]
     ]);
     Route::resource('permission', 'PermissionController',['names' =>
         [
-        'create' => 'admin.permission.create',
-        'update' => 'admin.permission.update',
-        'edit' => 'admin.permission.edit',
-        'store' => 'admin.permission.store',
-        'show' => 'admin.permission.show',
-        'destroy' => 'admin.permission.destroy',
+            'index' => 'admin.permission.index',
+            'create' => 'admin.permission.create',
+            'update' => 'admin.permission.update',
+            'edit' => 'admin.permission.edit',
+            'store' => 'admin.permission.store',
+            'show' => 'admin.permission.show',
+            'destroy' => 'admin.permission.destroy',
         ]
     ]);
 });
