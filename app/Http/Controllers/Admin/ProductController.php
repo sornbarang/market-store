@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request; 
-use App\Product;
+use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
@@ -68,10 +68,10 @@ class ProductController extends Controller
             'description'=>$description
             ]);
         if($product){
-            return redirect()->action('ProductController@index')->with('succeess', 'Record has been added!');
+            return redirect('admin/product')->with('succeess', 'Record has been added!');
         } 
        
-        return redirect()->action('ProductController@index')->with('error', 'Oh snap! Change a few things up and try submitting again!');
+        return redirect('admin/product')->with('error', 'Oh snap! Change a few things up and try submitting again!');
         // if ($request->hasFile('photos')) {  
         //     foreach($request->file('photos') as $image)
         //     {
@@ -191,10 +191,10 @@ class ProductController extends Controller
             $product->image =isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'';
             $product->save();
             if($product){
-                return redirect()->action('ProductController@index')->with('succeess', 'Record has been updated!');
+                return redirect('admin/product')->with('succeess', 'Record has been updated!');
             }
         } 
-        return redirect()->action('ProductController@index')->with('succeess', 'Record has been updated!');
+        return redirect('admin/product')->with('succeess', 'Record has been updated!');
     }
 
     /**
