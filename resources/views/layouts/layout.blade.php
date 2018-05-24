@@ -48,10 +48,15 @@
                 height: 100%;
                 overflow:auto;
             }  
+            .btncus:hover{
+                color: #fff;
+                background-color: #66bb2c;
+            }
             .btncus{
-                background:#2ECC71;
+                background:#56a72d;
                 color:#fff;
                 font-size:15px;
+                border-color:#56a72d !important;
             }
             .btncus.focus, .btncus:focus{
                 box-shadow:inherit;

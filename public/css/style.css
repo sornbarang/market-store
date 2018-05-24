@@ -1834,7 +1834,8 @@ h6 {
 }
 
 .btn {
-  background: #0674ec;
+  /* background: #0674ec; */
+  background: #56a72d;
   padding: 0;
   margin: 0;
   text-transform: capitalize;
@@ -2697,7 +2698,8 @@ h6 {
 }
 
 .pagination-area .page-numbers:hover, .pagination-area .page-numbers.current {
-  background: #0674ec;
+  /* background: #0674ec; */
+  background: #56a72d;
   color: #fff;
 }
 
@@ -2716,7 +2718,8 @@ h6 {
 
 .pagination-area .prev.page-numbers:hover, .pagination-area .next.page-numbers:hover {
   color: #fff;
-  background: #7347c1;
+  /* background: #7347c1; */
+  background: #56a72d;
 }
 
 .pagination-area.pagination-area2 {
@@ -7107,7 +7110,8 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .author-area__seller-btn {
-  background: #0674ec;
+  /* background: #0674ec; */
+  background: #56a72d;
   color: #fff;
   padding: 0 17px;
   display: inline-block;
@@ -7122,7 +7126,8 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .author-area__seller-btn:hover {
-  background: #7347c1;
+  /* background: #7347c1; */
+  background: #66bb2c;
   color: #fff;
 }
 
@@ -7315,7 +7320,8 @@ ul.nav-tabs.nav--tabs2 li a::before {
   border: 0;
   width: 45px;
   text-align: center;
-  background: #0674ec;
+  /* background: #0674ec; */
+  background: #56a72d;
   color: #fff;
   -webkit-border-radius: 50%;
           border-radius: 50%;
@@ -7570,7 +7576,8 @@ ul.nav-tabs.nav--tabs2 li a::before {
   line-height: 40px;
   cursor: pointer;
   width: 40px;
-  background: #0674ec;
+  /* background: #0674ec; */
+  background: #56a72d;
   color: #fff;
   position: fixed;
   -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
