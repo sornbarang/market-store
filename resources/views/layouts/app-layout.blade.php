@@ -66,7 +66,7 @@
                                 </a> 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
-                                </form> 
+                                </form>
                             @else
                                 <a href="{{route('login')}}" class="author-area__seller-btn inline">Login</a>
                             @endauth 
@@ -440,12 +440,12 @@
                                                 </li>
                                                 @if (Route::has('login'))
                                                     @auth
-                                                        @if(Auth::user()->roles[0]->id==1)
-                                                            <li>
-                                                                <a href="{{route('admin')}}">
+                                                        @hasrole('admin')
+                                                        <li>
+                                                            <a href="{{route('admin')}}">
                                                                 <span class="lnr lnr-briefcase"></span>Back office</a>
-                                                            </li>
-                                                        @endif
+                                                        </li>
+                                                        @endhasrole
                                                     @endauth 
                                                 @endif
                                                 <li>
@@ -488,7 +488,7 @@
                                             </p>
                                         @else
                                             guest
-                                        @endauth 
+                                        @endauth
                                     @endif    
                                 
                                     <p class="ammount">$20.45</p>
@@ -531,76 +531,72 @@
                                     @auth
                                     <div class="dropdown dropdown--author">
                                         <ul>
-                                        <li>
-                                            <a href="{{url('/c2c/temp/myprofile')}}">
-                                                <span class="lnr lnr-user"></span>Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="dashboard.html">
-                                                <span class="lnr lnr-home"></span> Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/c2c/temp/mysetting')}}">
-                                                <span class="lnr lnr-cog"></span> Setting</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/c2c/temp/mycard')}}">
-                                                <span class="lnr lnr-cart"></span>Purchases</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/c2c/temp/myfavorite')}}">
-                                                <span class="lnr lnr-heart"></span> Favourite</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="lnr lnr-dice"></span>Add Credits</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/c2c/temp/mysale')}}">
-                                                <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/c2c/temp/myitemupload')}}">
-                                                <span class="lnr lnr-upload"></span>Upload Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/c2c/temp/mymanageitem')}}">
-                                                <span class="lnr lnr-book"></span>Manage Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="lnr lnr-briefcase"></span>Withdrawals</a>
-                                        </li>
+                                            <li>
+                                                <a href="{{url('/c2c/temp/myprofile')}}">
+                                                    <span class="lnr lnr-user"></span>Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="dashboard.html">
+                                                    <span class="lnr lnr-home"></span> Dashboard</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('/c2c/temp/mysetting')}}">
+                                                    <span class="lnr lnr-cog"></span> Setting</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('/c2c/temp/mycard')}}">
+                                                    <span class="lnr lnr-cart"></span>Purchases</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('/c2c/temp/myfavorite')}}">
+                                                    <span class="lnr lnr-heart"></span> Favourite</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="lnr lnr-dice"></span>Add Credits</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('/c2c/temp/mysale')}}">
+                                                    <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('/c2c/temp/myitemupload')}}">
+                                                    <span class="lnr lnr-upload"></span>Upload Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('/c2c/temp/mymanageitem')}}">
+                                                    <span class="lnr lnr-book"></span>Manage Item</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="lnr lnr-briefcase"></span>Withdrawals</a>
+                                            </li>
                                             <li>
                                                 @if (Route::has('login'))
                                                     @auth
-                                                        @if(Auth::user()->roles[0]->id==1)
+                                                        @hasrole('admin')
                                                             <li>
-                                                                <a href="{{route('admin')}}">
-                                                                <span class="lnr lnr-briefcase"></span>Back office</a>
+                                                                <a href="{{route('admin')}}"><span class="lnr lnr-briefcase"></span>Back office</a>
                                                             </li>
-                                                        @endif
-                                                    @endauth 
+                                                        @endhasrole
+                                                    @endauth
                                                 @endif
+                                            </li>
                                             <li>
-                                                <a class="lnr lnr-exit" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                                                <a class="lnr lnr-exit" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                     Logout
                                                 </a>
-
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                     @csrf
                                                 </form>
                                             </li>
-                                            </li>
                                         </ul>
-                                    </div>  
+                                    </div>
                                     @else
                                         <div class="text-center">
                                             <a href="{{route('login')}}" class="author-area__seller-btn inline">Become a member</a>
                                         </div>
-                                    @endauth 
+                                    @endauth
                                 @endif
                         </div>
                     </div>

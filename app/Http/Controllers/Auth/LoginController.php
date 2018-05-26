@@ -21,10 +21,6 @@ class LoginController extends Controller
     use AuthenticatesUsers;
     protected function authenticated(Request $request, $user)
     {
-        if ( $user->roles[0]->name=='administrator' ) {// do your margic here
-            return redirect()->route('admin');
-        }
-
         return redirect('/c2c');
     }
     /**
