@@ -7,6 +7,7 @@
                     <header class="card-heading ">
                         <h2 class="card-title">Add User</h2>
                         <p></p>
+                        {{dd($roles) }}
                     </header>
                     <div class="card-body">
                         <form id="form-horizontal"

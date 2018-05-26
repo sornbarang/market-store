@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use HasSlug;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','address', 'phone',
+        'name', 'first_name', 'last_name', 'email', 'password'
     ];
 
     /**
@@ -40,9 +45,19 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
 
     }
-
-    /*public function roles()
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
     {
-        return $this->belongsToMany('App\Models\Role', 'role_users', 'user_id', 'role_id');
-    }*/
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
 }

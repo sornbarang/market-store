@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $data = [];
         $view = "admin.user.index";
-        return view('admin.user.index',compact('view','data'));
+        return view('admin.user.index',compact('view','data','roles','permissions'));
     }
 
     /**
@@ -28,8 +28,9 @@ class UserController extends Controller
      */
     public function create()
     {
-
-        return view('admin.user.add');
+        $roles = Role::get();
+        $permissions = Permission::get();
+        return view('admin.user.add', compact('roles','permissions'));
     }
 
     /**
