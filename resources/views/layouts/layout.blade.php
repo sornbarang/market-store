@@ -52,14 +52,21 @@
                 color: #fff;
                 background-color: #66bb2c;
             }
+            .btncus:active{
+                color: #fff !important;
+                background-color: #66bb2c !important;
+                border-color:#56a72d !important;
+                
+            }
             .btncus{
                 background:#56a72d;
                 color:#fff;
                 font-size:15px;
                 border-color:#56a72d !important;
             }
-            .btncus.focus, .btncus:focus{
-                box-shadow:inherit;
+            .btncus:focus{
+                box-shadow:inherit !important;
+                border-color:#56a72d !important;
             }
         </style>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
