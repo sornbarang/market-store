@@ -7,7 +7,9 @@ use Spatie\Sluggable\SlugOptions;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Wildside\Userstamps\Userstamps;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class User extends Authenticatable
 {
@@ -15,6 +17,7 @@ class User extends Authenticatable
     use HasRoles;
     use HasSlug;
     use SoftDeletes;
+    use Userstamps;
 
     /**
      * The attributes that are mass assignable.
