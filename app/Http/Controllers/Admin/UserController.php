@@ -29,8 +29,15 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
-        $permissions = Permission::get();
-        return view('admin.user.add', compact('roles','permissions'));
+        $permissions = Permission::with('roles')->get();
+        $roles_permissions = array();
+        foreach ($roles as $role){
+            foreach ($role->permissions as $permission){
+                $roles_permissions[$role->id][] = $permission->id;
+            }
+        }
+
+        return view('admin.user.add', compact('roles','permissions','roles_permissions'));
     }
 
     /**
