@@ -19,6 +19,7 @@
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-permission": "^2.9",
         "spatie/laravel-sluggable": "^2.1",
+        "torann/geoip": "^1.0",
         "wildside/userstamps": "^0.5.1"
     },
     "require-dev": {

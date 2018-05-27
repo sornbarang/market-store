@@ -7,7 +7,6 @@
                     <header class="card-heading ">
                         <h2 class="card-title">Add User</h2>
                         <p></p>
-                        {{dd($roles) }}
                     </header>
                     <div class="card-body">
                         <form id="form-horizontal"
@@ -41,35 +40,37 @@
                                     <input id="confirmPassInput" type="password" name="confirmPassword" placeholder="Enter confirm password" data-rule-required="true" data-rule-equalto="#passInput" class="form-control" aria-required="true">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Roles</label>
-                                <div class="col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="roles[]" value="admin" data-rule-required="true" aria-required="true"> Admin
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="roles[]" value="user"> user
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Permission</label>
-                                <div class="col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permission[]" value="admin" data-rule-required="true" aria-required="true"> Admin
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permission[]" value="user"> user
-                                        </label>
+
+                            <div class="checklist_dependency">
+                                <script>
+                                    var  user_role_permission = "{!! json_encode($roles_permissions) !!}";
+                                </script>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Roles</label>
+                                    <div class="col-sm-10">
+                                        @foreach($roles as $role)
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="roles[]" class="secondary_list" data-id="{{$role->id}}" data-rule-required="true" aria-required="true" value="{{$role->id}}" entity="roles" entity_secondary="permissions"> {{$role->name}}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Permission</label>
+                                    <div class="col-sm-10">
+                                        @foreach($permissions as $permission)
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="permission[]" class="primary_list" data-id="{{$permission->id}}" data-rule-required="true" aria-required="true" value="{{$permission->id}}" entity="permissions" entity_primary="roles"> {{ $permission->name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="form-group">
@@ -84,4 +85,7 @@
             </div>
         </div>
     </div>
+@endsection()
+@section('javascript')
+    @include('admin.partials.checklist_dependency')
 @endsection()

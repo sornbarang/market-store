@@ -5,7 +5,6 @@
             <div class="col-xs-12">
                 <div class="card card-data-tables product-table-wrapper">
                     <header class="card-heading">
-
                         <h2 class="card-title">List User</h2>
                         {{--<small class="dataTables_info">User info</small>--}}
 
