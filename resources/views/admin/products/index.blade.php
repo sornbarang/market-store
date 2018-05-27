@@ -154,7 +154,8 @@
                     </div>
                     <div class="form-group label-floating is-empty">
                         <label class="control-label">Price</label>
-                        <input name="price" type="text" class="form-control">
+                        <input name="price" type="text" class="form-control input-mask" data-mask="000.000.000.000.000,00" autocomplete="off">
+                        <!-- <input name="price" type="text" class="form-control"> -->
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-3">
@@ -436,7 +437,7 @@
                     </div>
                     <div class="form-group label-floating is-empty">
                         <label class="control-label">Price</label>
-                        <input name="price" type="text" class="form-control">
+                        <input name="price" type="text" class="form-control input-mask" data-mask="000.000.000.000.000,00" autocomplete="off">
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-3">

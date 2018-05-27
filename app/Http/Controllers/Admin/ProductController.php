@@ -16,6 +16,11 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // $newsItem= Product::find(1);
+        // $mediaItems = $newsItem->getMedia();
+        // $publicUrl = $mediaItems[0]->getUrl();
+        // $publicFullUrl = $mediaItems[0]->getFullUrl(); //url including domain
+        // echo $publicUrl;
         $data['products']= Product::get();
         $data['active']= 'product';
         $view="admin.products.index";
@@ -67,7 +72,23 @@ class ProductController extends Controller
             'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
             'description'=>$description
             ]);
+        
         if($product){
+            // if($request->hasFile('photos'))
+            // {
+            //     $allowedfileExtension=['jpg','jpeg','png'];
+            //     $files = $request->file('photos'); 
+            //     foreach($files as $file){
+            //         $filename = $file->getClientOriginalName();
+            //         $extension = $file->getClientOriginalExtension();
+            //         $check=in_array($extension,$allowedfileExtension);
+            //         if($check){
+            //             if($check){
+            //                 $imgappend[] = $file->store('public'); 
+            //             }
+            //         }
+            //     }
+            // } 
             return redirect('admin/product')->with('succeess', 'Record has been added!');
         } 
        

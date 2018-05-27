@@ -8,10 +8,10 @@
     <meta name="keywords" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>MaterialWrap - jQuery full version</title>
-    <link rel="stylesheet" href="{{asset('/')}}assets/css/vendor.bundle.css">
-    <link rel="stylesheet" href="{{asset('/')}}assets/css/app.bundle.css">
-    <link rel="stylesheet" href="{{asset('/')}}assets/css/theme-a.css">
-    <link rel="stylesheet" href="{{asset('/')}}assets/css/admin-back.css">
+    <link rel="stylesheet" href="{{asset('assets/css/vendor.bundle.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/app.bundle.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/theme-a.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/admin-back.css')}}">
 </head>
 <body>
 <div id="app_wrapper">
@@ -170,7 +170,7 @@
                 <li class="logo-icon">
                     <a href="index.html">
                         <div class="logo">
-                            <img src="{{asset('/')}}assets/img/logo/logo-icon.png" alt="Logo">
+                            <img src="{{asset('assets/img/logo/logo-icon.png')}}" alt="Logo">
                         </div>
                         <h1 class="brand-text">MaterialWrap</h1>
                     </a>
@@ -272,11 +272,11 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <header id="header">
-                                <h1>Form Validation</h1>
+                                <h1>Form {{isset($data['active'])?ucfirst($data['active']):'Application'}}</h1>
                                 <ol class="breadcrumb">
                                     <li><a href="index.html">Dashboard</a></li>
                                     <li><a href="javascript:void(0)">Forms</a></li>
-                                    <li class="active">Form Validation</li>
+                                    <li class="active">Form {{isset($data['active'])?ucfirst($data['active']):'Application'}}</li>
                                 </ol>
                             </header>
                         </div>
