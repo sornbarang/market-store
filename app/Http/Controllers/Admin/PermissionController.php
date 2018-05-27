@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AdminPermissionRequest;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -14,7 +17,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('admin.permission.index');
+        $permissions = Permission::get();
+        return view('admin.permission.index', compact('permissions'));
     }
 
     /**
@@ -24,7 +28,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::get();
+        return view('admin.permission.add', compact('roles'));
     }
 
     /**
@@ -33,9 +38,19 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminPermissionRequest $request)
     {
-        //
+
+        $validated = $request->validated();
+        $roles = $request->roles;
+        $permission = Permission::create(['name' => $request->name]);
+        if($roles){
+            $permission->assignRole($roles);
+        }
+
+        $request->session()->flash('success', 'Permission successfully saved.');
+        return redirect()->route('admin.permission.index');
+
     }
 
     /**

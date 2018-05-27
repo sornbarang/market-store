@@ -48,6 +48,14 @@
                                 Heads up! You can Swipe table Left to Right on Mobile devices.
                             </p>
                         </div>
+
+                        @if(session('success'))
+                            <div class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Success</strong> {!! session('success') !!}
+                            </div>
+                        @endif
+
                         <div class="table-responsive">
                             <table id="productsTable" class="mdl-data-table product-table m-t-30" cellspacing="0" width="100%">
                                 <thead>
@@ -68,22 +76,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="checkbox-cell">
-                                <span class="checkbox">
-                                  <label>
-                                    <input type="checkbox" value="" id="">
-                                    <span class="checkbox-material"></span>
-                                  </label>
-                                </span>
-                                    </td>
-                                    <td>Grunt</td>
-                                    <td>Read,Write</td>
-                                    <td>
-                                        <a href="{{action('Admin\PermissionController@edit',['id' => '1'])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
-                                        <a href="{{action('Admin\PermissionController@destroy',['id' => '1'])}}" class="btn btn-danger btn-fab btn-fab-sm"><i class="zmdi zmdi-delete"></i></a>
-                                    </td>
-                                </tr>
+                                @foreach($permissions as $permission)
+                                    <tr>
+                                        <td class="checkbox-cell">
+                                    <span class="checkbox">
+                                      <label>
+                                        <input type="checkbox" value="" id="">
+                                        <span class="checkbox-material"></span>
+                                      </label>
+                                    </span>
+                                        </td>
+                                        <td>{{$permission->name}}</td>
+                                        <td>{{$permission->roles->pluck('name')->implode(', ')}}</td>
+                                        <td>
+                                            <a href="{{action('Admin\PermissionController@edit',['id' => $permission->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
+                                            <a href="{{action('Admin\PermissionController@destroy',['id' => $permission->id])}}" class="btn btn-danger btn-fab btn-fab-sm"><i class="zmdi zmdi-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
