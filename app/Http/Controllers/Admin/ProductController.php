@@ -246,4 +246,18 @@ class ProductController extends Controller
         }
         return response()->json(['status'=>false]);
     }
+    public function publish(Request $request,$id)
+    {
+        $product=Product::find($id); 
+        if($product){
+            try {
+                $product->active = $request->get('active');
+                $product->save();
+                return response()->json(['status'=>true]);
+            } catch (Exception $e) { 
+                return response()->json(['status'=>false,'error'=>$e]); 
+            } 
+        }
+        return response()->json(['status'=>false]);
+    }
 }

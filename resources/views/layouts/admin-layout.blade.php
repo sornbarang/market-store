@@ -1003,6 +1003,32 @@ $(document).ready(function() {
             $(this).val(0)
         }
     });
+    $('.togglebutton > label > input').click(function(){
+        var pid =$(this).parent().parent().parent().parent().children().children().children().children().val();
+        var active=0;
+        if($(this).is(':checked')){ 
+            active=1;
+        }else{
+            active=0;
+        }
+        console.log(pid);
+        if(typeof pid != "undefined"){
+                $.ajax({
+                    url: '{{ url("/admin/publish") }}' + '/' + pid,
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-Token':CSRF_TOKEN,
+                    },
+                    data:{active:active},
+                    success: function( response ) {
+                        console.log(response);
+                    },
+                    error: function( error ) {
+                        console.log(error);
+                    }
+                });
+        }
+    });
     $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','none');
     function readURL(input) {
         // console.log(input.parentElement.parentElement.childNodes[0].nextSibling);
