@@ -75,10 +75,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+                            {{--$publicUrl = $mediaItems[0]->getUrl();
+                                    $getFullUrl = $mediaItems[0]->getFullUrl();
+                                    $publicPath = $mediaItems[0]->getPath();
+                                    $publicFullUrl = $mediaItems[0]->getFullUrl(); 
+                                    echo $publicPath;
+                                    echo $publicUrl;
+                                    echo $getFullUrl."\n";--}}
                             @foreach($data['products'] as $val)
                                 @php
-                                    $arrimg=explode(',',$val->image);
+                                    $img='';
+                                    $newsItem=App\Models\Product::find($val->id);
+                                    $mediaItems = $newsItem->getMedia(); 
+                                    $getFirstMedia = $newsItem->getFirstMedia(); 
+                                    if($getFirstMedia){
+                                        $img = $getFirstMedia->id.'/'.$getFirstMedia->file_name;
+                                    } 
                                 @endphp
                                 <tr>
                                     <td class="checkbox-cell">
@@ -89,7 +101,7 @@
                                         </label>
                                         </span>
                                     </td> 
-                                    <td><img src="{{Storage::url($arrimg[0])}}" alt="" class="img-thumbnail" /></td>
+                                    <td><img src="{{Storage::url($img)}}" alt="" class="img-thumbnail" /></td>
                                     <td>{{$val->name}}</td>
                                     <td>#394822</td>
                                     <td>${{$val->price}}</td>
@@ -167,7 +179,7 @@
                                 <div class="input-group">
                                     <input name="photos[]" id="file" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>
@@ -186,7 +198,7 @@
                                 <div class="input-group">
                                     <input name="photos[]" id="file1" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>
@@ -205,7 +217,7 @@
                                 <div class="input-group">
                                     <input name="photos[]" id="file2" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>
@@ -224,7 +236,7 @@
                                 <div class="input-group">
                                     <input name="photos[]" id="file3" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>
@@ -444,10 +456,13 @@
                             <div class="form-group label-floating is-empty">
                             
                                 <img id="image_upload_preview"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos" id="file" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>
@@ -460,10 +475,13 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview1"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos1" id="file1" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>
@@ -476,10 +494,13 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview2"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos2" id="file2" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>
@@ -492,10 +513,13 @@
                         <div class="col-xs-6 col-sm-3">
                             <div class="form-group label-floating is-empty">
                                 <img id="image_upload_preview3"  alt="your image" />
+                                <div class="rmbtn">
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
+                                </div>
                                 <div class="input-group">
                                     <input name="photos3" id="file3" type="file" class="form-control" placeholder="File Upload...">
                                     <div class="input-group">
-                                        <input type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
+                                        <input id="myinputfile" type="text" readonly="" class="form-control" placeholder="Placeholder w/file chooser...">
                                         <span class="input-group-btn input-group-sm">
                                         <button type="button" class="btn btn-info btn-fab btn-fab-sm">
                                             <i class="zmdi zmdi-attachment-alt"></i>

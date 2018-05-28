@@ -16,11 +16,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // $newsItem= Product::find(1);
-        // $mediaItems = $newsItem->getMedia();
-        // $publicUrl = $mediaItems[0]->getUrl();
-        // $publicFullUrl = $mediaItems[0]->getFullUrl(); //url including domain
-        // echo $publicUrl;
         $data['products']= Product::get();
         $data['active']= 'product';
         $view="admin.products.index";
@@ -48,47 +43,36 @@ class ProductController extends Controller
         $price = $request->price;
         $active = (int)$request->active??0;
         $description= $request->sumernotehidden;
-        $imgappend=[];
-        if($request->hasFile('photos'))
-        {
-            $allowedfileExtension=['jpg','jpeg','png'];
-            $files = $request->file('photos'); 
-            foreach($files as $file){
-                $filename = $file->getClientOriginalName();
-                $extension = $file->getClientOriginalExtension();
-                $check=in_array($extension,$allowedfileExtension);
-                if($check){
-                    if($check){
-                        $imgappend[] = $file->store('public'); 
-                    }
-                }
-            }
-        }
+        // $imgappend=[];
         // dd($imgappend);
         $product = Product::create([
             'name' => $name,
             'price' => $price,
             'active' => $active,
-            'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
+            // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
             'description'=>$description
             ]);
         
         if($product){
-            // if($request->hasFile('photos'))
-            // {
-            //     $allowedfileExtension=['jpg','jpeg','png'];
-            //     $files = $request->file('photos'); 
-            //     foreach($files as $file){
-            //         $filename = $file->getClientOriginalName();
-            //         $extension = $file->getClientOriginalExtension();
-            //         $check=in_array($extension,$allowedfileExtension);
-            //         if($check){
-            //             if($check){
-            //                 $imgappend[] = $file->store('public'); 
-            //             }
-            //         }
-            //     }
-            // } 
+            $newsItem = Product::find($product->id);
+            if($request->hasFile('photos'))
+            {
+                $allowedfileExtension=['jpg','jpeg','png'];
+                $files = $request->file('photos'); 
+                foreach($files as $file){
+                    // $filename = $file->getClientOriginalName();
+                    $extension = $file->getClientOriginalExtension();
+                    $check=in_array($extension,$allowedfileExtension);
+                    if($check){
+                        // if($check){
+                        //     $imgappend[] = $file->store('public'); 
+                        // }
+                        $newsItem
+                        ->addMedia($file)
+                        ->toMediaCollection();
+                    }
+                }
+            }
             return redirect('admin/product')->with('succeess', 'Record has been added!');
         } 
        
@@ -124,7 +108,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product= Product::find($id);
+        $product= Product::find($id); 
+        $product->getFirstMedia();
         if($product){
             return response()->json(['status'=>true,'data'=>$product]);   
         }
@@ -140,8 +125,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        
+        $product = Product::find($id);  
         if($product){
             $imgs = explode(',',$product->image); 
             $name = $request->name??'';
@@ -158,13 +142,15 @@ class ProductController extends Controller
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){
                     // Storage::move('old/file.jpg',$file->store('public'));
-                    $imgappend[] = $file->store('public'); 
+                    // $imgappend[] = $file->store('public');
+                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid'))){
+                        // $imgappend[] = $file->store('public');
+                        $product->deleteMedia((int)$request->get('mediaid'));
+                    } 
+                    $product
+                        ->addMedia($file)
+                        ->toMediaCollection();
                 } 
-            }else{
-                // get default image 
-                if(isset($imgs[0])){
-                    $imgappend[] = $imgs[0];
-                }
             }
             if($request->hasFile('photos1')){
                 $file = $request->file('photos1'); 
@@ -172,12 +158,14 @@ class ProductController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){
-                    $imgappend[] = $file->store('public'); 
+                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid1'))){
+                        // $imgappend[] = $file->store('public');
+                        $product->deleteMedia((int)$request->get('mediaid1'));
+                    } 
+                    $product
+                        ->addMedia($file)
+                        ->toMediaCollection(); 
                 } 
-            }else{
-                if(isset($imgs[1])){
-                    $imgappend[] = $imgs[1];
-                }
             }
             if($request->hasFile('photos2')){
                 $file = $request->file('photos2'); 
@@ -185,31 +173,36 @@ class ProductController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){
-                    $imgappend[] = $file->store('public'); 
+                    // $imgappend[] = $file->store('public');
+                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid2'))){
+                        // $imgappend[] = $file->store('public');
+                        $product->deleteMedia((int)$request->get('mediaid2')); 
+                    } 
+                   
+                    $product
+                        ->addMedia($file)
+                        ->toMediaCollection(); 
                 } 
-            }else{
-                if(isset($imgs[2])){
-                    $imgappend[] = $imgs[2];
-                }
             }
             if($request->hasFile('photos3')){
                 $file = $request->file('photos3'); 
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();
                 $check=in_array($extension,$allowedfileExtension);
-                if($check){
-                    $imgappend[] = $file->store('public'); 
+                if($check){ 
+                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid3'))){
+                        $product->deleteMedia((int)$request->get('mediaid3')); 
+                    } 
+                    $product    
+                        ->addMedia($file)
+                        ->toMediaCollection();
                 } 
-            }else{
-                if(isset($imgs[3])){
-                    $imgappend[] = $imgs[3];
-                } 
-            }  
+            }
             $product->name = $name;
             $product->price = $price;
             $product->active = $active;
             $product->description = $description;
-            $product->image =isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'';
+            // $product->image =isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'';
             $product->save();
             if($product){
                 return redirect('admin/product')->with('succeess', 'Record has been updated!');
@@ -227,15 +220,30 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $res=Product::whereIn('id',explode(',',$id))->get(); 
-        // $res=Product::whereIn('id',explode(',',$id))->delete();
-        
         if($res){
             foreach($res as $val){
-                Storage::delete(explode(',',$val->image));
+                // Storage::delete(explode(',',$val->image));
+                $val->delete(); // all associated files will be deleted as well
             }
             Product::whereIn('id',explode(',',$id))->delete();
             return response()->json(['status'=>true]);
         }
-        return response()->json(['status'=>true]);
+        return response()->json(['status'=>false]);
+    }
+    /**
+     * Remove media
+     */
+    public function deleteMedia(Request $request,$id)
+    {
+        $product=Product::find($id); 
+        if($product){
+            try {
+                $product->deleteMedia((int)$request->get('mid')); 
+                return response()->json(['status'=>true]); 
+            } catch (Exception $e) { 
+                return response()->json(['status'=>false,'error'=>$e]); 
+            } 
+        }
+        return response()->json(['status'=>false]);
     }
 }

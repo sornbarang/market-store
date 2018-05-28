@@ -876,7 +876,43 @@
 <script>
 $(document).ready(function() {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    // Add New record
+    // Remove file add mode
+    $(document).on('click', 'form#addProduct .rmbtn', function(e) {
+        console.log($(this).parent().find('input#myinputfile'));
+        $(this).parent().find('input#myinputfile,input[name="photos[]"]').val('').clone(true);
+        $(this).parent().find('img').attr('src','');
+        $(this).parent().find('img').hide();
+        $(this).hide();
+    });
+    // Remove file edit mode
+    $(document).on('click', 'form#editProduct .rmbtn', function(e) { 
+        var pid=$('#editProduct #editid').val();
+        $(this).parent().find('input#myinputfile,input[name="photos[]"]').val('').clone(true);
+        $(this).parent().find('img').attr('src','');
+        $(this).parent().find('img').hide();
+        $(this).hide(); 
+        var mid=$(this).next().next('input').val();
+        if(typeof mid != "undefined"){
+            $.ajax({
+                url: '{{ url("/admin/deletemedia") }}' + '/' + pid,
+                type: 'POST',
+                headers: {
+                    'X-CSRF-Token':CSRF_TOKEN,
+                },
+                data: {mid:mid},
+                success: function( response ) {
+                    console.log(response);
+                },
+                error: function( error ) {
+                    console.log(error);
+                }
+            });
+        }else{
+            console.log('undified');
+        }
+        return false;
+        
+    });
     $(document).on('click', 'form#addProduct button[type=submit]', function(e) {
         $('#addProduct #sumernotehidden').val($('#addProduct .note-editable').html()); 
         // e.preventDefault();
@@ -890,6 +926,7 @@ $(document).ready(function() {
     });
     $(document).on('click', '.edit-product', function(e) {
         var id=$(this).data('id');
+        $('#editProduct  input[name*="mediaid"]').remove();
         $.ajax({
             type: "GET",
             headers: {
@@ -905,23 +942,28 @@ $(document).ready(function() {
                 $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','none');
                 
                 if(response.data !=''){
-                    var imgs = response.data.image !=''?response.data.image.split(','):[]
-                    console.log(imgs);
-                    for(var i=0;i<imgs.length;i++){  
-                        var img = imgs[i].replace('public/','');
-                        var url ="{{Storage::url('')}}"+img; 
+                    // var imgs = response.data.media !=''?response.data.image.split(','):[]
+                    // console.log(imgs);
+                    for(var i=0;i<response.data.media.length;i++){  
+                        // var img = imgs[i].replace('public/','');
+                        var url ="{{Storage::url('')}}"+response.data.media[i].id+'/'+response.data.media[i].file_name; 
                         if(i==0){
                             // $('#editProduct #file').next().children().first().val(url)
+                            $('#editProduct #image_upload_preview').parent().append('<input name="mediaid" type="hidden" value="'+response.data.media[i].id+'">');
                             $('#editProduct #image_upload_preview').css('display','block');
                             $('#editProduct #image_upload_preview').attr('src',url)
+                            $('#editProduct #image_upload_preview').next().show()
                         }else{
                             // $('#editProduct #file'+i).next().children().first().val(url)
+                            $('#editProduct #image_upload_preview'+i).parent().append('<input name="mediaid'+i+'" type="hidden" value="'+response.data.media[i].id+'">');                            
                             $('#editProduct #image_upload_preview'+i).css('display','block');
                             $('#editProduct #image_upload_preview'+i).attr('src',url)
+                            $('#editProduct #image_upload_preview'+i).next().show()
                         }
                         
                     }  
                     $('#editProduct').attr('action','{{url("admin/product")}}/'+response.data.id);
+                    $('#editProduct #editid').val(response.data.id);
                     if(response.data.name !='' || response.data.price !='' || response.data.active !=''){
                         $('#editProduct input[name="name"]').parent().attr('class','form-group label-floating is-empty is-focused')
                         $('#editProduct input[name="name"]').val(response.data.name)
@@ -968,7 +1010,7 @@ $(document).ready(function() {
             // show preview image
             input.parentElement.parentElement.childNodes[0].nextSibling.style.display = "block"
             // show remove image label
-            // input.parentElement.parentElement.childNodes[0].parentElement.children[1].style.display = "block"
+            input.parentElement.parentElement.childNodes[0].parentElement.children[1].style.display = "block"
             // console.log(input.parentElement.parentElement.childNodes[0]);
             // console.log(input.parentElement.parentElement.childNodes[0].parentElement.children[1]);
             // $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','block');
