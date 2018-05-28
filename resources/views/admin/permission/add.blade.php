@@ -1,5 +1,6 @@
 @extends('layouts.admin-layout')
 @section('content')
+
     <div class="content-body">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -8,6 +9,7 @@
                         <h2 class="card-title">Add Permission</h2>
                         <p></p>
                     </header>
+                    @include('admin.partials.message')
                     <div class="card-body">
                         <form id="form-horizontal"
                               accept-charset="UTF-8"
@@ -16,25 +18,22 @@
                               class="form-horizontal">
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
-                            <div class="form-group">
+                            <div class="form-group @if($errors->has('name')) has-error @endif">
                                 <label for="nameInput" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input id="nameInput" type="text" name="name" placeholder="Enter your name" data-rule-required="true" minlength="2"class="form-control" aria-required="true">
+                                    <input id="nameInput" type="text" name="name" placeholder="Enter your name" data-rule-required="true" minlength="2" class="form-control" aria-required="true">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Roles</label>
                                 <div class="col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permission[]" value="admin" data-rule-required="true" aria-required="true"> Admin
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permission[]" value="user"> user
-                                        </label>
-                                    </div>
+                                    @foreach($roles as $role)
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="roles[]" value="{{$role->name}}" data-rule-required="false" aria-required="false"> {{$role->name}}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
 

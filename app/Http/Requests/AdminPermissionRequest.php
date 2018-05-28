@@ -13,7 +13,7 @@ class AdminPermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,5 +45,17 @@ class AdminPermissionRequest extends FormRequest
             }
             default:break;
         }
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Permission name is required',
+        ];
     }
 }
