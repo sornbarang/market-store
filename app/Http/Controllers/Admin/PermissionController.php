@@ -84,7 +84,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -95,6 +95,9 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ids = explode(',',$id);
+        Permission::whereIn('id', $ids)->delete();
+
+        return response()->json(['status'=>true]);
     }
 }

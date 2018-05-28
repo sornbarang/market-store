@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>MaterialWrap - jQuery full version</title>
+    <title>Admin Panel - @yield('title')</title>
     <link rel="stylesheet" href="{{asset('assets/css/vendor.bundle.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/app.bundle.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/theme-a.css')}}">
@@ -220,7 +220,7 @@
                         <ul class="nav-sub">
                             <li><a href="{{ action('Admin\UserController@index') }}">Users</a></li>
                             <li><a href="{{ action('Admin\RoleController@index') }}">Roles</a></li>
-                            <li><a href="{{ action('Admin\RoleController@index') }}">Permissions</a></li>
+                            <li><a href="{{ action('Admin\PermissionController@index') }}">Permissions</a></li>
                         </ul>
                     </li>
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>Advertise</a>
@@ -274,9 +274,11 @@
                             <header id="header">
                                 <h1>Form {{isset($data['active'])?ucfirst($data['active']):'Application'}}</h1>
                                 <ol class="breadcrumb">
-                                    <li><a href="index.html">Dashboard</a></li>
+
+                                    <li><a href="{{url('/')}}">Dashboard</a></li>
                                     <li><a href="javascript:void(0)">Forms</a></li>
                                     <li class="active">Form {{isset($data['active'])?ucfirst($data['active']):'Application'}}</li>
+
                                 </ol>
                             </header>
                         </div>

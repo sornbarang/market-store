@@ -1,4 +1,5 @@
 @extends('layouts.admin-layout')
+@section('title', 'List Permission')
 @section('content')
     <div class="content-body">
         <div class="row">
@@ -19,7 +20,7 @@
                         <ul class="card-actions icons right-top">
                             <li id="deleteItems" style="display: none;">
                                 <span class="label label-info pull-left m-t-5 m-r-10 text-white"></span>
-                                <a href="javascript:void(0)" id="confirmDelete" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
+                                <a href="javascript:void(0)" id="confirmBeforeDelete" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
                                     <i class="zmdi zmdi-delete"></i>
                                 </a>
                             </li>
@@ -81,7 +82,7 @@
                                         <td class="checkbox-cell">
                                     <span class="checkbox">
                                       <label>
-                                        <input type="checkbox" value="" id="">
+                                        <input type="checkbox" value="{{$permission->id}}" id="">
                                         <span class="checkbox-material"></span>
                                       </label>
                                     </span>
@@ -90,7 +91,8 @@
                                         <td>{{$permission->roles->pluck('name')->implode(', ')}}</td>
                                         <td>
                                             <a href="{{action('Admin\PermissionController@edit',['id' => $permission->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="{{action('Admin\PermissionController@destroy',['id' => $permission->id])}}" class="btn btn-danger btn-fab btn-fab-sm"><i class="zmdi zmdi-delete"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-id="{{$permission->id}}"><i class="zmdi zmdi-delete"></i></a>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -105,8 +107,131 @@
 @endsection()
 @section('javascript')
     <script>
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
         $(document).on('click touch', '#add-new-permission', function(e) {
             window.location.href='{{action('Admin\PermissionController@create')}}'
         });
+
+        $(document).on('click.warning-delete', '.warning-delete', function (e) {
+            e.stopPropagation();
+            var permissionID = $(this).attr("data-id");
+            swal({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this permission!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then(function() {
+                setTimeout(function () {
+                    $.ajax({
+                    url: "permission/" + permissionID,
+                    type: 'DELETE',
+                    headers: {
+                        'X-CSRF-Token':CSRF_TOKEN,
+                    },
+                    success: function( msg ) {
+                        if(msg.status){
+                            swal("Deleted!", "Your data has been deleted.", "success");
+                            setTimeout(function () {
+                                document.location.reload(true);
+                            }, 3000);
+                        }else{
+                            swal(
+                                'Cancelled',
+                                'Can not delete record !',
+                                'error'
+                            )
+                        }
+                    },
+                    error: function( data ) {
+                        swal(
+                            'Cancelled',
+                            'Can not delete record)',
+                            'error'
+                        )
+                    }
+                });
+
+                }, 600);
+            }, function(dismiss) {
+                // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                if (dismiss === 'cancel') {
+                    swal("Cancelled", "Your action has been cancelled.", "error");
+                }
+            })
+        });
+
+
+        //Confirm delete
+        $('#confirmBeforeDelete').on('click', function (e) {
+            e.stopPropagation();
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this data.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Delete',
+                cancelButtonText: "Cancel",
+            }).then(function() {
+                setTimeout(function () {
+                    var permissionID = [];
+                    $('.checkbox-cell input[id*=CheckboxId_][type=checkbox]:checked').each(function () {
+                        permissionID.push($(this).val());
+                        $(this).prop('checked', false);
+                        $(this).closest("tr").fadeOut();
+                        $('#deleteItems').fadeOut();
+                    });
+                    if(permissionID.length > 0){
+                        $.ajax({
+                            url: "permission/" + permissionID.join(','),
+                            type: 'DELETE',
+                            headers: {
+                                'X-CSRF-Token':CSRF_TOKEN,
+                            },
+                            success: function( msg ) {
+                                if(msg.status){
+                                    swal("Deleted!", "Your data has been deleted.", "success");
+                                    setTimeout(function () {
+                                        document.location.reload(true);
+                                    }, 3000);
+                                }else{
+                                    swal(
+                                        'Cancelled',
+                                        'Can not delete record !',
+                                        'error'
+                                    )
+                                }
+                            },
+                            error: function( data ) {
+                                swal(
+                                    'Cancelled',
+                                    'Can not delete record)',
+                                    'error'
+                                )
+                            }
+                        });
+                    }
+
+                    if ($('#checkAll').is(":checked")) {
+                        $('#checkAll').prop('checked', false);
+                    };
+                    $('#deleteItems span').text('');
+
+                }, 600);
+                setTimeout(function () {
+                    $('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
+                }, 2000);
+            }, function(dismiss) {
+                // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                if (dismiss === 'cancel') {
+                    swal("Cancelled", "Your action has been cancelled.", "error");
+                }
+            })
+        });
+
+
     </script>
 @endsection()
