@@ -70,6 +70,11 @@ Route::group([
             'destroy' => 'admin.product.destroy',
         ]
     ]);
+    /***
+     * Remove media
+     */
+    Route::post('deletemedia/{id}', 'ProductController@deleteMedia');
+    Route::post('publish/{id}', 'ProductController@publish');
     Route::resource('user', 'UserController',['names' =>
         [
             'index' => 'admin.user.index',
