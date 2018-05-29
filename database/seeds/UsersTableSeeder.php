@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         $user->first_name = 'user';
         $user->last_name = 'admin';
         $user->email = 'admin@treewb.com';
-        $user->password = bcrypt('secret123admin');
+        $user->password = 'secret123admin';
         $user->save();
 
         $user->profile()->create([
