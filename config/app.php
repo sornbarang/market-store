@@ -155,6 +155,7 @@ return [
         'Baum\Providers\BaumServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -216,6 +217,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
     ],
 
