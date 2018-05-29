@@ -37,6 +37,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+
     /**
      * Set the user's password.
      *

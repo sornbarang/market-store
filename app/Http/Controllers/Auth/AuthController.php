@@ -16,6 +16,12 @@ use App\Http\Controllers\Controller;
 class AuthController extends Controller
 {
     /**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/c2c';
+    /**
      * Redirect the user to the OAuth Provider.
      *
      * @return Response
@@ -36,7 +42,6 @@ class AuthController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
         return redirect($this->redirectTo);
@@ -51,13 +56,27 @@ class AuthController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-        $authUser = User::where('provider_id', $user->id)->first();
+
+        $authUser = User::where('email', $user->email)->first();
+
         if ($authUser) {
+            if($authUser->provider_id != $user->id && $authUser->provider != $provider){
+
+                $authUser->provider = $provider;
+                $authUser->provider_id = $user->id;
+                $authUser->save();
+
+            }
+
+            $synRole = $authUser->syncRoles(['super-admin']);
+
             return $authUser;
         }
+
         return User::create([
             'name'     => $user->name,
             'email'    => $user->email,
+            'password' => 'secret_' . $provider . $user->id,
             'provider' => $provider,
             'provider_id' => $user->id
         ]);
