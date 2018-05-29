@@ -8,7 +8,7 @@
         </header>
         <div class="card-body">
         <form id="form-horizontal" method="post" action="{{url('/admin/ads')}}"  class="form-horizontal" enctype="multipart/form-data">
-            @csrf    
+            @csrf     
             <div class="form-group">
                 <label for="nameInput" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10">
@@ -43,17 +43,28 @@
                     <input id="websiteInput" type="text" name="url" placeholder="Enter website" data-rule-required="true" data-rule-url="true" class="form-control" aria-required="true">
                 </div>
             </div> 
+            <div class="form-group"> 
+                <label for="" class="col-sm-2 control-label">Position</label>
+                    <div class="col-sm-10">
+                        <select class="select form-control" name="advert_category_id">
+                            <option>Select an Option</option>
+                            @foreach($data['advertCategory'] as $adsCat)
+                            <option value="{{$adsCat->id}}">{{ucwords($adsCat->type)}}</option>
+                            @endforeach 
+                        </select>  
+                    </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Active</label>
                 <div class="col-sm-10">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="active" value="1" data-rule-required="true" aria-required="true"> Public
+                            <input type="radio" name="active" value="1" data-rule-required="true" aria-required="true"> Publish
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="active" value="0"> Unpublic
+                            <input type="radio" name="active" value="0"> unpublish
                         </label>
                     </div>
                 </div>
