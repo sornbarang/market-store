@@ -1,4 +1,5 @@
 <div class="content-body">
+
     <div class="row">
     <div class="col-xs-12">
         <div class="card card-data-tables product-table-wrapper">
@@ -59,17 +60,17 @@
                     </th>
                     <th data-orderable="false" class="col-xs-2">Image</th>
                     <th class="col-xs-2">Product Title</th>
-                    <th class="col-xs-2">SKU</th>
+                    <th class="col-xs-2">URL</th>
                     <th class="col-xs-2">Price</th>
                     <th data-orderable="false" class="col-xs-1">Active</th>
-                    <th class="col-xs-1">Stock</th>
+                    <th class="col-xs-1">Position</th>
                     <th data-orderable="false" class="col-xs-2">
                     <a href="{{url('admin/ads/create')}}"><button class="btn btn-primary btn-fab  animate-fab"><i class="zmdi zmdi-plus"></i></button></a>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                @for ($i = 0; $i < 10; $i++)
+                @foreach($data['advert'] as $ads)  
                     <tr>
                         <td class="checkbox-cell">
                         <span class="checkbox">
@@ -79,21 +80,21 @@
                             </label>
                         </span>
                         </td>
-                        <td><img src="{{asset('/')}}assets/img/ecom/products/12252_Tgi0.jpeg" alt="" class="img-thumbnail" /></td>
-                        <td>Grunt</td>
-                        <td>#394822</td>
+                        <td><img style="max-height:100px;" src="{{Storage::url($ads->image_url)}}" alt="" class="img-thumbnail" /></td>
+                        <td>{{$ads->alt}}</td>
+                        <td>{{$ads->url}}</td>
                         <td>$32</td>
                         <td>
                         <div class="togglebutton">
                             <label>
-                            <input type="checkbox" class="toggle-info" checked>
+                            <input type="checkbox" class="toggle-info" {{$ads->active==1?'checked':''}}>
                             </label>
                         </div>
                         </td>
-                        <td>1,200</td>
+                        <td>{{ucfirst($ads->advert_category->type)}}</td>
                         <td><a href="javascript:void(0)" class="edit-product icon"><i class="zmdi zmdi-edit"></i></a></td>
                     </tr>
-                @endfor
+                @endforeach
                 </tbody>
             </table>
             </div>

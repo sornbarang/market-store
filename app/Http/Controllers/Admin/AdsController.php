@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Advert;
+use Adumskis\LaravelAdvert\Model\Advert;
+use Adumskis\LaravelAdvert\Model\AdvertCategory;
 use App\Http\Controllers\Controller;
 
 class AdsController extends Controller
@@ -14,9 +15,11 @@ class AdsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data['cats']=[];
+    { 
+        $advert=Advert::get(); 
+        $data['advert']=$advert;
         $view="admin.ads.index";
+        $data['active']="Advertise";
         return view('admin.index',compact('view','data'));
     }
 
@@ -27,8 +30,10 @@ class AdsController extends Controller
      */
     public function create()
     {
-        $data['cats']=[];
+        $advertCategory=AdvertCategory::get(); 
+        $data['advertCategory']=$advertCategory;
         $view="admin.ads.create";
+        $data['active']="Advertise";        
         return view('admin.index',compact('view','data'));
     }
 
@@ -41,15 +46,11 @@ class AdsController extends Controller
     public function store(Request $request)
     {
         $advert = Advert::make(
-            $request->only(['alt', 'url', 'active']), 
+            $request->only(['alt', 'url', 'active','advert_category_id']), 
             $request->file('image')
-        ); 
-        // $ads= new Advert();
-        // $ads->alt=$advert->alt;
-        // $ads->url=$advert->url;
-        // $ads->active=$advert->acitve;
-        // $ads->save();
-        return redirect()->action('AdsController@index');
+        );
+        return redirect('admin/ads')->with('successfull', 'Record has been added!');
+        
     }
 
     /**

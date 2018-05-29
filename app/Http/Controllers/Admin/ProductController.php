@@ -73,7 +73,7 @@ class ProductController extends Controller
                     }
                 }
             }
-            return redirect('admin/product')->with('succeess', 'Record has been added!');
+            return redirect('admin/product')->with('successfull', 'Record has been added!');
         } 
        
         return redirect('admin/product')->with('error', 'Oh snap! Change a few things up and try submitting again!');
