@@ -66,7 +66,14 @@
                             </div>
 
                             <button class="btn btn--md btn--round" type="submit">Login Now</button>
-
+                            <!-- <div class="form-group"> -->
+                                <div class="social social--color--filled login_assist">
+                                    <ul>
+                                        <li><a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" title="Sign in with facebook"><span class="fa fa-facebook"></span></a></li> 
+                                        <li><a href="{{ route('socialite.auth', ['provider' => 'google']) }}" title="Sign in with google"><span class="fa fa-google-plus"></span></a></li> 
+                                    </ul>
+                                </div>
+                            <!-- </div> -->
                             <div class="login_assist">
                                 <p class="recover">Lost your <a href="{{ route('password.request') }}">username</a> or <a href="{{ route('password.request') }}">password</a>?</p>
                                 <p class="signup">Don't have an <a href="{{url('register')}}">account</a>?</p>

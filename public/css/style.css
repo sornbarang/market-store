@@ -477,7 +477,7 @@ a {
 }
 .login_area.section--padding2,.signup_area.section--padding2,.pass_recover_area.section--padding2{
   /* padding: 70px 0 120px; */
-  padding:50px !important;
+  padding:50px 0 !important;
 }
 .section-title {
   text-align: center;
