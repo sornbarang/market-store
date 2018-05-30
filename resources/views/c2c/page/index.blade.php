@@ -5,7 +5,7 @@
 =================================-->
 {{--<section class="hero-area hero--2 bgimage">
     <div class="bg_image_holder">
-        <img src="images/hero_area_bg3.jpg" alt="">
+        <img src="{{asset('/')}}images/hero_area_bg3.jpg" alt="">
     </div>
 
     <!-- start hero-content -->
@@ -90,7 +90,7 @@
                 <div class="featured-product-slider prod-slider2">
                     <div class="featured__single-slider">
                         <div class="featured__preview-img">
-                            <img src="images/featprod.jpg" alt="Featured products">
+                            <img src="{{asset('/')}}images/featprod.jpg" alt="Featured products">
                         </div><!-- end /.featured__preview-img -->
 
                         <div class="featured__product-description">
@@ -98,7 +98,7 @@
                                 <a href="single-product.html" class="product_title"><h4>Rida - vCard, Portfolio / Resume Template</h4></a>
                                 <ul class="titlebtm">
                                     <li>
-                                        <img class="auth-img" src="images/auth.jpg" alt="author image">
+                                        <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
                                         <p><a href="#">AazzTech</a></p>
                                     </li>
                                     <li class="product_cat">
@@ -142,7 +142,7 @@
 
                     <div class="featured__single-slider">
                         <div class="featured__preview-img">
-                            <img src="images/featprod.jpg" alt="Featured products">
+                            <img src="{{asset('/')}}images/featprod.jpg" alt="Featured products">
                         </div><!-- end /.featured__preview-img -->
 
                         <div class="featured__product-description">
@@ -150,7 +150,7 @@
                                 <a href="single-product.html" class="product_title"><h4>One Page Resume Template</h4></a>
                                 <ul class="titlebtm">
                                     <li>
-                                        <img class="auth-img" src="images/auth.jpg" alt="author image">
+                                        <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
                                         <p><a href="#">AazzTech</a></p>
                                     </li>
                                     <li class="product_cat">
@@ -194,7 +194,7 @@
 
                     <div class="featured__single-slider">
                         <div class="featured__preview-img">
-                            <img src="images/featprod.jpg" alt="Featured products">
+                            <img src="{{asset('/')}}images/featprod.jpg" alt="Featured products">
                         </div><!-- end /.featured__preview-img -->
 
                         <div class="featured__product-description">
@@ -202,7 +202,7 @@
                                 <a href="single-product.html" class="product_title"><h4>AppsPress App Landing</h4></a>
                                 <ul class="titlebtm">
                                     <li>
-                                        <img class="auth-img" src="images/auth.jpg" alt="author image">
+                                        <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
                                         <p><a href="#">AazzTech</a></p>
                                     </li>
                                     <li class="product_cat">
@@ -246,7 +246,7 @@
 
                     <div class="featured__single-slider">
                         <div class="featured__preview-img">
-                            <img src="images/featprod.jpg" alt="Featured products">
+                            <img src="{{asset('/')}}images/featprod.jpg" alt="Featured products">
                         </div><!-- end /.featured__preview-img -->
 
                         <div class="featured__product-description">
@@ -254,7 +254,7 @@
                                 <a href="single-product.html" class="product_title"><h4>MartPlace - Digital Marketplace</h4></a>
                                 <ul class="titlebtm">
                                     <li>
-                                        <img class="auth-img" src="images/auth.jpg" alt="author image">
+                                        <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
                                         <p><a href="#">AazzTech</a></p>
                                     </li>
                                     <li class="product_cat">
@@ -314,7 +314,7 @@
 <section class="search-wrapper">
     <div class="search-area2 bgimage">
         <div class="bg_image_holder">
-            <img src="images/search.jpg" alt="">
+            <img src="{{asset('/')}}images/search.jpg" alt="">
         </div>
         <div class="container content_above">
             <div class="row">
@@ -359,7 +359,7 @@
                     <div class="filter__menu">
                         <p>Filter by:</p>
                         <div class="filter__menu_icon">
-                            <img class="svg" src="images/svg/menu.svg" alt="">
+                            <img class="svg" src="{{asset('/')}}images/svg/menu.svg" alt="">
 
                             <ul class="filter_dropdown">
                                 <li><a href="#">Trending items</a></li>
@@ -388,7 +388,7 @@
                         <div class="product product--card product--card3">
 
                             <div class="product__thumbnail">
-                                <img src="images/p1.jpg" alt="Product Image">
+                                <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
                                 <div class="prod_btn">
                                     <a href="{{url('c2c/temp/categories')}}" class="transparent btn--sm btn--round">More Info</a>
                                 </div><!-- end /.prod_btn -->
@@ -423,7 +423,7 @@
 =================================-->
 <section class="counter-up-area bgimage">
     <div class="bg_image_holder">
-        <img src="images/countbg.jpg" alt="">
+        <img src="{{asset('/')}}images/countbg.jpg" alt="">
     </div>
     <!-- start .container -->
     <div class="container content_above">
@@ -583,13 +583,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="special-feature feature--1">
-                    <img src="images/spf1.png" alt="Special Feature image">
+                    <img src="{{asset('/')}}images/spf1.png" alt="Special Feature image">
                     <h3 class="special__feature-title">30 Days Money Back <span class="highlight">Guarantee</span></h3>
                 </div>
             </div><!-- end /.col-md-6 -->
             <div class="col-md-6">
                 <div class="special-feature feature--2">
-                    <img src="images/spf2.png" alt="Special Feature image">
+                    <img src="{{asset('/')}}images/spf2.png" alt="Special Feature image">
                     <h3 class="special__feature-title">Fast and Friendly <span class="highlight">Support</span></h3>
                 </div>
             </div><!-- end /.col-md-6 -->
@@ -605,7 +605,7 @@
 =================================-->
 <section class="call-to-action bgimage">
     <div class="bg_image_holder">
-        <img src="images/calltobg.jpg" alt="">
+        <img src="{{asset('/')}}images/calltobg.jpg" alt="">
     </div>
     <div class="container content_above">
         <div class="row">
