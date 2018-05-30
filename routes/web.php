@@ -13,35 +13,34 @@ use App\Http\Middleware\Admin;
 
 Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
+
 Route::get('/', function () {
     return view('page');
 });
 
-Route::prefix('c2c')->group(function () {
-    // Route::get('/', function () {
-    //     return view('c2c/page/index'); 
-    // });
-    Route::get('/', 'C2cController@index')->name('home');
+    Route::group([
+        'prefix'     => 'market'
+    ], function(){
 
-    Route::prefix('temp')->group(function () {
-        Route::get('/categories', 'C2cController@getcategory')->name('category');
-        Route::get('/product', 'C2cController@getproduct')->name('product');
-        Route::get('/productdetail', 'C2cController@getproductdetail')->name('product'); 
-        Route::get('/mystore', 'CustomerController@myStore')->name('customer'); 
-        Route::get('/mysetting', 'CustomerController@mySetting')->name('customer'); 
-        Route::get('/myprofile', 'CustomerController@myProfile')->name('customer'); 
-        Route::get('/mycart', 'CustomerController@myCart')->name('customer'); 
-        Route::get('/myfavorite', 'CustomerController@myFavorite')->name('customer'); 
-        Route::get('/mysale', 'CustomerController@mySaleManagement')->name('customer'); 
-        Route::get('/myitemupload', 'CustomerController@myItemUpload')->name('customer'); 
-        Route::get('/mymanageitem', 'CustomerController@myManageItem')->name('customer'); 
-        Route::get('/edititem', 'CustomerController@myEditItem')->name('customer'); 
-        Route::resource('customer', 'CustomerController');
+        Route::get('/', 'C2cController@index')->name('c2c');
+        Route::prefix('temp')->group(function () {
+            Route::get('/categories', 'C2cController@getcategory')->name('category');
+            Route::get('/product', 'C2cController@getproduct')->name('product');
+            Route::get('/productdetail', 'C2cController@getproductdetail')->name('product');
+            Route::get('/mystore', 'CustomerController@myStore')->name('customer');
+            Route::get('/mysetting', 'CustomerController@mySetting')->name('customer');
+            Route::get('/myprofile', 'CustomerController@myProfile')->name('customer');
+            Route::get('/mycart', 'CustomerController@myCart')->name('customer');
+            Route::get('/myfavorite', 'CustomerController@myFavorite')->name('customer');
+            Route::get('/mysale', 'CustomerController@mySaleManagement')->name('customer');
+            Route::get('/myitemupload', 'CustomerController@myItemUpload')->name('customer');
+            Route::get('/mymanageitem', 'CustomerController@myManageItem')->name('customer');
+            Route::get('/edititem', 'CustomerController@myEditItem')->name('customer');
+            Route::resource('customer', 'CustomerController');
+        });
 
     });
-});
-Route::get('/contact', 'PageController@contact')->name('page');
-
+    Route::get(trans('routes.contact'), 'PageController@contact')->name('contact');
 
 //Route::group(['prefix' => 'admin',  'middleware' => Admin::class], function(){
 

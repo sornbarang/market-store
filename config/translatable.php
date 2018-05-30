@@ -12,8 +12,13 @@ return [
     */
     'locales' => [
         'en' => 'English',
-        'km' => 'Khmer',
+        'km' => 'ភាសាខ្មែរ',
     ],
+    /*
+     * If you want to fallback to a default translation when a translation has not been found,
+     * enable this in the configuration using the use_fallback key
+     */
+    'use_fallback' => true,
 
     /*
      * If a translation has not been set for a given locale, use this locale instead.
