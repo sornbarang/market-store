@@ -194,7 +194,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-header">Market</li>
-                    <li class="nav-dropdown {{isset($data['active'])?'active open':''}}"><a href="#"><i class="zmdi zmdi-shopping-cart"></i>E-Commerce</a>
+                    <li class="nav-dropdown {{isset($data['active']) && $data['active']=='product'?'active open':''}}"><a href="#"><i class="zmdi zmdi-shopping-cart"></i>E-Commerce</a>
                         <ul class="nav-sub">
                             <li><a href="#">Dashboard</a></li>
                             <li class="{{isset($data['active']) && $data['active']=='product'?'active':''}}"><a href="{{url('admin/product')}}" >Products</a></li>
@@ -223,7 +223,7 @@
                             <li><a href="{{ action('Admin\PermissionController@index') }}">Permissions</a></li>
                         </ul>
                     </li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>Advertise</a>
+                    <li class="nav-dropdown {{isset($data['active']) && $data['active']=='advertise'?'active open':''}}"><a href="#"><i class="zmdi zmdi-palette"></i>Advertise</a>
                         <ul class="nav-sub">
                             <li><a href="#">User</a></li>
                             <li><a href="{{url('admin/ads')}}">Banner</a></li>
@@ -878,8 +878,10 @@
 <script>
 $(document).ready(function() {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','none');
+    $('#adsEdit #image_upload_preview').css('display','block');
     // Remove file add mode
-    $(document).on('click', 'form#addProduct .rmbtn', function(e) {
+    $(document).on('click', 'form#addProduct .rmbtn,form#adsEdit .rmbtn', function(e) {
         console.log($(this).parent().find('input#myinputfile'));
         $(this).parent().find('input#myinputfile,input[name="photos[]"]').val('').clone(true);
         $(this).parent().find('img').attr('src','');
@@ -1031,7 +1033,6 @@ $(document).ready(function() {
                 });
         }
     });
-    $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').css('display','none');
     function readURL(input) {
         // console.log(input.parentElement.parentElement.childNodes[0].nextSibling);
         if (input.files && input.files[0]) {

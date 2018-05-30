@@ -3,7 +3,7 @@
 <!--================================
         START BREADCRUMB AREA
     =================================-->
-    <section class="breadcrumb-area">
+    {{--<section class="breadcrumb-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -17,7 +17,7 @@
                 </div><!-- end /.col-md-12 -->
             </div><!-- end /.row -->
         </div><!-- end /.container -->
-    </section>
+    </section>--}}
     <!--================================
         END BREADCRUMB AREA
     =================================-->
@@ -70,7 +70,7 @@
 <!--================================
     START CALL TO ACTION AREA
 =================================-->
-<section class="call-to-action bgimage">
+{{--<section class="call-to-action bgimage">
     <div class="bg_image_holder">
         <img src="{{asset('/')}}images/calltobg.jpg" alt="">
     </div>
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>--}}
 <!--================================
     END CALL TO ACTION AREA
 =================================-->

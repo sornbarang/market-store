@@ -687,7 +687,7 @@
     START FOOTER AREA
 =================================-->
 <footer class="footer-area">
-    <div class="footer-big section--padding">
+    {{--<div class="footer-big section--padding">
         <!-- start .container -->
         <div class="container">
             <div class="row">
@@ -771,7 +771,7 @@
                 </div><!-- end /.col-md-4 -->
             </div><!-- end /.row -->
         </div><!-- end /.container -->
-    </div><!-- end /.footer-big -->
+    </div--}}<!-- end /.footer-big -->
 
     <div class="mini-footer">
             <div class="container">
