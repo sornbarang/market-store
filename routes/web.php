@@ -40,7 +40,7 @@ Route::get('/', function () {
         });
 
     });
-    Route::get('contact', 'PageController@contact')->name('contact');
+    Route::get(trans('routes.contact'), 'PageController@contact')->name('contact');
 
 //Route::group(['prefix' => 'admin',  'middleware' => Admin::class], function(){
 

@@ -658,10 +658,10 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="#">policy</a>
+                                    <a href="#">{{trans('menu.policy')}}</a>
                                 </li>
                                 <li>
-                                    <a href="#">contact</a>
+                                    <a href="{{ route('contact') }}">{{trans('menu.contact')}}</a>
                                 </li>
                             </ul>
                         </div>
