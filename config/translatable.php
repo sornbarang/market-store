@@ -12,7 +12,7 @@ return [
     */
     'locales' => [
         'en' => 'English',
-        'fr' => 'Khmer',
+        'km' => 'Khmer',
     ],
 
     /*
