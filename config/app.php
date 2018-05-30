@@ -155,6 +155,7 @@ return [
         'Baum\Providers\BaumServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
