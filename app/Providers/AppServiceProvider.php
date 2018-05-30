@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Set the app locale according to the URL
         app()->setLocale($request->segment(1));
+
     }
 
     /**

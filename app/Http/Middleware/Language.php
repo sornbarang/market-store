@@ -30,6 +30,7 @@ class Language
             // Redirect to the correct url
             return redirect()->to(implode('/', $segments));
         }
+
         return $next($request);
     }
 }

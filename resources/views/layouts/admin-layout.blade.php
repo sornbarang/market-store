@@ -53,12 +53,36 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="select-menu hidden-xs hidden-sm">
+
+                    {{--<li class="select-menu hidden-xs hidden-sm">
                         <select class="select form-control country" style="display:none">
                             <option option="EN">English</option>
                             <option option="KH">Khmer</option>
                         </select>
+                    </li>--}}
+
+                    <li class="dropdown avatar-menu">
+                        <a href="javascript:void(0)" data-toggle="dropdown" aria-expanded="false">
+                            <span class="meta">
+                                <img src="{{ (app()->getLocale() == 'km') ? asset('assets/img/icons/flags/KH.png') : asset('assets/img/icons/flags/US.png') }}" alt="" class="max-w-35">
+                                <span class="name">{{ config('translatable.locales')[app()->getLocale()] }}</span>
+                                <span class="caret"></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach (config('translatable.locales') as $lang => $language)
+                                @if ($lang != app()->getLocale())
+                                    <li>
+                                        <a href="{{ route('lang.switch', $lang) }}">
+                                            <img src="{{ (app()->getLocale() != 'km') ? asset('assets/img/icons/flags/KH.png') : asset('assets/img/icons/flags/US.png') }}" alt="" class="max-w-35">
+                                            {{ $language }}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
                     </li>
+
                     <li>
                         <a href="javascript:void(0)" data-navsearch-open>
                             <i class="zmdi zmdi-search"></i>
