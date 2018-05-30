@@ -92,7 +92,9 @@
                         </div>
                         </td>
                         <td>{{ucfirst($ads->advert_category->type)}}</td>
-                        <td><a href="javascript:void(0)" class="edit-product icon"><i class="zmdi zmdi-edit"></i></a></td>
+                        <td>
+                        <a href="{{url('admin/ads/'. $ads->id .'/edit')}}" class="edit-product icon"><i class="zmdi zmdi-edit"></i></a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

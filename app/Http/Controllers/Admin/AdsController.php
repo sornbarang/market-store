@@ -19,7 +19,7 @@ class AdsController extends Controller
         $advert=Advert::get(); 
         $data['advert']=$advert;
         $view="admin.ads.index";
-        $data['active']="Advertise";
+        $data['active']="advertise";
         return view('admin.index',compact('view','data'));
     }
 
@@ -33,7 +33,7 @@ class AdsController extends Controller
         $advertCategory=AdvertCategory::get(); 
         $data['advertCategory']=$advertCategory;
         $view="admin.ads.create";
-        $data['active']="Advertise";        
+        $data['active']="advertise";        
         return view('admin.index',compact('view','data'));
     }
 
@@ -71,15 +71,22 @@ class AdsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    { 
+        $advert=Advert::find($id); 
+        $data['advert']=$advert;
+        $advertCategory=AdvertCategory::get(); 
+        $data['advertCategory']=$advertCategory;
+        $view="admin.ads.edit";
+        $data['active']="advertise";        
+        return view('admin.index',compact('view','data'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $id	
+
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)

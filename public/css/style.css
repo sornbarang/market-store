@@ -473,9 +473,12 @@ a {
 }
 
 .section--padding2 {
-  padding: 70px 0 120px;
+  padding: 70px 0 120px; 
 }
-
+.login_area.section--padding2,.signup_area.section--padding2,.pass_recover_area.section--padding2{
+  /* padding: 70px 0 120px; */
+  padding:50px !important;
+}
 .section-title {
   text-align: center;
   padding-bottom: 53px;
@@ -3346,9 +3349,9 @@ h6 {
   padding-bottom: 120px;
 }
 
-.section--padding2 {
+/* .section--padding2 {
   padding: 70px 0 120px;
-}
+} */
 
 .section-title {
   text-align: center;
@@ -4533,9 +4536,9 @@ h6 {
   padding-bottom: 120px;
 }
 
-.section--padding2 {
+/* .section--padding2 {
   padding: 70px 0 120px;
-}
+} */
 
 .section-title {
   text-align: center;
@@ -6062,9 +6065,9 @@ div#ui-datepicker-div tbody tr td a:hover {
   padding-bottom: 120px;
 }
 
-.section--padding2 {
+/* .section--padding2 {
   padding: 70px 0 120px;
-}
+} */
 
 .section-title {
   text-align: center;
