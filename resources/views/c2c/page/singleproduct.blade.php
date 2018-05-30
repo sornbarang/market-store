@@ -537,7 +537,7 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <a href="mystore"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
+                                    <a href="{{url(app()->getLocale().'/c2c/temp/mystore')}}"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
                                 </div>
 
                                 <div class="author">

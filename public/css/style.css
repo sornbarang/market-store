@@ -475,10 +475,15 @@ a {
 .section--padding2 {
   padding: 70px 0 120px; 
 }
+/* by vitou */
+.footer-big.section--padding{
+  padding:0;
+}
 .login_area.section--padding2,.signup_area.section--padding2,.pass_recover_area.section--padding2{
   /* padding: 70px 0 120px; */
   padding:50px 0 !important;
 }
+/* end by vitou */
 .section-title {
   text-align: center;
   padding-bottom: 53px;
@@ -4859,7 +4864,6 @@ h6 {
   cursor: pointer;
   text-transform: none;
 }
-
 .custom-checkbox2 label span.circle, .custom-radio label span.circle, .custom-checkbox2 .form-group p.label span.circle, .form-group .custom-checkbox2 p.label span.circle, .custom-radio .form-group p.label span.circle, .form-group .custom-radio p.label span.circle {
   height: 20px;
   margin-right: 12px;
@@ -14627,7 +14631,8 @@ span.counter {
     left: 0;
     width: 100%;
     z-index: 5;
-    height: 280px;
+    /* height: 280px; */
+    height: auto;
     background: #fff;
     padding: 0 15px;
     -webkit-box-shadow: 0 2px 20px rgba(108, 111, 115, 0.1);

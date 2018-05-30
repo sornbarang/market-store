@@ -7,6 +7,7 @@
     <div class="bg_image_holder">
         <img src="{{asset('/')}}images/hero_area_bg3.jpg" alt="">
     </div>
+    
 
     <!-- start hero-content -->
     <div class="hero-content">
@@ -324,15 +325,15 @@
                         <div class="search__field">
                             <form action="#">
                                 <div class="field-wrapper">
-                                    <input class="relative-field rounded" type="text" placeholder="Search your products">
-                                    <button class="btn btn--round" type="submit">Search</button>
+                                    <input class="relative-field rounded" type="text" placeholder="@lang('frontlabel.searchpro')">
+                                    <button class="btn btn--round" type="submit">@lang('frontlabel.search')</button>
                                 </div>
                             </form>
                         </div>
                         <div class="breadcrumb">
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li class="active"><a href="#">All Products</a></li>
+                                <li><a href="{{url(app()->getLocale().'/c2c')}}">@lang('menu.home')</a></li>
+                                <li class="active"><a href="#">@lang('frontlabel.allpro')</a></li>
                             </ul>
                         </div>
                     </div>
@@ -390,7 +391,7 @@
                             <div class="product__thumbnail">
                                 <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
                                 <div class="prod_btn">
-                                    <a href="{{url('/temp/categories')}}" class="transparent btn--sm btn--round">More Info</a>
+                                    <a href="{{url(app()->getLocale().'/c2c/temp/categories')}}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                 </div><!-- end /.prod_btn -->
                             </div><!-- end /.product__thumbnail -->
 
@@ -408,7 +409,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="more-product">
-                    <a href="all-products.html" class="btn btn--lg btn--round">All New Products</a>
+                    <a href="all-products.html" class="btn btn--lg btn--round">@lang('frontlabel.allpro')</a>
                 </div>
             </div><!-- end ./col-md-12 -->
         </div><!-- end /.row -->
@@ -433,22 +434,22 @@
                 <div class="counter mcolor2">
                     <span class="lnr lnr-briefcase"></span>
                     <span class="count">38,436</span>
-                    <p>items for sale</p>
+                    <p>@lang('frontlabel.itemssale')</p>
                 </div>
                 <div class="counter mcolor3">
                     <span class="lnr lnr-cloud-download"></span>
                     <span class="count">38,436</span>
-                    <p>total Sales</p>
+                    <p>@lang('frontlabel.totalsale')</p>
                 </div>
                 <div class="counter mcolor1">
                     <span class="lnr lnr-smile"></span>
                     <span class="count">38,436</span>
-                    <p>appy customers</p>
+                    <p>@lang('frontlabel.happycustomer')</p>
                 </div>
                 <div class="counter mcolor4">
                     <span class="lnr lnr-users"></span>
                     <span class="count">38,436</span>
-                    <p>members</p>
+                    <p>@lang('frontlabel.totalmember')</p>
                 </div>
             </div>
         </div><!-- end /.col-md-12 -->
@@ -611,9 +612,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="call-to-wrap">
-                    <h1 class="text--white">Ready to Join Our Marketplace!</h1>
-                    <h4 class="text--white">Over 25,000 designers and developers trust the MartPlace.</h4>
-                    <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">Join Us Today</a>
+                    <h1 class="text--white">@lang('frontlabel.joinourshop')</h1>
+                    <h4 class="text--white">@lang('frontlabel.memberjoin')</h4>
+                    <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">@lang('frontlabel.joinus')</a>
                 </div>
             </div>
         </div>
