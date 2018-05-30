@@ -11,6 +11,8 @@ use App\Http\Middleware\Admin;
 |
 */
 
+Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
+
 Route::get('/', function () {
     return view('page');
 });
