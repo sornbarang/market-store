@@ -8,12 +8,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page_title">
-                        <h3>Contact Us</h3>
-                        <p class="subtitle">You came to the right place</p>
+                        <h3>@lang('contact.contact')</h3>
+                        <p class="subtitle">@lang('contact.youcomerightplace')</p>
                     </div>
                     <div class="breadcrumb">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{url(app()->getLocale().'/')}}">@lang('menu.home')</a></li>
                             <li class="active"><a href="#">Affiliates</a></li>
                         </ul>
                     </div>
@@ -36,8 +36,8 @@
                         <!-- start col-md-12 -->
                         <div class="col-md-12">
                             <div class="section-title">
-                                <h1>How can We <span class="highlighted">Help?</span></h1>
-                                <p>Laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats. Lid est laborum dolo rumes fugats untras.</p>
+                                <h1>@lang('contact.howcanihelpu')</h1>
+                                <p>@lang('contact.contactdesc')</p>
                             </div>
                         </div><!-- end /.col-md-12 -->
                     </div><!-- end /.row -->
@@ -46,15 +46,15 @@
                         <div class="col-md-4">
                             <div class="contact_tile">
                                 <span class="tiles__icon lnr lnr-map-marker"></span>
-                                <h4 class="tiles__title">Office Address</h4>
-                                <div class="tiles__content"><p>202 New Hampshire Avenue , Northwest #100, New York-2573</p></div>
+                                <h4 class="tiles__title">@lang('contact.officeaddress')</h4>
+                                <div class="tiles__content"><p>@lang('contact.officeaddressdes')</p></div>
                             </div>
                         </div><!-- end /.col-md-4 -->
 
                         <div class="col-md-4">
                             <div class="contact_tile">
                                 <span class="tiles__icon lnr lnr-phone"></span>
-                                <h4 class="tiles__title">Phone Number</h4>
+                                <h4 class="tiles__title">@lang('contact.phone')</h4>
                                 <div class="tiles__content">
                                     <p>1-800-643-4500</p>
                                     <p>1-800-643-4500</p>
@@ -65,7 +65,7 @@
                         <div class="col-md-4">
                             <div class="contact_tile">
                                 <span class="tiles__icon lnr lnr-inbox"></span>
-                                <h4 class="tiles__title">Phone Number</h4>
+                                <h4 class="tiles__title">@lang('contact.emailaddress')</h4>
                                 <div class="tiles__content">
                                     <p>support@aazztech.com</p>
                                     <p>support@aazztech.com</p>
@@ -76,45 +76,39 @@
                         <div class="col-md-12">
                             <div class="contact_form cardify">
                                 <div class="contact_form__title">
-                                    <h3>Leave Your Messages</h3>
+                                    <h3>@lang('contact.leavemessage')</h3>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-8 col-md-offset-2">
+                                    <div class="col-md-8 offset-md-2">
                                         <div class="contact_form--wrapper">
                                             <form action="#">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <input type="text"  placeholder="Name">
+                                                            <input type="text"  placeholder="@lang('contact.name')">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <input type="text" placeholder="Email">
+                                                            <input type="text" placeholder="@lang('contact.emailaddress')">
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 col-md-6">
                                                         <div class="form-group">
-                                                            <input type="text" placeholder="Name">
+                                                            <input type="text" placeholder="@lang('contact.phone')">
                                                         </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <input type="text" placeholder="Email">
-                                                        </div>
-                                                    </div>
+                                                    </div> 
                                                 </div>
 
-                                                <textarea cols="30" rows="10" placeholder="Yout text here"></textarea>
+                                                <textarea cols="30" rows="10" placeholder="@lang('contact.des')"></textarea>
 
                                                 <div class="sub_btn">
-                                                    <button type="button" class="btn btn--round btn--default">Send Request</button>
+                                                    <button type="button" class="btn btn--round btn--default">@lang('contact.sent')</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -135,22 +129,7 @@
     <!--================================
         START CALL TO ACTION AREA
     =================================-->
-    <section class="call-to-action bgimage">
-        <div class="bg_image_holder">
-            <img src="{{asset('/')}}images/calltobg.jpg" alt="">
-        </div>
-        <div class="container content_above">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="call-to-wrap">
-                        <h1 class="text--white">Ready to Join Our Marketplace!</h1>
-                        <h4 class="text--white">Over 25,000 designers and developers trust the MartPlace.</h4>
-                        <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">Join Us Today</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('elements.joinshop')
     <!--================================
         END CALL TO ACTION AREA
     =================================-->

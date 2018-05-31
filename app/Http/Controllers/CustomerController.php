@@ -13,7 +13,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customer.dashboard');
+        $data['breadcrub']='dashboard';
+        return view('customer.dashboard',compact('data'));
     }
     /**
      * Display a listing of the store of user.
@@ -22,7 +23,9 @@ class CustomerController extends Controller
      */
     public function myStore()
     {
-        return view('customer.store');
+
+        $data['breadcrub']='store';
+        return view('customer.store',compact('data'));
     }
     /**
      * setting of user.
@@ -31,7 +34,8 @@ class CustomerController extends Controller
      */
     public function mySetting()
     {
-        return view('customer.setting');
+        $data['breadcrub']='setting';
+        return view('customer.setting',compact('data'));
     }
     /**
      * Show the form for creating a new resource.
@@ -106,7 +110,8 @@ class CustomerController extends Controller
      */
     public function myProfile()
     {
-        return view('customer.profile');
+        $data['breadcrub']='profile';
+        return view('customer.profile',compact('data'));
     }
     /**
      * User's card
@@ -116,7 +121,8 @@ class CustomerController extends Controller
      */
     public function myCart()
     {
-        return view('customer.cart');
+        $data['breadcrub']='purchase';
+        return view('customer.cart',compact('data'));
     }
     /**
      * User's card
@@ -126,7 +132,8 @@ class CustomerController extends Controller
      */
     public function myFavorite()
     {
-        return view('customer.favorite');
+        $data['breadcrub']='favourite';
+        return view('customer.favorite',compact('data'));
     }
     /**
      * User's sale management
@@ -136,7 +143,8 @@ class CustomerController extends Controller
      */
     public function mySaleManagement()
     {
-        return view('customer.sale-management');
+        $data['breadcrub']='sale manangement';
+        return view('customer.sale-management',compact('data'));
     }
     /**
      * User's card
@@ -146,7 +154,8 @@ class CustomerController extends Controller
      */
     public function myItemUpload()
     {
-        return view('customer.item-upload');
+        $data['breadcrub']='upload item';
+        return view('customer.item-upload',compact('data'));
     }
     /**
      * User's card
@@ -156,7 +165,8 @@ class CustomerController extends Controller
      */
     public function myManageItem()
     {
-        return view('customer.manage-item');
+        $data['breadcrub']='manage items';
+        return view('customer.manage-item',compact('data'));
     }
     /**
      * User's card
@@ -166,6 +176,7 @@ class CustomerController extends Controller
      */
     public function myEditItem()
     {
-        return view('customer.edit-item');
+        $data['breadcrub']='update item';
+        return view('customer.edit-item',compact('data'));
     }
 }

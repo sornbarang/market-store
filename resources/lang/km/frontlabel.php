@@ -22,6 +22,13 @@ return [
     'totalsale'=>'ផលិតផលលក់បានទាំងអស់',
     'happycustomer'=>'អនុវត្តអតិថិជន',
     'totalmember'=>'អតិថិជន',
-    'moreinfo'=>'ផលិតផលលំអិត'
+    'moreinfo'=>'លំអិត',
+    'proinfo'=>'ព័រមានរបស់អតិធិជន',
+    'viewprofile'=>'មើលប្រវត្តិរូប',      
+    'sentmessage'=>'ផ្ញើសារ', 
+    'moreitems'=>'ច្រើនទៀតដោយ',      
+    'favourites'=>'ចូលចិត្ត',      
+    'comments'=>'យោបល់',      
+    'views'=>'មើល'      
 
 ];

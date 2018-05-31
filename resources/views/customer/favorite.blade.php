@@ -3,21 +3,8 @@
 <!--================================
         START BREADCRUMB AREA
     =================================-->
-    <section class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumb">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li class="active"><a href="#">Favorites</a></li>
-                        </ul>
-                    </div>
-                    <h1 class="page-title">Your Favourites</h1>
-                </div><!-- end /.col-md-12 -->
-            </div><!-- end /.row -->
-        </div><!-- end /.container -->
-    </section>
+    @include('elements.customer-breadcrumb')
+    
     <!--================================
         END BREADCRUMB AREA
     =================================-->
@@ -25,27 +12,40 @@
     <!--================================
         START FILTER AREA
     =================================-->
+    @include('elements.customer-menu')    
     <div class="filter-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="filter-bar filter-bar3">
                         <div class="filter__option filter--text pull-left">
-                            <p><span>570</span> Items</p>
+                            <p>
+                                <span>570</span> Items</p>
                         </div>
 
                         <div class="pull-right">
                             <div class="filter__option filter--dropdown">
-                                <a href="#" id="drop2" class="dropdown-trigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Filter By <span class="lnr lnr-chevron-down"></span>
+                                <a href="#" id="drop2" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Filter By
+                                    <span class="lnr lnr-chevron-down"></span>
                                 </a>
 
-                                <ul class="dropdown dropdown-menu" aria-labelledby="drop2">
-                                    <li><a href="#">Trending items</a></li>
-                                    <li><a href="#">Popular items</a></li>
-                                    <li><a href="#">New items </a></li>
-                                    <li><a href="#">Best seller </a></li>
-                                    <li><a href="#">Best rating </a></li>
+                                <ul class="custom_dropdown dropdown-menu" aria-labelledby="drop2">
+                                    <li>
+                                        <a href="#">Trending items</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Popular items</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">New items </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Best seller </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Best rating </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="filter__option filter--select">
@@ -68,11 +68,17 @@
                                 </div>
                             </div>
                             <div class="filter__option filter--layout">
-                                <div class="svg-icon"><img class="svg" src="{{asset('/')}}images/svg/grid.svg" alt="it's just a layout control folks!"></div>
-                                <div class="svg-icon"><img class="svg" src="{{asset('/')}}images/svg/list.svg" alt="it's just a layout control folks!"></div>
+                                <div class="svg-icon">
+                                    <img class="svg" src="{{asset('/')}}images/svg/grid.svg" alt="it's just a layout control folks!">
+                                </div>
+                                <div class="svg-icon">
+                                    <img class="svg" src="{{asset('/')}}images/svg/list.svg" alt="it's just a layout control folks!">
+                                </div>
                             </div>
-                        </div><!-- end /.pull-right -->
-                    </div><!-- end filter-bar -->
+                        </div>
+                        <!-- end /.pull-right -->
+                    </div>
+                    <!-- end filter-bar -->
                 </div><!-- end /.col-md-12 -->
             </div><!-- end filter-bar -->
         </div>
@@ -158,22 +164,7 @@
     <!--================================
         START CALL TO ACTION AREA
     =================================-->
-    <section class="call-to-action bgimage">
-        <div class="bg_image_holder">
-            <img src="{{asset('/')}}images/calltobg.jpg" alt="">
-        </div>
-        <div class="container content_above">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="call-to-wrap">
-                        <h1 class="text--white">Ready to Join Our Marketplace!</h1>
-                        <h4 class="text--white">Over 25,000 designers and developers trust the MartPlace.</h4>
-                        <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">Join Us Today</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('elements.joinshop')
     <!--================================
         END CALL TO ACTION AREA
     =================================-->

@@ -22,6 +22,12 @@ return [
     'totalsale'=>'Total sales',
     'happycustomer'=>'Appy customers',
     'totalmember'=>'Members',
-    'moreinfo'=>'More Info'
+    'moreinfo'=>'More Info',
+    'proinfo'=>'Product Information',   
+    'viewprofile'=>'View profile', 
+    'moreitems'=>'More Items by',
+    'favourites'=>'Favourites',      
+    'comments'=>'Comments',      
+    'views'=>'Views'
 
 ];

@@ -41,7 +41,7 @@
 
                             <div class="form-group">
                                 <label for="urname">@lang('authlabel.name')</label>
-                                <input id="name" type="text" class="text_field form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="Enter your name...">
+                                <input id="name" type="text" class="text_field form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="@lang('authlabel.name')">
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback">
@@ -52,7 +52,7 @@
 
                             <div class="form-group">
                                 <label for="email_ad">@lang('authlabel.email')</label>
-                                <input id="email" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="Enter your email address">
+                                <input id="email" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="@lang('authlabel.emailplaceholder')">
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
@@ -92,7 +92,7 @@
                             <button class="btn btn--md btn--round register_btn" type="submit">@lang('authlabel.register')</button>
 
                             <div class="login_assist">
-                                <p>@lang('authlabel.noaccount') <a href="{{url('login')}}">@lang('authlabel.login')</a></p>
+                                <p>@lang('authlabel.noaccount') <a href="{{url( app()->getLocale().'/login')}}">@lang('authlabel.login')</a></p>
                             </div>
                         </div><!-- end .login--form -->
                     </div><!-- end .cardify -->

@@ -16,6 +16,7 @@ return [
     'login' => 'Login',
     'phone' => 'Phone Number',
     'address' => 'Address',
+    'addressplaceholder' => 'Enter your address...',
     'usrplaceholder' => 'Enter your username...', 
     'phoneplaceholder' => 'Enter your phone number...', 
     'passplaceholder' => 'Enter your password...', 

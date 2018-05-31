@@ -9,11 +9,11 @@
                 <div class="col-md-12">
                     <div class="breadcrumb">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="index.html">@lang('menu.home')</a></li>
+                            <li><a href="dashboard.html">@lang('profile.dashboard')</a></li>
                         </ul>
                     </div>
-                    <h1 class="page-title">Author's Dashboard</h1>
+                    <h1 class="page-title">Author's @lang('profile.dashboard')</h1>
                 </div><!-- end /.col-md-12 -->
             </div><!-- end /.row -->
         </div><!-- end /.container -->
@@ -26,24 +26,7 @@
             START DASHBOARD AREA
     =================================-->
     <section class="dashboard-area">
-        <div class="dashboard_menu_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="dashboard_menu">
-                            <li class="active"><a href="dashboard.html"><span class="lnr lnr-home"></span>Dashboard</a></li>
-                            <li><a href="dashboard-setting.html"><span class="lnr lnr-cog"></span>Setting</a></li>
-                            <li><a href="dashboard-purchase.html"><span class="lnr lnr-cart"></span>Purchase</a></li>
-                            <li><a href="dashboard-add-credit.html"><span class="lnr lnr-dice"></span>Add Credits</a></li>
-                            <li><a href="dashboard-statement.html"><span class="lnr lnr-chart-bars"></span>Statements</a></li>
-                            <li><a href="dashboard-upload.html"><span class="lnr lnr-upload"></span>Upload Items</a></li>
-                            <li><a href="dashboard-manage-item.html"><span class="lnr lnr-briefcase"></span>Manage Items</a></li>
-                            <li><a href="dashboard-withdrawal.html"><span class="lnr lnr-briefcase"></span>Withdrawals</a></li>
-                        </ul><!-- end /.dashboard_menu -->
-                    </div><!-- end /.col-md-12 -->
-                </div><!-- end /.row -->
-            </div><!-- end /.container -->
-        </div><!-- end /.dashboard_menu_area -->
+        @include('elements.customer-menu')
 
         <div class="dashboard_contents">
             <div class="container">
@@ -731,6 +714,7 @@
             </div><!-- end /.container -->
         </div><!-- end /.dashboard_menu_area -->
     </section>
+    @include('elements.customer-menu')
     <!--================================
             END DASHBOARD AREA
     =================================-->
