@@ -21,9 +21,10 @@ return [
     'emailaddress' => 'Email Address', 
     'password' => 'Password', 
     'conpass' => 'Confirm password', 
-    'Website' => 'Website', 
+    'website' => 'Website', 
     'country' => 'Country', 
     'profilehead' => 'Profile Heading', 
+    'company' => 'Company name', 
     'authbio' => 'Author Bio', 
     'bilinginfo' => 'Biling Information', 
     'firstname' => 'First name', 
@@ -34,5 +35,8 @@ return [
     'zipcode' => 'Zip / Postal Code', 
     'profileimage' => 'Profile Image', 
     'coverimage' => 'Cover Image', 
-    'socialprofiles ' => 'Social Profiles', 
+    'socialprofile' => 'Social Profiles', 
+    'savechange' => 'Save change', 
+    'button'=>'Browse',
+    'selectone'=>'Select one'
 ];
