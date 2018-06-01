@@ -3,22 +3,7 @@
 <!--================================
         START BREADCRUMB AREA
     =================================-->
-    <section class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumb">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="dashboard.html">Manage Item</a></li>
-                            <li class="active"><a href="#">Edit Item</a></li>
-                        </ul>
-                    </div>
-                    <h1 class="page-title">Edit MartPlace Extension Bundle</h1>
-                </div><!-- end /.col-md-12 -->
-            </div><!-- end /.row -->
-        </div><!-- end /.container -->
-    </section>
+    @include('elements.customer-breadcrumb')
     <!--================================
         END BREADCRUMB AREA
     =================================-->
@@ -26,6 +11,7 @@
     <!--================================
             START DASHBOARD AREA
     =================================-->
+    @include('elements.customer-menu')
     <section class="dashboard-area">
         <div class="dashboard_contents">
             <div class="container">
@@ -435,22 +421,7 @@
     <!--================================
         START CALL TO ACTION AREA
     =================================-->
-    <section class="call-to-action bgimage">
-        <div class="bg_image_holder">
-            <img src="{{asset('/')}}images/calltobg.jpg" alt="">
-        </div>
-        <div class="container content_above">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="call-to-wrap">
-                        <h1 class="text--white">Ready to Join Our Marketplace!</h1>
-                        <h4 class="text--white">Over 25,000 designers and developers trust the MartPlace.</h4>
-                        <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">Join Us Today</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('elements.joinshop')
     <!--================================
         END CALL TO ACTION AREA
     =================================-->

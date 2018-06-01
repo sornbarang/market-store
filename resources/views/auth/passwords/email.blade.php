@@ -38,16 +38,13 @@
                         @csrf
                         <div class="cardify recover_pass">
                             <div class="login--header">
-                                <p>Please enter the email address for your account. A verification
-                                    code will be sent to you. Once you have received the
-                                    verification code, you will be able to choose a new password
-                                    for your account.</p>
+                                <p>@lang('authlabel.resetinfo')</p>
                             </div><!-- end .login_header -->
 
                             <div class="login--form">
                                 <div class="form-group">
-                                    <label for="email_ad">Email Address</label>
-                                    <input id="email_ad" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="Enter your email address">
+                                    <label for="email_ad">@lang('authlabel.email')</label>
+                                    <input id="email_ad" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="@lang('authlabel.emailplaceholder')">
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -55,7 +52,7 @@
                                     @endif
                                 </div>
 
-                                <button class="btn btn--md btn--round register_btn" type="submit">Register Now</button>
+                                <button class="btn btn--md btn--round register_btn" type="submit">@lang('authlabel.register')</button>
                             </div><!-- end .login--form -->
                         </div><!-- end .cardify -->
                     </form>

@@ -9,11 +9,11 @@
                 <div class="col-md-12">
                     <div class="breadcrumb">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li class="active"><a href="#">Login</a></li>
+                            <li><a href="index.html">@lang('authlabel.home')</a></li>
+                            <li class="active"><a href="#">@lang('authlabel.login')</a></li>
                         </ul>
                     </div>
-                    <h1 class="page-title">Login</h1>
+                    <h1 class="page-title">@lang('authlabel.login')</h1>
                 </div><!-- end /.col-md-12 -->
             </div><!-- end /.row -->
         </div><!-- end /.container -->
@@ -32,13 +32,13 @@
                 @csrf
                     <div class="cardify login">
                         <div class="login--header">
-                            <h3>Welcome Back</h3>
-                            <p>You can sign in with your username</p>
+                            <h3>@lang('authlabel.welcomeback')</h3>
+                            <p>@lang('authlabel.signwusr')</p>
                         </div><!-- end .login_header -->
 
                         <div class="login--form">
                             <div class="form-group">
-                                <label for="user_name">Username</label>
+                                <label for="user_name">@lang('authlabel.username')</label>
                                 <input id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Enter your username..." name="email" value="{{ old('email') }}" required autofocus>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="pass">Password</label>
+                                <label for="pass">@lang('authlabel.password')</label>
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -61,11 +61,11 @@
                             <div class="form-group">
                                 <div class="custom_checkbox">
                                     <input type="checkbox" name="remember" id="ch2" {{ old('remember') ? 'checked' : '' }}>
-                                    <label for="ch2"><span class="shadow_checkbox"></span><span class="label_text">Remember me</span></label>
+                                    <label for="ch2"><span class="shadow_checkbox"></span><span class="label_text">@lang('authlabel.remember')</span></label>
                                 </div>
                             </div>
 
-                            <button class="btn btn--md btn--round" type="submit">Login Now</button>
+                            <button class="btn btn--md btn--round" type="submit">@lang('authlabel.login')</button>
                             <!-- <div class="form-group"> -->
                                 <div class="social social--color--filled login_assist">
                                     <ul>
@@ -75,8 +75,8 @@
                                 </div>
                             <!-- </div> -->
                             <div class="login_assist">
-                                <p class="recover">Lost your <a href="{{ route('password.request') }}">username</a> or <a href="{{ route('password.request') }}">password</a>?</p>
-                                <p class="signup">Don't have an <a href="{{url('register')}}">account</a>?</p>
+                                <p class="recover">@lang('authlabel.lost') <a href="{{ route('password.request') }}"> > @lang('authlabel.username')</a> @lang('authlabel.or') <a href="{{ route('password.request') }}">>@lang('authlabel.password')</a>?</p>
+                                <p class="signup">@lang('authlabel.dont') <a href="{{route('register')}}"> > @lang('authlabel.account')</a>?</p>
                             </div>
                         </div><!-- end .login--form -->
                     </div><!-- end .cardify -->

@@ -24,7 +24,15 @@
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/trumbowyg.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    @if( app()->getLocale()=='km')
+        <link href="https://fonts.googleapis.com/css?family=Kantumruy:400" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style-kh.css') }}">
+    @else
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @endif 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.css">
     <!-- endinject -->
 
     <!-- Favicon -->
@@ -49,6 +57,7 @@
                         <a href="/">
                             <img src="{{asset('/')}}images/logo.png" alt="logo image" class="img-fluid">
                         </a>
+                        
                     </div>
                 </div>
                 <!-- end /.col-md-3 -->
@@ -68,11 +77,35 @@
                                     @csrf
                                 </form>
                             @else
-                                <a href="{{route('login')}}" class="author-area__seller-btn inline">Login</a>
-                            @endauth 
+                                <a href="{{route('login')}}" class="author-area__seller-btn inline">@lang('authlabel.login')</a> 
+                                @endauth 
                         @endif
-                        
-
+                            <div class="inline">
+                                <div class="has_dropdown">
+                                    <button class="btn btn--icon btn-sm btn-info">
+                                    @if( app()->getLocale()=='km')
+                                        <span class="flag-icon flag-icon-kh"></span>
+                                    @else
+                                        <span class="flag-icon flag-icon-gb"></span>
+                                    @endif 
+                                        {{ config('translatable.locales')[app()->getLocale()] }}</button>
+                                    <div class="dropdown dropdown--author">
+                                        <ul>
+                                            @foreach (config('translatable.locales') as $lang => $language)
+                                                @if ($lang != app()->getLocale())  
+                                                    <li><a href="{{ route('lang.switch', $lang) }}">
+                                                    @if( $lang=='km')
+                                                        <span class="flag-icon flag-icon-kh"></span>
+                                                    @else
+                                                        <span class="flag-icon flag-icon-gb"></span>
+                                                    @endif{{ $language }}</a>
+                                                    </li>
+                                                @endif
+                                            @endforeach  
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         <div class="author__notification_area">
                             <ul>
                                 {{--<li class="has_dropdown">
@@ -399,51 +432,43 @@
                                         <div class="dropdown dropdown--author">
                                             <ul>
                                                 <li>
-                                                    <a href="{{url('/c2c/temp/myprofile')}}">
-                                                        <span class="lnr lnr-user"></span>Profile</a>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/myprofile')}}">
+                                                        <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="dashboard.html">
-                                                        <span class="lnr lnr-home"></span> Dashboard</a>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/customer')}}">
+                                                        <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url('/c2c/temp/mysetting')}}">
-                                                        <span class="lnr lnr-cog"></span> Setting</a>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/mysetting')}}">
+                                                        <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url('/c2c/temp/mycard')}}">
-                                                        <span class="lnr lnr-cart"></span>Purchases</a>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/mycart')}}">
+                                                        <span class="lnr lnr-cart"></span>@lang('profile.purchase')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url('/c2c/temp/myfavorite')}}">
-                                                        <span class="lnr lnr-heart"></span> Favourite</a>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/myfavorite')}}">
+                                                        <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">
-                                                        <span class="lnr lnr-dice"></span>Add Credits</a>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/mysale')}}">
+                                                        <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url('/c2c/temp/mysale')}}">
-                                                        <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/myitemupload')}}">
+                                                        <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url('/c2c/temp/myitemupload')}}">
-                                                        <span class="lnr lnr-upload"></span>Upload Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{url('/c2c/temp/mymanageitem')}}">
-                                                        <span class="lnr lnr-book"></span>Manage Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="lnr lnr-briefcase"></span>Withdrawals</a>
-                                                </li>
+                                                    <a href="{{url(app()->getLocale().'/market/temp/mymanageitem')}}">
+                                                        <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
+                                                </li> 
                                                 @if (Route::has('login'))
                                                     @auth
                                                         @hasrole('admin')
                                                         <li>
                                                             <a href="{{route('admin')}}">
-                                                                <span class="lnr lnr-briefcase"></span>Back office</a>
+                                                                <span class="lnr lnr-briefcase"></span>@lang('profile.backoffice')</a>
                                                         </li>
                                                         @endhasrole
                                                     @endauth 
@@ -452,7 +477,7 @@
                                                     <a class="lnr lnr-exit" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                                        Logout
+                                                        @lang('profile.logout')
                                                     </a>
 
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -470,8 +495,34 @@
                     <!-- end .author-area -->
 
                     <!-- author area restructured for mobile -->
-                    <div class="mobile_content ">
-                        <span class="lnr lnr-user menu_icon"></span>
+                    <div class="mobile_content " style="display: inline-block;float: right;">
+                        <div class="inline customerswitch" style="line-height:60px;">
+                            <button id="drop2" class="btn btn--icon btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                @if( app()->getLocale()=='km')
+                                    <span class="flag-icon flag-icon-kh"></span>
+                                @else
+                                    <span class="flag-icon flag-icon-gb"></span>
+                                @endif
+                                        </button>
+
+                            <ul class="custom_dropdown messaging_dropdown dropdown-menu" aria-labelledby="drop2">
+                                @foreach (config('translatable.locales') as $lang => $language)
+                                    @if ($lang != app()->getLocale())  
+                                        <li>
+                                            <a href="{{ route('lang.switch', $lang) }}">
+                                                @if( $lang=='km')
+                                                    <span class="flag-icon flag-icon-kh" style="float: left; top: 8px;margin-right: 5px;"></span>
+                                                @else
+                                                    <span class="flag-icon flag-icon-kh" style="float: left; top: 8px;margin-right: 5px;"></span>
+                                                @endif
+                                                    {{ $language }}
+                                            </a>    
+                                        </li>  
+                                    @endif
+                                @endforeach 
+                            </ul>
+                        </div>
+                        <span class="lnr lnr-user menu_icon" style="margin-left:5px;"></span>
 
                         <!-- offcanvas menu -->
                         <div class="offcanvas-menu closed">
@@ -532,51 +583,43 @@
                                     <div class="dropdown dropdown--author">
                                         <ul>
                                             <li>
-                                                <a href="{{url('/c2c/temp/myprofile')}}">
-                                                    <span class="lnr lnr-user"></span>Profile</a>
+                                                <a href="{{url(app()->getLocale().'/market/temp/myprofile')}}">
+                                                    <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                             </li>
                                             <li>
-                                                <a href="dashboard.html">
-                                                    <span class="lnr lnr-home"></span> Dashboard</a>
+                                                <a href="{{url(app()->getLocale().'/market/temp/customer')}}">
+                                                    <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
                                             </li>
                                             <li>
-                                                <a href="{{url('/c2c/temp/mysetting')}}">
-                                                    <span class="lnr lnr-cog"></span> Setting</a>
+                                                <a href="{{url(app()->getLocale().'/market/temp/mysetting')}}">
+                                                    <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
                                             </li>
                                             <li>
-                                                <a href="{{url('/c2c/temp/mycard')}}">
-                                                    <span class="lnr lnr-cart"></span>Purchases</a>
+                                                <a href="{{url(app()->getLocale().'/market/temp/mycart')}}">
+                                                    <span class="lnr lnr-cart"></span>@lang('profile.puchase')</a>
                                             </li>
                                             <li>
-                                                <a href="{{url('/c2c/temp/myfavorite')}}">
-                                                    <span class="lnr lnr-heart"></span> Favourite</a>
+                                                <a href="{{url(app()->getLocale().'/market/temp/myfavorite')}}">
+                                                    <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
                                             </li>
                                             <li>
-                                                <a href="#">
-                                                    <span class="lnr lnr-dice"></span>Add Credits</a>
+                                                <a href="{{url(app()->getLocale().'/market/temp/mysale')}}">
+                                                    <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
                                             </li>
                                             <li>
-                                                <a href="{{url('/c2c/temp/mysale')}}">
-                                                    <span class="lnr lnr-chart-bars"></span>Sale Statement</a>
+                                                <a href="{{url(app()->getLocale().'/market/temp/myitemupload')}}">
+                                                    <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
                                             </li>
                                             <li>
-                                                <a href="{{url('/c2c/temp/myitemupload')}}">
-                                                    <span class="lnr lnr-upload"></span>Upload Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url('/c2c/temp/mymanageitem')}}">
-                                                    <span class="lnr lnr-book"></span>Manage Item</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span class="lnr lnr-briefcase"></span>Withdrawals</a>
-                                            </li>
+                                                <a href="{{url(app()->getLocale().'/market/temp/mymanageitem')}}">
+                                                    <span class="lnr lnr-book"></span>@lang('profile.manangeitems')</a>
+                                            </li> 
                                             <li>
                                                 @if (Route::has('login'))
                                                     @auth
                                                         @hasrole('admin')
                                                             <li>
-                                                                <a href="{{route('admin')}}"><span class="lnr lnr-briefcase"></span>Back office</a>
+                                                                <a href="{{route('admin')}}"><span class="lnr lnr-briefcase"></span>@lang('profile.backoffice')</a>
                                                             </li>
                                                         @endhasrole
                                                     @endauth
@@ -584,7 +627,7 @@
                                             </li>
                                             <li>
                                                 <a class="lnr lnr-exit" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                    Logout
+                                                @lang('profile.logout')
                                                 </a>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                     @csrf
@@ -594,7 +637,7 @@
                                     </div>
                                     @else
                                         <div class="text-center">
-                                            <a href="{{route('login')}}" class="author-area__seller-btn inline">Become a member</a>
+                                            <a href="{{route('login')}}" class="author-area__seller-btn inline">@lang('authlabel.login')</a>
                                         </div>
                                     @endauth
                                 @endif
@@ -623,7 +666,7 @@
                         <div class="mainmenu__search">
                             <form action="#">
                                 <div class="searc-wrap">
-                                    <input type="text" placeholder="Search product">
+                                    <input type="text" placeholder="@lang('frontlabel.search')">
                                     <button type="submit" class="search-wrap__btn">
                                         <span class="lnr lnr-magnifier"></span>
                                     </button>
@@ -642,7 +685,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="has_dropdown">
-                                    <a href="index.html">HOME</a>
+                                    <a href="index.html">@lang('menu.home')</a>
                                     <div class="dropdown dropdown--menu">
                                         <ul>
                                             <li>
@@ -687,92 +730,98 @@
     START FOOTER AREA
 =================================-->
 <footer class="footer-area">
-    {{--<div class="footer-big section--padding">
-        <!-- start .container -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="info-footer">
-                        <div class="info__logo">
-                            <img src="{{asset('/')}}images/flogo.png" alt="footer logo">
-                        </div>
-                        <p class="info--text">Nunc placerat mi id nisi interdum they mollis. Praesent pharetra, justo ut scel erisque the mattis, leo quam.</p>
-                        <ul class="info-contact">
-                            <li>
-                                <span class="lnr lnr-phone info-icon"></span>
-                                <span class="info">Phone: +6789-875-2235</span>
-                            </li>
-                            <li>
-                                <span class="lnr lnr-envelope info-icon"></span>
-                                <span class="info">support@aazztech.com</span>
-                            </li>
-                            <li>
-                                <span class="lnr lnr-map-marker info-icon"></span>
-                                <span class="info">202 New Hampshire Avenue Northwest #100, New York-2573</span>
-                            </li>
-                        </ul>
-                    </div><!-- end /.info-footer -->
-                </div><!-- end /.col-md-3 -->
+    <!-- hidden footer all auth route -->
+@php
+    $name = Route::currentRouteName();
+@endphp 
+@if($name !='login' && $name !='password.request' && $name !='password.request' && $name !='register')
+<div class="footer-big section--padding">
+    <!-- start .container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="info-footer">
+                    <div class="info__logo">
+                        <img src="{{asset('/')}}images/flogo.png" alt="footer logo">
+                    </div>
+                    <p class="info--text">Nunc placerat mi id nisi interdum they mollis. Praesent pharetra, justo ut scel erisque the mattis, leo quam.</p>
+                    <ul class="info-contact">
+                        <li>
+                            <span class="lnr lnr-phone info-icon"></span>
+                            <span class="info">Phone: +6789-875-2235</span>
+                        </li>
+                        <li>
+                            <span class="lnr lnr-envelope info-icon"></span>
+                            <span class="info">support@aazztech.com</span>
+                        </li>
+                        <li>
+                            <span class="lnr lnr-map-marker info-icon"></span>
+                            <span class="info">202 New Hampshire Avenue Northwest #100, New York-2573</span>
+                        </li>
+                    </ul>
+                </div><!-- end /.info-footer -->
+            </div><!-- end /.col-md-3 -->
 
-                <div class="col-md-5 col-sm-6">
-                    <div class="footer-menu">
-                        <h4 class="footer-widget-title text--white">Our Company</h4>
+            <div class="col-md-5 col-sm-6">
+                <div class="footer-menu">
+                    <h4 class="footer-widget-title text--white">Our Company</h4>
+                    <ul>
+                        <li><a href="#">How to Join Us</a></li>
+                        <li><a href="#">How It Work</a></li>
+                        <li><a href="#">Buying and Selling</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Copyright Notice</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Affiliates</a></li>
+                    </ul>
+                </div><!-- end /.footer-menu -->
+
+                <div class="footer-menu">
+                    <h4 class="footer-widget-title text--white">Help and FAQs</h4>
+                    <ul>
+                        <li><a href="#">How to Join Us</a></li>
+                        <li><a href="#">How It Work</a></li>
+                        <li><a href="#">Buying and Selling</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Copyright Notice</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Affiliates</a></li>
+                    </ul>
+                </div><!-- end /.footer-menu -->
+            </div><!-- end /.col-md-5 -->
+
+            <div class="col-md-4 col-sm-12">
+                <div class="newsletter">
+                    <h4 class="footer-widget-title text--white">Newsletter</h4>
+                    <p>Subscribe to get the latest news, update and offer information. Don't worry, we won't send spam!</p>
+                    <div class="newsletter__form">
+                        <form action="#">
+                            <div class="field-wrapper">
+                                <input class="relative-field rounded" type="text" placeholder="Enter email">
+                                <button class="btn btn--round" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- start .social -->
+                    <div class="social social--color--filled">
                         <ul>
-                            <li><a href="#">How to Join Us</a></li>
-                            <li><a href="#">How It Work</a></li>
-                            <li><a href="#">Buying and Selling</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Copyright Notice</a></li>
-                            <li><a href="#">Refund Policy</a></li>
-                            <li><a href="#">Affiliates</a></li>
+                            <li><a href="#"><span class="fa fa-facebook"></span></a></li>
+                            <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                            <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
+                            <li><a href="#"><span class="fa fa-pinterest"></span></a></li>
+                            <li><a href="#"><span class="fa fa-linkedin"></span></a></li>
+                            <li><a href="#"><span class="fa fa-dribbble"></span></a></li>
                         </ul>
-                    </div><!-- end /.footer-menu -->
-
-                    <div class="footer-menu">
-                        <h4 class="footer-widget-title text--white">Help and FAQs</h4>
-                        <ul>
-                            <li><a href="#">How to Join Us</a></li>
-                            <li><a href="#">How It Work</a></li>
-                            <li><a href="#">Buying and Selling</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Copyright Notice</a></li>
-                            <li><a href="#">Refund Policy</a></li>
-                            <li><a href="#">Affiliates</a></li>
-                        </ul>
-                    </div><!-- end /.footer-menu -->
-                </div><!-- end /.col-md-5 -->
-
-                <div class="col-md-4 col-sm-12">
-                    <div class="newsletter">
-                        <h4 class="footer-widget-title text--white">Newsletter</h4>
-                        <p>Subscribe to get the latest news, update and offer information. Don't worry, we won't send spam!</p>
-                        <div class="newsletter__form">
-                            <form action="#">
-                                <div class="field-wrapper">
-                                    <input class="relative-field rounded" type="text" placeholder="Enter email">
-                                    <button class="btn btn--round" type="submit">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <!-- start .social -->
-                        <div class="social social--color--filled">
-                            <ul>
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                                <li><a href="#"><span class="fa fa-pinterest"></span></a></li>
-                                <li><a href="#"><span class="fa fa-linkedin"></span></a></li>
-                                <li><a href="#"><span class="fa fa-dribbble"></span></a></li>
-                            </ul>
-                        </div>
-                        <!-- end /.social -->
-                    </div><!-- end /.newsletter -->
-                </div><!-- end /.col-md-4 -->
-            </div><!-- end /.row -->
-        </div><!-- end /.container -->
-    </div--}}<!-- end /.footer-big -->
-
+                    </div>
+                    <!-- end /.social -->
+                </div><!-- end /.newsletter -->
+            </div><!-- end /.col-md-4 -->
+        </div><!-- end /.row -->
+    </div><!-- end /.container -->
+</div>
+<!-- endfooterbig -->
+@endif 
     <div class="mini-footer">
             <div class="container">
                 <div class="row">
@@ -797,6 +846,8 @@
 
 <!-- inject:js -->
 <script src="{{ asset('js/vendor/jquery/jquery-1.12.3.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
 <script src="{{ asset('js/vendor/jquery/uikit.min.js') }}"></script>
 <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/vendor/chart.bundle.min.js') }}"></script>

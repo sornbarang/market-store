@@ -12,7 +12,14 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'ព័ត៌មានអត្តសញ្ញាណទាំងនេះមិនត្រូវគ្នានឹងកំណត់ត្រារបស់យើងទេ។',
-    'throttle' => 'មានការប៉ុនប៉ងចូលច្រើនពេក។ សូមព្យាយាមម្តងទៀតនៅ :seconds វិនាទី។'
+    'profile' => 'Profile',
+    'dashboard' => 'Dashboard',
+    'setting' => 'Setting', 
+    'purchase' => 'Purchase',
+    'favourite' => 'Favourite',
+    'salemanage' => 'Sale statement',
+    'uploaditems' => 'Uplaod Items',
+    'manageitems' => 'Manage Item',
+    'logout' => 'Logout',
+    'backoffice' => 'Back office',
 ];

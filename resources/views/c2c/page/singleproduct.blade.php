@@ -491,17 +491,17 @@
                             <ul class="data">
                                 <li>
                                     <p>
-                                        <span class="lnr lnr-heart scolor"></span>Favorites</p>
+                                        <span class="lnr lnr-heart scolor"></span>@lang('frontlabel.favourites')</p>
                                     <span>240</span>
                                 </li>
                                 <li>
                                     <p>
-                                        <span class="lnr lnr-bubble mcolor3"></span>Comments</p>
+                                        <span class="lnr lnr-bubble mcolor3"></span>@lang('frontlabel.comments')</p>
                                     <span>35</span>
                                 </li>
                                 <li>
                                     <p>
-                                        <span class="lnr lnr-eye mcolor4"></span>Views</p>
+                                        <span class="lnr lnr-eye mcolor4"></span>@lang('frontlabel.views')</p>
                                     <span>6,589</span>
                                 </li>
                             </ul>
@@ -532,12 +532,12 @@
 
                         <div class="author-card sidebar-card ">
                             <div class="card-title">
-                                <h4>Product Information</h4>
+                                <h4>@lang('frontlabel.proinfo')</h4>
                             </div>
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <a href="mystore"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
+                                    <a href="{{url(app()->getLocale().'/market/temp/mystore')}}"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
                                 </div>
 
                                 <div class="author">
@@ -554,8 +554,8 @@
                                 </div><!-- end /.social -->
 
                                 <div class="author-btn">
-                                    <a href="#" class="btn btn--sm btn--round">View Profile</a>
-                                    <a href="#" class="btn btn--sm btn--round">Send Message</a>
+                                    <a href="#" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
+                                    <a href="#" class="btn btn--sm btn--round">@lang('frontlabel.sentmessage')</a>
                                 </div><!-- end /.author-btn -->
                             </div><!-- end /.author-infos -->
 
@@ -579,7 +579,7 @@
                 <!-- start col-md-12 -->
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h1>More Items <span class="highlighted">by Aazztech</span></h1>
+                        <h1>@lang('frontlabel.moreitems') <span class="highlighted"> Aazztech</span></h1>
                     </div>
                 </div><!-- end /.col-md-12 -->
 
@@ -744,22 +744,8 @@
     <!--================================
         START CALL TO ACTION AREA
     =================================-->
-    <section class="call-to-action bgimage">
-        <div class="bg_image_holder">
-            <img src="{{asset('/')}}images/calltobg.jpg" alt="">
-        </div>
-        <div class="container content_above">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="call-to-wrap">
-                        <h1 class="text--white">Ready to Join Our Marketplace!</h1>
-                        <h4 class="text--white">Over 25,000 designers and developers trust the MartPlace.</h4>
-                        <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">Join Us Today</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('elements.joinshop')
+
     <!--================================
         END CALL TO ACTION AREA
     =================================-->
