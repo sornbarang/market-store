@@ -22,4 +22,8 @@ return [
     'manageitems' => 'Manage Item',
     'logout' => 'Logout',
     'backoffice' => 'Back office',
+    'totalitems' => 'Total items',
+    'totalrate' => 'Total rates',
+    'follow' => 'Follow',
+    'newpro' => 'Newest products',
 ];

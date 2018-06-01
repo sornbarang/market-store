@@ -21,6 +21,7 @@ return [
     'itemssale'=>'Items for sale',
     'totalsale'=>'Total sales',
     'happycustomer'=>'Appy customers',
+    'sentmessage'=>'Sent message',
     'totalmember'=>'Members',
     'moreinfo'=>'More Info',
     'proinfo'=>'Product Information',   

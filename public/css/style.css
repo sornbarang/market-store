@@ -708,13 +708,13 @@ a {
 }
 
 .range-slider.ui-slider .ui-slider-range {
-  background: #7347c1;
+  background: #56a72d;
 }
 
 .range-slider.ui-slider .ui-slider-handle {
   height: 18px;
   width: 18px;
-  background: #0674ec;
+  background: #56a72d;
   -webkit-border-radius: 50px;
           border-radius: 50px;
   top: -6px;
@@ -750,7 +750,7 @@ a {
   display: inline-block;
   background: rgba(115, 71, 193, 0.1);
   width: 80px;
-  color: #7347c1;
+  color: #56a72d;
 }
 
 .rating {
@@ -1294,7 +1294,7 @@ h6 {
 }
 
 .product--sidebar .card--category ul li a:hover, .support--sidebar .card--category ul li a:hover, .faq--sidebar .card--category ul li a:hover, .affliate_rule_module .card--category ul li a:hover, .support--sidebar .card--forum_categories ul li a:hover, .faq--sidebar .card--forum_categories ul li a:hover, .affliate_rule_module .card--forum_categories ul li a:hover, .sidebar--blog .card--forum_categories ul li a:hover, .sidebar--blog .card--category ul li a:hover {
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .product--sidebar .card--category ul li a span.lnr, .support--sidebar .card--category ul li a span.lnr, .faq--sidebar .card--category ul li a span.lnr, .affliate_rule_module .card--category ul li a span.lnr, .support--sidebar .card--forum_categories ul li a span.lnr, .faq--sidebar .card--forum_categories ul li a span.lnr, .affliate_rule_module .card--forum_categories ul li a span.lnr, .sidebar--blog .card--forum_categories ul li a span.lnr, .sidebar--blog .card--category ul li a span.lnr {
@@ -1632,7 +1632,7 @@ h6 {
 }
 
 .author-card .author-infos .author-btn .btn:hover {
-  background: #7347c1;
+  background: #66bb2c;
   color: #fff;
 }
 
@@ -2008,7 +2008,7 @@ h6 {
 
 .btn.btn--color4, .btn-info, .btn--info,
 .btn.btn--color4:hover, .btn-info:hover, .btn--info:hover {
-  background: #58c9e9;
+  background: #56a72d;
 }
 
 .btn.btn--color4.btn--bordered, .btn-info.btn--bordered, .btn--info.btn--bordered,
@@ -2143,11 +2143,11 @@ h6 {
 }
 
 .product .prod_btn a:hover {
-  color: #0674ec;
+  color: #fff;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
-  background: #fff;
+  background: #56a72d;
 }
 
 .product .prod_btn a + a {
@@ -3582,13 +3582,13 @@ h6 {
 }
 
 .range-slider.ui-slider .ui-slider-range {
-  background: #7347c1;
+  background: #56a72d;
 }
 
 .range-slider.ui-slider .ui-slider-handle {
   height: 18px;
   width: 18px;
-  background: #0674ec;
+  background: #56a72d;
   -webkit-border-radius: 50px;
           border-radius: 50px;
   top: -6px;
@@ -3624,7 +3624,7 @@ h6 {
   display: inline-block;
   background: rgba(115, 71, 193, 0.1);
   width: 80px;
-  color: #7347c1;
+  color: #56a72d
 }
 
 .rating {
@@ -4769,13 +4769,13 @@ h6 {
 }
 
 .range-slider.ui-slider .ui-slider-range {
-  background: #7347c1;
+  background: #56a72d;
 }
 
 .range-slider.ui-slider .ui-slider-handle {
   height: 18px;
   width: 18px;
-  background: #0674ec;
+  background: #56a72d;
   -webkit-border-radius: 50px;
           border-radius: 50px;
   top: -6px;
@@ -4811,7 +4811,7 @@ h6 {
   display: inline-block;
   background: rgba(115, 71, 193, 0.1);
   width: 80px;
-  color: #7347c1;
+  color: #56a72d;
 }
 
 .rating {
@@ -5173,7 +5173,7 @@ h6 {
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
-  border-top: 1px solid #0674ec;
+  border-top: 1px solid #56a72d;
   -webkit-border-radius: 0 0 4px 4px;
           border-radius: 0 0 4px 4px;
   -webkit-box-shadow: 0 5px 40px rgba(82, 85, 90, 0.2);
@@ -5208,7 +5208,7 @@ h6 {
   position: absolute;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #0674ec;
+  border-bottom: 10px solid #56a72d;
   bottom: 100%;
 }
 
@@ -5367,7 +5367,7 @@ h6 {
 }
 
 .dropdown.dropdown--author ul li a:hover {
-  background: #0674ec;
+  background: #56a72d;
   color: #fff;
 }
 
@@ -5658,7 +5658,7 @@ h6 {
   -webkit-box-shadow: 0 5px 40px rgba(82, 85, 90, 0.2);
           box-shadow: 0 5px 40px rgba(82, 85, 90, 0.2);
   border: 0;
-  border-top: 1px solid #0674ec;
+  border-top: 1px solid #56a72d;
   -webkit-border-radius: 0;
           border-radius: 0;
   position: relative;
@@ -5670,7 +5670,7 @@ h6 {
   position: absolute;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #5867dd;
+  border-bottom: 10px solid #56a72d;
   bottom: 100%;
 }
 
@@ -5740,7 +5740,7 @@ h6 {
   -webkit-box-shadow: 0 5px 40px rgba(82, 85, 90, 0.2);
           box-shadow: 0 5px 40px rgba(82, 85, 90, 0.2);
   border: 0;
-  border-top: 1px solid #0674ec;
+  border-top: 1px solid #56a72d;
   -webkit-border-radius: 0;
           border-radius: 0;
   position: relative;
@@ -5752,7 +5752,7 @@ h6 {
   position: absolute;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #5867dd;
+  border-bottom: 10px solid #56a72d;
   bottom: 100%;
 }
 
@@ -6297,13 +6297,13 @@ div#ui-datepicker-div tbody tr td a:hover {
 }
 
 .range-slider.ui-slider .ui-slider-range {
-  background: #7347c1;
+  background: #56a72d;
 }
 
 .range-slider.ui-slider .ui-slider-handle {
   height: 18px;
   width: 18px;
-  background: #0674ec;
+  background: #56a72d;
   -webkit-border-radius: 50px;
           border-radius: 50px;
   top: -6px;
@@ -6339,7 +6339,7 @@ div#ui-datepicker-div tbody tr td a:hover {
   display: inline-block;
   background: rgba(115, 71, 193, 0.1);
   width: 80px;
-  color: #7347c1;
+  color: #56a72d;
 }
 
 .rating {
@@ -6425,7 +6425,7 @@ div#ui-datepicker-div tbody tr td a:hover {
           transform: scale(0.5);
   -webkit-border-radius: 50%;
           border-radius: 50%;
-  background: #0674ec;
+  background: #56a72d;
   color: #fff;
   line-height: 20px;
 }
@@ -7233,7 +7233,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .author__notification_area ul li .notification_count.purch {
-  background: #0674ec;
+  background: #56a72d;
 }
 
 .author-author__info {
@@ -7797,7 +7797,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .more-product a:hover {
-  background: #7347c1;
+  background: #56a72d;
   color: #fff;
 }
 
@@ -9403,7 +9403,7 @@ span.counter {
 }
 
 .sidebar_author .author-menu ul li a:hover, .sidebar_author .author-menu ul li a.active {
-  background: #0674ec;
+  background: #56a72d;
   color: #fff;
 }
 
