@@ -581,7 +581,7 @@
                                     <div class="dropdown dropdown--author">
                                         <ul>
                                             <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/myprofile')}}">
+                                                <a href="{{route('market.customer.index')}}">
                                                     <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                             </li>
                                             <li>
