@@ -107,7 +107,7 @@
                                 <!-- end /.social -->
 
                                 <div class="author-btn">
-                                    <a href="#" class="btn btn--md btn--round">Follow</a>
+                                    <a href="#" class="btn btn--md btn--round">@lang('profile.follow')</a>
                                 </div>
                                 <!-- end /.author-btn -->
                             </div>
@@ -118,12 +118,12 @@
                         <div class="sidebar-card author-menu">
                             <ul>
                                 <li>
-                                    <a href="author.html">Profile</a>
+                                    <a href="author.html">@lang('profile.profile')</a>
                                 </li>
                                 <li>
-                                    <a class="active" href="author-items.html">Author Items</a>
+                                    <a class="active" href="author-items.html">@lang('profile.authitems')</a>
                                 </li>
-                                <li>
+                                {{--<li>
                                     <a href="author-reviews.html">Customer Reviews</a>
                                 </li>
                                 <li>
@@ -131,21 +131,21 @@
                                 </li>
                                 <li>
                                     <a href="author-following.html">Following (39)</a>
-                                </li>
+                                </li>--}}
                             </ul>
                         </div>
                         <!-- end /.author-menu -->
 
-                        <div class="sidebar-card freelance-status">
+                        {{--<div class="sidebar-card freelance-status">
                             <div class="custom-radio">
                                 <input type="radio" id="opt1" class="" name="filter_opt" checked>
                                 <label for="opt1">
                                     <span class="circle"></span>Available for Freelance work</label>
                             </div>
-                        </div>
+                        </div>--}}
                         <!-- end /.author-card -->
 
-                        <div class="sidebar-card message-card">
+                        {{--<div class="sidebar-card message-card">
                             <div class="card-title">
                                 <h4>Product Information</h4>
                             </div>
@@ -164,7 +164,7 @@
                                     <a href="#">sign in</a> to contact this author.</p>
                             </div>
                             <!-- end /.message-form -->
-                        </div>
+                        </div>--}}
                         <!-- end /.freelance-status -->
                     </aside>
                 </div>
@@ -175,7 +175,7 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <div class="author-info mcolorbg4">
-                                <p>Total Items</p>
+                                <p>@lang('profile.totalitems')</p>
                                 <h3>4,369</h3>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
 
                         <div class="col-md-4 col-sm-4">
                             <div class="author-info pcolorbg">
-                                <p>Total sales</p>
+                                <p>@lang('profile.totalsales')</p>
                                 <h3>36,957</h3>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
 
                         <div class="col-md-4 col-sm-4">
                             <div class="author-info scolorbg">
-                                <p>Total Items</p>
+                                <p>@lang('profile.totalrates')</p>
                                 <div class="rating">
                                     <ul>
                                         <li>
@@ -224,12 +224,12 @@
                             <div class="filter-bar clearfix filter-bar2">
                                 <div class="filter__option filter--text pull-left">
                                     <p>
-                                        <span>4,369</span> Author Items</p>
+                                        <span>4,369</span> @lang('profile.authitems')</p>
                                 </div>
 
                                 <div class="pull-right">
                                     <div class="filter__option filter--dropdown">
-                                        <a href="#" class="dropdown-trigger dropdown-toggle" id="drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
+                                        <a href="#" class="dropdown-trigger dropdown-toggle" id="drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('profile.category')
                                             <span class="lnr lnr-chevron-down"></span>
                                         </a>
                                         <ul class="custom_dropdown custom_drop2 dropdown-menu" aria-labelledby="drop1">
@@ -238,52 +238,15 @@
                                                     <span>35</span>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="#">Landing Page
-                                                    <span>45</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Psd Template
-                                                    <span>13</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Plugins
-                                                    <span>08</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">HTML Template
-                                                    <span>34</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Components
-                                                    <span>78</span>
-                                                </a>
-                                            </li>
                                         </ul>
                                     </div>
                                     <div class="filter__option filter--dropdown">
-                                        <a href="#" id="drop2" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By
+                                        <a href="#" id="drop2" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('profile.filter')
                                             <span class="lnr lnr-chevron-down"></span>
                                         </a>
                                         <ul class="custom_dropdown dropdown-menu" aria-labelledby="drop2">
                                             <li>
                                                 <a href="#">Trending items</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Popular items</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">New items </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Best seller </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Best rating </a>
                                             </li>
                                         </ul>
                                     </div>

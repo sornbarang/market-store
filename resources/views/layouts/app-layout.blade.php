@@ -69,7 +69,7 @@
                             <a class="author-area__seller-btn inline" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                    Logout
+                                @lang('authlabel.logout')
                                 </a> 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -106,240 +106,6 @@
                             </div>
                         <div class="author__notification_area">
                             <ul>
-                                {{--<li class="has_dropdown">
-                                    <div class="icon_wrap">
-                                        <span class="lnr lnr-alarm"></span>
-                                        <span class="notification_count noti">25</span>
-                                    </div>
-
-                                    <div class="dropdown notification--dropdown">
-
-                                        <div class="dropdown_module_header">
-                                            <h4>My Notifications</h4>
-                                            <a href="notification.html">View All</a>
-                                        </div>
-
-                                        <div class="notifications_module">
-                                            <div class="notification">
-                                                <div class="notification__info">
-                                                    <div class="info_avatar">
-                                                        <img src="{{asset('/')}}images/notification_head.png" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p>
-                                                            <span>Anderson</span> added to Favourite
-                                                            <a href="#">Mccarther Coffee Shop</a>
-                                                        </p>
-                                                        <p class="time">Just now</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.notifications -->
-
-                                                <div class="notification__icons ">
-                                                    <span class="lnr lnr-heart loved noti_icon"></span>
-                                                </div>
-                                                <!-- end /.notifications -->
-                                            </div>
-                                            <!-- end /.notifications -->
-
-                                            <div class="notification">
-                                                <div class="notification__info">
-                                                    <div class="info_avatar">
-                                                        <img src="{{asset('/')}}images/notification_head2.png" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p>
-                                                            <span>Michael</span> commented on
-                                                            <a href="#">MartPlace Extension Bundle</a>
-                                                        </p>
-                                                        <p class="time">Just now</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.notifications -->
-
-                                                <div class="notification__icons ">
-                                                    <span class="lnr lnr-bubble commented noti_icon"></span>
-                                                </div>
-                                                <!-- end /.notifications -->
-                                            </div>
-                                            <!-- end /.notifications -->
-
-                                            <div class="notification">
-                                                <div class="notification__info">
-                                                    <div class="info_avatar">
-                                                        <img src="{{asset('/')}}images/notification_head3.png" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p>
-                                                            <span>Khamoka </span>purchased
-                                                            <a href="#"> Visibility Manager Subscriptions</a>
-                                                        </p>
-                                                        <p class="time">Just now</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.notifications -->
-
-                                                <div class="notification__icons ">
-                                                    <span class="lnr lnr-cart purchased noti_icon"></span>
-                                                </div>
-                                                <!-- end /.notifications -->
-                                            </div>
-                                            <!-- end /.notifications -->
-
-                                            <div class="notification">
-                                                <div class="notification__info">
-                                                    <div class="info_avatar">
-                                                        <img src="{{asset('/')}}images/notification_head4.png" alt="">
-                                                    </div>
-                                                    <div class="info">
-                                                        <p>
-                                                            <span>Anderson</span> added to Favourite
-                                                            <a href="#">Mccarther Coffee Shop</a>
-                                                        </p>
-                                                        <p class="time">Just now</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.notifications -->
-
-                                                <div class="notification__icons ">
-                                                    <span class="lnr lnr-star reviewed noti_icon"></span>
-                                                </div>
-                                                <!-- end /.notifications -->
-                                            </div>
-                                            <!-- end /.notifications -->
-                                        </div>
-                                        <!-- end /.dropdown -->
-                                    </div>
-                                </li>--}}
-
-                                {{--<li class="has_dropdown">
-                                    <div class="icon_wrap">
-                                        <span class="lnr lnr-envelope"></span>
-                                        <span class="notification_count msg">6</span>
-                                    </div>
-
-                                    <div class="dropdown messaging--dropdown">
-                                        <div class="dropdown_module_header">
-                                            <h4>My Messages</h4>
-                                            <a href="message.html">View All</a>
-                                        </div>
-
-                                        <div class="messages">
-                                            <a href="message.html" class="message recent">
-                                                <div class="message__actions_avatar">
-                                                    <div class="avatar">
-                                                        <img src="{{asset('/')}}images/notification_head4.png" alt="">
-                                                    </div>
-                                                </div>
-                                                <!-- end /.actions -->
-
-                                                <div class="message_data">
-                                                    <div class="name_time">
-                                                        <div class="name">
-                                                            <p>NukeThemes</p>
-                                                            <span class="lnr lnr-envelope"></span>
-                                                        </div>
-
-                                                        <span class="time">Just now</span>
-                                                        <p>Hello John Smith! Nunc placerat mi ...</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.message_data -->
-                                            </a>
-                                            <!-- end /.message -->
-
-                                            <a href="message.html" class="message recent">
-                                                <div class="message__actions_avatar">
-                                                    <div class="avatar">
-                                                        <img src="{{asset('/')}}images/notification_head5.png" alt="">
-                                                    </div>
-                                                </div>
-                                                <!-- end /.actions -->
-
-                                                <div class="message_data">
-                                                    <div class="name_time">
-                                                        <div class="name">
-                                                            <p>Crazy Coder</p>
-                                                            <span class="lnr lnr-envelope"></span>
-                                                        </div>
-
-                                                        <span class="time">Just now</span>
-                                                        <p>Hi! Nunc placerat mi id nisi interum ...</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.message_data -->
-                                            </a>
-                                            <!-- end /.message -->
-
-                                            <a href="message.html" class="message">
-                                                <div class="message__actions_avatar">
-                                                    <div class="avatar">
-                                                        <img src="{{asset('/')}}images/notification_head6.png" alt="">
-                                                    </div>
-                                                </div>
-                                                <!-- end /.actions -->
-
-                                                <div class="message_data">
-                                                    <div class="name_time">
-                                                        <div class="name">
-                                                            <p>Hybrid Insane</p>
-                                                        </div>
-
-                                                        <span class="time">Just now</span>
-                                                        <p>Hi! Nunc placerat mi id nisi interum ...</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.message_data -->
-                                            </a>
-                                            <!-- end /.message -->
-
-                                            <a href="message.html" class="message">
-                                                <div class="message__actions_avatar">
-                                                    <div class="avatar">
-                                                        <img src="{{asset('/')}}images/notification_head3.png" alt="">
-                                                    </div>
-                                                </div>
-                                                <!-- end /.actions -->
-
-                                                <div class="message_data">
-                                                    <div class="name_time">
-                                                        <div class="name">
-                                                            <p>ThemeXylum</p>
-                                                        </div>
-
-                                                        <span class="time">Just now</span>
-                                                        <p>Hi! Nunc placerat mi id nisi interum ...</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.message_data -->
-                                            </a>
-                                            <!-- end /.message -->
-
-                                            <a href="message.html" class="message">
-                                                <div class="message__actions_avatar">
-                                                    <div class="avatar">
-                                                        <img src="{{asset('/')}}images/notification_head4.png" alt="">
-                                                    </div>
-                                                </div>
-                                                <!-- end /.actions -->
-
-                                                <div class="message_data">
-                                                    <div class="name_time">
-                                                        <div class="name">
-                                                            <p>NukeThemes</p>
-                                                            <span class="lnr lnr-envelope"></span>
-                                                        </div>
-
-                                                        <span class="time">Just now</span>
-                                                        <p>Hello John Smith! Nunc placerat mi ...</p>
-                                                    </div>
-                                                </div>
-                                                <!-- end /.message_data -->
-                                            </a>
-                                            <!-- end /.message -->
-                                        </div>
-                                    </div>
-                                </li>--}}
                                 <li class="has_dropdown">
                                     <div class="icon_wrap">
                                         <span class="lnr lnr-cart"></span>
@@ -430,35 +196,35 @@
                                         <div class="dropdown dropdown--author">
                                             <ul>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/myprofile')}}">
+                                                    <a href="{{route('market.myprofile')}}">
                                                         <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/customer')}}">
+                                                    <a href="{{route('market.customer.index')}}">
                                                         <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/mysetting')}}">
+                                                    <a href="{{route('market.mysetting')}}">
                                                         <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/mycart')}}">
+                                                    <a href="{{route('market.mycart')}}">
                                                         <span class="lnr lnr-cart"></span>@lang('profile.purchase')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/myfavorite')}}">
+                                                    <a href="{{route('market.myfavorite')}}">
                                                         <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/mysale')}}">
+                                                    <a href="{{route('market.mysale')}}">
                                                         <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/myitemupload')}}">
+                                                    <a href="{{route('market.myitemupload')}}">
                                                         <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{url(app()->getLocale().'/market/temp/mymanageitem')}}">
+                                                    <a href="{{route('market.mymanageitem')}}">
                                                         <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
                                                 </li> 
                                                 @if (Route::has('login'))
@@ -580,38 +346,38 @@
                                     @auth
                                     <div class="dropdown dropdown--author">
                                         <ul>
-                                            <li>
-                                                <a href="{{route('market.customer.index')}}">
-                                                    <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/customer')}}">
-                                                    <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/mysetting')}}">
-                                                    <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/mycart')}}">
-                                                    <span class="lnr lnr-cart"></span>@lang('profile.puchase')</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/myfavorite')}}">
-                                                    <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/mysale')}}">
-                                                    <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/myitemupload')}}">
-                                                    <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{url(app()->getLocale().'/market/temp/mymanageitem')}}">
-                                                    <span class="lnr lnr-book"></span>@lang('profile.manangeitems')</a>
-                                            </li> 
+                                        <li>
+                                                    <a href="{{route('market.myprofile')}}">
+                                                        <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('market.customer.index')}}">
+                                                        <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('market.mysetting')}}">
+                                                        <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('market.mycart')}}">
+                                                        <span class="lnr lnr-cart"></span>@lang('profile.purchase')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('market.myfavorite')}}">
+                                                        <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('market.mysale')}}">
+                                                        <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('market.myitemupload')}}">
+                                                        <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('market.mymanageitem')}}">
+                                                        <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
+                                                </li> 
                                             <li>
                                                 @if (Route::has('login'))
                                                     @auth

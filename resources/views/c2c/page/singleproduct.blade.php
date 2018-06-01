@@ -537,7 +537,7 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <a href="{{url(app()->getLocale().'/market/temp/mystore')}}"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
+                                    <a href="{{route('market.mystore')}}"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
                                 </div>
 
                                 <div class="author">

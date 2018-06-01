@@ -27,37 +27,37 @@
     =================================-->
     <section class="dashboard-area">
         @include('elements.customer-menu')
-
         <div class="dashboard_contents">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                         <div class="author-info author-info--dashboard mcolorbg4">
-                            <p>Total Items</p>
+                            <p>@lang('profile.totalitems')</p>
                             <h3>4,369</h3>
                         </div>
                     </div><!-- end /.col-md-3 -->
 
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                         <div class="author-info author-info--dashboard mcolorbg2">
-                            <p>Monthly Sales</p>
+                            <p>@lang('profile.monthlysale')</p>
                             <h3>$273.00</h3>
                         </div>
                     </div><!-- end /.col-md-3 -->
 
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                         <div class="author-info author-info--dashboard mcolorbg3">
-                            <p>Yearly Sales</p>
+                            <p>@lang('profile.yearsale')</p>
                             <h3>$2,249.00</h3>
                         </div>
                     </div><!-- end /.col-md-3 -->
 
-                    <div class="col-md-3 col-sm-6">
+                    {{--<div class="col-md-3 col-sm-6">
                         <div class="author-info author-info--dashboard mcolorbg1">
                             <p>Lifetime Sales</p>
                             <h3>$5,583.00</h3>
                         </div>
-                    </div><!-- end /.col-md-3 -->
+                    </div>--}}
+                    <!-- end /.col-md-3 -->
                 </div><!-- end /.row -->
 
                 <div class="row">
@@ -87,20 +87,20 @@
                                         <div class="col-md-4 col-sm-4 col-xs-4">
                                             <div class="single_stat_data">
                                                 <h4 class="single_stat__title">478</h4>
-                                                <p>Total <span>Sales</span> This Month</p>
+                                                <p>@lang('profile.tstm')</p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 text-center col-sm-4 col-xs-4">
                                             <div class="single_stat_data">
                                                 <h4 class="single_stat__title">$2,478</h4>
-                                                <p>Total <span>Earnings</span> This Month</p>
+                                                <p>@lang('profile.tetm')</p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 text-right col-sm-4 col-xs-4">
-                                            <div class="single_stat_data">
+                                            {{--<div class="single_stat_data">
                                                 <h4 class="single_stat__title">478</h4>
                                                 <p>Total <span>Sales</span> This Month</p>
-                                            </div>
+                                            </div>--}}
                                         </div>
                                     </div>
 
@@ -109,7 +109,7 @@
                         </div>
                     </div><!-- end /.col-md-12 -->
 
-                    <div class="col-md-6">
+                    {{--<div class="col-md-6">
                         <div class="dashboard_module chart country_statistics">
                             <div class="dashboard__title">
                                 <h4>Country Statistics</h4>
@@ -231,11 +231,11 @@
                             </div>
                         </div><!-- end /.dashboard_module -->
                     </div><!-- end /.col-md-6 -->
-
+                    --}}
                     <div class="col-md-8">
                         <div class="dashboard_module recent_sells">
                             <div class="dashboard__title">
-                                <h4>Recent Items Sales</h4>
+                                <h4>@lang('profile.ris')</h4>
 
                                 <div class="loading"><a href="#"><span class="lnr lnr-sync"></span></a></div>
                             </div>
@@ -313,7 +313,7 @@
                     <div class="col-md-4">
                         <div class="dashboard_module recent_buyers">
                             <div class="dashboard__title">
-                                <h4>Recent Buyers</h4>
+                                <h4>@lang('profile.rb')</h4>
                                 <div class="loading"><a href="#"><span class="lnr lnr-sync"></span></a></div>
                             </div>
 
@@ -380,7 +380,7 @@
                     <div class="col-md-6">
                         <div class="dashboard_module recent_comment">
                             <div class="dashboard__title">
-                                <h4>Recent Comments</h4>
+                                <h4>@lang('profile.rc')</h4>
                             </div>
 
                             <div class="dashboard__content">
@@ -465,7 +465,7 @@
                     <div class="col-md-6">
                         <div class="dashboard_module recent_message">
                             <div class="dashboard__title">
-                                <h4>Recent Message</h4>
+                                <h4>@lang('profile.rm')</h4>
                                 <div class="loading"><a href="#">View All</a></div>
                             </div>
 
@@ -542,10 +542,10 @@
                         </div>
                     </div><!-- end /.col-md-6 -->
 
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="dashboard_module recent_notification">
                             <div class="dashboard__title">
-                                <h4>Recent Notification</h4>
+                                <h4>@lang('profile.rn')</h4>
                                 <div class="loading"><a href="#">View All</a></div>
                             </div>
                             <div class="dashboard__content">
@@ -623,7 +623,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    {{--<div class="col-md-4">
                         <div class="dashboard_module product_que">
                             <div class="dashboard__title">
                                 <h4>Product Upload Queue</h4>
@@ -660,9 +660,9 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
 
-                    <div class="col-md-12">
+                    {{--<div class="col-md-12">
                         <div class="dashboard_module single_item_visitor">
                             <div class="dashboard__title">
                                 <h4>Single Items Visitors</h4>
@@ -709,12 +709,11 @@
                                 <canvas id="revenue"></canvas>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                 </div><!-- end /.row -->
             </div><!-- end /.container -->
         </div><!-- end /.dashboard_menu_area -->
-    </section>
-    @include('elements.customer-menu')
+    </section> 
     <!--================================
             END DASHBOARD AREA
     =================================-->
@@ -723,22 +722,7 @@
     <!--================================
         START CALL TO ACTION AREA
     =================================-->
-    <section class="call-to-action bgimage">
-        <div class="bg_image_holder">
-            <img src="{{asset('/')}}images/calltobg.jpg" alt="">
-        </div>
-        <div class="container content_above">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="call-to-wrap">
-                        <h1 class="text--white">Ready to Join Our Marketplace!</h1>
-                        <h4 class="text--white">Over 25,000 designers and developers trust the MartPlace.</h4>
-                        <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">Join Us Today</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('elements.joinshop')
     <!--================================
         END CALL TO ACTION AREA
     =================================-->

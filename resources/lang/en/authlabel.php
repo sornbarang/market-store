@@ -14,6 +14,7 @@ return [
     */
     'name' => 'Your Name',
     'login' => 'Login',
+    'logout' => 'Logout',
     'phone' => 'Phone Number',
     'address' => 'Address',
     'addressplaceholder' => 'Enter your address...',
