@@ -16,13 +16,14 @@ Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageControl
 
 Route::get('/', function () {
     return view('page');
-});
+})->name(trans('routes.home'));
+
 
     Route::group([
         'prefix'     => trans('routes.market')
     ], function(){
 
-        Route::get('/', 'C2cController@index')->name('c2c');
+        Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
         Route::prefix('temp')->group(function () {
             Route::get('/categories', 'C2cController@getcategory')->name('category');
             Route::get('/product', 'C2cController@getproduct')->name('product');
