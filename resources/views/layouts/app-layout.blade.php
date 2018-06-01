@@ -28,10 +28,8 @@
     @if( app()->getLocale()=='km')
         <link href="https://fonts.googleapis.com/css?family=Kantumruy:400" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/style-kh.css') }}">
-    @else
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @endif 
-    
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.css">
     <!-- endinject -->
 
