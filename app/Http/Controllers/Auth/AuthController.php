@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use Socialite;
+use Session;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 
@@ -28,6 +29,8 @@ class AuthController extends Controller
      */
     public function redirectToProvider($provider)
     {
+        $lang = app()->getLocale();
+        Session::put('applocale', $lang);
         return Socialite::driver($provider)->redirect();
     }
 

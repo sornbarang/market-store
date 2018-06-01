@@ -18,6 +18,7 @@ class Language
      */
     public function handle($request, Closure $next)
     {
+
         // Check if the first segment matches a language code
         if (!array_key_exists($request->segment(1), config('translatable.locales')) ) {
 
@@ -30,6 +31,7 @@ class Language
             // Redirect to the correct url
             return redirect()->to(implode('/', $segments));
         }
+
 
         return $next($request);
     }

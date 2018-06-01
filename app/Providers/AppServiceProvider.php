@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Request;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {

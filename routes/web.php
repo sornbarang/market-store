@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
     Route::group([
-        'prefix'     => 'market'
+        'prefix'     => trans('routes.market')
     ], function(){
 
         Route::get('/', 'C2cController@index')->name('c2c');
