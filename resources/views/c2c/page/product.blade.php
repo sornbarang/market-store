@@ -6,7 +6,7 @@
     <section class="search-wrapper">
         <div class="search-area2 bgimage">
             <div class="bg_image_holder">
-                <img src="{{asset('/')}}images/search.jpg" alt="">
+                <img src="{{asset('images/search.jpg')}}" alt="">
             </div>
             <div class="container content_above">
                 <div class="row">
@@ -69,10 +69,10 @@
                             </div>
                             <div class="filter__option filter--layout">
                                 <a href="category-grid.html">
-                                    <div class="svg-icon"><img class="svg" src="{{asset('/')}}images/svg/grid.svg" alt="it's just a layout control folks!"></div>
+                                    <div class="svg-icon"><img class="svg" src="{{asset('images/svg/grid.svg')}}" alt="it's just a layout control folks!"></div>
                                 </a>
                                 <a href="category-list.html">
-                                    <div class="svg-icon"><img class="svg" src="{{asset('/')}}images/svg/list.svg" alt="it's just a layout control folks!"></div>
+                                    <div class="svg-icon"><img class="svg" src="{{asset('images/svg/list.svg')}}" alt="it's just a layout control folks!"></div>
                                 </a>
                             </div>
                         </div>
@@ -158,9 +158,9 @@
                                     <div class="product product--card product--card-small">
 
                                         <div class="product__thumbnail">
-                                            <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
+                                            <img src="{{asset('images/p1.jpg')}}" alt="Product Image">
                                             <div class="prod_btn">
-                                                <a href="{{url(app()->getLocale().'/market/temp/productdetail')}}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                                <a href="{{ route('market.productdetail') }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                                 {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                                             </div><!-- end /.prod_btn -->
                                         </div><!-- end /.product__thumbnail -->
@@ -168,7 +168,7 @@
                                             <a href="#" class="product_title"><h4>{{$val}}</h4></a>
                                             <ul class="titlebtm">
                                                 <li>
-                                                    <img class="auth-img" src="{{asset('/')}}images/auth3.jpg" alt="author image">
+                                                    <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                                     <p><a href="#">AazzTech</a></p>
                                                 </li>
                                                 {{--<li class="out_of_class_name">

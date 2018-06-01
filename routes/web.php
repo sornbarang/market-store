@@ -22,26 +22,34 @@ Route::get('/', function () {
     Route::group([
         'prefix'     => trans('routes.market')
     ], function(){
-
         Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
-        Route::prefix('temp')->group(function () {
-            Route::get('/categories', 'C2cController@getcategory')->name('category');
-            Route::get('/product', 'C2cController@getproduct')->name('product');
-            Route::get('/productdetail', 'C2cController@getproductdetail')->name('product');
-            Route::get('/mystore', 'CustomerController@myStore')->name('customer');
-            Route::get('/mysetting', 'CustomerController@mySetting')->name('customer');
-            Route::get('/myprofile', 'CustomerController@myProfile')->name('customer');
-            Route::get('/mycart', 'CustomerController@myCart')->name('customer');
-            Route::get('/myfavorite', 'CustomerController@myFavorite')->name('customer');
-            Route::get('/mysale', 'CustomerController@mySaleManagement')->name('customer');
-            Route::get('/myitemupload', 'CustomerController@myItemUpload')->name('customer');
-            Route::get('/mymanageitem', 'CustomerController@myManageItem')->name('customer');
-            Route::get('/edititem', 'CustomerController@myEditItem')->name('customer');
-            Route::resource('customer', 'CustomerController');
-        });
+        Route::get(trans('routes.market_categories'), ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
+        Route::get(trans('routes.market_products'), ['as' => 'market.categories', 'uses' => 'C2cController@getproduct']);
+        Route::get(trans('routes.market_productdetail'), ['as' => 'market.productdetail', 'uses' => 'C2cController@getproductdetail']);
+        Route::get(trans('routes.market_mystore'), ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
+        Route::get(trans('routes.market_mysetting'), ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
+        Route::get(trans('routes.market_myprofile'), ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
+        Route::get(trans('routes.market_mycart'), ['as' => 'market.mycart', 'uses' => 'CustomerController@myCart']);
+        Route::get(trans('routes.market_myfavorite'), ['as' => 'market.myfavorite', 'uses' => 'CustomerController@myFavorite']);
+        Route::get(trans('routes.market_mysale'), ['as' => 'market.mysale', 'uses' => 'CustomerController@mySaleManagement']);
+        Route::get(trans('routes.market_myitemupload'), ['as' => 'market.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
+        Route::get(trans('routes.market_mymanageitem'), ['as' => 'market.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
+        Route::get(trans('routes.market_edititem'), ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
 
+        Route::resource('customer', 'CustomerController',['names' =>
+            [
+                'index' => 'market.customer.index',
+                'create' => 'market.customer.create',
+                'update' => 'market.customer.update',
+                'edit' => 'market.customer.edit',
+                'store' => 'market.customer.store',
+                'show' => 'market.customer.show',
+                'destroy' => 'market.customer.destroy',
+            ]
+        ]);
     });
-    Route::get(trans('routes.contact'), 'PageController@contact')->name('contact');
+
+Route::get(trans('routes.contact'), 'PageController@contact')->name('contact');
 
 //Route::group(['prefix' => 'admin',  'middleware' => Admin::class], function(){
 

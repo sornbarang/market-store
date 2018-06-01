@@ -389,9 +389,9 @@
                         <div class="product product--card product--card3">
 
                             <div class="product__thumbnail">
-                                <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
+                                <img src="{{ asset('images/p1.jpg') }}" alt="Product Image">
                                 <div class="prod_btn">
-                                    <a href="{{url(app()->getLocale().'/market/temp/categories')}}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                    <a href="{{ route('market.categories') }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                 </div><!-- end /.prod_btn -->
                             </div><!-- end /.product__thumbnail -->
 
