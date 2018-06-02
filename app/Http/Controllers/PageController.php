@@ -13,6 +13,7 @@ class PageController extends Controller
      */
     public function contact()
     {
-        return view('contact');
+        $data['breadcrub']='contact';
+        return view('contact',compact('data'));
     }
 }
