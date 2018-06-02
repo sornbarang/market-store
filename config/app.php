@@ -156,6 +156,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -220,6 +221,7 @@ return [
         'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
     ],
 
 ];

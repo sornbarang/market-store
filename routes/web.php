@@ -11,30 +11,46 @@ use App\Http\Middleware\Admin;
 |
 */
 
-Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
+/*$lang = Request::getPreferredLanguage([ 'en', 'km']);
+if (App::environment() == 'local') {
+    $lang = 'en';
+}
+
+App::setLocale($lang);*/
 
 Route::get('/', function () {
     return view('page');
 })->name(trans('routes.home'));
 
+Route::group(
+[
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+],
+function()
+{
+    // OAuth Routes
+    Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
+    Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
 
+    /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
     Route::group([
-        'prefix'     => trans('routes.market')
+        'prefix'    => 'market'
     ], function(){
         Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
-        Route::get(trans('routes.market_categories'), ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
-        Route::get(trans('routes.market_products'), ['as' => 'market.categories', 'uses' => 'C2cController@getproduct']);
-        Route::get(trans('routes.market_productdetail'), ['as' => 'market.productdetail', 'uses' => 'C2cController@getproductdetail']);
-        Route::get(trans('routes.market_mystore'), ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
-        Route::get(trans('routes.market_mysetting'), ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
-        Route::get(trans('routes.market_myprofile'), ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
-        Route::get(trans('routes.market_mycart'), ['as' => 'market.mycart', 'uses' => 'CustomerController@myCart']);
-        Route::get(trans('routes.market_myfavorite'), ['as' => 'market.myfavorite', 'uses' => 'CustomerController@myFavorite']);
-        Route::get(trans('routes.market_mysale'), ['as' => 'market.mysale', 'uses' => 'CustomerController@mySaleManagement']);
-        Route::get(trans('routes.market_myitemupload'), ['as' => 'market.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
-        Route::get(trans('routes.market_mymanageitem'), ['as' => 'market.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
-        Route::get(trans('routes.market_edititem'), ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
+        Route::get('categories', ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
+        Route::get('products', ['as' => 'market.categories', 'uses' => 'C2cController@getproduct']);
+        Route::get('productdetail', ['as' => 'market.productdetail', 'uses' => 'C2cController@getproductdetail']);
+        Route::get('mystore', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
+        Route::get('mysetting', ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
+        Route::get('myprofile', ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
+        Route::get('mycart', ['as' => 'market.mycart', 'uses' => 'CustomerController@myCart']);
+        Route::get('myfavorite', ['as' => 'market.myfavorite', 'uses' => 'CustomerController@myFavorite']);
+        Route::get('mysale', ['as' => 'market.mysale', 'uses' => 'CustomerController@mySaleManagement']);
+        Route::get('myitemupload', ['as' => 'market.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
+        Route::get('mymanageitem', ['as' => 'market.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
+        Route::get('myEditItem', ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
 
         Route::resource('customer', 'CustomerController',['names' =>
             [
@@ -49,7 +65,14 @@ Route::get('/', function () {
         ]);
     });
 
-Route::get(trans('routes.contact'), 'PageController@contact')->name('contact');
+    Route::get('contact', 'PageController@contact')->name('contact');
+    // OAuth Routes
+    Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
+    Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
+
+    Auth::routes();
+
+});
 
 //Route::group(['prefix' => 'admin',  'middleware' => Admin::class], function(){
 
@@ -120,8 +143,3 @@ Route::group([
     ]);
 });
 
-// OAuth Routes
-Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
-Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
-
-Auth::routes();
