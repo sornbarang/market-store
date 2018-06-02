@@ -19,16 +19,17 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
     protected function authenticated(Request $request, $user)
     {
-        return redirect('/c2c');
+        return redirect('/market');
     }
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/c2c';
+    protected $redirectTo = '/market';
 
     /**
      * Create a new controller instance.

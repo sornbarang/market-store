@@ -89,18 +89,22 @@
                                         {{ config('translatable.locales')[app()->getLocale()] }}</button>
                                     <div class="dropdown dropdown--author">
                                         <ul>
-                                            @foreach (config('translatable.locales') as $lang => $language)
-                                                @if ($lang != app()->getLocale())  
-                                                    <li><a href="{{ route('lang.switch', $lang) }}">
-                                                    @if( $lang=='km')
-                                                        <span class="flag-icon flag-icon-kh"></span>
-                                                    @else
-                                                        <span class="flag-icon flag-icon-gb"></span>
-                                                    @endif{{ $language }}</a>
+                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                                @if ($localeCode != LaravelLocalization::getCurrentLocale())
+                                                    <li>
+                                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                            @if( $localeCode =='km')
+                                                                <span class="flag-icon flag-icon-kh"></span>
+                                                            @else
+                                                                <span class="flag-icon flag-icon-gb"></span>
+                                                            @endif
+                                                            {{ $properties['native'] }}
+                                                        </a>
                                                     </li>
                                                 @endif
-                                            @endforeach  
+                                            @endforeach
                                         </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -267,24 +271,25 @@
                                 @else
                                     <span class="flag-icon flag-icon-gb"></span>
                                 @endif
-                                        </button>
+                            </button>
 
                             <ul class="custom_dropdown messaging_dropdown dropdown-menu" aria-labelledby="drop2">
-                                @foreach (config('translatable.locales') as $lang => $language)
-                                    @if ($lang != app()->getLocale())  
-                                        <li>
-                                            <a href="{{ route('lang.switch', $lang) }}">
-                                                @if( $lang=='km')
-                                                    <span class="flag-icon flag-icon-kh" style="float: left; top: 8px;margin-right: 5px;"></span>
-                                                @else
-                                                    <span class="flag-icon flag-icon-kh" style="float: left; top: 8px;margin-right: 5px;"></span>
-                                                @endif
-                                                    {{ $language }}
-                                            </a>    
-                                        </li>  
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    @if ($localeCode != LaravelLocalization::getCurrentLocale())
+                                    <li>
+                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            @if( $localeCode =='km')
+                                                <span class="flag-icon flag-icon-kh" style="float: left; top: 8px;margin-right: 5px;"></span>
+                                            @else
+                                                <span class="flag-icon flag-icon-gb" style="float: left; top: 8px;margin-right: 5px;"></span>
+                                            @endif
+                                            {{ $properties['native'] }}
+                                        </a>
+                                    </li>
                                     @endif
-                                @endforeach 
+                                @endforeach
                             </ul>
+
                         </div>
                         <span class="lnr lnr-user menu_icon" style="margin-left:5px;"></span>
 

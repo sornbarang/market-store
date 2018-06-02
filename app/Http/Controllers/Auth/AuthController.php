@@ -10,9 +10,9 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use Socialite;
-use Session;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -21,7 +21,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/c2c';
+    protected $redirectTo = '';
     /**
      * Redirect the user to the OAuth Provider.
      *
@@ -29,8 +29,6 @@ class AuthController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        $lang = app()->getLocale();
-        Session::put('applocale', $lang);
         return Socialite::driver($provider)->redirect();
     }
 
