@@ -66,6 +66,11 @@ function()
     });
 
     Route::get('contact', 'PageController@contact')->name('contact');
+    // OAuth Routes
+    Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
+    Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
+
+    Auth::routes();
 
 });
 
@@ -138,8 +143,3 @@ Route::group([
     ]);
 });
 
-// OAuth Routes
-Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
-Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
-
-Auth::routes();
