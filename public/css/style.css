@@ -1909,7 +1909,7 @@ h6 {
 .btn.btn--white, .btn-light, .btn--light,
 .btn.btn--white:hover, .btn-light:hover, .btn--light:hover {
   background: #fff;
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .btn--default {
@@ -2745,12 +2745,12 @@ h6 {
 }
 
 .pagination-area.pagination-area2 .page-numbers:hover {
-  background: #0674ec;
+  background:#56a72d;
   color: #fff;
 }
 
 .pagination-area.pagination-area2 .page-numbers.prev:hover, .pagination-area.pagination-area2 .page-numbers.next:hover {
-  background: #7347c1;
+  background:#56a72d;
 }
 
 .pagination-area.pagination-area2 .pagination {
@@ -5541,7 +5541,7 @@ h6 {
 }
 
 .dropdown.dropdown--menu ul li a:hover {
-  background: #0674ec;
+  background: #56a72d;
   color: #fff;
 }
 
@@ -7290,7 +7290,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
 }
 
 .mainmenu__menu .navbar-nav > li:hover > a {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 .mainmenu__menu .navbar-nav > li > a {
@@ -8490,7 +8490,11 @@ span.counter {
 .info__logo {
   margin-bottom: 25px;
 }
-
+.info__logo h3{
+  font-weight: bold;
+  color: #fff;
+  line-height: 42px;
+}
 .footer-menu {
   display: inline-block;
   width: 49%;
@@ -8510,7 +8514,7 @@ span.counter {
 }
 
 .footer-menu ul li a:hover {
-  color: #fff;
+  color: #56a72d;
 }
 
 .footer-widget-title {
@@ -8555,7 +8559,7 @@ span.counter {
 }
 
 .mini-footer p a:hover {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 /***************************************
@@ -9675,7 +9679,7 @@ span.counter {
 }
 
 .dashboard_menu_area .dashboard_menu li a:hover {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 .dashboard_menu_area .dashboard_menu li a span.lnr {
@@ -9684,7 +9688,7 @@ span.counter {
 }
 
 .dashboard_menu_area .dashboard_menu li.active a {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 .dashboard_contents {
@@ -10187,17 +10191,17 @@ span.counter {
 }
 
 .profile_images .upload_btn {
-  float: right;
-  padding-left: 18px;
-  padding-top: 27px;
+  /* float: right; */
+  /* padding-left: 18px; */
+  /* padding-top: 27px; */
 }
 
 .profile_images .upload_btn .btn {
-  background: #7347c1;
+  background: #56a72d;
 }
 
 .profile_images .upload_btn .btn:hover {
-  background: #0674ec;
+  background: #56a72d;
   color: #fff;
 }
 

@@ -42,19 +42,19 @@
                         <div class="filter-bar dashboard_title_area clearfix filter-bar2">
 
                             <div class="dashboard__title dashboard__title pull-left">
-                                <h3>Manage Items</h3>
+                                <h3>@lang('profilemanageitem.manageitem')</h3>
                             </div>
 
                             <div class="pull-right">
                                 <div class="filter__option filter--text">
-                                    <p><span>26</span> Products</p>
+                                    <p><span>26</span> @lang('profilemanageitem.product')</p>
                                 </div>
 
                                 <div class="filter__option filter--select">
                                     <div class="select-wrap">
                                         <select name="price">
-                                            <option value="low">Price : Low to High</option>
-                                            <option value="high">Price : High to low</option>
+                                            <option value="low">@lang('profilefavorite.lowtohight')</option>
+                                            <option value="high">@lang('profilefavorite.highttolow')</option>
                                         </select>
                                         <span class="lnr lnr-chevron-down"></span>
                                     </div>
@@ -81,11 +81,11 @@
 
                                         <div class="options dropdown-menu" aria-labelledby="drop2">
                                             <ul>
-                                                <li><a href="{{url(app()->getLocale().'/market/temp/edititem')}}"><span class="lnr lnr-pencil"></span>Edit</a></li>
-                                                <li><a href="#"><span class="lnr lnr-eye"></span>Hide</a></li>
+                                                <li><a href="{{route('market.edititem')}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
+                                                <li><a href="#"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.hide')</a></li>
                                                 <li>
                                                     <a href="#" data-toggle="modal" data-target="#myModal2" class="delete">
-                                                        <span class="lnr lnr-trash"></span>Delete</a>
+                                                        <span class="lnr lnr-trash"></span>@lang('profilemanageitem.delete')</a>
                                                 </li>
                                             </ul>
                                         </div>

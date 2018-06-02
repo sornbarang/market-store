@@ -19,29 +19,29 @@
                     <div class="col-md-12">
                         <div class="dashboard_title_area">
                             <div class="dashboard__title">
-                                <h3>Sales Statements</h3>
+                                <h3>@lang('profilesale.salestatement')</h3>
                                 <div class="date_area">
                                     <form action="#">
                                         <div class="input_with_icon">
-                                            <input type="text" class="dattaPikkara" placeholder="From">
+                                            <input type="text" class="dattaPikkara" placeholder="@lang('profilesale.from')">
                                             <span class="lnr lnr-calendar-full"></span>
                                         </div>
 
                                         <div class="input_with_icon">
-                                            <input type="text" class="dattaPikkara" placeholder="To">
+                                            <input type="text" class="dattaPikkara" placeholder="@lang('profilesale.to')">
                                             <span class="lnr lnr-calendar-full"></span>
                                         </div>
                                         <div class="select-wrap">
                                             <select name="transaction_type" id="#">
-                                                <option value="all">All Transaction</option>
-                                                <option value="sale">Sale</option>
-                                                <option value="sale">Purchase</option>
-                                                <option value="credited">Withdraw</option>
+                                                <option value="0">@lang('profilesale.salestatement')</option>
+                                                <option value="1">Sale</option>
+                                                <option value="2">Purchase</option>
+                                                <option value="3">Withdraw</option>
                                             </select>
                                             <span class="lnr lnr-chevron-down"></span>
                                         </div>
 
-                                        <button type="submit" class="btn btn--sm btn--round btn--color1">Search</button>
+                                        <button type="submit" class="btn btn--sm btn--round btn--color1">@lang('profilesale.search')</button>
                                     </form>
                                 </div>
                             </div>
@@ -50,13 +50,13 @@
                 </div><!-- end /.row -->
 
                 <div class="row">
-                    <div class="col-md-3 col-sm-3">
+                    <div class="col-md-3 col-sm-3 offset-md-3">
                         <div class="statement_info_card">
                             <div class="info_wrap">
                                 <span class="lnr lnr-tag icon mcolorbg1"></span>
                                 <div class="info">
                                     <p>$4,563</p>
-                                    <span>Total Sales</span>
+                                    <span>@lang('profilesale.totalsale')</span>
                                 </div>
                             </div><!-- end /.info_wrap -->
                         </div><!-- end /.statement_info_card -->
@@ -68,12 +68,12 @@
                                 <span class="lnr lnr-cart icon mcolorbg2"></span>
                                 <div class="info">
                                     <p>$340</p>
-                                    <span>Total Purchases</span>
+                                    <span>@lang('profilesale.totalpurchase')</span>
                                 </div>
                             </div><!-- end /.info_wrap -->
                         </div><!-- end /.statement_info_card -->
                     </div><!-- end /.col-md-3 -->
-
+                    {{--
                     <div class="col-md-3 col-sm-3">
                         <div class="statement_info_card">
                             <div class="info_wrap">
@@ -97,6 +97,7 @@
                             </div><!-- end /.info_wrap -->
                         </div><!-- end /.statement_info_card -->
                     </div><!-- end /.col-md-3 -->
+                    --}}
                 </div><!-- end /.row -->
 
                 <div class="row">
@@ -105,14 +106,14 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Order ID</th>
-                                    <th>Author</th>
-                                    <th>Detail</th>
-                                    <th>Type</th>
-                                    <th>Price</th>
-                                    <th>Earning</th>
-                                    <th>Action</th>
+                                    <th>@lang('profilesale.date')</th>
+                                    <th>@lang('profilesale.orderid')</th>
+                                    <th>@lang('profilesale.author')</th>
+                                    <th>@lang('profilesale.detail')</th>
+                                    <th>@lang('profilesale.type')</th>
+                                    <th>@lang('profilesale.price')</th>
+                                    <th>@lang('profilesale.earning')</th>
+                                    <th>@lang('profilesale.action')</th>
                                 </tr>
                                 </thead>
 
@@ -125,7 +126,7 @@
                                         <td class="type"><span class="sale">Sale</span></td>
                                         <td>$49</td>
                                         <td class="earning">$24.50</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
+                                        <td class="action"><a href="invoice.html">@lang('profilesale.view')</a></td>
                                     </tr>
 
                                     <tr>

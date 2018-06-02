@@ -21,7 +21,7 @@ return [
     'setting' => 'ការកំណត់', 
     'purchase' => 'ការទិញ',
     'cart' => 'ការទិញ',
-    'favourite' => 'ពេញចិត្',
+    'favourite' => 'ពេញចិត្ត',
     'salemanage' => 'ការលក់',
     'uploaditems' => 'បន្ថែមផលិតផល',
     'manageitems' => 'គ្រប់គ្រង់ផលិតផល',
