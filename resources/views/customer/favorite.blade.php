@@ -20,13 +20,13 @@
                     <div class="filter-bar filter-bar3">
                         <div class="filter__option filter--text pull-left">
                             <p>
-                                <span>570</span> Items</p>
+                                <span>570</span> @lang('profilefavorite.items')</p>
                         </div>
 
                         <div class="pull-right">
                             <div class="filter__option filter--dropdown">
                                 <a href="#" id="drop2" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Filter By
+                                    @lang('profile.filter')
                                     <span class="lnr lnr-chevron-down"></span>
                                 </a>
 
@@ -51,8 +51,8 @@
                             <div class="filter__option filter--select">
                                 <div class="select-wrap">
                                     <select name="price">
-                                        <option value="low">Price : Low to High</option>
-                                        <option value="high">Price : High to low</option>
+                                        <option value="low">@lang('profilefavorite.lowtohight')</option>
+                                        <option value="high">@lang('profilefavorite.highttolow')</option>
                                     </select>
                                     <span class="lnr lnr-chevron-down"></span>
                                 </div>
@@ -60,9 +60,9 @@
                             <div class="filter__option filter--select">
                                 <div class="select-wrap">
                                     <select name="price">
-                                        <option value="12">12 Items per page</option>
-                                        <option value="15">15 Items per page</option>
-                                        <option value="25">25 Items per page</option>
+                                        <option value="12">@lang('profilefavorite.12items')</option>
+                                        <option value="15">@lang('profilefavorite.15items')</option>
+                                        <option value="25">@lang('profilefavorite.25items')</option>
                                     </select>
                                     <span class="lnr lnr-chevron-down"></span>
                                 </div>
@@ -106,8 +106,8 @@
                         <div class="product__thumbnail">
                             <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
                             <div class="prod_btn">
-                                <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                                <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
+                                <a href="single-product.html" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                             </div><!-- end /.prod_btn -->
                         </div><!-- end /.product__thumbnail -->
 

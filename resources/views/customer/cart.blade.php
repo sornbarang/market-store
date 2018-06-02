@@ -24,16 +24,16 @@
                         <div class="title_area">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <h4>Product Details</h4>
+                                    <h4>@lang('profilebuy.prodetail')</h4>
                                 </div>
                                 <div class="col-md-3">
-                                    <h4 class="add_info">Category</h4>
+                                    <h4 class="add_info">@lang('profilebuy.category')</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <h4>Price</h4>
+                                    <h4>@lang('profilebuy.price')</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <h4>Remove</h4>
+                                    <h4>@lang('profilebuy.remove')</h4>
                                 </div>
                             </div>
                         </div>
@@ -142,14 +142,14 @@
                                 <div class="cart_calculation">
                                     <div class="cart--subtotal">
                                         <p>
-                                            <span>Cart Subtotal</span>$120</p>
+                                            <span>@lang('profilebuy.cartsubtotal')</span>$120</p>
                                     </div>
                                     <div class="cart--total">
                                         <p>
-                                            <span>total</span>$120</p>
+                                            <span>@lang('profilebuy.total')</span>$120</p>
                                     </div>
 
-                                    <a href="checkout.html" class="btn btn--round btn--md checkout_link">Proceed To Checkout</a>
+                                    <a href="checkout.html" class="btn btn--round btn--md checkout_link">@lang('profilebuy.proceedtocheckout')</a>
                                 </div>
                             </div>
                             <!-- end .col-md-12 -->

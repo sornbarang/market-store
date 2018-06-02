@@ -506,7 +506,8 @@
             <div class="col-md-3 col-sm-6">
                 <div class="info-footer">
                     <div class="info__logo">
-                        <img src="{{asset('/')}}images/flogo.png" alt="footer logo">
+                        <h3>TreeWB</h3>
+                        <!-- <img src="{{asset('/')}}images/flogo.png" alt="footer logo"> -->
                     </div>
                     <p class="info--text">Nunc placerat mi id nisi interdum they mollis. Praesent pharetra, justo ut scel erisque the mattis, leo quam.</p>
                     <ul class="info-contact">
@@ -528,7 +529,7 @@
 
             <div class="col-md-5 col-sm-6">
                 <div class="footer-menu">
-                    <h4 class="footer-widget-title text--white">Our Company</h4>
+                    <h4 class="footer-widget-title text--white">@lang('footer.ourcompany')</h4>
                     <ul>
                         <li><a href="#">How to Join Us</a></li>
                         <li><a href="#">How It Work</a></li>
@@ -541,7 +542,7 @@
                 </div><!-- end /.footer-menu -->
 
                 <div class="footer-menu">
-                    <h4 class="footer-widget-title text--white">Help and FAQs</h4>
+                    <h4 class="footer-widget-title text--white">@lang('footer.helpandfq')</h4>
                     <ul>
                         <li><a href="#">How to Join Us</a></li>
                         <li><a href="#">How It Work</a></li>
@@ -556,7 +557,7 @@
 
             <div class="col-md-4 col-sm-12">
                 <div class="newsletter">
-                    <h4 class="footer-widget-title text--white">Newsletter</h4>
+                    <h4 class="footer-widget-title text--white">@lang('footer.newsletter')</h4>
                     <p>Subscribe to get the latest news, update and offer information. Don't worry, we won't send spam!</p>
                     <div class="newsletter__form">
                         <form action="#">

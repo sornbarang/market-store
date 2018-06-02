@@ -22,7 +22,7 @@
                         <div class="dashboard_title_area">
                             <div class="pull-left">
                                 <div class="dashboard__title">
-                                    <h3>Upload Your Item</h3>
+                                    <h3>@lang('profileitemupload.uploaditem')</h3>
                                 </div>
                             </div>
                         </div>
@@ -34,15 +34,15 @@
                         <form action="#">
                             <div class="upload_modules">
                                 <div class="modules__title">
-                                    <h3>Item Name & Description</h3>
+                                    <h3>@lang('profileitemupload.uploaditem')</h3>
                                 </div><!-- end /.module_title -->
 
                                 <div class="modules__content">
                                     <div class="form-group">
-                                        <label for="category">Select Category</label>
+                                        <label for="category">@lang('profileitemupload.itemnamedes')</label>
                                         <div class="select-wrap select-wrap2">
                                             <select name="country" id="category" class="text_field">
-                                                <option value="">Select one</option>
+                                                <option value="">@lang('profileitemupload.selectcategory')</option>
                                                 <option value="wordpress">Wordpress</option>
                                                 <option value="html">Html</option>
                                                 <option value="graphic">Graphics</option>
@@ -55,109 +55,66 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="product_name">Product Name <span>(Max 100 characters)</span></label>
+                                        <label for="product_name">@lang('profileitemupload.productname') <span>(Max 100 characters)</span></label>
                                         <input type="text" id="product_name" class="text_field" placeholder="Enter your product name here...">
                                     </div>
 
                                     <div class="form-group no-margin">
-                                        <p class="label">Product Description</p>
+                                        <p class="label">@lang('profileitemupload.productdes')</p>
                                         <div id="trumbowyg-demo"></div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label for="exlicense">@lang('profileitemupload.price')</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" id="exlicense" class="text_field" placeholder="00.00">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div><!-- end /.modules__content -->
                             </div><!-- end /.upload_modules -->
 
                             <div class="upload_modules module--upload">
                                 <div class="modules__title">
-                                    <h3>Upload Files</h3>
+                                    <h3>@lang('profileitemupload.uploadfile')</h3>
                                 </div><!-- end /.module_title -->
 
                                 <div class="modules__content">
                                     <div class="form-group">
-                                        <div class="upload_wrapper">
-                                            <p>Upload Thumbnail <span>(JPEG or PNG 100x100px)</span></p>
+                                        @for($i=0;$i<4;$i++)
+                                            <div class="upload_wrapper">
+                                                <p>@lang('profileitemupload.uploadthumbnail') <span>(JPEG or PNG 100x100px)</span></p>
 
-                                            <div class="custom_upload">
-                                                <label for="thumbnail">
-                                                    <input type="file" id="thumbnail" class="files">
-                                                    <span class="btn btn--round btn--sm">Choose File</span>
-                                                </label>
-                                            </div><!-- end /.custom_upload -->
+                                                <div class="custom_upload">
+                                                    <label for="thumbnail">
+                                                        <input type="file" id="thumbnail".$i."" class="files">
+                                                        <span class="btn btn--round btn--sm">@lang('profileitemupload.choosefile')</span>
+                                                    </label>
+                                                </div><!-- end /.custom_upload -->
 
-                                            <div class="progress_wrapper">
-                                                <div class="labels clearfix">
-                                                    <p>Thumbnail.jpg</p>
-                                                    <span data-width="89">89%</span>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 89%;">
-                                                        <span class="sr-only">70% Complete</span>
+                                                <div class="progress_wrapper">
+                                                    <div class="labels clearfix">
+                                                        <p>filename.jpg</p>
+                                                        <span data-width="89">89%</span>
                                                     </div>
-                                                </div>
-                                            </div><!-- end /.progress_wrapper -->
-
-                                            <span class="lnr upload_cross lnr-cross"></span>
-                                        </div><!-- end /.upload_wrapper -->
-                                    </div><!-- end /.form-group -->
-
-                                    <div class="form-group">
-                                        <div class="upload_wrapper">
-                                            <p>Upload Main File <span>(ZIP - All files)</span></p>
-
-                                            <div class="custom_upload">
-                                                <label for="main_file">
-                                                    <input type="file" id="main_file" class="files">
-                                                    <span class="btn btn--round btn--sm">Choose File</span>
-                                                </label>
-                                            </div><!-- end /.custom_upload -->
-
-                                            <div class="progress_wrapper">
-                                                <div class="labels clearfix">
-                                                    <p>WordPress Blog Theme.zip</p>
-                                                    <span data-width="90">90%</span>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-                                                        <span class="sr-only">90% Complete</span>
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 89%;">
+                                                            <span class="sr-only">70% Complete</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div><!-- end /.progress_wrapper -->
+                                                </div><!-- end /.progress_wrapper -->
 
-                                            <span class="lnr upload_cross lnr-cross"></span>
-                                        </div><!-- end /.upload_wrapper -->
-                                    </div><!-- end /.form-group -->
-
-                                    <div class="form-group">
-                                        <div class="upload_wrapper">
-                                            <p>Upload Screenshots <span>(ZIP file of images)</span></p>
-
-                                            <div class="custom_upload">
-                                                <label for="screenshot">
-                                                    <input type="file" id="screenshot" class="files">
-                                                    <span class="btn btn--round btn--sm">Choose File</span>
-                                                </label>
-                                            </div><!-- end /.custom_upload -->
-
-                                            <div class="progress_wrapper">
-                                                <div class="labels clearfix">
-                                                    <p>Thumbnail.jpg</p>
-                                                    <span data-width="78">78%</span>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 78%;">
-                                                        <span class="sr-only">78% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </div><!-- end /.progress_wrapper -->
-
-                                            <span class="lnr upload_cross lnr-cross"></span>
-                                        </div><!-- end /.upload_wrapper -->
-                                    </div><!-- end /.form-group -->
+                                                <span class="lnr upload_cross lnr-cross"></span>
+                                            </div><!-- end /.upload_wrapper -->
+                                        @endfor
+                                    </div><!-- end /.form-group --> 
                                 </div><!-- end /.upload_modules -->
                             </div><!-- end /.upload_modules -->
 
                             <div class="upload_modules">
                                 <div class="modules__title">
-                                    <h3>Others Information</h3>
+                                    <h3>@lang('profileitemupload.otherinfo')</h3>
                                 </div><!-- end /.module_title -->
 
                                 <div class="modules__content">
@@ -269,72 +226,8 @@
                                     </div>
                                 </div><!-- end /.upload_modules -->
                             </div><!-- end /.upload_modules -->
-
-                            <div class="upload_modules">
-                                <div class="modules__title">
-                                    <h3>Others Information</h3>
-                                </div><!-- end /.module_title -->
-
-                                <div class="modules__content">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="rlicense">Regular License</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" id="rlicense" class="text_field" placeholder="00.00">
-                                                </div>
-                                            </div>
-                                        </div><!-- end /.col-md-6 -->
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="exlicense">Extended License</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" id="exlicense" class="text_field" placeholder="00.00">
-                                                </div>
-                                            </div>
-                                        </div><!-- end /.col-md-6 -->
-
-                                    </div><!-- end /.row -->
-                                    <div class="or"></div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="single_use">Single User License</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" id="single_use" class="text_field" placeholder="00.00">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="double_use">2 User License</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" id="double_use" class="text_field" placeholder="00.00">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="multi_user">Multi User License</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" id="multi_user" class="text_field" placeholder="00.00">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><!-- end /.row -->
-                                </div><!-- end /.modules__content -->
-                            </div><!-- end /.upload_modules -->
-
                             <!-- submit button -->
-                            <button type="submit" class="btn btn--round btn--fullwidth btn--lg">Submit Your Item for Review</button>
+                            <button type="submit" class="btn btn--round btn--fullwidth btn--lg">@lang('profileitemupload.save')</button>
                         </form>
                     </div><!-- end /.col-md-8 -->
 
@@ -342,22 +235,12 @@
                         <aside class="sidebar upload_sidebar">
                             <div class="sidebar-card">
                                 <div class="card-title">
-                                    <h3>Quick Upload  Rules</h3>
+                                    <h3>@lang('profileitemupload.quickuploadrule')</h3>
                                 </div>
 
                                 <div class="card_content">
                                     <div class="card_info">
-                                        <h4>Image Upload</h4>
-                                        <p>Nunc placerat mi id nisi interdum mollis. Praesent there pharetra, justo ut sceleris que the mattis interdum.</p>
-                                    </div>
-
-                                    <div class="card_info">
-                                        <h4>File Upload</h4>
-                                        <p>Nunc placerat mi id nisi interdum mollis. Praesent there pharetra, justo ut sceleris que the mattis interdum.</p>
-                                    </div>
-
-                                    <div class="card_info">
-                                        <h4>Vector Upload</h4>
+                                        <h4>@lang('profileitemupload.imageupload')</h4>
                                         <p>Nunc placerat mi id nisi interdum mollis. Praesent there pharetra, justo ut sceleris que the mattis interdum.</p>
                                     </div>
                                 </div>
@@ -365,7 +248,7 @@
 
                             <div class="sidebar-card">
                                 <div class="card-title">
-                                    <h3>Trouble Uploading?</h3>
+                                    <h3>@lang('profileitemupload.troubleupload')</h3>
                                 </div>
 
                                 <div class="card_content">
@@ -380,26 +263,7 @@
                                         <li>Consectetur elit, sed do eiusmod the</li>
                                     </ul>
                                 </div>
-                            </div><!-- end /.sidebar-card -->
-
-                            <div class="sidebar-card">
-                                <div class="card-title">
-                                    <h3>More Upload Info</h3>
-                                </div>
-
-                                <div class="card_content">
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceler isque the mattis, leo quam aliquet congue.</p>
-                                    <ul>
-                                        <li>Consectetur elit, sed do eiusmod the
-                                            labore et dolore magna.</li>
-                                        <li>Consectetur elit, sed do eiusmod the
-                                            labore et dolore magna.</li>
-                                        <li>Consectetur elit, sed do eiusmod the
-                                            labore et dolore magna.</li>
-                                        <li>Consectetur elit, sed do eiusmod the</li>
-                                    </ul>
-                                </div>
-                            </div><!-- end /.sidebar-card -->
+                            </div><!-- end /.sidebar-card --> 
                         </aside><!-- end /.sidebar -->
                     </div><!-- end /.col-md-4 -->
                 </div><!-- end /.row -->
