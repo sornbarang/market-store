@@ -140,7 +140,7 @@
                                             <label for="country1">@lang('profilesetting.country') <sup>*</sup></label>
                                             <div class="select-wrap select-wrap2">
                                                 <select name="country" id="country" class="text_field">
-                                                    <option value="">Select one</option>
+                                                    <option value="">@lang('profilesetting.selectone')</option>
                                                     <option value="bangladesh">Bangladesh</option>
                                                     <option value="india">India</option>
                                                     <option value="uruguye">Uruguye</option>
@@ -213,7 +213,18 @@
                                             </label>
                                         </div>
 
-                                        
+                                        <div class="prof_img_upload">
+                                            <p class="bold">@lang('profilesetting.coverimage')</p>
+                                            <img src="{{asset('/')}}images/cvrplc.jpg" alt="The great warrior of China">
+
+                                            <div  class="upload_title">
+                                                <p>JPG, GIF or PNG 750x370 px</p>
+                                                <label for="dp" class="upload_btn">
+                                                    <input type="file" id="dp">
+                                                    <span class="btn btn--sm btn--round" aria-hidden="true">@lang('profilesetting.button')</span>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div><!-- end /.information_module -->

@@ -10187,17 +10187,17 @@ span.counter {
 }
 
 .profile_images .upload_btn {
-  float: right;
-  padding-left: 18px;
-  padding-top: 27px;
+  /* float: right; */
+  /* padding-left: 18px; */
+  /* padding-top: 27px; */
 }
 
 .profile_images .upload_btn .btn {
-  background: #7347c1;
+  background: #56a72d;
 }
 
 .profile_images .upload_btn .btn:hover {
-  background: #0674ec;
+  background: #56a72d;
   color: #fff;
 }
 
