@@ -3,24 +3,7 @@
 <!--================================
         START BREADCRUMB AREA
     =================================-->
-    <section class="breadcrumb-area breadcrumb--center breadcrumb--smsbtl">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page_title">
-                        <h3>@lang('contact.contact')</h3>
-                        <p class="subtitle">@lang('contact.youcomerightplace')</p>
-                    </div>
-                    <div class="breadcrumb">
-                        <ul>
-                            <li><a href="{{url(app()->getLocale().'/')}}">@lang('menu.home')</a></li>
-                            <li class="active"><a href="#">Affiliates</a></li>
-                        </ul>
-                    </div>
-                </div><!-- end /.col-md-12 -->
-            </div><!-- end /.row -->
-        </div><!-- end /.container -->
-    </section>
+    @include('elements.customer-breadcrumb')
     <!--================================
         END BREADCRUMB AREA
     =================================-->
