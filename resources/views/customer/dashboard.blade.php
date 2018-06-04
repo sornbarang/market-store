@@ -3,21 +3,7 @@
 <!--================================
         START BREADCRUMB AREA
     =================================-->
-    <section class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumb">
-                        <ul>
-                            <li><a href="index.html">@lang('menu.home')</a></li>
-                            <li><a href="dashboard.html">@lang('profile.dashboard')</a></li>
-                        </ul>
-                    </div>
-                    <h1 class="page-title">Author's @lang('profile.dashboard')</h1>
-                </div><!-- end /.col-md-12 -->
-            </div><!-- end /.row -->
-        </div><!-- end /.container -->
-    </section>
+    @include('elements.customer-breadcrumb')
     <!--================================
         END BREADCRUMB AREA
     =================================-->

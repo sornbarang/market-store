@@ -332,8 +332,8 @@
                         </div>
                         <div class="breadcrumb">
                             <ul>
-                                <li><a href="{{url(app()->getLocale().'/market')}}">@lang('menu.home')</a></li>
-                                <li class="active"><a href="#">@lang('frontlabel.allpro')</a></li>
+                                <li><a href="{{route('market')}}">@lang('menu.home')</a></li>
+                                <li class="active"><a href="#">@lang('frontlabel.allcats')</a></li>
                             </ul>
                         </div>
                     </div>

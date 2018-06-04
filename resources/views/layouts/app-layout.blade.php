@@ -454,7 +454,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="has_dropdown">
-                                    <a href="index.html">@lang('menu.home')</a>
+                                    <a href="{{route('market')}}">@lang('menu.home')</a>
                                     <div class="dropdown dropdown--menu">
                                         <ul>
                                             <li>

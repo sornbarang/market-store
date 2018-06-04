@@ -118,113 +118,21 @@
                                 </thead>
 
                                 <tbody>
+                                    @php 
+                                        $credites=['Sale','Purchase','Credited','Withdraw'];
+                                    @endphp
+                                    @foreach($credites as $credite)
                                     <tr>
                                         <td>09 Jul 2017</td>
                                         <td>MP810094</td>
                                         <td class="author">AazzTech</td>
-                                        <td class="detail"><a href="single-product.html">Visibility Manager Subscriptions</a></td>
-                                        <td class="type"><span class="sale">Sale</span></td>
+                                        <td class="detail"><a href="{{route('market.productdetail')}}">Visibility Manager Subscriptions</a></td>
+                                        <td class="type"><span class="sale">{{$credite}}</span></td>
                                         <td>$49</td>
                                         <td class="earning">$24.50</td>
-                                        <td class="action"><a href="invoice.html">@lang('profilesale.view')</a></td>
+                                        <td class="action"><a href="{{route('market.invoice')}}">@lang('profilesale.view')</a></td>
                                     </tr>
-
-                                    <tr>
-                                        <td>03 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Markober</td>
-                                        <td class="detail"><a href="single-product.html">Martplace Coffee Shop</a></td>
-                                        <td class="type"><span class="purchase">Purchase</span></td>
-                                        <td>$30</td>
-                                        <td class="earning subtract">-$30</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>09 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Themexylum</td>
-                                        <td class="detail"><a href="single-product.html">MartPlace Extension Bundle</a></td>
-                                        <td class="type"><span class="sale">Sale</span></td>
-                                        <td>$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>05 Apr 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">AazzTech</td>
-                                        <td class="detail"><a href="single-product.html">Stack - Responsive Bootstrap 4 Admin Template</a></td>
-                                        <td class="type"><span class="sale">Sale</span></td>
-                                        <td>$20</td>
-                                        <td class="earning">$10</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>25 Dec 2016</td>
-                                        <td>MP810394</td>
-                                        <td class="author text-center" colspan="2">Via Payoneer</td>
-                                        <td class="type"><span class="credited">Credited</span></td>
-                                        <td>$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>09 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author text-center" colspan="2">Via Paypal</td>
-                                        <td class="type"><span class="withdrawal">Withdraw</span></td>
-                                        <td>$350</td>
-                                        <td class="earning subtract">-$350</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>0 Feb 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Artcorner</td>
-                                        <td class="detail"><a href="single-product.html">Rida - Applanding Onepage </a></td>
-                                        <td class="type"><span class="purchase">Purchase</span></td>
-                                        <td>$30</td>
-                                        <td class="earning subtract">-$30</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>26 May 2016</td>
-                                        <td>MP81024</td>
-                                        <td class="author">Awesomaiya</td>
-                                        <td class="detail"><a href="single-product.html">Table Generator extension bundle</a></td>
-                                        <td class="type"><span class="sale">Sale</span></td>
-                                        <td>$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>26 Aug 2017</td>
-                                        <td>MP810654</td>
-                                        <td class="author">Codepoets</td>
-                                        <td class="detail"><a href="single-product.html">Kamla One page portfolio</a></td>
-                                        <td class="type"><span class="sale">Sale</span></td>
-                                        <td>$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>09 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Designing</td>
-                                        <td class="detail"><a href="single-product.html">Ajaxified karma loader</a></td>
-                                        <td class="type"><span class="purchase">Purchased</span></td>
-                                        <td>$29</td>
-                                        <td class="earning">-$29</td>
-                                        <td class="action"><a href="invoice.html">view</a></td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 

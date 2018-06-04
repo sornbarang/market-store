@@ -167,6 +167,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Adumskis\LaravelAdvert\AdvertServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+
     ],
 
     /*
@@ -222,6 +224,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

@@ -51,6 +51,9 @@ function()
         Route::get('myitemupload', ['as' => 'market.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
         Route::get('mymanageitem', ['as' => 'market.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
         Route::get('myEditItem', ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
+        Route::get('myInvoice', ['as' => 'market.invoice', 'uses' => 'CustomerController@myInvoice']);
+        Route::get('viewPdf', ['as' => 'market.viewpdf', 'uses' => 'CustomerController@viewPdf']);
+        Route::get('downloadPdf', ['as' => 'market.downloadpdf', 'uses' => 'CustomerController@downloadPdf']);
 
         Route::resource('customer', 'CustomerController',['names' =>
             [
