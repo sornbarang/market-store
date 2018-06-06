@@ -1,4 +1,22 @@
-<style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>    
+    @if( app()->getLocale()=='km')
+        @font-face {
+            font-family: "Kantumruy";
+            font-style: normal;
+            font-weight: normal;
+            src: url("{{public_path()}}/fonts/Kantumruy-Light.ttf") format('truetype');
+        } 
+        th,h4,.info p,.date_info > p > span,.pricing_info p { font-family: Kantumruy; }
+        body {font-family: "Quicksand, sans-serif";}
+    @else
+        * {
+            font-family: "Quicksand, sans-serif";
+        }
+    @endif 
     .invoice {
         background: #fff;
         -webkit-border-radius: 4px;
@@ -130,6 +148,10 @@ p {
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 </style>
+</head>
+<body> 
+ 
+
 <h1>
 <section class="dashboard-area"> 
     <div class="dashboard_contents">
@@ -143,8 +165,8 @@ p {
                             </div>
 
                             <div class="info">
-                                <h4>Invoice info</h4>
-                                <p>Order # MP810094</p>
+                                <h4>@lang('profileinvoice.invoiceinfo')</h4>
+                                <p>@lang('profileinvoice.order') # MP810094</p>
                             </div>
                         </div>
                         <!-- end /.invoice__head -->
@@ -159,11 +181,11 @@ p {
 
                             <div class="date_info">
                                 <p>
-                                    <span>Invoice Date</span>May 05, 2017</p>
+                                    <span>@lang('profileinvoice.invoicedate')</span>May 05, 2017</p>
                                 <p>
-                                    <span>Due Date</span>May 10, 2017</p>
+                                    <span>@lang('profileinvoice.duedate')</span>May 10, 2017</p>
                                 <p class="status">
-                                    <span>Status</span>Sale</p>
+                                    <span>@lang('profileinvoice.status')</span>Sale</p>
                             </div>
                         </div>
                         <!-- end /.invoice__meta -->
@@ -173,12 +195,12 @@ p {
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Date</th>
-                                            <th>AazzTech</th>
-                                            <th>Item</th>
-                                            <th>License</th>
-                                            <th>Unit Cost</th>
-                                            <th>Total</th>
+                                            <th>@lang('profileinvoice.date')</th>
+                                            <th>@lang('profileinvoice.name')</th>
+                                            <th>@lang('profileinvoice.item')</th>
+                                            <th>@lang('profileinvoice.license')</th>
+                                            <th>@lang('profileinvoice.unitcost')</th>
+                                            <th>@lang('profileinvoice.total')</th>
                                         </tr>
                                     </thead>
 
@@ -199,8 +221,8 @@ p {
                             </div>
 
                             <div class="pricing_info">
-                                <p>Sub - Total amount: $30</p>
-                                <p class="bold">Total : $30</p>
+                                <p>@lang('profileinvoice.subamount'): $30</p>
+                                <p class="bold">@lang('profileinvoice.total') : $30</p>
                             </div>
                         </div>
                         <!-- end /.invoice_detail -->
@@ -215,3 +237,5 @@ p {
     </div>
 </section>
 </h1>
+</body>
+</html>

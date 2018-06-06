@@ -193,15 +193,12 @@ class CustomerController extends Controller
         $data['breadcrub']='invoice';
         return view('customer.invoice',compact('data'));
     }
-    public function downloadPdf(){
-        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'Quicksand, sans-serif']);
+    public function downloadPdf(){ 
         $data['breadcrub']='invoice';
         $pdf = PDF::loadView('customer.pdf',compact('data'));
         return $pdf->download('invoice.pdf'); 
     }
-    public function viewPdf(){ 
-        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'Quicksand, sans-serif']);
-
+    public function viewPdf(){  
         // $pdf = App::make('dompdf.wrapper');
         // $pdf->loadHTML('<h1>Test</h1>');
         $data['breadcrub']='invoice';
