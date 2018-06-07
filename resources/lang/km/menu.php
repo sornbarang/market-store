@@ -17,4 +17,5 @@ return [
     'policy' => 'គោលការណ៍',
     'contact' => 'ទំនាក់ទំនង',
     'aboutus' => 'អំពីរយើង', 
+    'termcondiction' => 'លក្ខខណ្ឌ', 
 ];

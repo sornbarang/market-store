@@ -454,7 +454,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="has_dropdown">
-                                    <a href="index.html">@lang('menu.home')</a>
+                                    <a href="{{route('market')}}">@lang('menu.home')</a>
                                     <div class="dropdown dropdown--menu">
                                         <ul>
                                             <li>
@@ -469,12 +469,16 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="#">{{trans('menu.policy')}}</a>
+                                </li> -->
+                                <li>
+                                    <a href="{{ route('termcondiction') }}">{{trans('menu.termcondiction')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('contact') }}">{{trans('menu.contact')}}</a>
                                 </li>
+                                
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->

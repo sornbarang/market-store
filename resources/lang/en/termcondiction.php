@@ -13,9 +13,12 @@ return [
     |
     */
 
-    'home' => 'Home',
-    'policy' => 'Policy',
-    'contact' => 'Contact',
-    'aboutus' => 'About', 
-    'termcondiction' => 'Terms & Conditions', 
+    'termofservice' => 'Term Of Service',
+    'ourservice' => 'Our Service',
+    'odpapc' => 'Our data policy and privacy choice',
+    'ycttaoc' => 'Your commitment to TreeWB and our community',
+    'limitonlia' => 'Limits on liability', 
+    'other' => 'Other', 
+    'othertapmou' => 'Other term and policy may apply on you', 
+    'cookie' => 'Cookie', 
 ];

@@ -13,9 +13,19 @@ return [
     |
     */
 
-    'home' => 'Home',
-    'policy' => 'Policy',
-    'contact' => 'Contact',
-    'aboutus' => 'About', 
-    'termcondiction' => 'Terms & Conditions', 
+    'print' => 'Print',
+    'download' => 'Download',
+    'invoiceinfo' => 'Invoice Info',
+    'invoice' => 'Invoice',
+    'date' => 'Date', 
+    'item' => 'Item', 
+    'license' => 'License', 
+    'invoicedate' => 'Invoice Date', 
+    'duedate' => 'Due Date', 
+    'status' => 'Status', 
+    'unitcost' => 'Unit Cost', 
+    'order' => 'Order', 
+    'total' => 'Total', 
+    'name' => 'Name', 
+    'subamount' => 'Sub - Total amount',  
 ];

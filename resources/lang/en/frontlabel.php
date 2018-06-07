@@ -15,6 +15,7 @@ return [
     'searchpro' => 'Search products',
     'search' => 'Search',
     'allpro' => 'All New Products',
+    'allcats' => 'All Categories',
     'joinourshop'=>'Ready to Join Our TreeWB!',
     'joinus'=>'Join Us Today',
     'memberjoin'=>'Over 25,000 designers and developers trust the TreeWB.',

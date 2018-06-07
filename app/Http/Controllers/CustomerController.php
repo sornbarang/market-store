@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Products;
+use PDF;
+use App;
 
 class CustomerController extends Controller
 {
@@ -178,5 +181,28 @@ class CustomerController extends Controller
     {
         $data['breadcrub']='update item';
         return view('customer.edit-item',compact('data'));
+    }
+    /**
+     * User's card
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function myInvoice()
+    {
+        $data['breadcrub']='invoice';
+        return view('customer.invoice',compact('data'));
+    }
+    public function downloadPdf(){ 
+        $data['breadcrub']='invoice';
+        $pdf = PDF::loadView('customer.pdf',compact('data'));
+        return $pdf->download('invoice.pdf'); 
+    }
+    public function viewPdf(){  
+        // $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadHTML('<h1>Test</h1>');
+        $data['breadcrub']='invoice';
+        $pdf = PDF::loadView('customer.pdf',compact('data'));
+        return $pdf->stream();
     }
 }
