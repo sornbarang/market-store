@@ -469,12 +469,16 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="#">{{trans('menu.policy')}}</a>
+                                </li> -->
+                                <li>
+                                    <a href="{{ route('termcondiction') }}">{{trans('menu.termcondiction')}}</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('contact') }}">{{trans('menu.contact')}}</a>
                                 </li>
+                                
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->

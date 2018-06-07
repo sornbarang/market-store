@@ -102,6 +102,9 @@ ul {
 li {
   list-style: none;
 }
+.job_area li{
+  list-style: inherit !important;
+}
 
 a:hover, a:focus {
   text-decoration: none;
@@ -12507,7 +12510,7 @@ span.counter {
 ****************************************/
 .term_condition_area {
   background: #eff1f5;
-  padding: 60px 0 120px;
+  /* padding: 60px 0 120px; */
 }
 
 .term_modules {
@@ -13250,14 +13253,15 @@ span.counter {
 }
 
 .job_detail_module .job__content .content_list li {
-  padding-left: 26px;
+  padding-left: 0px;
+  /* padding-left: 26px; */
   position: relative;
   line-height: 30px;
   color: #555;
 }
 
 .job_detail_module .job__content .content_list li:before {
-  content: "";
+  /* content: "";
   height: 7px;
   width: 7px;
   background: #c5cad4;
@@ -13268,8 +13272,9 @@ span.counter {
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  transform: translateY(-50%); */
 }
+
 
 .job_detail_module .job__content .social, .job_detail_module .job__content .single_blog_content .share_tags .share .social_share, .single_blog_content .share_tags .share .job_detail_module .job__content .social_share {
   margin-top: 72px;
@@ -13313,7 +13318,7 @@ span.counter {
 }
 
 .job_detail_module.information .job__content {
-  padding: 34px 30px 0;
+  /* padding: 34px 30px 0; */
 }
 
 /***************************************

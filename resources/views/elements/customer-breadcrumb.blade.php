@@ -13,8 +13,6 @@
                     @if (Route::has('login'))
                         @auth
                             {{ ucfirst(Auth::user()->name) }}'s
-                        @else
-                            guest
                         @endauth 
                     @endif
                 {{NULL !== $data['breadcrub']?$data['breadcrub']:'Application'}}</h1>
