@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\CategoriesAds;
 
-class C2cController extends Controller
+class CategoryAdsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    function make_slug($string) {
-        return preg_replace('/\s+/u', '-', trim($string));
-    }
-
-
     public function index()
     {
+        $root = CategoriesAds::create(['name' => 'Root category']);
 
-        return view('c2c.page.index');
+        $Baum = new CategoriesAds([
+            'name' => 'ដំណឹងល្អ'
+        ]);
+
+        $Baum->save();
+
     }
 
     /**
@@ -86,28 +89,5 @@ class C2cController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * Display a listing of the category.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getcategory()
-    {
-        return view('c2c.page.category');
-    }
-    /**
-     * Display a listing of the category.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getproduct()
-    {
-        return view('c2c.page.product');
-    }
-    public function getproductdetail()
-    {
-        return view('c2c.page.singleproduct');
     }
 }
