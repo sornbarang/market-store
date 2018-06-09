@@ -52,7 +52,7 @@ class CategoryAdsController extends Controller
         }
 
         $category->save();
-
+        $request->session()->flash('success', 'Category successfully saved.');
         return redirect()->route('admin.category-ads.index');
 
     }

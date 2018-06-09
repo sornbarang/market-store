@@ -1,4 +1,5 @@
 @extends('layouts.admin-layout')
+@section('title', 'List Categories')
 @section('content')
     <div class="content-body">
         <div class="row">
@@ -48,6 +49,12 @@
                                 Heads up! You can Swipe table Left to Right on Mobile devices.
                             </p>
                         </div>
+                        @if(session('success'))
+                            <div class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Success</strong> {!! session('success') !!}
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table id="productsTable" class="mdl-data-table product-table m-t-30" cellspacing="0" width="100%">
                                 <thead>
