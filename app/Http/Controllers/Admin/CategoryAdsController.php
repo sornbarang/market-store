@@ -8,6 +8,7 @@ use App\Models\CategoriesAds;
 
 class CategoryAdsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,13 +16,9 @@ class CategoryAdsController extends Controller
      */
     public function index()
     {
-        $root = CategoriesAds::create(['name' => 'Root category']);
+        $categories = CategoriesAds::get();
 
-        $Baum = new CategoriesAds([
-            'name' => 'ដំណឹងល្អ'
-        ]);
-
-        $Baum->save();
+        return view('admin.category-ads.index', compact('categories'));
 
     }
 
@@ -32,7 +29,8 @@ class CategoryAdsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = CategoriesAds::all();
+        return view('admin.category-ads.add', compact('categories'));
     }
 
     /**
@@ -43,7 +41,20 @@ class CategoryAdsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $category = new CategoriesAds();
+        $category->name = $request->name;
+        $category->parent_id = $request->parent_id;
+        $category->save();
+
+        foreach (['en', 'km'] as $locale) {
+            $category->translateOrNew($locale)->name = $request->name;
+        }
+
+        $category->save();
+
+        return redirect()->route('admin.category-ads.index');
+
     }
 
     /**
@@ -65,7 +76,9 @@ class CategoryAdsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = CategoriesAds::all();
+        $category = CategoriesAds::findOrFail($id);
+        return view('admin.category-ads.edit', compact(['category', 'categories']));
     }
 
     /**
@@ -77,7 +90,10 @@ class CategoryAdsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateCat = CategoriesAds::findOrFail($id);
+        $updateCat->translate()->name = $request->name;
+        $updateCat->save();
+        return redirect()->route('admin.category-ads.index');
     }
 
     /**
@@ -88,6 +104,8 @@ class CategoryAdsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ids = explode(',',$id);
+        CategoriesAds::whereIn('id', $ids)->delete();
+        return response()->json(['status'=>true]);
     }
 }

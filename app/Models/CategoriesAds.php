@@ -1,8 +1,9 @@
 <?php
 namespace App\Models;
 
+use App\Traits\Translatable;
+//use Dimsav\Translatable\Translatable;
 use Baum\Node;
-use Dimsav\Translatable\Translatable;
 /**
 * CategoriesAd
 */
@@ -11,7 +12,9 @@ class CategoriesAds extends Node {
 
 //    use Translatable;
 //    public $translationModel = 'App\Models\CategoriesAdsTranslation';
-    use \Dimsav\Translatable\Translatable;
+    // use \Dimsav\translatedAttributesle\Translatable;
+
+    use Translatable;
   /**
    * Table name.
    *
@@ -108,7 +111,8 @@ class CategoriesAds extends Node {
   // to hook your own callbacks/observers into this events:
   // http://laravel.com/docs/5.0/eloquent#model-events
 
-    public function save(array $options = [])
+
+    /*public function save(array $options = [])
     {
         //!!!store translations to prevent deleting from model events...
         $translations = $this->translations;
@@ -148,6 +152,6 @@ class CategoriesAds extends Node {
         }
 
         return false;
-    }
+    }*/
 
 }

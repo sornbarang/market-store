@@ -108,6 +108,7 @@ function()
          */
         Route::post('deletemedia/{id}', 'ProductController@deleteMedia');
         Route::post('publish/{id}', 'ProductController@publish');
+        
         Route::resource('user', 'UserController',['names' =>
             [
                 'index' => 'admin.user.index',
@@ -139,6 +140,17 @@ function()
                 'store' => 'admin.permission.store',
                 'show' => 'admin.permission.show',
                 'destroy' => 'admin.permission.destroy',
+            ]
+        ]);
+        Route::resource('category-ads', 'CategoryAdsController',['names' =>
+            [
+                'index' => 'admin.category-ads.index',
+                'create' => 'admin.category-ads.create',
+                'update' => 'admin.category-ads.update',
+                'edit' => 'admin.category-ads.edit',
+                'store' => 'admin.category-ads.store',
+                'show' => 'admin.category-ads.show',
+                'destroy' => 'admin.category-ads.destroy',
             ]
         ]);
     });

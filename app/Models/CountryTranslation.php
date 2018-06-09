@@ -6,12 +6,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class CategoriesAdsTranslation extends Model
+class CountryTranslation extends Model
 {
-    use Sluggable;
-    protected $table = 'categories_ads_translations';
-    protected $fillable = ['name', 'slug'];
+	use Sluggable;
     public $timestamps = false;
+    protected $fillable = ['name', 'slug'];
+
 
     public function sluggable()
     {
