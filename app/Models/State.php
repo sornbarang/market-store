@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-	use \Dimsav\Translatable\Translatable;
+	use Translatable;
     
     protected $table = 'states';
-    public $translatedAttributes = ['name'];
-    protected $fillable = ['code'];
+    public $translationModel = 'App\Models\StateTranslation';
+    public $translatedAttributes = ['name', 'slug'];
+
+    public function country(){
+        return $this->belongsTo('App\Models\Country');
+    }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\State;
+use App\Models\Country;
 
 class StateController extends Controller
 {
@@ -13,7 +16,8 @@ class StateController extends Controller
      */
     public function index()
     {
-        //
+        $states = State::all();
+        return view('admin.state.index', compact('states'));
     }
 
     /**
@@ -23,7 +27,8 @@ class StateController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Country::all();
+        return view('admin.state.add', compact('countries'));
     }
 
     /**
@@ -34,7 +39,18 @@ class StateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $addState = new State();
+        $addState->name = $request->name;
+        $addState->country_id = $request->country_id;
+        $addState->save();
+
+        foreach (['en', 'km'] as $locale) {
+            $addState->translateOrNew($locale)->name = $request->name;
+        }
+        $addState->save();
+
+        $request->session()->flash('success', 'State successfully saved.');
+        return redirect()->route('admin.state.index');
     }
 
     /**
@@ -56,7 +72,9 @@ class StateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $countries = Country::all();
+        $state = State::findOrFail($id);
+        return view('admin.state.edit', compact(['state', 'countries']));
     }
 
     /**
@@ -68,7 +86,12 @@ class StateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateState = State::findOrFail($id);
+        $updateState->translate()->name = $request->name;
+        $updateState->country_id = $request->country_id;
+        $updateState->save();
+        $request->session()->flash('success', 'State successfully updated.');
+        return redirect()->route('admin.state.index');
     }
 
     /**
@@ -79,6 +102,8 @@ class StateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ids = explode(',',$id);
+        State::whereIn('id', $ids)->delete();
+        return response()->json(['status'=>true]);
     }
 }

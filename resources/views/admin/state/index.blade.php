@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title', 'List Categories')
+@section('title', 'List State')
 @section('content')
     <div class="content-body">
         <div class="row">
@@ -7,7 +7,7 @@
                 <div class="card card-data-tables product-table-wrapper">
                     <header class="card-heading">
 
-                        <h2 class="card-title">List Categories</h2>
+                        <h2 class="card-title">List State</h2>
                         {{--<small class="dataTables_info">User info</small>--}}
 
                         <div class="card-search">
@@ -69,29 +69,29 @@
                                     </th>
                                     <th class="col-xs-2">Name</th>
                                     <th class="col-xs-2">Slug</th>
-                                    <th class="col-xs-2">Parent</th>
+                                    <th class="col-xs-2">Country</th>
                                     <th data-orderable="false" class="col-xs-2">
                                         <button id="add-new-cat" class="btn btn-primary btn-fab  animate-fab"><i class="zmdi zmdi-plus"></i></button>
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $cat)
+                                @foreach($states as $state)
                                     <tr>
                                         <td class="checkbox-cell">
                                             <span class="checkbox">
                                               <label>
-                                                <input type="checkbox" value="{{$cat->id}}" id="">
+                                                <input type="checkbox" value="{{$state->id}}" id="">
                                                 <span class="checkbox-material"></span>
                                               </label>
                                             </span>
                                         </td>
-                                        <td>{{$cat->name}}</td>
-                                        <td>{{$cat->slug}}</td>
-                                        <td>{{( $cat->parent()->get()->count() > 0 ) ? $cat->parent()->get()->first()->name : ''}}</td>
+                                        <td>{{$state->name}}</td>
+                                        <td>{{$state->slug}}</td>
+                                        <td>{{($state->country->count() > 0) ? $state->country->name : ''}}</td>
                                         <td>
-                                            <a href="{{action('Admin\CategoryAdsController@edit',['id' => $cat->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-id="{{$cat->id}}"><i class="zmdi zmdi-delete"></i></a>
+                                            <a href="{{action('Admin\StateController@edit',['id' => $state->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-id="{{$state->id}}"><i class="zmdi zmdi-delete"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -109,7 +109,7 @@
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         $(document).on('click touch', '#add-new-cat', function(e) {
-            window.location.href='{{action('Admin\CategoryAdsController@create')}}'
+            window.location.href='{{action('Admin\StateController@create')}}'
         });
 
         $(document).on('click.warning-delete', '.warning-delete', function (e) {
@@ -125,7 +125,7 @@
             }).then(function() {
                 setTimeout(function () {
                     $.ajax({
-                        url: "category-ads/" + catID,
+                        url: "state/" + catID,
                         type: 'DELETE',
                         headers: {
                             'X-CSRF-Token':CSRF_TOKEN,
@@ -185,7 +185,7 @@
                     });
                     if(catID.length > 0){
                         $.ajax({
-                            url: "category-ads/" + catID.join(','),
+                            url: "state/" + catID.join(','),
                             type: 'DELETE',
                             headers: {
                                 'X-CSRF-Token':CSRF_TOKEN,

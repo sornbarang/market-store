@@ -18,7 +18,8 @@ class StateTranslation extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'name',
+                'onUpdate' => true
             ]
         ];
     }

@@ -164,6 +164,28 @@ function()
                 'destroy' => 'admin.country.destroy',
             ]
         ]);
+        Route::resource('state', 'StateController',['names' =>
+            [
+                'index' => 'admin.state.index',
+                'create' => 'admin.state.create',
+                'update' => 'admin.state.update',
+                'edit' => 'admin.state.edit',
+                'store' => 'admin.state.store',
+                'show' => 'admin.state.show',
+                'destroy' => 'admin.state.destroy',
+            ]
+        ]);
+        Route::resource('city', 'CityController',['names' =>
+            [
+                'index' => 'admin.city.index',
+                'create' => 'admin.city.create',
+                'update' => 'admin.city.update',
+                'edit' => 'admin.city.edit',
+                'store' => 'admin.city.store',
+                'show' => 'admin.city.show',
+                'destroy' => 'admin.city.destroy',
+            ]
+        ]);
     });
 
 });

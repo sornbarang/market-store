@@ -22,13 +22,13 @@ class CreateCitiesTable extends Migration
         Schema::create('cities_translations', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('cities_id')->unsigned();
+            $table->integer('city_id')->unsigned();
             $table->string('name');
             $table->string('slug');
             $table->string('locale')->index();
 
-            $table->unique(['cities_id','locale']);
-            $table->foreign('cities_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->unique(['city_id','locale']);
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
         });
     }
 

@@ -23,13 +23,13 @@ class CreateStatesTable extends Migration
         Schema::create('states_translations', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('states_id')->unsigned();
+            $table->integer('state_id')->unsigned();
             $table->string('name');
             $table->string('slug');
             $table->string('locale')->index();
 
-            $table->unique(['states_id','locale']);
-            $table->foreign('states_id')->references('id')->on('states')->onDelete('cascade');
+            $table->unique(['state_id','locale']);
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
         });
     }
 

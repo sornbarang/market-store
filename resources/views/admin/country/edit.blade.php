@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="card">
                     <header class="card-heading ">
-                        <h2 class="card-title">Update Role</h2>
+                        <h2 class="card-title">Update Country</h2>
                         <p></p>
                     </header>
                     <div class="card-body">

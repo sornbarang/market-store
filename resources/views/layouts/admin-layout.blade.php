@@ -238,12 +238,12 @@
                                 </a>
                                 <ul class="nav-sub">
                                     <li>
-                                        <a href="javascript:;" title="Level 3.1">
+                                        <a href="{{ action('Admin\CountryController@index') }}" title="Level 3.1">
                                             <i class="fa fa-fw fa-file"></i> List
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;" title="Level 3.1">
+                                        <a href="{{ action('Admin\CountryController@create') }}" title="Level 3.1">
                                             <i class="fa fa-fw fa-file"></i> Add
                                         </a>
                                     </li>
