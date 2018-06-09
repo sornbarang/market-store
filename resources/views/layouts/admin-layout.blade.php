@@ -193,10 +193,10 @@
             <ul>
                 <li class="logo-icon">
                     <a href="index.html">
-                        <div class="logo">
+                        {{--<div class="logo">
                             <img src="{{asset('assets/img/logo/logo-icon.png')}}" alt="Logo">
-                        </div>
-                        <h1 class="brand-text">MaterialWrap</h1>
+                        </div>--}}
+                        <h1 class="brand-text">TreeWB</h1>
                     </a>
                 </li>
                 <li class="menu-icon">
@@ -228,18 +228,76 @@
                         </ul>
                     </li>
                     <li class="sidebar-header">Market Advertise</li>
-                    <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-widgets"></i>Country</a>
+                    <li class="nav-dropdown">
+                        <a href="#" title="Menu Levels">
+                            <i class="zmdi zmdi-pin"></i>Location</a>
                         <ul class="nav-sub">
-                            <li><a href="#">List</a></li>
-                            <li><a href="#">Add</a></li>
+                            <li class="nav-dropdown">
+                                <a href="#" title="Level 2.3">
+                                    <i class="fa fa-fw fa-folder-open"></i> Country
+                                </a>
+                                <ul class="nav-sub">
+                                    <li>
+                                        <a href="javascript:;" title="Level 3.1">
+                                            <i class="fa fa-fw fa-file"></i> List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" title="Level 3.1">
+                                            <i class="fa fa-fw fa-file"></i> Add
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                            <li class="nav-dropdown">
+                                <a href="#" title="Level 2.3">
+                                    <i class="fa fa-fw fa-folder-open"></i> City
+                                </a>
+                                <ul class="nav-sub">
+                                    <li>
+                                        <a href="javascript:;" title="Level 3.1">
+                                            <i class="fa fa-fw fa-file"></i> List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" title="Level 3.1">
+                                            <i class="fa fa-fw fa-file"></i> Add
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                            <li class="nav-dropdown">
+                                <a href="#" title="Level 2.3">
+                                    <i class="fa fa-fw fa-folder-open"></i> State
+                                </a>
+                                <ul class="nav-sub">
+                                    <li>
+                                        <a href="javascript:;" title="Level 3.1">
+                                            <i class="fa fa-fw fa-file"></i> List
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" title="Level 3.1">
+                                            <i class="fa fa-fw fa-file"></i> Add
+                                        </a>
+                                    </li>
+
+                                </ul>
+
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-widgets"></i>Category</a>
                         <ul class="nav-sub">
-                            <li><a href="#">List</a></li>
-                            <li><a href="#">Add</a></li>
+                            <li><a href="{{ action('Admin\CategoryAdsController@index') }}">List</a></li>
+                            <li><a href="{{ action('Admin\CategoryAdsController@create') }}">Add</a></li>
                         </ul>
                     </li>
+
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-accounts-alt"></i>Users</a>
                         <ul class="nav-sub">
                             <li><a href="{{ action('Admin\UserController@index') }}">Users</a></li>
@@ -384,8 +442,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <h6>Want to Work with Us?</h6>
-                        <p>Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo affogato dolore gentrify retro chartreuse. Anim austin tempor ethical, sapiente food truck fanny pack farm-to-table. Culpa keytar esse
-                            tilde hoodie, art party nostrud messenger bag authentic helvetica kinfolk cred eu affogato forage.</p>
+                        <p>You just sign up</p>
                     </div>
                     <div class="col-xs-12 col-sm-2">
                         <h6>Company</h6>
@@ -398,7 +455,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-4">
                         <h6>Email Newsletters</h6>
-                        <p>Sign up for new MaterialWrap content, updates, and offers.</p>
+                        <p>Sign up for new TreeWB content, updates, and offers.</p>
                         <div class="form-group is-empty">
                             <div class="input-group">
                                 <label class="control-label sr-only" for="footerEmail">Email Address</label>

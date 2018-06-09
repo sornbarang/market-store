@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Translatable;
 
 class Country extends Model
 {
-    use \Dimsav\Translatable\Translatable;
-    
-    public $translatedAttributes = ['name'];
+    use Translatable;
+    public $translationModel = 'App\Models\CountryTranslation';
+    protected $table = 'countries';
+    public $translatedAttributes = ['name', 'slug'];
     protected $fillable = ['code'];
     
 

@@ -153,6 +153,17 @@ function()
                 'destroy' => 'admin.category-ads.destroy',
             ]
         ]);
+        Route::resource('country', 'CountryController',['names' =>
+            [
+                'index' => 'admin.country.index',
+                'create' => 'admin.country.create',
+                'update' => 'admin.country.update',
+                'edit' => 'admin.country.edit',
+                'store' => 'admin.country.store',
+                'show' => 'admin.country.show',
+                'destroy' => 'admin.country.destroy',
+            ]
+        ]);
     });
 
 });

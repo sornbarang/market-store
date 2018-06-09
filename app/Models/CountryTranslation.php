@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 class CountryTranslation extends Model
 {
 	use Sluggable;
+    protected $table = 'country_translations';
     public $timestamps = false;
     protected $fillable = ['name', 'slug'];
 
@@ -17,7 +18,8 @@ class CountryTranslation extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'name',
+                'onUpdate' => true
             ]
         ];
     }
