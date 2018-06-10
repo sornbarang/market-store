@@ -79,6 +79,7 @@ function()
     Route::group([
         'prefix'     => config('base.route_prefix', 'admin'),
         'namespace'  => 'Admin',
+        'middleware' => ['auth']
     ], function(){
         Route::get('/', 'HomeController@index')->name('admin');
         Route::resource('ads', 'AdsController',['names' =>

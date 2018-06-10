@@ -34,7 +34,7 @@
 										<img src="{{asset('assets/img/profiles/02.jpg')}}" alt="" class="img-circle max-w-35">
 										<i class="badge mini success status"></i>
 									</span>
-									<span class="name">Mike Jones</span>
+									<span class="name">{{ Auth::user()->name }}</span>
 									<span class="caret"></span>
 								</span>
                         </a>
@@ -49,7 +49,15 @@
                                 <a href="javascript:void(0)"><i class="zmdi zmdi-settings"></i> Account Settings</a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)"><i class="zmdi zmdi-sign-in"></i> Sign Out</a>
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                    <i class="zmdi zmdi-sign-in"></i>
+                                    @lang('authlabel.logout')
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </li>
@@ -192,7 +200,7 @@
         <div id="logo_wrapper">
             <ul>
                 <li class="logo-icon">
-                    <a href="index.html">
+                    <a href="{{url('admin')}}">
                         {{--<div class="logo">
                             <img src="{{asset('assets/img/logo/logo-icon.png')}}" alt="Logo">
                         </div>--}}
@@ -249,20 +257,20 @@
                                     </li>
 
                                 </ul>
-
                             </li>
+
                             <li class="nav-dropdown">
                                 <a href="#" title="Level 2.3">
-                                    <i class="fa fa-fw fa-folder-open"></i> City
+                                    <i class="fa fa-fw fa-folder-open"></i> State
                                 </a>
                                 <ul class="nav-sub">
                                     <li>
-                                        <a href="javascript:;" title="Level 3.1">
+                                        <a href="{{ action('Admin\StateController@index') }}" title="Level 3.1">
                                             <i class="fa fa-fw fa-file"></i> List
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;" title="Level 3.1">
+                                        <a href="{{ action('Admin\StateController@create') }}" title="Level 3.1">
                                             <i class="fa fa-fw fa-file"></i> Add
                                         </a>
                                     </li>
@@ -272,16 +280,16 @@
                             </li>
                             <li class="nav-dropdown">
                                 <a href="#" title="Level 2.3">
-                                    <i class="fa fa-fw fa-folder-open"></i> State
+                                    <i class="fa fa-fw fa-folder-open"></i> City
                                 </a>
                                 <ul class="nav-sub">
                                     <li>
-                                        <a href="javascript:;" title="Level 3.1">
+                                        <a href="{{ action('Admin\CityController@index') }}" title="Level 3.1">
                                             <i class="fa fa-fw fa-file"></i> List
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;" title="Level 3.1">
+                                        <a href="{{ action('Admin\CityController@create') }}" title="Level 3.1">
                                             <i class="fa fa-fw fa-file"></i> Add
                                         </a>
                                     </li>
@@ -560,7 +568,7 @@
                                 <span class="pull-left"><img src="{{asset('assets/img/profiles/03.jpg')}}" alt="" class="img-circle max-w-40 m-r-10 "></span>
                                 <i class="badge mini warning status"></i>
                                 <div class="list-group-item-body">
-                                    <div class="list-group-item-heading">Mike Jones </div>
+                                    <div class="list-group-item-heading">{{ Auth::user()->name }}</div>
                                     <div class="list-group-item-text">San Francisco, CA</div>
                                 </div>
                             </li>
