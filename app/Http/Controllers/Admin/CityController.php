@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\City;
+use App\Models\State;
 
 class CityController extends Controller
 {
@@ -13,7 +16,8 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        $cities = City::all();
+        return view('admin.city.index', compact('cities'));
     }
 
     /**
@@ -23,7 +27,8 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        $states = State::all();
+        return view('admin.city.add', compact('states'));
     }
 
     /**
@@ -34,7 +39,18 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $addCity = new City();
+        $addCity->name = $request->name;
+        $addCity->state_id = $request->state_id;
+        $addCity->save();
+
+        foreach (['en', 'km'] as $locale) {
+            $addCity->translateOrNew($locale)->name = $request->name;
+        }
+        $addCity->save();
+
+        $request->session()->flash('success', 'City successfully saved.');
+        return redirect()->route('admin.city.index');
     }
 
     /**
@@ -56,7 +72,9 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $states = State::all();
+        $city = City::findOrFail($id);
+        return view('admin.city.edit', compact(['city', 'states']));
     }
 
     /**
@@ -68,7 +86,13 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateCity = City::findOrFail($id);
+        $updateCity->translate()->name = $request->name;
+        $updateCity->state_id = $request->state_id;
+        $updateCity->save();
+
+        $request->session()->flash('success', 'City successfully updated.');
+        return redirect()->route('admin.state.index');
     }
 
     /**
@@ -79,6 +103,8 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ids = explode(',',$id);
+        City::whereIn('id', $ids)->delete();
+        return response()->json(['status'=>true]);
     }
 }
