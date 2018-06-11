@@ -66,6 +66,7 @@ function()
                 'destroy' => 'market.customer.destroy',
             ]
         ]);
+        Route::get('reportmarket', 'C2cController@makeReport');
     });
 
     Route::get('contact', 'PageController@contact')->name('contact');
@@ -103,7 +104,8 @@ function()
                 'show' => 'admin.product.show',
                 'destroy' => 'admin.product.destroy',
             ]
-        ]);
+        ]); 
+
         /***
          * Remove media
          */

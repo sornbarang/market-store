@@ -324,6 +324,8 @@
         slidesToScroll: 1,
         arrows: false,
         fade: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
         asNavFor: '.thumb-slider'
     });
 

@@ -3,9 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Product;
+use Auth;
 class C2cController extends Controller
 {
+    public function makeReport()
+    {
+        $post = Product::find(1);
+        $user = Auth::user();
+        
+        $report=$post->report([
+            'reason' => str_random(10),
+            'meta' => ['some more optional data, can be notes or something'],
+        ], $user);
+        $report->conclude([
+            'conclusion' => 'Your report was valid. Thanks! We\'ve taken action and removed the entry.',
+            'action_taken' => 'Record has been deleted.', // This is optional but can be useful to see what happend to the record
+            'meta' => ['some more optional data, can be notes or something'],
+        ], $user);
+    }
     /**
      * Display a listing of the resource.
      *

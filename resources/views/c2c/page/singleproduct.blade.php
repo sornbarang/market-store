@@ -46,7 +46,7 @@
                     <div class="item-preview">
                         <div class="item__preview-slider">
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
-                            <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
+                            <div class="prev-slide"><img src="{{asset('/')}}images/itprv2.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>

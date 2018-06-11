@@ -8966,7 +8966,7 @@ span.counter {
   line-height: 35px;
   font-size: 16px;
   padding: 0 15px;
-  background: #0674ec;
+  background: #56a72d;
   -webkit-border-radius: 200px;
           border-radius: 200px;
   cursor: pointer;
@@ -8975,11 +8975,11 @@ span.counter {
 }
 
 .item-preview .prev-nav span:active {
-  background: #6b3fba;
+  background: #56a72d;
 }
 
 .item-preview .prev-nav span:hover {
-  background: #7347c1;
+  background: #66bb2c;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
