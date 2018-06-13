@@ -30,6 +30,7 @@ return [
     'moreitems'=>'ច្រើនទៀតដោយ',      
     'favourites'=>'ចូលចិត្ត',      
     'comments'=>'យោបល់',      
-    'views'=>'មើល'      
+    'views'=>'មើល',
+    'shareitem'=>'ចែករំលែក'
 
 ];
