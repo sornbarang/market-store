@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Traits\Translatable;
+//use \Rinvex\Attributes\Traits\Attributable;
 //use Dimsav\Translatable\Translatable;
 use Baum\Node;
 /**
@@ -13,7 +14,6 @@ class CategoriesAds extends Node {
 //    use Translatable;
 //    public $translationModel = 'App\Models\CategoriesAdsTranslation';
     // use \Dimsav\translatedAttributesle\Translatable;
-
     use Translatable;
   /**
    * Table name.
@@ -154,6 +154,11 @@ class CategoriesAds extends Node {
         return false;
     }*/
     public function products() {
-        return $this->belongsToMany('Product', 'products_categories');
+        return $this->belongsToMany('App\Models\Product', 'products_categories');
     }
+
+    public function products_ads() {
+        return $this->belongsToMany('App\Models\ProductsAds', 'products_ads_categories_ads', 'categories_ads_id', 'products_ads_id');
+    }
+
 }
