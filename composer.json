@@ -10,6 +10,7 @@
         "barryvdh/laravel-dompdf": "^0.8.2",
         "baum/baum": "~1.1",
         "cviebrock/eloquent-sluggable": "^4.5",
+        "cyrildewit/eloquent-viewable": "^2.1",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "dimsav/laravel-translatable": "^9.0",
         "doctrine/dbal": "^2.7",

@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Traits\Translatable;
+use CyrildeWit\EloquentViewable\Viewable;
 use Illuminate\Database\Eloquent\Model;
 
 
 class ProductsAds extends Model
 {
     use Translatable;
+    use Viewable;
+
     protected $table = 'products_ads';
     public $translatedAttributes = ['name', 'description', 'slug'];
 
