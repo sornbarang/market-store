@@ -30,6 +30,7 @@ return [
     'moreitems'=>'More Items by',
     'favourites'=>'Favourites',      
     'comments'=>'Comments',      
-    'views'=>'Views'
+    'views'=>'Views',
+    'shareitem'=>'Share this item'
 
 ];

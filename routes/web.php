@@ -40,8 +40,9 @@ function()
     ], function(){
         Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
         Route::get('categories', ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
-        Route::get('products', ['as' => 'market.categories', 'uses' => 'C2cController@getproduct']);
-        Route::get('productdetail', ['as' => 'market.productdetail', 'uses' => 'C2cController@getproductdetail']);
+        Route::get('products', ['as' => 'market.categories', 'uses' => 'Market\ProductController@getproduct']);
+        Route::get('productdetail', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);
+        Route::post('reportmarket', ['as' => 'market.reportmarket', 'uses' => 'Market\ProductController@makeReport']); 
         Route::get('mystore', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
         Route::get('mysetting', ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
         Route::get('myprofile', ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
@@ -66,6 +67,7 @@ function()
                 'destroy' => 'market.customer.destroy',
             ]
         ]);
+        
     });
 
     Route::get('contact', 'PageController@contact')->name('contact');
@@ -103,7 +105,8 @@ function()
                 'show' => 'admin.product.show',
                 'destroy' => 'admin.product.destroy',
             ]
-        ]);
+        ]); 
+
         /***
          * Remove media
          */

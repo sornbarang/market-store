@@ -7,34 +7,126 @@
 <!--================================
         START BREADCRUMB AREA
     =================================-->
-<section class="breadcrumb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="breadcrumb">
-                    <ul>
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li>
-                            <a href="#">Wordpress</a>
-                        </li>
-                        <li class="active">
-                            <a href="#">Corporate & Business</a>
-                        </li>
-                    </ul>
-                </div>
-                <h1 class="page-title">Beborn - Multipurpose WordPress Landing Page</h1>
-            </div>
-            <!-- end /.col-md-12 -->
-        </div>
-        <!-- end /.row -->
-    </div>
-    <!-- end /.container -->
-</section>
+@include('elements.customer-breadcrumb')
 <!--================================
     END BREADCRUMB AREA
 =================================-->
+@if (Route::has('login'))
+    @auth
+    <!-- Modals -->
+    <div class="modal fade rating_modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title" id="rating_modal">Give Feedback on This Post</h3>
+                    <h4>Product</h4>
+                    <p>by
+                        <a href="author.html">AazzTech</a>
+                    </p>
+                </div>
+                <div class="container"> 
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3">
+                            <div class="card_style2 nudity"> 
+                                Nudity 
+                            </div>
+                            <!-- end /.single_job -->
+                        </div>
+                        <!-- end /.col-md-6 -->
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card_style2 violence">
+                                Violence
+                            </div>
+                            <!-- end /.card_style2 -->
+                        </div>
+                        <!-- end /.col-md-6 -->
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card_style2 spam"> 
+                                Spam
+                            </div>
+                            <!-- end /.card_style2 -->
+                        </div>
+                        <!-- end /.col-md-6 -->
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card_style2 falseproduct"> 
+                                False Product
+                            </div>
+                            <!-- end /.card_style2 -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card_style2 unauthorizedsales"> 
+                                Unauthorized Sales
+                            </div>
+                            <!-- end /.card_style2 -->
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card_style2 harassment"> 
+                                Harassment
+                            </div>
+                            <!-- end /.card_style2 -->
+                        </div>
+                        <!-- end /.col-md-6 -->
+                    </div>
+                </div>
+                <!-- end /.modal-header -->
+
+                <div class="modal-body">
+                    <form id="frmReport">
+                        <input type="hidden" id="myreport" name="reason">
+                        {{--<ul>
+                            <li>
+                                <p>Your Rating</p>
+                                <div class="right_content btn btn--round btn--white btn--md">
+                                    <select name="rating" class="give_rating">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </li>
+
+                            <li>
+                                <p>Rating Causes</p>
+                                <div class="right_content">
+                                    <div class="select-wrap">
+                                        <select name="review_reason" id="rev">
+                                            <option value="design">Design Quality</option>
+                                            <option value="customization">Customization</option>
+                                            <option value="support">Support</option>
+                                            <option value="performance">Performance</option>
+                                            <option value="documentation">Well Documented</option>
+                                        </select>
+
+                                        <span class="lnr lnr-chevron-down"></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>--}}
+
+                        <div class="rating_field">
+                            <label for="rating_field">Comments</label>
+                            <textarea name="commemnt_reporter" id="commemnt_reporter" class="text_field" placeholder="Please enter your comment report for this post"></textarea>
+                            <p class="notice">Your review will be ​publicly visible​ and the author may reply to your comments. </p>
+                        </div>
+                        <button type="button" class="btn btn--round btn--default">Submit</button>
+                        <button class="btn btn--round modal_close" data-dismiss="modal">Close</button>
+                    </form>
+                    <!-- end /.form -->
+                </div>
+                <!-- end /.modal-body -->
+            </div>
+        </div>
+    </div> 
+    @endauth 
+@endif
 
 <!--============================================
         START SINGLE PRODUCT DESCRIPTION AREA
@@ -46,7 +138,7 @@
                     <div class="item-preview">
                         <div class="item__preview-slider">
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
-                            <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
+                            <div class="prev-slide"><img src="{{asset('/')}}images/itprv2.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
                             <div class="prev-slide"><img src="{{asset('/')}}images/itprv.jpg" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
@@ -85,9 +177,18 @@
                                 </div>
                             </div>--}}<!-- end /.item__action -->
                             <div class="item_social_share">
+                            @if (Route::has('login'))
+                                @auth
+                                    <p>
+                                        <a href="#" class="myfeedback" data-target="#myModal1" data-toggle="modal">
+                                            <span class="fa fa-exclamation"></span> Give feedback this post
+                                        </a>
+                                    </p>
+                                @endauth
+                            @endif
                                 <p>
                                     <img src="{{ asset('images/svg/share.svg') }}" alt="This is share svg">
-                                    <span>Share this item</span>
+                                    <span>@lang('frontlabel.shareitem')</span>
                                 </p>
 
                                 <div class="social social--color--filled">
@@ -107,7 +208,7 @@
                                                 <span class="fa fa-google-plus"></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="#">
                                                 <span class="fa fa-pinterest"></span>
                                             </a>
@@ -121,7 +222,7 @@
                                             <a href="#">
                                                 <span class="fa fa-dribbble"></span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                                 <!-- end /.social-->

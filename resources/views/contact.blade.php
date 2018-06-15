@@ -25,16 +25,8 @@
                         </div><!-- end /.col-md-12 -->
                     </div><!-- end /.row -->
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="contact_tile">
-                                <span class="tiles__icon lnr lnr-map-marker"></span>
-                                <h4 class="tiles__title">@lang('contact.officeaddress')</h4>
-                                <div class="tiles__content"><p>@lang('contact.officeaddressdes')</p></div>
-                            </div>
-                        </div><!-- end /.col-md-4 -->
-
-                        <div class="col-md-4">
+                    <div class="row"> 
+                        <div class="col-md-6">
                             <div class="contact_tile">
                                 <span class="tiles__icon lnr lnr-phone"></span>
                                 <h4 class="tiles__title">@lang('contact.phone')</h4>
@@ -45,7 +37,7 @@
                             </div><!-- end /.contact_tile -->
                         </div><!-- end /.col-md-4 -->
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="contact_tile">
                                 <span class="tiles__icon lnr lnr-inbox"></span>
                                 <h4 class="tiles__title">@lang('contact.emailaddress')</h4>

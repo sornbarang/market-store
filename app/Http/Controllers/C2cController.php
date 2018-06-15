@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 class C2cController extends Controller
 {
     /**
@@ -88,26 +87,5 @@ class C2cController extends Controller
         //
     }
 
-    /**
-     * Display a listing of the category.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getcategory()
-    {
-        return view('c2c.page.category');
-    }
-    /**
-     * Display a listing of the category.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getproduct()
-    {
-        return view('c2c.page.product');
-    }
-    public function getproductdetail()
-    {
-        return view('c2c.page.singleproduct');
-    }
+    
 }

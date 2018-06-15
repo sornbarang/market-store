@@ -168,6 +168,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Adumskis\LaravelAdvert\AdvertServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Ghanem\Reportable\ReportableServiceProvider::class,
 
     ],
 

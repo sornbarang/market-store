@@ -108,6 +108,7 @@ li {
 
 a:hover, a:focus {
   text-decoration: none;
+  color: #66bb2c;
 }
 
 a:focus {
@@ -242,7 +243,7 @@ h6 {
 }
 
 a {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 .form-group {
@@ -6995,7 +6996,7 @@ ul.nav-tabs li a {
 ul.nav-tabs li a:hover {
   border: none;
   background: none;
-  color: #0674ec;
+  color: #56a72d;
 }
 
 ul.nav-tabs li a span {
@@ -7007,7 +7008,7 @@ ul.nav-tabs li a:before {
   position: absolute;
   height: 3px;
   width: 100%;
-  background: #0674ec;
+  background: #56a72d;
   opacity: 0;
   left: 0;
   -webkit-transition: 0.3s;
@@ -7020,7 +7021,7 @@ ul.nav-tabs li a.active {
   border-bottom: 0;
   border: 0;
   background: none;
-  color: #0674ec;
+  color: #56a72d;
 }
 
 ul.nav-tabs li a.active:before {
@@ -8966,7 +8967,7 @@ span.counter {
   line-height: 35px;
   font-size: 16px;
   padding: 0 15px;
-  background: #0674ec;
+  background: #56a72d;
   -webkit-border-radius: 200px;
           border-radius: 200px;
   cursor: pointer;
@@ -8975,11 +8976,11 @@ span.counter {
 }
 
 .item-preview .prev-nav span:active {
-  background: #6b3fba;
+  background: #56a72d;
 }
 
 .item-preview .prev-nav span:hover {
-  background: #7347c1;
+  background: #66bb2c;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
@@ -15874,5 +15875,12 @@ span.counter {
     width: 100%;
   }
 }
-
+.myfeedback{
+  font-size: 15px;
+  color: #555555;
+}
+.myfeedback >span{
+  font-size:25px;
+}
+.modal-content{ background:#eef1f3}
 /*# sourceMappingURL=src/map/style.css.map */

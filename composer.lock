@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aae7e0ca3aa833a7e5edb34d03e5c685",
+    "content-hash": "4ebbf5b210ee475fbc3c6735754c74a8",
     "packages": [
         {
             "name": "adumskis/laravel-advert",
@@ -1039,7 +1039,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Ménager",
+                    "name": "Fabien M??nager",
                     "email": "fabien.menager@gmail.com"
                 },
                 {
@@ -1260,6 +1260,48 @@
                 "trusted proxy"
             ],
             "time": "2018-02-07T20:20:57+00:00"
+        },
+        {
+            "name": "ghanem/reportable",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AbdullahGhanem/reportable.git",
+                "reference": "3c20f26117be9888e84078bda4e6325ffa7ab721"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AbdullahGhanem/reportable/zipball/3c20f26117be9888e84078bda4e6325ffa7ab721",
+                "reference": "3c20f26117be9888e84078bda4e6325ffa7ab721",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ghanem\\Reportable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "abdullah-ghanem",
+                    "email": "3bdullah.ghanem@gmail.com"
+                }
+            ],
+            "description": "Reportable Polymorphic Eloquent Models for Laravel 5",
+            "keywords": [
+                "ajax",
+                "blade",
+                "laravel"
+            ],
+            "time": "2015-10-23T13:33:45+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2227,7 +2269,7 @@
                     "email": "donatj@gmail.com"
                 },
                 {
-                    "name": "Jonatan Männchen",
+                    "name": "Jonatan M??nnchen",
                     "email": "jonatan@maennchen.ch"
                 }
             ],
@@ -2286,7 +2328,7 @@
             ],
             "authors": [
                 {
-                    "name": "Marc Cámara",
+                    "name": "Marc C??mara",
                     "email": "mcamara88@gmail.com",
                     "role": "Developer"
                 }
@@ -2539,24 +2581,23 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.99.99",
+            "version": "v2.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "35469243ebbb9be5086cff57538cac6da2c36852"
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/35469243ebbb9be5086cff57538cac6da2c36852",
-                "reference": "35469243ebbb9be5086cff57538cac6da2c36852",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
                 "shasum": ""
             },
             "require": {
-                "php": "^7"
+                "php": ">=5.2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*|5.*",
-                "vimeo/psalm": "^1"
+                "phpunit/phpunit": "4.*|5.*"
             },
             "suggest": {
                 "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
@@ -2585,7 +2626,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-06-06T05:12:00+00:00"
+            "time": "2018-06-08T15:26:40+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -2616,7 +2657,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Ménager",
+                    "name": "Fabien M??nager",
                     "email": "fabien.menager@gmail.com"
                 }
             ],
@@ -2656,7 +2697,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien Ménager",
+                    "name": "Fabien M??nager",
                     "email": "fabien.menager@gmail.com"
                 }
             ],
@@ -3353,24 +3394,24 @@
         },
         {
             "name": "spatie/pdf-to-image",
-            "version": "1.8.0",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/pdf-to-image.git",
-                "reference": "a5f70c9d5d11677ba1fc3d7a0705d6dca4cc29db"
+                "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/pdf-to-image/zipball/a5f70c9d5d11677ba1fc3d7a0705d6dca4cc29db",
-                "reference": "a5f70c9d5d11677ba1fc3d7a0705d6dca4cc29db",
+                "url": "https://api.github.com/repos/spatie/pdf-to-image/zipball/9a5cb264a99e87e010c65d4ece03b51f821d55bd",
+                "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd",
                 "shasum": ""
             },
             "require": {
-                "ext-imagick": "*",
-                "php": "^7.0"
+                "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.2"
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
             },
             "type": "library",
             "autoload": {
@@ -3399,7 +3440,7 @@
                 "pdf-to-image",
                 "spatie"
             ],
-            "time": "2018-04-03T11:51:11+00:00"
+            "time": "2016-12-14T15:37:00+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -3607,7 +3648,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jean-François Simon",
+                    "name": "Jean-Fran??ois Simon",
                     "email": "jeanfrancois.simon@sensiolabs.com"
                 },
                 {
@@ -4744,7 +4785,7 @@
             ],
             "authors": [
                 {
-                    "name": "François Zaninotto"
+                    "name": "Fran??ois Zaninotto"
                 }
             ],
             "description": "Faker is a PHP library that generates fake data for you.",
@@ -4843,7 +4884,7 @@
             ],
             "authors": [
                 {
-                    "name": "Pádraic Brady",
+                    "name": "P??draic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
@@ -6231,7 +6272,7 @@
                     "email": "p@tchwork.com"
                 }
             ],
-            "description": "Give thanks (in the form of a GitHub ⭐) to your fellow PHP package maintainers (not limited to Symfony components)!",
+            "description": "Give thanks (in the form of a GitHub ???) to your fellow PHP package maintainers (not limited to Symfony components)!",
             "time": "2018-03-14T21:51:39+00:00"
         },
         {
