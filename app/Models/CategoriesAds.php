@@ -154,4 +154,8 @@ class CategoriesAds extends Node {
         return false;
     }*/
 
+    public function products_ads() {
+        return $this->belongsToMany('App\Models\ProductsAds', 'products_ads_categories_ads', 'categories_ads_id', 'products_ads_id');
+    }
+
 }
