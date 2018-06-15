@@ -157,6 +157,7 @@ return [
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 
         /*
          * Application Service Providers...
