@@ -643,6 +643,12 @@
 <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
 <script src="{{ asset('js/map.js') }}"></script> 
 <script>
+    $(document).on('click', 'form#frmUploadFront button[type=submit]', function(e) {
+        // $('#frmUploadFront #trumbowyg-demo').html()); 
+        $('#frmUploadFront #trumbowyg-demoe-hidden').val($('#frmUploadFront #trumbowyg-demo').html());  
+        // e.preventDefault();
+        $(this).submit();
+    });
     function readURL(input) {
         if (input.files && input.files[0]) { 
             var reader = new FileReader();

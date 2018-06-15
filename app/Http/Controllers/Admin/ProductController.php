@@ -73,7 +73,7 @@ class ProductController extends Controller
                     }
                 }
             }
-            return redirect('admin/product')->with('successfull', 'Record has been added!');
+            return redirect('admin/product')->with('success', 'Record has been added!');
         } 
        
         return redirect('admin/product')->with('error', 'Oh snap! Change a few things up and try submitting again!');
@@ -205,10 +205,10 @@ class ProductController extends Controller
             // $product->image =isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'';
             $product->save();
             if($product){
-                return redirect('admin/product')->with('succeess', 'Record has been updated!');
+                return redirect('admin/product')->with('success', 'Record has been updated!');
             }
         } 
-        return redirect('admin/product')->with('succeess', 'Record has been updated!');
+        return redirect('admin/product')->with('error', 'Oh snap! Change a few things up and try submitting again!');
     }
 
     /**

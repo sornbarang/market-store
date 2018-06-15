@@ -162,37 +162,44 @@ class CustomerController extends Controller
         // $product = Product::find(1);
         // $product->categories()->attach($category);
         $data['breadcrub']='upload item';
-        // $name = $request->name;
-        // $price = $request->price;
-        // $active = (int)$request->active??0;
-        // $description= $request->sumernotehidden;
-        // // $imgappend=[];
-        // // dd($imgappend);
-        // $product = Product::create([
-        //     'name' => $name,
-        //     'price' => $price,
-        //     'active' => $active,
-        //     // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
-        //     'description'=>$description
-        //     ]);
-        // if($request->hasFile('photos'))
-        //     {
-        //         $allowedfileExtension=['jpg','jpeg','png'];
-        //         $files = $request->file('photos'); 
-        //         foreach($files as $file){
-        //             // $filename = $file->getClientOriginalName();
-        //             $extension = $file->getClientOriginalExtension();
-        //             $check=in_array($extension,$allowedfileExtension);
-        //             if($check){
-        //                 // if($check){
-        //                 //     $imgappend[] = $file->store('public'); 
-        //                 // }
-        //                 $newsItem
-        //                 ->addMedia($file)
-        //                 ->toMediaCollection();
-        //             }
-        //         }
-        //     }
+        if($request->isMethod('post')){
+            $name = $request->name;
+            $price = $request->price;
+            $active = (int)$request->active??0;
+            $description= $request->sumernotehidden;
+            // $imgappend=[];
+            // dd($imgappend);
+            $product = Product::create([
+                'name' => $name,
+                'price' => $price,
+                'active' => $active,
+                // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
+                'description'=>$description
+                ]);
+                if($product){
+                    $newsItem = Product::find($product->id);
+                    if($request->hasFile('photos'))
+                    {
+                        $allowedfileExtension=['jpg','jpeg','png'];
+                        $files = $request->file('photos'); 
+                        foreach($files as $file){
+                            // $filename = $file->getClientOriginalName();
+                            $extension = $file->getClientOriginalExtension();
+                            $check=in_array($extension,$allowedfileExtension);
+                            if($check){
+                                // if($check){
+                                //     $imgappend[] = $file->store('public'); 
+                                // }
+                                $newsItem
+                                ->addMedia($file)
+                                ->toMediaCollection();
+                            }
+                        }
+                    }
+                    return redirect('market/mymanageitem')->with('success', 'Record has been added!');
+                }
+                return redirect('market/mymanageitem')->with('error', '<strong>Oh snap!</strong> Change a few things up and try submitting again!');
+        }
         return view('customer.item-upload',compact('data'));
     }
     /**

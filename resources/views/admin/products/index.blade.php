@@ -1,8 +1,8 @@
 
-@if (session('succeess')) 
+@if (session('success')) 
     <div class="alert alert-success" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>{{ session('succeess') }}.</strong>
+        <strong>{{ session('success') }}.</strong>
     </div>
 @elseif(session('error'))
     <div class="alert alert-danger" role="alert">
@@ -115,7 +115,7 @@
                                     <td>1,200</td>
                                     <td>
                                         <!-- <a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a> -->
-                                        <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_edit_modal" data-id="{{$val->id}}"><i class="zmdi zmdi-edit"></i></a>
+                                        <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_edit_modal" data-id="{{$val->id}}" data-url="{{route('admin.product.edit',['edit'=>$val->id])}}" data-urlupdate="{{route('admin.product.update',[$val->id])}}"><i class="zmdi zmdi-edit"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -128,7 +128,7 @@
     </div>
 </div>
 <!-- Add mode -->
-<form  id="addProduct" method="post" action="{{url('admin/product')}}" enctype="multipart/form-data">
+<form  id="addProduct" method="post" action="{{route('admin.product.store')}}" enctype="multipart/form-data">
 @csrf
 <input type="hidden" id="sumernotehidden" name="sumernotehidden"> 
 <div class="modal fade" id="product_add_modal" tabindex="-1" role="dialog" aria-labelledby="tab_modal">
@@ -411,7 +411,7 @@
 <!-- edit mode -->
 <form  id="editProduct" method="post" enctype="multipart/form-data">
 @csrf
-@method('PUT')
+@method('PUT') 
 <input type="hidden" id="sumernotehidden" name="sumernotehidden"> 
 <input type="hidden" id="editid" name="editid"> 
 <div class="modal fade" id="product_edit_modal" tabindex="-1" role="dialog" aria-labelledby="tab_modal">

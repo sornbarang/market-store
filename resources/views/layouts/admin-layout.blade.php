@@ -1017,16 +1017,16 @@ $(document).ready(function() {
         // e.preventDefault();
         $(this).submit();
     });
-    $(document).on('click', '.edit-product', function(e) {
-        var id=$(this).data('id');
+    $(document).on('click', '.edit-product', function(e) { 
+        var url=$(this).data('url'); 
+        var urlupdate=$(this).data('urlupdate'); 
         $('#editProduct  input[name*="mediaid"]').remove();
         $.ajax({
             type: "GET",
             headers: {
                 'X-CSRF-Token':CSRF_TOKEN,
             },
-            url: "{{url('admin/product')}}/"+id+"/edit",
-            data: $(this).data('id'),
+            url: url, 
             dataType:'json',
             success: function(response){
                 // clear image to empty before set new attribute
@@ -1055,7 +1055,7 @@ $(document).ready(function() {
                         }
                         
                     }  
-                    $('#editProduct').attr('action','{{url("admin/product")}}/'+response.data.id);
+                    $('#editProduct').attr('action',urlupdate);
                     $('#editProduct #editid').val(response.data.id);
                     if(response.data.name !='' || response.data.price !='' || response.data.active !=''){
                         $('#editProduct input[name="name"]').parent().attr('class','form-group label-floating is-empty is-focused')

@@ -22,8 +22,27 @@
                         <div class="dashboard_title_area">
                             <div class="pull-left">
                                 <div class="dashboard__title">
-                                    <h3>@lang('profileitemupload.uploaditem')</h3>
+                                    <h3>@lang('profileitemupload.uploaditem')</h3> 
                                 </div>
+                            </div>
+                            <div class="pull-right">
+                            @if (session('success')) 
+                                <div class="alert alert-success" role="alert">
+                                    <span class="alert_icon lnr lnr-checkmark-circle"></span>
+                                    {{ session('success') }}.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            @elseif(session('error'))
+                                <div class="alert alert-danger" role="alert">
+                                    <span class="alert_icon lnr lnr-warning"></span>
+                                        {{ session('success') }}.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            @endif  
                             </div>
                         </div>
                     </div><!-- end /.col-md-12 -->
@@ -31,7 +50,9 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form action="#" id="frmUploadFront">
+                        <form method="post" action="{{route('market.myitemupload')}}" id="frmUploadFront">
+                            @csrf
+                            <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <div class="upload_modules">
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploaditem')</h3>
