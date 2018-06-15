@@ -11,13 +11,13 @@ use App\Http\Middleware\Admin;
 |
 */
 
-
-/*$lang = Request::getPreferredLanguage([ 'en', 'km']);
+/*
+$lang = Request::getPreferredLanguage([ 'en', 'km']);
 if (App::environment() == 'local') {
     $lang = 'en';
-}
+}*/
 
-App::setLocale($lang);*/
+App::setLocale($lang);
 
 Route::get('/', function () {
     return view('page');

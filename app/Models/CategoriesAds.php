@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Traits\Translatable;
+//use \Rinvex\Attributes\Traits\Attributable;
 //use Dimsav\Translatable\Translatable;
 use Baum\Node;
 /**
@@ -13,7 +14,6 @@ class CategoriesAds extends Node {
 //    use Translatable;
 //    public $translationModel = 'App\Models\CategoriesAdsTranslation';
     // use \Dimsav\translatedAttributesle\Translatable;
-
     use Translatable;
   /**
    * Table name.
