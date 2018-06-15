@@ -51,16 +51,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.61.6",
+            "version": "3.61.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a2477aacfb780a024c9a20fdb6f6c3fbf5cc84d1"
+                "reference": "3e588fc5bed3f3e0fb48c4320883fbf5b26076af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a2477aacfb780a024c9a20fdb6f6c3fbf5cc84d1",
-                "reference": "a2477aacfb780a024c9a20fdb6f6c3fbf5cc84d1",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3e588fc5bed3f3e0fb48c4320883fbf5b26076af",
+                "reference": "3e588fc5bed3f3e0fb48c4320883fbf5b26076af",
                 "shasum": ""
             },
             "require": {
@@ -127,7 +127,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-06-13T21:37:13+00:00"
+            "time": "2018-06-14T22:16:36+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1039,7 +1039,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien M??nager",
+                    "name": "Fabien Ménager",
                     "email": "fabien.menager@gmail.com"
                 },
                 {
@@ -2269,7 +2269,7 @@
                     "email": "donatj@gmail.com"
                 },
                 {
-                    "name": "Jonatan M??nnchen",
+                    "name": "Jonatan Männchen",
                     "email": "jonatan@maennchen.ch"
                 }
             ],
@@ -2328,7 +2328,7 @@
             ],
             "authors": [
                 {
-                    "name": "Marc C??mara",
+                    "name": "Marc Cámara",
                     "email": "mcamara88@gmail.com",
                     "role": "Developer"
                 }
@@ -2581,23 +2581,24 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.15",
+            "version": "v2.99.99",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
+                "reference": "35469243ebbb9be5086cff57538cac6da2c36852"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
-                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/35469243ebbb9be5086cff57538cac6da2c36852",
+                "reference": "35469243ebbb9be5086cff57538cac6da2c36852",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.0"
+                "php": "^7"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*|5.*"
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
             },
             "suggest": {
                 "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
@@ -2626,7 +2627,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-06-08T15:26:40+00:00"
+            "time": "2018-06-06T05:12:00+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -2657,7 +2658,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien M??nager",
+                    "name": "Fabien Ménager",
                     "email": "fabien.menager@gmail.com"
                 }
             ],
@@ -2697,7 +2698,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fabien M??nager",
+                    "name": "Fabien Ménager",
                     "email": "fabien.menager@gmail.com"
                 }
             ],
@@ -3394,24 +3395,24 @@
         },
         {
             "name": "spatie/pdf-to-image",
-            "version": "1.2.2",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/pdf-to-image.git",
-                "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd"
+                "reference": "a5f70c9d5d11677ba1fc3d7a0705d6dca4cc29db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/pdf-to-image/zipball/9a5cb264a99e87e010c65d4ece03b51f821d55bd",
-                "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd",
+                "url": "https://api.github.com/repos/spatie/pdf-to-image/zipball/a5f70c9d5d11677ba1fc3d7a0705d6dca4cc29db",
+                "reference": "a5f70c9d5d11677ba1fc3d7a0705d6dca4cc29db",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "ext-imagick": "*",
+                "php": "^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*",
-                "scrutinizer/ocular": "~1.1"
+                "phpunit/phpunit": "^6.2"
             },
             "type": "library",
             "autoload": {
@@ -3440,7 +3441,7 @@
                 "pdf-to-image",
                 "spatie"
             ],
-            "time": "2016-12-14T15:37:00+00:00"
+            "time": "2018-04-03T11:51:11+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -3648,7 +3649,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jean-Fran??ois Simon",
+                    "name": "Jean-François Simon",
                     "email": "jeanfrancois.simon@sensiolabs.com"
                 },
                 {
@@ -4785,7 +4786,7 @@
             ],
             "authors": [
                 {
-                    "name": "Fran??ois Zaninotto"
+                    "name": "François Zaninotto"
                 }
             ],
             "description": "Faker is a PHP library that generates fake data for you.",
@@ -4884,7 +4885,7 @@
             ],
             "authors": [
                 {
-                    "name": "P??draic Brady",
+                    "name": "Pádraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
@@ -6272,7 +6273,7 @@
                     "email": "p@tchwork.com"
                 }
             ],
-            "description": "Give thanks (in the form of a GitHub ???) to your fellow PHP package maintainers (not limited to Symfony components)!",
+            "description": "Give thanks (in the form of a GitHub ⭐) to your fellow PHP package maintainers (not limited to Symfony components)!",
             "time": "2018-03-14T21:51:39+00:00"
         },
         {
