@@ -11,6 +11,9 @@ class Product extends Model implements HasMedia,Reportable
 {
     use HasMediaTrait;
     use ReportableTrait;
+    protected $table = 'products';
     protected $fillable = ['name','price','image','description','active'];
-    
+    public function categories() {
+        return $this->belongsToMany('App\Models\Category', 'products_categories');
+    } 
 }

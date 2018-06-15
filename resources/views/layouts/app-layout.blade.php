@@ -29,7 +29,7 @@
         <link href="https://fonts.googleapis.com/css?family=Kantumruy:400" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/style-kh.css') }}">
     @endif 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.css">
     <!-- endinject -->
 
@@ -641,34 +641,23 @@
 <script src="{{ asset('js/dashboard.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
-<script src="{{ asset('js/map.js') }}"></script>
-<script> 
-$(document).ready(function() {
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $('form#frmReport button[type="button"]').on('click',function(){
-        $.ajax({
-            url: "{{route('market.reportmarket')}}",
-            type: 'POST',
-            data:{'reason':$('#myreport').val(),'commemnt_reporter':$('#commemnt_reporter').val()},
-            headers: {
-                    'X-CSRF-Token':CSRF_TOKEN,
-            },
-            success: function( msg ) {
-                if(msg.status==200){
-                    $('form#frmReport button.modal_close').click();
-                }
-            },
-            error: function( data ) {
-                console.log(data);
+<script src="{{ asset('js/map.js') }}"></script> 
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) { 
+            var reader = new FileReader();
+            reader.onload = function(e) {  
+                input.parentElement.nextSibling.nextSibling.childNodes[1].style.backgroundImage = 'url('+e.target.result +')';
+                // $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                // $('#imagePreview').hide();
+                // $('#imagePreview').fadeIn(650);
             }
-        });
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imageUpload,#imageUpload1,#imageUpload2,#imageUpload3").change(function() {
+        readURL(this); 
     });
-    $('.modal-dialog .card_style2').on('click',function(){
-        $('.modal-dialog .card_style2').attr('style','');
-        $(this).css({'background':'#56a72d','color':'#fff'});
-        $('#myreport').val($(this).text().trim())
-    });
-});    
 </script>
 <!-- endinject -->
 </body>

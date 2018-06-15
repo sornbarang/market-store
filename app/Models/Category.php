@@ -101,5 +101,7 @@ class Category extends Node {
   // Please refer the Laravel documentation for further instructions on how
   // to hook your own callbacks/observers into this events:
   // http://laravel.com/docs/5.0/eloquent#model-events
-
+  public function products() {
+      return $this->belongsToMany('App\Models\Product', 'products_categories');
+  }
 }

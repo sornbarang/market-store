@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form action="#">
+                        <form action="#" id="frmUploadFront">
                             <div class="upload_modules">
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploaditem')</h3>
@@ -56,7 +56,7 @@
 
                                     <div class="form-group">
                                         <label for="product_name">@lang('profileitemupload.productname') <span>(Max 100 characters)</span></label>
-                                        <input type="text" id="product_name" class="text_field" placeholder="Enter your product name here...">
+                                        <input type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')">
                                     </div>
 
                                     <div class="form-group no-margin">
@@ -68,18 +68,72 @@
                                             <label for="exlicense">@lang('profileitemupload.price')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input type="text" id="exlicense" class="text_field" placeholder="00.00">
+                                                <input name="price" type="text" id="exlicense" class="text_field" placeholder="00.00">
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- end /.modules__content -->
                             </div><!-- end /.upload_modules -->
-
-                            <div class="upload_modules module--upload">
+                            <div class="upload_modules">
+                            <div class="modules__title">
+                                    <h3>@lang('profileitemupload.uploadfile')</h3>
+                                </div><!-- end /.module_title -->
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos[]" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos[]" type='file' id="imageUpload1" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload1"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos[]" type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload2"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos[]" type='file' id="imageUpload3" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload3"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                            {{--<div class="upload_modules module--upload">
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploadfile')</h3>
                                 </div><!-- end /.module_title -->
-
+                        
                                 <div class="modules__content">
                                     <div class="form-group">
                                         @for($i=0;$i<4;$i++)
@@ -110,9 +164,9 @@
                                         @endfor
                                     </div><!-- end /.form-group --> 
                                 </div><!-- end /.upload_modules -->
-                            </div><!-- end /.upload_modules -->
+                            </div>--}}<!-- end /.upload_modules -->
 
-                            <div class="upload_modules">
+                            {{--<div class="upload_modules">
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.otherinfo')</h3>
                                 </div><!-- end /.module_title -->
@@ -225,7 +279,7 @@
                                         <textarea name="tags" id="tags" class="text_field" placeholder="Enter your item tags here..."></textarea>
                                     </div>
                                 </div><!-- end /.upload_modules -->
-                            </div><!-- end /.upload_modules -->
+                            </div>--}}<!-- end /.upload_modules -->
                             <!-- submit button -->
                             <button type="submit" class="btn btn--round btn--fullwidth btn--lg">@lang('profileitemupload.save')</button>
                         </form>

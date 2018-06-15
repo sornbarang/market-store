@@ -153,5 +153,7 @@ class CategoriesAds extends Node {
 
         return false;
     }*/
-
+    public function products() {
+        return $this->belongsToMany('Product', 'products_categories');
+    }
 }

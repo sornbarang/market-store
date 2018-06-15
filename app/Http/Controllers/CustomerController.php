@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Products;
+use App\Models\Product;
+use App\Models\Category;
 use PDF;
 use App;
 
@@ -155,9 +156,43 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function myItemUpload()
+    public function myItemUpload(Request $request) 
     {
+        // $category = Category::roots()->first();
+        // $product = Product::find(1);
+        // $product->categories()->attach($category);
         $data['breadcrub']='upload item';
+        // $name = $request->name;
+        // $price = $request->price;
+        // $active = (int)$request->active??0;
+        // $description= $request->sumernotehidden;
+        // // $imgappend=[];
+        // // dd($imgappend);
+        // $product = Product::create([
+        //     'name' => $name,
+        //     'price' => $price,
+        //     'active' => $active,
+        //     // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
+        //     'description'=>$description
+        //     ]);
+        // if($request->hasFile('photos'))
+        //     {
+        //         $allowedfileExtension=['jpg','jpeg','png'];
+        //         $files = $request->file('photos'); 
+        //         foreach($files as $file){
+        //             // $filename = $file->getClientOriginalName();
+        //             $extension = $file->getClientOriginalExtension();
+        //             $check=in_array($extension,$allowedfileExtension);
+        //             if($check){
+        //                 // if($check){
+        //                 //     $imgappend[] = $file->store('public'); 
+        //                 // }
+        //                 $newsItem
+        //                 ->addMedia($file)
+        //                 ->toMediaCollection();
+        //             }
+        //         }
+        //     }
         return view('customer.item-upload',compact('data'));
     }
     /**

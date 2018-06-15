@@ -1103,8 +1103,7 @@ $(document).ready(function() {
             active=1;
         }else{
             active=0;
-        }
-        console.log(pid);
+        } 
         if(typeof pid != "undefined"){
                 $.ajax({
                     url: '{{ url("/admin/publish") }}' + '/' + pid,
