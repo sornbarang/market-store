@@ -642,28 +642,36 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
 <script src="{{ asset('js/map.js') }}"></script>
-<script>
+<script> 
     $(document).on('click', 'form#frmUploadFront button[type=submit]', function(e) {
         // $('#frmUploadFront #trumbowyg-demo').html()); 
         $('#frmUploadFront #trumbowyg-demoe-hidden').val($('#frmUploadFront #trumbowyg-demo').html());  
         // e.preventDefault();
         $(this).submit();
     });
-    function readURL(input) {
-        if (input.files && input.files[0]) { 
-            var reader = new FileReader();
-            reader.onload = function(e) {  
-                input.parentElement.nextSibling.nextSibling.childNodes[1].style.backgroundImage = 'url('+e.target.result +')';
-                // $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-                // $('#imagePreview').hide();
-                // $('#imagePreview').fadeIn(650);
+    $(document).ready(function(){ 
+        var imguploads=[];
+        $('.upload_modules.upload_modules_blog >div.row > div > div > div > input').each(function( index ,elm) {
+            imguploads.push('#'+elm.id);
+        }); 
+        console.log(imguploads.join(','));
+        function readURL(input) {
+            if (input.files && input.files[0]) { 
+                var reader = new FileReader();
+                reader.onload = function(e) {  
+                    input.parentElement.nextSibling.nextSibling.childNodes[1].style.backgroundImage = 'url('+e.target.result +')';
+                    // $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                    // $('#imagePreview').hide();
+                    // $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-    $("#imageUpload,#imageUpload1,#imageUpload2,#imageUpload3").change(function() {
-        readURL(this); 
+        $('#imageUpload,#imageUpload1,#imageUpload2,#imageUpload3,#imageUpload4').change(function() {
+            readURL(this); 
+        });
     });
+    
 </script>
 <!-- endinject -->
 </body>

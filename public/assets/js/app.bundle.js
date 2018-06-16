@@ -4864,6 +4864,15 @@
 	//Confirm delete
 	var deleteItem = function deleteItem() {
 	  $('#confirmDelete').on('click', function (e) {
+			var ditem=[];
+			$('.checkbox-cell input[id*=CheckboxId_][type=checkbox]:checked').each(function () {
+				// push id checked item on product
+				ditem.push($(this).val());
+				$(this).prop('checked', false);
+				$(this).closest("tr").fadeOut();
+				$('#deleteItems').fadeOut();
+			});
+			var url = $(this).data('route')+'/'+ditem.join(',');
 			e.stopPropagation();
 			// my custome js sweetAlert2 by vitou
 			swal({
@@ -4879,18 +4888,10 @@
 			}).then((result) => {
 				if (result) {
 					
-	        setTimeout(function () {
-						var ditem=[];
-	          $('.checkbox-cell input[id*=CheckboxId_][type=checkbox]:checked').each(function () {
-							// push id checked item on product
-							ditem.push($(this).val());
-	            $(this).prop('checked', false);
-	            $(this).closest("tr").fadeOut();
-	            $('#deleteItems').fadeOut();
-						}); 
+	        setTimeout(function () { 
 						if(ditem.length > 0){
 							$.ajax({
-								url: "product/" + ditem.join(','),
+								url: url,
 								type: 'DELETE',
 								headers: {
 										'X-CSRF-Token':CSRF_TOKEN,
@@ -4898,12 +4899,21 @@
 								success: function( msg ) {
 										if(msg.status){
 											swal("Deleted!", "Your data has been deleted.", "success");
+											// show element again
+											// setTimeout(function () {
+											//   $('.card-data-tables table tbody tr').attr('style', '').empty('highlight');
+											// }, 2000); 
+											// pagination();
 										}else{
 											swal(
 												'Cancelled',
 												'Can not delete record !',
 												'error'
 											)
+											// show element again
+											setTimeout(function () {
+											  $('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
+											}, 2000); 
 										}
 								},
 								error: function( data ) {
@@ -4912,6 +4922,9 @@
 										'Can not delete record)',
 										'error'
 									)
+									setTimeout(function () {
+										$('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
+									}, 2000); 
 								}
 							});
 						}
@@ -4935,6 +4948,9 @@
 				} else {
 					throw dismiss;
 				}
+				setTimeout(function () {
+					$('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
+				}, 2000); 
 			})
 			//  Default code sweetAlert2
 	    // swal({

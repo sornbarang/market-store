@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\ProductsAds as Product;
 use App\Models\Category;
 use PDF;
 use App;
+use Auth;
 
 class CustomerController extends Controller
 {
@@ -169,14 +170,25 @@ class CustomerController extends Controller
             $description= $request->sumernotehidden;
             // $imgappend=[];
             // dd($imgappend);
+            // print_r(Auth::user()->id);exit();
             $product = Product::create([
                 'name' => $name,
                 'price' => $price,
                 'active' => $active,
+                'user_id'=>Auth::user()->id,
                 // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
                 'description'=>$description
                 ]);
+
+                
+
                 if($product){
+
+                    foreach (['en', 'km'] as $locale) {
+                        $product->translateOrNew($locale)->name = $name;
+                        $product->translateOrNew($locale)->description = $description;
+                    }
+                    $product->save();
                     $newsItem = Product::find($product->id);
                     if($request->hasFile('photos'))
                     {

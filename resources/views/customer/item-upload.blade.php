@@ -50,7 +50,7 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form method="post" action="{{route('market.myitemupload')}}" id="frmUploadFront">
+                        <form method="post" action="{{route('market.myitemupload')}}" id="frmUploadFront" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <div class="upload_modules">
@@ -95,59 +95,40 @@
                                     </div>
                                 </div><!-- end /.modules__content -->
                             </div><!-- end /.upload_modules -->
-                            <div class="upload_modules">
+                            <div class="upload_modules upload_modules_blog">
                             <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploadfile')</h3>
                                 </div><!-- end /.module_title -->
                                 <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="avatar-upload">
-                                            <div class="avatar-edit">
-                                                <input name="photos[]" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                                                <label for="imageUpload"></label>
-                                            </div>
-                                            <div class="avatar-preview">
-                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                    @for($i=0;$i<5;$i++)
+                                        @if($i==0)
+                                            <div class="col-sm-4">
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        <input name="photos[]" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload"></label>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div> 
-                                    <div class="col-sm-4">
-                                        <div class="avatar-upload">
-                                            <div class="avatar-edit">
-                                                <input name="photos[]" type='file' id="imageUpload1" accept=".png, .jpg, .jpeg" />
-                                                <label for="imageUpload1"></label>
-                                            </div>
-                                            <div class="avatar-preview">
-                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                        @else
+                                            <div class="col-sm-4">
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        <input name="photos[]" type='file' id="imageUpload{{$i}}" accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload{{$i}}"></label>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="avatar-upload">
-                                            <div class="avatar-edit">
-                                                <input name="photos[]" type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" />
-                                                <label for="imageUpload2"></label>
-                                            </div>
-                                            <div class="avatar-preview">
-                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="avatar-upload">
-                                            <div class="avatar-edit">
-                                                <input name="photos[]" type='file' id="imageUpload3" accept=".png, .jpg, .jpeg" />
-                                                <label for="imageUpload3"></label>
-                                            </div>
-                                            <div class="avatar-preview">
-                                                <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
+                                        @endif 
+                                    @endfor 
                                 </div>
                             </div>
                             {{--<div class="upload_modules module--upload">

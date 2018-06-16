@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsCategoriesTable extends Migration
+class AddUserIdToProductAdsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateProductsCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('products_categories', function (Blueprint $t) {
-            $t->integer('product_id');
-            $t->integer('category_id'); 
-            $t->primary(['product_id', 'category_id']);
+        Schema::table('products_ads', function (Blueprint $table) {
+            if (!Schema::hasColumn('products_ads', 'user_id')) {
+                $table->integer('user_id')->unsigned();
+            }
         });
     }
 
@@ -27,6 +27,8 @@ class CreateProductsCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products_categories');
+        Schema::table('products_ads', function (Blueprint $table) {
+            //
+        });
     }
 }

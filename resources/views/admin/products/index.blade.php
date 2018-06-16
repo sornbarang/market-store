@@ -27,7 +27,7 @@
                     <ul class="card-actions icons right-top">
                         <li id="deleteItems" style="display: none;">
                         <span class="label label-info pull-left m-t-5 m-r-10 text-white"></span>
-                        <a href="javascript:void(0)" id="confirmDelete" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
+                        <a href="javascript:void(0)" id="confirmDelete" data-route="{{route('admin.product.destroy',[''])}}" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
                             <i class="zmdi zmdi-delete"></i>
                         </a>
                         </li>
