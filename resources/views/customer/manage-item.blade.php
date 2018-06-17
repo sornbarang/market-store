@@ -47,7 +47,7 @@
 
                             <div class="pull-right">
                                 <div class="filter__option filter--text">
-                                    <p><span>26</span> @lang('profilemanageitem.product')</p>
+                                    <p><span>{{count($data['products'])}}</span> @lang('profilemanageitem.product')</p>
                                 </div>
 
                                 <div class="filter__option filter--select">
@@ -64,16 +64,25 @@
                     </div><!-- end /.col-md-12 -->
                 </div><!-- end /.row -->
 
-                <div class="row">
-                    @for($i=0;$i<6;$i++)
-                        <!-- start .col-md-4 -->
+                <div class="row"> 
+                    @foreach($data['products'] as $val) 
+                        @php
+                            $img='';
+                            $newsItem=App\Models\ProductsAds::find($val->id);
+                            $mediaItems = $newsItem->getMedia(); 
+                            $getFirstMedia = $newsItem->getFirstMedia(); 
+                            if($getFirstMedia){
+                                $img = $getFirstMedia->id.'/'.$getFirstMedia->file_name;
+                            } 
+                        @endphp
                         <div class="col-md-4 col-sm-6">
                             <!-- start .single-product -->
                             <div class="product product--card">
 
-                                <div class="product__thumbnail">
-                                    <img src="{{asset('/')}}images/p1.jpg" alt="Product Image">
-
+                                <div class="product__thumbnail" style="height: 223px;"> 
+                                    <figure class="figure">
+                                        <img style="max-height:223px;" src="{{Storage::url($img)}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
+                                    </figure>
                                     <div class="prod_option">
                                         <a href="#" id="drop2" class="dropdown-trigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <span class="lnr lnr-cog setting-icon"></span>
@@ -81,7 +90,7 @@
 
                                         <div class="options dropdown-menu" aria-labelledby="drop2">
                                             <ul>
-                                                <li><a href="{{route('market.edititem')}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
+                                                <li><a href="{{route('market.edititem',$val->id)}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
                                                 <li><a href="#"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.hide')</a></li>
                                                 <li>
                                                     <a href="#" data-toggle="modal" data-target="#myModal2" class="delete">
@@ -93,31 +102,43 @@
                                 </div><!-- end /.product__thumbnail -->
 
                                 <div class="product-desc">
-                                    <a href="#" class="product_title"><h4>MartPlace Extension Bundle</h4></a>
+                                    <a href="#" class="product_title"><h4>{{$val->translateOrNew(app()->getLocale())->name}}</h4></a>
                                     <ul class="titlebtm">
                                         <li>
                                             <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
-                                            <p><a href="#">AazzTech</a></p>
+                                            <p><a href="{{route('market.myprofile')}}">
+                                            @if (Route::has('login'))
+                                                @auth
+                                                    {{ ucfirst(Auth::user()->name) }}
+                                                @else
+                                                    guest
+                                                @endauth 
+                                            @endif
+                                            </a></p>
                                         </li>
                                         <li class="product_cat">
                                             <a href="#"><span class="lnr lnr-book"></span>Plugin</a>
                                         </li>
                                     </ul>
 
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
-                                        the mattis, leo quam aliquet congue.</p>
+                                    {{--
+                                        <p> preg_replace("/(\<(\/?[^\>]+)\>)/", " ", $val->translateOrNew(app()->getLocale())->description)
+                                        </p>
+                                        {!!$val->translateOrNew(app()->getLocale())->description!!}
+                                    --}}
+                                    {!!$val->translateOrNew(app()->getLocale())->description!!}
                                 </div><!-- end /.product-desc -->
 
                                 <div class="product-purchase">
                                     <div class="price_love">
-                                        <span>$10 - $50</span>
+                                        <span>$ {{$val->price??0}}</span>
                                         <p><span class="lnr lnr-heart"></span> 90</p>
                                     </div>
                                     <div class="sell"><p><span class="lnr lnr-cart"></span><span>16</span></p></div>
                                 </div><!-- end /.product-purchase -->
                             </div><!-- end /.single-product -->
                         </div><!-- end /.col-md-4 -->
-                    @endfor
+                    @endforeach 
                 </div>
 
                 <div class="row">

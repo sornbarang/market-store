@@ -987,12 +987,12 @@ $(document).ready(function() {
         var mid=$(this).next().next('input').val();
         if(typeof mid != "undefined"){
             $.ajax({
-                url: '{{ url("/admin/deletemedia") }}' + '/' + pid,
-                type: 'POST',
+                url: '{{ route("admin.deleteMedia",'') }}',
+                type: 'post',
                 headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
                 },
-                data: {mid:mid},
+                data: {mid:mid,pid:pid},
                 success: function( response ) {
                     console.log(response);
                 },
@@ -1106,12 +1106,12 @@ $(document).ready(function() {
         } 
         if(typeof pid != "undefined"){
                 $.ajax({
-                    url: '{{ url("/admin/publish") }}' + '/' + pid,
+                    url: '{{ route("admin.publish") }}',
                     type: 'POST',
                     headers: {
                         'X-CSRF-Token':CSRF_TOKEN,
                     },
-                    data:{active:active},
+                    data:{active:active,pid:pid},
                     success: function( response ) {
                         console.log(response);
                     },

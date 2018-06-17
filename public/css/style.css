@@ -2283,7 +2283,7 @@ h6 {
   line-height: 32px;
   display: inline-block;
   padding: 0 15px;
-  color: #0674ec;
+  color: #56a72d;
   margin-right: 10px;
   font-size: 15px;
   font-weight: 500;
@@ -10911,11 +10911,10 @@ span.counter {
   font-size: 20px;
   line-height: 45px;
   width: 45px;
-  text-align: center;
-  background: #000;
+  text-align: center; 
   color: #fff;
   display: inline-block;
-  background: #0674ec;
+  background: #56a72d;
   -webkit-border-radius: 200px;
   border-radius: 200px;
   cursor: pointer;
@@ -10962,11 +10961,11 @@ span.counter {
 }
 
 .dashboard-edit .product .prod_option .options ul li a:hover {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 .dashboard-edit .product .prod_option .options ul li a.delete:hover {
-  color: #ff6a6d;
+  color: red;
 }
 
 /* trumboyg*/
@@ -15904,7 +15903,7 @@ span.counter {
   height: 34px;
   margin-bottom: 0;
   border-radius: 100%;
-  background: #FFFFFF;
+  background: #56a72d;
   border: 1px solid transparent;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
@@ -15912,13 +15911,13 @@ span.counter {
   transition: all 0.2s ease-in-out;
 }
 .avatar-upload .avatar-edit input + label:hover {
-  background: #f1f1f1;
-  border-color: #d6d6d6;
+  background: #66bb2c;
+  border-color: #56a72d;
 }
 .avatar-upload .avatar-edit input + label:after {
   content: "\f040";
   font-family: 'FontAwesome';
-  color: #757575;
+  color: #ffffff;
   position: absolute;
   top: 10px;
   left: 0;
@@ -15941,4 +15940,7 @@ span.counter {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+.subcategory{
+  display:none;
 }

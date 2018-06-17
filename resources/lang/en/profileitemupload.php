@@ -30,4 +30,5 @@ return [
     'price' => 'Price',
     'choosefile' => 'Choose File',
     'save' => 'Save',
+    'discount' => 'Discount',
 ];
