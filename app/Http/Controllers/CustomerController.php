@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use PDF;
 use App;
+use App\Models\CategoriesAds;
 
 class CustomerController extends Controller
 {
@@ -162,6 +163,7 @@ class CustomerController extends Controller
         // $product = Product::find(1);
         // $product->categories()->attach($category);
         $data['breadcrub']='upload item';
+
         if($request->isMethod('post')){
             $name = $request->name;
             $price = $request->price;
@@ -200,8 +202,10 @@ class CustomerController extends Controller
                 }
                 return redirect('market/mymanageitem')->with('error', '<strong>Oh snap!</strong> Change a few things up and try submitting again!');
         }
+
         return view('customer.item-upload',compact('data'));
     }
+
     /**
      * User's card
      *

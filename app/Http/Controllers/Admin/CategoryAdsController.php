@@ -92,6 +92,7 @@ class CategoryAdsController extends Controller
     {
         $updateCat = CategoriesAds::findOrFail($id);
         $updateCat->translate()->name = $request->name;
+        $updateCat->parent_id = $request->parent_id;
         $updateCat->save();
         return redirect()->route('admin.category-ads.index');
     }
