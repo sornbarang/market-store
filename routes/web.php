@@ -44,31 +44,32 @@ function()
         Route::get('products', ['as' => 'market.categories', 'uses' => 'Market\ProductController@getproduct']);
         Route::get('productdetail', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);
         Route::post('reportmarket', ['as' => 'market.reportmarket', 'uses' => 'Market\ProductController@makeReport']); 
-        Route::get('mystore', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
-        Route::get('mysetting', ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
-        Route::get('myprofile', ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
-        Route::get('mycart', ['as' => 'market.mycart', 'uses' => 'CustomerController@myCart']);
-        Route::get('myfavorite', ['as' => 'market.myfavorite', 'uses' => 'CustomerController@myFavorite']);
-        Route::get('mysale', ['as' => 'market.mysale', 'uses' => 'CustomerController@mySaleManagement']);
-        Route::any('myitemupload', ['as' => 'market.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
-        Route::get('mymanageitem', ['as' => 'market.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
-        Route::get('myEditItem', ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
-        Route::get('myInvoice', ['as' => 'market.invoice', 'uses' => 'CustomerController@myInvoice']);
-        Route::get('viewPdf', ['as' => 'market.viewpdf', 'uses' => 'CustomerController@viewPdf']);
-        Route::get('downloadPdf', ['as' => 'market.downloadpdf', 'uses' => 'CustomerController@downloadPdf']);
-
-        Route::resource('customer', 'CustomerController',['names' =>
-            [
-                'index' => 'market.customer.index',
-                'create' => 'market.customer.create',
-                'update' => 'market.customer.update',
-                'edit' => 'market.customer.edit',
-                'store' => 'market.customer.store',
-                'show' => 'market.customer.show',
-                'destroy' => 'market.customer.destroy',
-            ]
-        ]);
-        
+        Route::group( ['middleware' => 'auth' ], function()
+        {
+            Route::get('mystore', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
+            Route::get('mysetting', ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
+            Route::get('myprofile', ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
+            Route::get('mycart', ['as' => 'market.mycart', 'uses' => 'CustomerController@myCart']);
+            Route::get('myfavorite', ['as' => 'market.myfavorite', 'uses' => 'CustomerController@myFavorite']);
+            Route::get('mysale', ['as' => 'market.mysale', 'uses' => 'CustomerController@mySaleManagement']);
+            Route::any('myitemupload', ['as' => 'market.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
+            Route::get('mymanageitem', ['as' => 'market.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
+            Route::any('myEditItem/{id?}', ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
+            Route::get('myInvoice', ['as' => 'market.invoice', 'uses' => 'CustomerController@myInvoice']);
+            Route::get('viewPdf', ['as' => 'market.viewpdf', 'uses' => 'CustomerController@viewPdf']);
+            Route::get('downloadPdf', ['as' => 'market.downloadpdf', 'uses' => 'CustomerController@downloadPdf']);
+            Route::resource('customer', 'CustomerController',['names' =>
+                [
+                    'index' => 'market.customer.index',
+                    'create' => 'market.customer.create',
+                    'update' => 'market.customer.update',
+                    'edit' => 'market.customer.edit',
+                    'store' => 'market.customer.store',
+                    'show' => 'market.customer.show',
+                    'destroy' => 'market.customer.destroy',
+                ]
+            ]);
+        });  
     });
 
     Route::get('contact', 'PageController@contact')->name('contact');
@@ -106,13 +107,14 @@ function()
                 'show' => 'admin.product.show',
                 'destroy' => 'admin.product.destroy',
             ]
-        ]); 
-
+        ]);  
         /***
          * Remove media
          */
-        Route::post('deletemedia/{id}', 'ProductController@deleteMedia');
-        Route::post('publish/{id}', 'ProductController@publish');
+        Route::post('deletemedia', ['as' => 'admin.deleteMedia', 'uses' => 'ProductController@deleteMedia']);
+        Route::post('publish', ['as' => 'admin.publish', 'uses' => 'ProductController@publish']);
+        // Route::any('deletemedia/{id}', 'ProductController@deleteMedia');
+        // Route::post('publish/{id}', 'ProductController@publish');
         
         Route::resource('user', 'UserController',['names' =>
             [
@@ -155,9 +157,11 @@ function()
                 'edit' => 'admin.category-ads.edit',
                 'store' => 'admin.category-ads.store',
                 'show' => 'admin.category-ads.show',
-                'destroy' => 'admin.category-ads.destroy',
+                'destroy' => 'admin.category-ads.destroy'
             ]
-        ]);
+        ]); 
+        Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'CategoryAdsController@getSubCategory']);
+
         Route::resource('country', 'CountryController',['names' =>
             [
                 'index' => 'admin.country.index',

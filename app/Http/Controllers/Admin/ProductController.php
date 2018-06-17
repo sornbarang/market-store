@@ -143,7 +143,7 @@ class ProductController extends Controller
                 if($check){
                     // Storage::move('old/file.jpg',$file->store('public'));
                     // $imgappend[] = $file->store('public');
-                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid'))){
+                    if(null !== $request->get('mediaid') && !empty($request->get('mediaid'))){
                         // $imgappend[] = $file->store('public');
                         $product->deleteMedia((int)$request->get('mediaid'));
                     } 
@@ -174,7 +174,7 @@ class ProductController extends Controller
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){
                     // $imgappend[] = $file->store('public');
-                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid2'))){
+                    if(null !== $request->get('mediaid2') && !empty($request->get('mediaid2'))){
                         // $imgappend[] = $file->store('public');
                         $product->deleteMedia((int)$request->get('mediaid2')); 
                     } 
@@ -190,7 +190,7 @@ class ProductController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){ 
-                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid3'))){
+                    if(null !== $request->get('mediaid3') && !empty($request->get('mediaid3'))){
                         $product->deleteMedia((int)$request->get('mediaid3')); 
                     } 
                     $product    
@@ -233,22 +233,25 @@ class ProductController extends Controller
     /**
      * Remove media
      */
-    public function deleteMedia(Request $request,$id)
-    {
-        $product=Product::find($id); 
-        if($product){
-            try {
-                $product->deleteMedia((int)$request->get('mid')); 
-                return response()->json(['status'=>true]); 
-            } catch (Exception $e) { 
-                return response()->json(['status'=>false,'error'=>$e]); 
-            } 
+    public function deleteMedia(Request $request)
+    { 
+        if($request->isMethod('post')){
+            $product=Product::find($request->pid);  
+            if($product){
+                try {
+                    $product->deleteMedia((int)$request->get('mid')); 
+                    return response()->json(['status'=>true]); 
+                } catch (Exception $e) { 
+
+                    return response()->json(['status'=>false,'error'=>$e]); 
+                }  
+            }
+            return response()->json(['status'=>false]);
         }
-        return response()->json(['status'=>false]);
     }
-    public function publish(Request $request,$id)
+    public function publish(Request $request)
     {
-        $product=Product::find($id); 
+        $product=Product::find($request->pid); 
         if($product){
             try {
                 $product->active = $request->get('active');

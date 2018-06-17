@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductsAds as Product;
-use App\Models\Category;
+use App\Models\CategoriesAds as Category ;
 use PDF;
 use App;
 use Auth;
-
+use Validator;
 class CustomerController extends Controller
 {
     /**
@@ -159,13 +159,23 @@ class CustomerController extends Controller
      */
     public function myItemUpload(Request $request) 
     {
-        // $category = Category::roots()->first();
-        // $product = Product::find(1);
-        // $product->categories()->attach($category);
+        
+        
+        $data['category'] = Category::where('parent_id',null)->get(); 
         $data['breadcrub']='upload item';
         if($request->isMethod('post')){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|max:100',
+                // 'body' => 'required',
+            ]); 
+            if ($validator->fails()) {
+                return redirect('market/myitemupload')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
             $name = $request->name;
             $price = $request->price;
+            $discount = $request->discount;
             $active = (int)$request->active??0;
             $description= $request->sumernotehidden;
             // $imgappend=[];
@@ -174,16 +184,13 @@ class CustomerController extends Controller
             $product = Product::create([
                 'name' => $name,
                 'price' => $price,
+                'discount' => $discount,
                 'active' => $active,
-                'user_id'=>Auth::user()->id,
+                'user_id'=>Auth::id(),
                 // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
                 'description'=>$description
-                ]);
-
-                
-
-                if($product){
-
+                ]);   
+                if($product){ 
                     foreach (['en', 'km'] as $locale) {
                         $product->translateOrNew($locale)->name = $name;
                         $product->translateOrNew($locale)->description = $description;
@@ -208,9 +215,9 @@ class CustomerController extends Controller
                             }
                         }
                     }
-                    return redirect('market/mymanageitem')->with('success', 'Record has been added!');
+                    return redirect('market/myitemupload')->with('success', 'Record has been added!');
                 }
-                return redirect('market/mymanageitem')->with('error', '<strong>Oh snap!</strong> Change a few things up and try submitting again!');
+                return redirect('market/myitemupload')->with('error', '<strong>Oh snap!</strong> Change a few things up and try submitting again!');
         }
         return view('customer.item-upload',compact('data'));
     }
@@ -222,6 +229,7 @@ class CustomerController extends Controller
      */
     public function myManageItem()
     {
+        $data['products'] = Product::where('user_id', Auth::user()->id)->get();
         $data['breadcrub']='manage items';
         return view('customer.manage-item',compact('data'));
     }
@@ -231,9 +239,81 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function myEditItem()
+    public function myEditItem(Request $request, $id)
     {
+        if($request->isMethod('post')){
+            $product = Product::find($id);
+            if($product){  
+            $allowedfileExtension=['jpg','jpeg','png'];
+            // check if have new input file image to update
+            if($request->hasFile('photos')){
+                $file = $request->file('photos'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){
+                    // Storage::move('old/file.jpg',$file->store('public'));
+                    // $imgappend[] = $file->store('public');
+                    if(null !== $request->get('mediaid') && !empty($request->get('mediaid'))){
+                        // $imgappend[] = $file->store('public');
+                        $product->deleteMedia((int)$request->get('mediaid'));
+                    } 
+                    $product
+                        ->addMedia($file)
+                        ->toMediaCollection();
+                } 
+            }
+            if($request->hasFile('photos1')){
+                $file = $request->file('photos1'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){
+                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid1'))){
+                        // $imgappend[] = $file->store('public');
+                        $product->deleteMedia((int)$request->get('mediaid1'));
+                    } 
+                    $product
+                        ->addMedia($file)
+                        ->toMediaCollection(); 
+                } 
+            }
+            if($request->hasFile('photos2')){
+                $file = $request->file('photos2'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){
+                    // $imgappend[] = $file->store('public');
+                    if(null !== $request->get('mediaid2') && !empty($request->get('mediaid2'))){
+                        // $imgappend[] = $file->store('public');
+                        $product->deleteMedia((int)$request->get('mediaid2')); 
+                    } 
+                   
+                    $product
+                        ->addMedia($file)
+                        ->toMediaCollection(); 
+                } 
+            }
+            if($request->hasFile('photos3')){
+                $file = $request->file('photos3'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){ 
+                    if(null !== $request->get('mediaid3') && !empty($request->get('mediaid3'))){
+                        $product->deleteMedia((int)$request->get('mediaid3')); 
+                    } 
+                    $product    
+                        ->addMedia($file)
+                        ->toMediaCollection();
+                } 
+            }
+                return redirect('market/mymanageitem')->with('success', 'Record has been updated!');
+            }
+        }
         $data['breadcrub']='update item';
+        $data['product']=Product::where('user_id',Auth::id())->find($id);
         return view('customer.edit-item',compact('data'));
     }
     /**

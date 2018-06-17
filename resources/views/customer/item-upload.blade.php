@@ -13,8 +13,7 @@
             START DASHBOARD AREA
     =================================-->
     <section class="dashboard-area">
-        @include('elements.customer-menu')
-
+        @include('elements.customer-menu') 
         <div class="dashboard_contents">
             <div class="container">
                 <div class="row">
@@ -27,7 +26,7 @@
                             </div>
                             <div class="pull-right">
                             @if (session('success')) 
-                                <div class="alert alert-success" role="alert">
+                                <div class="alert alert-success" role="alert" style="margin:0 !important;padding:0;">
                                     <span class="alert_icon lnr lnr-checkmark-circle"></span>
                                     {{ session('success') }}.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -35,7 +34,7 @@
                                     </button>
                                 </div>
                             @elseif(session('error'))
-                                <div class="alert alert-danger" role="alert">
+                                <div class="alert alert-danger" role="alert" style="margin:0 !important;padding:0;">
                                     <span class="alert_icon lnr lnr-warning"></span>
                                         {{ session('success') }}.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -62,22 +61,46 @@
                                     <div class="form-group">
                                         <label for="category">@lang('profileitemupload.itemnamedes')</label>
                                         <div class="select-wrap select-wrap2">
-                                            <select name="country" id="category" class="text_field">
-                                                <option value="">@lang('profileitemupload.selectcategory')</option>
-                                                <option value="wordpress">Wordpress</option>
-                                                <option value="html">Html</option>
-                                                <option value="graphic">Graphics</option>
-                                                <option value="illustration">Illustration</option>
-                                                <option value="music">Music</option>
-                                                <option value="video">Video</option>
+                                            <select name="category" id="category" class="text_field">
+                                                <option value="0">@lang('profileitemupload.selectcategory')</option>
+                                                @foreach($data['category'] as $cat)
+                                                    <option value="{{$cat->translate()->id}}">{{$cat->translate(app()->getLocale())->name}}</option>
+                                                @endforeach
                                             </select>
                                             <span class="lnr lnr-chevron-down"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group subcategory">
+                                        <label for="category">@lang('profileitemupload.itemnamedes')</label>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="select-wrap select-wrap2">
+                                                    <select name="country" id="category" class="text_field">
+                                                        <option value="">@lang('profileitemupload.selectcategory')</option>
+                                                        @foreach($data['category'] as $cat)
+                                                            <option value="wordpress">{{$cat->translate(app()->getLocale())->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <span class="lnr lnr-chevron-down"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="product_name">@lang('profileitemupload.productname') <span>(Max 100 characters)</span></label>
-                                        <input type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')">
+                                        <input required type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')">
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger" style="margin:0 !important;padding:0;">
+                                                <ul>
+                                                    <li>{{ $errors->getBag('default')->first('name') }}</li> 
+                                                    {{--
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach --}}
+                                                </ul>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="form-group no-margin">
@@ -89,7 +112,16 @@
                                             <label for="exlicense">@lang('profileitemupload.price')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input name="price" type="text" id="exlicense" class="text_field" placeholder="00.00">
+                                                <input name="price" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label for="exlicense">@lang('profileitemupload.discount')</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
                                             </div>
                                         </div>
                                     </div>
@@ -100,7 +132,7 @@
                                     <h3>@lang('profileitemupload.uploadfile')</h3>
                                 </div><!-- end /.module_title -->
                                 <div class="row">
-                                    @for($i=0;$i<5;$i++)
+                                    @for($i=0;$i<4;$i++)
                                         @if($i==0)
                                             <div class="col-sm-4">
                                                 <div class="avatar-upload">
@@ -109,7 +141,7 @@
                                                         <label for="imageUpload"></label>
                                                     </div>
                                                     <div class="avatar-preview">
-                                                        <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                        <div title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,7 +154,7 @@
                                                         <label for="imageUpload{{$i}}"></label>
                                                     </div>
                                                     <div class="avatar-preview">
-                                                        <div class="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                        <div title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');">
                                                         </div>
                                                     </div>
                                                 </div>

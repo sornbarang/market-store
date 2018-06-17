@@ -30,7 +30,9 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form action="#">
+                        <form method="post" action="{{route('market.edititem',$data['product']->id)}}" id="frmUpdateFront" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <div class="upload_modules">
                                 <div class="modules__title">
                                     <h3>@lang('profileedititemupload.uploaditem')</h3>
@@ -55,63 +57,116 @@
 
                                     <div class="form-group">
                                         <label for="product_name">@lang('profileedititemupload.productname') <span>(Max 100 characters)</span></label>
-                                        <input type="text" id="product_name" class="text_field" placeholder="Enter your product name here...">
+                                        <input value="{{$data['product']->name}}" name="name" type="text" id="product_name" class="text_field" placeholder="Enter your product name here...">
                                     </div>
 
                                     <div class="form-group no-margin">
                                         <p class="label">@lang('profileedititemupload.productdes')</p>
-                                        <div id="trumbowyg-demo"></div>
+                                        <div id="trumbowyg-demo">
+                                        {!!$data['product']->translateOrNew(app()->getLocale())->description !!}
+                                        </div>
                                     </div> 
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="exlicense">@lang('profileedititemupload.price')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input type="text" id="exlicense" class="text_field" placeholder="00.00">
+                                                <input value="{{$data['product']->price}}" name="price" type="text" id="exlicense" class="text_field" placeholder="00.00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label for="exlicense">@lang('profileitemupload.discount')</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input value="{{$data['product']->discount}}" step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
                                             </div>
                                         </div>
                                     </div>
                                 </div><!-- end /.modules__content -->
                             </div><!-- end /.upload_modules -->
 
-                            <div class="upload_modules module--upload">
-                                <div class="modules__title">
-                                    <h3>@lang('profileedititemupload.uploadfile')</h3>
+                            <div class="upload_modules upload_modules_blog">
+                            <div class="modules__title">
+                                @php
+                                    $img=''; 
+                                    $newsItem=App\Models\ProductsAds::find($data['product']->id);
+                                    $mediaItems = $newsItem->getMedia(); 
+                                    $img=isset($mediaItems[0])?$mediaItems[0]->id.'/'.$mediaItems[0]->file_name:''; 
+                                    $img1=isset($mediaItems[1])?$mediaItems[1]->id.'/'.$mediaItems[1]->file_name:''; 
+                                    $img2=isset($mediaItems[2])?$mediaItems[2]->id.'/'.$mediaItems[2]->file_name:''; 
+                                    $img3=isset($mediaItems[3])?$mediaItems[3]->id.'/'.$mediaItems[3]->file_name:''; 
+                                @endphp
+                                    <h3>@lang('profileitemupload.uploadfile')</h3>
                                 </div><!-- end /.module_title -->
-
-                                <div class="modules__content">
-                                    <div class="form-group">
-                                        @for($i=0;$i<4;$i++)
-                                            <div class="upload_wrapper">
-                                                <p>@lang('profileedititemupload.uploadthumbnail') <span>(JPEG or PNG 100x100px)</span></p>
-
-                                                <div class="custom_upload">
-                                                    <label for="thumbnail">
-                                                        <input type="file" id="thumbnail".$i."" class="files">
-                                                        <span class="btn btn--round btn--sm">@lang('profileedititemupload.choosefile')</span>
-                                                    </label>
-                                                </div><!-- end /.custom_upload -->
-
-                                                <div class="progress_wrapper">
-                                                    <div class="labels clearfix">
-                                                        <p>filename.jpg</p>
-                                                        <span data-width="89">89%</span>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 89%;">
-                                                            <span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- end /.progress_wrapper -->
-
-                                                <span class="lnr upload_cross lnr-cross"></span>
-                                            </div><!-- end /.upload_wrapper -->
-                                        @endfor
-                                    </div><!-- end /.form-group --> 
-                                </div><!-- end /.upload_modules -->
+                                <div class="row"> 
+                                    <div class="col-md-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div class="imagePreview" style="background-image: url('{{Storage::url($img)}}')">
+                                                </div>
+                                                @if($img)
+                                                    <input name="mediaid" type="hidden" value="{{$mediaItems[0]->id}}">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-md-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos1" type='file' id="imageUpload1" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload1"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div class="imagePreview" style="background-image: url('{{Storage::url($img1)}}');">
+                                                </div>
+                                                @if($img1)
+                                                    <input name="mediaid1" type="hidden" value="{{$mediaItems[1]->id}}">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos2" type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload2"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div class="imagePreview" style="background-image: url('{{Storage::url($img2)}}');">
+                                                </div>
+                                                @if($img2)
+                                                    <input name="mediaid2" type="hidden" value="{{$mediaItems[2]->id}}">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input name="photos3" type='file' id="imageUpload3" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload3"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                
+                                                @if($img3)
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img3)}}');"></div>
+                                                    <input name="mediaid3" type="hidden" value="{{$mediaItems[3]->id}}">
+                                                @else
+                                                    <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
                             </div><!-- end /.upload_modules -->
 
-                            <div class="upload_modules">
+                            {{--<div class="upload_modules">
                                 <div class="modules__title">
                                     <h3>@lang('profileedititemupload.otherinfo')</h3>
                                 </div><!-- end /.module_title -->
@@ -225,6 +280,7 @@
                                     </div>
                                 </div><!-- end /.upload_modules -->
                             </div><!-- end /.upload_modules -->
+                            --}}
                             <!-- submit button -->
                             <button type="submit" class="btn btn--round btn--fullwidth btn--lg">@lang('profileedititemupload.save')</button>
                         </form>

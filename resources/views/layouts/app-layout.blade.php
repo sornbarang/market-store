@@ -643,13 +643,14 @@
 <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
 <script src="{{ asset('js/map.js') }}"></script>
 <script> 
-    $(document).on('click', 'form#frmUploadFront button[type=submit]', function(e) {
+    $(document).on('click', 'form#frmUploadFront button[type=submit],form#frmUpdateFront button[type=submit]', function(e) {
         // $('#frmUploadFront #trumbowyg-demo').html()); 
-        $('#frmUploadFront #trumbowyg-demoe-hidden').val($('#frmUploadFront #trumbowyg-demo').html());  
+        $('#frmUploadFront #trumbowyg-demoe-hidden,#frmUpdateFront #trumbowyg-demoe-hidden').val($('#frmUploadFront #trumbowyg-demo,#frmUpdateFront #trumbowyg-demo').html());  
         // e.preventDefault();
         $(this).submit();
     });
     $(document).ready(function(){ 
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         var imguploads=[];
         $('.upload_modules.upload_modules_blog >div.row > div > div > div > input').each(function( index ,elm) {
             imguploads.push('#'+elm.id);
@@ -669,6 +670,28 @@
         }
         $('#imageUpload,#imageUpload1,#imageUpload2,#imageUpload3,#imageUpload4').change(function() {
             readURL(this); 
+        });
+        $('form#frmUploadFront #category').on('change',function(){ 
+            var this_=$(this);
+            $.ajax({
+                url: '{{route("getsubcategory")}}',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-Token':CSRF_TOKEN,
+                },
+                data:{pid:$(this).val()},
+                success: function( msg ) {
+                    console.log(msg);
+                    if(msg.status==true && msg.data.length > 0){
+                        // $('.subcategory').show();
+                        // console.log(this_.parent().parent().next().children().children().children()); 
+                        // this_.parent().parent().nextAll('.subcategory').empty(); 
+                    }
+                },
+                error: function( data ) {
+                    console.log(data);
+                }
+            });
         });
     });
     
