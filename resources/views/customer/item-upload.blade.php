@@ -58,6 +58,7 @@
                                 </div><!-- end /.module_title -->
 
                                 <div class="modules__content">
+                                    
                                     <div class="form-group">
                                         <label for="category">@lang('profileitemupload.itemnamedes')</label>
                                         <div class="select-wrap select-wrap2">
@@ -71,22 +72,35 @@
                                         </div>
                                     </div>
                                     <div class="form-group subcategory">
-                                        <label for="category">@lang('profileitemupload.itemnamedes')</label>
+                                        
+                                    </div>
+                                    <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <div class="select-wrap select-wrap2">
-                                                    <select name="country" id="category" class="text_field">
-                                                        <option value="">@lang('profileitemupload.selectcategory')</option>
-                                                        @foreach($data['category'] as $cat)
-                                                            <option value="wordpress">{{$cat->translate(app()->getLocale())->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <span class="lnr lnr-chevron-down"></span>
+                                                <div class="sidebar-card card--category">
+                                                    <a   href="#collapse1" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse1">
+                                                        <h6>Child</h6>
+                                                    </a>
+                                                    <div class="collapse show collapsible-content" id="collapse1">
+                                                        <ul class="card-content">
+                                                            <li>
+                                                                <a href="#">
+                                                                    &nbsp;Wordpress 
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    &nbsp;xxxx 
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- end /.collapsible_content -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="form-group">
                                         <label for="product_name">@lang('profileitemupload.productname') <span>(Max 100 characters)</span></label>
                                         <input required type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')">

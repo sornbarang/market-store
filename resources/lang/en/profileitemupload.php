@@ -15,6 +15,7 @@ return [
 
     'uploaditem' => 'Upload Your Item',
     'itemnamedes' => 'Item Name & Description',
+    'subcat'=>'child',
     'quickuploadrule' => 'Quick Upload Rules',
     'imageupload' => 'Image Upload',
     'fileupload' => 'File Upload', 

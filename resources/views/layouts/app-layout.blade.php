@@ -650,6 +650,7 @@
         $(this).submit();
     });
     $(document).ready(function(){ 
+        var locale="{{ app()->getLocale() }}";
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         var imguploads=[];
         $('.upload_modules.upload_modules_blog >div.row > div > div > div > input').each(function( index ,elm) {
@@ -673,7 +674,7 @@
         });
         $('form#frmUploadFront #category').on('change',function(){ 
             var this_=$(this);
-            var locale="{{ app()->getLocale() }}";
+            
             $.ajax({
                 url: '{{route("getsubcategory")}}',
                 type: 'POST',
@@ -687,24 +688,67 @@
                     if(msg.status==true && msg.data.length > 0){
                         $('.subcategory').show();
                         // console.log(this_.parent().parent().next().children().children().children()); 
-                        this_.parent().parent().nextAll('.subcategory').empty();
+                        this_.parent().parent().nextAll('.subcategory').empty(); 
                         var arrhtml=[];
                         $.each(msg.data, function(k, cat) {
+                            // loop lang 
                             for(var i=0;i<cat.translations.length;i++){
                                 if(cat.translations[i].locale==locale){
-                                    arrhtml+='<option value="'+ cat.translations[i].categories_ads_id +'">' + cat.translations[i].name + '</option>'
+                                    arrhtml+='<div class="options"><div class="custom-radio"> <input value="'+ cat.translations[i].categories_ads_id +'" type="radio" id="opt'+(k+1)+'" class="" name="filter_opt" /> <label for="opt'+(k+1)+'"> <span class="circle"></span>' + cat.translations[i].name + '</label> </div> </div>'
                                 }
                             }
-                            $('.subcategory').html('<label>Item Name & Description</label> <div class="row"> <div class="col-md-3"> <div class="select-wrap select-wrap2"> <select name="country" id="category" class="text_field"> <option value="">@lang("profileitemupload.selectcategory")</option> '+ arrhtml +'</select> <span class="lnr lnr-chevron-down"></span> </div> </div> </div> ');
+                            $('.subcategory').html('<label for="category">@lang("profileitemupload.subcat")</label> <div class="row"> <div class="col-md-3">'+arrhtml+'</div> </div>');
                         }); 
                         
+                    }else if(msg.status==true && msg.data.length >=0){
+                        this_.parent().parent().nextAll('.subcategory').empty(); 
                     }
                 },
                 error: function( data ) {
                     console.log(data);
                 }
             });
-        });
+        }); 
+        $('.modal-dialog .card_style2').on('click',function(){
+            $('.modal-dialog .card_style2').attr('style','');
+            $(this).css({'background':'#56a72d','color':'#fff'});
+            $('#myreport').val($(this).text().trim())
+        });  
+        $( document ).on( "click", "form#frmUploadFront .subcategory .custom-radio input[name='filter_opt']", function(e){
+            var this_=$(this);
+            $.ajax({
+                url: '{{route("getsubcategory")}}',
+                type: 'POST',
+                dataType:'json',
+                headers: {
+                    'X-CSRF-Token':CSRF_TOKEN,
+                },
+                data:{pid:$(this).val()},
+                success: function( msg ) {
+                    console.log(msg);
+                    if(msg.status==true && msg.data.length > 0){ 
+                        var arrhtml=[];
+                        $.each(msg.data, function(k, cat) {
+                            // loop lang 
+                            for(var i=0;i<cat.translations.length;i++){
+                                if(cat.translations[i].locale==locale){
+                                    arrhtml+='<div class="options"><div class="custom-radio"> <input value="'+ cat.translations[i].categories_ads_id +'" type="radio" id="optchildred'+(k+1)+'" class="" name="filter_opt" /> <label for="optchildred'+(k+1)+'"> <span class="circle"></span>' + cat.translations[i].name + '</label> </div> </div>'
+                                }
+                            } 
+                        }); 
+                        this_.parent().parent().parent().next('div.col-md-3').remove();
+                        $('form#frmUploadFront .subcategory > div.row').append('<div class="col-md-3">'+arrhtml+'</div>');
+                    }else if(msg.status==true && msg.data.length >=0){
+                        this_.parent().parent().parent().next('div.col-md-3').remove();
+                    }
+                },
+                error: function( data ) {
+                    console.log(data);
+                }
+            });
+        } );
+
+
     });
     
 </script>
