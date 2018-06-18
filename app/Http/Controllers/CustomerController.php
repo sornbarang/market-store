@@ -9,6 +9,7 @@ use PDF;
 use App;
 use Auth;
 use Validator;
+
 class CustomerController extends Controller
 {
     /**
@@ -163,6 +164,7 @@ class CustomerController extends Controller
         
         $data['category'] = Category::where('parent_id',null)->get(); 
         $data['breadcrub']='upload item';
+
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
@@ -176,7 +178,7 @@ class CustomerController extends Controller
             $name = $request->name;
             $price = $request->price;
             $discount = $request->discount;
-            $active = (int)$request->active??0;
+            $active = (int)$request->active ? 1 : 0;
             $description= $request->sumernotehidden;
             // $imgappend=[];
             // dd($imgappend);
@@ -219,8 +221,10 @@ class CustomerController extends Controller
                 }
                 return redirect('market/myitemupload')->with('error', '<strong>Oh snap!</strong> Change a few things up and try submitting again!');
         }
+
         return view('customer.item-upload',compact('data'));
     }
+
     /**
      * User's card
      *
