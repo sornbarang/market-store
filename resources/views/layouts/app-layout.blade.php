@@ -673,9 +673,11 @@
         });
         $('form#frmUploadFront #category').on('change',function(){ 
             var this_=$(this);
+            var locale="{{ app()->getLocale() }}";
             $.ajax({
                 url: '{{route("getsubcategory")}}',
                 type: 'POST',
+                dataType:'json',
                 headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
                 },
@@ -683,9 +685,19 @@
                 success: function( msg ) {
                     console.log(msg);
                     if(msg.status==true && msg.data.length > 0){
-                        // $('.subcategory').show();
+                        $('.subcategory').show();
                         // console.log(this_.parent().parent().next().children().children().children()); 
-                        // this_.parent().parent().nextAll('.subcategory').empty(); 
+                        this_.parent().parent().nextAll('.subcategory').empty();
+                        var arrhtml=[];
+                        $.each(msg.data, function(k, cat) {
+                            for(var i=0;i<cat.translations.length;i++){
+                                if(cat.translations[i].locale==locale){
+                                    arrhtml+='<option value="'+ cat.translations[i].categories_ads_id +'">' + cat.translations[i].name + '</option>'
+                                }
+                            }
+                            $('.subcategory').html('<label>Item Name & Description</label> <div class="row"> <div class="col-md-3"> <div class="select-wrap select-wrap2"> <select name="country" id="category" class="text_field"> <option value="">@lang("profileitemupload.selectcategory")</option> '+ arrhtml +'</select> <span class="lnr lnr-chevron-down"></span> </div> </div> </div> ');
+                        }); 
+                        
                     }
                 },
                 error: function( data ) {

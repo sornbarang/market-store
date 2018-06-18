@@ -64,7 +64,7 @@
                                             <select name="category" id="category" class="text_field">
                                                 <option value="0">@lang('profileitemupload.selectcategory')</option>
                                                 @foreach($data['category'] as $cat)
-                                                    <option value="{{$cat->translate()->id}}">{{$cat->translate(app()->getLocale())->name}}</option>
+                                                    <option value="{{$cat->translate(app()->getLocale())->categories_ads_id}}">{{$cat->translate(app()->getLocale())->name}}</option>
                                                 @endforeach
                                             </select>
                                             <span class="lnr lnr-chevron-down"></span>
