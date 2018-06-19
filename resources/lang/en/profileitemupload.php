@@ -32,4 +32,6 @@ return [
     'choosefile' => 'Choose File',
     'save' => 'Save',
     'discount' => 'Discount',
+    'choosecat'=>'Choose a category',
+    'choosesubcat'=>'Choose a subcategory',
 ];

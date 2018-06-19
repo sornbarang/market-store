@@ -644,6 +644,14 @@
 <script src="{{ asset('js/map.js') }}"></script>
 <script> 
     $(document).on('click', 'form#frmUploadFront button[type=submit],form#frmUpdateFront button[type=submit]', function(e) {
+        var chkconfirmcat=$("form#frmUploadFront #chkconfirm").val();
+        if(chkconfirmcat ==undefined || chkconfirmcat == 0){
+            alert('please tick for next process');
+            e.preventDefault();
+        }else{
+            console.log('can go');
+        } 
+        return false
         // $('#frmUploadFront #trumbowyg-demo').html()); 
         $('#frmUploadFront #trumbowyg-demoe-hidden,#frmUpdateFront #trumbowyg-demoe-hidden').val($('#frmUploadFront #trumbowyg-demo,#frmUpdateFront #trumbowyg-demo').html());  
         // e.preventDefault();
@@ -672,9 +680,8 @@
         $('#imageUpload,#imageUpload1,#imageUpload2,#imageUpload3,#imageUpload4').change(function() {
             readURL(this); 
         });
-        $('form#frmUploadFront #category').on('change',function(){ 
-            var this_=$(this);
-            
+        $('form#frmUploadFront .modules__content div.statement_info_card').on('click',function(){ 
+            var this_=$(this); 
             $.ajax({
                 url: '{{route("getsubcategory")}}',
                 type: 'POST',
@@ -682,26 +689,32 @@
                 headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
                 },
-                data:{pid:$(this).val()},
+                data:{pid:$(this).data('id')},
                 success: function( msg ) {
                     console.log(msg);
+                    $('form#frmUploadFront .modules__content div.statement_info_card').removeAttr('style');
+                    $('form#frmUploadFront .modules__content div.statement_info_card').children().find('.info').children().removeAttr('style');
+                    this_.css('background','#56a72d');
+                    this_.children().find('.info').children().css('color','#ffff');
                     if(msg.status==true && msg.data.length > 0){
                         $('.subcategory').show();
                         // console.log(this_.parent().parent().next().children().children().children()); 
-                        this_.parent().parent().nextAll('.subcategory').empty(); 
+                        this_.parent().parent().parent().nextAll('.subcategory').empty(); 
                         var arrhtml=[];
                         $.each(msg.data, function(k, cat) {
                             // loop lang 
                             for(var i=0;i<cat.translations.length;i++){
                                 if(cat.translations[i].locale==locale){
-                                    arrhtml+='<div class="options"><div class="custom-radio"> <input value="'+ cat.translations[i].categories_ads_id +'" type="radio" id="opt'+(k+1)+'" class="" name="filter_opt" /> <label for="opt'+(k+1)+'"> <span class="circle"></span>' + cat.translations[i].name + '</label> </div> </div>'
+                                    arrhtml+='<div  data-id="'+ cat.translations[i].categories_ads_id +'" class="statement_info_card mb-2"> <div class="info_wrap"> <span class="lnr lnr-list icon mcolorbg1"></span> <div class="info"> <span>' + cat.translations[i].name + '</span> </div> </div> </div>'
                                 }
-                            }
-                            $('.subcategory').html('<label for="category">@lang("profileitemupload.subcat")</label> <div class="row"> <div class="col-md-3">'+arrhtml+'</div> </div>');
+                            } 
+                            $('.subcategory').html('<div class="row"><div class="col-12 mb-1"> <label>@lang("profileitemupload.choosesubcat")</label> </div> <div class="col-md-3 lavel1"> '+arrhtml+'</div> </div>');
                         }); 
                         
                     }else if(msg.status==true && msg.data.length >=0){
-                        this_.parent().parent().nextAll('.subcategory').empty(); 
+                        $('.subcategory').show();
+                        this_.parent().parent().parent().nextAll('.subcategory').empty(); 
+                        $('.subcategory').html('<div class="row"> <div class="col-md-12 lavel1 text-center"><div class="custom-radio"> <input type="radio" id="yes" class="" name="high_res"><div class="custom_checkbox"> <input type="checkbox" id="chkconfirm" value="0"> <label for="chkconfirm"> <span class="shadow_checkbox"></span> <span class="label_text">Check it to confirm</span> </label> </div></div></div> </div>');
                     }
                 },
                 error: function( data ) {
@@ -709,12 +722,12 @@
                 }
             });
         }); 
-        $('.modal-dialog .card_style2').on('click',function(){
-            $('.modal-dialog .card_style2').attr('style','');
-            $(this).css({'background':'#56a72d','color':'#fff'});
-            $('#myreport').val($(this).text().trim())
-        });  
-        $( document ).on( "click", "form#frmUploadFront .subcategory .custom-radio input[name='filter_opt']", function(e){
+        // $('.modal-dialog .card_style2').on('click',function(){
+        //     $('.modal-dialog .card_style2').attr('style','');
+        //     $(this).css({'background':'#56a72d','color':'#fff'});
+        //     $('#myreport').val($(this).text().trim())
+        // });  
+        $( document ).on( "click", "form#frmUploadFront .modules__content div.subcategory div.statement_info_card", function(e){
             var this_=$(this);
             $.ajax({
                 url: '{{route("getsubcategory")}}',
@@ -723,32 +736,43 @@
                 headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
                 },
-                data:{pid:$(this).val()},
+                data:{pid:$(this).data('id')},
                 success: function( msg ) {
                     console.log(msg);
-                    if(msg.status==true && msg.data.length > 0){ 
+                    $('form#frmUploadFront .modules__content div.subcategory div.statement_info_card').removeAttr('style');
+                    $('form#frmUploadFront .modules__content div.subcategory div.statement_info_card').children().find('.info').children().removeAttr('style');
+                    this_.css('background','#56a72d');
+                    this_.children().find('.info').children().css('color','#ffff');
+                    if(msg.status==true && msg.data.length > 0){
+                        this_.parent().nextAll().remove(); 
                         var arrhtml=[];
                         $.each(msg.data, function(k, cat) {
                             // loop lang 
                             for(var i=0;i<cat.translations.length;i++){
                                 if(cat.translations[i].locale==locale){
-                                    arrhtml+='<div class="options"><div class="custom-radio"> <input value="'+ cat.translations[i].categories_ads_id +'" type="radio" id="optchildred'+(k+1)+'" class="" name="filter_opt" /> <label for="optchildred'+(k+1)+'"> <span class="circle"></span>' + cat.translations[i].name + '</label> </div> </div>'
+                                    // arrhtml+='<div class="options"><div class="custom-radio"> <input value="'+ cat.translations[i].categories_ads_id +'" type="radio" id="optchildred'+(k+1)+'" class="" name="filter_opt" /> <label for="optchildred'+(k+1)+'"> <span class="circle"></span>' + cat.translations[i].name + '</label> </div> </div>'
+                                    arrhtml+='<div data-id="'+ cat.translations[i].categories_ads_id +'" class="statement_info_card mb-2"> <div class="info_wrap"> <span class="lnr lnr-list icon mcolorbg1"></span> <div class="info"> <span>' + cat.translations[i].name + '</span> </div> </div> </div>'
                                 }
                             } 
                         }); 
-                        this_.parent().parent().parent().next('div.col-md-3').remove();
                         $('form#frmUploadFront .subcategory > div.row').append('<div class="col-md-3">'+arrhtml+'</div>');
                     }else if(msg.status==true && msg.data.length >=0){
-                        this_.parent().parent().parent().next('div.col-md-3').remove();
+                        this_.parent().nextAll().remove();
+                        $('form#frmUploadFront .subcategory > div.row').append('<div class="col-md-3 text-center"><label>Go to upload form</label><span class="lnr lnr-upload icon mcolorbg3 gotoupload"></span></div>');
                     }
                 },
                 error: function( data ) {
                     console.log(data);
                 }
             });
-        } );
-
-
+        } ); 
+        $( document ).on( "click", "form#frmUploadFront .custom_checkbox label[for='chkconfirm']", function(e){
+            if ($(this).prev().is(':checked')) { 
+                $(this).prev().val('0')
+            }else{
+                $(this).prev().val('1')
+            }
+        });
     });
     
 </script>

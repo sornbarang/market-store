@@ -31,4 +31,6 @@ return [
     'price' => 'តំលៃ',
     'choosefile' => 'ជ្រើរើសរូប',
     'save' => 'បន្ថែម',
+    'choosecat'=>'ជ្រើរើសប្រភេទ',
+    'choosesubcat'=>'ជ្រើរើសកូននៃប្រភេទ',
 ];
