@@ -15989,3 +15989,6 @@ form#frmUploadFront .subcategory span.circle:before{
   width: 60px;
   border-radius: 50%;
 }
+form#frmUploadFront .info_wrap{
+  text-align: left;
+} 

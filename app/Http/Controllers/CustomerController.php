@@ -174,7 +174,7 @@ class CustomerController extends Controller
                 return redirect('market/myitemupload')
                     ->withErrors($validator)
                     ->withInput();
-            }
+            } 
             $name = $request->name;
             $price = $request->price;
             $discount = $request->discount;
@@ -198,7 +198,13 @@ class CustomerController extends Controller
                         $product->translateOrNew($locale)->description = $description;
                     }
                     $product->save();
+                    // save product to relation table between product and cateogry
                     $newsItem = Product::find($product->id);
+                    $category = Category::roots()->first();
+                    $product = Product::find($product->id);
+                    $product->categories_ads()->attach($request->lastchildid);
+                    // end
+                    
                     if($request->hasFile('photos'))
                     {
                         $allowedfileExtension=['jpg','jpeg','png'];
@@ -213,6 +219,7 @@ class CustomerController extends Controller
                                 // }
                                 $newsItem
                                 ->addMedia($file)
+                                ->withResponsiveImages()
                                 ->toMediaCollection();
                             }
                         }
@@ -264,6 +271,7 @@ class CustomerController extends Controller
                     } 
                     $product
                         ->addMedia($file)
+                        ->withResponsiveImages()
                         ->toMediaCollection();
                 } 
             }
@@ -279,6 +287,7 @@ class CustomerController extends Controller
                     } 
                     $product
                         ->addMedia($file)
+                        ->withResponsiveImages()
                         ->toMediaCollection(); 
                 } 
             }
@@ -296,6 +305,7 @@ class CustomerController extends Controller
                    
                     $product
                         ->addMedia($file)
+                        ->withResponsiveImages()
                         ->toMediaCollection(); 
                 } 
             }
@@ -310,6 +320,7 @@ class CustomerController extends Controller
                     } 
                     $product    
                         ->addMedia($file)
+                        ->withResponsiveImages()
                         ->toMediaCollection();
                 } 
             }

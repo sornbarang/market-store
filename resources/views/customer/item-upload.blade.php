@@ -52,6 +52,7 @@
                         <form method="post" action="{{route('market.myitemupload')}}" id="frmUploadFront" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
+                            <input type="hidden" name="lastchildid" id="lastchildid">
                             <div class="upload_modules">
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploaditem')</h3>
@@ -130,7 +131,7 @@
                                 <div class="row">
                                     @for($i=0;$i<4;$i++)
                                         @if($i==0)
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="avatar-upload">
                                                     <div class="avatar-edit">
                                                         <input name="photos[]" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
@@ -143,7 +144,7 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="avatar-upload">
                                                     <div class="avatar-edit">
                                                         <input name="photos[]" type='file' id="imageUpload{{$i}}" accept=".png, .jpg, .jpeg" />
