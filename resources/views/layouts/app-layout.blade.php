@@ -643,15 +643,38 @@
 <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
 <script src="{{ asset('js/map.js') }}"></script>
 <script> 
-    $(document).on('click', 'form#frmUploadFront button[type=submit],form#frmUpdateFront button[type=submit]', function(e) {
-        var chkconfirmcat=$("form#frmUploadFront #chkconfirm").val();
+    $(document).on('click', 'form#frmUploadFront button[type=submit]', function(e) {
+        var chkconfirmcat=$("form#frmUploadFront #chkconfirm,form#frmUpdateFront #chkconfirm").val();
+        //check current last child id
+        var chkclcid=$("form#frmUploadFront #currentlastchildid,form#frmUpdateFront #chkclcid").val();
         if(chkconfirmcat ==undefined || chkconfirmcat == 0){
             alert('please tick for next process');  
-            $("form#frmUploadFront #chkconfirm").next().find('.shadow_checkbox').css('border','1px solid red');
-            $("form#frmUploadFront #chkconfirm").next().find('.label_text').css('color','red');
+            $("form#frmUploadFront #chkconfirm,form#frmUpdateFront #chkconfirm").next().find('.shadow_checkbox').css('border','1px solid red');
+            $("form#frmUploadFront #chkconfirm,form#frmUpdateFront #chkconfirm").next().find('.label_text').css('color','red');
             $('html, body').animate({
-                scrollTop: ($('form#frmUploadFront').first().offset().top)
+                scrollTop: ($('form#frmUploadFront,form#frmUpdateFront').first().offset().top)
             },500);
+            e.preventDefault();
+        }
+        // $('#frmUploadFront #trumbowyg-demo').html()); 
+        $('#frmUploadFront #trumbowyg-demoe-hidden,#frmUpdateFront #trumbowyg-demoe-hidden').val($('#frmUploadFront #trumbowyg-demo,#frmUpdateFront #trumbowyg-demo').html());  
+        // e.preventDefault();
+        $(this).submit(); 
+    });
+    $(document).on('click', 'form#frmUpdateFront button[type=submit]', function(e) {
+        var chkconfirmcat=$("form#frmUploadFront #chkconfirm,form#frmUpdateFront #chkconfirm").val();
+        //check current last child id
+        var chkclid=$("form#frmUpdateFront #clid").val();
+        if(chkclid == ''){
+            if(chkconfirmcat ==undefined || chkconfirmcat == 0){
+                alert('please tick for next process');  
+                $("form#frmUploadFront #chkconfirm,form#frmUpdateFront #chkconfirm").next().find('.shadow_checkbox').css('border','1px solid red');
+                $("form#frmUploadFront #chkconfirm,form#frmUpdateFront #chkconfirm").next().find('.label_text').css('color','red');
+                $('html, body').animate({
+                    scrollTop: ($('form#frmUploadFront,form#frmUpdateFront').first().offset().top)
+                },500);
+                e.preventDefault();
+            }
         }
         // $('#frmUploadFront #trumbowyg-demo').html()); 
         $('#frmUploadFront #trumbowyg-demoe-hidden,#frmUpdateFront #trumbowyg-demoe-hidden').val($('#frmUploadFront #trumbowyg-demo,#frmUpdateFront #trumbowyg-demo').html());  
@@ -700,11 +723,14 @@
                 data:{pid:mythis.data('id')},
                 success: function( msg ) {
                     console.log(msg);
-                    $('form#frmUploadFront .modules__content div.statement_info_card').removeAttr('style');
-                    $('form#frmUploadFront .modules__content div.statement_info_card').children().find('.info').children().removeAttr('style');
+                    // clear current product and category
+                    $("form#frmUpdateFront #clid").val('');
+                    $('form#frmUploadFront .modules__content div.statement_info_card,form#frmUpdateFront .modules__content div.statement_info_card').removeAttr('style');
+                    $('form#frmUploadFront .modules__content div.statement_info_card,form#frmUpdateFront .modules__content div.statement_info_card').children().find('.info').children().removeAttr('style');
                     this_.css('background','#56a72d');
                     this_.children().find('.info').children().css('color','#ffff');
                     if(msg.status==true && msg.data.length > 0){
+                        $('form#frmUploadFront #lastchildid,form#frmUpdateFront #lastchildid').val('');
                         $('.subcategory').show();
                         // console.log(this_.parent().parent().next().children().children().children()); 
                         this_.parent().parent().parent().nextAll('.subcategory').empty(); 
@@ -720,11 +746,11 @@
                         }); 
                         if(isMobile){   
                             $('html, body').animate({
-                                scrollTop: $('form#frmUploadFront .subcategory').offset().top - 100
+                                scrollTop: $('form#frmUploadFront .subcategory,form#frmUpdateFront .subcategory').offset().top - 100
                             }, 1000)
                         }
                     }else if(msg.status==true && msg.data.length >=0){
-                        $('form#frmUploadFront #lastchildid').val(this_.data('id'));
+                        $('form#frmUploadFront #lastchildid,form#frmUpdateFront #lastchildid').val(this_.data('id'));
                         $('.subcategory').show();
                         this_.parent().parent().parent().nextAll('.subcategory').empty(); 
                         $('.subcategory').html('<div class="row"> <div class="col-md-12 lavel1 text-center"><div class="custom-radio"> <input type="radio" id="yes" class="" name="high_res"><div class="custom_checkbox"> <input type="checkbox" id="chkconfirm" value="0"> <label for="chkconfirm"> <span class="shadow_checkbox"></span> <span class="label_text">Check it to confirm</span></label> </div></div></div> </div>');
@@ -747,11 +773,14 @@
                 data:{pid:mythis.data('id')},
                 success: function( msg ) {
                     console.log(msg);
-                    $('form#frmUploadFront .modules__content div.subcategory div.statement_info_card').removeAttr('style');
+                    // clear current product and category
+                    $("form#frmUpdateFront #clid").val('');
+                    $('form#frmUploadFront .modules__content div.subcategory div.statement_info_card,form#frmUpdateFront .modules__content div.subcategory div.statement_info_card').removeAttr('style');
                     $('form#frmUploadFront .modules__content div.subcategory div.statement_info_card').children().find('.info').children().removeAttr('style');
                     this_.css('background','#56a72d');
                     this_.children().find('.info').children().css('color','#ffff');
                     if(msg.status==true && msg.data.length > 0){
+                        $('form#frmUploadFront #lastchildid,form#frmUpdateFront #lastchildid').val('');
                         this_.parent().nextAll().remove(); 
                         var arrhtml=[];
                         $.each(msg.data, function(k, cat) {
@@ -764,14 +793,14 @@
                             } 
                         }); 
                         if(isMobile){
-                            $('form#frmUploadFront .subcategory > div.row').append('<div class="col-md-3"><span class="lnr lnr-chevron-down icon" style="font-size: 18px; font-weight: bolder; color: rgb(86, 167, 45); "></span>'+arrhtml+'</div>');
+                            $('form#frmUploadFront .subcategory > div.row,form#frmUpdateFront .subcategory > div.row').append('<div class="col-md-3"><span class="lnr lnr-chevron-down icon" style="font-size: 18px; font-weight: bolder; color: rgb(86, 167, 45); "></span>'+arrhtml+'</div>');
                         }else{
-                            $('form#frmUploadFront .subcategory > div.row').append('<div class="col-md-3">'+arrhtml+'</div>');
+                            $('form#frmUploadFront .subcategory > div.row,form#frmUpdateFront .subcategory > div.row').append('<div class="col-md-3">'+arrhtml+'</div>');
                         } 
                     }else if(msg.status==true && msg.data.length >=0){
-                        $('form#frmUploadFront #lastchildid').val(this_.data('id'));
+                        $('form#frmUploadFront #lastchildid,form#frmUpdateFront #lastchildid').val(this_.data('id'));
                         this_.parent().nextAll().remove();
-                        $('form#frmUploadFront .subcategory > div.row').append('<div class="col-md-3 text-center"><label>Check it to confirm</label><div class="custom_checkbox"> <input type="checkbox" id="chkconfirm" value="0"> <label for="chkconfirm"> <span class="shadow_checkbox"></span></label> </div></div>');
+                        $('form#frmUploadFront .subcategory > div.row,form#frmUpdateFront .subcategory > div.row').append('<div class="col-md-3 text-center"><label>Check it to confirm</label><div class="custom_checkbox"> <input type="checkbox" id="chkconfirm" value="0"> <label for="chkconfirm"> <span class="shadow_checkbox"></span></label> </div></div>');
                     }
                 },
                 error: function( data ) {
@@ -787,7 +816,7 @@
             documentClick = false;
         });
         var ios_devices = user_agent.match(/(iphone|ipod|ipad)/)  ? "touchend" : "click"; //check if android or ios
-        $('form#frmUploadFront .modules__content div.statement_info_card').on(ios_devices,function(e){ 
+        $('form#frmUploadFront .modules__content div.statement_info_card,form#frmUpdateFront .modules__content div.statement_info_card').on(ios_devices,function(e){ 
             e.preventDefault(); 
             if (e.type == "click") documentClick = true; 
             if (documentClick){
@@ -799,7 +828,7 @@
                 }
             }  
         });  
-        $( document ).on( ios_devices , "form#frmUploadFront .modules__content div.subcategory div.statement_info_card", function(e){
+        $( document ).on( ios_devices , "form#frmUploadFront .modules__content div.subcategory div.statement_info_card,form#frmUpdateFront .modules__content div.subcategory div.statement_info_card", function(e){
             e.preventDefault(); 
             if (e.type == "click") documentClick = true; 
             if (documentClick){
@@ -811,7 +840,7 @@
                 }
             }  
         } ); 
-        $( document ).on( "click", "form#frmUploadFront .custom_checkbox label[for='chkconfirm']", function(e){
+        $( document ).on( "click", "form#frmUploadFront .custom_checkbox label[for='chkconfirm'],form#frmUpdateFront .custom_checkbox label[for='chkconfirm']", function(e){
             $(this).find('.shadow_checkbox').attr('style','');
             $(this).find('.label_text').attr('style','');
             if ($(this).prev().is(':checked')) { 

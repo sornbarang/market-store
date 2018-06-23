@@ -26,6 +26,7 @@
                             </div>
                         </div>
                     </div><!-- end /.col-md-12 -->
+                    
                 </div><!-- end /.row -->
 
                 <div class="row">
@@ -33,60 +34,89 @@
                         <form method="post" action="{{route('market.edititem',$data['product']->id)}}" id="frmUpdateFront" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
-                            <div class="upload_modules">
-                                <div class="modules__title">
-                                    <h3>@lang('profileedititemupload.uploaditem')</h3>
-                                </div><!-- end /.module_title -->
-
-                                <div class="modules__content">
-                                    <div class="form-group">
-                                        <label for="category">@lang('profileedititemupload.itemnamedes')</label>
-                                        <div class="select-wrap select-wrap2">
-                                            <select name="country" id="category" class="text_field">
-                                                <option value="">@lang('profileedititemupload.selectcategory')</option>
-                                                <option value="wordpress">Wordpress</option>
-                                                <option value="html">Html</option>
-                                                <option value="graphic">Graphics</option>
-                                                <option value="illustration">Illustration</option>
-                                                <option value="music">Music</option>
-                                                <option value="video">Video</option>
-                                            </select>
-                                            <span class="lnr lnr-chevron-down"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="product_name">@lang('profileedititemupload.productname') <span>(Max 100 characters)</span></label>
-                                        <input value="{{$data['product']->name}}" name="name" type="text" id="product_name" class="text_field" placeholder="Enter your product name here...">
-                                    </div>
-
-                                    <div class="form-group no-margin">
-                                        <p class="label">@lang('profileedititemupload.productdes')</p>
-                                        <div id="trumbowyg-demo">
-                                        {!!$data['product']->translateOrNew(app()->getLocale())->description !!}
-                                        </div>
-                                    </div> 
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for="exlicense">@lang('profileedititemupload.price')</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">$</span>
-                                                <input value="{{$data['product']->price}}" name="price" type="text" id="exlicense" class="text_field" placeholder="00.00">
+                            <input type="hidden" name="lastchildid" id="lastchildid">
+                            <input type="hidden" name="clid" id="clid" value="{{$data['clid']}}">
+                            @if(isset($data['category']) && !empty($data['category'] ))
+                                <div class="upload_modules">
+                                    <div class="modules__title">
+                                        <h3>@lang('profileitemupload.uploaditem')</h3>
+                                    </div><!-- end /.module_title -->  
+                                    <div class="modules__content">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-12" style="margin-bottom:1px;"> 
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>@lang('profileitemupload.choosecat')</label>
+                                                        </div>
+                                                        <div class="col-md-8 text-center">
+                                                            <label>{{count($data['currentcat']) > 0?implode(' > ',$data['currentcat']):'no category'}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @foreach($data['category'] as $cat)
+                                                <div class="col-md-4 mb-2">
+                                                    <div data-id="{{$cat->translate(app()->getLocale())->categories_ads_id}}" class="statement_info_card">
+                                                        <div class="info_wrap">
+                                                            <span class="lnr lnr-tag icon mcolorbg1"></span>
+                                                            <div class="info"> 
+                                                                <span>{{$cat->translate(app()->getLocale())->name}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end /.info_wrap -->
+                                                    </div>
+                                                    <!-- end /.statement_info_card -->
+                                                </div>
+                                                <!-- end /.col-md-3 -->
+                                                @endforeach
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label for="exlicense">@lang('profileitemupload.discount')</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">$</span>
-                                                <input value="{{$data['product']->discount}}" step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                        <!-- start subcat -->
+                                        <div class="form-group subcategory">
+                                        </div>
+                                        <!-- end sub cat -->
+                                        <div class="form-group">
+                                            <label for="product_name">@lang('profileitemupload.productname') <span>(Max 100 characters)</span></label>
+                                            <input value="{{$data['product']->name}}" required type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')">
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger" style="margin:0 !important;padding:0;">
+                                                    <ul>
+                                                        <li>{{ $errors->getBag('default')->first('name') }}</li> 
+                                                        {{--
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach --}}
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="form-group no-margin">
+                                            <p class="label">@lang('profileitemupload.productdes')</p>
+                                            <div id="trumbowyg-demo">
+                                                {!!$data['product']->translations[0]->description!!}
+                                            </div>
+                                        </div> 
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="exlicense">@lang('profileitemupload.price')</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input value="{{$data['product']->price}}" name="price" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div><!-- end /.modules__content -->
-                            </div><!-- end /.upload_modules -->
-
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="exlicense">@lang('profileitemupload.discount')</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input value="{{$data['product']->discount}}" step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- end /.modules__content -->
+                                </div><!-- end /.upload_modules -->
+                            @endif
                             <div class="upload_modules upload_modules_blog">
                             <div class="modules__title">
                                 @php

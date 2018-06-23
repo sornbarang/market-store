@@ -152,6 +152,12 @@ class CustomerController extends Controller
         $data['breadcrub']='sale manangement';
         return view('customer.sale-management',compact('data'));
     }
+    function getParentsCategory($id=''){
+        if(isset($id) && $id!=''){
+            return Category::find($id);
+        }
+        return Category::where('parent_id',null)->get();
+    }
     /**
      * User's card
      *
@@ -162,7 +168,7 @@ class CustomerController extends Controller
     {
         
         
-        $data['category'] = Category::where('parent_id',null)->get(); 
+        $data['category'] = $this->getParentsCategory();
         $data['breadcrub']='upload item';
 
         if($request->isMethod('post')){
@@ -199,10 +205,8 @@ class CustomerController extends Controller
                     }
                     $product->save();
                     // save product to relation table between product and cateogry
-                    $newsItem = Product::find($product->id);
-                    $category = Category::roots()->first();
-                    $product = Product::find($product->id);
-                    $product->categories_ads()->attach($request->lastchildid);
+                    $newsItem = Product::find($product->id); 
+                    $newsItem->categories_ads()->attach($request->lastchildid);
                     // end
                     
                     if($request->hasFile('photos'))
@@ -244,6 +248,10 @@ class CustomerController extends Controller
         $data['breadcrub']='manage items';
         return view('customer.manage-item',compact('data'));
     }
+
+    function getLavel(){
+
+    }
     /**
      * User's card
      *
@@ -252,9 +260,24 @@ class CustomerController extends Controller
      */
     public function myEditItem(Request $request, $id)
     {
+        $data['category'] = $this->getParentsCategory();  
         if($request->isMethod('post')){
-            $product = Product::find($id);
+            $product = Product::where('user_id',Auth::id())->find($id);
             if($product){  
+                // $node = Category::find($product->categories_ads[0]->id);
+                // $lavel=$node->getAncestorsAndSelf();
+                // $currentCat=[];
+                // foreach($lavel as $p){
+                //    $currentCat[]=$p->translate('en')->name;
+                // }  
+                // check last child have try to delete and new insert
+                if(isset($request->lastchildid) && !empty($request->lastchildid)){
+                    echo 'have';
+                    // delete old category
+                    $product->categories_ads()->detach($product->categories_ads[0]->id);
+                    // add new category 
+                    $product->categories_ads()->attach($request->lastchildid);
+                } 
             $allowedfileExtension=['jpg','jpeg','png'];
             // check if have new input file image to update
             if($request->hasFile('photos')){
@@ -328,9 +351,57 @@ class CustomerController extends Controller
             }
         }
         $data['breadcrub']='update item';
-        $data['product']=Product::where('user_id',Auth::id())->find($id);
+        $data['product']=Product::where('user_id',Auth::id())->find($id); 
+        $currentCat=[];
+        $data['clid']='';
+        // check if have category in relation
+        if(count($data['product']->categories_ads) > 0){
+            $data['clid']=$data['product']->categories_ads[0]->id;
+            $node = Category::find($data['product']->categories_ads[0]->id);
+            // print_r($data['product']->categories_ads[0]->id);exit();
+            $lavel=$node->getAncestorsAndSelf();
+            foreach($lavel as $p){
+                $currentCat[]=$p->translate('en')->name;
+            }
+        }
+        $data['currentcat']=$currentCat;
+        // $categories = Category::all()->toHierarchy();
+        // foreach($categories as $node){
+        //     echo $this->renderNode($node);
+        // }
+        // $category = Category::find(26);
+        // // get the product id's
+        // $products = Product::where('id',28)->get();
+
+        // // sync the products inside the categoy with those selected previously
+        // $c = $category->products_ads()->sync($products);
+        // print_r($c);
+        // // print_r($categories);
         return view('customer.edit-item',compact('data'));
     }
+    public function renderNode($node) {
+
+        $html = '<ul>';
+      
+        if( $node->isLeaf() ) {
+          $html .= '<li>' . $node->name . '</li>';
+        } else {
+          $html .= '<li>' . $node->name;
+      
+          $html .= '<ul>';
+              
+          foreach($node->children as $child)
+            $html .= $this->renderNode($child);
+      
+          $html .= '</ul>';
+      
+          $html .= '</li>';
+        }
+      
+        $html .= '</ul>';
+      
+        return $html;
+      }
     /**
      * User's card
      *
