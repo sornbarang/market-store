@@ -34,8 +34,12 @@ class CustomerController extends Controller
     {
 
         $user= User::findOrFail($id);
+        $post= Product::where('user_id',$id)->get();
         if($user){
             $data['user']=$user;
+        }
+        if($post){
+            $data['product']=$post;
         }
         $data['breadcrub']='store';
         return view('customer.store',compact('data'));

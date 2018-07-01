@@ -113,10 +113,10 @@
                     <aside class="sidebar product--sidebar">
                         <div class="sidebar-card card--category">
                             
-                            <a class="card-title" href="#collapse1" role="button" data-toggle="collapse"  aria-expanded="false" aria-controls="collapse1">
+                            <a class="card-title" href="#collapse1" role="button" data-toggle="collapse"  aria-expanded="true" aria-controls="collapse1">
                                 <h4 >Categories <span class="lnr lnr-chevron-down"></span></h4>
                             </a> 
-                            <div class="collapse in collapsible-content" id="collapse1">
+                            <div class="collapse in collapsible-content show" id="collapse1">
                                 <ul class="card-content">
                                     @foreach($data['countcatpro'] as $key => $val)
                                         <li><a href="#"><span class="lnr lnr-chevron-right"></span>{{ucfirst($val['name'])}}<span class="item-count">{{$val['count']}}</span></a></li> 

@@ -251,7 +251,7 @@
                                 <div class="tab-content-wrapper">
                                 @foreach($data['product']->translations as $val)
                                     @if($val->locale==app()->getLocale())
-                                        {!!$data['product']->translations[0]->description!!}
+                                        {!!$val->description!!}
                                     @endif
                                 @endforeach
                                 </div>
