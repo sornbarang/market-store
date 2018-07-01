@@ -333,7 +333,15 @@
                         <div class="breadcrumb">
                             <ul>
                                 <li><a href="{{route('market')}}">@lang('menu.home')</a></li>
-                                <li class="active"><a href="#">@lang('frontlabel.allcats')</a></li>
+                                @if(isset($data['bread']))
+                                    @foreach($data['bread'] as $bread)
+                                        @foreach($bread->translations as $v)
+                                            @if($v->locale==app()->getLocale())
+                                                <li class="{{$data['cnode']==$v->name?'active':''}}"><a href="{{route('market.dynamiccat',$v->categories_ads_id)}}">{{$v->name}}</a></li> 
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -376,27 +384,28 @@
         </div>--}}
         <!-- end /.row -->
         <!-- start .row -->
-        <div class="row">
-
-            @php
-                $categories = ['Phone & Tablets','Computers & Accessories','Electronics & Appliances','Cars And Vehicles','Fashion & Beauty'];
-            @endphp
-
-            @foreach ($categories as $category)
+        <div class="row">  
+            @foreach ($data['category'] as $cat)
+                @php  
+                    foreach($cat->translations as $lang){
+                        if($lang->locale==app()->getLocale()){
+                            $link=['link'=>route('market.dynamiccat',$lang->categories_ads_id),'name'=>$lang->name];
+                        }
+                    }
+                @endphp 
                 <!-- start .col-md-4 -->
                     <div class="col-md-3 col-sm-6">
                         <!-- start .single-product -->
                         <div class="product product--card product--card3">
-
                             <div class="product__thumbnail">
                                 <img src="{{ asset('images/p1.jpg') }}" alt="Product Image">
-                                <div class="prod_btn">
-                                    <a href="{{ route('market.categories') }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                <div class="prod_btn">  
+                                    <a href="{{$link['link']}}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                 </div><!-- end /.prod_btn -->
                             </div><!-- end /.product__thumbnail -->
 
-                            <div class="product-desc">
-                                <a href="#" class="product_title"><h4>{{$category}}</h4></a>
+                            <div class="product-desc"> 
+                                <a href="{{$link['link']}}" class="product_title"><h4>{{$link['name']}}</h4></a>
                             </div><!-- end /.product-desc -->
                         </div>
                         <!-- end /.single-product -->

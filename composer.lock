@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "17a2e02fe3076e3b51ae7b981ef2114a",
+    "content-hash": "a221804a1e699983ddb42efdef260cff",
     "packages": [
         {
             "name": "adumskis/laravel-advert",

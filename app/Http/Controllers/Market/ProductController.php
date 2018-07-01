@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Market;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\ProductsAds as Product;
 use Auth;
 class ProductController extends Controller
 {
@@ -125,9 +125,15 @@ class ProductController extends Controller
      {
          return view('c2c.page.product');
      }
-     public function getproductdetail()
-     {
-         $data['breadcrub']='Product Detail';
-         return view('c2c.page.singleproduct',compact('data'));
+     public function getproductdetail($id)
+     { 
+        $post = Product::findOrFail($id);
+        if($post->user_id !=null){ 
+            $data['relateProByUser'] = Product::where('user_id',$post->user_id)->latest()->limit(5)->get();  
+        }if($post){
+            $data['product']=$post;
+        }
+        $data['breadcrub']='Product Detail';
+        return view('c2c.page.singleproduct',compact('data'));
      }
 }

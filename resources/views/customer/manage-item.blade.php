@@ -70,10 +70,18 @@
                             $img='';
                             $newsItem=App\Models\ProductsAds::find($val->id);
                             $mediaItems = $newsItem->getMedia(); 
-                            $getFirstMedia = $newsItem->getFirstMedia(); 
+                            $getFirstMedia = $newsItem->getFirstMedia();
+                            //print_r($getFirstMedia); 
+                            //$test=$getFirstMedia->getPath();
+                            //$url=$getFirstMedia->getUrl();
+                            //$path=$getFirstMedia->getPath('thumb');
+                            $getUrlThum=$getFirstMedia->getUrl('thumb'); 
+                            //print_r($path);
+                            //print_r($getUrlThum); 
                             if($getFirstMedia){
-                                $img = $getFirstMedia->id.'/'.$getFirstMedia->file_name;
+                                $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
                             } 
+                            
                         @endphp
                         <div class="col-md-4 col-sm-6">
                             <!-- start .single-product -->
@@ -81,7 +89,7 @@
 
                                 <div class="product__thumbnail" style="height: 223px;"> 
                                     <figure class="figure">
-                                        <img style="max-height:223px;" src="{{Storage::url($img)}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
+                                        <img style="max-height:223px;" src="{{$img}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
                                     </figure>
                                     <div class="prod_option">
                                         <a href="#" id="drop2" class="dropdown-trigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

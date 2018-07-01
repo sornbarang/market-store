@@ -126,7 +126,8 @@
                             </div><!-- end /.upload_modules -->
                             <div class="upload_modules upload_modules_blog">
                                 <div class="modules__title">
-                                    <h3>@lang('profileitemupload.uploadfile')</h3>
+                                    <h3>@lang('profileitemupload.uploadfile') </h3> 
+                                    <span>750 x 430 (width,height) is standard</span>
                                 </div><!-- end /.module_title -->
                                 <div class="row">
                                     @for($i=0;$i<4;$i++)

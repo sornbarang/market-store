@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductsAds as Product;
 use App\Models\CategoriesAds as Category ;
+use App\Models\User ;
 use PDF;
 use App;
 use Auth;
 use Validator;
-
+use Illuminate\Support\Facades\Hash; 
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 class CustomerController extends Controller
 {
     /**
@@ -27,9 +30,13 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function myStore()
+    public function myStore($id)
     {
 
+        $user= User::findOrFail($id);
+        if($user){
+            $data['user']=$user;
+        }
         $data['breadcrub']='store';
         return view('customer.store',compact('data'));
     }
@@ -94,8 +101,36 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    { 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
+            'email' => 'required',
+        ]); 
+        if ($validator->fails()) {
+            return redirect('market/mysetting')
+                ->withErrors($validator)
+                ->withInput();
+        } 
+        // echo $request->name;exit();
+        $user = User::findOrFail($id);
+        if($user){
+            $user->name = $request->acname;
+            $user->slug = $request->name;
+            if( ! $request->password == ''){
+                $user->password=$request->password;
+            }
+            $user->profile()->update([
+                'phone' => $request->phone,
+                'location' => $request->location,
+                'bio' => $request->author_bio,
+            ]);
+            $user->save();
+            if($user){
+                return redirect('market/mysetting')->with('success', 'Record has been update!');
+            }
+            return redirect('market/mysetting')->with('error', 'Problem with update profile!');
+        }
+        return redirect('market/mysetting')->with('error', 'Problem with update profile!');
     }
 
     /**
@@ -214,17 +249,42 @@ class CustomerController extends Controller
                         $allowedfileExtension=['jpg','jpeg','png'];
                         $files = $request->file('photos'); 
                         foreach($files as $file){
-                            // $filename = $file->getClientOriginalName();
+                            $filename = $file->getClientOriginalName();
                             $extension = $file->getClientOriginalExtension();
                             $check=in_array($extension,$allowedfileExtension);
                             if($check){
                                 // if($check){
                                 //     $imgappend[] = $file->store('public'); 
                                 // }
-                                $newsItem
+                                $media = $newsItem
                                 ->addMedia($file)
-                                ->withResponsiveImages()
-                                ->toMediaCollection();
+                                ->sanitizingFileName(function($filename) {
+                                    return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                                 })
+                                ->toMediaCollection(); 
+                                $getThub = $media->getPath('thumb'); 
+                                $file_name = $media->file_name; 
+                                $name = $media->name; 
+                                $id = $media->id; 
+                                // get crop image
+                                $cropPath = storage_path('app/public/'.$id.'/conversions/'.$file_name);
+                                $cropPathFit = storage_path('app/public/'.$id.'/conversions/crop.png');
+                                // echo $id; 
+                                // echo $path;
+                                // echo $getThub; 
+                                // echo $getThub2;exit();
+                                // save crop image
+                                Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);
+                                Image::load($getThub)
+                                    ->crop(Manipulations::CROP_TOP, 750, 430)
+                                    ->format(Manipulations::FORMAT_PNG)
+                                    ->background('ffffff')->save($cropPathFit);
+                                    
+                                // $media->getPath();  // the path to the where the original image is stored
+                                // $media->getPath('thumb'); // the path to the converted image with dimensions 368x232
+
+                                // $media->getUrl();  // the url to the where the original image is stored
+                                // $media->getUrl('thumb'); // the url to the converted image with dimensions 368x232
                             }
                         }
                     }

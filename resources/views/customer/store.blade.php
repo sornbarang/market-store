@@ -17,7 +17,7 @@
                             </li>
                         </ul>
                     </div>
-                    <h1 class="page-title">Author's Profile</h1>
+                    <h1 class="page-title">{{$data['user']->name??''}}'s Profile</h1>
                 </div>
                 <!-- end /.col-md-12 -->
             </div>
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="author">
-                                    <h4>AazzTech</h4>
+                                    <h4>{{$data['user']->name}}</h4>
                                     <p>Signed Up: 08 April 2016</p>
                                 </div>
                                 <!-- end /.author -->

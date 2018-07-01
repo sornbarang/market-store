@@ -38,5 +38,7 @@ return [
     'socialprofile' => 'Social Profiles', 
     'savechange' => 'Save change', 
     'button'=>'Browse',
-    'selectone'=>'Select one'
+    'selectone'=>'Select one',
+    'phone'=>'Phone',
+    'address'=>'Address',
 ];

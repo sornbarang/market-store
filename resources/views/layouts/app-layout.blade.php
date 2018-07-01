@@ -643,6 +643,38 @@
 <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
 <script src="{{ asset('js/map.js') }}"></script>
 <script> 
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('form#frmReport button[type="button"]').on('click',function(){
+        $.ajax({
+            url: "{{route('market.reportmarket')}}",
+            type: 'POST',
+            data:{'reason':$('#myreport').val(),'commemnt_reporter':$('#commemnt_reporter').val()},
+            headers: {
+                    'X-CSRF-Token':CSRF_TOKEN,
+            },
+            success: function( msg ) {
+                if(msg.status==200){
+                    $('form#frmReport button.modal_close').click();
+                }
+            },
+            error: function( data ) {
+                console.log(data);
+            }
+        });
+    });
+    $('.modal-dialog .card_style2').on('click',function(){
+        $('.modal-dialog .card_style2').attr('style','');
+        $(this).css({'background':'#56a72d','color':'#fff'});
+        $('#myreport').val($(this).text().trim())
+    });
+    $(document).on('click', 'form#frmupdateprofile button[type=submit]', function(e) {
+        var pass=$('form#frmupdateprofile #password').val();
+        var cpass=$('form#frmupdateprofile #conpassword').val();
+        if(pass != cpass){
+            $('form#frmupdateprofile #notmatch').focus().show();
+            e.preventDefault(); 
+        }
+    });
     $(document).on('click', 'form#frmUploadFront button[type=submit]', function(e) {
         var chkconfirmcat=$("form#frmUploadFront #chkconfirm,form#frmUpdateFront #chkconfirm").val();
         //check current last child id

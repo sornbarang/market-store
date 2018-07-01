@@ -499,7 +499,7 @@ a {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .section-title p {
@@ -2055,7 +2055,7 @@ h6 {
 *****************************/
 /* GENERAL PRODUCT STYLE */
 .products {
-  padding: 80px 0;
+  padding: 80px 0 !important;
 }
 
 .product {
@@ -3373,7 +3373,7 @@ h6 {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .section-title p {
@@ -4560,7 +4560,7 @@ h6 {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 .section-title p {
@@ -6088,7 +6088,7 @@ div#ui-datepicker-div tbody tr td a:hover {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .section-title p {
@@ -15992,3 +15992,10 @@ form#frmUploadFront .subcategory span.circle:before,form#frmUpdateFront .subcate
 form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   text-align: left;
 } 
+#notmatch{
+  display: none;
+  
+}
+#notmatch p{
+  color:red;
+}
