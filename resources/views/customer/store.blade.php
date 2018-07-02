@@ -10,7 +10,7 @@
                     <div class="breadcrumb">
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a href="{{route('market')}}">Home</a>
                             </li>
                             <li class="active">
                                 <a href="#">Author Profile</a>

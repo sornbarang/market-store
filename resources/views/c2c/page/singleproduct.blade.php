@@ -141,7 +141,7 @@
                     <div class="item-preview">
                         <div class="item__preview-slider">
                             @foreach( $media as $val)
-                                <div class="prev-slide"><img src="{{Storage::url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
+                                <div class="prev-slide"><img src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
                             @endforeach
                         </div><!-- end /.item--preview-slider -->
 
