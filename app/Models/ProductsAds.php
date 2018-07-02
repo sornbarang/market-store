@@ -9,13 +9,17 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
 use App\Models\CategoriesAds as Category ;
-class ProductsAds extends Model implements HasMedia
+use Ghanem\Reportable\Contracts\Reportable;
+use Ghanem\Reportable\Traits\Reportable as ReportableTrait;
+class ProductsAds extends Model implements HasMedia,Reportable
 {
     use Translatable;
 
     use Viewable;
 
     use HasMediaTrait;
+
+    use ReportableTrait;
     
     protected $table = 'products_ads';
     public $translatedAttributes = ['name', 'description', 'slug'];

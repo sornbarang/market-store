@@ -79,6 +79,7 @@
                 <div class="modal-body">
                     <form id="frmReport">
                         <input type="hidden" id="myreport" name="reason">
+                        <input type="hidden" id="product_id" name="product_id" value="{{$data['product']->id}}">
                         {{--<ul>
                             <li>
                                 <p>Your Rating</p>

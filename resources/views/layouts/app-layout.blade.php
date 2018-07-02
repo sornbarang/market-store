@@ -648,7 +648,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: "{{route('market.reportmarket')}}",
             type: 'POST',
-            data:{'reason':$('#myreport').val(),'commemnt_reporter':$('#commemnt_reporter').val()},
+            data:{'id':$('#product_id').val(),'reason':$('#myreport').val(),'commemnt_reporter':$('#commemnt_reporter').val()},
             headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
             },
