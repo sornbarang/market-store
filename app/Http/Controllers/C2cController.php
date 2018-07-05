@@ -19,17 +19,38 @@ class C2cController extends Controller
     
     public function index()
     {
-        
-        $data['category']=$this->getParentsCategory();
-        // return $data['category'];
+        $data['category']=$this->getParentsCategory();  
         return view('c2c.page.index',compact('data'));
-    }
+    } 
+    public function renderNode($node) {
+
+        $html = '<ul>';
+      
+        if( $node->isLeaf() ) {
+          $html .= '<li>' . $node->name . '</li>';
+        } else {
+          $html .= '<li>' . $node->name;
+      
+          $html .= '<ul>';
+              
+          foreach($node->children as $child){
+            $html .= $this->renderNode($child);
+        }
+          $html .= '</ul>';
+      
+          $html .= '</li>';
+        }
+      
+        $html .= '</ul>';
+      
+        return $html;
+      }
     function getParentsCategory($id=''){
         if(isset($id) && $id!=''){
             $node = Category::find($id); 
             return $node->getImmediateDescendants();
         }
-        return Category::where('parent_id',null)->get();
+        return Category::roots()->get();
     }
     public function getDynamicCategory($id){
         
@@ -59,7 +80,8 @@ class C2cController extends Controller
         $data['countcatpro']=$catarr;
         // $category = Category::find($id); 
         // get proudct if category have product
-        $products = Product::categorized($node)->get();
+        $products = Product::categorized($node)->paginate(19);
+        
         if(count($products) > 0){
             $data['product']=$products;
             return view('c2c.page.product',compact('data'));

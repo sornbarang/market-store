@@ -32,6 +32,17 @@
     <!--================================
         START AUTHOR AREA
     =================================-->
+    @php 
+        $media = $data['user']->profile->getMedia(); 
+        foreach($media as $val){  
+            if($data['user']->profile->avatar==$val->id){
+                $avatar=$val->id.'/avatar100.png';  
+            } 
+            if($data['user']->profile->cover_image==$val->id){
+                $cover=$val->id.'/cover.png';  
+            }
+        }   
+    @endphp
     <section class="author-profile-area">
         <div class="container">
             <div class="row">
@@ -40,9 +51,12 @@
                         <div class="author-card sidebar-card">
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
-                                </div>
-
+                                    @if(isset($avatar) && !empty($avatar))
+                                        <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                    @else
+                                        <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
+                                    @endif
+                                </div> 
                                 <div class="author">
                                     <h4>{{$data['user']->name}}</h4>
                                     <p>Signed Up: {{$data['user']->created_at}}</p>
@@ -182,8 +196,14 @@
                                         <button type="submit" class="btn btn--md btn--round">send message</button>
                                     </div>
                                 </form>
-                                <p> Please
-                                    <a href="#">sign in</a> to contact this author.</p>
+                                @if (Route::has('login'))
+                                    @auth
+                                    
+                                    @else
+                                    <p> Please
+                                        <a href="{{route('register')}}">sign in</a> to contact this author.</p>
+                                    @endauth 
+                                @endif 
                             </div>
                             <!-- end /.message-form -->
                         </div>
@@ -239,7 +259,12 @@
 
                         <div class="col-md-12 col-sm-12">
                             <div class="author_module">
-                                <img src="{{ asset('images/authcvr.jpg') }}" alt="author image">
+                                @if(isset($cover) && !empty($cover))
+                                    <img src="{{Storage::url($cover)}}" alt="Presenting the broken author avatar :D">
+                                @else
+                                    <img src="{{ asset('images/authcvr.jpg') }}" alt="author image">
+                                @endif
+                                
                             </div>
 
                             <div class="author_module about_author">
@@ -257,9 +282,8 @@
                             <div class="product-title-area">
                                 <div class="product__title">
                                     <h2>Newest Products</h2>
-                                </div>
-
-                                <a href="#" class="btn btn--sm">See all Items</a>
+                                </div> 
+                                {{-- a href="#" class="btn btn--sm">See all Items</a>--}}
                             </div>
                             <!-- end /.product-title-area -->
                         </div>
@@ -267,15 +291,22 @@
 
                         <!-- start .col-md-4 -->
                         @foreach($data['product'] as $val)
+                            @php 
+                                $img='';
+                                $getFirstMedia = $val->getFirstMedia(); 
+                                if($getFirstMedia){
+                                    $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                } 
+                            @endphp 
                             <div class="col-lg-6 col-md-6">
                                 <!-- start .single-product -->
                                 <div class="product product--card">
 
                                     <div class="product__thumbnail">
-                                        <img src="{{ asset('images/p4.jpg') }}" alt="Product Image">
+                                        <img src="{{ $img }}" alt="Product Image">
                                         <div class="prod_btn">
-                                            <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                                            <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
+                                            <a href="{{route('market.productdetail',$val->id)}}" class="transparent btn--sm btn--round">More Info</a>
+                                            {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                                         </div>
                                         <!-- end /.prod_btn -->
                                     </div>
@@ -347,9 +378,15 @@
                         <!-- end /.col-md-4 --> 
                     </div>
                     <!-- end /.row -->
+                    <div class="pagination-area pagination--right">
+                        <nav class="navigation pagination" role="navigation">
+                            <div class="nav-links">
+                                {{$data['product']->links()}}
+                            </div>
+                        </nav>
+                    </div>       
                 </div>
-                <!-- end /.col-md-8 -->
-
+                <!-- end /.col-md-8 -->                         
             </div>
             <!-- end /.row -->
         </div>

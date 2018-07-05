@@ -48,6 +48,7 @@ function()
         Route::get('mystore/{id}', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
         Route::group( ['middleware' => 'auth' ], function()
         { 
+            Route::delete('mydestroypro/{id}', ['as' => 'market.deleteproduct', 'uses' => 'CustomerController@myDeletePro']);
             Route::get('mysetting', ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
             Route::get('myprofile', ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
             Route::get('mycart', ['as' => 'market.mycart', 'uses' => 'CustomerController@myCart']);

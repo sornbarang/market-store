@@ -176,12 +176,26 @@
                             </ul>
                         </div>
                         <!--start .author__notification_area -->
-
+                        @if (Route::has('login'))
+                            @auth
+                                @php 
+                                    $media = Auth::user()->profile->getMedia(); 
+                                    foreach($media as $val){  
+                                        if(Auth::user()->profile->avatar==$val->id){
+                                            $avatar=$val->id.'/avatar.png';  
+                                        } 
+                                    }   
+                                @endphp
+                            @endauth 
+                        @endif 
                         <!--start .author-author__info-->
                         <div class="author-author__info inline has_dropdown">
                             <div class="author__avatar">
+                            @if(isset($avatar) && !empty($avatar))
+                                <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
+                            @else
                                 <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
-
+                            @endif 
                             </div>
                             <div class="autor__info">
                                 <p class="name">
@@ -291,14 +305,17 @@
                             </ul>
 
                         </div>
-                        <span class="lnr lnr-user menu_icon" style="margin-left:5px;"></span>
-
+                        <span class="lnr lnr-user menu_icon" style="margin-left:5px;"></span> 
                         <!-- offcanvas menu -->
                         <div class="offcanvas-menu closed">
                             <span class="lnr lnr-cross close_menu"></span>
                             <div class="author-author__info">
                                 <div class="author__avatar v_middle">
+                                    @if(isset($avatar) && !empty($avatar))
+                                        <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
+                                    @else
                                     <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
+                                    @endif
                                 </div>
                                 <div class="autor__info v_middle">
                                     @if (Route::has('login'))
@@ -643,7 +660,10 @@
 <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
 <script src="{{ asset('js/map.js') }}"></script>
 <script> 
-var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+    $(document).on('click', '#deletepro', function(e) {
+        $('#frmdeleteproduct').attr('action',$(this).data('route'));
+    });
     $('form#frmReport button[type="button"]').on('click',function(){
         $.ajax({
             url: "{{route('market.reportmarket')}}",

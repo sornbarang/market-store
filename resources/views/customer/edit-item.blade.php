@@ -138,10 +138,12 @@
                                                 <label for="imageUpload"></label>
                                             </div>
                                             <div class="avatar-preview">
-                                                <div class="imagePreview" style="background-image: url('{{Storage::url($img)}}')">
-                                                </div>
                                                 @if($img)
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img)}}')">
+                                                    </div>
                                                     <input name="mediaid" type="hidden" value="{{$mediaItems[0]->id}}">
+                                                @else
+                                                    <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
                                                 @endif
                                             </div>
                                         </div>
@@ -153,10 +155,13 @@
                                                 <label for="imageUpload1"></label>
                                             </div>
                                             <div class="avatar-preview">
-                                                <div class="imagePreview" style="background-image: url('{{Storage::url($img1)}}');">
-                                                </div>
+                                                
                                                 @if($img1)
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img1)}}');">
+                                                    </div>
                                                     <input name="mediaid1" type="hidden" value="{{$mediaItems[1]->id}}">
+                                                @else
+                                                    <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
                                                 @endif
                                             </div>
                                         </div>
@@ -168,11 +173,15 @@
                                                 <label for="imageUpload2"></label>
                                             </div>
                                             <div class="avatar-preview">
-                                                <div class="imagePreview" style="background-image: url('{{Storage::url($img2)}}');">
-                                                </div>
+                                                
                                                 @if($img2)
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img2)}}');">
+                                                    </div>
                                                     <input name="mediaid2" type="hidden" value="{{$mediaItems[2]->id}}">
+                                                @else
+                                                    <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
                                                 @endif
+                                                
                                             </div>
                                         </div>
                                     </div>

@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Profile extends Model
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\Models\Media;
+class Profile extends Model implements HasMedia
 {
     use SoftDeletes;
-
+    
+    use HasMediaTrait;
     /**
      * The attributes that are mass assignable.
      *

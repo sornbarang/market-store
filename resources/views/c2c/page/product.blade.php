@@ -97,7 +97,7 @@
         START PRODUCTS AREA
     =================================-->
     @php
-        $cats = ['Wordpress'=>'35','Landing Page'=>'45','Psd Template'=>'13','Plugins'=>'08','HTML Template'=>'34','Components'=>'78','Joomla Template'=>'26'];
+       
         $profilters = ['Trending Products','Popular Products','New Products','Best Seller','Best Rating','Free Support','On Sale'];
         $products = ['Finance and Consulting','Best Free Responsive','AppsPress - HTML5 ','Finance and Consulting','Best Free Responsive','AppsPress - HTML5 ','Finance and Consulting','Best Free Responsive','AppsPress - HTML5 '];
     @endphp
@@ -159,6 +159,7 @@
                 <!-- start col-md-9 -->
                 <div class="col-md-9"> 
                         <div class="row">
+                        
                             @foreach($data['product'] as $val) 
                                 @php
                                     $img='';
@@ -192,7 +193,7 @@
                                             <ul class="titlebtm">
                                                 <li>
                                                     <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
-                                                    <p><a href="#">{{$newsItem->user->name}}</a></p>
+                                                    <p><a href="#">{{$val->user->name}}</a></p>
                                                 </li>
                                                 {{--<li class="out_of_class_name">
                                                     <div class="sell"><p><span class="lnr lnr-cart"></span><span>27</span></p></div>
@@ -226,13 +227,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pagination-area categorised_item_pagination">
+                    
                         <nav class="navigation pagination" role="navigation">
                             <div class="nav-links">
-                                <a class="prev page-numbers" href="#"><span class="lnr lnr-arrow-left"></span></a>
-                                <a class="page-numbers current" href="#">1</a>
-                                <a class="page-numbers" href="#">2</a>
-                                <a class="page-numbers" href="#">3</a>
-                                <a class="next page-numbers" href="#"><span class="lnr lnr-arrow-right"></span></a>
+                                {{$data['product']->links()}}
                             </div>
                         </nav>
                     </div>

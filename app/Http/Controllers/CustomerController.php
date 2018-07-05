@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductsAds as Product;
-use App\Models\CategoriesAds as Category ;
-use App\Models\User ;
+use App\Models\CategoriesAds as Category;
+use App\Models\User;
+use App\Models\Profile;
 use PDF;
 use App;
 use Auth;
@@ -34,7 +35,7 @@ class CustomerController extends Controller
     {
 
         $user= User::findOrFail($id);
-        $post= Product::where('user_id',$id)->get();
+        $post= Product::where('user_id',$id)->paginate(20);
         if($user){
             $data['user']=$user;
         }
@@ -106,6 +107,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     { 
+        $allowedfileExtension=['jpg','jpeg','png'];
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:100',
             'email' => 'required',
@@ -117,9 +119,62 @@ class CustomerController extends Controller
         } 
         // echo $request->name;exit();
         $user = User::findOrFail($id);
-        if($user){
-            $user->name = $request->acname;
-            $user->slug = $request->name;
+        if($user){  
+            $profile = Profile::where('user_id',$user->id)->first(); 
+            // check if have new input file image to update
+            if($request->hasFile('profile')){
+                $file = $request->file('profile'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){ 
+                    if(null !== $request->get('mediaavatarid') && !empty($request->get('mediaavatarid'))){ 
+                        $profile->deleteMedia((int)$request->get('mediaavatarid'));
+                    } 
+                    $avatar = $profile
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
+                        ->toMediaCollection(); 
+                        $cropPath = storage_path('app/public/'.$avatar->id.'/avatar.png'); 
+                        $cropPath100 = storage_path('app/public/'.$avatar->id.'/avatar100.png'); 
+                        Image::load($avatar->getPath())
+                        ->fit(Manipulations::FIT_CROP, 50, 50)
+                        ->format(Manipulations::FORMAT_PNG)
+                        ->save($cropPath);
+                        Image::load($avatar->getPath())
+                        ->fit(Manipulations::FIT_CROP, 100, 100)
+                        ->format(Manipulations::FORMAT_PNG)
+                        ->save($cropPath100);
+                    // $this->mediaconvert($media); 
+                } 
+            }
+            if($request->hasFile('cover')){
+                $file = $request->file('cover'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){ 
+                    if(null !== $request->get('mediacoverid') && !empty($request->get('mediacoverid'))){ 
+                        $profile->deleteMedia((int)$request->get('mediacoverid'));
+                    } 
+                    $cover = $profile
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
+                        ->toMediaCollection();
+                        $cropPath = storage_path('app/public/'.$cover->id.'/cover.png'); 
+                        Image::load($cover->getPath())
+                        ->fit(Manipulations::FIT_CROP, 750, 370)
+                        ->format(Manipulations::FORMAT_PNG)
+                        ->save($cropPath);
+                    // $this->mediaconvert($media); 
+                } 
+            }
+            $user->name = $request->name??'';
+            $user->slug = $request->name??'';
             if( ! $request->password == ''){
                 $user->password=$request->password;
             }
@@ -127,10 +182,12 @@ class CustomerController extends Controller
                 'phone' => $request->phone,
                 'location' => $request->location,
                 'bio' => $request->author_bio,
+                'avatar'=>isset($avatar->id) && !empty($avatar->id)?$avatar->id:$profile->avatar,
+                'cover_image'=>isset($cover->id) && !empty($cover->id)?$cover->id:$profile->cover_image,
             ]);
-            $user->save();
+            $user->save();  
             if($user){
-                return redirect('market/mysetting')->with('success', 'Record has been update!');
+                return redirect('market/mysetting')->with('success', 'Record has been update!'); 
             }
             return redirect('market/mysetting')->with('error', 'Problem with update profile!');
         }
@@ -145,7 +202,21 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+    public function myDeletePro($id){
+        $product = Product::findOrFail($id); 
+        $media = $product->getMedia(); 
+        if($product){
+            if(count($media) > 0){
+                foreach($media as $val){
+                    $product->deleteMedia((int)$val->id);
+                }
+            }
+            $product->delete();
+            return redirect('market/mymanageitem')->with('success', 'Record has been deleted');
+        }
+        return redirect('market/mymanageitem')->with('error', 'Problem with delete record!');
     }
     /**
      * User's profile
@@ -266,29 +337,7 @@ class CustomerController extends Controller
                                     return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                                  })
                                 ->toMediaCollection(); 
-                                $getThub = $media->getPath('thumb'); 
-                                $file_name = $media->file_name; 
-                                $name = $media->name; 
-                                $id = $media->id; 
-                                // get crop image
-                                $cropPath = storage_path('app/public/'.$id.'/conversions/'.$file_name);
-                                $cropPathFit = storage_path('app/public/'.$id.'/conversions/crop.png');
-                                // echo $id; 
-                                // echo $path;
-                                // echo $getThub; 
-                                // echo $getThub2;exit();
-                                // save crop image
-                                Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);
-                                Image::load($getThub)
-                                    ->crop(Manipulations::CROP_TOP, 750, 430)
-                                    ->format(Manipulations::FORMAT_PNG)
-                                    ->background('ffffff')->save($cropPathFit);
-                                    
-                                // $media->getPath();  // the path to the where the original image is stored
-                                // $media->getPath('thumb'); // the path to the converted image with dimensions 368x232
-
-                                // $media->getUrl();  // the url to the where the original image is stored
-                                // $media->getUrl('thumb'); // the url to the converted image with dimensions 368x232
+                                $this->mediaconvert($media);
                             }
                         }
                     }
@@ -308,13 +357,9 @@ class CustomerController extends Controller
      */
     public function myManageItem()
     {
-        $data['products'] = Product::where('user_id', Auth::user()->id)->get();
+        $data['products'] = Product::where('user_id', Auth::user()->id)->paginate(20);
         $data['breadcrub']='manage items';
         return view('customer.manage-item',compact('data'));
-    }
-
-    function getLavel(){
-
     }
     /**
      * User's card
@@ -328,15 +373,8 @@ class CustomerController extends Controller
         if($request->isMethod('post')){
             $product = Product::where('user_id',Auth::id())->find($id);
             if($product){  
-                // $node = Category::find($product->categories_ads[0]->id);
-                // $lavel=$node->getAncestorsAndSelf();
-                // $currentCat=[];
-                // foreach($lavel as $p){
-                //    $currentCat[]=$p->translate('en')->name;
-                // }  
                 // check last child have try to delete and new insert
-                if(isset($request->lastchildid) && !empty($request->lastchildid)){
-                    echo 'have';
+                if(isset($request->lastchildid) && !empty($request->lastchildid)){ 
                     // delete old category
                     $product->categories_ads()->detach($product->categories_ads[0]->id);
                     // add new category 
@@ -356,10 +394,13 @@ class CustomerController extends Controller
                         // $imgappend[] = $file->store('public');
                         $product->deleteMedia((int)$request->get('mediaid'));
                     } 
-                    $product
-                        ->addMedia($file)
-                        ->withResponsiveImages()
+                    $media = $product
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
                         ->toMediaCollection();
+                    $this->mediaconvert($media); 
                 } 
             }
             if($request->hasFile('photos1')){
@@ -372,10 +413,13 @@ class CustomerController extends Controller
                         // $imgappend[] = $file->store('public');
                         $product->deleteMedia((int)$request->get('mediaid1'));
                     } 
-                    $product
+                    $media = $product
                         ->addMedia($file)
-                        ->withResponsiveImages()
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
                         ->toMediaCollection(); 
+                    $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos2')){
@@ -390,10 +434,13 @@ class CustomerController extends Controller
                         $product->deleteMedia((int)$request->get('mediaid2')); 
                     } 
                    
-                    $product
+                    $media = $product
                         ->addMedia($file)
-                        ->withResponsiveImages()
-                        ->toMediaCollection(); 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
+                        ->toMediaCollection();
+                    $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos3')){
@@ -405,10 +452,13 @@ class CustomerController extends Controller
                     if(null !== $request->get('mediaid3') && !empty($request->get('mediaid3'))){
                         $product->deleteMedia((int)$request->get('mediaid3')); 
                     } 
-                    $product    
-                        ->addMedia($file)
-                        ->withResponsiveImages()
+                    $media = $product    
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
                         ->toMediaCollection();
+                    $this->mediaconvert($media);
                 } 
             }
                 return redirect('market/mymanageitem')->with('success', 'Record has been updated!');
@@ -442,6 +492,20 @@ class CustomerController extends Controller
         // print_r($c);
         // // print_r($categories);
         return view('customer.edit-item',compact('data'));
+    }
+    public function mediaconvert($media){
+        $getThub = $media->getPath('thumb');  
+        $file_name = $media->file_name; 
+        // $name = $media->name; 
+        $id = $media->id; 
+        // // get crop image
+        $cropPath = storage_path('app/public/'.$id.'/conversions/'.$file_name);
+        $cropPathFit = storage_path('app/public/'.$id.'/conversions/crop.png');
+        Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);
+        Image::load($getThub)
+            ->crop(Manipulations::CROP_TOP, 750, 430)
+            ->format(Manipulations::FORMAT_PNG)
+            ->background('ffffff')->save($cropPathFit);
     }
     public function renderNode($node) {
 

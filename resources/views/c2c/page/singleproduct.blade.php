@@ -130,7 +130,13 @@
 @endif
 
 @php 
-    $media = $data['product']->getMedia();
+    $media = $data['product']->getMedia(); 
+    $profile = $data['product']->user->profile->getMedia(); 
+    foreach($profile as $val){  
+        if($data['product']->user->profile->avatar==$val->id){
+            $avatar=$val->id.'/avatar100.png';  
+        } 
+    }    
 @endphp
 <!--============================================
         START SINGLE PRODUCT DESCRIPTION AREA
@@ -551,7 +557,7 @@
                             <div class="price">
                                 <h1>
                                     <sup>$</sup>
-                                    <span>{{$data['product']->price}}</span>
+                                    <span>{{$data['product']->price??0}}</span>
                                 </h1>
                             </div>
                             <!-- end /.purchase-button -->
@@ -585,7 +591,13 @@
 
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <a href="{{route('market.mystore',$data['product']->user->id)}}"><img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D"></a>
+                                    <a href="{{route('market.mystore',$data['product']->user->id)}}">
+                                        @if(isset($avatar) && !empty($avatar))
+                                            <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                        @else
+                                            <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
+                                        @endif
+                                    </a>
                                 </div>
 
                                 <div class="author">

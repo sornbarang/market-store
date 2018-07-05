@@ -12,11 +12,14 @@
                 </button>
             </div>
             <!-- end /.modal-header -->
-
-            <div class="modal-body">
-                <button type="submit" class="btn btn--round btn-danger btn--default">Delete</button>
-                <button class="btn btn--round modal_close" data-dismiss="modal">Cancel</button>
-            </div>
+            <form id="frmdeleteproduct" method="post">
+                @method('DELETE')
+                @csrf
+                <div class="modal-body">
+                    <button type="submit" class="btn btn--round btn-danger btn--default">Delete</button>
+                    <button class="btn btn--round modal_close" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
             <!-- end /.modal-body -->
         </div>
     </div>
@@ -44,8 +47,28 @@
                             <div class="dashboard__title dashboard__title pull-left">
                                 <h3>@lang('profilemanageitem.manageitem')</h3>
                             </div>
-
+                            &nbsp;
+                            <div class="filter__option filter--text">
+                                @if (session('success')) 
+                                    <div class="alert alert-success" role="alert" style="margin:0 !important;padding:10px;">
+                                        <span class="alert_icon lnr lnr-checkmark-circle"></span>
+                                        {{ session('success') }}.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                @elseif(session('error'))
+                                    <div class="alert alert-danger" role="alert" style="margin:0 !important;padding:10px;">
+                                        <span class="alert_icon lnr lnr-warning"></span>
+                                            {{ session('success') }}.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                @endif   
+                            </div>
                             <div class="pull-right">
+                                
                                 <div class="filter__option filter--text">
                                     <p><span>{{count($data['products'])}}</span> @lang('profilemanageitem.product')</p>
                                 </div>
@@ -67,29 +90,19 @@
                 <div class="row"> 
                     @foreach($data['products'] as $val) 
                         @php
-                            $img='';
-                            $newsItem=App\Models\ProductsAds::find($val->id);
-                            $mediaItems = $newsItem->getMedia(); 
-                            $getFirstMedia = $newsItem->getFirstMedia();
-                            //print_r($getFirstMedia); 
-                            //$test=$getFirstMedia->getPath();
-                            //$url=$getFirstMedia->getUrl();
-                            //$path=$getFirstMedia->getPath('thumb');
-                            $getUrlThum=$getFirstMedia->getUrl('thumb'); 
-                            //print_r($path);
-                            //print_r($getUrlThum); 
+                            $img=''; 
+                            $getFirstMedia = $val->getFirstMedia(); 
                             if($getFirstMedia){
                                 $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-                            } 
-                            
+                            }
                         @endphp
                         <div class="col-md-4 col-sm-6">
                             <!-- start .single-product -->
                             <div class="product product--card">
 
-                                <div class="product__thumbnail" style="height: 223px;"> 
+                                <div class="product__thumbnail"> 
                                     <figure class="figure">
-                                        <img style="max-height:223px;" src="{{$img}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
+                                        <img  src="{{$img}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
                                     </figure>
                                     <div class="prod_option">
                                         <a href="#" id="drop2" class="dropdown-trigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -101,8 +114,9 @@
                                                 <li><a href="{{route('market.edititem',$val->id)}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
                                                 <li><a href="#"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.hide')</a></li>
                                                 <li>
-                                                    <a href="#" data-toggle="modal" data-target="#myModal2" class="delete">
-                                                        <span class="lnr lnr-trash"></span>@lang('profilemanageitem.delete')</a>
+                                                    <a data-route="{{route('market.deleteproduct',$val->id)}}" href="#" data-toggle="modal" data-target="#myModal2" class="delete" id="deletepro">
+                                                        <span class="lnr lnr-trash"></span>@lang('profilemanageitem.delete')
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -154,11 +168,7 @@
                         <div class="pagination-area">
                             <nav class="navigation pagination" role="navigation">
                                 <div class="nav-links">
-                                    <a class="prev page-numbers" href="#"><span class="lnr lnr-arrow-left"></span></a>
-                                    <a class="page-numbers current" href="#">1</a>
-                                    <a class="page-numbers" href="#">2</a>
-                                    <a class="page-numbers" href="#">3</a>
-                                    <a class="next page-numbers" href="#"><span class="lnr lnr-arrow-right"></span></a>
+                                    {{$data['products']->links()}}
                                 </div>
                             </nav>
                         </div><!-- end /.pagination-area -->
