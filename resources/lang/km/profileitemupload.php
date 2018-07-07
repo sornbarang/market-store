@@ -15,6 +15,7 @@ return [
 
     'uploaditem' => 'បន្ថែមផលិតផលថ្មី',
     'itemnamedes' => 'ផលិតផល & ការពិពណ៌នា',
+    'subcat'=>'កូន',
     'quickuploadrule' => 'ច្បាប់នៃការបន្ថែមផលិតផល',
     'imageupload' => 'រូបភាព',
     'fileupload' => 'រូបភាព', 
@@ -30,4 +31,6 @@ return [
     'price' => 'តំលៃ',
     'choosefile' => 'ជ្រើរើសរូប',
     'save' => 'បន្ថែម',
+    'choosecat'=>'ជ្រើរើសប្រភេទ',
+    'choosesubcat'=>'ជ្រើរើសកូននៃប្រភេទ',
 ];

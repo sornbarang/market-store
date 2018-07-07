@@ -38,5 +38,7 @@ return [
     'socialprofile' => 'ព័រមានលើបន្តាសង្គម', 
     'savechange' => 'រក្សាទុក្ខ', 
     'button'=>'រើលយក',
-    'selectone'=>'ជ្រើសមួយ'
+    'selectone'=>'ជ្រើសមួយ',
+    'phone'=>'លេខទូរស័ព្វ',
+    'address'=>'អាស័យដ្ឋាន',
 ];

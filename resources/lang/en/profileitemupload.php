@@ -15,6 +15,7 @@ return [
 
     'uploaditem' => 'Upload Your Item',
     'itemnamedes' => 'Item Name & Description',
+    'subcat'=>'child',
     'quickuploadrule' => 'Quick Upload Rules',
     'imageupload' => 'Image Upload',
     'fileupload' => 'File Upload', 
@@ -31,4 +32,6 @@ return [
     'choosefile' => 'Choose File',
     'save' => 'Save',
     'discount' => 'Discount',
+    'choosecat'=>'Choose a category',
+    'choosesubcat'=>'Choose a subcategory',
 ];

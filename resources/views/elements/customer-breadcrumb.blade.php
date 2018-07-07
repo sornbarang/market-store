@@ -5,8 +5,15 @@
                 <div class="breadcrumb">
                     <ul>
                         <li><a href="{{route('market')}}">@lang('menu.home')</a></li>
-                        {{--<li><a href="dashboard.html">@lang('profile.dashboard')</a></li>
-                        <li class="active"><a href="#">@lang('profile.setting')</a></li>--}}
+                        @if(isset($data['bread']))
+                            @foreach($data['bread'] as $bread)
+                                @foreach($bread->translations as $v)
+                                    @if($v->locale==app()->getLocale())
+                                        <li class="{{$data['cnode']==$v->name?'active':''}}"><a href="{{route('market.dynamiccat',$v->categories_ads_id)}}">{{$v->name}}</a></li> 
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        @endif
                     </ul>
                 </div> 
                 <h1 class="page-title">

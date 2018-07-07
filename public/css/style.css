@@ -499,7 +499,7 @@ a {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .section-title p {
@@ -2055,7 +2055,7 @@ h6 {
 *****************************/
 /* GENERAL PRODUCT STYLE */
 .products {
-  padding: 80px 0;
+  padding: 80px 0 !important;
 }
 
 .product {
@@ -3373,7 +3373,7 @@ h6 {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .section-title p {
@@ -4560,7 +4560,7 @@ h6 {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color: #56a72d;
 }
 
 .section-title p {
@@ -6088,7 +6088,7 @@ div#ui-datepicker-div tbody tr td a:hover {
 }
 
 .section-title h1 .highlighted {
-  color: #0674ec;
+  color:#56a72d;
 }
 
 .section-title p {
@@ -15943,4 +15943,59 @@ span.counter {
 }
 .subcategory{
   display:none;
+}
+form#frmUploadFront .statement_info_card .icon,form#frmUpdateFront .statement_info_card .icon{
+  width: 25px !important;
+  line-height: 25px !important;
+  font-size: inherit !important;
+}
+form#frmUploadFront .statement_info_card,form#frmUpdateFront .statement_info_card{
+  min-height:60px !important;
+}
+form#frmUploadFront .modules__content div.statement_info_card,form#frmUpdateFront .modules__content div.statement_info_card{
+  background: #f4f5f8;
+  cursor: pointer;
+}
+form#frmUploadFront .modules__content .subcategory div.statement_info_card,form#frmUpdateFront .modules__content .subcategory div.statement_info_card{
+  min-height: 35px !important;
+  padding: 0 5px !important;
+  text-align: left;
+}
+.gotoupload{
+  -webkit-border-radius: 200px;
+  border-radius: 200px;
+  line-height: 60px;
+  margin-right: 13px;
+  width: 60px;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+  font-size: 24px;
+}
+form#frmUploadFront .subcategory span.circle,form#frmUpdateFront .subcategory span.circle{
+  height: 60px;
+    margin-right: 12px;
+    vertical-align: middle;
+    width: 60px;
+    background: #fff;
+    display: inline-block;
+    border: 4px solid #e6e9ed;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    position: relative;
+}
+form#frmUploadFront .subcategory span.circle:before,form#frmUpdateFront .subcategory span.circle:before{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
+  text-align: left;
+} 
+#notmatch{
+  display: none;
+  
+}
+#notmatch p{
+  color:red;
 }

@@ -10,14 +10,14 @@
                     <div class="breadcrumb">
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a href="{{route('market')}}">Home</a>
                             </li>
                             <li class="active">
                                 <a href="#">Author Profile</a>
                             </li>
                         </ul>
                     </div>
-                    <h1 class="page-title">Author's Profile</h1>
+                    <h1 class="page-title">{{$data['user']->name??''}}'s Profile</h1>
                 </div>
                 <!-- end /.col-md-12 -->
             </div>
@@ -32,6 +32,17 @@
     <!--================================
         START AUTHOR AREA
     =================================-->
+    @php 
+        $media = $data['user']->profile->getMedia(); 
+        foreach($media as $val){  
+            if($data['user']->profile->avatar==$val->id){
+                $avatar=$val->id.'/avatar100.png';  
+            } 
+            if($data['user']->profile->cover_image==$val->id){
+                $cover=$val->id.'/cover.png';  
+            }
+        }   
+    @endphp
     <section class="author-profile-area">
         <div class="container">
             <div class="row">
@@ -40,12 +51,15 @@
                         <div class="author-card sidebar-card">
                             <div class="author-infos">
                                 <div class="author_avatar">
-                                    <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
-                                </div>
-
+                                    @if(isset($avatar) && !empty($avatar))
+                                        <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                    @else
+                                        <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
+                                    @endif
+                                </div> 
                                 <div class="author">
-                                    <h4>AazzTech</h4>
-                                    <p>Signed Up: 08 April 2016</p>
+                                    <h4>{{$data['user']->name}}</h4>
+                                    <p>Signed Up: {{$data['user']->created_at}}</p>
                                 </div>
                                 <!-- end /.author -->
 
@@ -182,8 +196,14 @@
                                         <button type="submit" class="btn btn--md btn--round">send message</button>
                                     </div>
                                 </form>
-                                <p> Please
-                                    <a href="#">sign in</a> to contact this author.</p>
+                                @if (Route::has('login'))
+                                    @auth
+                                    
+                                    @else
+                                    <p> Please
+                                        <a href="{{route('register')}}">sign in</a> to contact this author.</p>
+                                    @endauth 
+                                @endif 
                             </div>
                             <!-- end /.message-form -->
                         </div>
@@ -239,19 +259,19 @@
 
                         <div class="col-md-12 col-sm-12">
                             <div class="author_module">
-                                <img src="{{ asset('images/authcvr.jpg') }}" alt="author image">
+                                @if(isset($cover) && !empty($cover))
+                                    <img src="{{Storage::url($cover)}}" alt="Presenting the broken author avatar :D">
+                                @else
+                                    <img src="{{ asset('images/authcvr.jpg') }}" alt="author image">
+                                @endif
+                                
                             </div>
 
                             <div class="author_module about_author">
                                 <h2>About
-                                    <span>AazzTech</span>
+                                    <span>{{$data['user']->name}}</span>
                                 </h2>
-                                <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo
-                                    quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo
-                                    ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis.
-                                    Prae sent pharetra, justo ut scelerisque the mattisleo quam aliquet congue.</p>
-                                <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo
-                                    quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra.</p>
+                                <p>{{$data['user']->profile->bio}}</p>
                             </div>
                         </div>
                     </div>
@@ -262,326 +282,111 @@
                             <div class="product-title-area">
                                 <div class="product__title">
                                     <h2>Newest Products</h2>
-                                </div>
-
-                                <a href="#" class="btn btn--sm">See all Items</a>
+                                </div> 
+                                {{-- a href="#" class="btn btn--sm">See all Items</a>--}}
                             </div>
                             <!-- end /.product-title-area -->
                         </div>
                         <!-- end /.col-md-12 -->
 
                         <!-- start .col-md-4 -->
-                        <div class="col-lg-6 col-md-6">
-                            <!-- start .single-product -->
-                            <div class="product product--card">
+                        @foreach($data['product'] as $val)
+                            @php 
+                                $img='';
+                                $getFirstMedia = $val->getFirstMedia(); 
+                                if($getFirstMedia){
+                                    $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                } 
+                            @endphp 
+                            <div class="col-lg-6 col-md-6">
+                                <!-- start .single-product -->
+                                <div class="product product--card">
 
-                                <div class="product__thumbnail">
-                                    <img src="{{ asset('images/p4.jpg') }}" alt="Product Image">
-                                    <div class="prod_btn">
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
+                                    <div class="product__thumbnail">
+                                        <img src="{{ $img }}" alt="Product Image">
+                                        <div class="prod_btn">
+                                            <a href="{{route('market.productdetail',$val->id)}}" class="transparent btn--sm btn--round">More Info</a>
+                                            {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
+                                        </div>
+                                        <!-- end /.prod_btn -->
                                     </div>
-                                    <!-- end /.prod_btn -->
-                                </div>
-                                <!-- end /.product__thumbnail -->
+                                    <!-- end /.product__thumbnail -->
 
-                                <div class="product-desc">
-                                    <a href="#" class="product_title">
-                                        <h4>Yannan Na nakka muka</h4>
-                                    </a>
-                                    <ul class="titlebtm">
-                                        <li>
-                                            <img class="auth-img" src="{{ asset('images/auth3.jpg') }}" alt="author image">
+                                    <div class="product-desc">
+                                        <a href="#" class="product_title">
+                                            <h4>{{$val->name}}</h4>
+                                        </a>
+                                        <ul class="titlebtm">
+                                            <li>
+                                                <img class="auth-img" src="{{ asset('images/auth3.jpg') }}" alt="author image">
+                                                <p>
+                                                    <a href="#">{{$val->user->name}}</a>
+                                                </p>
+                                            </li>
+                                            <li class="product_cat">
+                                                <a href="#">
+                                                    <img src="{{ asset('images/cathtm.png') }}" alt="category image">Plugin</a>
+                                            </li>
+                                        </ul> 
+                                        @foreach($val->translations as $v)
+                                            @if($v->locale==app()->getLocale())
+                                                {!!$v->description!!}
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <!-- end /.product-desc -->
+
+                                    <div class="product-purchase">
+                                        <div class="price_love">
+                                            <span>$ {{$val->price??'0'}}</span>
+                                            
+                                            {{--<p> <span class="lnr lnr-heart"></span> 48</p>--}}
+                                        </div>
+                                        {{--
+                                        <div class="rating product--rating">
+                                            <ul>
+                                                <li>
+                                                    <span class="fa fa-star"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star-half-o"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="sell">
                                             <p>
-                                                <a href="#">AazzTech</a>
+                                                <span class="lnr lnr-cart"></span>
+                                                <span>50</span>
                                             </p>
-                                        </li>
-                                        <li class="product_cat">
-                                            <a href="#">
-                                                <img src="{{ asset('images/cathtm.png') }}" alt="category image">Plugin</a>
-                                        </li>
-                                    </ul>
-
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the
-                                        mattis, leo quam aliquet congue.</p>
+                                        </div>--}}
+                                    </div>
+                                    <!-- end /.product-purchase -->
                                 </div>
-                                <!-- end /.product-desc -->
-
-                                <div class="product-purchase">
-                                    <div class="price_love">
-                                        <span>$10</span>
-                                        <p>
-                                            <span class="lnr lnr-heart"></span> 48</p>
-                                    </div>
-
-                                    <div class="rating product--rating">
-                                        <ul>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star-half-o"></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="sell">
-                                        <p>
-                                            <span class="lnr lnr-cart"></span>
-                                            <span>50</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- end /.product-purchase -->
+                                <!-- end /.single-product -->
                             </div>
-                            <!-- end /.single-product -->
-                        </div>
-                        <!-- end /.col-md-4 -->
-
-                        <!-- start .col-md-4 -->
-                        <div class="col-lg-6 col-md-6">
-                            <!-- start .single-product -->
-                            <div class="product product--card">
-
-                                <div class="product__thumbnail">
-                                    <img src="{{ asset('images/p2.jpg') }}" alt="Product Image">
-                                    <div class="prod_btn">
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
-                                    </div>
-                                    <!-- end /.prod_btn -->
-                                </div>
-                                <!-- end /.product__thumbnail -->
-
-                                <div class="product-desc">
-                                    <a href="#" class="product_title">
-                                        <h4>Mccarther Coffee Shop</h4>
-                                    </a>
-                                    <ul class="titlebtm">
-                                        <li>
-                                            <img class="auth-img" src="{{ asset('images/auth2.jpg') }}" alt="author image">
-                                            <p>
-                                                <a href="#">AazzTech</a>
-                                            </p>
-                                        </li>
-                                        <li class="product_cat">
-                                            <a href="#">
-                                                <img src="{{ asset('images/catword.png') }}" alt="category image">wordpress</a>
-                                        </li>
-                                    </ul>
-
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the
-                                        mattis, leo quam aliquet congue.</p>
-                                </div>
-                                <!-- end /.product-desc -->
-
-                                <div class="product-purchase">
-                                    <div class="price_love">
-                                        <span>$10</span>
-                                        <p>
-                                            <span class="lnr lnr-heart"></span> 48</p>
-                                    </div>
-
-                                    <div class="rating product--rating">
-                                        <ul>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star-half-o"></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="sell">
-                                        <p>
-                                            <span class="lnr lnr-cart"></span>
-                                            <span>50</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- end /.product-purchase -->
-                            </div>
-                            <!-- end /.single-product -->
-                        </div>
-                        <!-- end /.col-md-4 -->
-
-                        <!-- start .col-md-4 -->
-                        <div class="col-lg-6 col-md-6">
-                            <!-- start .single-product -->
-                            <div class="product product--card">
-
-                                <div class="product__thumbnail">
-                                    <img src="{{ asset('images/p2.jpg') }}" alt="Product Image">
-                                    <div class="prod_btn">
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
-                                    </div>
-                                    <!-- end /.prod_btn -->
-                                </div>
-                                <!-- end /.product__thumbnail -->
-
-                                <div class="product-desc">
-                                    <a href="#" class="product_title">
-                                        <h4>Mccarther Coffee Shop</h4>
-                                    </a>
-                                    <ul class="titlebtm">
-                                        <li>
-                                            <img class="auth-img" src="{{ asset('images/auth2.jpg') }}" alt="author image">
-                                            <p>
-                                                <a href="#">AazzTech</a>
-                                            </p>
-                                        </li>
-                                        <li class="product_cat">
-                                            <a href="#">
-                                                <img src="{{ asset('images/catword.png') }}" alt="category image">wordpress</a>
-                                        </li>
-                                    </ul>
-
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the
-                                        mattis, leo quam aliquet congue.</p>
-                                </div>
-                                <!-- end /.product-desc -->
-
-                                <div class="product-purchase">
-                                    <div class="price_love">
-                                        <span>$10</span>
-                                        <p>
-                                            <span class="lnr lnr-heart"></span> 48</p>
-                                    </div>
-
-                                    <div class="rating product--rating">
-                                        <ul>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star-half-o"></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="sell">
-                                        <p>
-                                            <span class="lnr lnr-cart"></span>
-                                            <span>50</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- end /.product-purchase -->
-                            </div>
-                            <!-- end /.single-product -->
-                        </div>
-                        <!-- end /.col-md-4 -->
-
-                        <!-- start .col-md-4 -->
-                        <div class="col-lg-6 col-md-6">
-                            <!-- start .single-product -->
-                            <div class="product product--card">
-
-                                <div class="product__thumbnail">
-                                    <img src="{{ asset('images/p6.jpg') }}" alt="Product Image">
-                                    <div class="prod_btn">
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
-                                        <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
-                                    </div>
-                                    <!-- end /.prod_btn -->
-                                </div>
-                                <!-- end /.product__thumbnail -->
-
-                                <div class="product-desc">
-                                    <a href="#" class="product_title">
-                                        <h4>The of the century</h4>
-                                    </a>
-                                    <ul class="titlebtm">
-                                        <li>
-                                            <img class="auth-img" src="{{ asset('images/auth.jpg') }}" alt="author image">
-                                            <p>
-                                                <a href="#">AazzTech</a>
-                                            </p>
-                                        </li>
-                                        <li class="product_cat">
-                                            <a href="#">
-                                                <img src="{{ asset('images/catph.png') }}" alt="Category Image">PSD</a>
-                                        </li>
-                                    </ul>
-
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the
-                                        mattis, leo quam aliquet congue.</p>
-                                </div>
-                                <!-- end /.product-desc -->
-
-                                <div class="product-purchase">
-                                    <div class="price_love">
-                                        <span>$10</span>
-                                        <p>
-                                            <span class="lnr lnr-heart"></span> 48</p>
-                                    </div>
-
-                                    <div class="rating product--rating">
-                                        <ul>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star-half-o"></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="sell">
-                                        <p>
-                                            <span class="lnr lnr-cart"></span>
-                                            <span>50</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- end /.product-purchase -->
-                            </div>
-                            <!-- end /.single-product -->
-                        </div>
-                        <!-- end /.col-md-4 -->
+                        @endforeach
+                        <!-- end /.col-md-4 --> 
                     </div>
                     <!-- end /.row -->
+                    <div class="pagination-area pagination--right">
+                        <nav class="navigation pagination" role="navigation">
+                            <div class="nav-links">
+                                {{$data['product']->links()}}
+                            </div>
+                        </nav>
+                    </div>       
                 </div>
-                <!-- end /.col-md-8 -->
-
+                <!-- end /.col-md-8 -->                         
             </div>
             <!-- end /.row -->
         </div>

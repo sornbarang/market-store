@@ -3,6 +3,7 @@
 <!--================================
         START SEARCH AREA
     =================================-->
+    
     <section class="search-wrapper">
         <div class="search-area2 bgimage">
             <div class="bg_image_holder">
@@ -24,9 +25,15 @@
                             <div class="breadcrumb">
                                 <ul>
                                     <li><a href="#">@lang('menu.home')</a></li>
-                                    <li><a href="#">Phone & Tablets</a></li>
-                                    <li><a href="#">Category</a></li>
-                                    <li class="active"><a href="#">product</a></li>
+                                    @if(isset($data['bread']))
+                                        @foreach($data['bread'] as $bread)
+                                            @foreach($bread->translations as $v)
+                                                @if($v->locale==app()->getLocale())
+                                                    <li class="{{$data['cnode']==$v->name?'active':''}}"><a href="{{route('market.dynamiccat',$v->categories_ads_id)}}">{{$v->name}}</a></li> 
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -90,7 +97,7 @@
         START PRODUCTS AREA
     =================================-->
     @php
-        $cats = ['Wordpress'=>'35','Landing Page'=>'45','Psd Template'=>'13','Plugins'=>'08','HTML Template'=>'34','Components'=>'78','Joomla Template'=>'26'];
+       
         $profilters = ['Trending Products','Popular Products','New Products','Best Seller','Best Rating','Free Support','On Sale'];
         $products = ['Finance and Consulting','Best Free Responsive','AppsPress - HTML5 ','Finance and Consulting','Best Free Responsive','AppsPress - HTML5 ','Finance and Consulting','Best Free Responsive','AppsPress - HTML5 '];
     @endphp
@@ -106,13 +113,13 @@
                     <aside class="sidebar product--sidebar">
                         <div class="sidebar-card card--category">
                             
-                            <a class="card-title" href="#collapse1" role="button" data-toggle="collapse"  aria-expanded="false" aria-controls="collapse1">
+                            <a class="card-title" href="#collapse1" role="button" data-toggle="collapse"  aria-expanded="true" aria-controls="collapse1">
                                 <h4 >Categories <span class="lnr lnr-chevron-down"></span></h4>
                             </a> 
-                            <div class="collapse in collapsible-content" id="collapse1">
+                            <div class="collapse in collapsible-content show" id="collapse1">
                                 <ul class="card-content">
-                                    @foreach($cats as $catname => $catvals)
-                                        <li><a href="#"><span class="lnr lnr-chevron-right"></span>{{$catname}}<span class="item-count">{{$catvals}}</span></a></li> 
+                                    @foreach($data['countcatpro'] as $key => $val)
+                                        <li><a href="#"><span class="lnr lnr-chevron-right"></span>{{ucfirst($val['name'])}}<span class="item-count">{{$val['count']}}</span></a></li> 
                                     @endforeach
                                 </ul>
                             </div><!-- end /.collapsible_content --> 
@@ -152,24 +159,41 @@
                 <!-- start col-md-9 -->
                 <div class="col-md-9"> 
                         <div class="row">
-                            @foreach($products as $val)
+                        
+                            @foreach($data['product'] as $val) 
+                                @php
+                                    $img='';
+                                    $newsItem=App\Models\ProductsAds::find($val->products_ads_id); 
+                                    $mediaItems = $newsItem->getMedia(); 
+                                    $getFirstMedia = $newsItem->getFirstMedia(); 
+                                    //print_r($getFirstMedia); 
+                                    //$test=$getFirstMedia->getPath();
+                                    //$url=$getFirstMedia->getUrl();
+                                    //$path=$getFirstMedia->getPath('thumb');
+                                    $getUrlThum=$getFirstMedia->getUrl('thumb'); 
+                                    //print_r($path);
+                                    //print_r($getUrlThum); 
+                                    if($getFirstMedia){
+                                        $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                    } 
+                                @endphp
                                 <div class="col-md-4 col-sm-4">
                                     <!-- start .single-product -->
                                     <div class="product product--card product--card-small">
 
                                         <div class="product__thumbnail">
-                                            <img src="{{asset('images/p1.jpg')}}" alt="Product Image">
+                                            <img src="{{$img}}" alt="Product Image">
                                             <div class="prod_btn">
-                                                <a href="{{ route('market.productdetail') }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                                <a href="{{ route('market.productdetail',$val->products_ads_id) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                                 {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                                             </div><!-- end /.prod_btn -->
                                         </div><!-- end /.product__thumbnail -->
                                         <div class="product-desc">
-                                            <a href="#" class="product_title"><h4>{{$val}}</h4></a>
+                                            <a href="#" class="product_title"><h4>{{$val->name}}</h4></a>
                                             <ul class="titlebtm">
                                                 <li>
                                                     <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
-                                                    <p><a href="#">AazzTech</a></p>
+                                                    <p><a href="#">{{$val->user->name}}</a></p>
                                                 </li>
                                                 {{--<li class="out_of_class_name">
                                                     <div class="sell"><p><span class="lnr lnr-cart"></span><span>27</span></p></div>
@@ -203,13 +227,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pagination-area categorised_item_pagination">
+                    
                         <nav class="navigation pagination" role="navigation">
                             <div class="nav-links">
-                                <a class="prev page-numbers" href="#"><span class="lnr lnr-arrow-left"></span></a>
-                                <a class="page-numbers current" href="#">1</a>
-                                <a class="page-numbers" href="#">2</a>
-                                <a class="page-numbers" href="#">3</a>
-                                <a class="next page-numbers" href="#"><span class="lnr lnr-arrow-right"></span></a>
+                                {{$data['product']->links()}}
                             </div>
                         </nav>
                     </div>

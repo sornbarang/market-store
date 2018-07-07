@@ -22,12 +22,41 @@
                         <div class="dashboard_title_area">
                             <div class="dashboard__title">
                                 <h3>@lang('profilesetting.as')</h3>
+                                @if ($errors->any())
+                                <div class="alert alert-danger" style="margin:0 !important;padding:0;">
+                                    <ul>
+                                        {{--<li>{{ $errors->getBag('default')->first('name') }}</li> --}}
+                                        
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endif
+                                @if (session('success')) 
+                                <div class="alert alert-success" role="alert" style="margin:0 !important;padding:0;">
+                                    <span class="alert_icon lnr lnr-checkmark-circle"></span>
+                                    {{ session('success') }}.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                @elseif(session('error'))
+                                    <div class="alert alert-danger" role="alert" style="margin:0 !important;padding:0;">
+                                        <span class="alert_icon lnr lnr-warning"></span>
+                                            {{ session('success') }}.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div><!-- end /.col-md-12 -->
-                </div><!-- end /.row -->
-
-                <form action="#" class="setting_form">
+                </div><!-- end /.row --> 
+                <form name="frmupdateprofile" id="frmupdateprofile" method="POST" action="{{route('market.customer.update',Auth::user()->id)}}" class="setting_form" enctype="multipart/form-data">
+                    @method('PUT')
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="information_module">
@@ -36,27 +65,41 @@
                                 </a>
                                 <div class="information__set toggle_module collapse in" id="collapse2">
                                     <div class="information_wrapper form--fields">
-                                        <div class="form-group">
-                                            <label for="acname">@lang('profilesetting.name')<sup>*</sup></label>
-                                            <input type="text" id="acname" class="text_field" placeholder="@lang('profilesetting.name')" value="Aazz Tech">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="acname">@lang('profilesetting.name')</label>
+                                                    <input name="acname" value="{{Auth::user()->name}}" type="text" id="acname" class="text_field" placeholder="@lang('profilesetting.name')">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="usrname">@lang('profilesetting.username') <sup>*</sup></label>
+                                                    <input name="name" value="{{Auth::user()->name}}" type="text" id="usrname" class="text_field" placeholder="@lang('profilesetting.username')" required>
+                                                    <p style="word-break:break-all;">{{route('market.myprofile')}}<span> {{ucfirst(Auth::user()->name)}}</span></p>
+                                                </div>
+                                            </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="usrname">@lang('profilesetting.username') <sup>*</sup></label>
-                                            <input type="text" id="usrname" class="text_field" placeholder="@lang('profilesetting.username')" value="aazztech">
-                                            <p>Your MartPlace URL: https://martplace.com/<span>aazztech</span></p>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="emailad">@lang('authlabel.email') <sup>*</sup></label>
-                                            <input type="text" id="emailad" class="text_field" placeholder="@lang('authlabel.email')" value="contact@aazztech.com">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="emailad">@lang('authlabel.email') <sup>*</sup></label>
+                                                    <input required type="email" title="Must be a globex.com email address"  name="email" value="{{Auth::user()->email}}" id="emailad" class="text_field" placeholder="@lang('authlabel.email')" value="contact@aazztech.com">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="website">@lang('profilesetting.website')</label>
+                                                    <input name="website" type="text" id="website" class="text_field" placeholder="@lang('profilesetting.website')" >
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="password">@lang('profilesetting.password') <sup>*</sup></label>
-                                                    <input type="password" id="password" class="text_field" placeholder="@lang('profilesetting.password')" >
+                                                    <input name="password" type="password" id="password" class="text_field" placeholder="@lang('profilesetting.password')" >
                                                 </div>
                                             </div>
 
@@ -64,315 +107,142 @@
                                                 <div class="form-group">
                                                     <label for="conpassword">@lang('profilesetting.conpass') <sup>*</sup></label>
                                                     <input type="password" id="conpassword" class="text_field" placeholder="@lang('profilesetting.conpass')" >
+                                                    <div id="notmatch"><p>Your password not match</p></div>
                                                 </div>
+                                               
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label for="website">@lang('profilesetting.website')</label>
-                                            <input type="password" id="website" class="text_field" placeholder="@lang('profilesetting.website')" >
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="country">@lang('profilesetting.country') <sup>*</sup></label>
-                                            <div class="select-wrap select-wrap2">
-                                                <select name="country" id="country" class="text_field">
-                                                    <option value="">@lang('profilesetting.selectone')</option>
-                                                    <option value="bangladesh">Bangladesh</option>
-                                                    <option value="india">India</option>
-                                                    <option value="uruguye">Uruguye</option>
-                                                    <option value="australia">Australia</option>
-                                                    <option value="neverland">Neverland</option>
-                                                    <option value="atlantis">Atlantis</option>
-                                                </select>
-                                                <span class="lnr lnr-chevron-down"></span>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="prohead">@lang('profilesetting.profilehead')</label>
-                                            <input type="text" id="prohead" class="text_field" placeholder="Ex: Webdesign & Development Service">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="authbio">@lang('profilesetting.authbio')</label>
-                                            <textarea name="author_bio" id="authbio" class="text_field" placeholder="Short brief about yourself or your account..."></textarea>
-                                        </div>
-                                    </div><!-- end /.information_wrapper -->
-                                </div><!-- end /.information__set -->
-                            </div><!-- end /.information_module -->
-
-                            <div class="information_module">
-                                <a class="toggle_title" href="#collapse1" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse1">
-                                    <h4>@lang('profilesetting.bilinginfo')<span class="lnr lnr-chevron-down"></span></h4>
-                                </a>
-
-                                <div class="information__set toggle_module collapse" id="collapse1">
-                                    <div class="information_wrapper form--fields">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="first_name">@lang('profilesetting.firstname') <sup>*</sup></label>
-                                                    <input type="text" id="first_name" class="text_field" placeholder="@lang('profilesetting.firstname')" value="Ron">
+                                                    <label for="phone">@lang('profilesetting.phone')</label>
+                                                    <input value="{{Auth::user()->profile->phone}}" name="phone" type="text" id="phone" class="text_field" placeholder="@lang('profilesetting.phone')" >
                                                 </div>
-                                            </div>
-
+                                            </div> 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="last_name">@lang('profilesetting.lastname') <sup>*</sup></label>
-                                                    <input type="text" id="last_name" class="text_field" placeholder="@lang('profilesetting.lastname')" value="Doe">
-                                                </div>
-                                            </div>
-                                        </div><!-- end /.row -->
-
-                                        <div class="form-group">
-                                            <label for="email">@lang('profilesetting.company')<sup>*</sup></label>
-                                            <input type="text" id="email" class="text_field" placeholder="@lang('profilesetting.company')" value="AazzTech">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="email1">@lang('profilesetting.emailaddress') <sup>*</sup></label>
-                                            <input type="text" id="email1" class="text_field" placeholder="@lang('profilesetting.emailaddress')" value="contact@aazztech.com">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="country1">@lang('profilesetting.country') <sup>*</sup></label>
-                                            <div class="select-wrap select-wrap2">
-                                                <select name="country" id="country" class="text_field">
-                                                    <option value="">@lang('profilesetting.selectone')</option>
-                                                    <option value="bangladesh">Bangladesh</option>
-                                                    <option value="india">India</option>
-                                                    <option value="uruguye">Uruguye</option>
-                                                    <option value="australia">Australia</option>
-                                                    <option value="neverland">Neverland</option>
-                                                    <option value="atlantis">Atlantis</option>
-                                                </select>
-                                                <span class="lnr lnr-chevron-down"></span>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label for="address1">@lang('profilesetting.add1')</label>
-                                            <input type="text" id="address1" class="text_field" placeholder="@lang('profilesetting.add1')">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="address2">@lang('profilesetting.add2')</label>
-                                            <input type="text" id="address2" class="text_field" placeholder="@lang('profilesetting.add2')">
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="city">@lang('profilesetting.citystate')<sup>*</sup></label>
+                                                    <label for="location">@lang('profilesetting.country')</label>
                                                     <div class="select-wrap select-wrap2">
-                                                        <select name="city" id="city" class="text_field">
-                                                            <option value="">Select one</option>
-                                                            <option value="dhaka">Dhaka</option>
-                                                            <option value="sydney">Sydney</option>
-                                                            <option value="newyork">New York</option>
-                                                            <option value="london">London</option>
-                                                            <option value="mexico">New Mexico</option>
-                                                        </select>
+                                                    <select id="location" data-placeholder="Select a City/Province" name="location">
+                                                    <option value="">Select a City/Province</option>
+                                                    <option value="Phnom Penh">Phnom Penh</option>
+                                                    <option value="Preah Sihanouk">Preah Sihanouk</option>
+                                                    <option value="Kampong Cham">Kampong Cham</option>
+                                                    <option value="Siem Reap">Siem Reap</option>
+                                                    <option value="Battambang">Battambang</option>
+                                                    <option value="Kandal">Kandal</option>
+                                                    <option value="Banteay Meanchey">Banteay Meanchey</option>
+                                                    <option value="Kampong Chhnang">Kampong Chhnang</option>
+                                                    <option value="Kampong Speu">Kampong Speu</option>
+                                                    <option value="Kampong Thom">Kampong Thom</option>
+                                                    <option value="Kampot">Kampot</option>
+                                                    <option value="Kep">Kep</option>
+                                                    <option value="Koh Kong">Koh Kong</option>
+                                                    <option value="Kratie">Kratie</option>
+                                                    <option value="Mondulkiri">Mondulkiri</option>
+                                                    <option value="Oddar Meanchey">Otdar Meanchey</option>
+                                                    <option value="Pailin">Pailin</option>
+                                                    <option value="Preah Vihear">Preah Vihear</option>
+                                                    <option value="Prey Veng">Prey Veng</option>
+                                                    <option value="Pursat">Pursat</option>
+                                                    <option value="Ratanakiri">Ratanakiri</option>
+                                                    <option value="Stung Treng">Stung Treng</option>
+                                                    <option value="Svay Rieng">Svay Rieng</option>
+                                                    <option value="Takeo">Takeo</option>
+                                                    <option value="Tboung Khmum">Tboung Khmum</option>
+                                                    </select>
                                                         <span class="lnr lnr-chevron-down"></span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="zipcode">@lang('profilesetting.zipcode') <sup>*</sup></label>
-                                                    <input type="text" id="zipcode" class="text_field" placeholder="@lang('profilesetting.zipcode')">
-                                                </div>
-                                            </div>
+                                        </div>  
+                                        
+                                        <div class="form-group">
+                                            <label for="authbio">@lang('profilesetting.authbio')</label>
+                                            <textarea name="author_bio" id="authbio" class="text_field" placeholder="Short brief about yourself or your account...">{{Auth::user()->profile->bio}}</textarea>
                                         </div>
-                                    </div>
+                                    </div><!-- end /.information_wrapper -->
                                 </div><!-- end /.information__set -->
-                            </div><!-- end /.information_module -->
+                            </div><!-- end /.information_module --> 
                         </div><!-- end /.col-md-6 -->
-                        
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                             <div class="information_module">
                                 <a class="toggle_title" href="#collapse3" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse1">
-                                    <h4>@lang('profilesetting.pic') <span class="lnr lnr-chevron-down"></span></h4>
+                                    <h4>Profile Image & Cover
+                                        <span class="lnr lnr-chevron-down"></span>
+                                    </h4>
                                 </a>
 
                                 <div class="information__set profile_images toggle_module collapse" id="collapse3">
                                     <div class="information_wrapper">
-                                        <div class="profile_image_area">
-                                            <img src="{{asset('/')}}images/authplc.png" alt="Author profile area">
+                                        <div class="profile_image_area"> 
                                             <div class="img_info">
-                                                <p class="bold">@lang('profilesetting.profileimage')</p>
+                                                <p class="bold">Profile Image</p>
                                                 <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
                                             </div>
-
-                                            <label for="cover_photo" class="upload_btn">
-                                                <input type="file" id="cover_photo">
-                                                <span class="btn btn--sm btn--round" aria-hidden="true">@lang('profilesetting.button')</span>
-                                            </label>
+                                            @php
+                                                $avatar=''; 
+                                                $cover=''; 
+                                                $media = Auth::user()->profile->getMedia(); 
+                                                foreach($media as $val){  
+                                                    if(Auth::user()->profile->avatar==$val->id){
+                                                        $avatar=$val->id.'/'.$val->file_name; 
+                                                        $mediaavatarid=$val->id??''; 
+                                                    }
+                                                    if(Auth::user()->profile->cover_image==$val->id){
+                                                        $cover=$val->id.'/'.$val->file_name; 
+                                                        $mediacoverid=$val->id??''; 
+                                                    }
+                                                }   
+                                            @endphp
+                                            <div class="col-md-12">
+                                                <div class="avatar-upload" style="margin:0 auto;">
+                                                    <div class="avatar-edit">
+                                                        <input name="profile" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload"></label>
+                                                    </div>
+                                                    <div class="avatar-preview"> 
+                                                        @if(isset($avatar) && !empty($avatar))
+                                                            <div class="imagePreview" style="background-image: url('{{Storage::url($avatar)}}');"></div>
+                                                            <input name="mediaavatarid" type="hidden" value="{{$mediaavatarid}}">
+                                                        @else
+                                                            <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="prof_img_upload">
-                                            <p class="bold">@lang('profilesetting.coverimage')</p>
-                                            <img src="{{asset('/')}}images/cvrplc.jpg" alt="The great warrior of China">
-
-                                            <div  class="upload_title">
+                                            <p class="bold">Cover Image</p>
+                                            <div class="col-md-12">
+                                                <div class="avatar-upload" style="margin:0 auto; max-width:100%;">
+                                                    <div class="avatar-edit">
+                                                        <input name="cover" type='file' id="imageUpload1" accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload1"></label>
+                                                    </div>
+                                                    <div class="avatar-preview" style="width:100%;height:360px;border-radius:inherit;">
+                                                    @if(isset($cover) && !empty($cover)) 
+                                                        <div  title="Choose image" class="imagePreview" style="background-image: url('{{Storage::url($cover)}}');border-radius: inherit;">
+                                                        </div> 
+                                                        <input name="mediacoverid" type="hidden" value="{{$mediacoverid}}">
+                                                    @else
+                                                        <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="upload_title">
                                                 <p>JPG, GIF or PNG 750x370 px</p>
-                                                <label for="dp" class="upload_btn">
-                                                    <input type="file" id="dp">
-                                                    <span class="btn btn--sm btn--round" aria-hidden="true">@lang('profilesetting.button')</span>
-                                                </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- end /.information_module -->
-
-                            <div class="information_module">
-                                <a class="toggle_title" href="#collapse5" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse1">
-                                    <h4>@lang('profilesetting.socialprofile') <span class="lnr lnr-chevron-down"></span></h4>
-                                </a>
-
-                                <div class="information__set social_profile toggle_module collapse " id="collapse5">
-                                    <div class="information_wrapper">
-                                        <div class="social__single">
-                                            <div class="social_icon">
-                                                <span class="fa fa-facebook"></span>
-                                            </div>
-
-                                            <div class="link_field">
-                                                <input type="text" class="text_field" placeholder="ex: www.facebook.com/aazztech">
-                                            </div>
-                                        </div><!-- end /.social__single -->
-
-                                        <div class="social__single">
-                                            <div class="social_icon">
-                                                <span class="fa fa-twitter"></span>
-                                            </div>
-
-                                            <div class="link_field">
-                                                <input type="text" class="text_field" placeholder="ex: www.twitter.com/aazztech">
-                                            </div>
-                                        </div><!-- end /.social__single -->
-
-                                        <div class="social__single">
-                                            <div class="social_icon">
-                                                <span class="fa fa-google-plus"></span>
-                                            </div>
-
-                                            <div class="link_field">
-                                                <input type="text" class="text_field" placeholder="ex: www.google.com/aazztech">
-                                            </div>
-                                        </div><!-- end /.social__single -->
-
-                                        <div class="social__single">
-                                            <div class="social_icon">
-                                                <span class="fa fa-behance"></span>
-                                            </div>
-
-                                            <div class="link_field">
-                                                <input type="text" class="text_field" placeholder="ex: www.behance.com/aazztech">
-                                            </div>
-                                        </div><!-- end /.social__single -->
-
-                                        <div class="social__single">
-                                            <div class="social_icon">
-                                                <span class="fa fa-dribbble"></span>
-                                            </div>
-
-                                            <div class="link_field">
-                                                <input type="text" class="text_field" placeholder="ex: www.dribbble.com/aazztech">
-                                            </div>
-                                        </div><!-- end /.social__single -->
-                                    </div><!-- end /.information_wrapper -->
-                                </div><!-- end /.social_profile -->
-                            </div><!-- end /.information_module -->
-
-                            {{--<div class="information_module">
-                                <a class="toggle_title" href="#collapse4" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse1">
-                                    <h4>Email Settings <span class="lnr lnr-chevron-down"></span></h4>
-                                </a>
-
-                                <div class="information__set mail_setting toggle_module collapse" id="collapse4">
-                                    <div class="information_wrapper">
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt1" class="" name="mail_rating_reminder" checked>
-                                            <label for="opt1">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">Rating Reminders</span>
-                                                <span class="desc">Send an email reminding me to rate an item after purchase</span>
-                                            </label>
-                                        </div><!-- end /.custom-radio -->
-
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt2" class="" name="mail_update_noti" checked>
-                                            <label for="opt2">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">Item Update Notifications</span>
-                                                <span class="desc">Send an email when an item I've purchased is updated</span>
-                                            </label>
-                                        </div><!-- end /.custom_checkbox -->
-
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt3" class="" name="mail_comment_noti" checked>
-                                            <label for="opt3">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">Item Comment Notifications</span>
-                                                <span class="desc">Send me an email when someone comments on one of my items</span>
-                                            </label>
-                                        </div><!-- end /.custom_checkbox -->
-
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt4" class="" name="mail_item_review_noti" checked>
-                                            <label for="opt4">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">Item Review Notifications</span>
-                                                <span class="desc">Send me an email when my items are approved or rejected</span>
-                                            </label>
-                                        </div><!-- end /.custom_checkbox -->
-
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt5" class="" name="mail_review_noti" checked>
-                                            <label for="opt5">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">Buyer Review Notifications</span>
-                                                <span class="desc">Send me an email when someone leaves a review with their rating</span>
-                                            </label>
-                                        </div><!-- end /.custom_checkbox -->
-
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt6" class="" name="mail_support_noti" checked>
-                                            <label for="opt6">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">Support Notifications</span>
-                                                <span class="desc">Send me emails showing my soon to expire support entitlements</span>
-                                            </label>
-                                        </div><!-- end /.custom_checkbox -->
-
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt7" class="" name="mail_weekly">
-                                            <label for="opt7">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">Weekly Summary Emails</span>
-                                                <span class="desc">Send me emails showing my soon to expire support entitlements</span>
-                                            </label>
-                                        </div><!-- end /.custom_checkbox -->
-
-                                        <div class="custom_checkbox">
-                                            <input type="checkbox" id="opt8" class="" name="mail_newsletter">
-                                            <label for="opt8">
-                                                <span class="shadow_checkbox"></span>
-                                                <span class="radio_title">MartPlace Newsletter</span>
-                                                <span class="desc">Get update about latest news, update and more.</span>
-                                            </label>
-                                        </div><!-- end /.custom_checkbox -->
-                                    </div><!-- end /.information_wrapper -->
-                                </div><!-- end /.information_module -->
-                            </div>--}}
-                            <!-- end /.information_module -->
-                        </div><!-- end /.col-md-6 -->
-                                        
+                            </div>
+                            <!-- end /.information_module --> 
+                        </div>
+                        <!-- end /.col-md-6 -->
+                        
                         <div class="col-md-12">
                             <div class="dashboard_setting_btn">
                                 <button type="submit" class="btn btn--round btn--md">@lang('profilesetting.savechange')</button>

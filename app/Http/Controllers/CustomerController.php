@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductsAds as Product;
-use App\Models\CategoriesAds as Category ;
+use App\Models\CategoriesAds as Category;
+use App\Models\User;
+use App\Models\Profile;
 use PDF;
 use App;
 use Auth;
 use Validator;
-
+use Illuminate\Support\Facades\Hash; 
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 class CustomerController extends Controller
 {
     /**
@@ -27,9 +31,17 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function myStore()
+    public function myStore($id)
     {
 
+        $user= User::findOrFail($id);
+        $post= Product::where('user_id',$id)->paginate(20);
+        if($user){
+            $data['user']=$user;
+        }
+        if($post){
+            $data['product']=$post;
+        }
         $data['breadcrub']='store';
         return view('customer.store',compact('data'));
     }
@@ -94,8 +106,92 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    { 
+        $allowedfileExtension=['jpg','jpeg','png'];
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
+            'email' => 'required',
+        ]); 
+        if ($validator->fails()) {
+            return redirect('market/mysetting')
+                ->withErrors($validator)
+                ->withInput();
+        } 
+        // echo $request->name;exit();
+        $user = User::findOrFail($id);
+        if($user){  
+            $profile = Profile::where('user_id',$user->id)->first(); 
+            // check if have new input file image to update
+            if($request->hasFile('profile')){
+                $file = $request->file('profile'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){ 
+                    if(null !== $request->get('mediaavatarid') && !empty($request->get('mediaavatarid'))){ 
+                        $profile->deleteMedia((int)$request->get('mediaavatarid'));
+                    } 
+                    $avatar = $profile
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
+                        ->toMediaCollection(); 
+                        $cropPath = storage_path('app/public/'.$avatar->id.'/avatar.png'); 
+                        $cropPath100 = storage_path('app/public/'.$avatar->id.'/avatar100.png'); 
+                        Image::load($avatar->getPath())
+                        ->fit(Manipulations::FIT_CROP, 50, 50)
+                        ->format(Manipulations::FORMAT_PNG)
+                        ->save($cropPath);
+                        Image::load($avatar->getPath())
+                        ->fit(Manipulations::FIT_CROP, 100, 100)
+                        ->format(Manipulations::FORMAT_PNG)
+                        ->save($cropPath100);
+                    // $this->mediaconvert($media); 
+                } 
+            }
+            if($request->hasFile('cover')){
+                $file = $request->file('cover'); 
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $check=in_array($extension,$allowedfileExtension);
+                if($check){ 
+                    if(null !== $request->get('mediacoverid') && !empty($request->get('mediacoverid'))){ 
+                        $profile->deleteMedia((int)$request->get('mediacoverid'));
+                    } 
+                    $cover = $profile
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
+                        ->toMediaCollection();
+                        $cropPath = storage_path('app/public/'.$cover->id.'/cover.png'); 
+                        Image::load($cover->getPath())
+                        ->fit(Manipulations::FIT_CROP, 750, 370)
+                        ->format(Manipulations::FORMAT_PNG)
+                        ->save($cropPath);
+                    // $this->mediaconvert($media); 
+                } 
+            }
+            $user->name = $request->name??'';
+            $user->slug = $request->name??'';
+            if( ! $request->password == ''){
+                $user->password=$request->password;
+            }
+            $user->profile()->update([
+                'phone' => $request->phone,
+                'location' => $request->location,
+                'bio' => $request->author_bio,
+                'avatar'=>isset($avatar->id) && !empty($avatar->id)?$avatar->id:$profile->avatar,
+                'cover_image'=>isset($cover->id) && !empty($cover->id)?$cover->id:$profile->cover_image,
+            ]);
+            $user->save();  
+            if($user){
+                return redirect('market/mysetting')->with('success', 'Record has been update!'); 
+            }
+            return redirect('market/mysetting')->with('error', 'Problem with update profile!');
+        }
+        return redirect('market/mysetting')->with('error', 'Problem with update profile!');
     }
 
     /**
@@ -106,7 +202,21 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+    public function myDeletePro($id){
+        $product = Product::findOrFail($id); 
+        $media = $product->getMedia(); 
+        if($product){
+            if(count($media) > 0){
+                foreach($media as $val){
+                    $product->deleteMedia((int)$val->id);
+                }
+            }
+            $product->delete();
+            return redirect('market/mymanageitem')->with('success', 'Record has been deleted');
+        }
+        return redirect('market/mymanageitem')->with('error', 'Problem with delete record!');
     }
     /**
      * User's profile
@@ -152,6 +262,12 @@ class CustomerController extends Controller
         $data['breadcrub']='sale manangement';
         return view('customer.sale-management',compact('data'));
     }
+    function getParentsCategory($id=''){
+        if(isset($id) && $id!=''){
+            return Category::find($id);
+        }
+        return Category::where('parent_id',null)->get();
+    }
     /**
      * User's card
      *
@@ -162,7 +278,7 @@ class CustomerController extends Controller
     {
         
         
-        $data['category'] = Category::where('parent_id',null)->get(); 
+        $data['category'] = $this->getParentsCategory();
         $data['breadcrub']='upload item';
 
         if($request->isMethod('post')){
@@ -174,7 +290,7 @@ class CustomerController extends Controller
                 return redirect('market/myitemupload')
                     ->withErrors($validator)
                     ->withInput();
-            }
+            } 
             $name = $request->name;
             $price = $request->price;
             $discount = $request->discount;
@@ -198,22 +314,30 @@ class CustomerController extends Controller
                         $product->translateOrNew($locale)->description = $description;
                     }
                     $product->save();
-                    $newsItem = Product::find($product->id);
+                    // save product to relation table between product and cateogry
+                    $newsItem = Product::find($product->id); 
+                    $newsItem->categories_ads()->attach($request->lastchildid);
+                    // end
+                    
                     if($request->hasFile('photos'))
                     {
                         $allowedfileExtension=['jpg','jpeg','png'];
                         $files = $request->file('photos'); 
                         foreach($files as $file){
-                            // $filename = $file->getClientOriginalName();
+                            $filename = $file->getClientOriginalName();
                             $extension = $file->getClientOriginalExtension();
                             $check=in_array($extension,$allowedfileExtension);
                             if($check){
                                 // if($check){
                                 //     $imgappend[] = $file->store('public'); 
                                 // }
-                                $newsItem
+                                $media = $newsItem
                                 ->addMedia($file)
-                                ->toMediaCollection();
+                                ->sanitizingFileName(function($filename) {
+                                    return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                                 })
+                                ->toMediaCollection(); 
+                                $this->mediaconvert($media);
                             }
                         }
                     }
@@ -233,7 +357,7 @@ class CustomerController extends Controller
      */
     public function myManageItem()
     {
-        $data['products'] = Product::where('user_id', Auth::user()->id)->get();
+        $data['products'] = Product::where('user_id', Auth::user()->id)->paginate(20);
         $data['breadcrub']='manage items';
         return view('customer.manage-item',compact('data'));
     }
@@ -245,9 +369,17 @@ class CustomerController extends Controller
      */
     public function myEditItem(Request $request, $id)
     {
+        $data['category'] = $this->getParentsCategory();  
         if($request->isMethod('post')){
-            $product = Product::find($id);
+            $product = Product::where('user_id',Auth::id())->find($id);
             if($product){  
+                // check last child have try to delete and new insert
+                if(isset($request->lastchildid) && !empty($request->lastchildid)){ 
+                    // delete old category
+                    $product->categories_ads()->detach($product->categories_ads[0]->id);
+                    // add new category 
+                    $product->categories_ads()->attach($request->lastchildid);
+                } 
             $allowedfileExtension=['jpg','jpeg','png'];
             // check if have new input file image to update
             if($request->hasFile('photos')){
@@ -262,9 +394,13 @@ class CustomerController extends Controller
                         // $imgappend[] = $file->store('public');
                         $product->deleteMedia((int)$request->get('mediaid'));
                     } 
-                    $product
-                        ->addMedia($file)
+                    $media = $product
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
                         ->toMediaCollection();
+                    $this->mediaconvert($media); 
                 } 
             }
             if($request->hasFile('photos1')){
@@ -277,9 +413,13 @@ class CustomerController extends Controller
                         // $imgappend[] = $file->store('public');
                         $product->deleteMedia((int)$request->get('mediaid1'));
                     } 
-                    $product
+                    $media = $product
                         ->addMedia($file)
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
                         ->toMediaCollection(); 
+                    $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos2')){
@@ -294,9 +434,13 @@ class CustomerController extends Controller
                         $product->deleteMedia((int)$request->get('mediaid2')); 
                     } 
                    
-                    $product
+                    $media = $product
                         ->addMedia($file)
-                        ->toMediaCollection(); 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
+                        ->toMediaCollection();
+                    $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos3')){
@@ -308,18 +452,84 @@ class CustomerController extends Controller
                     if(null !== $request->get('mediaid3') && !empty($request->get('mediaid3'))){
                         $product->deleteMedia((int)$request->get('mediaid3')); 
                     } 
-                    $product    
-                        ->addMedia($file)
+                    $media = $product    
+                        ->addMedia($file) 
+                        ->sanitizingFileName(function($filename) {
+                            return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
+                        })
                         ->toMediaCollection();
+                    $this->mediaconvert($media);
                 } 
             }
                 return redirect('market/mymanageitem')->with('success', 'Record has been updated!');
             }
         }
         $data['breadcrub']='update item';
-        $data['product']=Product::where('user_id',Auth::id())->find($id);
+        $data['product']=Product::where('user_id',Auth::id())->find($id); 
+        $currentCat=[];
+        $data['clid']='';
+        // check if have category in relation
+        if(count($data['product']->categories_ads) > 0){
+            $data['clid']=$data['product']->categories_ads[0]->id;
+            $node = Category::find($data['product']->categories_ads[0]->id);
+            // print_r($data['product']->categories_ads[0]->id);exit();
+            $lavel=$node->getAncestorsAndSelf();
+            foreach($lavel as $p){
+                $currentCat[]=$p->translate('en')->name;
+            }
+        }
+        $data['currentcat']=$currentCat;
+        // $categories = Category::all()->toHierarchy();
+        // foreach($categories as $node){
+        //     echo $this->renderNode($node);
+        // }
+        // $category = Category::find(26);
+        // // get the product id's
+        // $products = Product::where('id',28)->get();
+
+        // // sync the products inside the categoy with those selected previously
+        // $c = $category->products_ads()->sync($products);
+        // print_r($c);
+        // // print_r($categories);
         return view('customer.edit-item',compact('data'));
     }
+    public function mediaconvert($media){
+        $getThub = $media->getPath('thumb');  
+        $file_name = $media->file_name; 
+        // $name = $media->name; 
+        $id = $media->id; 
+        // // get crop image
+        $cropPath = storage_path('app/public/'.$id.'/conversions/'.$file_name);
+        $cropPathFit = storage_path('app/public/'.$id.'/conversions/crop.png');
+        Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);
+        Image::load($getThub)
+            ->crop(Manipulations::CROP_TOP, 750, 430)
+            ->format(Manipulations::FORMAT_PNG)
+            ->background('ffffff')->save($cropPathFit);
+    }
+    public function renderNode($node) {
+
+        $html = '<ul>';
+      
+        if( $node->isLeaf() ) {
+          $html .= '<li>' . $node->name . '</li>';
+        } else {
+          $html .= '<li>' . $node->name;
+      
+          $html .= '<ul>';
+              
+          foreach($node->children as $child)
+            $html .= $this->renderNode($child);
+      
+          $html .= '</ul>';
+      
+          $html .= '</li>';
+        }
+      
+        $html .= '</ul>';
+      
+        return $html;
+      }
     /**
      * User's card
      *
