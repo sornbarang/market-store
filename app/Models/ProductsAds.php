@@ -11,6 +11,7 @@ use Spatie\MediaLibrary\Models\Media;
 use App\Models\CategoriesAds as Category ;
 use Ghanem\Reportable\Contracts\Reportable;
 use Ghanem\Reportable\Traits\Reportable as ReportableTrait;
+use Nicolaslopezj\Searchable\SearchableTrait;
 class ProductsAds extends Model implements HasMedia,Reportable
 {
     use Translatable;
@@ -21,6 +22,8 @@ class ProductsAds extends Model implements HasMedia,Reportable
 
     use ReportableTrait;
     
+    use SearchableTrait;
+
     protected $table = 'products_ads';
     public $translatedAttributes = ['name', 'description', 'slug'];
     protected $fillable = ['name','price','discount','description','active','user_id'];
@@ -34,6 +37,8 @@ class ProductsAds extends Model implements HasMedia,Reportable
     
         return $query->with('categories_ads')
           ->join('products_ads_categories_ads', 'products_ads_categories_ads.products_ads_id', '=', 'products_ads.id')
+          ->join('products_ads_translations', 'products_ads_translations.products_ads_id', '=', 'products_ads.id')
+          ->where('products_ads_translations.locale',app()->getLocale())
           ->whereIn('products_ads_categories_ads.categories_ads_id', $categoryIds);
     }
     public function registerMediaConversions(Media $media = null)
@@ -47,4 +52,33 @@ class ProductsAds extends Model implements HasMedia,Reportable
     {
         return $this->belongsTo('App\Models\User');
     }
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'users.name' => 10,
+            'users.first_name' => 9,
+            'users.last_name' => 8,
+            'profiles.bio' => 2,
+            'users.email' => 5,
+            'products_ads.price' => 2,
+            'products_ads_translations.name' => 2,
+            'products_ads_translations.description' => 2
+        ],
+        'joins' => [ 
+            'users' => ['products_ads.user_id','users.id'],
+            'profiles' => ['users.id','profiles.user_id'],
+            'products_ads_translations' => ['products_ads.id','products_ads_translations.products_ads_id'],
+        ],
+    ];
 }

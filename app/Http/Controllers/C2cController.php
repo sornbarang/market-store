@@ -80,14 +80,15 @@ class C2cController extends Controller
         $data['countcatpro']=$catarr;
         // $category = Category::find($id); 
         // get proudct if category have product
-        $products = Product::categorized($node)->paginate(19);
-        
+        $products = Product::categorized($node)->orderBy('products_ads.id', 'desc')->paginate(20);
+        // return $products;
         if(count($products) > 0){
             $data['product']=$products;
             return view('c2c.page.product',compact('data'));
         }
         return view('c2c.page.index',compact('data'));
     }
+    
     /**
      * Show the form for creating a new resource.
      *

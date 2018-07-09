@@ -125,31 +125,31 @@
                                                     <div class="select-wrap select-wrap2">
                                                     <select id="location" data-placeholder="Select a City/Province" name="location">
                                                     <option value="">Select a City/Province</option>
-                                                    <option value="Phnom Penh">Phnom Penh</option>
-                                                    <option value="Preah Sihanouk">Preah Sihanouk</option>
-                                                    <option value="Kampong Cham">Kampong Cham</option>
-                                                    <option value="Siem Reap">Siem Reap</option>
-                                                    <option value="Battambang">Battambang</option>
-                                                    <option value="Kandal">Kandal</option>
-                                                    <option value="Banteay Meanchey">Banteay Meanchey</option>
-                                                    <option value="Kampong Chhnang">Kampong Chhnang</option>
-                                                    <option value="Kampong Speu">Kampong Speu</option>
-                                                    <option value="Kampong Thom">Kampong Thom</option>
-                                                    <option value="Kampot">Kampot</option>
-                                                    <option value="Kep">Kep</option>
-                                                    <option value="Koh Kong">Koh Kong</option>
-                                                    <option value="Kratie">Kratie</option>
-                                                    <option value="Mondulkiri">Mondulkiri</option>
-                                                    <option value="Oddar Meanchey">Otdar Meanchey</option>
-                                                    <option value="Pailin">Pailin</option>
-                                                    <option value="Preah Vihear">Preah Vihear</option>
-                                                    <option value="Prey Veng">Prey Veng</option>
-                                                    <option value="Pursat">Pursat</option>
-                                                    <option value="Ratanakiri">Ratanakiri</option>
-                                                    <option value="Stung Treng">Stung Treng</option>
-                                                    <option value="Svay Rieng">Svay Rieng</option>
-                                                    <option value="Takeo">Takeo</option>
-                                                    <option value="Tboung Khmum">Tboung Khmum</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='phnom penh'?'selected':''}} value="Phnom Penh">Phnom Penh</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='preah sihanouk'?'selected':''}} value="Preah Sihanouk">Preah Sihanouk</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='preah sihanouk'?'selected':''}} value="Kampong Cham">Kampong Cham</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='siem reap'?'selected':''}} value="Siem Reap">Siem Reap</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='battambang'?'selected':''}} value="Battambang">Battambang</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kandal'?'selected':''}} value="Kandal">Kandal</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='banteay meanchey'?'selected':''}} value="Banteay Meanchey">Banteay Meanchey</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampong chhnang'?'selected':''}} value="Kampong Chhnang">Kampong Chhnang</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampong speu'?'selected':''}} value="Kampong Speu">Kampong Speu</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampong thom'?'selected':''}} value="Kampong Thom">Kampong Thom</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampot'?'selected':''}} value="Kampot">Kampot</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kep'?'selected':''}} value="Kep">Kep</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='koh kong'?'selected':''}} value="Koh Kong">Koh Kong</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kratie'?'selected':''}} value="Kratie">Kratie</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='mondulkiri'?'selected':''}} value="Mondulkiri">Mondulkiri</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='oddar meanchey'?'selected':''}} value="Oddar Meanchey">Otdar Meanchey</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='pailin'?'selected':''}} value="Pailin">Pailin</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='preah vihear'?'selected':''}} value="Preah Vihear">Preah Vihear</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='prey veng'?'selected':''}} value="Prey Veng">Prey Veng</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='pursat'?'selected':''}} value="Pursat">Pursat</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='ratanakiri'?'selected':''}} value="Ratanakiri">Ratanakiri</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='stung treng'?'selected':''}} value="Stung Treng">Stung Treng</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='svay rieng'?'selected':''}} value="Svay Rieng">Svay Rieng</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='takeo'?'selected':''}} value="Takeo">Takeo</option>
+                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='tboung khmum'?'selected':''}} value="Tboung Khmum">Tboung Khmum</option>
                                                     </select>
                                                         <span class="lnr lnr-chevron-down"></span>
                                                     </div>

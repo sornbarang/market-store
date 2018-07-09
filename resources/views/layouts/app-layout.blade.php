@@ -37,7 +37,9 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon/favicon-96x96.png') }}">
 </head>
 <body class="home3">
-
+@php 
+    $avatar='';
+@endphp
 <!--================================
         START MENU AREA
     =================================-->
@@ -176,7 +178,7 @@
                             </ul>
                         </div>
                         <!--start .author__notification_area -->
-                        @if (Route::has('login'))
+                        @if (Route::has('login')) 
                             @auth
                                 @php 
                                     $media = Auth::user()->profile->getMedia(); 
@@ -186,6 +188,7 @@
                                         } 
                                     }   
                                 @endphp
+                            @else
                             @endauth 
                         @endif 
                         <!--start .author-author__info-->

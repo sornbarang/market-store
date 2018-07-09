@@ -4,52 +4,7 @@
     END FEATURED PRODUCT AREA
 =================================-->
 
-<!--================================
-      START SEARCH AREA
-  =================================-->
-<section class="search-wrapper">
-    <div class="search-area2 bgimage">
-        <div class="bg_image_holder">
-            <img src="{{asset('/')}}images/search.jpg" alt="">
-        </div>
-        <div class="container content_above">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="search">
-                        {{--<div class="search__title">
-                            <h3>
-                                <span>35,270</span> website templates from our creative community</h3>
-                        </div>--}}
-                        <div class="search__field">
-                            <form action="#">
-                                <div class="field-wrapper">
-                                    <input class="relative-field rounded" type="text" placeholder="@lang('frontlabel.searchpro')">
-                                    <button class="btn btn--round" type="submit">@lang('frontlabel.search')</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="breadcrumb">
-                            <ul>
-                                <li>
-                                    <a href="{{url('/'.app()->getLocale())}}">@lang('menu.home')</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">@lang('frontlabel.allpro')</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end /.row -->
-        </div>
-        <!-- end /.container -->
-    </div>
-    <!-- end /.search-area2 -->
-</section>
-<!--================================
-    END SEARCH AREA
-=================================-->
+@include('elements.search')
 
 <!--================================
     START PRODUCTS AREA

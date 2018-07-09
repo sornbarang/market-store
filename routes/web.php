@@ -42,6 +42,7 @@ function()
         Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
         Route::get('categories', ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
         Route::get('getdynamiccategory/{id}', ['as' => 'market.dynamiccat', 'uses' =>'C2cController@getDynamicCategory']);
+        Route::any('search', ['as' => 'market.search', 'uses' =>'SearchController@filter']); 
         Route::get('products', ['as' => 'market.categories', 'uses' => 'Market\ProductController@getproduct']);
         Route::get('productdetail/{id}', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);
         Route::post('reportmarket', ['as' => 'market.reportmarket', 'uses' => 'Market\ProductController@makeReport']); 
