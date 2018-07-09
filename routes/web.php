@@ -75,6 +75,9 @@ function()
         });  
     });
 
+    //Route::get('contact', 'PageController@contact')->name('contact');
+
+
     Route::get('contact', 'PageController@contact')->name('contact');
     Route::get('termcondiction', 'PageController@termcondiction')->name('termcondiction');
     // OAuth Routes
@@ -199,6 +202,8 @@ function()
             ]
         ]);
     });
+
+
 
 });
 
