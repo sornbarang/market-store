@@ -372,13 +372,13 @@
         </div>
 
         <!-- start .row -->
-        <div class="row">
+        {{--<div class="row">
             <div class="col-md-12">
                 <div class="more-product">
                     <a href="all-products.html" class="btn btn--lg btn--round">@lang('frontlabel.allpro')</a>
                 </div>
             </div><!-- end ./col-md-12 -->
-        </div><!-- end /.row -->
+        </div>--}}<!-- end /.row -->
     </div><!-- end /.container -->
 </section>
 <!--================================
