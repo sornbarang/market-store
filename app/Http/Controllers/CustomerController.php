@@ -357,7 +357,7 @@ class CustomerController extends Controller
      */
     public function myManageItem()
     {
-        $data['products'] = Product::where('user_id', Auth::user()->id)->paginate(20);
+        $data['products'] = Product::where('user_id', Auth::user()->id)->latest('products_ads.id')->paginate(20);
         $data['breadcrub']='manage items';
         return view('customer.manage-item',compact('data'));
     }
@@ -371,8 +371,31 @@ class CustomerController extends Controller
     {
         $data['category'] = $this->getParentsCategory();  
         if($request->isMethod('post')){
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|max:100',
+                // 'body' => 'required',
+            ]); 
+            if ($validator->fails()) {
+                return redirect('market/myEditItem/'.$id)
+                    ->withErrors($validator)
+                    ->withInput();
+            } 
             $product = Product::where('user_id',Auth::id())->find($id);
-            if($product){  
+            if($product){   
+                $name = $request->name;
+                $price = $request->price;
+                $discount = $request->discount;
+                $active = (int)$request->active ? 1 : 0;
+                $description= $request->sumernotehidden;
+                // $imgappend=[];
+                // dd($imgappend);
+                // print_r(Auth::user()->id);exit();
+                $product->name = $name;
+                $product->price = $price;
+                $product->discount = $discount;
+                $product->active = $active;
+                $product->description=$description;
+                $product->save();
                 // check last child have try to delete and new insert
                 if(isset($request->lastchildid) && !empty($request->lastchildid)){ 
                     // delete old category
@@ -461,6 +484,7 @@ class CustomerController extends Controller
                     $this->mediaconvert($media);
                 } 
             }
+            
                 return redirect('market/mymanageitem')->with('success', 'Record has been updated!');
             }
         }

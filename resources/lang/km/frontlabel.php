@@ -31,6 +31,7 @@ return [
     'favourites'=>'ចូលចិត្ត',      
     'comments'=>'យោបល់',      
     'views'=>'មើល',
-    'shareitem'=>'ចែករំលែក'
+    'shareitem'=>'ចែករំលែក',
+    'norecord'=>'ពំុមានផលិតផល នៃ'
 
 ];

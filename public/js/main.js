@@ -219,7 +219,7 @@
     var $featuredProd = $('.prod-slider1');
     $featuredProd.owlCarousel({
         items: 1,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 1000
 
     });

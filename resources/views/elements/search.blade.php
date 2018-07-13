@@ -12,8 +12,7 @@
                     <div class="search">
                         {{--<div class="search__title"><h3><span>35,270</span> website templates from our creative community</h3></div>--}}
                         <div class="search__field">
-                            <form action="{{route('market.search')}}" method="post">
-                                @csrf 
+                            <form action="{{route('market.search')}}" method="get"> 
                                 <div class="field-wrapper">
                                     <input value="{{$data['strsearch']??''}}" name="searchstr" class="relative-field rounded" type="text" placeholder="@lang('frontlabel.searchpro')">
                                     <button class="btn btn--round" type="submit">@lang('frontlabel.search')</button>

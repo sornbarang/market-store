@@ -15951,6 +15951,7 @@ form#frmUploadFront .statement_info_card .icon,form#frmUpdateFront .statement_in
 }
 form#frmUploadFront .statement_info_card,form#frmUpdateFront .statement_info_card{
   min-height:60px !important;
+  padding:15px;
 }
 form#frmUploadFront .modules__content div.statement_info_card,form#frmUpdateFront .modules__content div.statement_info_card{
   background: #f4f5f8;

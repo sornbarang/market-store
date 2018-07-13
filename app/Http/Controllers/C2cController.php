@@ -85,7 +85,7 @@ class C2cController extends Controller
         }
         return Category::roots()->get();
     }
-    public function getDynamicCategory($id){
+    public function getDynamicCategory($id,Request $request){
         
         $allcats = Category::all(); 
         $node = Category::find($id); 
@@ -103,21 +103,39 @@ class C2cController extends Controller
             }
         } 
         $data['cnode'] = $curentnode;
-        // $catarr=[];
-        // foreach($allcats as $cat){ 
-        //     $pros = Product::categorized($cat)->get();
-        //     if(count($pros) > 0){ 
-        //         $catarr[$cat->name]=['id'=>$cat->id,'name'=>$cat->name,'count'=>count($pros)];
-        //     }
-        // } 
-        // // return $catarr;
-        // $data['category']=$catarr;
+        $catarr=[];
+        foreach($allcats as $cat){ 
+            $pros = Product::categorized($cat)->get();
+            if(count($pros) > 0){ 
+                $catarr[$cat->name]=['id'=>$cat->id,'name'=>$cat->name,'count'=>count($pros)];
+            }
+        } 
+        // return $catarr;
+        $data['countcatpro']=$catarr;
         // $category = Category::find($id); 
         // get proudct if category have product
-        $products = Product::categorized($node)->orderBy('products_ads.id', 'desc')->paginate(20);
-        // return $products;
-        if(count($products) > 0){
-            $data['product']=$products;
+        // check if last child
+        if($node->isLeaf()){
+            $order='asc';
+            $record=25;
+            if(isset($request->price) && $request->price=='high'){
+                $order='desc';
+            }
+            if(isset($request->record) && !empty($request->record)){
+                if($request->record==12){
+                    $record=12;
+                }else if(isset($request->record) && $request->record==15){
+                    $record=15;
+                }
+            }
+            $data['product']=[];
+            $data['order']=$order;
+            $data['record']=$record;
+            $products = Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
+            // return $products;
+            if(count($products) > 0){
+                $data['product']=$products;
+            }
             return view('c2c.page.product',compact('data'));
         }
         return view('c2c.page.index',compact('data'));

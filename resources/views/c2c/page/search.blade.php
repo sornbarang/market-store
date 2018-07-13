@@ -94,34 +94,46 @@
 
                         <div class="filter__option filter--select">
                             <div class="select-wrap">
-                                <select name="price">
-                                    <option value="low">Price : Low to High</option>
-                                    <option value="high">Price : High to low</option>
-                                </select>
-                                <span class="lnr lnr-chevron-down"></span>
+                                <!-- Request::url() get current url -->
+                                <!-- Request::query('searchstr') is get param  -->
+                                <form action="{{ Request::url() }}" method="get">
+                                    <input type="hidden" value="{{ Request::query('record') ?? 25 }}" name="record">
+                                    <input type="hidden" value="{{ Request::query('searchstr') ?? '' }}" name="searchstr">
+                                    <select name="price"> 
+                                        <option value="low" {{$data['order']=='asc'?'selected':''}}>Price : Low to High</option>
+                                        <option value="high" {{$data['order']=='desc'?'selected':''}}>Price : High to low</option>
+                                    </select>
+                                    <span class="lnr lnr-chevron-down"></span>
+                                </form>
                             </div>
                         </div>
                         <!-- end /.filter__option -->
 
                         <div class="filter__option filter--select">
                             <div class="select-wrap">
-                                <select name="price">
-                                    <option value="12">12 Items per page</option>
-                                    <option value="15">15 Items per page</option>
-                                    <option value="25">25 Items per page</option>
-                                </select>
-                                <span class="lnr lnr-chevron-down"></span>
+                                <!-- Request::url() get current url -->
+                                <form action="{{ Request::url() }}">
+                                <!-- Request::query('searchstr') is get param  -->
+                                <input type="hidden" value="{{ Request::query('searchstr') ?? '' }}" name="searchstr">
+                                <input type="hidden" value="{{ Request::query('price') ?? 'low' }}" name="price">
+                                    <select name="record">
+                                        <option value="12" {{$data['record']==12?'selected':''}}>12 Items per page</option>
+                                        <option value="15" {{$data['record']==15?'selected':''}}>15 Items per page</option>
+                                        <option value="25" {{$data['record']==25?'selected':''}}>25 Items per page</option>
+                                    </select>
+                                    <span class="lnr lnr-chevron-down"></span>
+                                </form>
                             </div>
                         </div>
                         <!-- end /.filter__option -->
 
                         <div class="filter__option filter--layout">
-                            <a href="all-products.html">
+                            <a href="javascript:void(0)">
                                 <div class="svg-icon">
                                     <img class="svg" src="{{asset('/')}}images/svg/grid.svg" alt="it's just a layout control folks!">
                                 </div>
                             </a>
-                            <a href="all-products-list.html">
+                            <a href="javascript:void(0)">
                                 <div class="svg-icon">
                                     <img class="svg" src="{{asset('/')}}images/svg/list.svg" alt="it's just a layout control folks!">
                                 </div>

@@ -112,7 +112,9 @@
                             </div>
                         <div class="author__notification_area">
                             <ul>
-                                <li class="has_dropdown">
+                            <li class="has_dropdown">
+                                    &nbsp;
+                                    {{--
                                     <div class="icon_wrap">
                                         <span class="lnr lnr-cart"></span>
                                         <span class="notification_count purch">2</span>
@@ -174,6 +176,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    --}}
                                 </li>
                             </ul>
                         </div>
@@ -221,12 +224,13 @@
                                                         <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('market.customer.index')}}">
-                                                        <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
-                                                </li>
-                                                <li>
                                                     <a href="{{route('market.mysetting')}}">
                                                         <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
+                                                </li>
+                                                {{--
+                                                <li>
+                                                    <a href="{{route('market.customer.index')}}">
+                                                        <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{route('market.mycart')}}">
@@ -240,6 +244,7 @@
                                                     <a href="{{route('market.mysale')}}">
                                                         <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
                                                 </li>
+                                                --}}
                                                 <li>
                                                     <a href="{{route('market.myitemupload')}}">
                                                         <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
@@ -331,7 +336,7 @@
                                         @endauth
                                     @endif    
                                 
-                                    <p class="ammount">$20.45</p>
+                                    {{--<p class="ammount">$20.45</p>--}}
                                 </div>
                             </div>
                             <!--end /.author-author__info-->
@@ -355,7 +360,7 @@
                                             </div>
                                         </a>
                                     </li>--}}
-
+                                    {{--
                                     <li>
                                         <a href="cart.html">
                                             <div class="icon_wrap">
@@ -363,7 +368,7 @@
                                                 <span class="notification_count purch">2</span>
                                             </div>
                                         </a>
-                                    </li>
+                                    </li>--}}
                                 </ul>
                             </div>
                             <!--start .author__notification_area -->
@@ -372,37 +377,39 @@
                                     <div class="dropdown dropdown--author">
                                         <ul>
                                         <li>
-                                                    <a href="{{route('market.myprofile')}}">
-                                                        <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('market.customer.index')}}">
-                                                        <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('market.mysetting')}}">
-                                                        <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('market.mycart')}}">
-                                                        <span class="lnr lnr-cart"></span>@lang('profile.purchase')</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('market.myfavorite')}}">
-                                                        <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('market.mysale')}}">
-                                                        <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('market.myitemupload')}}">
-                                                        <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('market.mymanageitem')}}">
-                                                        <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
-                                                </li> 
+                                            <a href="{{route('market.myprofile')}}">
+                                                <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('market.mysetting')}}">
+                                                    <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
+                                            </li>
+                                            {{--
+                                            <li>
+                                                <a href="{{route('market.customer.index')}}">
+                                                    <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('market.mycart')}}">
+                                                    <span class="lnr lnr-cart"></span>@lang('profile.purchase')</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('market.myfavorite')}}">
+                                                    <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('market.mysale')}}">
+                                                    <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
+                                            </li>
+                                            --}}
+                                            <li>
+                                                <a href="{{route('market.myitemupload')}}">
+                                                    <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('market.mymanageitem')}}">
+                                                    <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
+                                            </li> 
                                             <li>
                                                 @if (Route::has('login'))
                                                     @auth
@@ -452,6 +459,7 @@
                 <div class="col-md-12">
                     <div class="navbar-header">
                         <!-- start mainmenu__search -->
+                        {{--
                         <div class="mainmenu__search">
                             <form action="#">
                                 <div class="searc-wrap">
@@ -462,6 +470,7 @@
                                 </div>
                             </form>
                         </div>
+                        --}}
                         <!-- start mainmenu__search -->
                     </div>
 
@@ -475,7 +484,7 @@
                             <ul class="navbar-nav">
                                 <li class="has_dropdown">
                                     <a href="{{route('market')}}">@lang('menu.home')</a>
-                                    <div class="dropdown dropdown--menu">
+                                    {{--<div class="dropdown dropdown--menu">
                                         <ul>
                                             <li>
                                                 <a href="index.html">Home Multi Vendor</a>
@@ -487,7 +496,7 @@
                                                 <a href="index3.html">Home Three Product</a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>--}}
                                 </li>
                                 <!-- <li>
                                     <a href="#">{{trans('menu.policy')}}</a>
@@ -660,7 +669,7 @@
 <script src="{{ asset('js/vendor/waypoints.min.js') }}"></script>
 <script src="{{ asset('js/dashboard.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script>
+<!-- <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script> -->
 <script src="{{ asset('js/map.js') }}"></script>
 <script> 
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
@@ -750,7 +759,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $('.upload_modules.upload_modules_blog >div.row > div > div > div > input').each(function( index ,elm) {
             imguploads.push('#'+elm.id);
         }); 
-        console.log(imguploads.join(','));
+        // console.log(imguploads.join(','));
         function readURL(input) {
             if (input.files && input.files[0]) { 
                 var reader = new FileReader();
@@ -903,6 +912,25 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             }else{
                 $(this).prev().val('1')
             }
+        });
+        $( document ).on( "change", ".filter__option.filter--select > .select-wrap > form > select[name='price'],.filter__option.filter--select > .select-wrap > form > select[name='record']", function(e){
+            $(this).closest('form').trigger('submit');
+            // $.ajax({
+            //     url: "{{route('market.reportmarket')}}",
+            //     type: 'POST',
+            //     data:{orderby:$(this).val()},
+            //     headers: {
+            //             'X-CSRF-Token':CSRF_TOKEN,
+            //     },
+            //     success: function( msg ) {
+            //         if(msg.status==200){
+            //             $('form#frmReport button.modal_close').click();
+            //         }
+            //     },
+            //     error: function( data ) {
+            //         console.log(data);
+            //     }
+            // });
         });
     });
     

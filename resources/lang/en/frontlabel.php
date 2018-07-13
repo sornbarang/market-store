@@ -31,6 +31,6 @@ return [
     'favourites'=>'Favourites',      
     'comments'=>'Comments',      
     'views'=>'Views',
-    'shareitem'=>'Share this item'
-
+    'shareitem'=>'Share this item',
+    'norecord'=>'No product of'
 ];
