@@ -116,7 +116,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="phone">@lang('profilesetting.phone')</label>
-                                                    <input value="{{Auth::user()->profile->phone}}" name="phone" type="text" id="phone" class="text_field" placeholder="@lang('profilesetting.phone')" >
+                                                    <input value="{{ (Auth::user()->profile != null) ? Auth::user()->profile->phone : ''}}" name="phone" type="text" id="phone" class="text_field" placeholder="@lang('profilesetting.phone')" >
                                                 </div>
                                             </div> 
                                             <div class="col-md-6">

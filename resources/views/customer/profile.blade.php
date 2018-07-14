@@ -13,7 +13,7 @@
     =================================-->
     @include('elements.customer-menu') 
     @php 
-        $media = Auth::user()->profile->getMedia(); 
+        $media = (Auth::user()->profile != null) ? Auth::user()->profile->getMedia() : [];
         foreach($media as $val){  
             if(Auth::user()->profile->avatar==$val->id){
                 $avatar=$val->id.'/avatar100.png';  
