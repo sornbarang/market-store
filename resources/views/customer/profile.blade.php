@@ -132,9 +132,9 @@
 
                         <div class="sidebar-card author-menu">
                             <ul>
-                                <li>
+                                {{--<li>
                                     <a href="author.html">@lang('profile.profile')</a>
-                                </li>
+                                </li>--}}
                                 <li>
                                     <a class="active" href="author-items.html">@lang('profile.authitems')</a>
                                 </li>

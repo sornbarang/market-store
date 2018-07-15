@@ -78,7 +78,7 @@ function()
     //Route::get('contact', 'PageController@contact')->name('contact');
 
 
-    Route::get('contact', 'PageController@contact')->name('contact');
+    Route::any('contact', 'PageController@contact')->name('contact');
     Route::get('termcondiction', 'PageController@termcondiction')->name('termcondiction');
     // OAuth Routes
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
