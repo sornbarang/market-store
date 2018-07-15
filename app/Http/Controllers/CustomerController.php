@@ -355,9 +355,14 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function myManageItem()
+    public function myManageItem(Request $request)
     {
-        $data['products'] = Product::where('user_id', Auth::user()->id)->latest('products_ads.id')->paginate(20);
+        $order='asc'; 
+        if(isset($request->price) && $request->price=='high'){
+            $order='desc';
+        } 
+        $data['order']=$order; 
+        $data['products'] = Product::where('user_id', Auth::user()->id)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate(20);
         $data['breadcrub']='manage items';
         return view('customer.manage-item',compact('data'));
     }
