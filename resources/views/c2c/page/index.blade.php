@@ -343,13 +343,13 @@
         <!-- start .row -->
         <div class="row">  
             @foreach ($data['category'] as $cat)
-                @php  
+                {{--@php  
                     foreach($cat->translations as $lang){
                         if($lang->locale==app()->getLocale()){
                             $link=['link'=>route('market.dynamiccat',$lang->categories_ads_id),'name'=>$lang->name];
                         }
                     }
-                @endphp 
+                @endphp --}}
                 <!-- start .col-md-4 -->
                     <div class="col-md-3 col-sm-6">
                         <!-- start .single-product -->
@@ -357,13 +357,40 @@
                             <div class="product__thumbnail">
                                 <img src="{{ asset('images/p1.jpg') }}" alt="Product Image">
                                 <div class="prod_btn">  
-                                    <a href="{{$link['link']}}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                    <a href="{{route('market.dynamiccat',$cat['id'])}}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                 </div><!-- end /.prod_btn -->
                             </div><!-- end /.product__thumbnail -->
 
-                            <div class="product-desc"> 
-                                <a href="{{$link['link']}}" class="product_title"><h4>{{$link['name']}}</h4></a>
+                            <div class="product-desc" style="height:75px;"> 
+                                <a href="{{route('market.dynamiccat',$cat['id'])}}" class="product_title">
+                                    <h4>{{$cat['name']}}</h4>
+                                </a>
+                                {{--
+                                <ul class="titlebtm">
+                                    <li>
+                                        <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
+                                        <p><a href="#">99</a></p>
+                                    </li>
+                                    <li class="out_of_class_name">
+                                        <div class="sell"><p><span class="lnr lnr-cart"></span><span>27</span></p></div>
+                                        <div class="rating product--rating">
+                                            <ul>
+                                                <li><span class="fa fa-star"></span></li>
+                                                <li><span class="fa fa-star"></span></li>
+                                                <li><span class="fa fa-star"></span></li>
+                                                <li><span class="fa fa-star"></span></li>
+                                                <li><span class="fa fa-star-half-o"></span></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>--}}
                             </div><!-- end /.product-desc -->
+                            <div class="product-purchase">
+                                <div class="price_love">
+                                    <span>{{$cat['count']}}</span>
+                                </div>
+                                <a href="#"><span class="lnr lnr-book"></span> Products</a>
+                            </div><!-- end /.product-purchase -->
                         </div>
                         <!-- end /.single-product -->
                     </div><!-- end /.col-md-4 -->
