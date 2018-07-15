@@ -202,7 +202,7 @@
                                 </li> -->
                             </ul>
 
-                            <p>{{$val->user->profile->bio}}</p>
+                            <p>{{ !empty($val->user->profile->bio) ? $val->user->profile->bio : '' }}</p>
                         </div>
                         <!-- end /.product-desc -->
 

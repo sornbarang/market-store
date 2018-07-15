@@ -183,13 +183,13 @@
                         <!--start .author__notification_area -->
                         @if (Route::has('login')) 
                             @auth
-                                @php 
-                                    $media = Auth::user()->profile->getMedia(); 
-                                    foreach($media as $val){  
+                                @php
+                                    $media = (Auth::user()->profile != null) ? Auth::user()->profile->getMedia() : [];
+                                    foreach($media as $val){
                                         if(Auth::user()->profile->avatar==$val->id){
-                                            $avatar=$val->id.'/avatar.png';  
-                                        } 
-                                    }   
+                                            $avatar=$val->id.'/avatar.png';
+                                        }
+                                    }
                                 @endphp
                             @else
                             @endauth 
