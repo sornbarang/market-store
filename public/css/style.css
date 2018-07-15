@@ -5396,8 +5396,8 @@ h6 {
 }
 
 .dropdown.dropdown--cart .cart_area .cart_product .product__info {
-  width: -webkit-calc(100% - 52px);
-  width: calc(100% - 52px);
+  width: -webkit-calc(100% - 70px);
+  width: calc(100% - 70px);
   display: inline-block;
 }
 

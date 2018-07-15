@@ -34,6 +34,24 @@ function()
     // OAuth Routes
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
+//    b2c route
+    Route::group([
+        'prefix'    => 'shop',
+        'namespace'  => 'Shop',
+    ], function() {
+        Route::get('/', ['as' => 'shop', 'uses' => 'CategoryController@index']);
+
+        Route::get('cart', ['as' => 'shop.cart', 'uses' => 'CustomerController@getCart']);
+        Route::get('checkout', ['as' => 'shop.checkout', 'uses' => 'CustomerController@getCheckout']);
+
+//        require login
+        Route::group( ['middleware' => 'auth' ], function()
+        {
+
+        });
+    });
+
+
 
     /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
     Route::group([
@@ -92,6 +110,30 @@ function()
         'middleware' => ['auth']
     ], function(){
         Route::get('/', 'HomeController@index')->name('admin');
+
+        Route::resource('e-category', 'EcommerceCategoryController',['names' =>
+            [
+                'index' => 'admin.e.category.index',
+                'create' => 'admin.e.category.create',
+                'update' => 'admin.e.category.update',
+                'edit' => 'admin.e.category.edit',
+                'store' => 'admin.e.category.store',
+                'show' => 'admin.e.category.show',
+                'destroy' => 'admin.e.category.destroy',
+            ]
+        ]);
+        Route::resource('e-product', 'EcommerceProductController',['names' =>
+            [
+                'index' => 'admin.e.product.index',
+                'create' => 'admin.e.product.create',
+                'update' => 'admin.e.product.update',
+                'edit' => 'admin.e.product.edit',
+                'store' => 'admin.e.product.store',
+                'show' => 'admin.e.product.show',
+                'destroy' => 'admin.e.product.destroy',
+            ]
+        ]);
+
         Route::resource('ads', 'AdsController',['names' =>
             [
                 'index' => 'admin.ads.index',

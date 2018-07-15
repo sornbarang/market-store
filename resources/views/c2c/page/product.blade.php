@@ -85,9 +85,11 @@
                             </a> 
                             <div class="collapse in collapsible-content show" id="collapse1">
                                 <ul class="card-content">
-                                    @foreach($data['countcatpro'] as $key => $val)
-                                        <li><a href="#"><span class="lnr lnr-chevron-right"></span>{{ucfirst($val['name'])}}<span class="item-count">{{$val['count']}}</span></a></li> 
-                                    @endforeach
+                                    @if(isset($data['countcatpro']))
+                                        @foreach($data['countcatpro'] as $key => $val)
+                                            <li><a href="#"><span class="lnr lnr-chevron-right"></span>{{ucfirst($val['name'])}}<span class="item-count">{{$val['count']}}</span></a></li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div><!-- end /.collapsible_content --> 
                         </div><!-- end /.sidebar-card -->
