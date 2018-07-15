@@ -106,9 +106,10 @@ class C2cController extends Controller
         $catarr=[];
         foreach($allcats as $cat){ 
             $pros = Product::categorized($cat)->get();
-            if(count($pros) > 0){ 
-                $catarr[$cat->name]=['id'=>$cat->id,'name'=>$cat->name,'count'=>count($pros)];
+            if($cat->isleaf() && count($pros) > 0 ){ 
+                $catarr[$cat->name]=['active'=>$cat->id==$id?true:false,'id'=>$cat->id,'name'=>$cat->name,'count'=>count($pros)];
             }
+            
         } 
         // return $catarr;
         $data['countcatpro']=$catarr;

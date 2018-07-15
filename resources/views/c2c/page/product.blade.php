@@ -87,7 +87,7 @@
                                 <ul class="card-content">
                                     @if(isset($data['countcatpro']))
                                         @foreach($data['countcatpro'] as $key => $val)
-                                            <li><a href="#"><span class="lnr lnr-chevron-right"></span>{{ucfirst($val['name'])}}<span class="item-count">{{$val['count']}}</span></a></li>
+                                            <li ><a class="{{$val['active']?'myactive':''}}" href="{{route('market.dynamiccat',$val['id'])}}"><span class="lnr lnr-chevron-right"></span>{{ucfirst($val['name'])}}<span class="item-count">{{$val['count']}}</span></a></li>
                                         @endforeach
                                     @endif
                                 </ul>

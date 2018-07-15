@@ -13,6 +13,7 @@
     =================================-->
     <section class="contact-area section--padding">
         <div class="container">
+        
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
@@ -57,17 +58,32 @@
                                 <div class="row">
                                     <div class="col-md-8 offset-md-2">
                                         <div class="contact_form--wrapper">
-                                            <form action="#">
+                                            <form action="{{route('contact')}}" method="post">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <input type="text"  placeholder="@lang('contact.name')">
+                                                            <input  required name="name" type="text"  placeholder="@lang('contact.name')">
+                                                            @if ($errors->any())
+                                                            <div class="alert alert-danger" style="margin:0 !important;padding:0;">
+                                                                <ul>
+                                                                    <li>{{ $errors->getBag('default')->first('name') }}</li>
+                                                                </ul>
+                                                            </div>
+                                                            @endif
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <input type="text" placeholder="@lang('contact.emailaddress')">
+                                                            <input  name="email" type="text" placeholder="@lang('contact.emailaddress')">
+                                                            @if ($errors->any())
+                                                            <div class="alert alert-danger" style="margin:0 !important;padding:0;">
+                                                                <ul>
+                                                                    <li>{{ $errors->getBag('default')->first('email') }}</li>
+                                                                </ul>
+                                                            </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,7 +91,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-6">
                                                         <div class="form-group">
-                                                            <input type="text" placeholder="@lang('contact.phone')">
+                                                            <input type="text"  placeholder="@lang('contact.phone')">
                                                         </div>
                                                     </div> 
                                                 </div>
@@ -83,7 +99,7 @@
                                                 <textarea cols="30" rows="10" placeholder="@lang('contact.des')"></textarea>
 
                                                 <div class="sub_btn">
-                                                    <button type="button" class="btn btn--round btn--default">@lang('contact.sent')</button>
+                                                    <button type="submit" class="btn btn--round btn--default">@lang('contact.sent')</button>
                                                 </div>
                                             </form>
                                         </div>

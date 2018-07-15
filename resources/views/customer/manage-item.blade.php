@@ -75,11 +75,14 @@
 
                                 <div class="filter__option filter--select">
                                     <div class="select-wrap">
-                                        <select name="price">
-                                            <option value="low">@lang('profilefavorite.lowtohight')</option>
-                                            <option value="high">@lang('profilefavorite.highttolow')</option>
-                                        </select>
-                                        <span class="lnr lnr-chevron-down"></span>
+                                        <!-- Request::url() get current url --> 
+                                        <form action="{{ Request::url() }}" method="get"> 
+                                            <select name="price"> 
+                                                <option value="low" {{$data['order']=='asc'?'selected':''}}>@lang('profilefavorite.lowtohight')</option>
+                                                <option value="high" {{$data['order']=='desc'?'selected':''}}>@lang('profilefavorite.highttolow')</option>
+                                            </select>
+                                            <span class="lnr lnr-chevron-down"></span>
+                                        </form> 
                                     </div>
                                 </div>
                             </div><!-- end /.pull-right -->

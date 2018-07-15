@@ -59,6 +59,7 @@
                                 </div> 
                                 <div class="author">
                                     <h4>{{$data['user']->name}}</h4>
+                                    <p>Phone: {{$data['user']->profile->phone}}</p>
                                     <p>Signed Up: {{$data['user']->created_at}}</p>
                                 </div>
                                 <!-- end /.author -->
@@ -156,6 +157,7 @@
                                 <li>
                                     <a href="#" class="active">Profile</a>
                                 </li>
+                                {{--
                                 <li>
                                     <a href="author-items.html">Author Items</a>
                                 </li>
@@ -167,7 +169,7 @@
                                 </li>
                                 <li>
                                     <a href="author-following.html">Following (39)</a>
-                                </li>
+                                </li>--}}
                             </ul>
                         </div>
                         <!-- end /.author-menu -->
@@ -215,22 +217,25 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
-                            <div class="author-info mcolorbg4">
-                                <p>Total Adv</p>
-                                <h3>4,369</h3>
-                            </div>
-                        </div>
-                        <!-- end /.col-md-4 -->
-
-                        <div class="col-md-4 col-sm-4">
+                        {{--
                             <div class="author-info pcolorbg">
                                 <p>Total Follower</p>
                                 <h3>36,957</h3>
                             </div>
+                        --}}
+                        </div>
+                        <!-- end /.col-md-4 -->
+    
+                        <div class="col-md-4 col-sm-4">
+                            <div class="author-info mcolorbg4">
+                                <p>Total Pro</p>
+                                <h3>{{count($data['product'])}}</h3>
+                            </div>
                         </div>
                         <!-- end /.col-md-4 -->
 
                         <div class="col-md-4 col-sm-4">
+                            {{--
                             <div class="author-info scolorbg">
                                 <p>Total Ratings</p>
                                 <div class="rating product--rating">
@@ -254,6 +259,7 @@
                                     <span class="rating__count">(26)</span>
                                 </div>
                             </div>
+                            --}}
                         </div>
                         <!-- end /.col-md-4 -->
 
