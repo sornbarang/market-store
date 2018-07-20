@@ -277,8 +277,9 @@
 
     /* partners slider */
     $('.partners').owlCarousel({
-        items: 5,
+        items: 4,
         autoplay: true,
+        margin: 30,
         responsive: {
             0: {
                 items: 1
@@ -290,7 +291,7 @@
                 items: 3
             },
             992: {
-                items: 5
+                items: 4
             }
         }
     });

@@ -16,66 +16,36 @@ class C2cController extends Controller
         return preg_replace('/\s+/u', '-', trim($string));
     }
 
-    
-    public function index()
-    {
-        $data['category']=$this->getParentsCategory(); 
-        $tree = Category::roots()->get();
-        $getAllNodeByParent=[];
-        // foreach($tree as $k => $va){  
-        //     $pro= $va->getDescendantsAndSelf();  
-        // } 
-        foreach($tree as $k => $node){     
-            $tree[$k]['children']=$node->getDescendants();
-            foreach($node->getDescendants() as $val){
-                $tree[$k]['product'] = Product::categorized($val)->get(); 
-            }
-             
-        }  
-        $trees=Category::all()->toHierarchy(); 
-        foreach($tree as $k=> $val){ 
-            if(count($val->children) > 0){ 
-                foreach ($val->children as $key => $value) { 
-                    $pro = Product::categorized($value)->get();  
-                } 
-                $tree[$k]['ro']=$pro; 
-            }
-        }
-        // return $tree;
-        $data['category']=$this->getParentsCategory(); 
-        $tree = Category::roots()->get();
-        $getAllNodeByParent=[];
-        // foreach($tree as $k => $va){  
-        //     $pro= $va->getDescendantsAndSelf();  
-        // }
-        foreach($tree as $k => $node){  
-            $getAllNodeByParent[]=array('id'=>$node->id,'parent'=>$node->name,'childs'=>$node->getDescendants());
-        }
-        $html=[];
-        foreach($getAllNodeByParent as $key => $val){
-            foreach($val['childs'] as $getProOfNode){
-                $pro=Product::categorized($getProOfNode)->get();
-                if(count($pro) > 0){
-                    $html[$val['parent']][]=array('id'=>$val['id'],'node'=>$getProOfNode->name,'categories_ads_id'=>$getProOfNode->id,'products'=>$pro);
-                }else{
-                    $html[$val['parent']][]=array('id'=>$val['id'],'node'=>$getProOfNode->name,'categories_ads_id'=>$getProOfNode->id,'products'=>[]);
-                }
-            } 
-            $html[$val['parent']][]=array('id'=>$val['id'],'node'=>'','categories_ads_id'=>'','products'=>[]);
-        }
-        $totalProOfParent=[];
-        foreach ($html as $k => $value) {
-            $count=0; 
-            foreach ($value as $key => $val) {
-                $count += count($val['products']);
-                $totalProOfParent[$k]=array('id'=>$val['id'],'name'=>$k,'count'=>$count);
-            # code...
+    public function renderNode($node) { 
+        $html = []; 
+        if( $node->isLeaf() ) {
+          $html[]= Product::categorized($node)->get();
+        }else { 
+            foreach($node->children as $child){ 
+                $html[]= Product::categorized($child)->get();
+                $this->renderNode($child); 
             }
         } 
-        // return $tree;
-        // return $totalProOfParent;
-        
-       $data['category']=$totalProOfParent;
+        return $html;
+      }
+    public function index()
+    {
+        // $data['category']=$this->getParentsCategory(); 
+        $tree = Category::roots()->get(); 
+        $pro=[]; 
+        foreach($tree as $k => $va){  
+            $cat = $va->getDescendantsAndSelf();  
+            foreach($cat as $node){
+                $p=Product::categorized($node)->get();
+                if(count($p) > 0){
+                    $pro[$va->name]['product'][]= Product::categorized($node)->get();
+                }
+            }
+            $pro[$va->name]['product'][]=[];
+            $pro [$va->name]['childreen'][]= $va->getDescendantsAndSelf(1);  
+        }  
+        // return $pro;
+        $data['listcats']=$pro;  
         return view('c2c.page.index',compact('data'));
     }  
     function getParentsCategory($id=''){

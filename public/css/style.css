@@ -526,7 +526,7 @@ a {
 .product-title-area, .shortcode_module_title, .dashboard_contents .dashboard_title_area {
   background: #fff;
   padding: 32px 30px 32px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   -webkit-border-radius: 4px;
           border-radius: 4px;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -3400,7 +3400,7 @@ h6 {
 .product-title-area, .shortcode_module_title, .dashboard_contents .dashboard_title_area {
   background: #fff;
   padding: 32px 30px 32px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   -webkit-border-radius: 4px;
           border-radius: 4px;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -4587,7 +4587,7 @@ h6 {
 .product-title-area, .shortcode_module_title, .dashboard_contents .dashboard_title_area {
   background: #fff;
   padding: 32px 30px 32px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   -webkit-border-radius: 4px;
           border-radius: 4px;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -6115,7 +6115,7 @@ div#ui-datepicker-div tbody tr td a:hover {
 .product-title-area, .shortcode_module_title, .dashboard_contents .dashboard_title_area {
   background: #fff;
   padding: 32px 30px 32px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   -webkit-border-radius: 4px;
           border-radius: 4px;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -16002,4 +16002,7 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
 }
 .myactive{
   color:#56a72d !important;
+}
+.activecat{
+  font-weight: bold;
 }

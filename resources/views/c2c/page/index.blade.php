@@ -310,7 +310,143 @@
 =================================-->
 
 @include('elements.search')
+<style>
+    .breadcrumb ul li:after{
+        color:#000 !important;
+    }
+</style>
 <section class="products section--padding">
+    <div class="shortcode_wrapper">
+        <div class="container">
+            @foreach($data['listcats'] as $key =>  $cats)
+                @foreach($cats['childreen'] as $k =>  $cat)
+                    @php
+                        $subcat=[];
+                        foreach($cat as $getsub) {
+                            $subcat[]=array('link'=>route('market.dynamiccat',$getsub['id']),'name'=>$getsub['name']);
+                        }
+                    @endphp
+                    <div class="row">
+                        <div class="col-md-12"> 
+                            <div class="shortcode_module_title"  style="padding:10px;">
+                                <div class="dashboard__title"> 
+                                    <div class="breadcrumb">
+                                        <ul> 
+                                            @foreach($subcat as $key => $val)
+                                                <li>
+                                                    @if($key==0)
+                                                        <a href="javascript:void(0)"  style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
+                                                    @else
+                                                    <a href="{{$val['link']}}" style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="row"> 
+                    <div class="col-md-12">
+                        <div class="partners">
+                            @if(is_array($cats['product']) && count($cats['product']) > 1)
+                                
+                                @foreach($cats['product'] as $pk => $product)
+                                    @foreach($product as $lpk => $getprops)
+                                        @php
+                                            $avatar='';  
+                                            $media = $getprops->user->profile->getMedia(); 
+                                            foreach($media as $val){   
+                                                if($getprops->user->profile->avatar == $val->id){
+                                                    $avatar=$val->id.'/'.$val->file_name;  
+                                                }
+                                            }   
+                                        @endphp
+                                        <div class="partner">
+                                            <!-- start .single-product -->
+                                            <div class="product product--card product--card-small">
+
+                                                <div class="product__thumbnail">
+                                                    <img src="{{ asset('images/p1.jpg') }}" alt="Product Image">
+                                                    <div class="prod_btn">
+                                                        <a href="{{route('market.productdetail',$getprops->products_ads_id)}}" class="transparent btn--sm btn--round">More Info</a>
+                                                        {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
+                                                    </div>
+                                                    <!-- end /.prod_btn -->
+                                                </div>
+                                                <!-- end /.product__thumbnail -->
+
+                                                <div class="product-desc">
+                                                    <a href="#" class="product_title">
+                                                        <h4>{{$getprops->name}}</h4>
+                                                    </a>
+                                                    <ul class="titlebtm">
+                                                        <li>
+                                                            @if(isset($avatar) && !empty($avatar))
+                                                                <img class="auth-img" src="{{Storage::url($avatar)}}" alt="author image"> 
+                                                            @else
+                                                                <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
+                                                            @endif 
+                                                            <p>
+                                                                <a href="#">{{$getprops->user->name}}</a>
+                                                            </p>
+                                                        </li>
+                                                        <li class="out_of_class_name">
+                                                            <div class="sell">
+                                                                <p>
+                                                                    <span class="lnr lnr-cart"></span>
+                                                                    <span>27</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="rating product--rating">
+                                                                <ul>
+                                                                    <li>
+                                                                        <span class="fa fa-star"></span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="fa fa-star"></span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="fa fa-star"></span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="fa fa-star"></span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="fa fa-star-half-o"></span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                                <!-- end /.product-desc -->
+
+                                                <div class="product-purchase">
+                                                    <div class="price_love">
+                                                        <span>${{$getprops->price??''}}</span>
+                                                    </div>
+                                                    <a href="#">
+                                                        <span class="lnr lnr-book"></span>Plugin</a>
+                                                </div>
+                                                <!-- end /.product-purchase -->
+                                            </div>
+                                            <!-- end /.single-product -->
+                                        </div> 
+                                    @endforeach
+                                @endforeach
+                            @else
+                                <p>No product</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endforeach 
+        </div>
+    </div>
     <!-- start container -->
     <div class="container">
         <!-- start row -->
@@ -341,16 +477,17 @@
         </div>--}}
         <!-- end /.row -->
         <!-- start .row -->
+        {{--
         <div class="row">  
             @foreach ($data['category'] as $cat)
-                {{--@php  
+                @php  
                     foreach($cat->translations as $lang){
                         if($lang->locale==app()->getLocale()){
                             $link=['link'=>route('market.dynamiccat',$lang->categories_ads_id),'name'=>$lang->name];
                         }
                     }
-                @endphp --}}
-                <!-- start .col-md-4 -->
+                @endphp
+                    <!-- start .col-md-4 -->
                     <div class="col-md-3 col-sm-6">
                         <!-- start .single-product -->
                         <div class="product product--card product--card3">
@@ -364,8 +501,7 @@
                             <div class="product-desc" style="height:75px;"> 
                                 <a href="{{route('market.dynamiccat',$cat['id'])}}" class="product_title">
                                     <h4>{{$cat['name']}}</h4>
-                                </a>
-                                {{--
+                                </a> 
                                 <ul class="titlebtm">
                                     <li>
                                         <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
@@ -383,7 +519,7 @@
                                             </ul>
                                         </div>
                                     </li>
-                                </ul>--}}
+                                </ul>
                             </div><!-- end /.product-desc -->
                             <div class="product-purchase">
                                 <div class="price_love">
@@ -397,7 +533,7 @@
             @endforeach
 
         </div>
-
+        --}}
         <!-- start .row -->
         {{--<div class="row">
             <div class="col-md-12">
@@ -569,4 +705,4 @@
 <!--================================
     END CALL TO ACTION AREA
 =================================-->
-@stop
+@stop 
