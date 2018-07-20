@@ -113,37 +113,14 @@
                         <div class="author__notification_area">
                             <ul>
                             <li class="has_dropdown">
-                                    &nbsp;
-                                    {{--
                                     <div class="icon_wrap">
                                         <span class="lnr lnr-cart"></span>
-                                        <span class="notification_count purch">2</span>
+                                        <span class="notification_count purch">1</span>
                                     </div>
 
                                     <div class="dropdown dropdown--cart">
                                         <div class="cart_area">
-                                            <div class="cart_product">
-                                                <div class="product__info">
-                                                    <div class="thumbn">
-                                                        <img src="{{asset('/')}}images/capro1.jpg" alt="cart product thumbnail">
-                                                    </div>
 
-                                                    <div class="info">
-                                                        <a class="title" href="single-product.html">Finance and Consulting Business Theme</a>
-                                                        <div class="cat">
-                                                            <a href="#">
-                                                                <img src="{{asset('/')}}images/catword.png" alt="">Wordpress</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product__action">
-                                                    <a href="#">
-                                                        <span class="lnr lnr-trash"></span>
-                                                    </a>
-                                                    <p>$60</p>
-                                                </div>
-                                            </div>
                                             <div class="cart_product">
                                                 <div class="product__info">
                                                     <div class="thumbn">
@@ -163,7 +140,7 @@
                                                     <a href="#">
                                                         <span class="lnr lnr-trash"></span>
                                                     </a>
-                                                    <p>$60</p>
+                                                    <p>$80</p>
                                                 </div>
                                             </div>
                                             <div class="total">
@@ -171,12 +148,11 @@
                                                     <span>Total :</span>$80</p>
                                             </div>
                                             <div class="cart_action">
-                                                <a class="go_cart" href="cart.html">View Cart</a>
-                                                <a class="go_checkout" href="checkout.html">Checkout</a>
+                                                <a class="go_cart" href="{{route('shop.cart')}}">View Cart</a>
+                                                <a class="go_checkout" href="{{route('shop.checkout')}}">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
-                                    --}}
                                 </li>
                             </ul>
                         </div>
@@ -201,7 +177,7 @@
                                 <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
                             @else
                                 <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
-                            @endif
+                            @endif 
                             </div>
                             <div class="autor__info">
                                 <p class="name">
@@ -210,7 +186,7 @@
                                         {{ Auth::user()->name }}
                                     @else
                                         guest
-                                    @endauth
+                                    @endauth 
                                 @endif
                                 </p>
                                 <p class="ammount">$20.45</p>
@@ -252,7 +228,7 @@
                                                 <li>
                                                     <a href="{{route('market.mymanageitem')}}">
                                                         <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
-                                                </li>
+                                                </li> 
                                                 @if (Route::has('login'))
                                                     @auth
                                                         @hasrole('admin')
@@ -261,7 +237,7 @@
                                                                 <span class="lnr lnr-briefcase"></span>@lang('profile.backoffice')</a>
                                                         </li>
                                                         @endhasrole
-                                                    @endauth
+                                                    @endauth 
                                                 @endif
                                                 <li>
                                                     <a class="lnr lnr-exit" href="{{ route('logout') }}"
@@ -276,9 +252,9 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    @endauth
+                                    @endauth 
                                 @endif
-
+                            
                         </div>--}}
                         <!--end /.author-author__info-->
                     </div>
