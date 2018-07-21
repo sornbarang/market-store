@@ -89,7 +89,7 @@
                                         <td>{{$role->permissions()->pluck('name')->implode(' ')}}</td>
                                         <td>
                                             <a href="{{action('Admin\RoleController@edit',['id' => $role->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="{{action('Admin\RoleController@destroy',['id' => $role->id])}}" class="btn btn-danger btn-fab btn-fab-sm"><i class="zmdi zmdi-delete"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-route="role" data-id="{{$role->id}}"><i class="zmdi zmdi-delete"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

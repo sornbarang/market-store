@@ -91,7 +91,7 @@
                                         <td>{{$permission->roles->pluck('name')->implode(', ')}}</td>
                                         <td>
                                             <a href="{{action('Admin\PermissionController@edit',['id' => $permission->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-id="{{$permission->id}}"><i class="zmdi zmdi-delete"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-route="permission" data-id="{{$permission->id}}"><i class="zmdi zmdi-delete"></i></a>
 
                                         </td>
                                     </tr>

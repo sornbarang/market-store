@@ -91,7 +91,7 @@
                                         <td>{{$user->created_at}}</td>
                                         <td>
                                             <a href="{{action('Admin\UserController@edit',['id' => $user->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-id="{{$user->id}}"><i class="zmdi zmdi-delete"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-route="user" data-id="{{$user->id}}"><i class="zmdi zmdi-delete"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
