@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CategoriesAds as Category ;
 use App\Models\ProductsAds as Product;
+use Storage;
 class C2cController extends Controller
 {
     /**
@@ -15,19 +16,6 @@ class C2cController extends Controller
     function make_slug($string) {
         return preg_replace('/\s+/u', '-', trim($string));
     }
-
-    public function renderNode($node) { 
-        $html = []; 
-        if( $node->isLeaf() ) {
-          $html[]= Product::categorized($node)->get();
-        }else { 
-            foreach($node->children as $child){ 
-                $html[]= Product::categorized($child)->get();
-                $this->renderNode($child); 
-            }
-        } 
-        return $html;
-      }
     public function index()
     {
         // $data['category']=$this->getParentsCategory(); 
@@ -55,10 +43,62 @@ class C2cController extends Controller
         }
         return Category::roots()->get();
     }
+    public function getProductOfCategory($id){
+        $node = Category::find($id); 
+        $cat = $node->getDescendantsAndSelf(); 
+        $pros=[];
+        foreach($cat as $n){
+            $p=Product::categorized($n)->get();
+            if(count($p) > 0){
+                $pros['product'][]= $p;
+            }
+        }  
+       
+        $finaldatas=[];
+        // return $pros;
+        if(count($pros) > 0){
+            foreach($pros as $vals){ 
+                foreach($vals as $val){ 
+                    foreach($val as $v){ 
+                        $avatar='';  
+                        $media = $v->user->profile->getMedia(); 
+                        foreach($media as $val){   
+                            if($v->user->profile->avatar == $val->id){
+                                $avatar=Storage::url($val->id.'/'.$val->file_name);
+                            }
+                        } 
+                        $img='';
+                        $newsItem=Product::find($v->products_ads_id); 
+                        $mediaItems = $newsItem->getMedia(); 
+                        $getFirstMedia = $newsItem->getFirstMedia();  
+                        if($getFirstMedia){
+                            $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                        } 
+                        $v['image']=$img;
+                        $v['avatar']=$avatar;
+                        $ps[]=$v;
+                    } 
+                }
+                $finaldatas=$ps;
+            }
+        } 
+        return response()->json($finaldatas);
+        // $pros[$node->name]['childreen']= $node->getDescendantsAndSelf(1);   
+    }
     public function getDynamicCategory($id,Request $request){
         
         $allcats = Category::all(); 
         $node = Category::find($id); 
+        $cat = $node->getDescendantsAndSelf();  
+        $pros=[];
+        foreach($cat as $n){
+            $p=Product::categorized($n)->get();
+            if(count($p) > 0){
+                $pros[$node->name]['product'][]= Product::categorized($n)->get();
+            }
+        }  
+        $pros[$node->name]['childreen']= $node->getDescendantsAndSelf(1);  
+        return $pros;
         // get each category
         $data['category'] = $node->getImmediateDescendants();
         // get category breadcrump
