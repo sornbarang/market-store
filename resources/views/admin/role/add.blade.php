@@ -8,6 +8,7 @@
                         <h2 class="card-title">Add Role</h2>
                         <p></p>
                     </header>
+                    @include ('admin.errors.list')
                     <div class="card-body">
                         <form id="form-horizontal"
                               accept-charset="UTF-8"
@@ -25,16 +26,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Permissions</label>
                                 <div class="col-sm-10">
+                                    @foreach($permissions as $permission)
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="permissions[]" value="admin" data-rule-required="true" aria-required="true"> Admin
+                                            <input type="checkbox" name="permissions[]" value="{{$permission->id}}" data-rule-required="true" aria-required="true"> {{$permission->name}}
                                         </label>
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="permissions[]" value="user"> user
-                                        </label>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
 
