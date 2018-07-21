@@ -932,6 +932,54 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             //     }
             // });
         });
+        $( document ).on( "click", "#getProductOfCategory", function(e){  
+            var this_=$(this);
+            $.ajax({
+                url: $(this).data('route'),
+                type: 'GET',
+                data:{orderby:$(this).val()},
+                headers: {
+                    'X-CSRF-Token':CSRF_TOKEN,
+                },
+                success: function( response ) {  
+                    var owl=this_.parent().parent().parent().parent().parent().parent().parent().next().children().find('.partners');
+                    if(response.length > 0){ 
+                        owl.empty();
+                        owl.trigger('destroy.owl.carousel');
+                        $.each( response, function( key, value ) {
+                            var route='{{route("market.productdetail")}}/'+value.products_ads_id; 
+                            owl.append('<div class="owl-item" style="width: 255px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4>'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="sell"> <p> <span class="lnr lnr-cart"></span> <span>27</span> </p> </div> <div class="rating product--rating"> <ul> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star-half-o"></span> </li> </ul> </div> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span>$'+value.price+'</span> </div> <a href="#"> <span class="lnr lnr-book"></span>Plugin</a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
+                        });
+                        owl.owlCarousel({
+                            items: response.length,
+                            autoplay: true, 
+                            margin: 30,
+                            responsive: {
+                                0: {
+                                    items: 1
+                                },
+                                480: {
+                                    items: 2
+                                },
+                                768: {
+                                    items: 3
+                                },
+                                992: {
+                                    items: 4
+                                }
+                            }
+                        }); 
+                    }else{
+                        owl.empty();
+                        owl.append('<p>No product</p>');
+
+                    }
+                },
+                error: function( data ) {
+                    console.log(data);
+                }
+            });
+        });
     });
     
 </script>

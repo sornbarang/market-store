@@ -323,7 +323,7 @@
                     @php
                         $subcat=[];
                         foreach($cat as $getsub) {
-                            $subcat[]=array('link'=>route('market.dynamiccat',$getsub['id']),'name'=>$getsub['name']);
+                            $subcat[]=array('link'=>route('market.getproductofcategory',$getsub['id']),'name'=>$getsub['name']);
                         }
                     @endphp
                     <div class="row">
@@ -334,11 +334,15 @@
                                         <ul> 
                                             @foreach($subcat as $key => $val)
                                                 <li>
-                                                    @if($key==0)
-                                                        <a href="javascript:void(0)"  style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
-                                                    @else
-                                                    <a href="{{$val['link']}}" style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
-                                                    @endif
+                                                    {{--
+                                                        @if($key==0)
+                                                            <a href="javascript:void(0)"  style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
+                                                        @else
+                                                        <a id="getProductOfCategory" data-route="{{$val['link']}}" href="javascript:void(0)" style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
+                                                        @endif
+                                                    --}}
+
+                                                    <a id="getProductOfCategory" data-route="{{$val['link']}}" href="javascript:void(0)" style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -362,14 +366,21 @@
                                                 if($getprops->user->profile->avatar == $val->id){
                                                     $avatar=$val->id.'/'.$val->file_name;  
                                                 }
-                                            }   
+                                            } 
+                                            $img='';
+                                            $newsItem=App\Models\ProductsAds::find($getprops->products_ads_id); 
+                                            $mediaItems = $newsItem->getMedia(); 
+                                            $getFirstMedia = $newsItem->getFirstMedia();   
+                                            if($getFirstMedia){
+                                                $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                            }  
                                         @endphp
                                         <div class="partner">
                                             <!-- start .single-product -->
                                             <div class="product product--card product--card-small">
 
                                                 <div class="product__thumbnail">
-                                                    <img src="{{ asset('images/p1.jpg') }}" alt="Product Image">
+                                                    <img src="{{ $img }}" alt="Product Image">
                                                     <div class="prod_btn">
                                                         <a href="{{route('market.productdetail',$getprops->products_ads_id)}}" class="transparent btn--sm btn--round">More Info</a>
                                                         {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}

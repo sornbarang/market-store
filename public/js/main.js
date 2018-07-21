@@ -301,6 +301,7 @@
     $('.sponsores').owlCarousel({
         items: 4,
         autoplay: true,
+        autoplaySpeed: 5000,
         margin: 30,
         responsive: {
             0: {
