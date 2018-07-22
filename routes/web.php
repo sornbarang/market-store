@@ -108,7 +108,7 @@ function()
     Route::group([
         'prefix'     => config('base.route_prefix', 'admin'),
         'namespace'  => 'Admin',
-        'middleware' => ['auth']
+        'middleware' => ['auth','role:super-admin|admin']
     ], function(){
         Route::get('/', 'HomeController@index')->name('admin');
 
@@ -234,6 +234,18 @@ function()
             ]
         ]);
         Route::resource('city', 'CityController',['names' =>
+            [
+                'index' => 'admin.city.index',
+                'create' => 'admin.city.create',
+                'update' => 'admin.city.update',
+                'edit' => 'admin.city.edit',
+                'store' => 'admin.city.store',
+                'show' => 'admin.city.show',
+                'destroy' => 'admin.city.destroy',
+            ]
+        ]);
+
+        Route::resource('report', 'ReportController',['names' =>
             [
                 'index' => 'admin.city.index',
                 'create' => 'admin.city.create',

@@ -308,12 +308,12 @@
 
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-accounts-alt"></i>Users</a>
                         <ul class="nav-sub">
-                            <li><a href="{{ action('Admin\UserController@index') }}">Users</a></li>
-                            <li><a href="{{ action('Admin\RoleController@index') }}">Roles</a></li>
-                            <li><a href="{{ action('Admin\PermissionController@index') }}">Permissions</a></li>
+                            <li><a href="{{ action('Admin\UserController@index') }}">User List</a></li>
+                            <li><a href="{{ action('Admin\RoleController@index') }}">User Role</a></li>
+                            <li><a href="{{ action('Admin\PermissionController@index') }}">User Permission</a></li>
                         </ul>
                     </li>
-                    <li class="nav-dropdown {{isset($data['active']) && $data['active']=='advertise'?'active open':''}}"><a href="#"><i class="zmdi zmdi-palette"></i>Advertise</a>
+                    <li class="nav-dropdown {{isset($data['active']) && $data['active']=='advertise'?'active open':''}}"><a href="#"><i class="zmdi zmdi-palette"></i>Ads Mangement</a>
                         <ul class="nav-sub">
                             <li><a href="#">User</a></li>
                             <li><a href="{{url('admin/ads')}}">Banner</a></li>
@@ -322,7 +322,7 @@
                     </li>
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-palette"></i>Report</a>
                         <ul class="nav-sub">
-                            <li><a href="#">List</a></li>
+                            <li><a href="{{url('admin/report')}}">List</a></li>
                         </ul>
                     </li>
 

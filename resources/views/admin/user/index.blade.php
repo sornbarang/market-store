@@ -18,7 +18,7 @@
                         <ul class="card-actions icons right-top">
                             <li id="deleteItems" style="display: none;">
                                 <span class="label label-info pull-left m-t-5 m-r-10 text-white"></span>
-                                <a href="javascript:void(0)" id="confirmDelete" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
+                                <a href="javascript:void(0)" id="confirmDelete" data-route="user" data-toggle="tooltip" data-placement="top" data-original-title="Delete Product(s)">
                                     <i class="zmdi zmdi-delete"></i>
                                 </a>
                             </li>
@@ -47,6 +47,12 @@
                                 Heads up! You can Swipe table Left to Right on Mobile devices.
                             </p>
                         </div>
+                        @if(session('success'))
+                            <div class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Success</strong> {!! session('success') !!}
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table id="productsTable" class="mdl-data-table product-table m-t-30" cellspacing="0" width="100%">
                                 <thead>
@@ -59,36 +65,37 @@
                                   </label>
                                 </span>
                                     </th>
-                                    <th data-orderable="false" class="col-xs-2">Image</th>
                                     <th class="col-xs-2">Name</th>
                                     <th class="col-xs-2">Email</th>
                                     <th class="col-xs-2">Role</th>
-                                    <th class="col-xs-1">Extra Permission</th>
+                                    <th class="col-xs-1">Created At</th>
                                     <th data-orderable="false" class="col-xs-2">
                                         <button id="add-new-user" class="btn btn-primary btn-fab  animate-fab"><i class="zmdi zmdi-plus"></i></button>
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="checkbox-cell">
-                                <span class="checkbox">
-                                  <label>
-                                    <input type="checkbox" value="" id="">
-                                    <span class="checkbox-material"></span>
-                                  </label>
-                                </span>
-                                    </td>
-                                    <td><img src="{{asset('assets/img/ecom/products/12252_Tgi0.jpeg')}}" alt="" class="img-thumbnail" /></td>
-                                    <td>Grunt</td>
-                                    <td>#394822</td>
-                                    <td>$32</td>
-                                    <td>1,200</td>
-                                    <td>
-                                        <a href="{{action('Admin\UserController@edit',['id' => '1'])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
-                                        <a href="{{action('Admin\UserController@destroy',['id' => '1'])}}" class="btn btn-danger btn-fab btn-fab-sm"><i class="zmdi zmdi-delete"></i></a>
-                                    </td>
-                                </tr>
+                                    @foreach($users as $user)
+                                    <tr>
+                                        <td class="checkbox-cell">
+                                    <span class="checkbox">
+                                      <label>
+                                        <input type="checkbox" value="{{$user->id}}" id="">
+                                        <span class="checkbox-material"></span>
+                                      </label>
+                                    </span>
+                                        </td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>{{$user->roles()->pluck('name')->implode(' ')}}</td>
+                                        <td>{{$user->created_at}}</td>
+                                        <td>
+                                            <a href="{{action('Admin\UserController@edit',['id' => $user->id])}}" class="btn btn-info btn-fab btn-fab-sm"><i class="zmdi zmdi-edit"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-sm warning-delete" data-route="user" data-id="{{$user->id}}"><i class="zmdi zmdi-delete"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -100,8 +107,131 @@
 @endsection()
 @section('javascript')
     <script>
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
         $(document).on('click touch', '#add-new-user', function(e) {
             window.location.href='{{action('Admin\UserController@create')}}'
         });
+
+        $(document).on('click.warning-delete', '.warning-delete', function (e) {
+            e.stopPropagation();
+            var userID = $(this).attr("data-id");
+            swal({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this user!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, keep it'
+            }).then(function() {
+                setTimeout(function () {
+                    $.ajax({
+                        url: "user/" + userID,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-Token':CSRF_TOKEN,
+                        },
+                        success: function( msg ) {
+                            if(msg.status){
+                                swal("Deleted!", "Your data has been deleted.", "success");
+                                setTimeout(function () {
+                                    document.location.reload(true);
+                                }, 3000);
+                            }else{
+                                swal(
+                                    'Cancelled',
+                                    'Can not delete record !',
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function( data ) {
+                            swal(
+                                'Cancelled',
+                                'Can not delete record)',
+                                'error'
+                            )
+                        }
+                    });
+
+                }, 600);
+            }, function(dismiss) {
+                // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                if (dismiss === 'cancel') {
+                    swal("Cancelled", "Your action has been cancelled.", "error");
+                }
+            })
+        });
+
+
+        //Confirm delete
+        $('#confirmBeforeDelete').on('click', function (e) {
+            e.stopPropagation();
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this data.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Delete',
+                cancelButtonText: "Cancel",
+            }).then(function() {
+                setTimeout(function () {
+                    var userID = [];
+                    $('.checkbox-cell input[id*=CheckboxId_][type=checkbox]:checked').each(function () {
+                        userID.push($(this).val());
+                        $(this).prop('checked', false);
+                        $(this).closest("tr").fadeOut();
+                        $('#deleteItems').fadeOut();
+                    });
+                    if(userID.length > 0){
+                        $.ajax({
+                            url: "user/" + userID.join(','),
+                            type: 'DELETE',
+                            headers: {
+                                'X-CSRF-Token':CSRF_TOKEN,
+                            },
+                            success: function( msg ) {
+                                if(msg.status){
+                                    swal("Deleted!", "Your data has been deleted.", "success");
+                                    setTimeout(function () {
+                                        document.location.reload(true);
+                                    }, 3000);
+                                }else{
+                                    swal(
+                                        'Cancelled',
+                                        'Can not delete record !',
+                                        'error'
+                                    )
+                                }
+                            },
+                            error: function( data ) {
+                                swal(
+                                    'Cancelled',
+                                    'Can not delete record)',
+                                    'error'
+                                )
+                            }
+                        });
+                    }
+
+                    if ($('#checkAll').is(":checked")) {
+                        $('#checkAll').prop('checked', false);
+                    };
+                    $('#deleteItems span').text('');
+
+                }, 600);
+                setTimeout(function () {
+                    $('.card-data-tables table tbody tr').attr('style', '').removeClass('highlight');
+                }, 2000);
+            }, function(dismiss) {
+                // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+                if (dismiss === 'cancel') {
+                    swal("Cancelled", "Your action has been cancelled.", "error");
+                }
+            })
+        });
+
+
     </script>
 @endsection()

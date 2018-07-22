@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -16,9 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = [];
-        $view = "admin.user.index";
-        return view('admin.user.index',compact('view','data','roles','permissions'));
+        $users = User::get();
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -29,15 +30,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
-        $permissions = Permission::with('roles')->get();
-        $roles_permissions = array();
-        foreach ($roles as $role){
-            foreach ($role->permissions as $permission){
-                $roles_permissions[$role->id][] = $permission->id;
-            }
-        }
-
-        return view('admin.user.add', compact('roles','permissions','roles_permissions'));
+        return view('admin.user.add', compact('roles'));
     }
 
     /**
@@ -48,7 +41,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'=>'required|max:120|unique:users,name',
+            'email'=>'required|email|unique:users,email',
+            'password'=>'required'
+        ]);
+
+        $user = User::create($request->only('email', 'name', 'first_name', 'last_name', 'password'));
+
+        $roles = $request['roles'];
+        if (isset($roles)) {
+
+            foreach ($roles as $role) {
+                $role_r = Role::where('id', '=', $role)->firstOrFail();
+                $user->assignRole($role_r);
+            }
+        }
+
+        $user->profile()->create([
+            'phone' => '',
+            'location' => '',
+        ]);
+
+        $request->session()->flash('success', 'User successfully added.');
+        return redirect()->route('admin.user.index');
     }
 
     /**
@@ -70,7 +86,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.edit');
+        $user = User::findOrFail($id);
+        $roles = Role::get();
+        $user_role = $user->roles->pluck('id')->toArray();
+        return view('admin.user.edit', compact('user','roles', 'user_role'));
     }
 
     /**
@@ -82,7 +101,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $this->validate($request, [
+            'name'=>'required|max:120|unique:users,name,'.$id,
+            'email'=>'required|email|unique:users,email,'.$id,
+        ]);
+
+        $input = $request->only(['email', 'name', 'first_name', 'last_name']);
+        $roles = $request['roles'];
+        $user->fill($input)->save();
+
+        if (isset($roles)) {
+            $user->roles()->sync($roles);
+        }
+        else {
+            $user->roles()->detach();
+        }
+        $request->session()->flash('success', 'User successfully updated.');
+        return redirect()->route('admin.user.index');
     }
 
     /**
@@ -93,6 +130,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $users = explode(',',$id);
+        User::whereIn('id', $users)->delete();
+
+        return response()->json(['status'=>true]);
     }
 }

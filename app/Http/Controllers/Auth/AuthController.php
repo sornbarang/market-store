@@ -57,6 +57,8 @@ class AuthController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
+        if(empty($user->email))
+            return redirect()->route('register');
 
         $authUser = User::where('email', $user->email)->first();
 
@@ -66,10 +68,9 @@ class AuthController extends Controller
                 $authUser->provider = $provider;
                 $authUser->provider_id = $user->id;
                 $authUser->save();
-
             }
 
-            $synRole = $authUser->syncRoles(['super-admin']);
+            $synRole = $authUser->syncRoles(['client','shop owner']);
 
             return $authUser;
         }
