@@ -308,9 +308,9 @@
 
                     <li class="nav-dropdown"><a href="#"><i class="zmdi zmdi-accounts-alt"></i>Users</a>
                         <ul class="nav-sub">
-                            <li><a href="{{ action('Admin\UserController@index') }}">Ads</a></li>
-                            <li><a href="{{ action('Admin\RoleController@index') }}">Campians</a></li>
-                            <li><a href="{{ action('Admin\PermissionController@index') }}">Bussiness</a></li>
+                            <li><a href="{{ action('Admin\UserController@index') }}">User List</a></li>
+                            <li><a href="{{ action('Admin\RoleController@index') }}">User Role</a></li>
+                            <li><a href="{{ action('Admin\PermissionController@index') }}">User Permission</a></li>
                         </ul>
                     </li>
                     <li class="nav-dropdown {{isset($data['active']) && $data['active']=='advertise'?'active open':''}}"><a href="#"><i class="zmdi zmdi-palette"></i>Ads Mangement</a>
