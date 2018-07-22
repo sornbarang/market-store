@@ -48,6 +48,7 @@ class UserController extends Controller
         ]);
 
         $user = User::create($request->only('email', 'name', 'first_name', 'last_name', 'password'));
+
         $roles = $request['roles'];
         if (isset($roles)) {
 
@@ -56,6 +57,11 @@ class UserController extends Controller
                 $user->assignRole($role_r);
             }
         }
+
+        $user->profile()->create([
+            'phone' => '',
+            'location' => '',
+        ]);
 
         $request->session()->flash('success', 'User successfully added.');
         return redirect()->route('admin.user.index');
