@@ -345,6 +345,9 @@
                                                     <a id="getProductOfCategory" data-route="{{$val['link']}}" href="javascript:void(0)" style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
                                                 </li>
                                             @endforeach
+                                            <li style="float:right;"> 
+                                                <a  href="javascript:void(0)" style="color:#000;">Explore &nbsp; <span style="font-size:20px;color:#56a72d" class="lnr lnr-rocket"></span></a>
+                                            </li>
                                         </ul>
                                     </div> 
                                 </div>
@@ -405,6 +408,22 @@
                                                             </p>
                                                         </li>
                                                         <li class="out_of_class_name">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <span class="flag-icon flag-icon-kh"></span>
+                                                                        <span>Cam</span>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <p> 
+                                                                        <span>Phnom penh</span>
+                                                                    </p>                                                                 
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        {{--
+                                                        <li class="out_of_class_name">
                                                             <div class="sell">
                                                                 <p>
                                                                     <span class="lnr lnr-cart"></span>
@@ -430,7 +449,7 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                        </li>
+                                                        </li>--}}
                                                     </ul>
 
                                                 </div>
@@ -438,10 +457,29 @@
 
                                                 <div class="product-purchase">
                                                     <div class="price_love">
-                                                        <span>${{$getprops->price??''}}</span>
+                                                        <span title="${{$getprops->price??''}}">${{$getprops->price??''}}</span>
                                                     </div>
-                                                    <a href="#">
-                                                        <span class="lnr lnr-book"></span>Plugin</a>
+                                                    <a href="javascript:void(0)">
+                                                        <div class="rating product--rating">
+                                                            <ul>
+                                                                <li>
+                                                                    <span class="fa fa-star"></span>
+                                                                </li>
+                                                                <li>
+                                                                    <span class="fa fa-star"></span>
+                                                                </li>
+                                                                <li>
+                                                                    <span class="fa fa-star"></span>
+                                                                </li>
+                                                                <li>
+                                                                    <span class="fa fa-star"></span>
+                                                                </li>
+                                                                <li>
+                                                                    <span class="fa fa-star-half-o"></span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                                 <!-- end /.product-purchase -->
                                             </div>

@@ -2282,13 +2282,18 @@ h6 {
   background: rgba(6, 116, 236, 0.1);
   line-height: 32px;
   display: inline-block;
-  padding: 0 15px;
+  padding: 0 5px;
   color: #56a72d;
   margin-right: 10px;
   font-size: 15px;
   font-weight: 500;
   -webkit-border-radius: 100px;
-          border-radius: 100px;
+  border-radius: 100px;
+  width:80px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
 }
 
 .product-purchase .price_love p span {
@@ -2319,7 +2324,7 @@ h6 {
 }
 
 .product--card .product-purchase {
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .product--card2 .product__thumbnail img {
@@ -2380,7 +2385,7 @@ h6 {
 }
 
 .product--card-small .product-purchase {
-  padding: 15px 20px;
+  padding: 15px 5px;
 }
 
 .product--card-small .product-purchase a {
@@ -16005,4 +16010,8 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
 }
 .activecat{
   font-weight: bold;
+}
+.titlebtm > li:first-child{
+  display:flex;
+  align-items: center;s
 }
