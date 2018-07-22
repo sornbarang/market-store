@@ -195,8 +195,8 @@
                             @endauth 
                         @endif 
                         <!--start .author-author__info-->
-                        {{--<div class="author-author__info inline has_dropdown">
-                            <div class="author__avatar">
+                        <div class="author-author__info inline has_dropdown">
+                            {{--<div class="author__avatar">
                             @if(isset($avatar) && !empty($avatar))
                                 <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
                             @else
@@ -214,8 +214,27 @@
                                 @endif
                                 </p>
                                 <p class="ammount">$20.45</p>
-                            </div>
+                            </div>--}}
                             @if (Route::has('login'))
+                                <div class="author__avatar">
+                                    @if(isset($avatar) && !empty($avatar))
+                                        <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
+                                    @else
+                                        <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
+                                    @endif
+                                </div>
+                                <div class="autor__info">
+                                    <p class="name">
+                                        @if (Route::has('login'))
+                                            @auth
+                                                {{ Auth::user()->name }}
+                                                @else
+                                                    guest
+                                                    @endauth
+                                                @endif
+                                    </p>
+                                    <p class="ammount">$20.45</p>
+                                </div>
                                     @auth
                                         <div class="dropdown dropdown--author">
                                             <ul>
@@ -227,7 +246,7 @@
                                                     <a href="{{route('market.mysetting')}}">
                                                         <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
                                                 </li>
-                                                --}}{{--
+
                                                 <li>
                                                     <a href="{{route('market.customer.index')}}">
                                                         <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
@@ -244,7 +263,7 @@
                                                     <a href="{{route('market.mysale')}}">
                                                         <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
                                                 </li>
-                                                --}}{{--
+
                                                 <li>
                                                     <a href="{{route('market.myitemupload')}}">
                                                         <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
@@ -279,7 +298,7 @@
                                     @endauth
                                 @endif
 
-                        </div>--}}
+                        </div>
                         <!--end /.author-author__info-->
                     </div>
                     <!-- end .author-area -->
@@ -413,7 +432,7 @@
                                             <li>
                                                 @if (Route::has('login'))
                                                     @auth
-                                                        @hasrole('admin')
+                                                        @hasrole('super-admin|admin')
                                                             <li>
                                                                 <a href="{{route('admin')}}"><span class="lnr lnr-briefcase"></span>@lang('profile.backoffice')</a>
                                                             </li>

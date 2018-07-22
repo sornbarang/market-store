@@ -69,7 +69,7 @@ class AuthController extends Controller
 
             }
 
-            $synRole = $authUser->syncRoles(['super-admin']);
+            $synRole = $authUser->syncRoles(['client','shop owner']);
 
             return $authUser;
         }
