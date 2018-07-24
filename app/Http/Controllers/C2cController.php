@@ -22,7 +22,12 @@ class C2cController extends Controller
         $tree = Category::roots()->get(); 
         $pro=[]; 
         foreach($tree as $k => $va){  
-            $cat = $va->getDescendantsAndSelf();  
+            if( $va->isRoot()){
+                $cat = $va->getImmediateDescendants();
+            }else{
+                //if not root get self and child
+                $cat = $va->getAncestorsAndSelf(); 
+            }
             foreach($cat as $node){
                 $p=Product::categorized($node)->get();
                 if(count($p) > 0){
@@ -43,9 +48,15 @@ class C2cController extends Controller
         }
         return Category::roots()->get();
     }
-    public function getProductOfCategory($id){
-        $node = Category::find($id); 
-        $cat = $node->getDescendantsAndSelf(); 
+    public function getProductOfCategory($id,$type=false){
+        $node = Category::find($id);
+        // if root get all child 
+        if( $node->isRoot()){
+            $cat = $node->getImmediateDescendants();
+        }else{
+            //if not root get self and child
+            $cat = $node->getAncestorsAndSelf(); 
+        }
         $pros=[];
         foreach($cat as $n){
             $p=Product::categorized($n)->get();
@@ -53,7 +64,9 @@ class C2cController extends Controller
                 $pros['product'][]= $p;
             }
         }  
-       
+        
+        // return $pros;
+        
         $finaldatas=[];
         // return $pros;
         if(count($pros) > 0){
@@ -82,74 +95,39 @@ class C2cController extends Controller
                 $finaldatas=$ps;
             }
         } 
+        if($type){
+            return $finaldatas;
+        }
         return response()->json($finaldatas);
         // $pros[$node->name]['childreen']= $node->getDescendantsAndSelf(1);   
     }
-    public function getDynamicCategory($id,Request $request){
-        
-        $allcats = Category::all(); 
+    public function getDynamicCategory($id,Request $request){  
         $node = Category::find($id); 
-        $cat = $node->getDescendantsAndSelf();  
-        $pros=[];
-        foreach($cat as $n){
-            $p=Product::categorized($n)->get();
-            if(count($p) > 0){
-                $pros[$node->name]['product'][]= Product::categorized($n)->get();
-            }
-        }  
-        $pros[$node->name]['childreen']= $node->getDescendantsAndSelf(1);  
-        return $pros;
-        // get each category
-        $data['category'] = $node->getImmediateDescendants();
-        // get category breadcrump
-        $data['bread'] = $node->getAncestorsAndSelf();  
-        // current category
-        $cnode= $node->getDescendantsAndSelf(); 
-        foreach($cnode[0]->translations as $lang){
-            if($lang->locale=='en'){
-                $curentnode=$lang->name;
-            }else{
-                $curentnode=$lang->name;
-            }
-        } 
-        $data['cnode'] = $curentnode;
-        $catarr=[];
-        foreach($allcats as $cat){ 
-            $pros = Product::categorized($cat)->get();
-            if($cat->isleaf() && count($pros) > 0 ){ 
-                $catarr[$cat->name]=['active'=>$cat->id==$id?true:false,'id'=>$cat->id,'name'=>$cat->name,'count'=>count($pros)];
-            }
-            
-        } 
-        // return $catarr;
-        $data['countcatpro']=$catarr;
-        // $category = Category::find($id); 
-        // get proudct if category have product
-        // check if last child
-        if($node->isLeaf()){
-            $order='asc';
-            $record=25;
-            if(isset($request->price) && $request->price=='high'){
-                $order='desc';
-            }
-            if(isset($request->record) && !empty($request->record)){
-                if($request->record==12){
-                    $record=12;
-                }else if(isset($request->record) && $request->record==15){
-                    $record=15;
-                }
-            }
-            $data['product']=[];
-            $data['order']=$order;
-            $data['record']=$record;
-            $products = Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
-            // return $products;
-            if(count($products) > 0){
-                $data['product']=$products;
-            }
-            return view('c2c.page.product',compact('data'));
-        }
-        return view('c2c.page.index',compact('data'));
+        $order='asc';
+        $record=25;
+        // if(isset($request->price) && $request->price=='high'){
+        //     $order='desc';
+        // }
+        // if(isset($request->record) && !empty($request->record)){
+        //     if($request->record==12){
+        //         $record=12;
+        //     }else if(isset($request->record) && $request->record==15){
+        //         $record=15;
+        //     }
+        // }
+        // $data['product']=[];
+        $data['order']=$order;
+        $data['record']=$record;
+        // $products = Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
+        // // return $products;
+        // if(count($products) > 0){
+        //     $data['product']=$products;
+        // }
+        // second param mean return array object
+        $data['product']=$this->getProductOfCategory($id,true);
+        
+        $data['nest'] = Category::all()->toHierarchy();
+        return view('c2c.page.product',compact('data'));
     }
     
     /**

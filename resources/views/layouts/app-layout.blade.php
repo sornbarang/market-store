@@ -492,7 +492,7 @@
                         --}}
                         <!-- start mainmenu__search -->
                     </div>
-
+                    {{--
                     <nav class="navbar navbar-expand-md navbar-light mainmenu__menu">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                                 aria-label="Toggle navigation">
@@ -503,19 +503,6 @@
                             <ul class="navbar-nav">
                                 <li class="has_dropdown">
                                     <a href="{{route('market')}}">@lang('menu.home')</a>
-                                    {{--<div class="dropdown dropdown--menu">
-                                        <ul>
-                                            <li>
-                                                <a href="index.html">Home Multi Vendor</a>
-                                            </li>
-                                            <li>
-                                                <a href="index-single.html">Home Two Single User</a>
-                                            </li>
-                                            <li>
-                                                <a href="index3.html">Home Three Product</a>
-                                            </li>
-                                        </ul>
-                                    </div>--}}
                                 </li>
                                 <!-- <li>
                                     <a href="#">{{trans('menu.policy')}}</a>
@@ -529,8 +516,9 @@
                                 
                             </ul>
                         </div>
-                        <!-- /.navbar-collapse -->
+                        <!-- /.navbar-collapse -->  
                     </nav>
+                    --}}
                 </div>
                 <!-- end /.col-md-12 -->
             </div>
@@ -653,11 +641,15 @@
                         <div class="copyright-text">
                             <p>&copy; 2018 <a href="#">TreeWB</a>. All rights reserved. Created by <a href="#">TreeWB</a></p>
                         </div>
-
+                        
                         <div class="go_top">
                             <span class="lnr lnr-chevron-up"></span>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center color-white"><p><a href="{{ route('termcondiction') }}">{{trans('menu.termcondiction')}}</a></p></div>
+                    <div class="col-md-12 text-center"><p><a href="{{ route('contact') }}">{{trans('menu.contact')}}</a></p></div>
                 </div>
             </div>
         </div>
@@ -900,9 +892,11 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         });
         var ios_devices = user_agent.match(/(iphone|ipod|ipad)/)  ? "touchend" : "click"; //check if android or ios
         $('form#frmUploadFront .modules__content div.statement_info_card,form#frmUpdateFront .modules__content div.statement_info_card').on(ios_devices,function(e){ 
+            
             e.preventDefault(); 
             if (e.type == "click") documentClick = true; 
             if (documentClick){
+                console.log(documentClick);
                 if(xhr==null){
                     getSubCategoryFirstRequest($(this));
                 }else{
@@ -952,6 +946,9 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             // });
         });
         $( document ).on( "click", "#getProductOfCategory", function(e){  
+            $(this).parent().parent().find('li').first().children().attr('class','');
+            $(this).parent().parent().find('li').children().attr('class','');
+            $(this).attr('class','activecat');
             var this_=$(this);
             $.ajax({
                 url: $(this).data('route'),
@@ -962,6 +959,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 },
                 success: function( response ) {  
                     var owl=this_.parent().parent().parent().parent().parent().parent().parent().next().children().find('.partners');
+                    var pushroute=this_.parent().parent().find('#exploreCategory');
                     if(response.length > 0){ 
                         owl.empty();
                         owl.trigger('destroy.owl.carousel');
@@ -992,16 +990,34 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                                 }
                             }
                         }); 
+                        pushroute.attr('href',this_.data('routepro'));
                     }else{
                         owl.empty();
                         owl.append('<p>No product</p>');
-
+                        pushroute.attr('href','javascript:void(0)');
                     }
                 },
                 error: function( data ) {
                     console.log(data);
                 }
             });
+        });
+        // List explore category
+        $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+        $('.tree li.parent_li > span').on('click', function (e) {
+            var children = $(this).parent('li.parent_li').find(' > ul > li');
+            if (children.is(":visible")) {
+                children.hide('fast');
+                if(!$(this).hasClass( "parent_root" )){
+                    $(this).attr('title', 'Expand this branch').find(' > i').removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+                } 
+            } else {
+                children.show('fast');
+                if(!$(this).hasClass( "parent_root" )){
+                    $(this).attr('title', 'Collapse this branch').find(' > i').removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
+                }
+            }
+            e.stopPropagation();
         });
     });
     

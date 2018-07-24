@@ -57,9 +57,10 @@ function()
     Route::group([
         'prefix'    => 'market'
     ], function(){
+        Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'Admin\CategoryAdsController@getSubCategory']);
         Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
         Route::get('categories', ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
-        Route::get('getdynamiccategory/{id}', ['as' => 'market.dynamiccat', 'uses' =>'C2cController@getDynamicCategory']);
+        Route::get('getdynamiccategory/{id?}', ['as' => 'market.dynamiccat', 'uses' =>'C2cController@getDynamicCategory']);
         Route::get('getproductofcategory/{id}', ['as' => 'market.getproductofcategory', 'uses' =>'C2cController@getProductOfCategory']);
         Route::get('search', ['as' => 'market.search', 'uses' =>'SearchController@filter']); 
         Route::get('products', ['as' => 'market.categories', 'uses' => 'Market\ProductController@getproduct']);
@@ -208,8 +209,7 @@ function()
                 'show' => 'admin.category-ads.show',
                 'destroy' => 'admin.category-ads.destroy'
             ]
-        ]); 
-        Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'CategoryAdsController@getSubCategory']);
+        ]);  
 
         Route::resource('country', 'CountryController',['names' =>
             [

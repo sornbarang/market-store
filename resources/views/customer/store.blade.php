@@ -216,13 +216,11 @@
 
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                        {{--
+                        <div class="col-md-4 col-sm-4"> 
                             <div class="author-info pcolorbg">
                                 <p>Total Follower</p>
                                 <h3>36,957</h3>
-                            </div>
-                        --}}
+                            </div> 
                         </div>
                         <!-- end /.col-md-4 -->
     
@@ -234,8 +232,7 @@
                         </div>
                         <!-- end /.col-md-4 -->
 
-                        <div class="col-md-4 col-sm-4">
-                            {{--
+                        <div class="col-md-4 col-sm-4"> 
                             <div class="author-info scolorbg">
                                 <p>Total Ratings</p>
                                 <div class="rating product--rating">
@@ -258,8 +255,7 @@
                                     </ul>
                                     <span class="rating__count">(26)</span>
                                 </div>
-                            </div>
-                            --}}
+                            </div> 
                         </div>
                         <!-- end /.col-md-4 -->
 
@@ -298,88 +294,126 @@
                         <!-- start .col-md-4 -->
                         @foreach($data['product'] as $val)
                             @php 
+                                $avatar='';  
+                                $media = $val->user->profile->getMedia(); 
+                                foreach($media as $m){   
+                                    if($val->user->profile->avatar == $m->id){
+                                        $avatar=$m->id.'/'.$m->file_name;  
+                                    }
+                                } 
                                 $img='';
                                 $getFirstMedia = $val->getFirstMedia(); 
                                 if($getFirstMedia){
                                     $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
                                 } 
-                            @endphp 
-                            <div class="col-lg-6 col-md-6">
-                                <!-- start .single-product -->
-                                <div class="product product--card">
+                            @endphp  
+                                <div class="col-lg-4 col-md-6">
+                                    <!-- start .single-product -->
+                                    <div class="product product--card product--card-small">
 
-                                    <div class="product__thumbnail">
-                                        <img src="{{ $img }}" alt="Product Image">
-                                        <div class="prod_btn">
-                                            <a href="{{route('market.productdetail',$val->id)}}" class="transparent btn--sm btn--round">More Info</a>
-                                            {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
+                                        <div class="product__thumbnail">
+                                            <img src="{{ $img }}" alt="Product Image">
+                                            <div class="prod_btn">
+                                                <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
+                                                <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>
+                                            </div>
+                                            <!-- end /.prod_btn -->
                                         </div>
-                                        <!-- end /.prod_btn -->
-                                    </div>
-                                    <!-- end /.product__thumbnail -->
+                                        <!-- end /.product__thumbnail -->
 
-                                    <div class="product-desc">
-                                        <a href="#" class="product_title">
-                                            <h4>{{$val->name}}</h4>
-                                        </a>
-                                        <ul class="titlebtm">
-                                            <li>
-                                                <img class="auth-img" src="{{ asset('images/auth3.jpg') }}" alt="author image">
-                                                <p>
-                                                    <a href="#">{{$val->user->name}}</a>
-                                                </p>
-                                            </li>
-                                            <li class="product_cat">
-                                                <a href="#">
-                                                    <img src="{{ asset('images/cathtm.png') }}" alt="category image">Plugin</a>
-                                            </li>
-                                        </ul> 
-                                        @foreach($val->translations as $v)
-                                            @if($v->locale==app()->getLocale())
-                                                {!!$v->description!!}
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <!-- end /.product-desc -->
-
-                                    <div class="product-purchase">
-                                        <div class="price_love">
-                                            <span>$ {{$val->price??'0'}}</span>
-                                            
-                                            {{--<p> <span class="lnr lnr-heart"></span> 48</p>--}}
-                                        </div>
-                                        {{--
-                                        <div class="rating product--rating">
-                                            <ul>
+                                        <div class="product-desc">
+                                            <a href="#" class="product_title">
+                                                <h4>{{$val->name}}</h4>
+                                            </a>
+                                            <ul class="titlebtm">
                                                 <li>
-                                                    <span class="fa fa-star"></span>
+                                                    @if(isset($avatar) && !empty($avatar))
+                                                        <img class="auth-img" src="{{Storage::url($avatar)}}" alt="author image"> 
+                                                    @else
+                                                        <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
+                                                    @endif 
+                                                    <p>
+                                                        <a href="#">{{$val->user->name}}</a>
+                                                    </p>
                                                 </li>
-                                                <li>
-                                                    <span class="fa fa-star"></span>
+                                                <li class="out_of_class_name">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p>
+                                                                <span class="flag-icon flag-icon-kh"></span>
+                                                                <span>Cam</span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p> 
+                                                                <span>Phnom penh</span>
+                                                            </p>                                                                 
+                                                        </div>
+                                                    </div>
                                                 </li>
-                                                <li>
-                                                    <span class="fa fa-star"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star-half-o"></span>
-                                                </li>
+                                                {{--
+                                                <li class="out_of_class_name">
+                                                    <div class="sell">
+                                                        <p>
+                                                            <span class="lnr lnr-cart"></span>
+                                                            <span>27</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="rating product--rating">
+                                                        <ul>
+                                                            <li>
+                                                                <span class="fa fa-star"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star-half-o"></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>--}}
                                             </ul>
-                                        </div>
 
-                                        <div class="sell">
-                                            <p>
-                                                <span class="lnr lnr-cart"></span>
-                                                <span>50</span>
-                                            </p>
-                                        </div>--}}
+                                        </div>
+                                        <!-- end /.product-desc -->
+
+                                        <div class="product-purchase">
+                                            <div class="price_love">
+                                                <span>$ {{$val->price??'0'}}</span>
+                                            </div>
+                                            <a href="javascript:void(0)">
+                                                <div class="rating product--rating">
+                                                    <ul>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star-half-o"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <!-- end /.product-purchase -->
                                     </div>
-                                    <!-- end /.product-purchase -->
-                                </div>
-                                <!-- end /.single-product -->
-                            </div>
+                                    <!-- end /.single-product -->
+                                </div>   
                         @endforeach
                         <!-- end /.col-md-4 --> 
                     </div>

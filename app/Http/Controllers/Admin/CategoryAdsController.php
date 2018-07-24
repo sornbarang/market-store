@@ -110,9 +110,11 @@ class CategoryAdsController extends Controller
         return response()->json(['status'=>true]);
     }
     public function getSubCategory(Request $request){
-        $subcategory=CategoriesAds::where('parent_id',$request->pid)->get();
-        if($subcategory){
-            return response()->json(['status'=>true,'data'=>$subcategory]);
+        if($request->isMethod('post')){
+            $subcategory=CategoriesAds::where('parent_id',$request->pid)->get();
+            if($subcategory){
+                return response()->json(['status'=>true,'data'=>$subcategory]);
+            }
         }
         return response()->json(['status'=>false,'data'=>[]]);
     }
