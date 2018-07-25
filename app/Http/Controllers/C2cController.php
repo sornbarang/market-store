@@ -19,7 +19,7 @@ class C2cController extends Controller
     public function index()
     {
         // $data['category']=$this->getParentsCategory(); 
-        $tree = Category::roots()->get(); 
+        $tree = Category::roots()->get();  
         $pro=[]; 
         foreach($tree as $k => $va){  
             if( $va->isRoot()){
@@ -39,94 +39,87 @@ class C2cController extends Controller
         }  
         // return $pro;
         $data['listcats']=$pro;  
+        // loop root category push icon
+        foreach($tree as $key => $val){
+            if(strtolower($val->name)=='fashion'){
+                $tree[$key]['icon'] = 'lnr-store';
+            }elseif(strtolower($val->name)=='technology'){
+                $tree[$key]['icon'] = 'lnr-laptop-phone';
+            }elseif(strtolower($val->name)=='real estate'){
+                $tree[$key]['icon'] = 'lnr-apartment';
+            }elseif(strtolower($val->name)=='vehicle'){
+                $tree[$key]['icon'] = 'lnr-car';
+            }elseif(strtolower($val->name)=='cosmetic'){
+                $tree[$key]['icon'] = 'lnr-diamond';
+            }elseif(strtolower($val->name)=='other'){
+                $tree[$key]['icon'] = 'lnr-warning';
+            }elseif(strtolower($val->name)=='furniture'){
+                $tree[$key]['icon'] = 'lnr-rocket';
+            }else{
+                $tree[$key]['icon'] = 'lnr-rocket';
+            }
+        }
+        $data['root']=$tree;  
         return view('c2c.page.index',compact('data'));
     }  
     function getParentsCategory($id=''){
         if(isset($id) && $id!=''){
-            $node = Category::find($id); 
+            $node = Category::findOrFail($id); 
             return $node->getImmediateDescendants();
         }
         return Category::roots()->get();
     }
-    public function getProductOfCategory($id,$type=false){
-        $node = Category::find($id);
-        // if root get all child 
-        if( $node->isRoot()){
-            $cat = $node->getImmediateDescendants();
-        }else{
-            //if not root get self and child
-            $cat = $node->getAncestorsAndSelf(); 
-        }
-        $pros=[];
-        foreach($cat as $n){
-            $p=Product::categorized($n)->get();
-            if(count($p) > 0){
-                $pros['product'][]= $p;
-            }
-        }  
-        
-        // return $pros;
-        
-        $finaldatas=[];
-        // return $pros;
-        if(count($pros) > 0){
-            foreach($pros as $vals){ 
-                foreach($vals as $val){ 
-                    foreach($val as $v){ 
-                        $avatar='';  
-                        $media = $v->user->profile->getMedia(); 
-                        foreach($media as $val){   
-                            if($v->user->profile->avatar == $val->id){
-                                $avatar=Storage::url($val->id.'/'.$val->file_name);
-                            }
-                        } 
-                        $img='';
-                        $newsItem=Product::find($v->products_ads_id); 
-                        $mediaItems = $newsItem->getMedia(); 
-                        $getFirstMedia = $newsItem->getFirstMedia();  
-                        if($getFirstMedia){
-                            $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-                        } 
-                        $v['image']=$img;
-                        $v['avatar']=$avatar;
-                        $ps[]=$v;
-                    } 
+    public function getProductOfCategory($id){
+        $node = Category::findOrFail($id); 
+        $pros=Product::categorized($node)->latest('products_ads.id')->limit(7)->get();
+        foreach($pros as $key => $val){ 
+            // get media 
+            $newsItem=Product::find($val->products_ads_id); 
+            $mediaItems = $newsItem->getMedia(); 
+            $getFirstMedia = $newsItem->getFirstMedia();   
+            if($getFirstMedia){
+                $pros[$key]['image']= Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+            } 
+            // get avatar
+            $media = $val->user->profile->getMedia(); 
+            foreach($media as $m){   
+                if($val->user->profile->avatar == $m->id){
+                    $pros[$key]['avatar']=Storage::url($m->id.'/'.$m->file_name);  
                 }
-                $finaldatas=$ps;
             }
         } 
-        if($type){
-            return $finaldatas;
-        }
-        return response()->json($finaldatas);
+        
+        return response()->json($pros);
+        // return response()->json(Product::categorized($node)->latest('products_ads.id')->with('user')->limit(7)->get());
         // $pros[$node->name]['childreen']= $node->getDescendantsAndSelf(1);   
     }
-    public function getDynamicCategory($id,Request $request){  
-        $node = Category::find($id); 
+    public function getDynamicCategory($id,Request $request){   
+        $data['nest'] = Category::all()->toHierarchy();
         $order='asc';
         $record=25;
-        // if(isset($request->price) && $request->price=='high'){
-        //     $order='desc';
-        // }
-        // if(isset($request->record) && !empty($request->record)){
-        //     if($request->record==12){
-        //         $record=12;
-        //     }else if(isset($request->record) && $request->record==15){
-        //         $record=15;
-        //     }
-        // }
-        // $data['product']=[];
+        if(isset($request->price) && $request->price=='high'){
+            $order='desc';
+        }
+        if(isset($request->record) && !empty($request->record)){
+            if($request->record==12){
+                $record=12;
+            }else if(isset($request->record) && $request->record==15){
+                $record=15;
+            }
+        }
+        
+        if($id==='all'){
+            // get all product
+            $data['product']=Product::categorized()->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
+        }else{
+            $node = Category::find($id);   
+            $data['order']=$order;
+            $data['record']=$record;
+            // second param mean return array object 
+            $data['product']=Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
+        }
         $data['order']=$order;
         $data['record']=$record;
-        // $products = Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
-        // // return $products;
-        // if(count($products) > 0){
-        //     $data['product']=$products;
-        // }
-        // second param mean return array object
-        $data['product']=$this->getProductOfCategory($id,true);
-        
-        $data['nest'] = Category::all()->toHierarchy();
         return view('c2c.page.product',compact('data'));
     }
     

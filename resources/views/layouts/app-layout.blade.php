@@ -945,15 +945,12 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             //     }
             // });
         });
-        $( document ).on( "click", "#getProductOfCategory", function(e){  
-            $(this).parent().parent().find('li').first().children().attr('class','');
-            $(this).parent().parent().find('li').children().attr('class','');
-            $(this).attr('class','activecat');
-            var this_=$(this);
-            $.ajax({
-                url: $(this).data('route'),
+        function getProductByCategory(mythis){
+            var this_=mythis
+            xhr=$.ajax({
+                url: this_.data('route'),
                 type: 'GET',
-                data:{orderby:$(this).val()},
+                data:{orderby:this_.val()},
                 headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
                 },
@@ -963,7 +960,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                     if(response.length > 0){ 
                         owl.empty();
                         owl.trigger('destroy.owl.carousel');
-                        $.each( response, function( key, value ) {
+                        $.each( response, function( key, value ) {  
                             var route='{{route("market.productdetail")}}/'+value.products_ads_id; 
                             owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4>'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row"> <div class="col"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rating product--rating"> <ul> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star-half-o"></span> </li> </ul> </div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
                         });
@@ -1001,6 +998,22 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                     console.log(data);
                 }
             });
+        }
+        $( document ).on( ios_devices, "#getProductOfCategory", function(e){  
+            $(this).parent().parent().find('li').first().children().attr('class','');
+            $(this).parent().parent().find('li').children().attr('class','');
+            $(this).attr('class','activecat'); 
+            e.preventDefault(); 
+            if (e.type == "click") documentClick = true; 
+            if (documentClick){
+                if(xhr==null){
+                    getProductByCategory($(this));
+                }else{
+                    xhr.abort();
+                    getProductByCategory($(this));
+                }
+            }
+            
         });
         // List explore category
         $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
@@ -1009,12 +1022,12 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             if (children.is(":visible")) {
                 children.hide('fast');
                 if(!$(this).hasClass( "parent_root" )){
-                    $(this).attr('title', 'Expand this branch').find(' > i').removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+                    $(this).attr('title', 'Expand this branch').find(' > i').removeClass('fa-minus-square').addClass('fa-plus-square');
                 } 
             } else {
                 children.show('fast');
                 if(!$(this).hasClass( "parent_root" )){
-                    $(this).attr('title', 'Collapse this branch').find(' > i').removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
+                    $(this).attr('title', 'Collapse this branch').find(' > i').removeClass('fa-plus-square').addClass('fa-minus-square');
                 }
             }
             e.stopPropagation();

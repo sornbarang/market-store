@@ -91,7 +91,8 @@ body {
   font-family: 'Quicksand', sans-serif;
   position: relative;
   font-weight: 400;
-  font-size: 15px;  
+  font-size: 15px; 
+   
 }
 
 ul {
@@ -483,7 +484,7 @@ a {
 .footer-big.section--padding{
   padding:0;
 }
-.login_area.section--padding2,.signup_area.section--padding2,.pass_recover_area.section--padding2,.more_product_area.section--padding{
+.products.section--padding,.products.section--padding2,.login_area.section--padding2,.signup_area.section--padding2,.pass_recover_area.section--padding2,.more_product_area.section--padding{
   /* padding: 70px 0 120px; */
   padding:50px 0 !important;
 }
@@ -2094,31 +2095,32 @@ h6 {
   background-image: -webkit-linear-gradient(right, #7347c1 0%, #0674ec 100%);
   background-image: -o-linear-gradient(right, #7347c1 0%, #0674ec 100%);
   background-image: linear-gradient(to left, #7347c1 0%, #0674ec 100%); */
-  background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg.png");
-  background-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg.png");
-  background-image: -o-linear-gradient(right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg.png");
-  background-image: linear-gradient(to left,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg.png");
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg2.png");
+  background-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg2.png");
+  background-image: -o-linear-gradient(right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg2.png");
+  background-image: linear-gradient(to left,rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%),url("../imgs/bg2.png");
   /* Fallback (could use .jpg/.png alternatively) */
   /* background-color: #7347c1; */
-  background-image:url('../imgs/bg.png');
+  background-image:url('../imgs/bg2.png');
   /* SVG fallback for IE 9 (could be data URI, or could use filter) */
-  background: url('../imgs/bg.png');
+  background: url('../imgs/bg2.png');
   /* Safari 4, Chrome 1-9, iOS 3.2-4.3, Android 2.1-3.0 */
   /* background-image: -webkit-gradient(linear, left top, right top, from(#7347c1), to(#0674ec));
   background-image: -webkit-gradient(linear, left top, right top, from(#7347c1), to(#0674ec)); */
 
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg.png");
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg.png");
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg2.png");
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))),url("../imgs/bg2.png");
   /* Safari 5.1, iOS 5.0-6.1, Chrome 10-25, Android 4.0-4.3 */
   /* background-image: -webkit-linear-gradient(left, #7347c1, #0674ec); */
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg.png");
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg2.png");
   /* Firefox 3.6 - 15 */
   /* Opera 11.1 - 12 */
   /* background-image: -o-linear-gradient(left, #7347c1, #0674ec); */
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg.png");
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg2.png");
   /* Opera 15+, Chrome 25+, IE 10+, Firefox 16+, Safari 6.1+, iOS 7+, Android 4.4+ */
   /* background-image: linear-gradient(to right, #7347c1, #0674ec); */
-  background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg.png");
+  background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),url("../imgs/bg2.png");
+  background-size:cover;
   left: 0;
 }
 
@@ -8415,9 +8417,10 @@ span.counter {
   background: -o-linear-gradient(right, #7347c1, #0674ec);
   background: linear-gradient(to left, #7347c1, #0674ec); */
   background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec));
-  background: -webkit-linear-gradient(right,rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg.png);
-  background: -o-linear-gradient(right,rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg.png);
-  background: linear-gradient( rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg.png);
+  background: -webkit-linear-gradient(right,rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg2.png);
+  background: -o-linear-gradient(right,rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg2.png);
+  background: linear-gradient( rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url(../imgs/bg2.png);
+  background-size:cover;
   opacity: .9;
 }
 
@@ -8659,9 +8662,9 @@ span.counter {
   background: #fff  no-repeat center;
 }
 
-.partners {
+/* .partners {
   margin-top: 30px;
-}
+} */
 
 .partners .partner {
   display: inline-block;
@@ -8692,12 +8695,13 @@ span.counter {
   background: -o-linear-gradient(right, #7347c1, #0674ec);
   background: linear-gradient(to left, #7347c1, #0674ec); */
   /* background: -webkit-gradient(linear, right top, left top, from(#7347c1), to(#0674ec)); */
-  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
-  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
-  background: linear-gradient( rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg.png');
+  background: -webkit-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg2.png');
+  background: -o-linear-gradient(right, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg2.png');
+  background: linear-gradient( rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.11) ),url('../imgs/bg2.png');
   opacity: 0.91;
   top: 0;
   left: 0;
+  background-size:cover;
 }
 
 .search {
@@ -10699,7 +10703,7 @@ span.counter {
 
 .statement_info_card {
   padding: 0 25px;
-  min-height: 150px;
+  min-height: 90px;
   display: table;
   width: 100%;
 }
@@ -10712,13 +10716,13 @@ span.counter {
 .statement_info_card .icon {
   -webkit-border-radius: 200px;
           border-radius: 200px;
-  line-height: 60px;
+  line-height: 40px;
   margin-right: 13px;
-  width: 60px;
+  width: 40px;
   color: #fff;
   display: inline-block;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .statement_info_card .info {
@@ -16050,16 +16054,16 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   right:auto
 }
 .tree li::before {
-  border-left:2px solid #56a72d;
+  border-left:1px solid #56a72d;
   bottom:50px;
   height:100%;
-  top:0;
+  top:-14px;
   width:1px
 }
 .tree li::after {
-  border-top:2px solid #56a72d;
+  border-top:1px solid #56a72d;
   height:20px;
-  top:30px;
+  top:16px;
   width:25px
 }
 .tree li span {
@@ -16068,7 +16072,7 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   /* border:1px solid #ddd; */
   border-radius:5px;
   display:inline-block;
-  padding:3px 15px;
+  padding:5px;
   text-decoration:none
 }
 .tree li.parent_li>span {
@@ -16087,11 +16091,25 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
 }
 .icongreen{
   color:#56a72d;
+  float: right;
+  line-height: 28px;
 }
 .tree li > span{
   font-size:16px;
 }
 .parent_root{
-  background:#dbdbdb;
-  color:#000;
+  background:rgba(6, 116, 236, 0.1);
+  /* color:#56a72d; */
+  width:100%;
+}
+.child_root{
+  padding:5px 0 !important;
+  border-bottom: 1px solid #56a72d;
+  width:100%;
+}
+.child_li{
+  padding: 0px 8px !important;
+}
+.greenbackground{
+  background:#56a72d;
 }

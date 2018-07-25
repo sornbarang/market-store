@@ -53,11 +53,7 @@
                             @csrf
                             <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <input type="hidden" name="lastchildid" id="lastchildid">
-                            <div class="upload_modules">
-                                <div class="modules__title">
-                                    <h3>@lang('profileitemupload.uploaditem')</h3>
-                                </div><!-- end /.module_title -->
-
+                            <div class="upload_modules"> 
                                 <div class="modules__content">
                                     <div class="form-group">
                                         <div class="row">

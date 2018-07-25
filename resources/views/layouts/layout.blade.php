@@ -18,8 +18,9 @@
                 background: linear-gradient(
                 rgba(0, 0, 0, 0.4), 
                 rgba(0, 0, 0, 0.1)
-                ),url("{{asset('/')}}imgs/bg.png");
+                ),url("{{asset('/')}}imgs/bg2.png");
                 color:#fff;
+                background-size:cover;
             }
             #flex-container {
                 /* display: -webkit-box;       

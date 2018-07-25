@@ -20,8 +20,8 @@
                                         <!-- Request::query('record') is get param  -->
                                         <input type="hidden" value="{{ Request::query('record') ?? 25 }}" name="record">
                                         <select name="price"> 
-                                            <option value="low" {{$data['order']=='asc'?'selected':''}}>Price : Low to High</option>
-                                            <option value="high" {{$data['order']=='desc'?'selected':''}}>Price : High to low</option>
+                                            <option value="low" {{isset($data['order']) ? $data['order']=='asc'?'selected':'':''}}>Price : Low to High</option>
+                                            <option value="high" {{isset($data['order']) ? $data['order']=='desc'?'selected':'':''}}>Price : High to low</option>
                                         </select>
                                         <span class="lnr lnr-chevron-down"></span>
                                     </form>
@@ -34,9 +34,9 @@
                                         <!-- Request::query('price') is get param  -->
                                         <input type="hidden" value="{{ Request::query('price') ?? 'low' }}" name="price">
                                         <select name="record">
-                                            <option value="12" {{$data['record']==12?'selected':''}}>12 Items per page</option>
-                                            <option value="15" {{$data['record']==15?'selected':''}}>15 Items per page</option>
-                                            <option value="25" {{$data['record']==25?'selected':''}}>25 Items per page</option>
+                                            <option value="12" {{isset($data['record'])?$data['record']==12?'selected':'':''}}>12 Items per page</option>
+                                            <option value="15" {{isset($data['record'])?$data['record']==15?'selected':'':''}}>15 Items per page</option>
+                                            <option value="25" {{isset($data['record'])?$data['record']==25?'selected':'':''}}>25 Items per page</option>
                                         </select>
                                         <span class="lnr lnr-chevron-down"></span>
                                     </form>
@@ -86,13 +86,19 @@
                             </a> 
                             <div class="collapse in collapsible-content show" id="collapse1">
                                 <div class="tree well">
-                                    <!-- renderNode call from helpers.js in app/helpers.js -->
-                                    @foreach($data['nest'] as $node)
-                                        @php 
-                                            $r=route('market.dynamiccat');
-                                        @endphp
-                                        {!!renderNode($node,$r)!!}
-                                    @endforeach
+                                    <ul>
+                                        <li class="parent_li">
+                                            <span class="parent_root"><i class="fa fa-folder-open icongreen"></i> All category</span>
+                                            <!-- renderNode call from helpers.php in app/helpers.php -->
+                                            @foreach($data['nest'] as $node)
+                                                @php 
+                                                    // $r is route link
+                                                    $r=route('market.dynamiccat');
+                                                @endphp
+                                                {!!renderNode($node,$r)!!}
+                                            @endforeach
+                                        </li>
+                                    </ul>
                                 </div>
                                 {{--<ul class="card-content"> 
                                     @if(isset($data['countcatpro']))
@@ -137,18 +143,43 @@
 
                 <!-- start col-md-9 -->
                 <div class="col-md-9"> 
-                        <div class="row">
-                            @if(isset($data['product']) && !empty($data['product']))
-
+                        <div class="row"> 
+                            @if(isset($data['product']) && !empty($data['product'])) 
                                 @foreach($data['product'] as $val)  
+                                    @php
+                                        $avatar='';
+                                        $media = $val->user->profile->getMedia(); 
+                                        foreach($media as $m){   
+                                            if($val->user->profile->avatar == $m->id){
+                                                $avatar=$m->id.'/'.$m->file_name;  
+                                            }
+                                        } 
+                                        $img='';  
+                                        $getFirstMedia='';
+                                        $mediaItems = $val->getMedia(); 
+                                        if(count($mediaItems) > 0){
+                                            $getFirstMedia = $val->getFirstMedia();
+                                        }else{
+                                            try {
+                                                $newsItem=App\Models\ProductsAds::findOrFail($val->products_ads_id); 
+                                                $mediaItems = $newsItem->getMedia(); 
+                                                $getFirstMedia = $newsItem->getFirstMedia(); 
+                                            } catch (Exception $e) {
+                                                echo 'Caught exception: ',  $e->getMessage(), "\n";
+                                            } 
+                                        } 
+                                        if($getFirstMedia){
+                                            $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                        }
+                                    @endphp
                                     <div class="col-md-4 col-sm-4">
                                         <!-- start .single-product -->
                                         <div class="product product--card product--card-small">
 
                                             <div class="product__thumbnail">
-                                                <img src="{{$val->image}}" alt="Product Image">
+                                                <img src="{{$img}}" alt="Product Image">
                                                 <div class="prod_btn">
-                                                    <a href="{{ route('market.productdetail',$val->products_ads_id) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                                    <a href="{{ route('market.productdetail',$val->id) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                                     {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                                                 </div><!-- end /.prod_btn -->
                                             </div><!-- end /.product__thumbnail -->
@@ -156,8 +187,8 @@
                                                 <a href="#" class="product_title"><h4>{{$val->name}}</h4></a>
                                                 <ul class="titlebtm">
                                                     <li>
-                                                        @if(isset($val->avatar) && !empty($val->avatar))
-                                                            <img class="auth-img" src="{{$val->avatar}}" alt="author image">
+                                                        @if(isset($avatar) && !empty($avatar))
+                                                            <img class="auth-img" src="{{Storage::url($avatar)}}" alt="author image">
                                                         @else
                                                             <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                                         @endif 
@@ -217,22 +248,22 @@
                         </div> 
                 </div><!-- end /.col-md-9 -->
             </div><!-- end /.row -->
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="pagination-area categorised_item_pagination">
-                    
-                        <nav class="navigation pagination" role="navigation">
-                            <div class="nav-links">
-                                {{--
-                                @if(count($data['product']) > 0)
-                                    {{$data['product']->links()}}
-                                @endif--}}
-                            </div>
-                        </nav>
+            
+            @if(count($data['product']) > 0)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pagination-area categorised_item_pagination">
+                        
+                            <nav class="navigation pagination" role="navigation">
+                                <div class="nav-links"> 
+                                    {{$data['product']->links()}} 
+                                </div>
+                            </nav>
+                        </div>
                     </div>
-                </div>
-            </div><!-- end /.row -->
+                </div><!-- end /.row -->
+            @endif
+            
         </div><!-- end /.container -->
 
     </section>
@@ -242,7 +273,7 @@
 <!--================================
     START COUNTER UP AREA
 =================================-->
-@include('elements.membercount')
+{{--@include('elements.membercount')--}}
 <!--================================
     END COUNTER UP AREA
 =================================-->

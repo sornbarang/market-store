@@ -318,6 +318,49 @@
 <section class="products section--padding">
     <div class="shortcode_wrapper">
         <div class="container">
+            <div class="row">
+                <div class="col-md-12"> 
+                    <div class="shortcode_module_title"  style="padding:10px;">
+                        <div class="dashboard__title"> 
+                            <div class="breadcrumb">
+                                <ul>  
+                                    <li>  
+                                        <a href="{{route('market.dynamiccat','all')}}" style="color:#000;" class="activecat">All Categories</a>
+                                    </li>
+                                    <li style="float:right;"> 
+                                        <a  href="{{route('market.dynamiccat','all')}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <span style="font-size:20px;color:#56a72d" class="lnr lnr-rocket"></span></a>
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-md-12"> 
+                    <div class="row pt-4">
+                        @if(isset($data['root']) && !empty($data['root']))
+                            @foreach($data['root'] as $val)
+                                <div class="col-lg-3 col-md-3 col-sm-6 pb-4">
+                                    <a href="{{route('market.dynamiccat',$val->id)}}">
+                                        <div class="statement_info_card">
+                                            <div class="info_wrap">
+                                                <span class="lnr {{$val->icon}} icon greenbackground"></span>
+                                                <div class="info"> 
+                                                    <span>{{ucfirst($val->name)}}</span>
+                                                </div>
+                                            </div>
+                                            <!-- end /.info_wrap -->
+                                        </div>
+                                    </a>
+                                    <!-- end /.statement_info_card -->
+                                </div>
+                            @endforeach
+                        @endif
+                        <!-- end /.col-md-3 --> 
+                    </div> 
+                </div>
+            </div>
             @if(count($data['listcats']) > 0)
                 @foreach($data['listcats'] as $key =>  $cats)
                     @foreach($cats['childreen'] as $k =>  $cat)
@@ -363,7 +406,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="row"> 
+                    <div class="row pt-4 pb-4"> 
                         <div class="col-md-12">
                             <div class="partners">
                                 @if(is_array($cats['product']) && count($cats['product']) > 1)

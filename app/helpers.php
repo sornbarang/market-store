@@ -3,12 +3,16 @@
     function renderNode($node,$route) {
       $html = '<ul>'; 
       if( $node->isLeaf() ) {
-        $html .= '<li><a href="'.$route.'/'.$node->id.'"><span><i class="fa fa-leaf icongreen"></i> '.ucfirst($node->name).'</span></a></li>';
+        if($node->isRoot()){
+          $html .= '<li class="parent_li"><span class="parent_root"><i class="fa fa-folder-open icongreen"></i> '.ucfirst($node->name).'</span></li>';
+        }else{
+          $html .= '<li class="child_li"><span class="child_root">'.ucfirst($node->name).' <i class="fa fa-leaf icongreen"></i></span></li>';
+        }
       } else {
         if($node->isRoot()){
-          $html .= '<li><a href="'.$route.'/'.$node->id.'"><span class="parent_root"><i class="fa fa-folder-open-o icongreen"></i> '.ucfirst($node->name).'</span></a>';
+          $html .= '<li class="parent_li"><span class="parent_root"><i class="fa fa-folder-open icongreen"></i> '.ucfirst($node->name).'</span>';
         }else{
-          $html .= '<li><a href="'.$route.'/'.$node->id.'"><span><i class="fa fa-minus-square-o icongreen"></i> '.ucfirst($node->name).'</span></a>';
+          $html .= '<li class="child_li"><span class="child_root"><i class="fa fa-minus-square icongreen"></i> '.ucfirst($node->name).'</span>';
         } 
         foreach($node->children as $child)
           $html .= renderNode($child,$route);

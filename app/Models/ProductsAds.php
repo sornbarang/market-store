@@ -31,11 +31,9 @@ class ProductsAds extends Model implements HasMedia,Reportable
         return $this->belongsToMany('App\Models\CategoriesAds', 'products_ads_categories_ads', 'products_ads_id', 'categories_ads_id');
     }
     public function scopeCategorized($query, Category $category=null) {
-        if ( is_null($category) ) return $query->with('categories_ads');
-    
-        $categoryIds = $category->getDescendantsAndSelf();
-    
-        return $query->with('categories_ads')
+        if ( is_null($category) ) return $query->with('categories_ads'); 
+        $categoryIds = $category->getDescendantsAndSelf()->pluck('id'); 
+        return $query->with('categories_ads')->select('*','products_ads_categories_ads.products_ads_id as id')
           ->join('products_ads_categories_ads', 'products_ads_categories_ads.products_ads_id', '=', 'products_ads.id')
           ->join('products_ads_translations', 'products_ads_translations.products_ads_id', '=', 'products_ads.id')
           ->where('products_ads_translations.locale',app()->getLocale())
