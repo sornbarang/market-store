@@ -74,11 +74,32 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
-    <body> 
-        
+    <body>  
         <div id="flex-container">
         
             @yield('content')
         </div>
+        <script type="text/javascript">
+    
+            // Total seconds to wait
+            var seconds = 5;
+            
+            function countdown() {
+                seconds = seconds - 1;
+                if (seconds < 0) {
+                    // Chnage your redirection link here
+                    window.location = "{{route('market')}}";
+                } else {
+                    // Update remaining seconds
+                    document.getElementById("countdown").innerHTML = seconds;
+                    // Count down using javascript
+                    window.setTimeout("countdown()", 1000);
+                }
+            }
+            
+            // Run countdown function
+            countdown();
+            
+        </script>
     </body>
 </html>

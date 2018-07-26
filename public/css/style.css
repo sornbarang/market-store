@@ -16047,7 +16047,7 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   padding:10px 5px 0 8px;
   position:relative
 }
-.tree li::before, .tree li::after {
+/* .tree li::before, .tree li::after {
   content:'';
   left:-20px;
   position:absolute;
@@ -16065,7 +16065,7 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   height:20px;
   top:16px;
   width:25px
-}
+} */
 .tree li span {
   -moz-border-radius:5px;
   -webkit-border-radius:5px;

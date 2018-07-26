@@ -89,9 +89,7 @@ class C2cController extends Controller
             }
         } 
         
-        return response()->json($pros);
-        // return response()->json(Product::categorized($node)->latest('products_ads.id')->with('user')->limit(7)->get());
-        // $pros[$node->name]['childreen']= $node->getDescendantsAndSelf(1);   
+        return response()->json($pros);   
     }
     public function getDynamicCategory($id,Request $request){   
         $data['nest'] = Category::all()->toHierarchy();
@@ -112,10 +110,13 @@ class C2cController extends Controller
             // get all product
             $data['product']=Product::categorized()->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
         }else{
-            $node = Category::find($id);   
+            $node = Category::findOrFail($id);   
+            $data['bread']=$node->getAncestorsAndSelf();
+            $data['cnode']=$node->id; 
+            $data['cnodeName']=$node->name; 
+            
             $data['order']=$order;
-            $data['record']=$record;
-            // second param mean return array object 
+            $data['record']=$record; 
             $data['product']=Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
         }
         $data['order']=$order;

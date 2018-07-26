@@ -84,29 +84,26 @@
                             <a class="card-title" href="#collapse1" role="button" data-toggle="collapse"  aria-expanded="true" aria-controls="collapse1">
                                 <h4 >Categories <span class="lnr lnr-chevron-down"></span></h4>
                             </a> 
-                            <div class="collapse in collapsible-content show" id="collapse1">
+                            <div class="collapse in collapsible-content show" id="collapse1" style="padding:0;">
                                 <div class="tree well">
                                     <ul>
                                         <li class="parent_li">
                                             <span class="parent_root"><i class="fa fa-folder-open icongreen"></i> All category</span>
                                             <!-- renderNode call from helpers.php in app/helpers.php -->
-                                            @foreach($data['nest'] as $node)
-                                                @php 
-                                                    // $r is route link
-                                                    $r=route('market.dynamiccat');
-                                                @endphp
-                                                {!!renderNode($node,$r)!!}
-                                            @endforeach
+                                            @if(isset($data['nest']) && !empty($data['nest']))
+                                                @foreach($data['nest'] as $node)
+                                                    @php 
+                                                        // $r is route link
+                                                        $r=route('market.dynamiccat');
+                                                    @endphp
+                                                    {!!renderNode($node,$r)!!}
+                                                @endforeach
+                                            @else
+                                                <p>No category</p>
+                                            @endif
                                         </li>
                                     </ul>
-                                </div>
-                                {{--<ul class="card-content"> 
-                                    @if(isset($data['countcatpro']))
-                                        @foreach($data['countcatpro'] as $key => $val)
-                                            <li ><a class="{{$val['active']?'myactive':''}}" href="{{route('market.dynamiccat',$val['id'])}}"><span class="lnr lnr-chevron-right"></span>{{ucfirst($val['name'])}}<span class="item-count">{{$val['count']}}</span></a></li>
-                                        @endforeach
-                                    @endif
-                                </ul>--}}
+                                </div> 
                             </div><!-- end /.collapsible_content --> 
                         </div><!-- end /.sidebar-card -->
 
@@ -143,8 +140,8 @@
 
                 <!-- start col-md-9 -->
                 <div class="col-md-9"> 
-                        <div class="row"> 
-                            @if(isset($data['product']) && !empty($data['product'])) 
+                        <div class="row">  
+                            @if(isset($data['product']) && count($data['product']) > 0) 
                                 @foreach($data['product'] as $val)  
                                     @php
                                         $avatar='';
@@ -243,7 +240,7 @@
                                     </div><!-- end /.col-md-4 -->
                                 @endforeach
                             @else
-                                @lang('frontlabel.norecord') {{$data['cnode'] ?? ''}}
+                                @lang('frontlabel.norecord') {{$data['cnodeName'] ?? ''}}
                             @endif
                         </div> 
                 </div><!-- end /.col-md-9 -->

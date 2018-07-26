@@ -130,17 +130,8 @@ class ProductController extends Controller
      { 
         $post = Product::findOrFail($id);
         $node = Category::find($post->categories_ads[0]->id);
-        $data['bread'] = $node->getAncestorsAndSelf(); 
-        // current category
-        $cnode= $node->getDescendantsAndSelf(); 
-        foreach($cnode[0]->translations as $lang){
-            if($lang->locale=='en'){
-                $curentnode=$lang->name;
-            }else{
-                $curentnode=$lang->name;
-            }
-        } 
-        $data['cnode'] = $curentnode;
+        $data['bread'] = $node->getAncestorsAndSelf();  
+        $data['cnode']=$node->id; 
         if($post->user_id !=null){ 
             $data['relateProByUser'] = Product::where('user_id',$post->user_id)->latest()->limit(5)->get();  
         }if($post){

@@ -25,8 +25,8 @@
                                 @if(isset($data['bread']))
                                     @foreach($data['bread'] as $bread)
                                         @foreach($bread->translations as $v)
-                                            @if($v->locale==app()->getLocale())
-                                                <li class="{{$data['cnode']==$v->name?'active':''}}"><a href="{{route('market.dynamiccat',$v->categories_ads_id)}}">{{$v->name}}</a></li> 
+                                            @if($v->locale==app()->getLocale()) 
+                                                <li class="{{$data['cnode']==$v->categories_ads_id?'active':''}}"><a href="{{route('market.dynamiccat',$v->categories_ads_id)}}">{{$v->name}}</a></li> 
                                             @endif
                                         @endforeach
                                     @endforeach
