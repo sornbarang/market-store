@@ -16113,3 +16113,9 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
 .greenbackground{
   background:#56a72d;
 }
+.trucate{
+  white-space: nowrap;
+  max-width: 158px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

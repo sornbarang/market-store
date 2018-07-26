@@ -246,7 +246,7 @@
                                                     <a href="{{route('market.mysetting')}}">
                                                         <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
                                                 </li>
-
+                                                {{--
                                                 <li>
                                                     <a href="{{route('market.customer.index')}}">
                                                         <span class="lnr lnr-home"></span> @lang('profile.dashboard')</a>
@@ -259,11 +259,12 @@
                                                     <a href="{{route('market.myfavorite')}}">
                                                         <span class="lnr lnr-heart"></span> @lang('profile.favourite')</a>
                                                 </li>
+                                                
                                                 <li>
                                                     <a href="{{route('market.mysale')}}">
                                                         <span class="lnr lnr-chart-bars"></span>@lang('profile.salemanage')</a>
                                                 </li>
-
+                                                --}}
                                                 <li>
                                                     <a href="{{route('market.myitemupload')}}">
                                                         <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
