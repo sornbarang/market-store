@@ -964,11 +964,17 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.each( response, function( key, value ) {  
                             var route='{{route("market.productdetail")}}/'+value.products_ads_id; 
                             owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4>'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row"> <div class="col"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rating product--rating"> <ul> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star-half-o"></span> </li> </ul> </div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
-                        });
+                        }); 
+                        if(response.length > 5){
+                           $('.owl-nav').show();
+                        }else{
+                            $('.owl-nav').hide();
+                        } 
                         owl.owlCarousel({
-                            items: response.length,
+                            items: 5,
                             autoplay: true,
-                            margin: 30,
+                            margin: 30,  
+                            navText : ["",""],
                             responsive: {
                                 0: {
                                     items: 1

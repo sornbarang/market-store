@@ -280,6 +280,7 @@
         items: 5,
         autoplay: true,
         margin: 30,
+        navText : ["",""],
         responsive: {
             0: {
                 items: 1

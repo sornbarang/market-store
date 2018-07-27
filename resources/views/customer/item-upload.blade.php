@@ -16,7 +16,7 @@
         @include('elements.customer-menu') 
         <div class="dashboard_contents">
             <div class="container">
-                <div class="row">
+                <div class="row pb-3">
                     <div class="col-md-12">
                         <div class="dashboard_title_area">
                             <div class="pull-left">

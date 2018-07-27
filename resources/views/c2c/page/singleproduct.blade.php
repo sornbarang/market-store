@@ -704,34 +704,7 @@
                                                     </p>                                                                 
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="out_of_class_name">
-                                            <div class="sell">
-                                                <p>
-                                                    <span class="lnr lnr-cart"></span>
-                                                    <span>27</span>
-                                                </p>
-                                            </div>
-                                            <div class="rating product--rating">
-                                                <ul>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star-half-o"></span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                        </li> 
                                     </ul>
 
                                 </div>

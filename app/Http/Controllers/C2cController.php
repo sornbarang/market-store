@@ -17,28 +17,16 @@ class C2cController extends Controller
         return preg_replace('/\s+/u', '-', trim($string));
     }
     public function index()
-    {
-        // $data['category']=$this->getParentsCategory(); 
+    { 
         $tree = Category::roots()->get();  
         $pro=[]; 
-        foreach($tree as $k => $va){  
-            if( $va->isRoot()){
-                $cat = $va->getImmediateDescendants();
-            }else{
-                //if not root get self and child
-                $cat = $va->getAncestorsAndSelf(); 
-            }
-            foreach($cat as $node){
-                $p=Product::categorized($node)->get();
-                if(count($p) > 0){
-                    $pro[$va->name]['product'][]= Product::categorized($node)->get();
-                }
-            }
-            $pro[$va->name]['product'][]=[];
-            $pro [$va->name]['childreen'][]= $va->getDescendantsAndSelf(1);  
-        }  
-        // return $pro;
-        $data['listcats']=$pro;  
+        foreach($tree as $k => $va){
+            // get product of parent limit 7
+            $pro[$va->name]['product']=Product::categorized($va)->latest('products_ads.id')->limit(7)->get();
+            // get one lavel of parent
+            $pro [$va->name]['childreen']= $va->getDescendantsAndSelf(1);
+        } 
+        $data['listcats']=$pro;   
         // loop root category push icon
         foreach($tree as $key => $val){
             if(strtolower($val->name)=='fashion'){
@@ -91,7 +79,8 @@ class C2cController extends Controller
         
         return response()->json($pros);   
     }
-    public function getDynamicCategory($id,Request $request){   
+    public function getDynamicCategory($id,Request $request){  
+        // get all category with tree relate with app/helpers.php 
         $data['nest'] = Category::all()->toHierarchy();
         $order='asc';
         $record=25;
