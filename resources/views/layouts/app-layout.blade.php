@@ -64,11 +64,13 @@
 
                 <!-- start .col-md-5 -->
                 <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle">
+                    
                     <!-- start .author-area -->
                     <div class="author-area">
+                    
                         @if (Route::has('login'))
                             @auth
-                            <a class="author-area__seller-btn inline" href="{{ route('logout') }}"
+                            <a class="btn btn--xs mr-3" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 @lang('authlabel.logout')
@@ -77,12 +79,12 @@
                                     @csrf
                                 </form>
                             @else
-                                <a href="{{route('login')}}" class="author-area__seller-btn inline">@lang('authlabel.login')</a> 
-                                @endauth 
+                                <a href="{{route('login')}}" class="btn btn--xs mr-3">@lang('authlabel.login')</a> 
+                            @endauth   
                         @endif
                             <div class="inline">
                                 <div class="has_dropdown">
-                                    <button class="btn btn--icon btn-sm btn-info">
+                                    <button class="btn btn--xs">
                                     @if( app()->getLocale()=='km')
                                         <span class="flag-icon flag-icon-kh"></span>
                                     @else
@@ -112,9 +114,7 @@
                             </div>
                         <div class="author__notification_area">
                             <ul>
-                            <li class="has_dropdown">
-                                    &nbsp;
-                                    {{--
+                                <li class="has_dropdown">  
                                     <div class="icon_wrap">
                                         <span class="lnr lnr-cart"></span>
                                         <span class="notification_count purch">2</span>
@@ -175,8 +175,7 @@
                                                 <a class="go_checkout" href="checkout.html">Checkout</a>
                                             </div>
                                         </div>
-                                    </div>
-                                    --}}
+                                    </div> 
                                 </li>
                             </ul>
                         </div>
@@ -227,13 +226,13 @@
                                     <p class="name">
                                         @if (Route::has('login'))
                                             @auth
-                                                {{ Auth::user()->name }}
-                                                @else
-                                                    guest
-                                                    @endauth
-                                                @endif
+                                                {{ ucfirst(Auth::user()->name) }}
+                                            @else
+                                                guest
+                                            @endauth
+                                        @endif
                                     </p>
-                                    <p class="ammount">$20.45</p>
+                                    <!-- <p class="ammount">$20.45</p> -->
                                 </div>
                                     @auth
                                         <div class="dropdown dropdown--author">
@@ -284,10 +283,10 @@
                                                     @endauth
                                                 @endif
                                                 <li>
-                                                    <a class="lnr lnr-exit" href="{{ route('logout') }}"
+                                                    <a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                                        @lang('profile.logout')
+                                                    <span class="lnr lnr-exit"></span>@lang('profile.logout')
                                                     </a>
 
                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -963,7 +962,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         owl.trigger('destroy.owl.carousel');
                         $.each( response, function( key, value ) {  
                             var route='{{route("market.productdetail")}}/'+value.products_ads_id; 
-                            owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4>'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row"> <div class="col"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rating product--rating"> <ul> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star-half-o"></span> </li> </ul> </div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
+                            owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4 class="trucate" title="'+value.name+'">'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row"> <div class="col"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rating product--rating"> <ul> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star-half-o"></span> </li> </ul> </div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
                         }); 
                         if(response.length > 5){
                            $('.owl-nav').show();

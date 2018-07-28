@@ -7104,7 +7104,8 @@ ul.nav-tabs.nav--tabs2 li a::before {
 	START MENU AREA
 *****************************/
 .top-menu-area {
-  background: #eef1f3;
+  
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
 
 .top-menu-area .top__menu ul li {
@@ -16038,9 +16039,6 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)
 } */
-.tree.well{
-  padding-bottom:20px;
-}
 .tree li {
   list-style-type:none;
   margin:0;

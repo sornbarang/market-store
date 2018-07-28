@@ -435,8 +435,8 @@
                                                 <!-- end /.product__thumbnail -->
 
                                                 <div class="product-desc">
-                                                    <a href="javascript:void(0)" class="product_title trucate">
-                                                        <h4>{{$getprops->name}}</h4>
+                                                    <a href="javascript:void(0)" class="product_title">
+                                                        <h4 class="trucate" title="{{$getprops->name}}">{{$getprops->name}}</h4>
                                                     </a>
                                                     <ul class="titlebtm">
                                                         <li>
