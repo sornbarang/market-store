@@ -331,17 +331,16 @@
         slidesToScroll: 1,
         arrows: false,
         fade: true,
-        autoplay: true,
         autoplaySpeed: 2000,
         asNavFor: '.thumb-slider'
     });
 
     var thumbSlider = $('.thumb-slider');
     thumbSlider.slick({
-        slidesToShow: 5,
+        slidesToShow: 3,
         slidesToScroll: 1,
         arrows: false,
-        focusOnSelect: false,
+        focusOnSelect: true,
         asNavFor: '.item__preview-slider',
         responsive: [
             {

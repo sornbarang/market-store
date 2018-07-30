@@ -228,11 +228,11 @@
                                             @auth
                                                 {{ ucfirst(Auth::user()->name) }}
                                             @else
-                                                guest
+                                                Guest
                                             @endauth
                                         @endif
                                     </p>
-                                    <!-- <p class="ammount">$20.45</p> -->
+                                    <p class="ammount">$20.45</p>
                                 </div>
                                     @auth
                                         <div class="dropdown dropdown--author">

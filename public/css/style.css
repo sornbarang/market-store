@@ -16108,6 +16108,9 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
 .child_li{
   padding: 0px 8px !important;
 }
+.child_li > a{
+  line-height: inherit !important;
+}
 .greenbackground{
   background:#56a72d;
 }
@@ -16129,7 +16132,7 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   height: 50px;
   position: absolute;
   top: 40%;
-  margin-left: -20px;
+  margin-left: -18px;
   display: block !important;
   border:0px solid black;
 }
