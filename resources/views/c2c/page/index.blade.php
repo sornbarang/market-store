@@ -347,7 +347,7 @@
                                             <div class="info_wrap">
                                                 <span class="lnr {{$val->icon}} icon greenbackground"></span>
                                                 <div class="info"> 
-                                                    <span>{{ucfirst($val->name)}}</span>
+                                                    <span>{{ucfirst(str_limit($val->name,15))}}</span>
                                                 </div>
                                             </div>
                                             <!-- end /.info_wrap -->
@@ -450,14 +450,14 @@
                                                             </p>
                                                         </li>
                                                         <li class="out_of_class_name">
-                                                            <div class="row">
-                                                                <div class="col">
+                                                            <div class="row no-gutters">
+                                                                <div class="col col-md-4">
                                                                     <p>
                                                                         <span class="flag-icon flag-icon-kh"></span>
                                                                         <span>Cam</span>
                                                                     </p>
                                                                 </div>
-                                                                <div class="col">
+                                                                <div class="col col-md-8 text-right">
                                                                     <p> 
                                                                         <span>Phnom penh</span>
                                                                     </p>                                                                 

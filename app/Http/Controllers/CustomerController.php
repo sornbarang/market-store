@@ -357,12 +357,18 @@ class CustomerController extends Controller
      */
     public function myManageItem(Request $request)
     {
-        $order='asc'; 
+        $order=''; 
         if(isset($request->price) && $request->price=='high'){
             $order='desc';
-        } 
+        }elseif(isset($request->price) && $request->price=='low'){
+            $order='asc'; 
+        }
         $data['order']=$order; 
-        $data['products'] = Product::where('user_id', Auth::user()->id)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate(20);
+        if($order){
+            $data['products'] = Product::where('user_id', Auth::user()->id)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate(9);
+        }else{
+            $data['products'] = Product::where('user_id', Auth::user()->id)->latest('products_ads.id')->paginate(9);
+        }
         $data['breadcrub']='manage items';
         return view('customer.manage-item',compact('data'));
     }

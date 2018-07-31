@@ -82,31 +82,39 @@ class C2cController extends Controller
     public function getDynamicCategory($id,Request $request){  
         // get all category with tree relate with app/helpers.php 
         $data['nest'] = Category::all()->toHierarchy();
-        $order='asc';
-        $record=25;
+        $order='';
+        $record=9;
         if(isset($request->price) && $request->price=='high'){
             $order='desc';
+        }elseif(isset($request->price) && $request->price=='low'){
+            $order='asc';
         }
         if(isset($request->record) && !empty($request->record)){
             if($request->record==12){
                 $record=12;
             }else if(isset($request->record) && $request->record==15){
                 $record=15;
+            }else if(isset($request->record) && $request->record==25){
+                $record=25;
             }
         }
         
         if($id==='all'){
-            // get all product
-            $data['product']=Product::categorized()->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
+            if($order !=''){
+                // get all product
+                $data['product']=Product::categorized()->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
+            }else{
+                // get all product->orderBy('products_ads.price', $order)
+                $data['product']=Product::categorized()->latest('products_ads.id')->paginate($record);                
+            }
         }else{
             $node = Category::findOrFail($id);   
             $data['bread']=$node->getAncestorsAndSelf();
             $data['cnode']=$node->id; 
-            $data['cnodeName']=$node->name; 
-            
+            $data['cnodeName']=$node->name;  
             $data['order']=$order;
             $data['record']=$record; 
-            $data['product']=Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
+            $data['product']=Product::categorized($node)->latest('products_ads.id')->orderBy('products_ads.price', $order)->paginate($record);
         }
         $data['order']=$order;
         $data['record']=$record;

@@ -18,7 +18,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="dashboard_title_area">
+                        <div class="dashboard_title_area mb-3">
                             <div class="pull-left">
                                 <div class="dashboard__title">
                                     <h3>@lang('profileedititemupload.uploaditem')</h3>
@@ -37,10 +37,7 @@
                             <input type="hidden" name="lastchildid" id="lastchildid">
                             <input type="hidden" name="clid" id="clid" value="{{$data['clid']}}">
                             @if(isset($data['category']) && !empty($data['category'] ))
-                                <div class="upload_modules">
-                                    <div class="modules__title">
-                                        <h3>@lang('profileitemupload.uploaditem')</h3>
-                                    </div><!-- end /.module_title -->  
+                                <div class="upload_modules">  
                                     <div class="modules__content">
                                         <div class="form-group">
                                             <div class="row">

@@ -139,7 +139,7 @@
                 </div><!-- end /.col-md-3 -->
 
                 <!-- start col-md-9 -->
-                <div class="col-md-9"> 
+                <div class="col-md-9 cAllProducts"> 
                         <div class="row">  
                             @if(isset($data['product']) && count($data['product']) > 0) 
                                 @foreach($data['product'] as $val)  
@@ -169,7 +169,7 @@
                                             $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
                                         }
                                     @endphp
-                                    <div class="col-md-4 col-sm-4">
+                                    <div class="col-md-4 col-sm-6">
                                         <!-- start .single-product -->
                                         <div class="product product--card product--card-small">
 
@@ -181,7 +181,7 @@
                                                 </div><!-- end /.prod_btn -->
                                             </div><!-- end /.product__thumbnail -->
                                             <div class="product-desc">
-                                                <a href="#" class="product_title"><h4>{{$val->name}}</h4></a>
+                                                <a href="#" class="product_title"><h4 title="{{$val->name}}">{{str_limit($val->name,35)}}</h4></a>
                                                 <ul class="titlebtm">
                                                     <li>
                                                         @if(isset($avatar) && !empty($avatar))
@@ -189,17 +189,17 @@
                                                         @else
                                                             <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                                         @endif 
-                                                        <p><a href="#">{{$val->user->name}}</a></p>
+                                                        <p><a href="#">{{str_limit($val->user->name,15)}}</a></p>
                                                     </li> 
                                                     <li class="out_of_class_name">
                                                                 <div class="row">
-                                                                    <div class="col">
+                                                                    <div class="col col-md-5">
                                                                         <p>
                                                                             <span class="flag-icon flag-icon-kh"></span>
                                                                             <span>Cam</span>
                                                                         </p>
                                                                     </div>
-                                                                    <div class="col">
+                                                                    <div class="col col-md-7">
                                                                         <p> 
                                                                             <span>Phnom penh</span>
                                                                         </p>                                                                 

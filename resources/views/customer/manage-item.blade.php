@@ -153,7 +153,10 @@
                                             </a></p>
                                         </li> 
                                     </ul> 
-                                    {!!$val->translateOrNew(app()->getLocale())->description!!}
+                                    @php 
+                                    $string = preg_replace("/(\<(\/?[^\>]+)\>)/", " ",$val->translateOrNew(app()->getLocale())->description);
+                                    @endphp
+                                    {{$string}} 
                                 </div><!-- end /.product-desc -->
 
                                 <div class="product-purchase">
