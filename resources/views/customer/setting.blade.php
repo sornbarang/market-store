@@ -240,6 +240,52 @@
                                 </div>
                             </div>
                             <!-- end /.information_module --> 
+                            <div class="information_module">
+                                <a class="toggle_title" href="#collapse5" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse1">
+                                    <h4>Social Profiles
+                                        <span class="lnr lnr-chevron-down"></span>
+                                    </h4>
+                                </a>
+
+                                <div class="information__set social_profile toggle_module collapse " id="collapse5">
+                                    <div class="information_wrapper">
+                                        <div class="social__single">
+                                            <div class="social_icon">
+                                                <span class="fa fa-facebook"></span>
+                                            </div>
+
+                                            <div class="link_field">
+                                                <input value="{{Auth::user()->profile->facebook_link}}" name="facebook" type="text" class="text_field" placeholder="ex: www.facebook.com/aazztech">
+                                            </div>
+                                        </div>
+                                        <!-- end /.social__single -->
+
+                                        <div class="social__single">
+                                            <div class="social_icon">
+                                                <span class="fa fa-twitter"></span>
+                                            </div>
+
+                                            <div class="link_field">
+                                                <input value="{{Auth::user()->profile->twitter_link}}" name="twitter" type="text" class="text_field" placeholder="ex: www.twitter.com/aazztech">
+                                            </div>
+                                        </div>
+                                        <!-- end /.social__single --> 
+                                        <div class="social__single">
+                                            <div class="social_icon">
+                                                <span class="fa fa-instagram"></span>
+                                            </div>
+
+                                            <div class="link_field">
+                                                <input value="{{Auth::user()->profile->instagram_link}}" name="instagram" type="text" class="text_field" placeholder="ex: www.instagram.com/aazztech">
+                                            </div>
+                                        </div>
+                                        <!-- end /.social__single --> 
+                                    </div>
+                                    <!-- end /.information_wrapper -->
+                                </div>
+                                <!-- end /.social_profile -->
+                            </div>
+                            <!-- end /.information_module -->
                         </div>
                         <!-- end /.col-md-6 -->
                         

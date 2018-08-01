@@ -1013,7 +1013,9 @@ a {
 .social_icon span.fa-facebook {
   background: #395799;
 }
-
+.social_icon span.fa-instagram{
+  background: #6f5858;
+}
 .social_icon span.fa-twitter {
   background: #19b2f5;
 }

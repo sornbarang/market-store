@@ -182,6 +182,9 @@ class CustomerController extends Controller
                 'phone' => $request->phone,
                 'location' => $request->location,
                 'bio' => $request->author_bio,
+                'facebook_link' => $request->facebook??'',
+                'twitter_link' => $request->twitter??'',
+                'instagram_link' => $request->instagram??'',
                 'avatar'=>isset($avatar->id) && !empty($avatar->id)?$avatar->id:$profile->avatar,
                 'cover_image'=>isset($cover->id) && !empty($cover->id)?$cover->id:$profile->cover_image,
             ]);
