@@ -307,14 +307,14 @@
                                     $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
                                 } 
                             @endphp  
-                                <div class="col-lg-4 col-md-6">
+                                <div class="col-lg-4 col-md-6 cStoreProduct">
                                     <!-- start .single-product -->
                                     <div class="product product--card product--card-small">
 
                                         <div class="product__thumbnail">
                                             <img src="{{ $img }}" alt="Product Image">
                                             <div class="prod_btn">
-                                                <a href="single-product.html" class="transparent btn--sm btn--round">More Info</a>
+                                                <a href="{{ route('market.productdetail',$val->id) }}" class="transparent btn--sm btn--round">More Info</a>
                                                 {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                                             </div>
                                             <!-- end /.prod_btn -->
@@ -323,7 +323,7 @@
 
                                         <div class="product-desc">
                                             <a href="#" class="product_title">
-                                                <h4>{{$val->name}}</h4>
+                                                <h4>{{str_limit($val->name,35)}}</h4>
                                             </a>
                                             <ul class="titlebtm">
                                                 <li>
@@ -333,7 +333,7 @@
                                                         <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                                     @endif 
                                                     <p>
-                                                        <a href="#">{{$val->user->name}}</a>
+                                                        <a href="#">{{str_limit($val->user->name,15)}}</a>
                                                     </p>
                                                 </li>
                                                 <li class="out_of_class_name">

@@ -133,7 +133,7 @@ class ProductController extends Controller
         $data['bread'] = $node->getAncestorsAndSelf();  
         $data['cnode']=$node->id; 
         if($post->user_id !=null){ 
-            $data['relateProByUser'] = Product::where('user_id',$post->user_id)->latest()->limit(5)->get();  
+            $data['relateProByUser'] = Product::where('user_id',$post->user_id)->latest()->limit(7)->get();  
         }if($post){
             $data['product']=$post;
         }

@@ -108,7 +108,7 @@
                         @endphp
                         <div class="col-md-4 col-sm-6">
                             <!-- start .single-product -->
-                            <div class="product product--card">
+                            <div class="product product--card cProfileProduct">
 
                                 <div class="product__thumbnail"> 
                                     <figure class="figure">
@@ -122,7 +122,7 @@
                                         <div class="options dropdown-menu" aria-labelledby="drop2">
                                             <ul>
                                                 <li><a href="{{route('market.edititem',$val->id)}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
-                                                {{--<li><a href="#"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.hide')</a></li>--}}
+                                                <li><a target="_blank" href="{{ route('market.productdetail',$val->id) }}"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.view')</a></li>
                                                 <li>
                                                     <a data-route="{{route('market.deleteproduct',$val->id)}}" href="#" data-toggle="modal" data-target="#myModal2" class="delete" id="deletepro">
                                                         <span class="lnr lnr-trash"></span>@lang('profilemanageitem.delete')
@@ -154,16 +154,18 @@
                                         </li> 
                                     </ul> 
                                     @php 
-                                    $string = preg_replace("/(\<(\/?[^\>]+)\>)/", " ",$val->translateOrNew(app()->getLocale())->description);
+                                    //$string = preg_replace("/(\<(\/?[^\>]+)\>)/", " ",html_entity_decode($val->translateOrNew(app()->getLocale())->description));
+                                    $string = strip_tags($val->translateOrNew(app()->getLocale())->description);
+                                    $string = preg_replace("/&#?[a-z0-9]{2,8};/i","",$string);
                                     @endphp
-                                    {{$string}} 
+                                    {{str_limit($string,100)}}
                                 </div><!-- end /.product-desc -->
 
                                 <div class="product-purchase">
                                     <div class="row">
                                         <div class="col text-md-left text-xs-center text-sm-center  col-xs-12 col-sm-12 col-md-6">
                                             <div class="price_love">
-                                                <span>$ {{$val->price??0}}</span> 
+                                                <span title="{{$val->price}}">$ {{str_limit($val->price,10)??0}}</span> 
                                             </div>
                                         </div>
                                         <div class="cflexcenter col text-xs-center  col-xs-12 col-sm-12 col-md-6">

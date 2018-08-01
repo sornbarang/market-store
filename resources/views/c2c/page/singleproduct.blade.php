@@ -642,105 +642,118 @@
                     <div class="section-title">
                         <h1>@lang('frontlabel.moreitems') <span class="highlighted"> {{ucfirst($data['product']->user->name)}}</span></h1>
                     </div>
-                </div><!-- end /.col-md-12 --> 
-                <!-- start .col-md-4 -->
-                <div class="partners">
-                    @foreach($data['relateProByUser'] as $val)
-                        @php
-                            $avatar='';  
-                            $media = $val->user->profile->getMedia(); 
-                            foreach($media as $m){   
-                                if($val->user->profile->avatar == $m->id){
-                                    $avatar=$m->id.'/'.$m->file_name;  
-                                }
-                            } 
-                            $img='';
-                            $getMediaRelation=$val->getMedia();
-                            $getFirstMedia = $val->getFirstMedia(); 
-                            if($getFirstMedia){
-                                $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-                            } 
-                        @endphp   
-                        <div class="partner">
-                            <!-- start .single-product -->
-                            <div class="product product--card product--card-small">
+                </div><!-- end /.col-md-12 -->  
+                <div class="col-md-12"> 
+                    <div class="partners relationPro">
+                        @foreach($data['relateProByUser'] as $val)
+                            @php
+                                $avatar='';  
+                                $media = $val->user->profile->getMedia(); 
+                                foreach($media as $m){   
+                                    if($val->user->profile->avatar == $m->id){
+                                        $avatar=$m->id.'/'.$m->file_name;  
+                                    }
+                                } 
+                                $img='';
+                                $getMediaRelation=$val->getMedia();
+                                $getFirstMedia = $val->getFirstMedia(); 
+                                if($getFirstMedia){
+                                    $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                } 
+                            @endphp   
+                            <div class="partner">
+                                <!-- start .single-product -->
+                                <div class="product product--card product--card-small">
 
-                                <div class="product__thumbnail">
-                                    <img src="{{$img}}" alt="Product Image">
-                                    <div class="prod_btn">
-                                        <a href="{{ route('market.productdetail',$val->id) }}" class="transparent btn--sm btn--round">More Info</a>
-                                        <!-- <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a> -->
-                                    </div>
-                                    <!-- end /.prod_btn -->
-                                </div>
-                                <!-- end /.product__thumbnail -->
-
-                                <div class="product-desc">
-                                    <a href="#" class="product_title">
-                                        <h4>{{$val->name}}</h4>
-                                    </a>
-                                    <ul class="titlebtm">
-                                        <li>
-                                            @if(isset($avatar) && !empty($avatar))
-                                                <img class="auth-img" src="{{Storage::url($avatar)}}" alt="author image"> 
-                                            @else
-                                                <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
-                                            @endif 
-                                            <p>
-                                                <a href="#">{{ucfirst($val->user->name)}}</a>
-                                            </p>
-                                        </li>
-                                        <li class="out_of_class_name">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p>
-                                                        <span class="flag-icon flag-icon-kh"></span>
-                                                        <span>Cam</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col">
-                                                    <p> 
-                                                        <span>Phnom penh</span>
-                                                    </p>                                                                 
-                                                </div>
-                                            </div>
-                                        </li> 
-                                    </ul>
-
-                                </div>
-                                <!-- end /.product-desc -->
-
-                                <div class="product-purchase">
-                                    <div class="price_love">
-                                        <span>$ {{$val->price??'0'}}</span>
-                                    </div>
-                                    <a href="javascript:void(0)">
-                                        <div class="rating product--rating">
-                                            <ul>
-                                                <li>
-                                                    <span class="fa fa-star"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star-half-o"></span>
-                                                </li>
-                                            </ul>
+                                    <div class="product__thumbnail">
+                                        <img src="{{$img}}" alt="Product Image">
+                                        <div class="prod_btn">
+                                            <a href="{{ route('market.productdetail',$val->id) }}" class="transparent btn--sm btn--round">More Info</a>
+                                            <!-- <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a> -->
                                         </div>
-                                    </a>
+                                        <!-- end /.prod_btn -->
+                                    </div>
+                                    <!-- end /.product__thumbnail -->
+
+                                    <div class="product-desc">
+                                        <a href="#" class="product_title">
+                                            <h4>{{str_limit($val->name,30)}}</h4>
+                                        </a>
+                                        <ul class="titlebtm">
+                                            <li>
+                                                @if(isset($avatar) && !empty($avatar))
+                                                    <img class="auth-img" src="{{Storage::url($avatar)}}" alt="author image"> 
+                                                @else
+                                                    <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
+                                                @endif 
+                                                <p>
+                                                    <a href="#">{{ucfirst(str_limit($val->user->name,15))}}</a>
+                                                </p>
+                                            </li>
+                                            <li class="out_of_class_name">
+                                                <div class="row no-gutters">
+                                                    <div class="col col-md-5">
+                                                        <p>
+                                                            <span class="flag-icon flag-icon-kh"></span>
+                                                            <span>Cam</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col col-md-7 text-right">
+                                                        <p> 
+                                                            <span>Phnom penh</span>
+                                                        </p>                                                                 
+                                                    </div>
+                                                </div>
+                                            </li> 
+                                        </ul>
+
+                                    </div>
+                                    <!-- end /.product-desc -->
+
+                                    <div class="product-purchase">
+                                        <div class="price_love">
+                                            <span>$ {{$val->price??'0'}}</span>
+                                        </div>
+                                        <a href="javascript:void(0)">
+                                            <div class="rating product--rating">
+                                                <ul>
+                                                    <li>
+                                                        <span class="fa fa-star"></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="fa fa-star"></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="fa fa-star"></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="fa fa-star"></span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="fa fa-star-half-o"></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- end /.product-purchase -->
                                 </div>
-                                <!-- end /.product-purchase -->
-                            </div>
-                            <!-- end /.single-product --> 
-                        </div> 
-                    @endforeach
+                                <!-- end /.single-product --> 
+                            </div> 
+                        @endforeach 
+                        
+                    </div> 
+                    @if(count($data['relateProByUser'])  > 5)
+                        <div class="owl-nav">
+                            <div class="owl-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                            <div class="owl-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                        </div>
+                        <div class="owl-dots">
+                            <div class="owl-dot active"><span></span></div>
+                            <div class="owl-dot"><span></span></div>
+                            <div class="owl-dot"><span></span></div>
+                        </div>
+                    @endif
                 </div> 
             </div><!-- end /.container -->
         </div><!-- end /.container -->

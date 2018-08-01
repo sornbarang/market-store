@@ -192,27 +192,27 @@
                                                         <p><a href="#">{{str_limit($val->user->name,15)}}</a></p>
                                                     </li> 
                                                     <li class="out_of_class_name">
-                                                                <div class="row">
-                                                                    <div class="col col-md-5">
-                                                                        <p>
-                                                                            <span class="flag-icon flag-icon-kh"></span>
-                                                                            <span>Cam</span>
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="col col-md-7">
-                                                                        <p> 
-                                                                            <span>Phnom penh</span>
-                                                                        </p>                                                                 
-                                                                    </div>
-                                                                </div>
-                                                            </li>
+                                                        <div class="row no-gutters">
+                                                            <div class="col col-md-5">
+                                                                <p>
+                                                                    <span class="flag-icon flag-icon-kh"></span>
+                                                                    <span>Cam</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col col-md-7">
+                                                                <p> 
+                                                                    <span>Phnom penh</span>
+                                                                </p>                                                                 
+                                                            </div>
+                                                        </div>
+                                                    </li>
                                                 </ul>
 
                                             </div><!-- end /.product-desc -->
 
                                             <div class="product-purchase">
                                                 <div class="price_love">
-                                                    <span title="${{$val->price??''}}">${{$val->price??''}}</span>
+                                                    <span title="${{$val->price??''}}">${{str_limit($val->price,10)??''}}</span>
                                                 </div>
                                                 <a href="javascript:void(0)">
                                                     <div class="rating product--rating">

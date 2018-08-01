@@ -35,7 +35,7 @@ class CustomerController extends Controller
     {
 
         $user= User::findOrFail($id);
-        $post= Product::where('user_id',$id)->paginate(20);
+        $post= Product::where('user_id',$id)->latest()->paginate(9);
         if($user){
             $data['user']=$user;
         }
@@ -264,7 +264,7 @@ class CustomerController extends Controller
     }
     function getParentsCategory($id=''){
         if(isset($id) && $id!=''){
-            return Category::find($id);
+            return Category::findOrFail($id);
         }
         return Category::where('parent_id',null)->get();
     }
@@ -315,7 +315,7 @@ class CustomerController extends Controller
                     }
                     $product->save();
                     // save product to relation table between product and cateogry
-                    $newsItem = Product::find($product->id); 
+                    $newsItem = Product::findOrFail($product->id); 
                     $newsItem->categories_ads()->attach($request->lastchildid);
                     // end
                     
@@ -391,7 +391,7 @@ class CustomerController extends Controller
                     ->withErrors($validator)
                     ->withInput();
             } 
-            $product = Product::where('user_id',Auth::id())->find($id);
+            $product = Product::where('user_id',Auth::id())->findOrFail($id);
             if($product){   
                 $name = $request->name;
                 $price = $request->price;
@@ -500,13 +500,13 @@ class CustomerController extends Controller
             }
         }
         $data['breadcrub']='update item';
-        $data['product']=Product::where('user_id',Auth::id())->find($id); 
+        $data['product']=Product::where('user_id',Auth::id())->findOrFail($id); 
         $currentCat=[];
         $data['clid']='';
         // check if have category in relation
         if(count($data['product']->categories_ads) > 0){
             $data['clid']=$data['product']->categories_ads[0]->id;
-            $node = Category::find($data['product']->categories_ads[0]->id);
+            $node = Category::findOrFail($data['product']->categories_ads[0]->id);
             // print_r($data['product']->categories_ads[0]->id);exit();
             $lavel=$node->getAncestorsAndSelf();
             foreach($lavel as $p){

@@ -17,5 +17,6 @@ return [
     'product' => 'Products',
     'edit' => 'Edit',
     'hide' => 'Hide', 
+    'view' => 'View', 
     'delete' => 'Delete'
 ];

@@ -283,7 +283,7 @@
                             @endphp 
                         <div class="col-lg-6 col-md-6">
                             <!-- start .single-product -->
-                            <div class="product product--card">
+                            <div class="product product--card cProfileProduct">
 
                                 <div class="product__thumbnail"> 
                                     <img src="{{$img}}" alt="Product Image">
@@ -297,63 +297,59 @@
 
                                 <div class="product-desc">
                                     <a href="#" class="product_title">
-                                        <h4>{{$val->name}}</h4>
+                                        <h4>{{str_limit($val->name,45)}}</h4>
                                     </a>
                                     <ul class="titlebtm">
                                         <li>
                                             <img class="auth-img" src="{{asset('/')}}images/auth3.jpg" alt="author image">
                                             <p>
-                                                <a href="#">{{$val->user->name}}</a>
+                                                <a href="#">{{str_limit($val->user->name,15)}}</a>
                                             </p>
-                                        </li>
-                                        <li class="product_cat">
-                                            <a href="#">
-                                                <img src="{{asset('/')}}images/cathtm.png" alt="category image">Plugin</a>
-                                        </li>
+                                        </li> 
                                     </ul>
-                                    @foreach($val->translations as $v)
-                                        @if($v->locale==app()->getLocale())
-                                            {!!$v->description!!}
-                                        @endif
-                                    @endforeach 
+                                    @php 
+                                    //$string = preg_replace("/(\<(\/?[^\>]+)\>)/", " ",html_entity_decode($val->translateOrNew(app()->getLocale())->description));
+                                    $string = strip_tags($val->translateOrNew(app()->getLocale())->description);
+                                    $string = preg_replace("/&#?[a-z0-9]{2,8};/i","",$string);
+                                    @endphp
+                                    {{str_limit($string,100)}}
                                 </div>
                                 <!-- end /.product-desc -->
 
-                                <div class="product-purchase">
-                                    <div class="price_love">
-                                        <span>$ {{$val->price??0}}</span>
-                                        {{--<p><span class="lnr lnr-heart"></span> 48</p>--}}
+                               <div class="product-purchase">
+                                    <div class="row">
+                                        <div class="col text-md-left col-xs-12 col-sm-6 col-md-6">
+                                            <div class="price_love">
+                                                <span title="{{$val->price}}">$ {{str_limit($val->price,10)??0}}</span> 
+                                            </div>
+                                        </div>
+                                        <div class="cflexcenter col text-xs-right  col-xs-12 col-sm-6 col-md-6">
+                                        <div class="sell">
+                                            <a href="javascript:void(0)">
+                                                <div class="rating product--rating">
+                                                    <ul>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star-half-o"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        </div>
                                     </div>
-                                    {{--
-                                    <div class="rating product--rating">
-                                        <ul>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star"></span>
-                                            </li>
-                                            <li>
-                                                <span class="fa fa-star-half-o"></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="sell">
-                                        <p>
-                                            <span class="lnr lnr-cart"></span>
-                                            <span>50</span>
-                                        </p>
-                                    </div>
-                                    --}}
-                                </div>
-                                <!-- end /.product-purchase -->
+                                </div><!-- end /.product-purchase -->
                             </div>
                             <!-- end /.single-product -->
                         </div>

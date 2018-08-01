@@ -2242,7 +2242,10 @@ h6 {
   -o-transition: 0.3s;
   transition: 0.3s;
 }
-
+.cProfileProduct .product-desc .product_title h4{
+  height: 45px;
+  overflow: hidden;
+}
 .product-desc ul li.product_cat a {
   color: #7347c1;
 }
@@ -2279,7 +2282,10 @@ h6 {
   display: inline-block;
   vertical-align: middle;
 }
-
+.cProfileProduct .product-purchase .price_love > span,.cAllProducts .product-purchase .price_love > span{
+  display: block;
+  width:inherit;
+}
 .product-purchase .price_love > span {
   background: rgba(6, 116, 236, 0.1);
   line-height: 32px;
@@ -2385,7 +2391,7 @@ h6 {
   font-size: 18px;
   line-height: 22px;
 }
-.cAllProducts .product--card-small .product-desc .product_title h4 {
+.cStoreProduct .product--card-small .product-desc .product_title h4,.cAllProducts .product--card-small .product-desc .product_title h4 ,.relationPro .product--card-small .product-desc .product_title h4{
   font-size: 18px;
   line-height: 22px;
   height: 45px;
@@ -14527,7 +14533,7 @@ span.counter {
 /* 767 */
 @media screen and (max-width: 767px) {
   .container {
-    width: 450px;
+    /* width: 450px; */
   }
   .dashboard-area.dashboard_purchase .dashboard_menu,
   .dashboard_menu_area .dashboard_menu {
