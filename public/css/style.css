@@ -8588,6 +8588,24 @@ span.counter {
 .mini-footer p a:hover {
   color: #56a72d;
 }
+.sticky-menu-right {
+  line-height: 40px;
+  cursor: pointer;
+  width: 100px;
+  background: #56a72d;
+  color: #fff;
+  position: fixed;
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 5%;
+  border-radius: 5%;
+  right: 0px;
+  z-index: 111;
+  bottom: 50%;
+}
+.sticky-menu-right a {
+  color: #FFFFFF;
+}
 
 /***************************************
 	END FOOTER AREA
