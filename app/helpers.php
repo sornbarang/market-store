@@ -9,7 +9,7 @@
           $html .= '<li class="parent_li"><span class="parent_root"><i class="fa fa-folder-open icongreen"></i> '.ucfirst($node->name).'</span></li>';
         }else{
           // default last child of parent
-          $html .= '<li class="child_li"><a href="'.$route.'/'.$node->id.'"><span class="child_root">'.ucfirst($node->name).' <i class="fa fa-leaf icongreen"></i></span></a></li>';
+          $html .= '<li class="child_li"><a href="'.$route.'/'.$node->slug.'"><span class="child_root">'.ucfirst($node->name).' <i class="fa fa-leaf icongreen"></i></span></a></li>';
         }
       } else {
         // is root and have child

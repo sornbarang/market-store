@@ -325,10 +325,10 @@
                             <div class="breadcrumb">
                                 <ul>  
                                     <li>  
-                                        <a href="{{route('market.dynamiccat','all')}}" style="color:#000;" class="activecat">All Categories</a>
+                                        <a href="{{route('market.allcategory')}}" style="color:#000;" class="activecat">All Categories</a>
                                     </li>
                                     <li style="float:right;"> 
-                                        <a  href="{{route('market.dynamiccat','all')}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <span style="font-size:20px;color:#56a72d" class="lnr lnr-rocket"></span></a>
+                                        <a  href="{{route('market.allcategory')}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <span style="font-size:20px;color:#56a72d" class="lnr lnr-rocket"></span></a>
                                     </li>
                                 </ul>
                             </div> 
@@ -342,7 +342,7 @@
                         @if(isset($data['root']) && !empty($data['root']))
                             @foreach($data['root'] as $val)
                                 <div class="col-lg-3 col-md-3 col-sm-6 pb-4">
-                                    <a href="{{route('market.dynamiccat',$val->id)}}">
+                                    <a href="{{route('market.dynamiccat',$val->slug)}}">
                                         <div class="statement_info_card">
                                             <div class="info_wrap">
                                                 <span class="lnr {{$val->icon}} icon greenbackground"></span>
@@ -368,7 +368,7 @@
                     @endphp
                     @foreach($cats['childreen'] as $k =>  $getsub)
                         @php  
-                            $subcat[]=array('dynamiccat'=>route('market.dynamiccat',$getsub->id),'link'=>route('market.getproductofcategory',$getsub->id),'name'=>$getsub->name);
+                            $subcat[]=array('dynamiccat'=>route('market.dynamiccat',$getsub->slug),'link'=>route('market.getproductofcategory',$getsub->slug),'name'=>$getsub->name);
                         @endphp 
                     @endforeach
                     <div class="row">

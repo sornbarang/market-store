@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\Sluggable; 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class CategoriesAdsTranslation extends Model
 {
-    use Sluggable;
+    use Sluggable; 
     protected $table = 'categories_ads_translations';
     protected $fillable = ['name', 'slug'];
     public $timestamps = false;
@@ -22,7 +22,15 @@ class CategoriesAdsTranslation extends Model
             ]
         ];
     }
-
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function scopeFindSimilarSlugs( Builder $query, string $attribute, array $config, string $slug ): Builder {
         $separator = $config['separator'];

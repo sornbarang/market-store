@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProductsAds as Product;
 use App\Models\CategoriesAds as Category ;
 use Auth;
+use willvincent\Rateable\Rating;
 class ProductController extends Controller
 {
     public function makeReport( Request $request)
@@ -23,6 +24,24 @@ class ProductController extends Controller
             'meta' => ['some more optional data, can be notes or something'],
         ], $user);
         if($report){
+            return response()->json([
+                'status' => 200,
+                'message' => 'Success'
+            ]);
+        }
+        return response()->json([
+            'status' => 400,
+            'message' => 'fail'
+        ]);
+    }
+    public function makeRateAble(Request $request){ 
+        $post = Product::findOrFail($request->id);
+        $rating = new Rating;
+        $rating->rating = $request->rate;
+        $rating->user_id = Auth::id();
+
+        $post->ratings()->save($rating);
+        if($post){
             return response()->json([
                 'status' => 200,
                 'message' => 'Success'

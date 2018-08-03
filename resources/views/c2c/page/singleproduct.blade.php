@@ -11,6 +11,72 @@
 <!--================================
     END BREADCRUMB AREA
 =================================-->
+<!-- Modals -->
+<div class="modal fade rating_modal" id="myModalRate" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title" id="rating_modal">Rating this Item</h3>
+                    <h4>Product Enquiry Extension</h4>
+                    <p>by
+                        <a href="author.html">AazzTech</a>
+                    </p>
+                </div>
+                <!-- end /.modal-header -->
+
+                <div class="modal-body">
+                    <form id="rateMarket">
+                        @csrf
+                        <input type="hidden" id="proId" name="id" value="{{$data['product']->id??''}}"/>
+                        <ul>
+                            <li>
+                                <p>Your Rating</p>
+                                <div class="right_content btn btn--round btn--white btn--md">
+                                    <select name="rating" class="give_rating">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </li>
+
+                            <li>
+                                <p>Rating Causes</p>
+                                <div class="right_content">
+                                    <div class="select-wrap">
+                                        <select name="review_reason">
+                                            <option value="design">Design Quality</option>
+                                            <option value="customization">Customization</option>
+                                            <option value="support">Support</option>
+                                            <option value="performance">Performance</option>
+                                            <option value="documentation">Well Documented</option>
+                                        </select>
+
+                                        <span class="lnr lnr-chevron-down"></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="rating_field">
+                            <label for="rating_field">Comments</label>
+                            <textarea name="rating_field" id="rating_field" class="text_field" placeholder="Please enter your rating reason to help the author"></textarea>
+                            <p class="notice">Your review will be ​publicly visible​ and the author may reply to your comments. </p>
+                        </div>
+                        <button type="button" class="btn btn--round btn--default">Submit Rating</button>
+                        <button class="btn btn--round modal_close" data-dismiss="modal">Close</button>
+                    </form>
+                    <!-- end /.form -->
+                </div>
+                <!-- end /.modal-body -->
+            </div>
+        </div>
+    </div>
 @if (Route::has('login'))
     @auth
     <!-- Modals -->
@@ -164,8 +230,7 @@
                                     <span class="lnr nav-left lnr-arrow-left"></span>
                                     <span class="lnr nav-right lnr-arrow-right"></span>
                                 </div><!-- end /.prev-nav -->
-                            </div>
-
+                            </div> 
                             {{--<div class="item-action">
                                 <div class="action-btns">
                                     <a href="#" class="btn btn--round btn--lg">Live Preview</a>
@@ -222,7 +287,31 @@
                                     </ul>
                                 </div>
                                 <!-- end /.social-->
-
+                                <div class="item_action v_middle"> 
+                                    <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
+                                        <P class="rate_it">Rate Now</P>
+                                        <div class="rating product--rating">
+                                            <ul>
+                                                <li>
+                                                    <span class="fa fa-star-o"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star-o"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star-o"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star-o"></span>
+                                                </li>
+                                                <li>
+                                                    <span class="fa fa-star-o"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </a>
+                                    <!-- end /.rating_btn -->
+                                </div>
                             </div>
                         </div><!-- end /.item__preview-thumb-->
 
@@ -607,9 +696,9 @@
 
                                 <div class="social social--color--filled">
                                     <ul>
-                                        <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                        <li><a href="#"><span class="fa fa-dribbble"></span></a></li>
+                                        <li><a target="_blank" href="{{$data['product']->user->profile->facebook_link??'javascript:void(0)'}}"><span class="fa fa-facebook"></span></a></li>
+                                        <li><a target="_blank" href="{{$data['product']->user->profile->twitter_link??'javascript:void(0)'}}"><span class="fa fa-twitter"></span></a></li>
+                                        <li><a target="_blank" href="{{$data['product']->user->profile->instagram_link??'javascript:void(0)'}}"><span class="fa fa-instagram"></span></a></li>
                                     </ul>
                                 </div><!-- end /.social -->
 

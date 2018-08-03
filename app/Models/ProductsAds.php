@@ -12,6 +12,7 @@ use App\Models\CategoriesAds as Category ;
 use Ghanem\Reportable\Contracts\Reportable;
 use Ghanem\Reportable\Traits\Reportable as ReportableTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use willvincent\Rateable\Rateable;
 class ProductsAds extends Model implements HasMedia,Reportable
 {
     use Translatable;
@@ -23,6 +24,8 @@ class ProductsAds extends Model implements HasMedia,Reportable
     use ReportableTrait;
     
     use SearchableTrait;
+    
+    use Rateable;
 
     protected $table = 'products_ads';
     public $translatedAttributes = ['name', 'description', 'slug'];

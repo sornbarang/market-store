@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CategoriesAds as Category ;
+use App\Models\CategoriesAdsTranslation as CategoryTranslate ;
 use App\Models\ProductsAds as Product;
 use Storage;
 class C2cController extends Controller
@@ -27,6 +28,7 @@ class C2cController extends Controller
             $pro [$va->name]['childreen']= $va->getDescendantsAndSelf(1);
         } 
         $data['listcats']=$pro;   
+        // return $data['listcats'];
         // loop root category push icon
         foreach($tree as $key => $val){
             if(strtolower($val->name)=='fashion'){
@@ -57,8 +59,8 @@ class C2cController extends Controller
         }
         return Category::roots()->get();
     }
-    public function getProductOfCategory($id){
-        $node = Category::findOrFail($id); 
+    public function getProductOfCategory(CategoryTranslate $slug){
+        $node = Category::findOrFail($slug->categories_ads_id); 
         $pros=Product::categorized($node)->latest('products_ads.id')->limit(7)->get();
         foreach($pros as $key => $val){ 
             // get media 
@@ -79,7 +81,8 @@ class C2cController extends Controller
         
         return response()->json($pros);   
     }
-    public function getDynamicCategory($id,Request $request){  
+    public function getAllCategory(Request $request){
+        // return $slug->categories_ads_id;
         // get all category with tree relate with app/helpers.php 
         $data['nest'] = Category::all()->toHierarchy();
         $order='';
@@ -98,29 +101,52 @@ class C2cController extends Controller
                 $record=25;
             }
         }
-        
-        if($id==='all'){
-            if($order !=''){
-                // get all product
-                $data['product']=Product::categorized()->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
-            }else{
-                // get all product->orderBy('products_ads.price', $order)
-                $data['product']=Product::categorized()->latest('products_ads.id')->paginate($record);                
-            }
+        if($order !=''){
+            // get all product
+            $data['product']=Product::categorized()->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record);
         }else{
-            $node = Category::findOrFail($id);   
-            $data['bread']=$node->getAncestorsAndSelf();
-            $data['cnode']=$node->id; 
-            $data['cnodeName']=$node->name;  
-            $data['order']=$order;
-            $data['record']=$record; 
-            $data['product']=Product::categorized($node)->latest('products_ads.id')->orderBy('products_ads.price', $order)->paginate($record);
-        }
+            // get all product->orderBy('products_ads.price', $order)
+            $data['product']=Product::categorized()->latest('products_ads.id')->paginate($record);                
+        } 
         $data['order']=$order;
         $data['record']=$record;
         return view('c2c.page.product',compact('data'));
     }
-    
+    public function getSlugCategory(Request $request,CategoryTranslate $slug){
+        // return $slug->categories_ads_id;
+        // get all category with tree relate with app/helpers.php 
+        $data['nest'] = Category::all()->toHierarchy();
+        $order='';
+        $record=9;
+        if(isset($request->price) && $request->price=='high'){
+            $order='desc';
+        }elseif(isset($request->price) && $request->price=='low'){
+            $order='asc';
+        }
+        if(isset($request->record) && !empty($request->record)){
+            if($request->record==12){
+                $record=12;
+            }else if(isset($request->record) && $request->record==15){
+                $record=15;
+            }else if(isset($request->record) && $request->record==25){
+                $record=25;
+            }
+        } 
+        $node = Category::findOrFail($slug->categories_ads_id);   
+        $data['bread']=$node->getAncestorsAndSelf();
+        $data['cnode']=$node->id; 
+        $data['cnodeName']=$node->name;  
+        $data['order']=$order;
+        $data['record']=$record; 
+        if($order !=''){
+            // get all product
+            $data['product']=Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record); 
+        }else{
+            // get all product->orderBy('products_ads.price', $order)
+            $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);       
+        } 
+        return view('c2c.page.product',compact('data'));
+    } 
     /**
      * Show the form for creating a new resource.
      *

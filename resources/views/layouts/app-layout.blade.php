@@ -949,8 +949,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var this_=mythis
             xhr=$.ajax({
                 url: this_.data('route'),
-                type: 'GET',
-                data:{orderby:this_.val()},
+                type: 'GET', 
                 headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
                 },
@@ -1037,6 +1036,41 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 }
             }
             e.stopPropagation();
+        });
+        function rateProduct(mythis){
+            var this_=mythis; 
+            var rateNum=$('.br-widget > a.br-selected.br-current').attr('data-rating-value');
+            var proId=$('#proId').val();
+            xhr=$.ajax({
+                url: "{{route('market.ratemarket')}}",
+                type: 'POST',
+                data:{id:proId,rate:rateNum},
+                headers: {
+                        'X-CSRF-Token':CSRF_TOKEN,
+                },
+                success: function( msg ) {
+                    if(msg.status==200){
+                        $('form#rateMarket button.modal_close').click();
+                    }
+                },
+                error: function( data ) {
+                    console.log(data);
+                }
+            });
+
+        }
+        $('form#rateMarket button[type="button"]').on('click',function(e){
+            e.preventDefault();   
+            if (e.type == "click") documentClick = true; 
+            if (documentClick){
+                if(xhr==null){
+                    rateProduct($(this))
+                }else{
+                    xhr.abort();
+                    rateProduct($(this))
+                }
+            }
+            
         });
     });
     

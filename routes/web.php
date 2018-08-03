@@ -60,12 +60,12 @@ function()
         Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'Admin\CategoryAdsController@getSubCategory']);
         Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
         Route::get('categories', ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
-        Route::get('getdynamiccategory/{id?}', ['as' => 'market.dynamiccat', 'uses' =>'C2cController@getDynamicCategory']);
-        Route::get('getproductofcategory/{id}', ['as' => 'market.getproductofcategory', 'uses' =>'C2cController@getProductOfCategory']);
+        Route::get('all-wholecateogry', ['as' => 'market.allcategory', 'uses' =>'C2cController@getAllCategory']);
         Route::get('search', ['as' => 'market.search', 'uses' =>'SearchController@filter']); 
         Route::get('products', ['as' => 'market.categories', 'uses' => 'Market\ProductController@getproduct']);
         Route::get('productdetail/{id?}', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);
         Route::post('reportmarket', ['as' => 'market.reportmarket', 'uses' => 'Market\ProductController@makeReport']); 
+        Route::post('ratemarket', ['as' => 'market.ratemarket', 'uses' => 'Market\ProductController@makeRateAble']); 
         Route::get('mystore/{id}', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
         Route::group( ['middleware' => 'auth' ], function()
         { 
@@ -93,6 +93,8 @@ function()
                 ]
             ]);
         });  
+        Route::get('{slug?}', ['as' => 'market.dynamiccat', 'uses' =>'C2cController@getSlugCategory']);
+        Route::get('json/{slug?}', ['as' => 'market.getproductofcategory', 'uses' =>'C2cController@getProductOfCategory']);
     });
 
     //Route::get('contact', 'PageController@contact')->name('contact');

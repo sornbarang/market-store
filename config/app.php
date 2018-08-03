@@ -170,7 +170,7 @@ return [
         Adumskis\LaravelAdvert\AdvertServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Ghanem\Reportable\ReportableServiceProvider::class,
-
+        willvincent\Rateable\RateableServiceProvider::class,
     ],
 
     /*

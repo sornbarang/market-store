@@ -29,7 +29,8 @@
         "spatie/laravel-sluggable": "^2.1",
         "torann/geoip": "^1.0",
         "wildside/userstamps": "^0.5.1",
-        "nicolaslopezj/searchable": "1.*"
+        "nicolaslopezj/searchable": "1.*",
+        "willvincent/laravel-rateable": "~1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
