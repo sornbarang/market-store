@@ -10730,7 +10730,7 @@ span.counter {
 
 .statement_info_card .icon {
   -webkit-border-radius: 200px;
-          border-radius: 200px;
+  border-radius: 200px;
   line-height: 40px;
   margin-right: 13px;
   width: 40px;
@@ -10739,7 +10739,24 @@ span.counter {
   text-align: center;
   font-size: 20px;
 }
+.callCategory .statement_info_card .icon{
+  -webkit-border-radius: 200px;
+  border-radius: 50%;
+  line-height: initial;
+  margin-right: 13px;
+  width: inherit;
+  padding: 20px;
+  height: inherit;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+  font-size: 30px;
 
+}
+.callCategory .statement_info_card{
+  background: none;
+  box-shadow: none;
+}
 .statement_info_card .info {
   display: inline-block;
 }

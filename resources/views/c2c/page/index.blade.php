@@ -318,6 +318,7 @@
 <section class="products section--padding">
     <div class="shortcode_wrapper">
         <div class="container">
+            {{--
             <div class="row">
                 <div class="col-md-12"> 
                     <div class="shortcode_module_title"  style="padding:10px;">
@@ -335,31 +336,25 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row"> 
-                <div class="col-md-12"> 
-                    <div class="row pt-4">
+            </div>--}}
+            <div class="row callCategory">
+                <div class="col-md-12">  
+                    <div class="d-flex justify-content-center">
                         @if(isset($data['root']) && !empty($data['root']))
                             @foreach($data['root'] as $val)
-                                <div class="col-lg-3 col-md-3 col-sm-6 pb-4">
+                                <div class="p-2">
                                     <a href="{{route('market.dynamiccat',$val->slug)}}">
                                         <div class="statement_info_card">
                                             <div class="info_wrap">
                                                 <span class="lnr {{$val->icon}} icon greenbackground"></span>
-                                                <div class="info"> 
-                                                    <span>{{ucfirst(str_limit($val->name,15))}}</span>
-                                                </div>
-                                            </div>
-                                            <!-- end /.info_wrap -->
+                                            </div> 
                                         </div>
                                     </a>
-                                    <!-- end /.statement_info_card -->
-                                </div>
+                                </div> 
                             @endforeach
                         @endif
-                        <!-- end /.col-md-3 --> 
-                    </div> 
-                </div>
+                    </div>  
+                </div>   
             </div>
             @if(count($data['listcats']) > 0)
                 @foreach($data['listcats'] as $key =>  $cats)
