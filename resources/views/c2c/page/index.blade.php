@@ -315,7 +315,7 @@
         color:#000 !important;
     }
 </style>
-<section class="products section--padding">
+<section class="products section--padding" style="padding-top:0px !important;">
     <div class="shortcode_wrapper">
         <div class="container">
             {{--
