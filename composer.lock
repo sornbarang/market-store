@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "8b706d91ca9216a4100da22cac5b8e5e",
@@ -47,20 +47,20 @@
                 }
             ],
             "description": "Advertising helper for laravel",
-            "time": "2017-10-23 06:06:23"
+            "time": "2017-10-23T06:06:23+00:00"
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.64.4",
+            "version": "3.64.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f053be09055d43bd60aefd9998440479a45c3da9"
+                "reference": "c1292388910063803cfd7aa73d48ad4df42a526c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f053be09055d43bd60aefd9998440479a45c3da9",
-                "reference": "f053be09055d43bd60aefd9998440479a45c3da9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c1292388910063803cfd7aa73d48ad4df42a526c",
+                "reference": "c1292388910063803cfd7aa73d48ad4df42a526c",
                 "shasum": ""
             },
             "require": {
@@ -127,7 +127,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-08-02T20:23:36+00:00"
+            "time": "2018-08-03T18:10:54+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",

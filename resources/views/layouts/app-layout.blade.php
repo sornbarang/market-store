@@ -645,6 +645,11 @@
                         <div class="go_top">
                             <span class="lnr lnr-chevron-up"></span>
                         </div>
+                        <div class="sticky-menu-right">
+                            <a href="{{ route('shop') }}">
+                                <span class="lnr lnr-pointer-right"></span> Go to shop
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
