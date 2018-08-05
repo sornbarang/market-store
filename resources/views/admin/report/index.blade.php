@@ -66,8 +66,7 @@
                                 </span>
                                     </th>
                                     <th class="col-xs-2">Reporter</th>
-                                    <th class="col-xs-2">Type Report</th>
-                                    <th class="col-xs-2">Type Report ID</th>
+                                    <th class="col-xs-2">Product</th> 
                                     <th class="col-xs-2">Reason</th>
                                     <th class="col-xs-2">Detail</th>
                                     <th class="col-xs-1">Created At</th>
@@ -85,10 +84,9 @@
                                             </span>
                                         </td>
                                         <td>{{$report->judge()->name}}</td>
-                                        <td>{{$report->reportable_type}}</td>
-                                        <td>{{$report->reportable_id}}</td>
+                                        <td><a href="{{route('market.productdetail',$report->reportable_id)}}">View</a></td> 
                                         <td>{{$report->reason}}</td>
-                                        <td>{{$report->meta}}</td>
+                                        <td>{{is_array($report->meta)?$report->meta[0]:$report->meta}}</td>
                                         <td>{{$report->created_at}}</td>
                                     </tr>
                                 @endforeach

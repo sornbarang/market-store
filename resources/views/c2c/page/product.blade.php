@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="filter-bar filter--bar2">
-                        <div class="pull-right">
+                    <div class="pull-left">
                             <div class="filter__option filter--select">
                                 <div class="select-wrap">
                                     <!-- Request::url() get current url --> 
@@ -41,7 +41,20 @@
                                         <span class="lnr lnr-chevron-down"></span>
                                     </form>
                                 </div>
-                            </div>
+                            </div> 
+                        </div>
+                        <div class="pull-right">
+                            <div class="filter__option filter--select">
+                                <div class="range-slider price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 6%; width: 54%;"></div>
+                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 6%;"></span>
+                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span>
+                                    </div>
+                                    <div class="price-ranges">
+                                        <span class="from rounded">$30</span>
+                                        <span class="to rounded">$300</span>
+                                    </div>
+                                </div> 
                             <div class="filter__option filter--layout">
                                 <a href="javascript:void(0)">
                                     <div class="svg-icon"><img class="svg" src="{{asset('images/svg/grid.svg')}}" alt="it's just a layout control folks!"></div>
@@ -63,12 +76,7 @@
 
     <!--================================
         START PRODUCTS AREA
-    =================================-->
-    @php
-       
-        $profilters = ['Trending Products','Popular Products','New Products','Best Seller','Best Rating','Free Support','On Sale'];
-        $products = ['Finance and Consulting','Best Free Responsive','AppsPress - HTML5 ','Finance and Consulting','Best Free Responsive','AppsPress - HTML5 ','Finance and Consulting','Best Free Responsive','AppsPress - HTML5 '];
-    @endphp
+    =================================--> 
     <section class="products section--padding2">
         <!-- start container -->
         <div class="container"> 
@@ -86,55 +94,23 @@
                             </a> 
                             <div class="collapse in collapsible-content show" id="collapse1" style="padding:0;">
                                 <div class="tree well">
-                                    <ul>
-                                        <li class="parent_li">
-                                            <span class="parent_root"><i class="fa fa-folder-open icongreen"></i> All category</span>
-                                            <!-- renderNode call from helpers.php in app/helpers.php -->
-                                            @if(isset($data['nest']) && !empty($data['nest']))
-                                                @foreach($data['nest'] as $node)
-                                                    @php 
-                                                        // $r is route link
-                                                        $r=route('market.dynamiccat');
-                                                    @endphp
-                                                    {!!renderNode($node,$r)!!}
-                                                @endforeach
-                                            @else
-                                                <p>No category</p>
-                                            @endif
-                                        </li>
+                                    <ul> 
+                                        <!-- renderNode call from helpers.php in app/helpers.php -->
+                                        @if(isset($data['nest']) && !empty($data['nest']))
+                                            @foreach($data['nest'] as $node)
+                                                @php 
+                                                    // $r is route link
+                                                    $r=route('market.dynamiccat');
+                                                @endphp
+                                                {!!renderNode($node,$r)!!}
+                                            @endforeach
+                                        @else
+                                            <p>No category</p>
+                                        @endif 
                                     </ul>
                                 </div> 
                             </div><!-- end /.collapsible_content --> 
-                        </div><!-- end /.sidebar-card -->
-
-                        <div class="sidebar-card card--filter">
-                            <a class="card-title" href="#collapse2" role="button" data-toggle="collapse"  aria-expanded="false" aria-controls="collapse2">
-                                <h4>Filter Products<span class="lnr lnr-chevron-down"></span></h4>
-                            </a>
-                            <div class="collapse in collapsible-content" id="collapse2">
-                                <ul class="card-content">
-                                @foreach($profilters as $pro)
-                                    <li><div class="custom-checkbox2"><input type="checkbox" id="opt{{ $loop->iteration }}" class="" name="filter_opt"> <label for="opt{{ $loop->iteration }}"><span class="circle"></span>{{$pro}}</label></div></li>
-                                @endforeach
-                            </ul>
-                            </div>
-                        </div><!-- end /.sidebar-card -->
-    
-                        <div class="sidebar-card card--slider">
-                                <a class="card-title" href="#collapse3" role="button" data-toggle="collapse"  aria-expanded="false" aria-controls="collapse3">
-                                    <h4>Filter Products<span class="lnr lnr-chevron-down"></span></h4>
-                                </a>
-                                <div class="collapse in collapsible-content" id="collapse3">
-                                    <div class="card-content">
-                                        <div class="range-slider price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 6%; width: 54%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 6%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-
-                                        <div class="price-ranges">
-                                            <span class="from rounded">$30</span>
-                                            <span class="to rounded">$300</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- end /.sidebar-card -->
+                        </div><!-- end /.sidebar-card -->  
                         </aside><!-- end aside -->
                 </div><!-- end /.col-md-3 -->
 

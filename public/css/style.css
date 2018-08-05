@@ -8903,7 +8903,7 @@ span.counter {
 }
 
 .filter__option.filter--layout {
-  padding: 10px 20px 11px;
+  padding: 10px 20px 5px;
   border: 1px solid #ececec;
   -webkit-border-radius: 4px;
           border-radius: 4px;
@@ -14530,6 +14530,11 @@ span.counter {
     line-height: 50px;
     width: 50px;
   }
+  .callCategory .statement_info_card .info_wrap span.icon {
+    margin-right: 0;
+    line-height: normal;
+    width: inherit;
+  }
   .statement_info_card .info_wrap .info {
     margin-top: 10px;
   }
@@ -15200,6 +15205,9 @@ span.counter {
   }
   .statement_info_card {
     margin-bottom: 30px;
+  }
+  .callCategory .statement_info_card {
+    margin-bottom: 0px;
   }
   .statement_info_card .info_wrap .info {
     text-align: left;
@@ -16198,3 +16206,9 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
 }
 .owl-prev i, .owl-next i {transform : scale(4,6); color: #56a72d;}
 ul.titlebtm > li:nth-of-type(2) p{font-size:13px;}
+.pull-right .price-ranges{
+  padding-top:10px !important;
+}
+.pull-right .price-ranges span{
+  line-height: 25px !important;
+}

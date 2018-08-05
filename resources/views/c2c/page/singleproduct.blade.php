@@ -287,31 +287,35 @@
                                     </ul>
                                 </div>
                                 <!-- end /.social-->
-                                <div class="item_action v_middle"> 
-                                    <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
-                                        <P class="rate_it">Rate Now</P>
-                                        <div class="rating product--rating">
-                                            <ul>
-                                                <li>
-                                                    <span class="fa fa-star-o"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star-o"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star-o"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star-o"></span>
-                                                </li>
-                                                <li>
-                                                    <span class="fa fa-star-o"></span>
-                                                </li>
-                                            </ul>
+                                @if (Route::has('login'))
+                                    @auth
+                                        <div class="item_action v_middle"> 
+                                            <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
+                                                <P class="rate_it">Rate Now</P>
+                                                <div class="rating product--rating">
+                                                    <ul>
+                                                        <li>
+                                                            <span class="fa fa-star-o"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star-o"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star-o"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star-o"></span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="fa fa-star-o"></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </a>
+                                            <!-- end /.rating_btn -->
                                         </div>
-                                    </a>
-                                    <!-- end /.rating_btn -->
-                                </div>
+                                    @endauth
+                                @endif 
                             </div>
                         </div><!-- end /.item__preview-thumb-->
 

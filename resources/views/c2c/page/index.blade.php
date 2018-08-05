@@ -339,12 +339,12 @@
             </div>--}}
             <div class="row callCategory">
                 <div class="col-md-12">  
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center flex-wrap">
                         @if(isset($data['root']) && !empty($data['root']))
                             @foreach($data['root'] as $val)
-                                <div class="p-2">
+                                <div>
                                     <a href="{{route('market.dynamiccat',$val->slug)}}">
-                                        <div class="statement_info_card">
+                                        <div class="statement_info_card" >
                                             <div class="info_wrap">
                                                 <span class="lnr {{$val->icon}} icon greenbackground"></span>
                                             </div> 
