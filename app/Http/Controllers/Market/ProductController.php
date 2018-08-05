@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ProductsAds as Product;
 use App\Models\CategoriesAds as Category ;
+use App\Models\Role;
 use Auth;
 use willvincent\Rateable\Rating;
 class ProductController extends Controller
@@ -146,7 +147,7 @@ class ProductController extends Controller
          return view('c2c.page.product');
      }
      public function getproductdetail($id)
-     { 
+     {  
         $post = Product::findOrFail($id);
         $node = Category::find($post->categories_ads[0]->id);
         $data['bread'] = $node->getAncestorsAndSelf();  

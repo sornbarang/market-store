@@ -84,7 +84,7 @@
                                             </span>
                                         </td>
                                         <td>{{$report->judge()->name}}</td>
-                                        <td><a href="{{route('market.productdetail',$report->reportable_id)}}">View</a></td> 
+                                        <td><i class="zmdi zmdi-eye"></i> &nbsp; <a target="_blank" href="{{route('market.productdetail',$report->reportable_id)}}">View</a></td> 
                                         <td>{{$report->reason}}</td>
                                         <td>{{is_array($report->meta)?$report->meta[0]:$report->meta}}</td>
                                         <td>{{$report->created_at}}</td>

@@ -239,7 +239,7 @@
                             </div>--}}<!-- end /.item__action -->
                             <div class="item_social_share">
                             @if (Route::has('login'))
-                                @auth
+                                @auth 
                                     <p>
                                         <a href="#" class="myfeedback" data-target="#myModal1" data-toggle="modal">
                                             <span class="fa fa-exclamation"></span> Give feedback this post
@@ -288,7 +288,7 @@
                                 </div>
                                 <!-- end /.social-->
                                 @if (Route::has('login'))
-                                    @auth
+                                    @auth  
                                         <div class="item_action v_middle"> 
                                             <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
                                                 <P class="rate_it">Rate Now</P>
@@ -313,9 +313,22 @@
                                                 </div>
                                             </a>
                                             <!-- end /.rating_btn -->
-                                        </div>
+                                        </div> 
                                     @endauth
                                 @endif 
+                            </div>
+                            <div class="row p-2">
+                                <div class="col text-center">
+                                    @if (Route::has('login'))
+                                        @auth  
+                                            @if(Auth::user()->roles->pluck('name')[0]=='super-admin') 
+                                                <a href="#" title="Delete this product">
+                                                    <button class="btn btn-sm btn-danger">Delete</button> 
+                                                </a>
+                                            @endif
+                                        @endauth
+                                    @endif
+                                </div>
                             </div>
                         </div><!-- end /.item__preview-thumb-->
 
