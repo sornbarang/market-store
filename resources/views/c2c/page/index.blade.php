@@ -346,7 +346,7 @@
                                     <a href="{{route('market.dynamiccat',$val->slug)}}">
                                         <div class="statement_info_card" >
                                             <div class="info_wrap">
-                                                <span class="lnr {{$val->icon}} icon greenbackground"></span>
+                                                <span class="{{$val->icon}} icon greenbackground"></span>
                                             </div> 
                                         </div>
                                     </a>

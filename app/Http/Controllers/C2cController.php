@@ -32,21 +32,21 @@ class C2cController extends Controller
         // loop root category push icon
         foreach($tree as $key => $val){
             if(strtolower($val->name)=='fashion'){
-                $tree[$key]['icon'] = 'lnr-store';
+                $tree[$key]['icon'] = 'lnr lnr-shirt';
             }elseif(strtolower($val->name)=='technology'){
-                $tree[$key]['icon'] = 'lnr-laptop-phone';
+                $tree[$key]['icon'] = 'lnr lnr-laptop-phone';
             }elseif(strtolower($val->name)=='real estate'){
-                $tree[$key]['icon'] = 'lnr-apartment';
+                $tree[$key]['icon'] = 'lnr lnr-apartment';
             }elseif(strtolower($val->name)=='vehicle'){
-                $tree[$key]['icon'] = 'lnr-car';
+                $tree[$key]['icon'] = 'lnr lnr-car';
             }elseif(strtolower($val->name)=='cosmetic'){
-                $tree[$key]['icon'] = 'lnr-diamond';
+                $tree[$key]['icon'] = 'lnr lnr-diamond';
             }elseif(strtolower($val->name)=='other'){
-                $tree[$key]['icon'] = 'lnr-warning';
+                $tree[$key]['icon'] = 'lnr lnr-warning';
             }elseif(strtolower($val->name)=='furniture'){
-                $tree[$key]['icon'] = 'lnr-rocket';
+                $tree[$key]['icon'] = 'fa fa-bed';
             }else{
-                $tree[$key]['icon'] = 'lnr-rocket';
+                $tree[$key]['icon'] = 'lnr lnr-rocket';
             }
         }
         $data['root']=$tree;  
