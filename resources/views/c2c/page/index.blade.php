@@ -337,7 +337,7 @@
                     </div>
                 </div>
             </div>--}}
-            <div class="row callCategory">
+            <div class="row callCategory p-3">
                 <div class="col-md-12">  
                     <div class="d-flex justify-content-center flex-wrap">
                         @if(isset($data['root']) && !empty($data['root']))

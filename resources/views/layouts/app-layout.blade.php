@@ -1074,9 +1074,8 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                     xhr.abort();
                     rateProduct($(this))
                 }
-            }
-            
-        });
+            } 
+        }); 
     });
     
 </script>

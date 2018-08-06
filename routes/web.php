@@ -63,12 +63,13 @@ function()
         Route::get('all-wholecateogry', ['as' => 'market.allcategory', 'uses' =>'C2cController@getAllCategory']);
         Route::get('search', ['as' => 'market.search', 'uses' =>'SearchController@filter']); 
         Route::get('products', ['as' => 'market.categories', 'uses' => 'Market\ProductController@getproduct']);
-        Route::get('productdetail/{id?}', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);
-        Route::post('reportmarket', ['as' => 'market.reportmarket', 'uses' => 'Market\ProductController@makeReport']); 
-        Route::post('ratemarket', ['as' => 'market.ratemarket', 'uses' => 'Market\ProductController@makeRateAble']); 
+        Route::get('productdetail/{id?}', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);   
         Route::get('mystore/{id}', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
         Route::group( ['middleware' => 'auth' ], function()
         { 
+            Route::post('reportmarket', ['as' => 'market.reportmarket', 'uses' => 'Market\ProductController@makeReport']); 
+            Route::post('ratemarket', ['as' => 'market.ratemarket', 'uses' => 'Market\ProductController@makeRateAble']);
+            Route::delete('destroyproduct/{id}', ['as' => 'market.destroyproduct', 'uses' => 'Market\ProductController@destroy']);
             Route::delete('mydestroypro/{id}', ['as' => 'market.deleteproduct', 'uses' => 'CustomerController@myDeletePro']);
             Route::get('mysetting', ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
             Route::get('myprofile', ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);

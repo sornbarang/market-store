@@ -13,6 +13,7 @@ use Ghanem\Reportable\Contracts\Reportable;
 use Ghanem\Reportable\Traits\Reportable as ReportableTrait;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use willvincent\Rateable\Rateable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class ProductsAds extends Model implements HasMedia,Reportable
 {
     use Translatable;
@@ -27,7 +28,9 @@ class ProductsAds extends Model implements HasMedia,Reportable
     
     use Rateable;
 
+    use SoftDeletes;
     protected $table = 'products_ads';
+    protected $dates = ['deleted_at'];
     public $translatedAttributes = ['name', 'description', 'slug'];
     protected $fillable = ['name','price','discount','description','active','user_id'];
     public function categories_ads() {

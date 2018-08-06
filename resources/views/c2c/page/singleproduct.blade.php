@@ -11,7 +11,39 @@
 <!--================================
     END BREADCRUMB AREA
 =================================-->
-<!-- Modals -->
+@if (Route::has('login'))
+    @auth 
+        @if(isset(Auth::user()->roles->pluck('name')[0])) 
+            @if(Auth::user()->roles->pluck('name')[0]=='super-admin') 
+                <!-- Modal confirm deleted product -->
+                <div class="modal fade rating_modal item_remove_modal" id="myModalConfirmProduct" tabindex="-1" role="dialog" aria-labelledby="myModal2">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Are you sure to delete this item?</h3>
+                                <p>You will not be able to recover this file!</p>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- end /.modal-header -->
+                            <form action="{{route('market.destroyproduct',$data['product']->id)}}" method="POST"> 
+                                {{ method_field('DELETE') }}
+                                @csrf
+                                <div class="modal-body">
+                                    <button type="submit" class="btn btn--round btn-danger btn--default">Delete</button>
+                                    <button class="btn btn--round modal_close" data-dismiss="modal">Cancel</button>
+                            </div>
+                            </form>
+                            <!-- end /.modal-body -->
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endif
+    @endauth
+@endif
+<!-- Modals Rating -->
 <div class="modal fade rating_modal" id="myModalRate" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -316,20 +348,22 @@
                                         </div> 
                                     @endauth
                                 @endif 
-                            </div>
-                            <div class="row p-2">
-                                <div class="col text-center">
-                                    @if (Route::has('login'))
-                                        @auth  
-                                            @if(Auth::user()->roles->pluck('name')[0]=='super-admin') 
-                                                <a href="#" title="Delete this product">
+                            </div> 
+                            @if (Route::has('login'))
+                                @auth 
+                                    @if(isset(Auth::user()->roles->pluck('name')[0])) 
+                                        @if(Auth::user()->roles->pluck('name')[0]=='super-admin') 
+                                        <div class="row p-2">
+                                            <div class="col text-center">
+                                                <a data-target="#myModalConfirmProduct" data-toggle="modal" href="#" title="Delete this product">
                                                     <button class="btn btn-sm btn-danger">Delete</button> 
                                                 </a>
-                                            @endif
-                                        @endauth
+                                            </div>
+                                        </div>
+                                        @endif
                                     @endif
-                                </div>
-                            </div>
+                                @endauth
+                            @endif
                         </div><!-- end /.item__preview-thumb-->
 
 

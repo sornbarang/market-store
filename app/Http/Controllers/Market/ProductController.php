@@ -125,8 +125,12 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    { 
+        $product = Product::findOrFail($id);
+        if($product){
+            $product->delete();
+            return redirect('admin/report')->with('success', 'Record has been update!'); 
+        }
     }
     /**
      * Display a listing of the category.
@@ -147,7 +151,7 @@ class ProductController extends Controller
          return view('c2c.page.product');
      }
      public function getproductdetail($id)
-     {  
+     {   
         $post = Product::findOrFail($id);
         $node = Category::find($post->categories_ads[0]->id);
         $data['bread'] = $node->getAncestorsAndSelf();  
