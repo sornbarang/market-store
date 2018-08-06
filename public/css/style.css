@@ -1412,7 +1412,7 @@ h6 {
 }
 
 .sidebar--single-product .card--metadata ul.data > li {
-  padding: 22px 0 22px;
+  padding: 5px 0 22px;
   border-bottom: 1px solid #ececec;
   overflow: hidden;
   line-height: 30px;

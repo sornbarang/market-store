@@ -22,6 +22,15 @@ class ProductsAdsTranslation extends Model
             ]
         ];
     }
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function scopeFindSimilarSlugs( Builder $query, string $attribute, array $config, string $slug ): Builder {
         $separator = $config['separator'];

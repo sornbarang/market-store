@@ -27,7 +27,7 @@
                                 </button>
                             </div>
                             <!-- end /.modal-header -->
-                            <form action="{{route('market.destroyproduct',$data['product']->id)}}" method="POST"> 
+                            <form action="{{route('market.destroyproduct',$data['product']->slug)}}" method="POST"> 
                                 {{ method_field('DELETE') }}
                                 @csrf
                                 <div class="modal-body">
@@ -42,9 +42,11 @@
             @endif
         @endif
     @endauth
-@endif
-<!-- Modals Rating -->
-<div class="modal fade rating_modal" id="myModalRate" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
+@endif 
+@if (Route::has('login'))
+    @auth
+    <!-- Modals Rating -->
+    <div class="modal fade rating_modal" id="myModalRate" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -54,7 +56,7 @@
                     <h3 class="modal-title" id="rating_modal">Rating this Item</h3>
                     <h4>Product Enquiry Extension</h4>
                     <p>by
-                        <a href="author.html">AazzTech</a>
+                        <a href="author.html">{{$data['product']->user->name}}</a>
                     </p>
                 </div>
                 <!-- end /.modal-header -->
@@ -109,8 +111,6 @@
             </div>
         </div>
     </div>
-@if (Route::has('login'))
-    @auth
     <!-- Modals -->
     <div class="modal fade rating_modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
         <div class="modal-dialog modal-lg" role="document">
@@ -283,22 +283,28 @@
                                     <img src="{{ asset('images/svg/share.svg') }}" alt="This is share svg">
                                     <span>@lang('frontlabel.shareitem')</span>
                                 </p>
-
+                                @php
+                                    $socialLink = route('market.productdetail',$data['product']->slug);  
+                                    $getShareLinkTwitter = Share::load($socialLink, $data['product']->name)->twitter(); 
+                                    $getShareLinkFacebook = Share::load($socialLink, $data['product']->name)->facebook(); 
+                                    $getShareLinklinkedin = Share::load($socialLink, $data['product']->name)->linkedin(); 
+                                @endphp
                                 <div class="social social--color--filled">
                                     <ul>
                                         <li>
-                                            <a href="#">
+
+                                            <a href="{{$getShareLinkFacebook??''}}" target="_blank">
                                                 <span class="fa fa-facebook"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="{{$getShareLinkTwitter??''}}" target="_blank">
                                                 <span class="fa fa-twitter"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <span class="fa fa-google-plus"></span>
+                                            <a href="{{$getShareLinklinkedin??'javascript:void(0)'}}" target="_blank">
+                                                <span class="fa fa-linkedin"></span>
                                             </a>
                                         </li>
                                         <!-- <li>
@@ -693,8 +699,8 @@
                             </div><!-- end /.purchase-button -->
                         </div>--}}<!-- end /.sidebar--card -->
 
-                        <div class="sidebar-card card-pricing">
-                            <div class="price">
+                        <div class="sidebar-card card-pricing p-3">
+                            <div class="price p-3 m-0">
                                 <h1>
                                     <sup>$</sup>
                                     <span>{{$data['product']->price??0}}</span>
@@ -808,7 +814,7 @@
                                     <div class="product__thumbnail">
                                         <img src="{{$img}}" alt="Product Image">
                                         <div class="prod_btn">
-                                            <a href="{{ route('market.productdetail',$val->id) }}" class="transparent btn--sm btn--round">More Info</a>
+                                            <a href="{{ route('market.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">More Info</a>
                                             <!-- <a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a> -->
                                         </div>
                                         <!-- end /.prod_btn -->

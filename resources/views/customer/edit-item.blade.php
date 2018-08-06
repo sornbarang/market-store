@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form method="post" action="{{route('market.edititem',$data['product']->id)}}" id="frmUpdateFront" enctype="multipart/form-data">
+                        <form method="post" action="{{route('market.edititem',$data['product']->slug)}}" id="frmUpdateFront" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <input type="hidden" name="lastchildid" id="lastchildid">

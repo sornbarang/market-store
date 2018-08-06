@@ -121,10 +121,10 @@
 
                                         <div class="options dropdown-menu" aria-labelledby="drop2">
                                             <ul>
-                                                <li><a href="{{route('market.edititem',$val->id)}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
-                                                <li><a target="_blank" href="{{ route('market.productdetail',$val->id) }}"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.view')</a></li>
+                                                <li><a href="{{route('market.edititem',$val->slug)}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
+                                                <li><a target="_blank" href="{{ route('market.productdetail',$val->slug) }}"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.view')</a></li>
                                                 <li>
-                                                    <a data-route="{{route('market.deleteproduct',$val->id)}}" href="#" data-toggle="modal" data-target="#myModal2" class="delete" id="deletepro">
+                                                    <a data-route="{{route('market.deleteproduct',$val->slug)}}" href="#" data-toggle="modal" data-target="#myModal2" class="delete" id="deletepro">
                                                         <span class="lnr lnr-trash"></span>@lang('profilemanageitem.delete')
                                                     </a>
                                                 </li>

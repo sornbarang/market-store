@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Market;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ProductsAds as Product;
+use App\Models\ProductsAdsTranslation as ProductTranslate;
 use App\Models\CategoriesAds as Category ;
 use App\Models\Role;
 use Auth;
@@ -124,9 +125,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ProductTranslate $slug)
     { 
-        $product = Product::findOrFail($id);
+        $product = Product::findOrFail($slug->products_ads_id);
         if($product){
             $product->delete();
             return redirect('admin/report')->with('success', 'Record has been update!'); 
@@ -150,9 +151,10 @@ class ProductController extends Controller
      {
          return view('c2c.page.product');
      }
-     public function getproductdetail($id)
+     public function getproductdetail(ProductTranslate $slug)
      {   
-        $post = Product::findOrFail($id);
+        // return $slug;
+        $post = Product::findOrFail($slug->products_ads_id);
         $node = Category::find($post->categories_ads[0]->id);
         $data['bread'] = $node->getAncestorsAndSelf();  
         $data['cnode']=$node->id; 

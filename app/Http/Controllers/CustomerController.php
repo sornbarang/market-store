@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductsAds as Product;
+use App\Models\ProductsAdsTranslation as ProductTranslate;
 use App\Models\CategoriesAds as Category;
 use App\Models\User;
 use App\Models\Profile;
@@ -207,7 +208,8 @@ class CustomerController extends Controller
     {
         
     }
-    public function myDeletePro($id){
+    public function myDeletePro(ProductTranslate $slug){
+        $id = $slug->products_ads_id; 
         $product = Product::findOrFail($id); 
         $media = $product->getMedia(); 
         if($product){
@@ -381,8 +383,9 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function myEditItem(Request $request, $id)
-    {
+    public function myEditItem(Request $request,ProductTranslate $slug)
+    { 
+        $id=$slug->products_ads_id;
         $data['category'] = $this->getParentsCategory();  
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [

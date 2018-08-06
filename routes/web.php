@@ -56,21 +56,21 @@ function()
     /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
     Route::group([
         'prefix'    => 'market'
-    ], function(){
+    ], function(){ 
         Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'Admin\CategoryAdsController@getSubCategory']);
         Route::get('/', ['as' => 'market', 'uses' => 'C2cController@index']);
         Route::get('categories', ['as' => 'market.categories', 'uses' =>'C2cController@getcategory']);
         Route::get('all-wholecateogry', ['as' => 'market.allcategory', 'uses' =>'C2cController@getAllCategory']);
         Route::get('search', ['as' => 'market.search', 'uses' =>'SearchController@filter']); 
         Route::get('products', ['as' => 'market.categories', 'uses' => 'Market\ProductController@getproduct']);
-        Route::get('productdetail/{id?}', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);   
+        Route::get('productdetail/{slug?}', ['as' => 'market.productdetail', 'uses' => 'Market\ProductController@getproductdetail']);   
         Route::get('mystore/{id}', ['as' => 'market.mystore', 'uses' => 'CustomerController@myStore']);
         Route::group( ['middleware' => 'auth' ], function()
         { 
             Route::post('reportmarket', ['as' => 'market.reportmarket', 'uses' => 'Market\ProductController@makeReport']); 
             Route::post('ratemarket', ['as' => 'market.ratemarket', 'uses' => 'Market\ProductController@makeRateAble']);
-            Route::delete('destroyproduct/{id}', ['as' => 'market.destroyproduct', 'uses' => 'Market\ProductController@destroy']);
-            Route::delete('mydestroypro/{id}', ['as' => 'market.deleteproduct', 'uses' => 'CustomerController@myDeletePro']);
+            Route::delete('destroyproduct/{slug}', ['as' => 'market.destroyproduct', 'uses' => 'Market\ProductController@destroy']);
+            Route::delete('mydestroypro/{slug}', ['as' => 'market.deleteproduct', 'uses' => 'CustomerController@myDeletePro']);
             Route::get('mysetting', ['as' => 'market.mysetting', 'uses' => 'CustomerController@mySetting']);
             Route::get('myprofile', ['as' => 'market.myprofile', 'uses' => 'CustomerController@myProfile']);
             Route::get('mycart', ['as' => 'market.mycart', 'uses' => 'CustomerController@myCart']);
@@ -78,7 +78,7 @@ function()
             Route::get('mysale', ['as' => 'market.mysale', 'uses' => 'CustomerController@mySaleManagement']);
             Route::any('myitemupload', ['as' => 'market.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
             Route::get('mymanageitem', ['as' => 'market.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
-            Route::any('myEditItem/{id?}', ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
+            Route::any('myEditItem/{slug?}', ['as' => 'market.edititem', 'uses' => 'CustomerController@myEditItem']);
             Route::get('myInvoice', ['as' => 'market.invoice', 'uses' => 'CustomerController@myInvoice']);
             Route::get('viewPdf', ['as' => 'market.viewpdf', 'uses' => 'CustomerController@viewPdf']);
             Route::get('downloadPdf', ['as' => 'market.downloadpdf', 'uses' => 'CustomerController@downloadPdf']);

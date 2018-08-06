@@ -171,6 +171,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Ghanem\Reportable\ReportableServiceProvider::class,
         willvincent\Rateable\RateableServiceProvider::class,
+        Chencha\Share\ShareServiceProvider::class,
     ],
 
     /*
@@ -227,6 +228,7 @@ return [
         'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Share' => Chencha\Share\ShareFacade::class,
     ],
 
 ];

@@ -84,7 +84,17 @@
                                             </span>
                                         </td>
                                         <td>{{$report->judge()->name}}</td>
-                                        <td><i class="zmdi zmdi-eye"></i> &nbsp; <a target="_blank" href="{{route('market.productdetail',$report->reportable_id)}}">View</a></td> 
+                                        <td>
+                                            @php 
+                                                $slug='';
+                                                $getSlug = App\Models\ProductsAdsTranslation::where('products_ads_id',$report->reportable_id)->first();
+                                                if($getSlug){
+                                                    $slug = $getSlug->slug;
+                                                }
+                                            @endphp
+                                            <i class="zmdi zmdi-eye"></i> &nbsp; 
+                                            <a target="_blank" href="{{route('market.productdetail',$slug)}}">View</a>
+                                        </td> 
                                         <td>{{$report->reason}}</td>
                                         <td>{{is_array($report->meta)?$report->meta[0]:$report->meta}}</td>
                                         <td>{{$report->created_at}}</td>

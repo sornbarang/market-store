@@ -152,7 +152,7 @@
                                             <div class="product__thumbnail">
                                                 <img src="{{$img}}" alt="Product Image">
                                                 <div class="prod_btn">
-                                                    <a href="{{ route('market.productdetail',$val->id) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                                                    <a href="{{ route('market.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                                                     {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                                                 </div><!-- end /.prod_btn -->
                                             </div><!-- end /.product__thumbnail -->
