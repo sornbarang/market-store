@@ -56,7 +56,7 @@
                     <h3 class="modal-title" id="rating_modal">Rating this Item</h3>
                     <h4>Product Enquiry Extension</h4>
                     <p>by
-                        <a href="author.html">{{$data['product']->user->name}}</a>
+                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{$data['product']->user->name}}</a>
                     </p>
                 </div>
                 <!-- end /.modal-header -->
@@ -79,6 +79,7 @@
                                 </div>
                             </li>
 
+                            {{--
                             <li>
                                 <p>Rating Causes</p>
                                 <div class="right_content">
@@ -95,11 +96,12 @@
                                     </div>
                                 </div>
                             </li>
+                            --}}
                         </ul>
 
                         <div class="rating_field">
                             <label for="rating_field">Comments</label>
-                            <textarea name="rating_field" id="rating_field" class="text_field" placeholder="Please enter your rating reason to help the author"></textarea>
+                            <textarea maxlength="50" name="rating_field" id="rating_field" class="text_field" placeholder="Please enter your rating reason to help the author"></textarea>
                             <p class="notice">Your review will be ​publicly visible​ and the author may reply to your comments. </p>
                         </div>
                         <button type="button" class="btn btn--round btn--default">Submit Rating</button>
@@ -122,7 +124,7 @@
                     <h3 class="modal-title" id="rating_modal">Give Feedback on This Post</h3>
                     <h4>Product</h4>
                     <p>by
-                        <a href="author.html">{{$data['product']->user->name}}</a>
+                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{$data['product']->user->name}}</a>
                     </p>
                 </div>
                 <div class="container"> 
@@ -212,7 +214,7 @@
 
                         <div class="rating_field">
                             <label for="rating_field">Comments</label>
-                            <textarea name="commemnt_reporter" id="commemnt_reporter" class="text_field" placeholder="Please enter your comment report for this post"></textarea>
+                            <textarea maxlength="100" name="commemnt_reporter" id="commemnt_reporter" class="text_field" placeholder="Please enter your comment report for this post"></textarea>
                             <p class="notice">Your review will be ​publicly visible​ and the author may reply to your comments. </p>
                         </div>
                         <button type="button" class="btn btn--round btn--default">Submit</button>
@@ -293,12 +295,12 @@
                                     <ul>
                                         <li>
 
-                                            <a href="{{$getShareLinkFacebook??''}}" target="_blank">
+                                            <a href="{{$getShareLinkFacebook??'javascript:void(0)'}}" target="_blank">
                                                 <span class="fa fa-facebook"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{$getShareLinkTwitter??''}}" target="_blank">
+                                            <a href="{{$getShareLinkTwitter??'javascript:void(0)'}}" target="_blank">
                                                 <span class="fa fa-twitter"></span>
                                             </a>
                                         </li>
@@ -327,31 +329,33 @@
                                 <!-- end /.social-->
                                 @if (Route::has('login'))
                                     @auth  
-                                        <div class="item_action v_middle"> 
-                                            <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
-                                                <P class="rate_it">Rate Now</P>
-                                                <div class="rating product--rating">
-                                                    <ul>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </a>
-                                            <!-- end /.rating_btn -->
-                                        </div> 
+                                        @if($data['allowUserRate']==='true')
+                                            <div class="item_action v_middle"> 
+                                                <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
+                                                    <P class="rate_it">Rate Now</P>
+                                                    <div class="rating product--rating">
+                                                        <ul>
+                                                            <li>
+                                                                <span class="fa fa-star-o"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star-o"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star-o"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star-o"></span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="fa fa-star-o"></span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </a>
+                                                <!-- end /.rating_btn -->
+                                            </div>
+                                        @endif
                                     @endauth
                                 @endif 
                             </div> 
@@ -711,22 +715,26 @@
                         <!-- end /.sidebar--card -->
                         <div class="sidebar-card card--metadata">
                             <ul class="data">
-                                <li>
+                                <li class="p-2">
                                     <p>
                                         <span class="lnr lnr-heart scolor"></span>@lang('frontlabel.favourites')</p>
                                     <span>240</span>
                                 </li>
-                                <li>
+                                <li class="p-2">
                                     <p>
                                         <span class="lnr lnr-bubble mcolor3"></span>@lang('frontlabel.comments')</p>
                                     <span>35</span>
                                 </li>
-                                <li>
+                                <li class="p-2">
                                     <p>
                                         <span class="lnr lnr-eye mcolor4"></span>@lang('frontlabel.views')</p>
                                     <span>6,589</span>
-                                </li>
+                                </li> 
                             </ul>
+                            <div class="row p-2">
+                                <div class="col-md-4"><div class="raty"></div></div>
+                                <div class="col-md-8 text-right"><b>( {{$data['totalRate']}} Ratings )</b></div>
+                            </div>
                         </div>
                         <!-- end /.sidebar-card --> 
 
@@ -860,25 +868,9 @@
                                         <div class="price_love">
                                             <span>$ {{$val->price??'0'}}</span>
                                         </div>
-                                        <a href="javascript:void(0)">
-                                            <div class="rating product--rating">
-                                                <ul>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star-half-o"></span>
-                                                    </li>
-                                                </ul>
+                                        <a href="javascript:void(0)">  
+                                            <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                                <input  type="hidden" name="score">
                                             </div>
                                         </a>
                                     </div>
@@ -917,3 +909,27 @@
         END CALL TO ACTION AREA
     =================================-->
 @stop
+@section('cusomescript')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('div.raty').raty(
+            { 
+                starType: 'i',
+                half:true,
+                score:"{{$data['totalRate']}}",
+                readOnly:true
+            }
+        );
+        $('div.raty.rateproduct').raty(
+            { 
+                starType: 'i',
+                half:true, 
+                readOnly:true,
+                score: function() {
+                    return $(this).attr('data-rating');
+                }
+            }
+        );
+    });
+</script>
+@stop 

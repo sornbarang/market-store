@@ -389,24 +389,8 @@
                                                 <span>$ {{$val->price??'0'}}</span>
                                             </div>
                                             <a href="javascript:void(0)">
-                                                <div class="rating product--rating">
-                                                    <ul>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-half-o"></span>
-                                                        </li>
-                                                    </ul>
+                                                <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                                    <input  type="hidden" name="score">
                                                 </div>
                                             </a>
                                         </div>
@@ -435,8 +419,22 @@
     <!--================================
         END AUTHOR AREA
     =================================-->
-
-
+    @section('cusomescript')
+    <script type="text/javascript">
+        $(document).ready(function(){ 
+            $('div.raty.rateproduct').raty(
+                { 
+                    starType: 'i',
+                    half:true, 
+                    readOnly:true,
+                    score: function() {
+                        return $(this).attr('data-rating');
+                    }
+                }
+            );
+        });
+    </script>
+    @stop  
     <!--================================
         START CALL TO ACTION AREA
     =================================-->

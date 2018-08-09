@@ -171,25 +171,9 @@
                                         <div class="cflexcenter col text-xs-center  col-xs-12 col-sm-12 col-md-6">
                                         <div class="sell">
                                             <a href="javascript:void(0)">
-                                                <div class="rating product--rating">
-                                                    <ul>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-half-o"></span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                               <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                                    <input  type="hidden" name="score">
+                                                </div> 
                                             </a>
                                         </div>
                                         </div>
@@ -217,8 +201,22 @@
     <!--================================
             END DASHBOARD AREA
     =================================-->
-
-
+    @section('cusomescript')
+    <script type="text/javascript">
+        $(document).ready(function(){  
+            $('div.raty.rateproduct').raty(
+                { 
+                    starType: 'i',
+                    half:true, 
+                    readOnly:true,
+                    score: function() {
+                        return $(this).attr('data-rating');
+                    }
+                }
+            );
+        });
+    </script>
+    @stop 
     <!--================================
         START CALL TO ACTION AREA
     =================================-->

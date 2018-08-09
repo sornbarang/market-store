@@ -31,6 +31,7 @@
     @endif 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.css">
     <!-- endinject -->
 
     <!-- Favicon -->
@@ -687,6 +688,8 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <!-- <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script> -->
 <script src="{{ asset('js/map.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.js"></script>
+@yield('cusomescript')
 <script> 
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
     $(document).on('click', '#deletepro', function(e) {
@@ -1046,17 +1049,19 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         function rateProduct(mythis){
             var this_=mythis; 
             var rateNum=$('.br-widget > a.br-selected.br-current').attr('data-rating-value');
+            var rateComment=$('#rating_field').val();
             var proId=$('#proId').val();
             xhr=$.ajax({
                 url: "{{route('market.ratemarket')}}",
                 type: 'POST',
-                data:{id:proId,rate:rateNum},
+                data:{id:proId,rate:rateNum,comments:rateComment},
                 headers: {
                         'X-CSRF-Token':CSRF_TOKEN,
                 },
                 success: function( msg ) {
                     if(msg.status==200){
                         $('form#rateMarket button.modal_close').click();
+                        $('.single-product-desc .item_action.v_middle').remove();
                     }
                 },
                 error: function( data ) {
@@ -1077,8 +1082,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 }
             } 
         }); 
-    });
-    
+    }); 
 </script>
 <!-- endinject -->
 </body>

@@ -497,24 +497,8 @@
                                                         <span title="${{$getprops->price??''}}">${{$getprops->price??''}}</span>
                                                     </div>
                                                     <a href="javascript:void(0)">
-                                                        <div class="rating product--rating">
-                                                            <ul>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star-half-o"></span>
-                                                                </li>
-                                                            </ul>
+                                                        <div class="raty rateproduct" data-rating="{{$getprops->averageRating}}">
+                                                            <input  type="hidden" name="score">
                                                         </div>
                                                     </a>
                                                 </div>
@@ -794,6 +778,22 @@
         </div><!-- end /.row -->
     </div><!-- end /.container -->
 </section>--}}
+@section('cusomescript')
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('div.raty.rateproduct').raty(
+            { 
+                starType: 'i',
+                half:true, 
+                readOnly:true,
+                score: function() {
+                    return $(this).attr('data-rating');
+                }
+            }
+        );
+    });
+</script>
+@stop 
 <!--================================
     END SPECIAL FEATURES AREA
 =================================-->

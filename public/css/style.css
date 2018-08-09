@@ -6382,10 +6382,15 @@ div#ui-datepicker-div tbody tr td a:hover {
   margin-right: 3px;
 }
 
-.rating ul li span.fa-star, .rating ul li span.fa-star-half-o {
+.rating ul li span.fa-star, .rating ul li span.fa-star-half-o,.raty i {
   color: #ffc000;
 }
-
+.raty i {
+  font-size:18px;
+}
+.raty.rateproduct i,.raty.total i {
+  font-size:15px;
+}
 .rating ul li span.fa-star-o {
   color: #7e7e7e;
 }

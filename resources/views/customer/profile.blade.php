@@ -207,26 +207,13 @@
                         <div class="col-md-4 col-sm-4">
                             <div class="author-info scolorbg">
                                 <p>@lang('profile.totalrates')</p>
-                                <div class="rating">
-                                    <ul>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star-half-o"></span>
-                                        </li>
-                                    </ul>
-                                    <span class="rating__count">(26)</span>
+                                <div class="row no-gutters p-2">
+                                    <div class="col-md-8 col-sm-10  text-md-right pr-1">
+                                        <div class="d-flex align-items-sm-center align-items-center justify-content-center justify-content-lg-end text-sm-left raty total"></div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2   text-md-left text-white">({{$data['totalRate']}})</div>
                                 </div>
+                                
                             </div>
                         </div>
                         <!-- end /.col-md-4 -->
@@ -326,24 +313,8 @@
                                         <div class="cflexcenter col text-xs-right  col-xs-12 col-sm-6 col-md-6">
                                         <div class="sell">
                                             <a href="javascript:void(0)">
-                                                <div class="rating product--rating">
-                                                    <ul>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-half-o"></span>
-                                                        </li>
-                                                    </ul>
+                                                <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                                    <input  type="hidden" name="score">
                                                 </div>
                                             </a>
                                         </div>
@@ -376,7 +347,30 @@
     <!--================================
         END AUTHOR AREA
     =================================-->
-
+    @section('cusomescript')
+    <script type="text/javascript">
+        $(document).ready(function(){ 
+            $('div.raty.total').raty(
+            { 
+                starType: 'i',
+                half:true,
+                score: "{{$data['totalRate']}}",
+                readOnly:true
+            }
+        );
+            $('div.raty.rateproduct').raty(
+                { 
+                    starType: 'i',
+                    half:true, 
+                    readOnly:true,
+                    score: function() {
+                        return $(this).attr('data-rating');
+                    }
+                }
+            );
+        });
+    </script>
+    @stop 
     <!--================================
         START CALL TO ACTION AREA
     =================================-->

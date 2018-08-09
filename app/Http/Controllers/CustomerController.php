@@ -230,7 +230,13 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function myProfile()
-    {
+    { 
+        $post = Product::where('user_id',Auth::id())->get();
+        $totalstar=0;
+        foreach($post as $key => $val){
+            $totalstar +=$val->sumRating;
+        } 
+        $data['totalRate'] =$totalstar;
         $data['breadcrub']='profile';
         return view('customer.profile',compact('data'));
     }
