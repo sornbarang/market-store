@@ -37,6 +37,12 @@ class CustomerController extends Controller
 
         $user= User::findOrFail($id);
         $post= Product::where('user_id',$id)->latest()->paginate(9);
+        $getAllPro= Product::where('user_id',$id)->get();
+        $totalstar=0;
+        foreach($getAllPro as $key => $val){
+            $totalstar +=$val->sumRating;
+        } 
+        $data['totalRate'] =$totalstar;
         if($user){
             $data['user']=$user;
         }

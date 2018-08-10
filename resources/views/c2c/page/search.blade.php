@@ -155,7 +155,7 @@
     <!--================================
         START PRODUCTS AREA
     =================================-->
-    <section class="products">
+    <section class="products pt-5">
         <!-- start container -->
         <div class="container">
 
@@ -204,22 +204,25 @@
 
                             <p>{{ !empty($val->user->profile->bio) ? $val->user->profile->bio : '' }}</p>
                         </div>
-                        <!-- end /.product-desc -->
-
+                        <!-- end /.product-desc --> 
                         <div class="product-purchase">
-                            <div class="price_love">
-                                <span>$ {{$val->price ?? 0}}</span>
-                                {{--<p>
-                                    <span class="lnr lnr-heart"></span> 90</p>--}}
+                            <div class="row">
+                                <div class="col text-md-left col-xs-12 col-sm-6 col-md-6">
+                                    <div class="price_love">
+                                        <span title="{{$val->price}}">$ {{str_limit($val->price,10)??0}}</span> 
+                                    </div>
+                                </div>
+                                <div class="cflexcenter col text-xs-right  col-xs-12 col-sm-6 col-md-6">
+                                <div class="sell">
+                                    <a href="javascript:void(0)">
+                                        <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                            <input  type="hidden" name="score">
+                                        </div>
+                                    </a>
+                                </div>
+                                </div>
                             </div>
-                            {{--<div class="sell">
-                                <p>
-                                    <span class="lnr lnr-cart"></span>
-                                    <span>16</span>
-                                </p>
-                            </div>--}}
-                        </div>
-                        <!-- end /.product-purchase -->
+                        </div><!-- end /.product-purchase --> 
                     </div>
                     <!-- end /.single-product -->
                 </div>
@@ -252,7 +255,7 @@
 <!--================================
     START COUNTER UP AREA
 =================================-->
-@include('elements.membercount')
+{{-- @include('elements.membercount') --}}
 <!--================================
     START CALL TO ACTION AREA
 =================================-->
@@ -261,3 +264,19 @@
     END CALL TO ACTION AREA
 =================================-->
 @stop
+@section('cusomescript')
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('div.raty.rateproduct').raty(
+            { 
+                starType: 'i',
+                half:true, 
+                readOnly:true,
+                score: function() {
+                    return $(this).attr('data-rating');
+                }
+            }
+        );
+    });
+</script>
+@stop 

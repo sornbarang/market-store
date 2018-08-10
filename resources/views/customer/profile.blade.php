@@ -349,15 +349,15 @@
     =================================-->
     @section('cusomescript')
     <script type="text/javascript">
-        $(document).ready(function(){ 
-            $('div.raty.total').raty(
-            { 
-                starType: 'i',
-                half:true,
-                score: "{{$data['totalRate']}}",
-                readOnly:true
-            }
-        );
+            $(document).ready(function(){ 
+                $('div.raty.total').raty(
+                { 
+                    starType: 'i',
+                    half:true,
+                    score: "{{$data['totalRate']}}",
+                    readOnly:true
+                }
+            );
             $('div.raty.rateproduct').raty(
                 { 
                     starType: 'i',

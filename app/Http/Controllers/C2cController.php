@@ -77,6 +77,7 @@ class C2cController extends Controller
                     $pros[$key]['avatar']=Storage::url($m->id.'/'.$m->file_name);  
                 }
             }
+            $pros[$key]['rateavg']=$val->averageRating();
         } 
         
         return response()->json($pros);   

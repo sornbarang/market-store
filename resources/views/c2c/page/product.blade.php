@@ -44,17 +44,19 @@
                             </div> 
                         </div>
                         <div class="pull-right">
-                            <div class="filter__option filter--select">
-                                <div class="range-slider price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 6%; width: 54%;"></div>
-                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 6%;"></span>
-                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span>
-                                    </div>
+                            <div class="filter__option filter--dropdown filter--range">
+                                <a href="#" id="drop3" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Price Range
+                                    <span class="lnr lnr-chevron-down"></span>
+                                </a>
+                                <div class="custom_dropdown dropdown-menu" aria-labelledby="drop3">
+                                    <div class="range-slider price-range"></div>
+
                                     <div class="price-ranges">
                                         <span class="from rounded">$30</span>
                                         <span class="to rounded">$300</span>
                                     </div>
-                                </div> 
+                                </div>
+                            </div>
                             <div class="filter__option filter--layout">
                                 <a href="javascript:void(0)">
                                     <div class="svg-icon"><img class="svg" src="{{asset('images/svg/grid.svg')}}" alt="it's just a layout control folks!"></div>
@@ -191,24 +193,8 @@
                                                     <span title="${{$val->price??''}}">${{str_limit($val->price,10)??''}}</span>
                                                 </div>
                                                 <a href="javascript:void(0)">
-                                                    <div class="rating product--rating">
-                                                        <ul>
-                                                            <li>
-                                                                <span class="fa fa-star"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star-half-o"></span>
-                                                            </li>
-                                                        </ul>
+                                                    <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                                        <input  type="hidden" name="score">
                                                     </div>
                                                 </a>
                                             </div>
@@ -243,6 +229,22 @@
     <!--================================
         END PRODUCTS AREA
     =================================-->
+@section('cusomescript')
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('div.raty.rateproduct').raty(
+            { 
+                starType: 'i',
+                half:true, 
+                readOnly:true,
+                score: function() {
+                    return $(this).attr('data-rating');
+                }
+            }
+        );
+    });
+</script>
+@stop 
 <!--================================
     START COUNTER UP AREA
 =================================-->
