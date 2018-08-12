@@ -65,10 +65,16 @@
                     <form id="rateMarket">
                         @csrf
                         <input type="hidden" id="proId" name="id" value="{{$data['product']->id??''}}"/>
-                        <ul>
+                        <div class="row no-gutters pt-3 pb-3">
+                            <div class="col-4 d-flex content-justify-center align-items-center"><b>Your Rating </b></div>
+                            <div class="col-8 d-flex content-justify-center align-items-center"><div class="rateenable"></div></div>
+                        </div>
+                        {{--
+                        <ul> 
                             <li>
                                 <p>Your Rating</p>
-                                <div class="right_content btn btn--round btn--white btn--md">
+                                <div class="rateenable"></div>
+                                <div class="right_content btn btn--round btn--white btn--md"> 
                                     <select name="rating" class="give_rating">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -76,10 +82,8 @@
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                     </select>
-                                </div>
-                            </li>
-
-                            {{--
+                                </div> 
+                            </li>  
                             <li>
                                 <p>Rating Causes</p>
                                 <div class="right_content">
@@ -95,10 +99,9 @@
                                         <span class="lnr lnr-chevron-down"></span>
                                     </div>
                                 </div>
-                            </li>
-                            --}}
+                            </li> 
                         </ul>
-
+                        --}}
                         <div class="rating_field">
                             <label for="rating_field">Comments</label>
                             <textarea maxlength="50" name="rating_field" id="rating_field" class="text_field" placeholder="Please enter your rating reason to help the author"></textarea>
@@ -245,13 +248,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="item-preview">
-                        <div class="item__preview-slider">
+                    
+                    <div class="item-preview"> 
+                        <div class="item__preview-slider"> 
                             @foreach( $media as $val)
-                                <div class="prev-slide"><img src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
+                                <div class="prev-slide">
+                                <div class="price p-1 m-0 c-price text-center col-md-12">
+                                    <h1>
+                                    <span> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
+                                    </h1>
+                                </div> 
+                                    <img src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                </div>
                             @endforeach
                         </div><!-- end /.item--preview-slider -->
-
+                        
                         <div class="item__preview-thumb">
                             <div class="prev-thumb">
                                 <div class="thumb-slider">
@@ -332,26 +343,12 @@
                                         @if($data['allowUserRate']==='true')
                                             <div class="item_action v_middle"> 
                                                 <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
-                                                    <P class="rate_it">Rate Now</P>
-                                                    <div class="rating product--rating">
-                                                        <ul>
-                                                            <li>
-                                                                <span class="fa fa-star-o"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star-o"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star-o"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star-o"></span>
-                                                            </li>
-                                                            <li>
-                                                                <span class="fa fa-star-o"></span>
-                                                            </li>
-                                                        </ul>
+                                                    <div class="row no-gutters">
+                                                        <div class="col-4 d-flex content-justify-center align-items-center">Rate Now</div>
+                                                        <div class="col-8 d-flex content-justify-center align-items-center pl-3"><div class="staronly rating product--rating"></div> </div>
                                                     </div>
+                                                    
+                                                    
                                                 </a>
                                                 <!-- end /.rating_btn -->
                                             </div>
@@ -385,20 +382,24 @@
                                 <li>
                                     <a href="#product-details" class="active" aria-controls="product-details" role="tab" data-toggle="tab">Item Details</a>
                                 </li>
+                                {{--
                                 <li>
                                     <a href="#product-comment" aria-controls="product-comment" role="tab" data-toggle="tab">Comments </a>
                                 </li>
-                                {{--<li>
+                                --}}
+                                <li>
                                     <a href="#product-review" aria-controls="product-review" role="tab" data-toggle="tab">Reviews
-                                        <span>(35)</span>
+                                        <span>({{count($data['getUserRateOfProduct'])}})</span>
                                     </a>
                                 </li>
+                                {{--
                                 <li>
                                     <a href="#product-support" aria-controls="product-support" role="tab" data-toggle="tab">Support</a>
                                 </li>
                                 <li>
                                     <a href="#product-faq" aria-controls="product-faq" role="tab" data-toggle="tab">item FAQ</a>
-                                </li>--}}
+                                </li>
+                                --}}
                             </ul>
                         </div>
                         <!-- end /.item-navigation -->
@@ -414,7 +415,7 @@
                                 </div>
                             </div>
                             <!-- end /.tab-content -->
-
+                            {{--
                             <div class="fade tab-pane product-tab" id="product-comment">
                                 <div class="thread">
                                     <ul class="media-list thread-list">
@@ -664,8 +665,17 @@
                                 </div>
                                 <!-- end /.comments -->
                             </div>
+                            --}}
                             <!-- end /.product-comment -->
 
+                            <div class="fade tab-pane product-tab" id="product-review">
+                                <div class="thread thread_review"> 
+                                    @include('c2c.page.userrate')
+                                </div>
+                                <!-- end /.comments -->
+                            </div>
+
+                            <!-- end /.product-comment -->
                         </div>
                         <!-- end /.tab-content -->
                     </div>
@@ -703,7 +713,7 @@
                             </div><!-- end /.purchase-button -->
                         </div>--}}<!-- end /.sidebar--card -->
 
-                        <div class="sidebar-card card-pricing p-3">
+                        {{--<div class="sidebar-card card-pricing p-3">
                             <div class="price p-3 m-0">
                                 <h1>
                                     <sup>$</sup>
@@ -711,38 +721,9 @@
                                 </h1>
                             </div>
                             <!-- end /.purchase-button -->
-                        </div>
+                        </div>--}}
                         <!-- end /.sidebar--card -->
-                        <div class="sidebar-card card--metadata">
-                            <ul class="data">
-                                <li class="p-2">
-                                    <p>
-                                        <span class="lnr lnr-heart scolor"></span>@lang('frontlabel.favourites')</p>
-                                    <span>240</span>
-                                </li>
-                                <li class="p-2">
-                                    <p>
-                                        <span class="lnr lnr-bubble mcolor3"></span>@lang('frontlabel.comments')</p>
-                                    <span>35</span>
-                                </li>
-                                <li class="p-2">
-                                    <p>
-                                        <span class="lnr lnr-eye mcolor4"></span>@lang('frontlabel.views')</p>
-                                    <span>6,589</span>
-                                </li> 
-                            </ul>
-                            <div class="row p-2">
-                                <div class="col-md-4"><div class="raty"></div></div>
-                                <div class="col-md-8 text-right"><b>( {{$data['totalRate']}} Ratings )</b></div>
-                            </div>
-                        </div>
-                        <!-- end /.sidebar-card --> 
-
-                        <div class="author-card sidebar-card ">
-                            <div class="card-title">
-                                <h4>@lang('frontlabel.proinfo')</h4>
-                            </div>
-
+                        <div class="author-card sidebar-card "> 
                             <div class="author-infos">
                                 <div class="author_avatar">
                                     <a href="{{route('market.mystore',$data['product']->user->id)}}">
@@ -753,7 +734,6 @@
                                         @endif
                                     </a>
                                 </div>
-
                                 <div class="author">
                                     <h4>{{ucfirst($data['product']->user->name)}}</h4>
                                     <p>Signed Up: {{$data['product']->user->created_at}}</p>
@@ -775,6 +755,30 @@
 
 
                         </div><!-- end /.author-card -->
+                        <div class="sidebar-card card--metadata">
+                            <ul class="data">
+                                <li class="p-2">
+                                    <p>
+                                        <span class="lnr lnr-heart scolor"></span>@lang('frontlabel.favourites')</p>
+                                    <span>240</span>
+                                </li>
+                                <li class="p-2">
+                                    <p>
+                                        <span class="lnr lnr-bubble mcolor3"></span>@lang('frontlabel.comments')</p>
+                                    <span>35</span>
+                                </li>
+                                <li class="p-2">
+                                    <p>
+                                        <span class="lnr lnr-eye mcolor4"></span>@lang('frontlabel.views')</p>
+                                    <span>6,589</span>
+                                </li> 
+                            </ul>
+                            <div class="row p-2">
+                                <div class="col-7 col-md-6"><div class="raty"></div></div>
+                                <div class="col-5 col-md-6  text-right"><b>( {{$data['totalRate']}} Ratings )</b></div>
+                            </div>
+                        </div>
+                        <!-- end /.sidebar-card --> 
                     </aside><!-- end /.aside -->
                 </div><!-- end /.col-md-4 -->
             </div><!-- end /.row -->
@@ -869,7 +873,7 @@
                                             <span>$ {{$val->price??'0'}}</span>
                                         </div>
                                         <a href="javascript:void(0)">  
-                                            <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                            <div class="rateproduct" data-rating="{{$val->averageRating}}">
                                                 <input  type="hidden" name="score">
                                             </div>
                                         </a>
@@ -911,25 +915,117 @@
 @stop
 @section('cusomescript')
 <script type="text/javascript">
-    $(document).ready(function(){
+    ( function($) {
+        $('div.rateenable').raty({
+            starOff   :"{{asset('imgs/0.png')}}",
+            iconRange: [            
+                { range: 1, on: "{{asset('imgs/1.png')}}"},
+                { range: 2, on: "{{asset('imgs/2.png')}}"},
+                { range: 3, on: "{{asset('imgs/3.png')}}"},
+                { range: 4, on: "{{asset('imgs/4.png')}}"},
+                { range: 5, on: "{{asset('imgs/5.png')}}"}
+            ]
+        });
+        $('div.staronly').raty(
+            { 
+                starType: 'img',
+                iconRange: [
+                    { range: 1, on: "{{asset('imgs/1.png')}}", off: "{{asset('imgs/1.png')}}" },
+                    { range: 2, on: "{{asset('imgs/2.png')}}", off: "{{asset('imgs/2.png')}}" },
+                    { range: 3, on: "{{asset('imgs/3.png')}}", off: "{{asset('imgs/3.png')}}" },
+                    { range: 4, on: "{{asset('imgs/4.png')}}", off: "{{asset('imgs/4.png')}}" },
+                    { range: 5, on: "{{asset('imgs/5.png')}}", off: "{{asset('imgs/5.png')}}"}
+                ], 
+                readOnly:true
+            }
+        );
         $('div.raty').raty(
             { 
-                starType: 'i',
-                half:true,
+                starOff   :"{{asset('imgs/0.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/1.png')}}"},
+                    { range: 2, on: "{{asset('imgs/2.png')}}"},
+                    { range: 3, on: "{{asset('imgs/3.png')}}"},
+                    { range: 4, on: "{{asset('imgs/4.png')}}"},
+                    { range: 5, on: "{{asset('imgs/5.png')}}"}
+                ],
                 score:"{{$data['totalRate']}}",
                 readOnly:true
             }
         );
-        $('div.raty.rateproduct').raty(
+        $('div.rateproduct').raty(
             { 
-                starType: 'i',
-                half:true, 
+                starOff   :"{{asset('imgs/0.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/1.png')}}"},
+                    { range: 2, on: "{{asset('imgs/2.png')}}"},
+                    { range: 3, on: "{{asset('imgs/3.png')}}"},
+                    { range: 4, on: "{{asset('imgs/4.png')}}"},
+                    { range: 5, on: "{{asset('imgs/5.png')}}"}
+                ], 
                 readOnly:true,
                 score: function() {
                     return $(this).attr('data-rating');
                 }
             }
         );
-    });
+        $('div.userrateproduct').raty(
+            { 
+                starOff   :"{{asset('imgs/0.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/1.png')}}"},
+                    { range: 2, on: "{{asset('imgs/2.png')}}"},
+                    { range: 3, on: "{{asset('imgs/3.png')}}"},
+                    { range: 4, on: "{{asset('imgs/4.png')}}"},
+                    { range: 5, on: "{{asset('imgs/5.png')}}"}
+                ], 
+                readOnly:true,
+                score: function() {
+                    return $(this).attr('data-rating');
+                }
+            }
+        );
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else {
+                    getPosts(page);
+                }
+            }
+        }); 
+    $(document).on('click', '.pagination-area.pagination-area2 a', function (e) {
+        getPosts($(this).attr('href').split('page=')[1]);
+        e.preventDefault();
+    }); 
+    function getPosts(page) {
+        $.ajax({
+            url : '?page=' + page,
+            dataType: 'json',
+        }).done(function (data) { 
+            $('.thread.thread_review').empty().html(data);
+            $('div.userrateproduct').raty(
+                { 
+                    starOff   :"{{asset('imgs/0.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/1.png')}}"},
+                        { range: 2, on: "{{asset('imgs/2.png')}}"},
+                        { range: 3, on: "{{asset('imgs/3.png')}}"},
+                        { range: 4, on: "{{asset('imgs/4.png')}}"},
+                        { range: 5, on: "{{asset('imgs/5.png')}}"}
+                    ], 
+                    readOnly:true,
+                    score: function() {
+                        return $(this).attr('data-rating');
+                    }
+                }
+            );
+            location.hash = page; 
+        }).fail(function () {
+            alert('Posts could not be loaded.');
+        });
+    }
+} ) ( jQuery );
 </script>
 @stop 

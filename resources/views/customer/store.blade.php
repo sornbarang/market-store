@@ -376,7 +376,7 @@
                                                 <span>$ {{$val->price??'0'}}</span>
                                             </div>
                                             <a href="javascript:void(0)">
-                                                <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                                <div class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
                                                     <input  type="hidden" name="score">
                                                 </div>
                                             </a>
@@ -411,15 +411,27 @@
         $(document).ready(function(){  
             $('div.raty.total').raty(
             { 
-                starType: 'i',
-                half:true,
-                score: "{{$data['totalRate']}}",
-                readOnly:true
+                starOff   :"{{asset('imgs/0.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/1.png')}}"},
+                    { range: 2, on: "{{asset('imgs/2.png')}}"},
+                    { range: 3, on: "{{asset('imgs/3.png')}}"},
+                    { range: 4, on: "{{asset('imgs/4.png')}}"},
+                    { range: 5, on: "{{asset('imgs/5.png')}}"}
+                ], 
+                readOnly:true,
+                score: "{{$data['totalRate']}}"
             });
-            $('div.raty.rateproduct').raty(
+            $('div.rateproduct.cproduct').raty(
                 { 
-                    starType: 'i',
-                    half:true, 
+                    starOff   :"{{asset('imgs/0.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/1.png')}}"},
+                        { range: 2, on: "{{asset('imgs/2.png')}}"},
+                        { range: 3, on: "{{asset('imgs/3.png')}}"},
+                        { range: 4, on: "{{asset('imgs/4.png')}}"},
+                        { range: 5, on: "{{asset('imgs/5.png')}}"}
+                    ], 
                     readOnly:true,
                     score: function() {
                         return $(this).attr('data-rating');

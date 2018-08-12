@@ -209,7 +209,7 @@
                                 <p>@lang('profile.totalrates')</p>
                                 <div class="row no-gutters p-2">
                                     <div class="col-md-8 col-sm-10  text-md-right pr-1">
-                                        <div class="d-flex align-items-sm-center align-items-center justify-content-center justify-content-lg-end text-sm-left raty total"></div>
+                                        <div class="d-flex align-items-sm-center align-items-center justify-content-center justify-content-lg-end text-sm-left totalrate"></div>
                                     </div>
                                     <div class="col-md-4 col-sm-2   text-md-left text-white">({{$data['totalRate']}})</div>
                                 </div>
@@ -313,7 +313,7 @@
                                         <div class="cflexcenter col text-xs-right  col-xs-12 col-sm-6 col-md-6">
                                         <div class="sell">
                                             <a href="javascript:void(0)">
-                                                <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                                <div class="rateproductprofile" data-rating="{{$val->averageRating}}">
                                                     <input  type="hidden" name="score">
                                                 </div>
                                             </a>
@@ -350,18 +350,30 @@
     @section('cusomescript')
     <script type="text/javascript">
             $(document).ready(function(){ 
-                $('div.raty.total').raty(
+                $('div.totalrate').raty(
                 { 
-                    starType: 'i',
-                    half:true,
-                    score: "{{$data['totalRate']}}",
-                    readOnly:true
+                    starOff   :"{{asset('imgs/0.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/1.png')}}"},
+                        { range: 2, on: "{{asset('imgs/2.png')}}"},
+                        { range: 3, on: "{{asset('imgs/3.png')}}"},
+                        { range: 4, on: "{{asset('imgs/4.png')}}"},
+                        { range: 5, on: "{{asset('imgs/5.png')}}"}
+                    ], 
+                    readOnly:true,
+                    score: "{{$data['totalRate']}}"
                 }
             );
-            $('div.raty.rateproduct').raty(
+            $('div.rateproductprofile').raty(
                 { 
-                    starType: 'i',
-                    half:true, 
+                    starOff   :"{{asset('imgs/0.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/1.png')}}"},
+                        { range: 2, on: "{{asset('imgs/2.png')}}"},
+                        { range: 3, on: "{{asset('imgs/3.png')}}"},
+                        { range: 4, on: "{{asset('imgs/4.png')}}"},
+                        { range: 5, on: "{{asset('imgs/5.png')}}"}
+                    ], 
                     readOnly:true,
                     score: function() {
                         return $(this).attr('data-rating');

@@ -551,7 +551,7 @@ class CustomerController extends Controller
         $file_name = $media->file_name; 
         // $name = $media->name; 
         $id = $media->id; 
-        // // get crop image
+        // get crop image
         $cropPath = storage_path('app/public/'.$id.'/conversions/'.$file_name);
         $cropPathFit = storage_path('app/public/'.$id.'/conversions/crop.png');
         Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);

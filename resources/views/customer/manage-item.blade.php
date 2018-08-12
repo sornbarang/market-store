@@ -171,7 +171,7 @@
                                         <div class="cflexcenter col text-xs-center  col-xs-12 col-sm-12 col-md-6">
                                         <div class="sell">
                                             <a href="javascript:void(0)">
-                                               <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
+                                               <div class="rateproductmanage" data-rating="{{$val->averageRating}}">
                                                     <input  type="hidden" name="score">
                                                 </div> 
                                             </a>
@@ -204,10 +204,16 @@
     @section('cusomescript')
     <script type="text/javascript">
         $(document).ready(function(){  
-            $('div.raty.rateproduct').raty(
+            $('div.rateproductmanage').raty(
                 { 
-                    starType: 'i',
-                    half:true, 
+                    starOff   :"{{asset('imgs/0.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/1.png')}}"},
+                        { range: 2, on: "{{asset('imgs/2.png')}}"},
+                        { range: 3, on: "{{asset('imgs/3.png')}}"},
+                        { range: 4, on: "{{asset('imgs/4.png')}}"},
+                        { range: 5, on: "{{asset('imgs/5.png')}}"}
+                    ], 
                     readOnly:true,
                     score: function() {
                         return $(this).attr('data-rating');

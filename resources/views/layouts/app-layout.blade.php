@@ -969,17 +969,23 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         owl.trigger('destroy.owl.carousel');
                         $.each( response, function( key, value ) {  
                             var route='{{route("market.productdetail")}}/'+value.slug; 
-                            owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4 class="trucate" title="'+value.name+'">'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row no-gutters"> <div class="col col-md-4"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col col-md-8 text-right"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="raty rateproduct" data-rating="'+value.rateavg+'"><input  type="hidden" name="score"></div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
+                            owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4 class="trucate" title="'+value.name+'">'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row no-gutters"> <div class="col col-md-4"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col col-md-8 text-right"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rateproduct" data-rating="'+value.rateavg+'"><input  type="hidden" name="score"></div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
                         });  
                         if(response.length > 5){
                            $('.owl-nav').show();
                         }else{
                             $('.owl-nav').hide();
                         } 
-                        $('div.raty.rateproduct').raty(
+                        $('div.rateproduct').raty(
                             { 
-                                starType: 'i',
-                                half:true, 
+                                starOff   :"{{asset('imgs/0.png')}}",
+                                iconRange: [            
+                                    { range: 1, on: "{{asset('imgs/1.png')}}"},
+                                    { range: 2, on: "{{asset('imgs/2.png')}}"},
+                                    { range: 3, on: "{{asset('imgs/3.png')}}"},
+                                    { range: 4, on: "{{asset('imgs/4.png')}}"},
+                                    { range: 5, on: "{{asset('imgs/5.png')}}"}
+                                ], 
                                 readOnly:true,
                                 score: function() {
                                     return $(this).attr('data-rating');
@@ -1058,7 +1064,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         });
         function rateProduct(mythis){
             var this_=mythis; 
-            var rateNum=$('.br-widget > a.br-selected.br-current').attr('data-rating-value');
+            var rateNum=$('div.rateenable > input[name="score"]').val();
             var rateComment=$('#rating_field').val();
             var proId=$('#proId').val();
             xhr=$.ajax({
