@@ -298,44 +298,12 @@
                                 </p>
                                 @php 
                                     
-                                    $socialLink = route('market.productdetail',$data['product']->slug);
-                                    $f=Share::load($socialLink, $data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->facebook();
-                                    $socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
+                                    $socialLink = route('market.productdetail',$data['product']->slug); 
+                                    //$socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
                                 @endphp
                                 <div class="social social--color--filled">
-                                    <ul> 
-                                        <li>
+                                @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' => 'http://127.0.0.1:8000/storage/106/conversions/crop.png'])
 
-                                            <a href="{{$f??'javascript:void(0)'}}" target="_blank">
-                                                <span class="fa fa-facebook"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{$socials['twitter']??'javascript:void(0)'}}" target="_blank">
-                                                <span class="fa fa-twitter"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{$socials['linkedin']??'javascript:void(0)'}}" target="_blank">
-                                                <span class="fa fa-linkedin"></span>
-                                            </a>
-                                        </li>
-                                        <!-- <li>
-                                            <a href="#">
-                                                <span class="fa fa-pinterest"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-linkedin"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-dribbble"></span>
-                                            </a>
-                                        </li> -->
-                                    </ul>
                                 </div>
                                 <!-- end /.social-->
                                 @if (Route::has('login'))
@@ -346,9 +314,7 @@
                                                     <div class="row no-gutters">
                                                         <div class="col-4 d-flex content-justify-center align-items-center">Rate Now</div>
                                                         <div class="col-8 d-flex content-justify-center align-items-center pl-3"><div class="staronly rating product--rating"></div> </div>
-                                                    </div>
-                                                    
-                                                    
+                                                    </div> 
                                                 </a>
                                                 <!-- end /.rating_btn -->
                                             </div>
