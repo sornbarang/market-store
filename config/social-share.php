@@ -29,7 +29,7 @@ return [
             'noparse' => 'false',
         ]],
         'whatsapp' => [ 'view' => 'social-share::whatsapp' ],
-        'mynewservice' => [ 'view' => 'share.mynewservice' ],
+        'mynewservice' => [ 'view' => 'c2c.page.share' ],
 
     ],
 ];
