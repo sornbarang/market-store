@@ -297,26 +297,26 @@
                                     <span>@lang('frontlabel.shareitem')</span>
                                 </p>
                                 @php 
+                                    
                                     $socialLink = route('market.productdetail',$data['product']->slug);
-                                    $mulit= Share::page(route('market.productdetail',$data['product']->slug), $data['product']->title)->facebook()->twitter()->googlePlus()->linkedin('Extra linkedin summary can be passed here');
-                                    echo $mulit;
-                                    $socials=[];
+                                    $f=Share::load($socialLink, $data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->facebook();
+                                    $socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
                                 @endphp
                                 <div class="social social--color--filled">
                                     <ul> 
                                         <li>
 
-                                            <a href="javascript:void(0)" target="_blank">
+                                            <a href="{{$f??'javascript:void(0)'}}" target="_blank">
                                                 <span class="fa fa-facebook"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" target="_blank">
+                                            <a href="{{$socials['twitter']??'javascript:void(0)'}}" target="_blank">
                                                 <span class="fa fa-twitter"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" target="_blank">
+                                            <a href="{{$socials['linkedin']??'javascript:void(0)'}}" target="_blank">
                                                 <span class="fa fa-linkedin"></span>
                                             </a>
                                         </li>
