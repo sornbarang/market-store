@@ -689,6 +689,7 @@
 <!-- <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script> -->
 <script src="{{ asset('js/map.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.js"></script>
+<script src="{{ asset('js/share.js') }}"></script>
 @yield('cusomescript')
 <script> 
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 

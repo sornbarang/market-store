@@ -170,8 +170,8 @@ return [
         Adumskis\LaravelAdvert\AdvertServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Ghanem\Reportable\ReportableServiceProvider::class,
-        willvincent\Rateable\RateableServiceProvider::class,
-        Chencha\Share\ShareServiceProvider::class,
+        willvincent\Rateable\RateableServiceProvider::class, 
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
     ],
 
     /*
@@ -228,7 +228,8 @@ return [
         'AdvMng'    => Adumskis\LaravelAdvert\AdvertFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Share' => Chencha\Share\ShareFacade::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
+        
     ],
 
 ];
