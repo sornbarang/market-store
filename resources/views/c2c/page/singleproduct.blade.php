@@ -298,19 +298,12 @@
                                 </p>
                                 @php 
                                     $socialLink = route('market.productdetail',$data['product']->slug);
-                                    $socials=Share::load('http://127.0.0.1:8000/en/market/productdetail/brand-computer',$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
-                                    $title = urlencode($data['product']->name);
-  $url = urlencode(route('market.productdetail',$data['product']->slug));
-  $summary = urlencode('Web development tutorials by Arjun');
-  $image = urlencode('http://127.0.0.1:8000/storage/106/conversions/crop.png');
-                                    @endphp
+                                    $socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
+                                @endphp
                                 <div class="social social--color--filled">
-                                    
                                     <ul> 
                                         <li>
-                                        <a onClick="window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]=<?php echo $title;?>&amp;p[summary]=<?php echo $summary;?>&amp;p[url]=<?php echo $url; ?>&amp;&p[images][0]=<?php echo $image;?>', 'sharer', 'toolbar=0,status=0,width=548,height=325');" target="_parent" href="javascript: void(0)">
-                    Share on facebook wall!
-                </a>
+
                                             <a href="{{$socials['facebook']??'javascript:void(0)'}}" target="_blank">
                                                 <span class="fa fa-facebook"></span>
                                             </a>
