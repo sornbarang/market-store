@@ -1,7 +1,7 @@
 <ul> 
     <li>
 
-        <a href='https://www.facebook.com/sharer/sharer.php?u={{ rawurlencode($url) }}<?php echo $sep; ?>title={{ rawurlencode("Check this out! $title. See it here: $url") }}<?php echo $sep; ?>image={{rawurlencode($image)}}' target="_blank">
+        <a href='https://www.facebook.com/sharer/sharer.php?u={{ rawurlencode($url) }}<?php echo $sep; ?>title={{ rawurlencode("Check this out! $title. See it here: $url") }}<?php echo $sep; ?>media=["{{rawurlencode($image)}}"]' target="_blank">
             <span class="fa fa-facebook"></span>
         </a>
     </li>
