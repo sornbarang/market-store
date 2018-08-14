@@ -269,11 +269,28 @@
     $(document).ready(function(){ 
         $('div.raty.rateproduct').raty(
             { 
-                starType: 'i',
-                half:true, 
+                starOff:"{{asset('imgs/no.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
+                readOnly:true,
+                single:true,
+                number:3,
                 readOnly:true,
                 score: function() {
-                    return $(this).attr('data-rating');
+                    if($(this).attr('data-rating') >=4){
+                        $num=3;
+                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                        $num=2;
+                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                        $num=1;
+                    }else{
+                        $num=2;
+                    }
+                    return $num;
                 }
             }
         );

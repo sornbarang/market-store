@@ -211,6 +211,17 @@
                                     <div class="col-md-8 col-sm-10  text-md-right pr-1">
                                         <div class="d-flex align-items-sm-center align-items-center justify-content-center justify-content-lg-end text-sm-left totalrate"></div>
                                     </div>
+                                    @php 
+                                        if($data['totalRate'] >=4){
+                                            $totalRate=3;
+                                        }else if($data['totalRate'] < 4 && $data['totalRate'] >= 2 ){
+                                            $totalRate=2;
+                                        }else if($data['totalRate'] < 2 && $data['totalRate'] >= 1 ){
+                                            $totalRate=1;
+                                        }else{
+                                            $totalRate=2;
+                                        }
+                                    @endphp
                                     <div class="col-md-4 col-sm-2   text-md-left text-white">({{$data['totalRate']}})</div>
                                 </div>
                                 
@@ -352,31 +363,44 @@
             $(document).ready(function(){ 
                 $('div.totalrate').raty(
                 { 
-                    starOff   :"{{asset('imgs/0.png')}}",
+                    starOff   :"{{asset('imgs/no.png')}}",
                     iconRange: [            
-                        { range: 1, on: "{{asset('imgs/1.png')}}"},
-                        { range: 2, on: "{{asset('imgs/2.png')}}"},
-                        { range: 3, on: "{{asset('imgs/3.png')}}"},
-                        { range: 4, on: "{{asset('imgs/4.png')}}"},
-                        { range: 5, on: "{{asset('imgs/5.png')}}"}
-                    ], 
+                        { range: 1, on: "{{asset('imgs/0.png')}}"},
+                        { range: 2, on: "{{asset('imgs/1.png')}}"},
+                        { range: 3, on: "{{asset('imgs/2.png')}}"}
+                    ],   
+                    hints: ['unlike','normal','love'],
                     readOnly:true,
-                    score: "{{$data['totalRate']}}"
+                    single:true,
+                    number:3,
+                    readOnly:true,
+                    score: "{{$totalRate}}"
                 }
             );
             $('div.rateproductprofile').raty(
                 { 
-                    starOff   :"{{asset('imgs/0.png')}}",
+                    starOff   :"{{asset('imgs/no.png')}}",
                     iconRange: [            
-                        { range: 1, on: "{{asset('imgs/1.png')}}"},
-                        { range: 2, on: "{{asset('imgs/2.png')}}"},
-                        { range: 3, on: "{{asset('imgs/3.png')}}"},
-                        { range: 4, on: "{{asset('imgs/4.png')}}"},
-                        { range: 5, on: "{{asset('imgs/5.png')}}"}
-                    ], 
+                        { range: 1, on: "{{asset('imgs/0.png')}}"},
+                        { range: 2, on: "{{asset('imgs/1.png')}}"},
+                        { range: 3, on: "{{asset('imgs/2.png')}}"}
+                    ],   
+                    hints: ['unlike','normal','love'],
+                    readOnly:true,
+                    single:true,
+                    number:3,
                     readOnly:true,
                     score: function() {
-                        return $(this).attr('data-rating');
+                        if($(this).attr('data-rating') >=4){
+                            $num=3;
+                        }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                            $num=2;
+                        }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                            $num=1;
+                        }else{
+                            $num=2;
+                        }
+                        return $num;
                     }
                 }
             );

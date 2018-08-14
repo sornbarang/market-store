@@ -16253,3 +16253,9 @@ div.rateproduct.cproduct img{
   max-width:18px;
   display:inline !important
 }
+.staronly i{
+  font-size:20px;
+}
+.rateenable i{
+  font-size:25px;
+}

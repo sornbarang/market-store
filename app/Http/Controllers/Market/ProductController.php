@@ -175,6 +175,7 @@ class ProductController extends Controller
         $node = Category::find($post->categories_ads[0]->id);  
         $data['bread'] = $node->getAncestorsAndSelf();  
         $data['totalRate'] =$post->sumRating;
+        $data['totalAvg'] =$post->averageRating;
         $data['cnode']=$node->id;  
         if($post->user_id !=null){ 
             $data['relateProByUser'] = Product::where('user_id',$post->user_id)->latest()->limit(7)->get();  

@@ -67,7 +67,15 @@
                         <input type="hidden" id="proId" name="id" value="{{$data['product']->id??''}}"/>
                         <div class="row no-gutters pt-3 pb-3">
                             <div class="col-4 d-flex content-justify-center align-items-center"><b>Your Rating </b></div>
-                            <div class="col-8 d-flex content-justify-center align-items-center"><div class="rateenable"></div></div>
+                            <div class="col-8">
+                                <div class="row"> 
+                                    <div class="col-md-auto">
+                                        <div class="d-flex content-justify-center align-items-center rateenable text-warning"></div>
+                                    </div>
+                                    <div class="col-md-4 d-flex content-justify-center align-items-center"><div id="hint" class="font-weight-bold"></div></div>
+                                </div>
+                                
+                            </div>
                         </div>
                         {{--
                         <ul> 
@@ -299,7 +307,7 @@
                                 @php 
                                     
                                     $socialLink = route('market.productdetail',$data['product']->slug); 
-                                    //$socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
+                                    $socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
                                 @endphp
                                 <div class="social social--color--filled">
                                 @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' => 'http://127.0.0.1:8000/storage/106/conversions/crop.png'])
@@ -313,7 +321,7 @@
                                                 <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
                                                     <div class="row no-gutters">
                                                         <div class="col-4 d-flex content-justify-center align-items-center">Rate Now</div>
-                                                        <div class="col-8 d-flex content-justify-center align-items-center pl-3"><div class="staronly rating product--rating"></div> </div>
+                                                        <div class="col-8 pl-3"><div class="d-flex content-justify-center align-items-center staronly rating product--rating text-warning"></div> </div>
                                                     </div> 
                                                 </a>
                                                 <!-- end /.rating_btn -->
@@ -740,8 +748,19 @@
                                 </li> 
                             </ul>
                             <div class="row p-2">
-                                <div class="col-7 col-md-6"><div class="raty"></div></div>
-                                <div class="col-5 col-md-6  text-right"><b>( {{$data['totalRate']}} Ratings )</b></div>
+                                @php 
+                                    if($data['totalAvg'] >=4){
+                                        $totalAvg=3;
+                                    }else if($data['totalAvg'] < 4 && $data['totalAvg'] >= 2 ){
+                                        $totalAvg=2;
+                                    }else if($data['totalAvg'] < 2 && $data['totalAvg'] >= 1 ){
+                                        $totalAvg=1;
+                                    }else{
+                                        $totalAvg=2;
+                                    }
+                                @endphp
+                                <div class="col-7 col-md-6"><div class="raty" data-score="{{$totalAvg??2}}"></div></div>
+                                <div class="col-5 col-md-6  text-right"><b>{{number_format($data['totalAvg'], 2, '.', ',')}} ( {{$data['totalRate']}} Votes )</b></div>
                             </div>
                         </div>
                         <!-- end /.sidebar-card --> 
@@ -882,72 +901,109 @@
 @section('cusomescript')
 <script type="text/javascript">
     ( function($) {
+        var xhr=null;
         $('div.rateenable').raty({
-            starOff   :"{{asset('imgs/0.png')}}",
-            iconRange: [            
-                { range: 1, on: "{{asset('imgs/1.png')}}"},
-                { range: 2, on: "{{asset('imgs/2.png')}}"},
-                { range: 3, on: "{{asset('imgs/3.png')}}"},
-                { range: 4, on: "{{asset('imgs/4.png')}}"},
-                { range: 5, on: "{{asset('imgs/5.png')}}"}
-            ]
+            starType: 'i',
+            target : '#hint',
+            targetType : 'score',
+            targetKeep : true,
+            targetFormat : '{score} : Rating'
         });
+        // rateable image
+        // $('div.rateenable').raty({
+        //     starOff   :"{{asset('imgs/0.png')}}",
+        //     iconRange: [            
+        //         { range: 1, on: "{{asset('imgs/1.png')}}"},
+        //         { range: 2, on: "{{asset('imgs/2.png')}}"},
+        //         { range: 3, on: "{{asset('imgs/3.png')}}"},
+        //         { range: 4, on: "{{asset('imgs/4.png')}}"},
+        //         { range: 5, on: "{{asset('imgs/5.png')}}"}
+        //     ]
+        // });
+        // stare with emoji
+        // $('div.staronly').raty(
+        //     { 
+        //         starType: 'img',
+        //         iconRange: [
+        //             { range: 1, on: "{{asset('imgs/1.png')}}", off: "{{asset('imgs/1.png')}}" },
+        //             { range: 2, on: "{{asset('imgs/2.png')}}", off: "{{asset('imgs/2.png')}}" },
+        //             { range: 3, on: "{{asset('imgs/3.png')}}", off: "{{asset('imgs/3.png')}}" },
+        //             { range: 4, on: "{{asset('imgs/4.png')}}", off: "{{asset('imgs/4.png')}}" },
+        //             { range: 5, on: "{{asset('imgs/5.png')}}", off: "{{asset('imgs/5.png')}}"}
+        //         ], 
+        //         readOnly:true
+        //     }
+        // );
         $('div.staronly').raty(
             { 
-                starType: 'img',
-                iconRange: [
-                    { range: 1, on: "{{asset('imgs/1.png')}}", off: "{{asset('imgs/1.png')}}" },
-                    { range: 2, on: "{{asset('imgs/2.png')}}", off: "{{asset('imgs/2.png')}}" },
-                    { range: 3, on: "{{asset('imgs/3.png')}}", off: "{{asset('imgs/3.png')}}" },
-                    { range: 4, on: "{{asset('imgs/4.png')}}", off: "{{asset('imgs/4.png')}}" },
-                    { range: 5, on: "{{asset('imgs/5.png')}}", off: "{{asset('imgs/5.png')}}"}
-                ], 
+                starType: 'i',  
                 readOnly:true
             }
         );
         $('div.raty').raty(
-            { 
-                starOff   :"{{asset('imgs/0.png')}}",
+            {  
+                starOff   :"{{asset('imgs/no.png')}}",
                 iconRange: [            
-                    { range: 1, on: "{{asset('imgs/1.png')}}"},
-                    { range: 2, on: "{{asset('imgs/2.png')}}"},
-                    { range: 3, on: "{{asset('imgs/3.png')}}"},
-                    { range: 4, on: "{{asset('imgs/4.png')}}"},
-                    { range: 5, on: "{{asset('imgs/5.png')}}"}
-                ],
-                score:"{{$data['totalRate']}}",
-                readOnly:true
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
+                readOnly:true,
+                single:true,
+                number:3,
+                score:"{{$totalAvg}}"
             }
         );
         $('div.rateproduct').raty(
             { 
-                starOff   :"{{asset('imgs/0.png')}}",
+                starOff   :"{{asset('imgs/no.png')}}",
                 iconRange: [            
-                    { range: 1, on: "{{asset('imgs/1.png')}}"},
-                    { range: 2, on: "{{asset('imgs/2.png')}}"},
-                    { range: 3, on: "{{asset('imgs/3.png')}}"},
-                    { range: 4, on: "{{asset('imgs/4.png')}}"},
-                    { range: 5, on: "{{asset('imgs/5.png')}}"}
-                ], 
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
                 readOnly:true,
-                score: function() {
-                    return $(this).attr('data-rating');
+                single:true,
+                number:3,
+                score: function() { 
+                    if($(this).attr('data-rating') >=4){
+                        $num=3;
+                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                        $num=2;
+                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                        $num=1;
+                    }else{
+                        $num=2;
+                    } 
+                    return $num;
                 }
             }
         );
         $('div.userrateproduct').raty(
             { 
-                starOff   :"{{asset('imgs/0.png')}}",
+                starOff   :"{{asset('imgs/no.png')}}",
                 iconRange: [            
-                    { range: 1, on: "{{asset('imgs/1.png')}}"},
-                    { range: 2, on: "{{asset('imgs/2.png')}}"},
-                    { range: 3, on: "{{asset('imgs/3.png')}}"},
-                    { range: 4, on: "{{asset('imgs/4.png')}}"},
-                    { range: 5, on: "{{asset('imgs/5.png')}}"}
-                ], 
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
                 readOnly:true,
+                single:true,
+                number:3,
                 score: function() {
-                    return $(this).attr('data-rating');
+                    if($(this).attr('data-rating') >=4){
+                        $num=3;
+                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                        $num=2;
+                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                        $num=1;
+                    }else{
+                        $num=2;
+                    }
+                    return $num;
                 }
             }
         );
@@ -973,17 +1029,27 @@
             $('.thread.thread_review').empty().html(data);
             $('div.userrateproduct').raty(
                 { 
-                    starOff   :"{{asset('imgs/0.png')}}",
+                    starOff   :"{{asset('imgs/no.png')}}",
                     iconRange: [            
-                        { range: 1, on: "{{asset('imgs/1.png')}}"},
-                        { range: 2, on: "{{asset('imgs/2.png')}}"},
-                        { range: 3, on: "{{asset('imgs/3.png')}}"},
-                        { range: 4, on: "{{asset('imgs/4.png')}}"},
-                        { range: 5, on: "{{asset('imgs/5.png')}}"}
-                    ], 
+                        { range: 1, on: "{{asset('imgs/0.png')}}"},
+                        { range: 2, on: "{{asset('imgs/1.png')}}"},
+                        { range: 3, on: "{{asset('imgs/2.png')}}"}
+                    ],   
+                    hints: ['unlike','normal','love'],
                     readOnly:true,
+                    single:true,
+                    number:3,
                     score: function() {
-                        return $(this).attr('data-rating');
+                        if($(this).attr('data-rating') >=4){
+                            $num=3;
+                        }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                            $num=2;
+                        }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                            $num=1;
+                        }else{
+                            $num=2;
+                        }
+                        return $num;
                     }
                 }
             );
@@ -992,6 +1058,45 @@
             alert('Posts could not be loaded.');
         });
     }
+        function rateProduct(mythis){
+            var this_=mythis; 
+            var rateNum=$('div.rateenable > input[name="score"]').val();
+            var rateComment=$('#rating_field').val();
+            var proId=$('#proId').val();
+            xhr=$.ajax({
+                url: "{{route('market.ratemarket')}}",
+                type: 'POST',
+                data:{id:proId,rate:rateNum,comments:rateComment},
+                headers: {
+                    'X-CSRF-Token':CSRF_TOKEN,
+                },
+                success: function( msg ) {
+                    if(msg.status==200){
+                        // console.log('ok');
+                        // $('div.raty').raty('reload');
+                        // $('div.raty').raty('set', { score: 5 }); 
+                        $('form#rateMarket button.modal_close').click();
+                        $('.single-product-desc .item_action.v_middle').remove();
+                    }
+                },
+                error: function( data ) {
+                    console.log(data);
+                }
+            });
+
+        }
+        $('form#rateMarket button[type="button"]').on('click',function(e){
+            e.preventDefault();   
+            if (e.type == "click") documentClick = true; 
+            if (documentClick){
+                if(xhr==null){
+                    rateProduct($(this))
+                }else{
+                    xhr.abort();
+                    rateProduct($(this))
+                }
+            } 
+        }); 
 } ) ( jQuery );
 </script>
 @stop 

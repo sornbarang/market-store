@@ -978,17 +978,27 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         } 
                         $('div.rateproduct').raty(
                             { 
-                                starOff   :"{{asset('imgs/0.png')}}",
+                                starOff   :"{{asset('imgs/no.png')}}",
                                 iconRange: [            
-                                    { range: 1, on: "{{asset('imgs/1.png')}}"},
-                                    { range: 2, on: "{{asset('imgs/2.png')}}"},
-                                    { range: 3, on: "{{asset('imgs/3.png')}}"},
-                                    { range: 4, on: "{{asset('imgs/4.png')}}"},
-                                    { range: 5, on: "{{asset('imgs/5.png')}}"}
-                                ], 
+                                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                                ],   
+                                hints: ['unlike','normal','love'],
                                 readOnly:true,
+                                single:true,
+                                number:3,
                                 score: function() {
-                                    return $(this).attr('data-rating');
+                                    if($(this).attr('data-rating') >=4){
+                                        $num=3;
+                                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                                        $num=2;
+                                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                                        $num=1;
+                                    }else{
+                                        $num=2;
+                                    }
+                                    return $num;
                                 }
                             }
                         );
@@ -1062,42 +1072,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             }
             e.stopPropagation();
         });
-        function rateProduct(mythis){
-            var this_=mythis; 
-            var rateNum=$('div.rateenable > input[name="score"]').val();
-            var rateComment=$('#rating_field').val();
-            var proId=$('#proId').val();
-            xhr=$.ajax({
-                url: "{{route('market.ratemarket')}}",
-                type: 'POST',
-                data:{id:proId,rate:rateNum,comments:rateComment},
-                headers: {
-                        'X-CSRF-Token':CSRF_TOKEN,
-                },
-                success: function( msg ) {
-                    if(msg.status==200){
-                        $('form#rateMarket button.modal_close').click();
-                        $('.single-product-desc .item_action.v_middle').remove();
-                    }
-                },
-                error: function( data ) {
-                    console.log(data);
-                }
-            });
-
-        }
-        $('form#rateMarket button[type="button"]').on('click',function(e){
-            e.preventDefault();   
-            if (e.type == "click") documentClick = true; 
-            if (documentClick){
-                if(xhr==null){
-                    rateProduct($(this))
-                }else{
-                    xhr.abort();
-                    rateProduct($(this))
-                }
-            } 
-        }); 
+        
     }); 
 </script>
 <!-- endinject -->

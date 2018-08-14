@@ -783,17 +783,27 @@
     $(document).ready(function(){ 
         $('div.rateproduct').raty(
             { 
-                starOff   :"{{asset('imgs/0.png')}}",
+                starOff   :"{{asset('imgs/no.png')}}",
                 iconRange: [            
-                    { range: 1, on: "{{asset('imgs/1.png')}}"},
-                    { range: 2, on: "{{asset('imgs/2.png')}}"},
-                    { range: 3, on: "{{asset('imgs/3.png')}}"},
-                    { range: 4, on: "{{asset('imgs/4.png')}}"},
-                    { range: 5, on: "{{asset('imgs/5.png')}}"}
-                ], 
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
                 readOnly:true,
+                single:true,
+                number:3,
                 score: function() {
-                    return $(this).attr('data-rating');
+                    if($(this).attr('data-rating') >=4){
+                        $num=3;
+                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                        $num=2;
+                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                        $num=1;
+                    }else{
+                        $num=2;
+                    }
+                    return $num;
                 }
             }
         );
