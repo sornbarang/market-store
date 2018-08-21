@@ -114,7 +114,6 @@ class C2cController extends Controller
         return view('c2c.page.product',compact('data'));
     }
     public function getSlugCategory(Request $request,CategoryTranslate $slug){
-        $slugName=$slug->slug;
         // return $slug->categories_ads_id;
         // get all category with tree relate with app/helpers.php 
         $data['nest'] = Category::all()->toHierarchy();
@@ -136,6 +135,7 @@ class C2cController extends Controller
         } 
         $node = Category::findOrFail($slug->categories_ads_id);   
         $data['bread']=$node->getAncestorsAndSelf();
+        $slugName=$node->getRoot()->slug;
         $data['cnode']=$node->id; 
         $data['cnodeName']=$node->name;  
         $data['order']=$order;
