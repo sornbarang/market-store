@@ -96,15 +96,15 @@
                             </a> 
                             <div class="collapse in collapsible-content show" id="collapse1" style="padding:0;">
                                 <div class="tree well">
-                                    <ul> 
-                                        <!-- renderNode call from helpers.php in app/helpers.php -->
+                                    <ul>  
+                                        {{-- renderNode call from helpers.php in app/helpers.php --}}
                                         @if(isset($data['nest']) && !empty($data['nest']))
                                             @foreach($data['nest'] as $node)
                                                 @php 
                                                     // $r is route link
                                                     $r=route('market.dynamiccat');
                                                 @endphp
-                                                {!!renderNode($node,$r)!!}
+                                                {!!renderNode($node,$r,$slugName)!!}
                                             @endforeach
                                         @else
                                             <p>No category</p>
@@ -150,7 +150,6 @@
                                     <div class="col-md-4 col-sm-6">
                                         <!-- start .single-product -->
                                         <div class="product product--card product--card-small">
-
                                             <div class="product__thumbnail">
                                                 <img src="{{$img}}" alt="Product Image">
                                                 <div class="prod_btn">

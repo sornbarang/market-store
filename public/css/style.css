@@ -16259,3 +16259,6 @@ div.rateproduct.cproduct img{
 .rateenable i{
   font-size:25px;
 }
+.tree .d-collape ul > li{
+  display: list-item !important;
+}

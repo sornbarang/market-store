@@ -114,6 +114,7 @@ class C2cController extends Controller
         return view('c2c.page.product',compact('data'));
     }
     public function getSlugCategory(Request $request,CategoryTranslate $slug){
+        $slugName=$slug->slug;
         // return $slug->categories_ads_id;
         // get all category with tree relate with app/helpers.php 
         $data['nest'] = Category::all()->toHierarchy();
@@ -146,7 +147,7 @@ class C2cController extends Controller
             // get all product->orderBy('products_ads.price', $order)
             $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);       
         } 
-        return view('c2c.page.product',compact('data'));
+        return view('c2c.page.product',compact('data','slugName'));
     } 
     /**
      * Show the form for creating a new resource.
