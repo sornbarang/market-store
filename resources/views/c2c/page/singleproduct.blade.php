@@ -1007,16 +1007,16 @@
                 }
             }
         );
-        $(window).on('hashchange', function() {
-            if (window.location.hash) {
-                var page = window.location.hash.replace('#', '');
-                if (page == Number.NaN || page <= 0) {
-                    return false;
-                } else {
-                    getPosts(page);
-                }
+    $(window).on('hashchange', function() {
+        if (window.location.hash) {
+            var page = window.location.hash.replace('#', '');
+            if (page == Number.NaN || page <= 0) {
+                return false;
+            } else {
+                getPosts(page);
             }
-        }); 
+        }
+    }); 
     $(document).on('click', '.pagination-area.pagination-area2 a', function (e) {
         getPosts($(this).attr('href').split('page=')[1]);
         e.preventDefault();
@@ -1058,45 +1058,44 @@
             alert('Posts could not be loaded.');
         });
     }
-        function rateProduct(mythis){
-            var this_=mythis; 
-            var rateNum=$('div.rateenable > input[name="score"]').val();
-            var rateComment=$('#rating_field').val();
-            var proId=$('#proId').val();
-            xhr=$.ajax({
-                url: "{{route('market.ratemarket')}}",
-                type: 'POST',
-                data:{id:proId,rate:rateNum,comments:rateComment},
-                headers: {
-                    'X-CSRF-Token':CSRF_TOKEN,
-                },
-                success: function( msg ) {
-                    if(msg.status==200){
-                        // console.log('ok');
-                        // $('div.raty').raty('reload');
-                        // $('div.raty').raty('set', { score: 5 }); 
-                        $('form#rateMarket button.modal_close').click();
-                        $('.single-product-desc .item_action.v_middle').remove();
-                    }
-                },
-                error: function( data ) {
-                    console.log(data);
+    function rateProduct(mythis){
+        var this_=mythis; 
+        var rateNum=$('div.rateenable > input[name="score"]').val();
+        var rateComment=$('#rating_field').val();
+        var proId=$('#proId').val();
+        xhr=$.ajax({
+            url: "{{route('market.ratemarket')}}",
+            type: 'POST',
+            data:{id:proId,rate:rateNum,comments:rateComment},
+            headers: {
+                'X-CSRF-Token':CSRF_TOKEN,
+            },
+            success: function( msg ) {
+                if(msg.status==200){
+                    // console.log('ok');
+                    // $('div.raty').raty('reload');
+                    // $('div.raty').raty('set', { score: 5 }); 
+                    $('form#rateMarket button.modal_close').click();
+                    $('.single-product-desc .item_action.v_middle').remove();
                 }
-            });
-
-        }
-        $('form#rateMarket button[type="button"]').on('click',function(e){
-            e.preventDefault();   
-            if (e.type == "click") documentClick = true; 
-            if (documentClick){
-                if(xhr==null){
-                    rateProduct($(this))
-                }else{
-                    xhr.abort();
-                    rateProduct($(this))
-                }
-            } 
-        }); 
+            },
+            error: function( data ) {
+                console.log(data);
+            }
+        });
+    }
+    $('form#rateMarket button[type="button"]').on('click',function(e){
+        e.preventDefault();   
+        if (e.type == "click") documentClick = true; 
+        if (documentClick){
+            if(xhr==null){
+                rateProduct($(this))
+            }else{
+                xhr.abort();
+                rateProduct($(this))
+            }
+        } 
+    }); 
 } ) ( jQuery );
 </script>
 @stop 

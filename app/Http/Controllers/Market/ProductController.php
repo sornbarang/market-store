@@ -162,7 +162,6 @@ class ProductController extends Controller
         $data['getUserRateOfProduct']=$getUserRateOfProduct;
         if ($request->ajax()) {  
             return \Response::json(\View::make('c2c.page.userrate',compact('data'))->render());
-
         }
         $data['allowUserRate']='true';
         if (Auth::check()) {
