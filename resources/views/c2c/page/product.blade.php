@@ -229,22 +229,8 @@
         }).fail(function () {
             alert('Posts could not be loaded.');
         });
-    }
-        // $(".ui-slider-handle").mouseup(function(e){
-        //     const segm="{{Request::get('page')}}"; 
-        //     const from=$(".price-ranges > span.from.rounded").text().replace('$','');
-        //     alert(from);
-        //     const to=$(".price-ranges > span.to.rounded").text().replace('$',''); 
-        //     if(segm !='' && segm !=null){
-        //         var mycurl = "{{url()->full()}}"+"&from="+from+"&to="+to;
-        //     }else{
-        //         var mycurl = "{{url()->full()}}"+"?from="+from+"&to="+to;
-        //     }
-        //     console.log(mycurl);
-        //     getPosts(mycurl);
-        //    e.preventDefault();
-        // });
-    });
+    } 
+});
 </script>
 @stop 
 <!--================================
