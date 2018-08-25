@@ -2058,7 +2058,7 @@ h6 {
 *****************************/
 /* GENERAL PRODUCT STYLE */
 .products {
-  padding: 80px 0 !important;
+  /* padding: 80px 0 !important; */
 }
 
 .product {
@@ -6382,10 +6382,15 @@ div#ui-datepicker-div tbody tr td a:hover {
   margin-right: 3px;
 }
 
-.rating ul li span.fa-star, .rating ul li span.fa-star-half-o {
+.rating ul li span.fa-star, .rating ul li span.fa-star-half-o,.raty i {
   color: #ffc000;
 }
-
+.raty i {
+  font-size:18px;
+}
+.raty.rateproduct i,.raty.total i {
+  font-size:15px;
+}
 .rating ul li span.fa-star-o {
   color: #7e7e7e;
 }
@@ -16211,4 +16216,49 @@ ul.titlebtm > li:nth-of-type(2) p{font-size:13px;}
 }
 .pull-right .price-ranges span{
   line-height: 25px !important;
+}
+.c-price{
+  position: absolute;
+  z-index: 9999;
+  right: 0;
+  max-width: 250px;
+  /* background: #fff; */
+  -webkit-border-radius: 0px 4px 0 0;
+  border-radius:0px 4px 0 0; 
+  background-color:rgba(86,167,45, 0.5);
+}
+.c-price span {
+  font-weight: 500;
+    font-size: 36px;
+    line-height: 30px;
+    color: #fff;
+    
+}
+.pagination-area.pagination-area2  > a.current{
+  background:#56a72d!important;
+  color:#fff;
+}
+.rateproduct img,.raty.rateproduct img{
+  max-width:16px;
+  display:inline !important
+}
+.raty img,.rateproductmanage img,.rateproductprofile img,.staronly img,.userrateproduct img,.totalrate img{
+  max-width:20px;
+  display:inline !important
+}
+.rateenable img{
+  max-width:25px;
+}
+div.rateproduct.cproduct img{
+  max-width:18px;
+  display:inline !important
+}
+.staronly i{
+  font-size:20px;
+}
+.rateenable i{
+  font-size:25px;
+}
+.d-collape ul > li{
+  display: list-item !important;
 }

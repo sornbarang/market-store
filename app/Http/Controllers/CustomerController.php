@@ -37,6 +37,12 @@ class CustomerController extends Controller
 
         $user= User::findOrFail($id);
         $post= Product::where('user_id',$id)->latest()->paginate(9);
+        $getAllPro= Product::where('user_id',$id)->get();
+        $totalstar=0;
+        foreach($getAllPro as $key => $val){
+            $totalstar +=$val->sumRating;
+        } 
+        $data['totalRate'] =$totalstar;
         if($user){
             $data['user']=$user;
         }
@@ -230,7 +236,13 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function myProfile()
-    {
+    { 
+        $post = Product::where('user_id',Auth::id())->get();
+        $totalstar=0;
+        foreach($post as $key => $val){
+            $totalstar +=$val->sumRating;
+        } 
+        $data['totalRate'] =$totalstar;
         $data['breadcrub']='profile';
         return view('customer.profile',compact('data'));
     }
@@ -539,7 +551,7 @@ class CustomerController extends Controller
         $file_name = $media->file_name; 
         // $name = $media->name; 
         $id = $media->id; 
-        // // get crop image
+        // get crop image
         $cropPath = storage_path('app/public/'.$id.'/conversions/'.$file_name);
         $cropPathFit = storage_path('app/public/'.$id.'/conversions/crop.png');
         Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);

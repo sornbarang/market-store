@@ -232,30 +232,28 @@
                         </div>
                         <!-- end /.col-md-4 -->
 
-                        <div class="col-md-4 col-sm-4"> 
+                        <div class="col-md-4 col-sm-4">
                             <div class="author-info scolorbg">
-                                <p>Total Ratings</p>
-                                <div class="rating product--rating">
-                                    <ul>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star"></span>
-                                        </li>
-                                        <li>
-                                            <span class="fa fa-star-half-o"></span>
-                                        </li>
-                                    </ul>
-                                    <span class="rating__count">(26)</span>
+                                <p>@lang('profile.totalrates')</p>
+                                <div class="row no-gutters p-2">
+                                    <div class="col-md-8 col-sm-10  text-md-right pr-1">
+                                        <div class="d-flex align-items-sm-center align-items-center justify-content-center justify-content-lg-end text-sm-left raty total"></div>
+                                    </div>
+                                    @php 
+                                        if($data['totalRate'] >=4){
+                                            $totalRate=3;
+                                        }else if($data['totalRate'] < 4 && $data['totalRate'] >= 2 ){
+                                            $totalRate=2;
+                                        }else if($data['totalRate'] < 2 && $data['totalRate'] >= 1 ){
+                                            $totalRate=1;
+                                        }else{
+                                            $totalRate=2;
+                                        }
+                                    @endphp
+                                    <div class="col-md-4 col-sm-2   text-md-left text-white">({{$data['totalRate']}})</div>
                                 </div>
-                            </div> 
+                                
+                            </div>
                         </div>
                         <!-- end /.col-md-4 -->
 
@@ -389,24 +387,8 @@
                                                 <span>$ {{$val->price??'0'}}</span>
                                             </div>
                                             <a href="javascript:void(0)">
-                                                <div class="rating product--rating">
-                                                    <ul>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-half-o"></span>
-                                                        </li>
-                                                    </ul>
+                                                <div class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
+                                                    <input  type="hidden" name="score">
                                                 </div>
                                             </a>
                                         </div>
@@ -435,8 +417,53 @@
     <!--================================
         END AUTHOR AREA
     =================================-->
-
-
+    @section('cusomescript')
+    <script type="text/javascript">
+        $(document).ready(function(){  
+            $('div.raty.total').raty(
+            { 
+                starOff   :"{{asset('imgs/no.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
+                readOnly:true,
+                single:true,
+                number:3,
+                readOnly:true,
+                score: "{{$totalRate}}"
+            });
+            $('div.rateproduct.cproduct').raty(
+                { 
+                    starOff   :"{{asset('imgs/no.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/0.png')}}"},
+                        { range: 2, on: "{{asset('imgs/1.png')}}"},
+                        { range: 3, on: "{{asset('imgs/2.png')}}"}
+                    ],   
+                    hints: ['unlike','normal','love'],
+                    readOnly:true,
+                    single:true,
+                    number:3,
+                    score: function() {
+                        if($(this).attr('data-rating') >=4){
+                            $num=3;
+                        }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                            $num=2;
+                        }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                            $num=1;
+                        }else{
+                            $num=2;
+                        }
+                        return $num;
+                    }
+                }
+            );
+        });
+    </script>
+    @stop  
     <!--================================
         START CALL TO ACTION AREA
     =================================-->

@@ -56,7 +56,7 @@
                     <h3 class="modal-title" id="rating_modal">Rating this Item</h3>
                     <h4>Product Enquiry Extension</h4>
                     <p>by
-                        <a href="author.html">{{$data['product']->user->name}}</a>
+                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{$data['product']->user->name}}</a>
                     </p>
                 </div>
                 <!-- end /.modal-header -->
@@ -65,10 +65,24 @@
                     <form id="rateMarket">
                         @csrf
                         <input type="hidden" id="proId" name="id" value="{{$data['product']->id??''}}"/>
-                        <ul>
+                        <div class="row no-gutters pt-3 pb-3">
+                            <div class="col-4 d-flex content-justify-center align-items-center"><b>Your Rating </b></div>
+                            <div class="col-8">
+                                <div class="row"> 
+                                    <div class="col-md-auto">
+                                        <div class="d-flex content-justify-center align-items-center rateenable text-warning"></div>
+                                    </div>
+                                    <div class="col-md-4 d-flex content-justify-center align-items-center"><div id="hint" class="font-weight-bold"></div></div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {{--
+                        <ul> 
                             <li>
                                 <p>Your Rating</p>
-                                <div class="right_content btn btn--round btn--white btn--md">
+                                <div class="rateenable"></div>
+                                <div class="right_content btn btn--round btn--white btn--md"> 
                                     <select name="rating" class="give_rating">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -76,9 +90,8 @@
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                     </select>
-                                </div>
-                            </li>
-
+                                </div> 
+                            </li>  
                             <li>
                                 <p>Rating Causes</p>
                                 <div class="right_content">
@@ -94,12 +107,12 @@
                                         <span class="lnr lnr-chevron-down"></span>
                                     </div>
                                 </div>
-                            </li>
+                            </li> 
                         </ul>
-
+                        --}}
                         <div class="rating_field">
                             <label for="rating_field">Comments</label>
-                            <textarea name="rating_field" id="rating_field" class="text_field" placeholder="Please enter your rating reason to help the author"></textarea>
+                            <textarea maxlength="50" name="rating_field" id="rating_field" class="text_field" placeholder="Please enter your rating reason to help the author"></textarea>
                             <p class="notice">Your review will be ​publicly visible​ and the author may reply to your comments. </p>
                         </div>
                         <button type="button" class="btn btn--round btn--default">Submit Rating</button>
@@ -122,7 +135,7 @@
                     <h3 class="modal-title" id="rating_modal">Give Feedback on This Post</h3>
                     <h4>Product</h4>
                     <p>by
-                        <a href="author.html">{{$data['product']->user->name}}</a>
+                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{$data['product']->user->name}}</a>
                     </p>
                 </div>
                 <div class="container"> 
@@ -212,7 +225,7 @@
 
                         <div class="rating_field">
                             <label for="rating_field">Comments</label>
-                            <textarea name="commemnt_reporter" id="commemnt_reporter" class="text_field" placeholder="Please enter your comment report for this post"></textarea>
+                            <textarea maxlength="100" name="commemnt_reporter" id="commemnt_reporter" class="text_field" placeholder="Please enter your comment report for this post"></textarea>
                             <p class="notice">Your review will be ​publicly visible​ and the author may reply to your comments. </p>
                         </div>
                         <button type="button" class="btn btn--round btn--default">Submit</button>
@@ -243,13 +256,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="item-preview">
-                        <div class="item__preview-slider">
+                    
+                    <div class="item-preview"> 
+                        <div class="item__preview-slider"> 
                             @foreach( $media as $val)
-                                <div class="prev-slide"><img src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing."></div>
+                                <div class="prev-slide">
+                                <div class="price p-1 m-0 c-price text-center col-md-12">
+                                    <h1>
+                                    <span> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
+                                    </h1>
+                                </div> 
+                                    <img src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                </div>
                             @endforeach
                         </div><!-- end /.item--preview-slider -->
-
+                        
                         <div class="item__preview-thumb">
                             <div class="prev-thumb">
                                 <div class="thumb-slider">
@@ -283,75 +304,29 @@
                                     <img src="{{ asset('images/svg/share.svg') }}" alt="This is share svg">
                                     <span>@lang('frontlabel.shareitem')</span>
                                 </p>
-                                @php
-                                    $socialLink = route('market.productdetail',$data['product']->slug);  
-                                    $getShareLinkTwitter = Share::load($socialLink, $data['product']->name)->twitter(); 
-                                    $getShareLinkFacebook = Share::load($socialLink, $data['product']->name)->facebook(); 
-                                    $getShareLinklinkedin = Share::load($socialLink, $data['product']->name)->linkedin(); 
+                                @php 
+                                    
+                                    $socialLink = route('market.productdetail',$data['product']->slug); 
+                                    $socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
                                 @endphp
                                 <div class="social social--color--filled">
-                                    <ul>
-                                        <li>
+                                @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' => 'http://127.0.0.1:8000/storage/106/conversions/crop.png'])
 
-                                            <a href="{{$getShareLinkFacebook??''}}" target="_blank">
-                                                <span class="fa fa-facebook"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{$getShareLinkTwitter??''}}" target="_blank">
-                                                <span class="fa fa-twitter"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{$getShareLinklinkedin??'javascript:void(0)'}}" target="_blank">
-                                                <span class="fa fa-linkedin"></span>
-                                            </a>
-                                        </li>
-                                        <!-- <li>
-                                            <a href="#">
-                                                <span class="fa fa-pinterest"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-linkedin"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-dribbble"></span>
-                                            </a>
-                                        </li> -->
-                                    </ul>
                                 </div>
                                 <!-- end /.social-->
                                 @if (Route::has('login'))
                                     @auth  
-                                        <div class="item_action v_middle"> 
-                                            <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
-                                                <P class="rate_it">Rate Now</P>
-                                                <div class="rating product--rating">
-                                                    <ul>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="fa fa-star-o"></span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </a>
-                                            <!-- end /.rating_btn -->
-                                        </div> 
+                                        @if($data['allowUserRate']==='true')
+                                            <div class="item_action v_middle"> 
+                                                <a href="#" class="btn btn--md btn--round btn--white rating--btn not--rated" data-toggle="modal" data-target="#myModalRate">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-4 d-flex content-justify-center align-items-center">Rate Now</div>
+                                                        <div class="col-8 pl-3"><div class="d-flex content-justify-center align-items-center staronly rating product--rating text-warning"></div> </div>
+                                                    </div> 
+                                                </a>
+                                                <!-- end /.rating_btn -->
+                                            </div>
+                                        @endif
                                     @endauth
                                 @endif 
                             </div> 
@@ -381,20 +356,24 @@
                                 <li>
                                     <a href="#product-details" class="active" aria-controls="product-details" role="tab" data-toggle="tab">Item Details</a>
                                 </li>
+                                {{--
                                 <li>
                                     <a href="#product-comment" aria-controls="product-comment" role="tab" data-toggle="tab">Comments </a>
                                 </li>
-                                {{--<li>
+                                --}}
+                                <li>
                                     <a href="#product-review" aria-controls="product-review" role="tab" data-toggle="tab">Reviews
-                                        <span>(35)</span>
+                                        <span>({{count($data['getUserRateOfProduct'])}})</span>
                                     </a>
                                 </li>
+                                {{--
                                 <li>
                                     <a href="#product-support" aria-controls="product-support" role="tab" data-toggle="tab">Support</a>
                                 </li>
                                 <li>
                                     <a href="#product-faq" aria-controls="product-faq" role="tab" data-toggle="tab">item FAQ</a>
-                                </li>--}}
+                                </li>
+                                --}}
                             </ul>
                         </div>
                         <!-- end /.item-navigation -->
@@ -410,7 +389,7 @@
                                 </div>
                             </div>
                             <!-- end /.tab-content -->
-
+                            {{--
                             <div class="fade tab-pane product-tab" id="product-comment">
                                 <div class="thread">
                                     <ul class="media-list thread-list">
@@ -660,8 +639,17 @@
                                 </div>
                                 <!-- end /.comments -->
                             </div>
+                            --}}
                             <!-- end /.product-comment -->
 
+                            <div class="fade tab-pane product-tab" id="product-review">
+                                <div class="thread thread_review"> 
+                                    @include('c2c.page.userrate')
+                                </div>
+                                <!-- end /.comments -->
+                            </div>
+
+                            <!-- end /.product-comment -->
                         </div>
                         <!-- end /.tab-content -->
                     </div>
@@ -699,7 +687,7 @@
                             </div><!-- end /.purchase-button -->
                         </div>--}}<!-- end /.sidebar--card -->
 
-                        <div class="sidebar-card card-pricing p-3">
+                        {{--<div class="sidebar-card card-pricing p-3">
                             <div class="price p-3 m-0">
                                 <h1>
                                     <sup>$</sup>
@@ -707,34 +695,9 @@
                                 </h1>
                             </div>
                             <!-- end /.purchase-button -->
-                        </div>
+                        </div>--}}
                         <!-- end /.sidebar--card -->
-                        <div class="sidebar-card card--metadata">
-                            <ul class="data">
-                                <li>
-                                    <p>
-                                        <span class="lnr lnr-heart scolor"></span>@lang('frontlabel.favourites')</p>
-                                    <span>240</span>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span class="lnr lnr-bubble mcolor3"></span>@lang('frontlabel.comments')</p>
-                                    <span>35</span>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span class="lnr lnr-eye mcolor4"></span>@lang('frontlabel.views')</p>
-                                    <span>6,589</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end /.sidebar-card --> 
-
-                        <div class="author-card sidebar-card ">
-                            <div class="card-title">
-                                <h4>@lang('frontlabel.proinfo')</h4>
-                            </div>
-
+                        <div class="author-card sidebar-card "> 
                             <div class="author-infos">
                                 <div class="author_avatar">
                                     <a href="{{route('market.mystore',$data['product']->user->id)}}">
@@ -745,7 +708,6 @@
                                         @endif
                                     </a>
                                 </div>
-
                                 <div class="author">
                                     <h4>{{ucfirst($data['product']->user->name)}}</h4>
                                     <p>Signed Up: {{$data['product']->user->created_at}}</p>
@@ -767,6 +729,41 @@
 
 
                         </div><!-- end /.author-card -->
+                        <div class="sidebar-card card--metadata">
+                            <ul class="data">
+                                <li class="p-2">
+                                    <p>
+                                        <span class="lnr lnr-heart scolor"></span>@lang('frontlabel.favourites')</p>
+                                    <span>240</span>
+                                </li>
+                                <li class="p-2">
+                                    <p>
+                                        <span class="lnr lnr-bubble mcolor3"></span>@lang('frontlabel.comments')</p>
+                                    <span>35</span>
+                                </li>
+                                <li class="p-2">
+                                    <p>
+                                        <span class="lnr lnr-eye mcolor4"></span>@lang('frontlabel.views')</p>
+                                    <span>6,589</span>
+                                </li> 
+                            </ul>
+                            <div class="row p-2">
+                                @php 
+                                    if($data['totalAvg'] >=4){
+                                        $totalAvg=3;
+                                    }else if($data['totalAvg'] < 4 && $data['totalAvg'] >= 2 ){
+                                        $totalAvg=2;
+                                    }else if($data['totalAvg'] < 2 && $data['totalAvg'] >= 1 ){
+                                        $totalAvg=1;
+                                    }else{
+                                        $totalAvg=2;
+                                    }
+                                @endphp
+                                <div class="col-7 col-md-6"><div class="raty" data-score="{{$totalAvg??2}}"></div></div>
+                                <div class="col-5 col-md-6  text-right"><b>{{number_format($data['totalAvg'], 2, '.', ',')}} ( {{$data['totalRate']}} Votes )</b></div>
+                            </div>
+                        </div>
+                        <!-- end /.sidebar-card --> 
                     </aside><!-- end /.aside -->
                 </div><!-- end /.col-md-4 -->
             </div><!-- end /.row -->
@@ -860,25 +857,9 @@
                                         <div class="price_love">
                                             <span>$ {{$val->price??'0'}}</span>
                                         </div>
-                                        <a href="javascript:void(0)">
-                                            <div class="rating product--rating">
-                                                <ul>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star"></span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="fa fa-star-half-o"></span>
-                                                    </li>
-                                                </ul>
+                                        <a href="javascript:void(0)">  
+                                            <div class="rateproduct" data-rating="{{$val->averageRating}}">
+                                                <input  type="hidden" name="score">
                                             </div>
                                         </a>
                                     </div>
@@ -917,3 +898,204 @@
         END CALL TO ACTION AREA
     =================================-->
 @stop
+@section('cusomescript')
+<script type="text/javascript">
+    ( function($) {
+        var xhr=null;
+        $('div.rateenable').raty({
+            starType: 'i',
+            target : '#hint',
+            targetType : 'score',
+            targetKeep : true,
+            targetFormat : '{score} : Rating'
+        });
+        // rateable image
+        // $('div.rateenable').raty({
+        //     starOff   :"{{asset('imgs/0.png')}}",
+        //     iconRange: [            
+        //         { range: 1, on: "{{asset('imgs/1.png')}}"},
+        //         { range: 2, on: "{{asset('imgs/2.png')}}"},
+        //         { range: 3, on: "{{asset('imgs/3.png')}}"},
+        //         { range: 4, on: "{{asset('imgs/4.png')}}"},
+        //         { range: 5, on: "{{asset('imgs/5.png')}}"}
+        //     ]
+        // });
+        // stare with emoji
+        // $('div.staronly').raty(
+        //     { 
+        //         starType: 'img',
+        //         iconRange: [
+        //             { range: 1, on: "{{asset('imgs/1.png')}}", off: "{{asset('imgs/1.png')}}" },
+        //             { range: 2, on: "{{asset('imgs/2.png')}}", off: "{{asset('imgs/2.png')}}" },
+        //             { range: 3, on: "{{asset('imgs/3.png')}}", off: "{{asset('imgs/3.png')}}" },
+        //             { range: 4, on: "{{asset('imgs/4.png')}}", off: "{{asset('imgs/4.png')}}" },
+        //             { range: 5, on: "{{asset('imgs/5.png')}}", off: "{{asset('imgs/5.png')}}"}
+        //         ], 
+        //         readOnly:true
+        //     }
+        // );
+        $('div.staronly').raty(
+            { 
+                starType: 'i',  
+                readOnly:true
+            }
+        );
+        $('div.raty').raty(
+            {  
+                starOff   :"{{asset('imgs/no.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
+                readOnly:true,
+                single:true,
+                number:3,
+                score:"{{$totalAvg}}"
+            }
+        );
+        $('div.rateproduct').raty(
+            { 
+                starOff   :"{{asset('imgs/no.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
+                readOnly:true,
+                single:true,
+                number:3,
+                score: function() { 
+                    if($(this).attr('data-rating') >=4){
+                        $num=3;
+                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                        $num=2;
+                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                        $num=1;
+                    }else{
+                        $num=2;
+                    } 
+                    return $num;
+                }
+            }
+        );
+        $('div.userrateproduct').raty(
+            { 
+                starOff   :"{{asset('imgs/no.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
+                readOnly:true,
+                single:true,
+                number:3,
+                score: function() {
+                    if($(this).attr('data-rating') >=4){
+                        $num=3;
+                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                        $num=2;
+                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                        $num=1;
+                    }else{
+                        $num=2;
+                    }
+                    return $num;
+                }
+            }
+        );
+    $(window).on('hashchange', function() {
+        if (window.location.hash) {
+            var page = window.location.hash.replace('#', '');
+            if (page == Number.NaN || page <= 0) {
+                return false;
+            } else {
+                getPosts(page);
+            }
+        }
+    }); 
+    $(document).on('click', '.pagination-area.pagination-area2 a', function (e) {
+        getPosts($(this).attr('href').split('page=')[1]);
+        e.preventDefault();
+    }); 
+    function getPosts(page) {
+        $.ajax({
+            url : '?page=' + page,
+            dataType: 'json',
+        }).done(function (data) { 
+            $('.thread.thread_review').empty().html(data);
+            $('div.userrateproduct').raty(
+                { 
+                    starOff   :"{{asset('imgs/no.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/0.png')}}"},
+                        { range: 2, on: "{{asset('imgs/1.png')}}"},
+                        { range: 3, on: "{{asset('imgs/2.png')}}"}
+                    ],   
+                    hints: ['unlike','normal','love'],
+                    readOnly:true,
+                    single:true,
+                    number:3,
+                    score: function() {
+                        if($(this).attr('data-rating') >=4){
+                            $num=3;
+                        }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                            $num=2;
+                        }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                            $num=1;
+                        }else{
+                            $num=2;
+                        }
+                        return $num;
+                    }
+                }
+            );
+            location.hash = page; 
+        }).fail(function () {
+            alert('Posts could not be loaded.');
+        });
+    }
+    function rateProduct(mythis){
+        var this_=mythis; 
+        var rateNum=$('div.rateenable > input[name="score"]').val();
+        var rateComment=$('#rating_field').val();
+        var proId=$('#proId').val();
+        xhr=$.ajax({
+            url: "{{route('market.ratemarket')}}",
+            type: 'POST',
+            data:{id:proId,rate:rateNum,comments:rateComment},
+            headers: {
+                'X-CSRF-Token':CSRF_TOKEN,
+            },
+            success: function( msg ) {
+                if(msg.status==200){
+                    // console.log('ok');
+                    // $('div.raty').raty('reload');
+                    // $('div.raty').raty('set', { score: 5 }); 
+                    $('form#rateMarket button.modal_close').click();
+                    $('.single-product-desc .item_action.v_middle').remove();
+                }
+            },
+            error: function( data ) {
+                console.log(data);
+            }
+        });
+    }
+    $('form#rateMarket button[type="button"]').on('click',function(e){
+        e.preventDefault();   
+        if (e.type == "click") documentClick = true; 
+        if (documentClick){
+            if(xhr==null){
+                rateProduct($(this))
+            }else{
+                xhr.abort();
+                rateProduct($(this))
+            }
+        } 
+    }); 
+} ) ( jQuery );
+</script>
+@stop 

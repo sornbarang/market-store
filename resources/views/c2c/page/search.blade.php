@@ -85,8 +85,8 @@
                                 <div class="range-slider price-range"></div>
 
                                 <div class="price-ranges">
-                                    <span class="from rounded">$30</span>
-                                    <span class="to rounded">$300</span>
+                                    <span class="from rounded">$0</span>
+                                    <span class="to rounded">$0</span>
                                 </div>
                             </div>
                         </div>
@@ -149,97 +149,17 @@
         </div>
     </div>
     <!-- end /.filter-area -->
+
     <!--================================
         END FILTER AREA
     =================================-->
     <!--================================
         START PRODUCTS AREA
     =================================-->
-    <section class="products">
+    <section class="products pt-5">
         <!-- start container -->
-        <div class="container">
-
-            <!-- start .row -->
-            <div class="row">
-                @foreach($data['searchpros'] as $val)
-                    @php
-                        $img=''; 
-                        $getFirstMedia = $val->getFirstMedia();  
-                        $getUrlThum=$getFirstMedia->getUrl('thumb');  
-                        if($getFirstMedia){
-                            $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-                        } 
-                    @endphp
-                <!-- start .col-md-4 -->
-                <div class="col-lg-4 col-md-6">
-                    <!-- start .single-product -->
-                    <div class="product product--card">
-
-                        <div class="product__thumbnail">
-                            <img src="{{$img}}" alt="Product Image">
-                            <div class="prod_btn">
-                                <a href="{{ route('market.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">More Info</a>
-                                {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
-                            </div>
-                            <!-- end /.prod_btn -->
-                        </div>
-                        <!-- end /.product__thumbnail -->
-
-                        <div class="product-desc">
-                            <a href="#" class="product_title">
-                                <h4>{{$val->getTranslation(app()->getLocale())->name}}</h4>
-                            </a>
-                            <ul class="titlebtm">
-                                <li>
-                                    <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
-                                    <p>
-                                        <a href="#">{{$val->user->name}}</a>
-                                    </p>
-                                </li>
-                                <!-- <li class="product_cat">
-                                    <a href="#">
-                                        <span class="lnr lnr-book"></span>Plugin</a>
-                                </li> -->
-                            </ul>
-
-                            <p>{{ !empty($val->user->profile->bio) ? $val->user->profile->bio : '' }}</p>
-                        </div>
-                        <!-- end /.product-desc -->
-
-                        <div class="product-purchase">
-                            <div class="price_love">
-                                <span>$ {{$val->price ?? 0}}</span>
-                                {{--<p>
-                                    <span class="lnr lnr-heart"></span> 90</p>--}}
-                            </div>
-                            {{--<div class="sell">
-                                <p>
-                                    <span class="lnr lnr-cart"></span>
-                                    <span>16</span>
-                                </p>
-                            </div>--}}
-                        </div>
-                        <!-- end /.product-purchase -->
-                    </div>
-                    <!-- end /.single-product -->
-                </div>
-                <!-- end /.col-md-4 -->
-                @endforeach
-            </div>
-            <!-- end /.row -->
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="pagination-area">
-                        <nav class="navigation pagination" role="navigation">
-                            <div class="nav-links">
-                            {{$data['searchpros']->links()}}
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <!-- end /.row -->
+        <div class="container searchcontainer"> 
+            @include('elements.search-items')
         </div>
         <!-- end /.container -->
     </section>
@@ -252,7 +172,7 @@
 <!--================================
     START COUNTER UP AREA
 =================================-->
-@include('elements.membercount')
+{{-- @include('elements.membercount') --}}
 <!--================================
     START CALL TO ACTION AREA
 =================================-->
@@ -261,3 +181,108 @@
     END CALL TO ACTION AREA
 =================================-->
 @stop
+@section('cusomescript')
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        rating();
+        function rating(){
+            $('div.raty.rateproduct').raty(
+                { 
+                    starOff:"{{asset('imgs/no.png')}}",
+                    iconRange: [            
+                        { range: 1, on: "{{asset('imgs/0.png')}}"},
+                        { range: 2, on: "{{asset('imgs/1.png')}}"},
+                        { range: 3, on: "{{asset('imgs/2.png')}}"}
+                    ],   
+                    hints: ['unlike','normal','love'],
+                    readOnly:true,
+                    single:true,
+                    number:3,
+                    readOnly:true,
+                    score: function() {
+                        if($(this).attr('data-rating') >=4){
+                            $num=3;
+                        }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                            $num=2;
+                        }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                            $num=1;
+                        }else{
+                            $num=2;
+                        }
+                        return $num;
+                    }
+                }
+            );
+        }
+        function getPosts(mycurl) {
+            $.ajax({
+                url : mycurl,
+                dataType: 'json',
+            }).done(function (data) { 
+                $('.searchcontainer').empty().html(data);
+                rating(); 
+            }).fail(function () {
+                alert('Posts could not be loaded.');
+            });
+        }
+        var $priceFrom = $('.price-ranges .from'),
+            $priceTo = $('.price-ranges .to');
+        $(".price-range").slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [0, 0],
+            slide: function (event, ui) {
+                $priceFrom.text("$" + ui.values[0]);
+                $priceTo.text("$" + ui.values[1]);
+            },
+            change: function( event, ui ) { 
+                const segm="{{Request::get('page')}}"; 
+                const from=ui.values[0]; 
+                const to=ui.values[1];
+                if(segm !='' && segm !=null){
+                    var mycurl = "<?php echo url()->full();?>"+"&from="+from+"&to="+to;
+                }else{
+                    var mycurl = "<?php echo url()->full();?>"+"&from="+from+"&to="+to;
+                } 
+                getPosts(mycurl);
+            }
+        });
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else {
+                    getPostsByPage(page);
+                }
+            }
+        }); 
+        $(document).on('click', '.searchcontainer .pagination-area a', function (e) {
+            getPostsByPage($(this).attr('href').split('page=')[1]);
+            e.preventDefault();
+        }); 
+        function getPostsByPage(page) {
+            var urlPage='';
+            var from=parseInt($(".price-ranges > span.from.rounded").text().replace('$',''));
+            var to=parseInt($(".price-ranges > span.to.rounded").text().replace('$','')); 
+            if(to !='' && to > 0){
+                urlPage= '<?php echo url()->full();?>'+'&page=' + page+'&from='+from+'&to='+to;
+            }else{
+                urlPage = '<?php echo url()->full();?>'+'&page=' + page;
+            }
+            console.log(urlPage);
+            $.ajax({
+                url : urlPage,
+                dataType: 'json',
+            }).done(function (data) { 
+                $('.searchcontainer').empty().html(data); 
+                rating();
+                // location.hash = page; 
+            }).fail(function () {
+                alert('Posts could not be loaded.');
+            });
+        }
+    });
+</script>
+@stop 

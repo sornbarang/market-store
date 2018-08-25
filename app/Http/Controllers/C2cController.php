@@ -77,6 +77,7 @@ class C2cController extends Controller
                     $pros[$key]['avatar']=Storage::url($m->id.'/'.$m->file_name);  
                 }
             }
+            $pros[$key]['rateavg']=$val->averageRating();
         } 
         
         return response()->json($pros);   
@@ -113,6 +114,7 @@ class C2cController extends Controller
         return view('c2c.page.product',compact('data'));
     }
     public function getSlugCategory(Request $request,CategoryTranslate $slug){
+        
         // return $slug->categories_ads_id;
         // get all category with tree relate with app/helpers.php 
         $data['nest'] = Category::all()->toHierarchy();
@@ -131,11 +133,21 @@ class C2cController extends Controller
             }else if(isset($request->record) && $request->record==25){
                 $record=25;
             }
-        } 
-        $node = Category::findOrFail($slug->categories_ads_id);   
-        $data['bread']=$node->getAncestorsAndSelf();
+        }  
+        $node = Category::findOrFail($slug->categories_ads_id); 
         $data['cnode']=$node->id; 
-        $data['cnodeName']=$node->name;  
+        $data['cnodeName']=$node->name; 
+        if ($request->ajax()) {    
+            // get all product->orderBy('products_ads.price', $order)
+            if(isset($request->from) && isset($request->to)){
+                $data['product']=Product::categorized($node)->whereBetween('price', [$request->from, $request->to])->paginate($record);   
+            }else{
+                $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);   
+            }
+            return \Response::json(\View::make('elements.product',compact('data'))->render());
+        }  
+        $data['bread']=$node->getAncestorsAndSelf();
+        $slugName=$node->getRoot()->slug; 
         $data['order']=$order;
         $data['record']=$record; 
         if($order !=''){
@@ -145,7 +157,7 @@ class C2cController extends Controller
             // get all product->orderBy('products_ads.price', $order)
             $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);       
         } 
-        return view('c2c.page.product',compact('data'));
+        return view('c2c.page.product',compact('data','slugName'));
     } 
     /**
      * Show the form for creating a new resource.

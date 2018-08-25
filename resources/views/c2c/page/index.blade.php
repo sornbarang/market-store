@@ -497,24 +497,8 @@
                                                         <span title="${{$getprops->price??''}}">${{$getprops->price??''}}</span>
                                                     </div>
                                                     <a href="javascript:void(0)">
-                                                        <div class="rating product--rating">
-                                                            <ul>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star"></span>
-                                                                </li>
-                                                                <li>
-                                                                    <span class="fa fa-star-half-o"></span>
-                                                                </li>
-                                                            </ul>
+                                                        <div class="rateproduct" data-rating="{{$getprops->averageRating}}">
+                                                            <input  type="hidden" name="score">
                                                         </div>
                                                     </a>
                                                 </div>
@@ -794,6 +778,38 @@
         </div><!-- end /.row -->
     </div><!-- end /.container -->
 </section>--}}
+@section('cusomescript')
+<script type="text/javascript">
+    $(document).ready(function(){ 
+        $('div.rateproduct').raty(
+            { 
+                starOff   :"{{asset('imgs/no.png')}}",
+                iconRange: [            
+                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                ],   
+                hints: ['unlike','normal','love'],
+                readOnly:true,
+                single:true,
+                number:3,
+                score: function() {
+                    if($(this).attr('data-rating') >=4){
+                        $num=3;
+                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                        $num=2;
+                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                        $num=1;
+                    }else{
+                        $num=2;
+                    }
+                    return $num;
+                }
+            }
+        );
+    });
+</script>
+@stop 
 <!--================================
     END SPECIAL FEATURES AREA
 =================================-->

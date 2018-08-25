@@ -37,18 +37,23 @@ class ProductController extends Controller
         ]);
     }
     public function makeRateAble(Request $request){ 
-        $post = Product::findOrFail($request->id);
-        $rating = new Rating;
-        $rating->rating = $request->rate;
-        $rating->user_id = Auth::id();
-
-        $post->ratings()->save($rating);
-        if($post){
-            return response()->json([
-                'status' => 200,
-                'message' => 'Success'
-            ]);
-        }
+        if (Auth::check()) {
+            $checkUserRate=Rating::where('user_id',Auth::id())->where('rateable_id',$request->id)->first();
+            if(empty($checkUserRate)){
+                $post = Product::findOrFail($request->id);
+                $rating = new Rating;
+                $rating->rating = $request->rate;
+                $rating->comments = $request->comments;
+                $rating->user_id = Auth::id(); 
+                $post->ratings()->save($rating); 
+                if($post){
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Success'
+                    ]);
+                }
+            }
+        } 
         return response()->json([
             'status' => 400,
             'message' => 'fail'
@@ -151,19 +156,33 @@ class ProductController extends Controller
      {
          return view('c2c.page.product');
      }
-     public function getproductdetail(ProductTranslate $slug)
-     {   
-        // return $slug;
+     public function getproductdetail(Request $request,ProductTranslate $slug)
+     {    
+        $getUserRateOfProduct = Rating::distinct()->where('rateable_id',$slug->products_ads_id)->paginate(9);
+        $data['getUserRateOfProduct']=$getUserRateOfProduct;
+        if ($request->ajax()) {  
+            return \Response::json(\View::make('c2c.page.userrate',compact('data'))->render());
+        }
+        $data['allowUserRate']='true';
+        if (Auth::check()) {
+            $checkUserRate=Rating::where('user_id',Auth::id())->where('rateable_id',$slug->products_ads_id)->first();
+            if($checkUserRate){
+                $data['allowUserRate']='false';
+            }
+        }  
         $post = Product::findOrFail($slug->products_ads_id);
-        $node = Category::find($post->categories_ads[0]->id);
+        $node = Category::find($post->categories_ads[0]->id);  
         $data['bread'] = $node->getAncestorsAndSelf();  
-        $data['cnode']=$node->id; 
+        $data['totalRate'] =$post->sumRating;
+        $data['totalAvg'] =$post->averageRating;
+        $data['cnode']=$node->id;  
         if($post->user_id !=null){ 
             $data['relateProByUser'] = Product::where('user_id',$post->user_id)->latest()->limit(7)->get();  
         }if($post){
             $data['product']=$post;
         }
         $data['breadcrub']='Product Detail';
+        
         return view('c2c.page.singleproduct',compact('data'));
      }
 }

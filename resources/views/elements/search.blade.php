@@ -14,7 +14,7 @@
                         <div class="search__field">
                             <form action="{{route('market.search')}}" method="get"> 
                                 <div class="field-wrapper">
-                                    <input value="{{$data['strsearch']??''}}" name="searchstr" class="relative-field rounded" type="text" placeholder="@lang('frontlabel.searchpro')">
+                                    <input value="{{request()->searchstr??''}}" name="searchstr" class="relative-field rounded" type="text" placeholder="@lang('frontlabel.searchpro')">
                                     <button class="btn btn--round" type="submit">@lang('frontlabel.search')</button>
                                 </div>
                             </form>

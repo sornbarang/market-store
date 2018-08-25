@@ -31,6 +31,7 @@
     @endif 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.css">
     <!-- endinject -->
 
     <!-- Favicon -->
@@ -55,7 +56,7 @@
                 <div class="col-lg-3 col-md-3 col-6 v_middle">
                     <div class="logo">
                         <a href="{{ route('market') }}">
-                            <img src="{{asset('/')}}images/logo.png" alt="logo image" class="img-fluid">
+                            <img src="{{asset('/')}}images/logo.png" alt="logo" class="img-fluid">
                         </a>
                         
                     </div>
@@ -687,6 +688,8 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <!-- <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBeySPFGz7DIUTrReCRQT6HYaMM0ia0knA"></script> -->
 <script src="{{ asset('js/map.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.js"></script>
+@yield('cusomescript')
 <script> 
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
     $(document).on('click', '#deletepro', function(e) {
@@ -966,13 +969,39 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         owl.trigger('destroy.owl.carousel');
                         $.each( response, function( key, value ) {  
                             var route='{{route("market.productdetail")}}/'+value.slug; 
-                            owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4 class="trucate" title="'+value.name+'">'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row no-gutters"> <div class="col col-md-4"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col col-md-8 text-right"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rating product--rating"> <ul> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star"></span> </li> <li> <span class="fa fa-star-half-o"></span> </li> </ul> </div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
+                            owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"> <div class="product__thumbnail"> <img src="'+value.image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4 class="trucate" title="'+value.name+'">'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+value.avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row no-gutters"> <div class="col col-md-4"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col col-md-8 text-right"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rateproduct" data-rating="'+value.rateavg+'"><input  type="hidden" name="score"></div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
                         });  
                         if(response.length > 5){
                            $('.owl-nav').show();
                         }else{
                             $('.owl-nav').hide();
                         } 
+                        $('div.rateproduct').raty(
+                            { 
+                                starOff   :"{{asset('imgs/no.png')}}",
+                                iconRange: [            
+                                    { range: 1, on: "{{asset('imgs/0.png')}}"},
+                                    { range: 2, on: "{{asset('imgs/1.png')}}"},
+                                    { range: 3, on: "{{asset('imgs/2.png')}}"}
+                                ],   
+                                hints: ['unlike','normal','love'],
+                                readOnly:true,
+                                single:true,
+                                number:3,
+                                score: function() {
+                                    if($(this).attr('data-rating') >=4){
+                                        $num=3;
+                                    }else if($(this).attr('data-rating') < 4 && $(this).attr('data-rating') >= 2 ){
+                                        $num=2;
+                                    }else if($(this).attr('data-rating') < 2 && $(this).attr('data-rating') >= 1 ){
+                                        $num=1;
+                                    }else{
+                                        $num=2;
+                                    }
+                                    return $num;
+                                }
+                            }
+                        );
                         owl.owlCarousel({
                             items: 5,
                             autoplay: true,
@@ -1026,11 +1055,18 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             }
             
         });
+        if($('.tree li.parent_li').hasClass('d-collape')){   
+            $('.tree li.parent_li.d-collape ul > li').attr('style','');
+        }
         // List explore category
         $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
-        $('.tree li.parent_li > span').on('click', function (e) {
+        $('.tree li.parent_li > span').on('click', function (e) { 
             var children = $(this).parent('li.parent_li').find(' > ul > li');
-            if (children.is(":visible")) {
+            if($(this).parent('li.parent_li').hasClass('d-collape')){  
+                $(this).parent('li.parent_li').removeClass('d-collape');
+                children.hide('fast');
+            }else{
+                if (children.is(":visible")) {
                 children.hide('fast');
                 if(!$(this).hasClass( "parent_root" )){
                     $(this).attr('title', 'Expand this branch').find(' > i').removeClass('fa-minus-square').addClass('fa-plus-square');
@@ -1041,44 +1077,11 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                     $(this).attr('title', 'Collapse this branch').find(' > i').removeClass('fa-plus-square').addClass('fa-minus-square');
                 }
             }
+            }
             e.stopPropagation();
         });
-        function rateProduct(mythis){
-            var this_=mythis; 
-            var rateNum=$('.br-widget > a.br-selected.br-current').attr('data-rating-value');
-            var proId=$('#proId').val();
-            xhr=$.ajax({
-                url: "{{route('market.ratemarket')}}",
-                type: 'POST',
-                data:{id:proId,rate:rateNum},
-                headers: {
-                        'X-CSRF-Token':CSRF_TOKEN,
-                },
-                success: function( msg ) {
-                    if(msg.status==200){
-                        $('form#rateMarket button.modal_close').click();
-                    }
-                },
-                error: function( data ) {
-                    console.log(data);
-                }
-            });
-
-        }
-        $('form#rateMarket button[type="button"]').on('click',function(e){
-            e.preventDefault();   
-            if (e.type == "click") documentClick = true; 
-            if (documentClick){
-                if(xhr==null){
-                    rateProduct($(this))
-                }else{
-                    xhr.abort();
-                    rateProduct($(this))
-                }
-            } 
-        }); 
-    });
-    
+        
+    }); 
 </script>
 <!-- endinject -->
 </body>
