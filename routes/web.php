@@ -24,6 +24,8 @@ Route::get('/', function () {
     return view('page');
 })->name(trans('routes.home'));
 
+Route::get('testing-mail', 'Demo\MailController@index');
+
 Route::group(
 [
     'prefix' => LaravelLocalization::setLocale(),
