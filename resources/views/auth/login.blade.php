@@ -37,6 +37,18 @@
                         </div><!-- end .login_header -->
 
                         <div class="login--form">
+
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            @if (session('warning'))
+                                <div class="alert alert-warning">
+                                    {{ session('warning') }}
+                                </div>
+                            @endif
+
                             <div class="form-group">
                                 <label for="user_name">@lang('authlabel.username')</label>
                                 <input id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Enter your username..." name="email" value="{{ old('email') }}" required autofocus>

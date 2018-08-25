@@ -25,6 +25,7 @@ Route::get('/', function () {
 })->name(trans('routes.home'));
 
 Route::get('testing-mail', 'Demo\MailController@index');
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 
 Route::group(
 [

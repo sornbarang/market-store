@@ -66,9 +66,15 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
     public function productads()
     {
         return $this->hasMany('App\Models\ProductsAds');
+    }
+
+    public function verifyUser()
+    {
+        return $this->hasOne('App\Models\VerifyUser');
     }
     // /**
     //  * Searchable rules.
