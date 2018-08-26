@@ -142,7 +142,24 @@
                                 <!-- end /.social -->
 
                                 <div class="author-btn">
-                                    <a href="#" class="btn btn--md btn--round">Follow</a>
+                                    @if (session('success'))
+                                        <div class="alert alert-success">
+                                            {{ session('success') }}
+                                        </div>
+                                    @endif
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+
+                                    @if(!$data['isFollowed'])
+                                            <a href="{{ route('user.follow', $data['user']->id) }}" class="btn btn--md btn--round">Follow</a>
+                                    @else
+                                            <a href="{{ route('user.unfollow', $data['user']->id) }}" class="btn btn--md btn--round">UnFollow</a>
+                                    @endif
+
+
                                 </div>
                                 <!-- end /.author-btn -->
                             </div>

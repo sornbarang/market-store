@@ -50,6 +50,8 @@ function()
 //        require login
         Route::group( ['middleware' => 'auth' ], function()
         {
+            Route::get('profile/{profileId}/follow', 'ProfileController@followUser')->name('user.follow');
+            Route::get('profile/{profileId}/unfollow', 'ProfileController@unFollowUser')->name('user.unfollow');
 
         });
     });
