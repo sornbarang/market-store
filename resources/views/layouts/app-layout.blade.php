@@ -57,164 +57,42 @@
                     <div class="logo">
                         <a href="{{ route('market') }}">
                             <img src="{{asset('/')}}images/logo.png" alt="logo" class="img-fluid">
-                        </a>
-                        
+                        </a> 
                     </div>
                 </div>
                 <!-- end /.col-md-3 -->
 
                 <!-- start .col-md-5 -->
-                <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle">
-                    
+                <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle align-self-center">
                     <!-- start .author-area -->
-                    <div class="author-area">
-                    
-                        @if (Route::has('login'))
-                            @auth
-                            <a class="btn btn--xs mr-3" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                @lang('authlabel.logout')
-                                </a> 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            @else
-                                <a href="{{route('login')}}" class="btn btn--xs mr-3">@lang('authlabel.login')</a> 
-                            @endauth   
-                        @endif
-                            <div class="inline">
-                                <div class="has_dropdown">
-                                    <button class="btn btn--xs">
-                                    @if( app()->getLocale()=='km')
-                                        <span class="flag-icon flag-icon-kh"></span>
-                                    @else
-                                        <span class="flag-icon flag-icon-gb"></span>
-                                    @endif 
-                                        {{ config('translatable.locales')[app()->getLocale()] }}</button>
-                                    <div class="dropdown dropdown--author">
-                                        <ul>
-                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                @if ($localeCode != LaravelLocalization::getCurrentLocale())
-                                                    <li>
-                                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                            @if( $localeCode =='km')
-                                                                <span class="flag-icon flag-icon-kh"></span>
-                                                            @else
-                                                                <span class="flag-icon flag-icon-gb"></span>
-                                                            @endif
-                                                            {{ $properties['native'] }}
-                                                        </a>
-                                                    </li>
-                                                @endif
-                                            @endforeach
-                                        </ul>
-
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="author__notification_area">
-                            <ul>
-                                <li class="has_dropdown">  
-                                    <div class="icon_wrap">
-                                        <span class="lnr lnr-cart"></span>
-                                        <span class="notification_count purch">2</span>
-                                    </div>
-
-                                    <div class="dropdown dropdown--cart">
-                                        <div class="cart_area">
-                                            <div class="cart_product">
-                                                <div class="product__info">
-                                                    <div class="thumbn">
-                                                        <img src="{{asset('/')}}images/capro1.jpg" alt="cart product thumbnail">
-                                                    </div>
-
-                                                    <div class="info">
-                                                        <a class="title" href="single-product.html">Finance and Consulting Business Theme</a>
-                                                        <div class="cat">
-                                                            <a href="#">
-                                                                <img src="{{asset('/')}}images/catword.png" alt="">Wordpress</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product__action">
-                                                    <a href="#">
-                                                        <span class="lnr lnr-trash"></span>
-                                                    </a>
-                                                    <p>$60</p>
-                                                </div>
-                                            </div>
-                                            <div class="cart_product">
-                                                <div class="product__info">
-                                                    <div class="thumbn">
-                                                        <img src="{{asset('/')}}images/capro2.jpg" alt="cart product thumbnail">
-                                                    </div>
-
-                                                    <div class="info">
-                                                        <a class="title" href="single-product.html">Flounce - Multipurpose OpenCart Theme</a>
-                                                        <div class="cat">
-                                                            <a href="#">
-                                                                <img src="{{asset('/')}}images/catword.png" alt="">Wordpress</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="product__action">
-                                                    <a href="#">
-                                                        <span class="lnr lnr-trash"></span>
-                                                    </a>
-                                                    <p>$60</p>
-                                                </div>
-                                            </div>
-                                            <div class="total">
-                                                <p>
-                                                    <span>Total :</span>$80</p>
-                                            </div>
-                                            <div class="cart_action">
-                                                <a class="go_cart" href="cart.html">View Cart</a>
-                                                <a class="go_checkout" href="checkout.html">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                </li>
-                            </ul>
-                        </div>
-                        <!--start .author__notification_area -->
-                        @if (Route::has('login')) 
-                            @auth
-                                @php
-                                    $media = (Auth::user()->profile != null) ? Auth::user()->profile->getMedia() : [];
-                                    foreach($media as $val){
-                                        if(Auth::user()->profile->avatar==$val->id){
-                                            $avatar=$val->id.'/avatar.png';
-                                        }
+                    <div class="author-area h-100 d-flex justify-content-center align-items-center">  
+                    <!--start .author__notification_area -->
+                    @if (Route::has('login')) 
+                        @auth
+                            @php
+                                $media = (Auth::user()->profile != null) ? Auth::user()->profile->getMedia() : [];
+                                foreach($media as $val){
+                                    if(Auth::user()->profile->avatar==$val->id){
+                                        $avatar=$val->id.'/avatar.png';
                                     }
-                                @endphp
-                            @else
-                            @endauth 
-                        @endif 
+                                }
+                            @endphp
+                        @else
+                        @endauth 
+                    @endif 
+                        
+                    @if (Route::has('login'))
+                        @auth 
+                        <a class="btn btn--xs mr-3" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        @lang('authlabel.logout')
+                        </a> 
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                         <!--start .author-author__info-->
-                        <div class="author-author__info inline has_dropdown">
-                            {{--<div class="author__avatar">
-                            @if(isset($avatar) && !empty($avatar))
-                                <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
-                            @else
-                                <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
-                            @endif
-                            </div>
-                            <div class="autor__info">
-                                <p class="name">
-                                @if (Route::has('login'))
-                                    @auth
-                                        {{ Auth::user()->name }}
-                                    @else
-                                        guest
-                                    @endauth
-                                @endif
-                                </p>
-                                <p class="ammount">$20.45</p>
-                            </div>--}}
+                        <div class="author-author__info inline has_dropdown"> 
                             @if (Route::has('login'))
                                 <div class="author__avatar">
                                     @if(isset($avatar) && !empty($avatar))
@@ -224,7 +102,7 @@
                                     @endif
                                 </div>
                                 <div class="autor__info">
-                                    <p class="name">
+                                    <p class="name text-white">
                                         @if (Route::has('login'))
                                             @auth
                                                 {{ ucfirst(Auth::user()->name) }}
@@ -233,7 +111,6 @@
                                             @endauth
                                         @endif
                                     </p>
-                                    <p class="ammount">$20.45</p>
                                 </div>
                                     @auth
                                         <div class="dropdown dropdown--author">
@@ -301,9 +178,46 @@
 
                         </div>
                         <!--end /.author-author__info-->
+                        @else
+                            <div class="row h-100">
+                            <form class="frmlogincustom" method="POST" action="{{ route('login') }}">
+                            @csrf
+                                <div class="row"> 
+                                    <div class="col-md-10">
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                               <label for="exampleInputEmail1" class="m-0 p-0 text-white">@lang('authlabel.email')</label>
+                                               <input style="height:40px;" id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="@lang('authlabel.email')" name="email" value="{{ old('email') }}" required autofocus>
+                                                @if ($errors->has('email'))
+                                                    <span class="invalid-feedback text-white">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-6">
+                                               <label for="exampleInputEmail1" class="m-0 p-0 text-white">@lang('authlabel.password')</label>
+                                               <div class="row d-flex flex-nowrap">
+                                                    <div class="col-md-12">
+                                                        <input placeholder="@lang('authlabel.password')" style="height:40px;" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                                    </div>
+                                                    <button  type="submit" class="btn btn-primary btn-sm">@lang('authlabel.login')</button>
+                                               </div>
+                                                @if ($errors->has('password'))
+                                                    <span class="invalid-feedback text-white">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                @endif
+                                                <h6 class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ?</small></h6> 
+                                            </div>  
+                                        </div>
+                                    </div> 
+                                </div>
+                            </form>
+                        </div>
+                        @endauth 
+                    @endif
                     </div>
                     <!-- end .author-area -->
-
                     <!-- author area restructured for mobile -->
                     <div class="mobile_content " style="display: inline-block;float: right;">
                         <div class="inline customerswitch" style="line-height:60px;">
@@ -468,7 +382,7 @@
         <!-- end /.container -->
     </div>
     <!-- end  -->
-
+    {{--
     <!-- start .mainmenu_area -->
     <div class="mainmenu">
         <!-- start .container -->
@@ -478,8 +392,7 @@
                 <!-- start .col-md-12 -->
                 <div class="col-md-12">
                     <div class="navbar-header">
-                        <!-- start mainmenu__search -->
-                        {{--
+                        <!-- start mainmenu__search --> 
                         <div class="mainmenu__search">
                             <form action="#">
                                 <div class="searc-wrap">
@@ -489,11 +402,9 @@
                                     </button>
                                 </div>
                             </form>
-                        </div>
-                        --}}
+                        </div> 
                         <!-- start mainmenu__search -->
-                    </div>
-                    {{--
+                    </div> 
                     <nav class="navbar navbar-expand-md navbar-light mainmenu__menu">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                                 aria-label="Toggle navigation">
@@ -518,8 +429,7 @@
                             </ul>
                         </div>
                         <!-- /.navbar-collapse -->  
-                    </nav>
-                    --}}
+                    </nav> 
                 </div>
                 <!-- end /.col-md-12 -->
             </div>
@@ -528,6 +438,7 @@
         <!-- start .container -->
     </div>
     <!-- end /.mainmenu-->
+    --}}
 </div>
 <!-- end /.menu-area -->
 <!--================================
@@ -654,8 +565,30 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 text-center color-white"><p><a href="{{ route('termcondiction') }}">{{trans('menu.termcondiction')}}</a></p></div>
-                    <div class="col-md-12 text-center"><p><a href="{{ route('contact') }}">{{trans('menu.contact')}}</a></p></div>
+                    <div class="col-md-12 text-center">
+                        <nav class="navbar navbar-expand-lg"> 
+                            <div class="collapse navbar-collapse d-flex justify-content-center align-items-center" id="navbarNav">
+                                <ul class="navbar-nav"> 
+                                    <li class="nav-item">
+                                        <a href="{{ route('termcondiction') }}" class="text-white">{{trans('menu.termcondiction')}}</a>
+                                    </li>
+                                    <li class="nav-item pl-2">
+                                        <a href="{{ route('contact') }}" class="text-white">{{trans('menu.contact')}}</a>
+                                    </li>
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        @if ($localeCode != LaravelLocalization::getCurrentLocale())
+                                            <li class="nav-item pl-2">
+                                                <a class="text-white" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                    
+                                                    {{ $properties['native'] }}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach 
+                                </ul>
+                            </div>
+                        </nav> 
+                    </div> 
                 </div>
             </div>
         </div>
