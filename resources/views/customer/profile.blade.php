@@ -121,8 +121,11 @@
                                 </div>
                                 <!-- end /.social -->
 
+
                                 <div class="author-btn">
+
                                     <a href="#" class="btn btn--md btn--round">@lang('profile.follow')</a>
+
                                 </div>
                                 <!-- end /.author-btn -->
                             </div>

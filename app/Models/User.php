@@ -66,10 +66,48 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
     public function productads()
     {
         return $this->hasMany('App\Models\ProductsAds');
     }
+
+    public function verifyUser()
+    {
+        return $this->hasOne('App\Models\VerifyUser');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'leader_id', 'follower_id')->withTimestamps();
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'leader_id')->withTimestamps();
+    }
+
+    /**
+     * Check if a given user is following this user.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function isFollowing(User $user)
+    {
+        return !! $this->following()->where('follower_id', $user->id)->count();
+    }
+    /**
+     * Check if a given user is being followed by this user.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function isFollowedBy(User $user)
+    {
+        return !! $this->followers()->where('follower_id', $user->id)->count();
+    }
+
     // /**
     //  * Searchable rules.
     //  *

@@ -24,6 +24,9 @@ Route::get('/', function () {
     return view('page');
 })->name(trans('routes.home'));
 
+Route::get('testing-mail', 'Demo\MailController@index');
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+
 Route::group(
 [
     'prefix' => LaravelLocalization::setLocale(),
@@ -47,6 +50,8 @@ function()
 //        require login
         Route::group( ['middleware' => 'auth' ], function()
         {
+            Route::get('profile/{profileId}/follow', 'ProfileController@followUser')->name('user.follow');
+            Route::get('profile/{profileId}/unfollow', 'ProfileController@unFollowUser')->name('user.unfollow');
 
         });
     });

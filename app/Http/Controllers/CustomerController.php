@@ -49,6 +49,10 @@ class CustomerController extends Controller
         if($post){
             $data['product']=$post;
         }
+
+        $isFollowed = $user->isFollowedBy(Auth::user());
+        $data['isFollowed'] = $isFollowed;
+
         $data['breadcrub']='store';
         return view('customer.store',compact('data'));
     }
