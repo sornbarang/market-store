@@ -65,7 +65,8 @@
                 <!-- start .col-md-5 -->
                 <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle align-self-center">
                     <!-- start .author-area -->
-                    <div class="author-area h-100 d-flex justify-content-center align-items-center">  
+                    <!-- d-flex justify-content-center align-items-center -->
+                    <div class="author-area h-100">  
                     <!--start .author__notification_area -->
                     @if (Route::has('login')) 
                         @auth

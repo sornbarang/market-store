@@ -266,7 +266,7 @@
                                     <span> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
                                     </h1>
                                 </div> 
-                                    <img src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                    <img class="w-100" src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                 </div>
                             @endforeach
                         </div><!-- end /.item--preview-slider -->

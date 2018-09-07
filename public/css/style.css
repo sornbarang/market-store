@@ -8955,7 +8955,7 @@ span.counter {
     START SINGLE PRODUCT DESCRIPTION AREA
 ****************************************/
 .single-product-desc {
-  background: #eff1f5;
+  background: #3b7a5e;
   padding: 70px 0;
 }
 
@@ -9391,7 +9391,7 @@ span.counter {
 
 /* ********* related item area ********** */
 .more_product_area {
-  background: #f6f7fb;
+  background: #3b7a5e;
 }
 
 .more_product_area .section-title h1 {
@@ -16209,22 +16209,23 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
 } 
 
 .owl-prev {
-  width: 15px;
+  /* width: 15px; */
   height: 50px;
   position: absolute;
   top: 40%;
-  margin-left: -18px;
+  left:0px;
+  /* margin-left: -18px; */
   display: block !important;
   border:0px solid black;
 }
 
 .owl-next {
-  width: 40px;
+  /* width: 40px; */
   height: 30px;
   /* background: red; */
   position: absolute;
   top: 40%;
-  right: -38px;
+  right: 0px;
   display: block !important;
   border: 0px solid black;
 }
@@ -16289,4 +16290,7 @@ div.rateproduct.cproduct img{
 }
 .owl-item.active > p{
   color:#fff;
+}
+.container{
+  max-width: 95vw !important;
 }
