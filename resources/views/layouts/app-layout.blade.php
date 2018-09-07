@@ -66,7 +66,7 @@
                 <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle align-self-center">
                     <!-- start .author-area -->
                     <!-- d-flex justify-content-center align-items-center -->
-                    <div class="author-area h-100">  
+                    <div class="author-area h-100 d-lg-flex">  
                     <!--start .author__notification_area -->
                     @if (Route::has('login')) 
                         @auth
@@ -84,7 +84,7 @@
                         
                     @if (Route::has('login'))
                         @auth 
-                        <a class="btn btn--xs mr-3" href="{{ route('logout') }}"
+                        <a class="btn btn--xs mr-3 align-self-center" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         @lang('authlabel.logout')
