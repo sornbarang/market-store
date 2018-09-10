@@ -34,6 +34,20 @@ Route::group(
 ],
 function()
 {
+    // Block chat
+    Route::post('/getFriends', 'Chat\HomeController@getFriends');
+    Route::post('/session/create', 'Chat\SessionController@create');
+    Route::post('/session/{session}/chats', 'Chat\ChatController@chats');
+    Route::post('/session/{session}/read', 'Chat\ChatController@read');
+    Route::post('/session/{session}/clear', 'Chat\ChatController@clear');
+    Route::post('/session/{session}/block', 'Chat\BlockController@block');
+    Route::post('/session/{session}/unblock', 'Chat\BlockController@unblock');
+    Route::post('/send/{session}', 'Chat\ChatController@send');
+    Route::get('/search', ['as' => 'chat.search', 'uses' =>'Chat\SearchController@index']); 
+
+    Route::get('/chat', 'Chat\HomeController@index')->name('chat');
+    // end blog chat
+
     // OAuth Routes
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');

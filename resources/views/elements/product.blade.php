@@ -81,7 +81,7 @@
             </div><!-- end /.col-md-4 -->
         @endforeach
     @else
-        @lang('frontlabel.norecord') {{$data['cnodeName'] ?? ''}}
+        <p class="text-left text-white">@lang('frontlabel.norecord') {{$data['cnodeName'] ?? ''}}</p>
     @endif
 </div> 
 @if(count($data['product']) > 0)
