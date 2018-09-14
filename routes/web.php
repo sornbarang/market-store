@@ -44,6 +44,8 @@ function()
     Route::post('/session/{session}/unblock', 'Chat\BlockController@unblock');
     Route::post('/send/{session}', 'Chat\ChatController@send');
     Route::get('/search', ['as' => 'chat.search', 'uses' =>'Chat\SearchController@index']); 
+    Route::post('/useronline', ['as' => 'chat.useronline', 'uses' =>'Chat\TrackUserController@setUserOnline']); 
+    Route::post('/useroffline', ['as' => 'chat.useroffline', 'uses' =>'Chat\TrackUserController@setUserOffline']); 
 
     Route::get('/chat', 'Chat\HomeController@index')->name('chat');
     // end blog chat

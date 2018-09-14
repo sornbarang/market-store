@@ -78,7 +78,7 @@
                 </Sider>
                 <!-- <div v-for="i in 200" :key="i">item</div> -->
             </div>
-            <div class="center border-left border-right">  
+            <div class="center border-left border-right">
                 <send-message-component v-if="friend!=null" @close="close(friend)" :friend="friend"></send-message-component>
                 <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div> 
             </div>    
@@ -116,7 +116,9 @@
                 btnsend:false,
                 friends: [],
                 friend:null,
-                searchStr:''
+                searchStr:'',
+                friendsFull:[],
+                users:[]
             }
         }, 
         computed: {
@@ -125,12 +127,48 @@
             }
         },
         watch:{
-            searchStr(val,oldVal){
+            searchStr(val,oldVal){ 
+                let this_=this;
+                const data = {
+                    keyword:val
+                }
                 // console.log('new: %s, old: %s', val, oldVal);
                 if(val){
-                    axios.get('/search').then(res=>{
-                        console.log(res);
-                    });
+                    axios.get('search', {
+                        params: {
+                            keyword: val
+                        }
+                    })
+                    .then(function (response) {
+                        if(response.status==200 && response.data.data.length > 0){
+                            let users = response.data.data;
+                            _.forEach(this_.friends,function(f,kf){
+                                _.forEach(users,function(usr,kusr){
+                                    if(f.id==usr.id){
+                                        users[kusr].online=f.online
+                                    }
+                                });
+                            }); 
+                            this_.friends = users 
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    .then(function () {
+                        // always executed
+                    });  
+                }else{
+                    axios.post("getFriends").then(res => {
+                        this.friends = res.data.data;  
+                        this.friends.forEach(friend => {
+                        this.users.forEach(user => {
+                            if (user.id == friend.id) {
+                                    friend.online = true;
+                                }
+                            });
+                        });
+                    });  
                 }
             }
         },
@@ -178,31 +216,32 @@
             },
             getFriends() {
                 axios.post("getFriends").then(res => {
-                    this.friends = res.data.data;
+                    this.friends = res.data.data; 
                     this.friends.forEach(
                         friend => (friend.session ? this.listenForEverySession(friend) : "")
                     );
                 }); 
             },
-            openChat(friend) { 
+            openChat(friend) {
                 if (friend.session) {
                     this.friends.forEach(
                         friend => (friend.session ? (friend.session.open = false) : "")
                     );
                     friend.session.open = true;
-                    friend.session.unreadCount = 0;
-                    this.friend=friend
-                   
+                    friend.session.unreadCount = 0; 
+                    this.friend=friend 
                 } else {
+                    console.log('else');
                     this.createSession(friend);
                 }
             },
             createSession(friend) {
                 axios.post("session/create", { friend_id: friend.id }).then(res => {
                     (friend.session = res.data.data), (friend.session.open = true);
+                    this.openChat(friend); // modify by vitou
                 });
             },
-            listenForEverySession(friend) {
+            listenForEverySession(friend) { 
                 Echo.private(`Chat.${friend.session.id}`).listen(
                     "PrivateChatEvent",
                     e => (friend.session.open ? "" : friend.session.unreadCount++)
@@ -211,31 +250,46 @@
         },
         created() {
             this.getFriends();
-            Echo.channel("Chat").listen("SessionEvent", e => {
+            Echo.channel("Chat").listen("SessionEvent", e => { 
                 let friend = this.friends.find(friend => friend.id == e.session_by);
                 friend.session = e.session;
                 this.listenForEverySession(friend);
             });
 
-            Echo.join(`Chat`)
-                .here(users => {
-                    this.friends.forEach(friend => {
+            Echo.join("Chat")
+            // users get user online and self
+            .here(users => {
+                this.users=users
+                // this.friend get all users not own self
+                this.friends.forEach(friend => {
                     users.forEach(user => {
                         if (user.id == friend.id) {
-                        friend.online = true;
+                            friend.online = true;
                         }
                     });
                 });
+                console.log(this.users);
             })
-            .joining(user => {
+            // broardcase when user join chat 
+            .joining(user => { 
+                this.users.push(user);
                 this.friends.forEach(
-                friend => (user.id == friend.id ? (friend.online = true) : "")
+                    friend => (user.id == friend.id ? (friend.online = true) : "")
                 );
+                console.log(this.users);
+
             })
-            .leaving(user => {
+            // broardcase when user leaving
+            .leaving(user => { 
+                console.log(user.id);
+                let usrarr=this.users
+                // var removeLeavingUser = _.filter(this.users, function(o) { return o.id != user.id });
+                _.pullAllWith(usrarr, [user], _.isEqual);
+                this.users=usrarr
                 this.friends.forEach(
-                friend => (user.id == friend.id ? (friend.online = false) : "")
+                    friend => (user.id == friend.id ? (friend.online = false) : "")
                 );
+                console.log(this.users);
             });
         },
     }

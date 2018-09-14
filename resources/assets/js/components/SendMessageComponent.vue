@@ -1,5 +1,5 @@
 <template>
-    <div style="position:relative;">
+    <div style="position:relative;"> 
         <Spin size="large" fix v-if="loading"></Spin> 
         <div @click="hideEmoji" v-show="show" style="position: absolute;z-index: 8; width: 100%;height: 100%;"></div>
         <div class="chat-body pl-2 pr-2" v-chat-scroll>
@@ -83,6 +83,10 @@ export default {
     }
   },
   watch: {
+    friend(){
+      this.read(); 
+      this.getAllMessages(); 
+    },
     message(value) {
       if (value) {
         Echo.private(`Chat.${this.friend.session.id}`).whisper("typing", {
@@ -116,6 +120,7 @@ export default {
         }
     },
     send() {
+      console.log(this.message);
       if (this.message) {
         this.pushToChats(this.message);
         axios
@@ -157,9 +162,9 @@ export default {
     },
     getAllMessages() {
       this.loading = true
-      axios
-        .post(`session/${this.friend.session.id}/chats`)
+      axios.post(`session/${this.friend.session.id}/chats`)
         .then(res => {
+          console.log(res);
           this.chats = res.data.data
           this.loading = false  
         });
@@ -168,7 +173,7 @@ export default {
       axios.post(`session/${this.friend.session.id}/read`);
     }
   },
-  created() { 
+  created() {
     this.read(); 
     this.getAllMessages(); 
     // sender

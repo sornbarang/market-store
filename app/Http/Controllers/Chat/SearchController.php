@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Chat;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
+use App\Http\Resources\UserResource;
 class SearchController extends Controller
 {
-    public function index(){
-        $user=User::all();
-        return response($user, 200);
+    public function index(Request $request){
+        return UserResource::collection(User::where('id', '!=', auth()->id())->where('name','like','%'.$request->keyword.'%')->get());
     }
 }
