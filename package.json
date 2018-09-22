@@ -15,14 +15,14 @@
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.11",
         "popper.js": "^1.14.4",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.5.17"
     },
     "dependencies": {
         "emoji-mart-vue": "^2.6.4",
-        "iview": "^3.1.0",
+        "iview": "^3.1.1",
         "laravel-echo": "^1.4.0",
         "pusher-js": "^4.3.1",
         "update": "^0.7.4",

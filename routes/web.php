@@ -43,11 +43,11 @@ function()
     Route::post('/session/{session}/block', 'Chat\BlockController@block');
     Route::post('/session/{session}/unblock', 'Chat\BlockController@unblock');
     Route::post('/send/{session}', 'Chat\ChatController@send');
-    Route::get('/search', ['as' => 'chat.search', 'uses' =>'Chat\SearchController@index']); 
-    Route::post('/useronline', ['as' => 'chat.useronline', 'uses' =>'Chat\TrackUserController@setUserOnline']); 
-    Route::post('/useroffline', ['as' => 'chat.useroffline', 'uses' =>'Chat\TrackUserController@setUserOffline']); 
+    Route::get('/search', ['as' => 'chat.search', 'uses' =>'Chat\SearchController@index']);
 
-    Route::get('/chat', 'Chat\HomeController@index')->name('chat');
+    // Route::get('/chat', 'Chat\HomeController@index')->name('chat');
+    Route::get('/chat',['as'=>'chat.home', 'uses'=> 'Chat\HomeController@index'])->name('chat');
+    Route::get('/createsession',['as'=>'chat.createsession', 'uses'=> 'Chat\HomeController@createSession'])->name('updateHistory');
     // end blog chat
 
     // OAuth Routes

@@ -208,7 +208,7 @@
                                                         <strong>{{ $errors->first('password') }}</strong>
                                                     </span>
                                                 @endif
-                                                <h6 class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ?</small></h6> 
+                                                <h6 class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ? or <a href="{{ route('register') }}" class="text-white">@lang('authlabel.signup')</a></small></h6> 
                                             </div>  
                                         </div>
                                     </div> 
@@ -1014,7 +1014,18 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             }
             e.stopPropagation();
         });
-        
+        var owl = $('.owl-carousel');
+        owl.owlCarousel();
+        // Go to the next item
+        $('.owl-prev').click(function() {
+            owl.trigger('next.owl.carousel');
+        })
+        // Go to the previous item
+        $('.owl-next').click(function() {
+            // With optional speed parameter
+            // Parameters has to be in square bracket '[]'
+            owl.trigger('prev.owl.carousel', [300]);
+        })
     }); 
 </script>
 <!-- endinject -->
