@@ -36,6 +36,7 @@ return [
     'dont' => 'Don\'t have an account', 
     'email' => 'Email Address', 
     'register' => 'Register Now', 
+    'signup' => 'Signup', 
     'emailplaceholder' => 'Enter your email address...',    
     'resetinfo'=>'Please enter the email address for your account. A verification code will be sent to you. Once you have received the verification code, you will be able to choose a new password for your account.'
 ];

@@ -10,7 +10,7 @@ class SearchController extends Controller
         
         $data['searchpros']=[]; 
         $order='asc';
-        $record=2;
+        $record=9;
         $query = Product::distinct()->with('user');
         if (isset($request->price))
         {
@@ -21,7 +21,7 @@ class SearchController extends Controller
         } 
         if(isset($request->record) && !empty($request->record)){
             if($request->record==12){  
-                $record=2;
+                $record=9;
             }else if(isset($request->record) && $request->record==15){ 
                 $record=15;
             }else if(isset($request->record) && $request->record==25){ 

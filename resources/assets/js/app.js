@@ -50,6 +50,8 @@ Vue.component('MenuItem', MenuItem);
 Vue.component('Footer', Footer);
 Vue.component('Sider', Sider);
 Vue.component('Picker', Picker);
+let activeUser = localStorage.getItem('activeUser');
+Vue.prototype.$activeUser = JSON.parse(activeUser);
 const app = new Vue({
     el: '#app'
 });

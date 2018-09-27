@@ -85,12 +85,14 @@ export default {
   watch: {
     friend(){
       this.read(); 
-      this.getAllMessages(); 
+      this.getAllMessages();  
     },
     message(value) {
       if (value) {
+        console.log('is typing');
         Echo.private(`Chat.${this.friend.session.id}`).whisper("typing", {
-          name: window.auth.name
+          name: window.auth.name,
+          id: window.auth.id
         });
       }
     }
@@ -112,7 +114,6 @@ export default {
         } 
     },
     keyup(){ 
-        console.log(this.message);
         if(this.message!=null && this.message !=''){
             this.btnsend=true
         }else{
@@ -120,15 +121,14 @@ export default {
         }
     },
     send() {
-      console.log(this.message);
+      console.log('send');
+      console.log(this.friend);
       if (this.message) {
         this.pushToChats(this.message);
-        axios
-          .post(`send/${this.friend.session.id}`, {
+        axios.post(`send/${this.friend.session.id}`, {
             content: this.message,
             to_user: this.friend.id
-          })
-          .then(res => (this.chats[this.chats.length - 1].id = res.data));
+          }).then(res => (this.chats[this.chats.length - 1].id = res.data));
         this.message = null;
       }
     },
@@ -174,14 +174,20 @@ export default {
     }
   },
   created() {
+    console.log('created');
     this.read(); 
     this.getAllMessages(); 
     // sender
     Echo.private(`Chat.${this.friend.session.id}`).listen(
       "PrivateChatEvent",
       e => {
+        alert();
+        console.log(e)
+        console.log(this.friend.session)
         this.friend.session.open ? this.read() : "";
-        this.chats.push({ message: e.content, type: 1, sent_at: "Just Now" });
+        if(this.friend.session.id === e.chat.session_id){
+          this.chats.push({ message: e.content, type: 1, sent_at: "Just Now" });
+        }
       }
     );
     // read event
@@ -199,8 +205,10 @@ export default {
     Echo.private(`Chat.${this.friend.session.id}`).listenForWhisper(
       "typing",
       e => {
+        
         console.log('back ');
-        console.log(e.name);
+        console.log(e);
+        console.log(this.friend);
         this.isTyping = true;
         setTimeout(() => {
           this.isTyping = false;

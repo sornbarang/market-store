@@ -4,8 +4,8 @@
         <div class="header border-bottom">
             <div class="left d-flex content-justify-center align-items-center">
                 <Row type="flex" justify="start" align="middle" class-name="w-100">
-                    <Col span="18" push="6" class-name="pr-2">Messenger</Col>
-                    <Col span="6" pull="18"  align="center"><Avatar size="large"  src="https://i.loli.net/2017/08/21/599a521472424.jpg" /></Col>
+                    <Col span="18" push="6" class-name="pr-2">TreeWb Messager</Col>
+                    <Col span="6" pull="18"  align="center"><Avatar size="large"  src="/imgs/logo.png" /></Col>
                 </Row>
             </div>
             <div class="center d-flex content-justify-center align-items-center"> 
@@ -23,10 +23,10 @@
                     <Col span="6" push="18" class-name="pr-2">
                         <Avatar size="large"  src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
                     </Col>
-                    <Col span="18" pull="6" align="end" class-name="pr-2">
+                    <Col span="18" pull="6" align="end" class-name="pr-2 text-dark">
                         <Dropdown trigger="click">
-                            <a href="javascript:void(0)" class="text-capitalize">
-                                <Icon type="md-cog" :size="18"/> &nbsp; {{auth.name}}
+                            <a href="javascript:void(0)" class="text-capitalize text-dark">
+                                <Icon color="black" type="md-cog" :size="18"/> &nbsp; {{auth.name}}
                             </a>
                             <DropdownMenu slot="list">
                                 <DropdownItem align="center" @click.native="getLogout">Logout</DropdownItem>
@@ -47,7 +47,7 @@
                     <Row class-name="main-scroll-container">
                         <Col span="24">
                             <Scroll :on-reach-bottom="handleReachBottom">
-                                <Row  @click.native="openChat(friend)" :key="friend.id" v-for="friend in friends" class-name="p-2 c-user">
+                                <Row  @click.native="openChat(friend)" :key="friend.id" v-for="friend in friends" :class-name="actived===friend.id?'p-2 c-user active':'p-2 c-user'">
                                     <Col span="4"> 
                                         <Badge overflow-count="9999" :count="friend.session.unreadCount"  type="error" v-if="friend.session && (friend.session.unreadCount > 0)"> 
                                             <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" /> 
@@ -83,26 +83,27 @@
                 <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div> 
             </div>    
             <div class="right">
-                <Row class-name="pl-2 pr-2 pt-2 c-right-container">
+                <Row class-name="pl-2 pr-2 pt-2 c-right-container"  v-if="friend!=null">
                     <Card :bordered="false" :padding="0" :dis-hover="true">
                         <div class="text-center">
                             <Avatar size="large" src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
-                            <h4 class="m-0 pt-1">Vitou 2</h4>
-                            <p class="m-0 p-0">messenger</p>
+                            <h4 class="m-0 pt-1 text-capitalize" v-text="friend.name"></h4>  
+                            <p class="m-0 p-0" v-text="friend.email"></p>
                         </div>
                     </Card>
                     <Row>
                         <Col span="24" class-name="p-2">Shared photos</Col>
-                        <Col span="12" v-for="i in 5" :key="i">
+                        <Col span="12" v-for="(media,key) in friend.randommediaproduct" :key="key">
                             <Card :bordered="false" :padding="0" :dis-hover="true">
                                 <div style="text-align:center">
-                                    <img class="img-fluid" alt="Responsive image" src="https://file.iviewui.com/dist/2ecd3b0452aa197097d5131afacab7b8.png">
+                                    <img class="img-fluid" alt="Responsive image" :src="media.file_name">
                                 </div>
                             </Card>
-                        </Col>
-                        
+                        </Col> 
                     </Row>
                 </Row>
+                <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div> 
+
             </div>    
         </div> 
     </div>
@@ -118,16 +119,25 @@
                 friend:null,
                 searchStr:'',
                 friendsFull:[],
-                users:[]
+                users:[],
+                actived:undefined
             }
         }, 
         computed: {
             auth: function () {
                 return window.auth
+            },
+            activeUser:{
+                get(){ 
+                    return this.$activeUser;
+                },
+                set(v){
+                    return localStorage.setItem('activeUser',JSON.stringify(v));
+                }
             }
         },
         watch:{
-            searchStr(val,oldVal){ 
+            searchStr(val,oldVal){
                 let this_=this;
                 const data = {
                     keyword:val
@@ -176,6 +186,7 @@
             getLogout(){
                 axios.post("logout").then(res => {
                     if(res.status==200){
+                        localStorage.removeItem('activeUser');
                         location.reload();
                     }
                 });
@@ -214,15 +225,39 @@
             close(friend) {
                 friend.session.open = false;
             },
-            getFriends() {
+            getFriends() { 
                 axios.post("getFriends").then(res => {
-                    this.friends = res.data.data; 
+                    console.log('get friends');
+                    // var getFs=[];
+                    // // remove empty array 
+                    // _.forEach(res.data.data,function(v,k){
+                    //     if(_.isUndefined(v.length)){
+                    //         getFs.push(res.data.data[k])
+                    //     }
+                    // });  
+                    // this.friends = getFs
+                    this.friends = res.data.data
                     this.friends.forEach(
                         friend => (friend.session ? this.listenForEverySession(friend) : "")
                     );
+                   
+
+                    // if(this.activeUser){
+                    //     this.friends.forEach(user => {
+                    //         if (user.id == this.activeUser.id) {
+                    //             this.activeUser.online = true;
+                    //         }
+                    //     }); 
+                    //     this.openChat(this.activeUser);
+                    // }
                 }); 
             },
             openChat(friend) {
+                console.log('open');
+                console.log(friend);
+                this.actived=friend.id;
+                // set active user to computed property
+                // this.activeUser=friend
                 if (friend.session) {
                     this.friends.forEach(
                         friend => (friend.session ? (friend.session.open = false) : "")
@@ -230,6 +265,8 @@
                     friend.session.open = true;
                     friend.session.unreadCount = 0; 
                     this.friend=friend 
+                    console.log('after loop');
+                    console.log(friend);
                 } else {
                     console.log('else');
                     this.createSession(friend);
@@ -241,7 +278,7 @@
                     this.openChat(friend); // modify by vitou
                 });
             },
-            listenForEverySession(friend) { 
+            listenForEverySession(friend) {  
                 Echo.private(`Chat.${friend.session.id}`).listen(
                     "PrivateChatEvent",
                     e => (friend.session.open ? "" : friend.session.unreadCount++)
@@ -249,7 +286,8 @@
             }
         },
         created() {
-            this.getFriends();
+            // set param to active user
+            this.getFriends(); 
             Echo.channel("Chat").listen("SessionEvent", e => { 
                 let friend = this.friends.find(friend => friend.id == e.session_by);
                 friend.session = e.session;
@@ -259,6 +297,9 @@
             Echo.join("Chat")
             // users get user online and self
             .here(users => {
+                console.log('join');
+                console.log(users);
+                // set user online and self
                 this.users=users
                 // this.friend get all users not own self
                 this.friends.forEach(friend => {
@@ -267,29 +308,26 @@
                             friend.online = true;
                         }
                     });
-                });
-                console.log(this.users);
+                }); 
             })
             // broardcase when user join chat 
             .joining(user => { 
+                // push new user if joining mean login
                 this.users.push(user);
                 this.friends.forEach(
                     friend => (user.id == friend.id ? (friend.online = true) : "")
                 );
                 console.log(this.users);
-
             })
             // broardcase when user leaving
             .leaving(user => { 
-                console.log(user.id);
                 let usrarr=this.users
-                // var removeLeavingUser = _.filter(this.users, function(o) { return o.id != user.id });
+                // remove user if leave
                 _.pullAllWith(usrarr, [user], _.isEqual);
                 this.users=usrarr
                 this.friends.forEach(
                     friend => (user.id == friend.id ? (friend.online = false) : "")
                 );
-                console.log(this.users);
             });
         },
     }
@@ -297,6 +335,9 @@
 <style lange="css">
 .lightgray{
     color: rgba(153, 153, 153, 1);
+}
+.c-user.active{
+    background:#f2f2f2;
 }
 .c-user:hover{
     background:#f2f2f2;

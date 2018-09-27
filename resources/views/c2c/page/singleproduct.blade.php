@@ -723,7 +723,7 @@
 
                                 <div class="author-btn">
                                     <a href="{{route('market.mystore',$data['product']->user->id)}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
-                                    <a href="#" class="btn btn--sm btn--round">@lang('frontlabel.sentmessage')</a>
+                                    <a href="javascript:void(0)" class="btn btn--sm btn--round" id="sendMessage" data-id="{{$data['product']->user->id}}">@lang('frontlabel.sentmessage')</a>
                                 </div><!-- end /.author-btn -->
                             </div><!-- end /.author-infos -->
 
@@ -872,8 +872,8 @@
                     </div> 
                     @if(count($data['relateProByUser'])  > 5)
                         <div class="owl-nav">
-                            <div class="owl-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                            <div class="owl-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                            <div class="owl-prev customPrevBtn"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                            <div class="owl-next customNextBtn"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
                         </div>
                         <div class="owl-dots">
                             <div class="owl-dot active"><span></span></div>
@@ -900,7 +900,9 @@
 @stop
 @section('cusomescript')
 <script type="text/javascript">
+
     ( function($) {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
         var xhr=null;
         $('div.rateenable').raty({
             starType: 'i',
@@ -1096,6 +1098,27 @@
             }
         } 
     }); 
+    $(document).on('click','#sendMessage',function(){
+        $.ajax({
+            url: "{{url('createsession')}}",
+            type: 'GET', 
+            data:{friend_id:$(this).data('id')},
+            headers: {
+                'X-CSRF-Token':CSRF_TOKEN,
+            },
+            success: function( response ) {  
+                console.log(response.data);
+                if(response.data.length > 0){
+                    localStorage.setItem('activeUser',JSON.stringify(response.data[0]));
+                    window.location.replace("{{url('chat')}}");
+                }
+            },
+            error: function( data ) {
+                console.log(data);
+            }
+        });
+    });
+
 } ) ( jQuery );
 </script>
 @stop 
