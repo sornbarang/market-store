@@ -3,7 +3,7 @@
         <Spin size="large" fix v-if="loading"></Spin> 
         <div @click="hideEmoji" v-show="show" style="position: absolute;z-index: 8; width: 100%;height: 100%;"></div>
         <div class="chat-body pl-2 pr-2" v-chat-scroll>
-            <Row class-name="pt-2 pb-2" v-for="chat in chats" :key="chat.id"> 
+            <Row class-name="pt-2 pb-2" v-for="chat in getChat" :key="chat.id"> 
                 <Col span="24">
                   <Card :dis-hover="true" :bordered="false" v-if="chat.type == 0"> 
                       <Row type="flex" justify="end" class-name="pt-2 pb-2"> 
@@ -31,7 +31,7 @@
                           </Col>
                           <Col span="21" class-name="pl-2">
                               <Row>
-                                  <Col span="24"><strong> {{friend.name}} </strong><small>{{chat.sent_at}}</small></Col>
+                                  <Col span="24"><strong> {{getF.name}} </strong><small>{{chat.sent_at}}</small></Col>
                                   <Col span="24">
                                       <p>
                                           {{chat.message}}
@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  props: ["friend"],
+  props: {friends:Object,chatMsg:Array},
   data() {
     return {
       chats: [],
@@ -71,36 +71,54 @@ export default {
       isTyping: false,
       btnsend:false,
       show:false,
-      loading:false
+      loading:false,
+      friend:this.friends,
+      chats:this.chatMsg
     };
   },
   computed: {
-    session() {
-      return this.friend.session;
+    getF:{
+      get(){
+        return this.friend;
+      },
+      set(v){
+        this.friend = v ;
+      }
     },
-    can() {
-      return this.session.blocked_by == window.auth.id
+    getChat:{
+      get(){
+        return this.chats;
+      },
+      set(v){
+        this.chats = v ;
+      }
     }
   },
   watch: {
-    friend(){
-      this.read(); 
-      this.getAllMessages();  
+    friends(v){
+      this.getAllMessages(v);
+      // this.read(v);
+      this.getF=v;
+    },
+    chatMsg(v){
+      console.log('watch');
+      console.log(v); 
+      this.getChat.push(_.last(v));
     },
     message(value) {
       if (value) {
         console.log('is typing');
-        Echo.private(`Chat.${this.friend.session.id}`).whisper("typing", {
+        Echo.private(`Chat.${this.getF.session.id}`).whisper("typing", {
           name: window.auth.name,
           id: window.auth.id
         });
       }
     }
   },
-  methods: {
-    hideEmoji(){ 
+  methods: { 
+    hideEmoji(){
         if(this.show){
-            this.show=false;
+          this.show=false;
         }
     },
     addEmoji(emoji){  
@@ -108,113 +126,65 @@ export default {
           this.$nextTick(function () {
             this.message='';
             this.message +=emoji.native
+            this.btnsend=true
           });
         }else{
           this.message +=emoji.native;
+          this.btnsend=true
         } 
     },
     keyup(){ 
         if(this.message!=null && this.message !=''){
-            this.btnsend=true
+          this.btnsend=true
         }else{
-            this.btnsend=false
+          this.btnsend=false
         }
     },
-    send() {
-      console.log('send');
-      console.log(this.friend);
-      if (this.message) {
-        this.pushToChats(this.message);
-        axios.post(`send/${this.friend.session.id}`, {
-            content: this.message,
-            to_user: this.friend.id
-          }).then(res => (this.chats[this.chats.length - 1].id = res.data));
-        this.message = null;
+    send(event) {  
+      if (event.target.value) {
+        this.pushToChats(event.target.value);
+        axios.post(`send/${this.getF.session.id}`, {
+            content: event.target.value,
+            to_user: this.getF.id
+          }).then(res => (this.getChat[this.getChat.length - 1].id = res.data));
+        this.message = null; 
+        this.$emit('chatMsg',this.getF);
       }
     },
-    pushToChats(message) { 
-      this.chats.push({
+    pushToChats(message) {
+      this.getChat.push({
         message: message,
         type: 0,
         read_at: null,
         sent_at: "Just Now"
       });
     },
-    close() {
-      this.$emit("close");
-    },
-    clear() {
-      axios
-        .post(`session/${this.friend.session.id}/clear`)
-        .then(res => (this.chats = []));
-    },
-    block() {
-      this.session.block = true;
-      axios
-        .post(`session/${this.friend.session.id}/block`)
-        .then(res => (this.session.blocked_by = auth.id));
-    },
-    unblock() {
-      this.session.block = false;
-      axios
-        .post(`session/${this.friend.session.id}/unblock`)
-        .then(res => (this.session.blocked_by = null));
-    },
-    getAllMessages() {
+    getAllMessages(f) {
       this.loading = true
-      axios.post(`session/${this.friend.session.id}/chats`)
-        .then(res => {
-          console.log(res);
-          this.chats = res.data.data
+      axios.post(`session/${f.session.id}/chats`)
+        .then(res => { 
+          this.getChat = res.data.data
           this.loading = false  
         });
     },
-    read() {
-      axios.post(`session/${this.friend.session.id}/read`);
+    read(f) {
+      axios.post(`session/${f.session.id}/read`);
     }
   },
-  created() {
-    console.log('created');
-    this.read(); 
-    this.getAllMessages(); 
-    // sender
-    Echo.private(`Chat.${this.friend.session.id}`).listen(
-      "PrivateChatEvent",
-      e => {
-        alert();
-        console.log(e)
-        console.log(this.friend.session)
-        this.friend.session.open ? this.read() : "";
-        if(this.friend.session.id === e.chat.session_id){
-          this.chats.push({ message: e.content, type: 1, sent_at: "Just Now" });
+  created() {  
+    if(this.getF){ 
+      this.getAllMessages(this.getF);
+      // typing
+      Echo.private(`Chat.${this.getF.session.id}`).listenForWhisper(
+        "typing",
+        e => {
+          this.isTyping = true;
+          setTimeout(() => {
+            this.isTyping = false;
+          }, 2000);
         }
-      }
-    );
-    // read event
-    Echo.private(`Chat.${this.friend.session.id}`).listen("MsgReadEvent", e =>
-      this.chats.forEach(
-        chat => (chat.id == e.chat.id ? (chat.read_at = e.chat.read_at) : "")
-      )
-    );
-    // block event
-    Echo.private(`Chat.${this.friend.session.id}`).listen(
-      "BlockEvent",
-      e => (this.session.block = e.blocked)
-    );
-    // typing
-    Echo.private(`Chat.${this.friend.session.id}`).listenForWhisper(
-      "typing",
-      e => {
-        
-        console.log('back ');
-        console.log(e);
-        console.log(this.friend);
-        this.isTyping = true;
-        setTimeout(() => {
-          this.isTyping = false;
-        }, 2000);
-      }
-    );
+      );
+    } 
   }
 };
 </script>
