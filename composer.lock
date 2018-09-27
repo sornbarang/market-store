@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "6141e848207253fdd768ab971171befe",
@@ -47,20 +47,20 @@
                 }
             ],
             "description": "Advertising helper for laravel",
-            "time": "2017-10-23 06:06:23"
+            "time": "2017-10-23T06:06:23+00:00"
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.67.16",
+            "version": "3.67.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "881b968ca164b401c26f5e3f9894bad34309cf6a"
+                "reference": "6c8bc0f42ba73bab85da67c3af9131e455c3f14c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/881b968ca164b401c26f5e3f9894bad34309cf6a",
-                "reference": "881b968ca164b401c26f5e3f9894bad34309cf6a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6c8bc0f42ba73bab85da67c3af9131e455c3f14c",
+                "reference": "6c8bc0f42ba73bab85da67c3af9131e455c3f14c",
                 "shasum": ""
             },
             "require": {
@@ -127,7 +127,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-09-20T21:20:22+00:00"
+            "time": "2018-09-26T20:06:30+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1110,16 +1110,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.5",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "54859fabea8b3beecbb1a282888d5c990036b9e3"
+                "reference": "0578b32b30b22de3e8664f797cf846fc9246f786"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/54859fabea8b3beecbb1a282888d5c990036b9e3",
-                "reference": "54859fabea8b3beecbb1a282888d5c990036b9e3",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0578b32b30b22de3e8664f797cf846fc9246f786",
+                "reference": "0578b32b30b22de3e8664f797cf846fc9246f786",
                 "shasum": ""
             },
             "require": {
@@ -1163,7 +1163,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2018-08-16T20:49:45+00:00"
+            "time": "2018-09-25T20:47:26+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -2172,16 +2172,16 @@
         },
         {
             "name": "league/flysystem-aws-s3-v3",
-            "version": "1.0.19",
+            "version": "1.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
-                "reference": "f135691ef6761542af301b7c9880f140fb12dc74"
+                "reference": "398c56027e49653712a8fba1eb12600d2a83f3b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/f135691ef6761542af301b7c9880f140fb12dc74",
-                "reference": "f135691ef6761542af301b7c9880f140fb12dc74",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/398c56027e49653712a8fba1eb12600d2a83f3b7",
+                "reference": "398c56027e49653712a8fba1eb12600d2a83f3b7",
                 "shasum": ""
             },
             "require": {
@@ -2215,7 +2215,7 @@
                 }
             ],
             "description": "Flysystem adapter for the AWS S3 SDK v3.x",
-            "time": "2018-03-27T20:33:59+00:00"
+            "time": "2018-09-25T12:02:44+00:00"
         },
         {
             "name": "league/glide",
@@ -2785,16 +2785,16 @@
         },
         {
             "name": "paragonie/sodium_compat",
-            "version": "v1.6.6",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/sodium_compat.git",
-                "reference": "a19c29c6c2a66dd01a6c532ae022e438d4e396e9"
+                "reference": "7b73005be3c224f12c47bd75a23ce24b762e47e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/a19c29c6c2a66dd01a6c532ae022e438d4e396e9",
-                "reference": "a19c29c6c2a66dd01a6c532ae022e438d4e396e9",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/7b73005be3c224f12c47bd75a23ce24b762e47e8",
+                "reference": "7b73005be3c224f12c47bd75a23ce24b762e47e8",
                 "shasum": ""
             },
             "require": {
@@ -2863,7 +2863,7 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "time": "2018-09-21T01:45:19+00:00"
+            "time": "2018-09-22T03:59:58+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -4760,21 +4760,21 @@
         },
         {
             "name": "torann/geoip",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Torann/laravel-geoip.git",
-                "reference": "bcd07e0a7e053d9be224bb944a49a7f76ca7e86f"
+                "reference": "948617dba3d9c2992c3b3ff48dbc429123000e58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/bcd07e0a7e053d9be224bb944a49a7f76ca7e86f",
-                "reference": "bcd07e0a7e053d9be224bb944a49a7f76ca7e86f",
+                "url": "https://api.github.com/repos/Torann/laravel-geoip/zipball/948617dba3d9c2992c3b3ff48dbc429123000e58",
+                "reference": "948617dba3d9c2992c3b3ff48dbc429123000e58",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
-                "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.*",
+                "illuminate/console": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
                 "php": ">=5.5.9"
             },
             "require-dev": {
@@ -4829,7 +4829,7 @@
                 "location",
                 "maxmind"
             ],
-            "time": "2018-08-15T18:24:26+00:00"
+            "time": "2018-09-21T17:11:51+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

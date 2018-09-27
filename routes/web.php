@@ -50,6 +50,9 @@ function()
     Route::get('/createsession',['as'=>'chat.createsession', 'uses'=> 'Chat\HomeController@createSession'])->name('updateHistory');
     // end blog chat
 
+    //feeds
+    Route::get('/feeds', 'FeedController@index')->name('feeds');
+
     // OAuth Routes
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
