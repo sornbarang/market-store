@@ -81,7 +81,7 @@
         </div>
         <script type="text/javascript">
     
-            // Total seconds to wait
+            /* // Total seconds to wait
             var seconds = 5;
             
             function countdown() {
@@ -98,7 +98,7 @@
             }
             
             // Run countdown function
-            countdown();
+            countdown(); */
             
         </script>
     </body>

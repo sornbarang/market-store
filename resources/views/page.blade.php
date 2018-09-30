@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 @section('content')
+@php
+header('refresh: 5; url=market');
+@endphp
+
 <div class="container-fluid" style="margin:auto;text-align:center;"> 
     <figure class="figure" style="margin:0;">
         <img   width="400" height="400"  src="{{asset('/imgs/logo.png')}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
@@ -7,7 +11,7 @@
     <br/>  
     <br/>  
     <h6>
-        Go to Market after <span id="countdown">5</span> seconds
+        {{-- Go to Market after <span id="countdown">5</span> seconds --}}
     </h6>
     {{--
         <div class="d-flex justify-content-center">
