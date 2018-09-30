@@ -65,8 +65,7 @@
 export default {
   props: {friends:Object,chatMsg:Array},
   data() {
-    return {
-      chats: [],
+    return { 
       message: null,
       isTyping: false,
       btnsend:false,
@@ -148,6 +147,7 @@ export default {
             to_user: this.getF.id
           }).then(res => (this.getChat[this.getChat.length - 1].id = res.data));
         this.message = null; 
+        console.log('emit to parent component');
         this.$emit('chatMsg',this.getF);
       }
     },
@@ -172,7 +172,7 @@ export default {
     }
   },
   created() {  
-    if(this.getF){ 
+    if(this.getF){
       this.getAllMessages(this.getF);
       // typing
       Echo.private(`Chat.${this.getF.session.id}`).listenForWhisper(
@@ -184,7 +184,28 @@ export default {
           }, 2000);
         }
       );
-    } 
+    }else{
+      // sender
+      Echo.private(`Chat.${this.getF.session.id}`).listen(
+        "PrivateChatEvent",
+        e => { 
+          this.getF.session.open ? this.read(this.getF) : "";
+          if(this.getF.session.id === e.chat.session_id){
+            this.getChat.push({ message: e.content, type: 1, sent_at: "Just Now" });
+            console.log('broad chast ');
+            console.log(this.getChat);
+          }
+        }
+      );
+      // read event
+      Echo.private(`Chat.${this.getF.session.id}`).listen("MsgReadEvent", e =>
+          { 
+              this.getChat.forEach(
+                  chat => (chat.id == e.chat.id ? (chat.read_at = e.chat.read_at) : "")
+              )
+          }
+      );
+    }
   }
 };
 </script>
