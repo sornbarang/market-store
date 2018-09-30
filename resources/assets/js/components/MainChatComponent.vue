@@ -17,7 +17,7 @@
                         <p v-if="friend!=null" v-text="friend.email"></p>
                     </Col> 
                 </Row>
-            </div>    
+            </div>     
             <div class="right d-flex content-justify-center align-items-center">
                 <Row type="flex" justify="end" align="middle" class-name="w-100">
                     <Col span="6" push="18" class-name="pr-2">
@@ -26,7 +26,7 @@
                     <Col span="18" pull="6" align="end" class-name="pr-2 text-dark">
                         <Dropdown trigger="click">
                             <a href="javascript:void(0)" class="text-capitalize text-dark">
-                                <Icon color="black" type="md-cog" :size="18"/> &nbsp; {{auth.name}}
+                                <Icon color="black" type="md-cog" :size="18"/> Hi,{{auth.name}}
                             </a>
                             <DropdownMenu slot="list">
                                 <DropdownItem align="center" @click.native="getLogout">Logout</DropdownItem>
@@ -79,7 +79,7 @@
                 <!-- <div v-for="i in 200" :key="i">item</div> -->
             </div>
             <div class="center border-left border-right">
-                <send-message-component v-if="friend!=null" @close="close(friend)" :friend="friend"></send-message-component>
+                <send-message-component v-if="friend!=null" @close="close(friend)" :friends="friend" v-on:chatMsg="chatMsg" :chatMsg="chats"></send-message-component>
                 <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div> 
             </div>    
             <div class="right">
@@ -92,18 +92,19 @@
                         </div>
                     </Card>
                     <Row>
-                        <Col span="24" class-name="p-2">Shared photos</Col>
-                        <Col span="12" v-for="(media,key) in friend.randommediaproduct" :key="key">
+                        <Col span="24" class-name="p-2" v-text="'Shared photos'"/>  
+                        <Col span="12" v-for="(media,key) in friend.randommediaproduct" :key="key" v-if="friend.randommediaproduct.length > 0">
                             <Card :bordered="false" :padding="0" :dis-hover="true">
                                 <div style="text-align:center">
-                                    <img class="img-fluid" alt="Responsive image" :src="media.file_name">
+                                    <img @click="openlink(media.link)" class="img-fluid" alt="Responsive image" :src="media.media">
                                 </div>
                             </Card>
                         </Col> 
+                        <div v-if="friend.randommediaproduct.length == 0" class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-sad" /></div> 
+
                     </Row>
                 </Row>
                 <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div> 
-
             </div>    
         </div> 
     </div>
@@ -120,7 +121,8 @@
                 searchStr:'',
                 friendsFull:[],
                 users:[],
-                actived:undefined
+                actived:undefined,
+                chats:[]
             }
         }, 
         computed: {
@@ -182,7 +184,41 @@
                 }
             }
         },
-        methods: { 
+        methods: {
+            openlink(link){
+                window.open(link, '_blank');
+                console.log(link);
+            },
+            read(f) {
+                axios.post(`session/${f.session.id}/read`);
+            },
+            // method working from emit send message component
+            chatMsg(v){
+                console.log('receive emit');
+                console.log(v);
+                console.log(this.friend); 
+                // come and get new message and return back one object
+                Echo.private(`Chat.${v.session.id}`).listen(
+                    "PrivateChatEvent",
+                    e => {  
+                        if(this.friend.session.id === e.chat.session_id){
+                            v.session.open ? this.read(v) : "";
+                            console.log('push back to sub component');
+                            this.chats.push({ message: e.content, type: 1, sent_at: "Just Now" });
+                        }
+                    }
+                );
+                // read event
+                Echo.private(`Chat.${v.session.id}`).listen("MsgReadEvent", e =>
+                    {
+                        console.log('read');
+                        console.log(this.chats);
+                        this.chats.forEach(
+                            chat => (chat.id == e.chat.id ? (chat.read_at = e.chat.read_at) : "")
+                        )
+                    }
+                );
+            },
             getLogout(){
                 axios.post("logout").then(res => {
                     if(res.status==200){
@@ -252,23 +288,21 @@
                     // }
                 }); 
             },
-            openChat(friend) {
-                console.log('open');
-                console.log(friend);
+            openChat(friend) { 
                 this.actived=friend.id;
                 // set active user to computed property
                 // this.activeUser=friend
                 if (friend.session) {
+                    console.log('open chat');
+                    console.log(friend);
                     this.friends.forEach(
                         friend => (friend.session ? (friend.session.open = false) : "")
                     );
                     friend.session.open = true;
                     friend.session.unreadCount = 0; 
-                    this.friend=friend 
-                    console.log('after loop');
-                    console.log(friend);
-                } else {
-                    console.log('else');
+                    this.friend=friend  
+                    this.read(friend);
+                } else { 
                     this.createSession(friend);
                 }
             },
@@ -285,7 +319,7 @@
                 );
             }
         },
-        created() {
+        created() {    
             // set param to active user
             this.getFriends(); 
             Echo.channel("Chat").listen("SessionEvent", e => { 
@@ -297,8 +331,6 @@
             Echo.join("Chat")
             // users get user online and self
             .here(users => {
-                console.log('join');
-                console.log(users);
                 // set user online and self
                 this.users=users
                 // this.friend get all users not own self

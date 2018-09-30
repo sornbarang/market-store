@@ -19,11 +19,12 @@ class UserResource extends JsonResource
         $products= ProductsAds::where('user_id',$this->id)->latest()->limit(5)->inRandomOrder()->get();
         $media=[];
         foreach($products as $v){
-            $media[]=$v->getFirstMedia();
-        }
-        foreach ($media as $key => $v) {
-            $media[$key]->file_name=Storage::url($v->id.'/'.$v->file_name); 
-        }
+            $media[]=['media'=>Storage::url($v->getFirstMedia()->id.'/'.$v->getFirstMedia()->file_name),'link'=>route('market.productdetail',$v->slug)];
+        }   
+        //     foreach ($media as $key => $v) {
+        //         $media[$key]['media']==Storage::url($media[$key]['media']['id'].'/'.$media[$key]['media']['file_name']); 
+            
+        // }
         // $this->productads->each(function ($item, $key) {
         //     return $item->getMedia();
         // });
