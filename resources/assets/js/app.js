@@ -10,7 +10,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 import VueChatScroll from 'vue-chat-scroll'
 import { Picker } from 'emoji-mart-vue'
-import { Col, Row, Avatar, Input, Icon, Badge, Card, Scroll, Spin, Dropdown, DropdownMenu, DropdownItem, Layout, Header, Menu, MenuItem, Footer, Sider } from 'iview';
+import { Notice,Col, Row, Avatar, Input, Icon, Badge, Card, Scroll, Spin, Dropdown, DropdownMenu, DropdownItem, Layout, Header, Menu, MenuItem, Footer, Sider } from 'iview';
 import 'iview/dist/styles/iview.css';
 import _ from 'lodash';
 Vue.use(VueChatScroll);
@@ -30,7 +30,6 @@ Vue.filter('isEmpty', function (value) {
 });
 // Vue.component('chat-component', require('./components/ChatComponent.vue'));
 Vue.component('main-chat-component', require('./components/MainChatComponent.vue'));
-Vue.component('send-message-component', require('./components/SendMessageComponent.vue'));
 Vue.component('Col', Col);
 Vue.component('Row', Row);
 Vue.component('Avatar', Avatar);
@@ -52,6 +51,7 @@ Vue.component('Sider', Sider);
 Vue.component('Picker', Picker);
 let activeUser = localStorage.getItem('activeUser');
 Vue.prototype.$activeUser = JSON.parse(activeUser);
+Vue.prototype.$Notice = Notice;
 const app = new Vue({
     el: '#app'
 });

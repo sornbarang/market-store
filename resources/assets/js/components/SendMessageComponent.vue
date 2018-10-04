@@ -1,9 +1,19 @@
 <template>
-    <div style="position:relative;"> 
+
+  <div style="position:relative;"> 
         <Spin size="large" fix v-if="loading"></Spin> 
         <div @click="hideEmoji" v-show="show" style="position: absolute;z-index: 8; width: 100%;height: 100%;"></div>
+        <div class="block-box border-bottom">
+            <Row type="flex" justify="center" align="middle" class-name="h-100"> 
+                <Col span="24" class-name="text-right"> 
+                    <Icon @click.prevent="clear" size="24" type="ios-trash-outline"/>
+                    <Icon @click.prevent="block" v-if="!session.block" size="24" type="md-lock"/>
+                    <Icon v-if="session.block && can" @click.prevent="unblock" size="24" type="md-unlock"/>
+                </Col> 
+            </Row>
+        </div>
         <div class="chat-body pl-2 pr-2" v-chat-scroll>
-            <Row class-name="pt-2 pb-2" v-for="chat in getChat" :key="chat.id"> 
+            <Row class-name="pt-2 pb-2" v-for="chat in chats" :key="chat.id"> 
                 <Col span="24">
                   <Card :dis-hover="true" :bordered="false" v-if="chat.type == 0"> 
                       <Row type="flex" justify="end" class-name="pt-2 pb-2"> 
@@ -31,7 +41,7 @@
                           </Col>
                           <Col span="21" class-name="pl-2">
                               <Row>
-                                  <Col span="24"><strong> {{getF.name}} </strong><small>{{chat.sent_at}}</small></Col>
+                                  <Col span="24"><strong> {{friend.name}} </strong><small>{{chat.sent_at}}</small></Col>
                                   <Col span="24">
                                       <p>
                                           {{chat.message}}
@@ -51,10 +61,11 @@
                     <Icon @click="show = !show" size="24" type="ios-happy-outline" /> 
                     <Icon size="24" type="md-thumbs-up" v-if="!btnsend"/>
                     <Icon @click="send" size="24" type="md-send" v-else/>
+                    <Icon @click="open(true)" size="24" type="md-images"/>
                     <picker @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
                 </Col>
                 <Col span="20" pull="4">
-                    <Input @on-keyup="keyup" ref="input" @on-enter="send" v-model="message" :placeholder="isTyping ?'is Typing . . .':'Type a message...'" element-id="no-border"/>
+                    <Input :disabled="session.block" @on-keyup="keyup" ref="input" @on-enter="send" v-model="message" :placeholder="isTyping ?'is Typing . . .':'Type a message...'" element-id="no-border"/>
                 </Col>
             </Row>
         </div>
@@ -63,58 +74,41 @@
 
 <script>
 export default {
-  props: {friends:Object,chatMsg:Array},
+  props: ["friend"],
   data() {
-    return { 
+    return {
+      chats: [],
       message: null,
       isTyping: false,
-      btnsend:false,
-      show:false,
       loading:false,
-      friend:this.friends,
-      chats:this.chatMsg
+      show:false,
+       btnsend:false,
     };
   },
   computed: {
-    getF:{
-      get(){
-        return this.friend;
-      },
-      set(v){
-        this.friend = v ;
-      }
+    session() {
+      return this.friend.session;
     },
-    getChat:{
-      get(){
-        return this.chats;
-      },
-      set(v){
-        this.chats = v ;
-      }
+    can() {
+      return this.session.blocked_by == auth.id;
     }
   },
   watch: {
-    friends(v){
-      this.getAllMessages(v);
-      // this.read(v);
-      this.getF=v;
-    },
-    chatMsg(v){
-      console.log('watch');
-      console.log(v); 
-      this.getChat.push(_.last(v));
-    },
-    message(value) {
-      if (value) {
-        console.log('is typing');
-        Echo.private(`Chat.${this.getF.session.id}`).whisper("typing", {
-          name: window.auth.name,
-          id: window.auth.id
+    message(value) { 
+      if (value) { 
+        Echo.private(`Chat.${this.friend.session.id}`).whisper("typing", {
+          name: auth.name
         });
       }
     }
   },
-  methods: { 
+  methods: {
+    open(nodesc){
+      this.$Notice.error({
+          title: 'In development mode',
+          desc: nodesc ? '' : 'Here is the notification description. Here is the notification description. '
+      });
+    },
     hideEmoji(){
         if(this.show){
           this.show=false;
@@ -139,77 +133,104 @@ export default {
           this.btnsend=false
         }
     },
-    send(event) {  
-      if (event.target.value) {
-        this.pushToChats(event.target.value);
-        axios.post(`send/${this.getF.session.id}`, {
-            content: event.target.value,
-            to_user: this.getF.id
-          }).then(res => (this.getChat[this.getChat.length - 1].id = res.data));
-        this.message = null; 
-        console.log('emit to parent component');
-        this.$emit('chatMsg',this.getF);
+    send() {
+      if (this.message) {
+        this.pushToChats(this.message);
+        axios
+          .post(`send/${this.friend.session.id}`, {
+            content: this.message,
+            to_user: this.friend.id
+          })
+          .then(res => (this.chats[this.chats.length - 1].id = res.data));
+        this.message = null;
       }
     },
-    pushToChats(message) {
-      this.getChat.push({
+    pushToChats(message) { 
+      this.chats.push({
         message: message,
         type: 0,
         read_at: null,
         sent_at: "Just Now"
       });
     },
-    getAllMessages(f) {
-      this.loading = true
-      axios.post(`session/${f.session.id}/chats`)
-        .then(res => { 
-          this.getChat = res.data.data
-          this.loading = false  
-        });
+    close() {
+      this.$emit("close");
     },
-    read(f) {
-      axios.post(`session/${f.session.id}/read`);
+    clear() {
+      axios
+        .post(`session/${this.friend.session.id}/clear`)
+        .then(res => (this.chats = []));
+    },
+    block() {
+      this.session.block = true;
+      axios
+        .post(`session/${this.friend.session.id}/block`)
+        .then(res => (this.session.blocked_by = auth.id));
+    },
+    unblock() {
+      this.session.block = false;
+      axios
+        .post(`session/${this.friend.session.id}/unblock`)
+        .then(res => (this.session.blocked_by = null));
+    },
+    getAllMessages() {
+      this.loading = true
+      axios
+        .post(`session/${this.friend.session.id}/chats`)
+        .then(res => (this.chats = res.data.data),this.loading = false);
+    },
+    read() {
+      axios.post(`session/${this.friend.session.id}/read`);
     }
   },
-  created() {  
-    if(this.getF){
-      this.getAllMessages(this.getF);
-      // typing
-      Echo.private(`Chat.${this.getF.session.id}`).listenForWhisper(
-        "typing",
-        e => {
-          this.isTyping = true;
-          setTimeout(() => {
-            this.isTyping = false;
-          }, 2000);
-        }
-      );
-    }else{
-      // sender
-      Echo.private(`Chat.${this.getF.session.id}`).listen(
-        "PrivateChatEvent",
-        e => { 
-          this.getF.session.open ? this.read(this.getF) : "";
-          if(this.getF.session.id === e.chat.session_id){
-            this.getChat.push({ message: e.content, type: 1, sent_at: "Just Now" });
-            console.log('broad chast ');
-            console.log(this.getChat);
-          }
-        }
-      );
-      // read event
-      Echo.private(`Chat.${this.getF.session.id}`).listen("MsgReadEvent", e =>
-          { 
-              this.getChat.forEach(
-                  chat => (chat.id == e.chat.id ? (chat.read_at = e.chat.read_at) : "")
-              )
-          }
-      );
-    }
+  created() { 
+    this.read();
+
+    this.getAllMessages();
+
+    Echo.private(`Chat.${this.friend.session.id}`).listen(
+      "PrivateChatEvent",
+      e => { 
+        console.log(this.friend);
+        console.log(e);
+        console.log(window.auth);
+        // if(this.friend.session.id === e.chat.session_id){ 
+            this.friend.session.open ? this.read() : "";
+            this.chats.push({ message: e.content, type: 1, sent_at: "Just Now" });
+        // }
+        
+      }
+    );
+
+    Echo.private(`Chat.${this.friend.session.id}`).listen("MsgReadEvent", e =>
+      this.chats.forEach(
+        chat => (chat.id == e.chat.id ? (chat.read_at = e.chat.read_at) : "")
+      )
+    );
+
+    Echo.private(`Chat.${this.friend.session.id}`).listen(
+      "BlockEvent",
+      e => (this.session.block = e.blocked)
+    );
+
+    Echo.private(`Chat.${this.friend.session.id}`).listenForWhisper(
+      "typing",
+      e => {
+        this.isTyping = true;
+        setTimeout(() => {
+          this.isTyping = false;
+        }, 2000);
+      }
+    );
   }
 };
 </script>
 
-<style scoped>
-
+<style>
+.chat-box {
+  height: 400px;
+}
+.card-body {
+  overflow-y: scroll;
+}
 </style>

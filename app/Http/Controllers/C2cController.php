@@ -34,17 +34,17 @@ class C2cController extends Controller
             if(strtolower($val->name)=='fashion'){
                 $tree[$key]['icon'] = 'lnr lnr-shirt';
             }elseif(strtolower($val->name)=='technology'){
-                $tree[$key]['icon'] = 'lnr lnr-laptop-phone';
+                $tree[$key]['icon'] = 'fa fa-bolt';
             }elseif(strtolower($val->name)=='real estate'){
                 $tree[$key]['icon'] = 'lnr lnr-apartment';
             }elseif(strtolower($val->name)=='vehicle'){
                 $tree[$key]['icon'] = 'lnr lnr-car';
             }elseif(strtolower($val->name)=='cosmetic'){
-                $tree[$key]['icon'] = 'lnr lnr-diamond';
+                $tree[$key]['img'] = asset('images/dresser.png');
             }elseif(strtolower($val->name)=='other'){
-                $tree[$key]['icon'] = 'lnr lnr-warning';
+                $tree[$key]['icon'] = 'fa fa-ellipsis-h';
             }elseif(strtolower($val->name)=='furniture'){
-                $tree[$key]['icon'] = 'fa fa-bed';
+                $tree[$key]['img'] = asset('images/armchair.png');
             }else{
                 $tree[$key]['icon'] = 'lnr lnr-rocket';
             }

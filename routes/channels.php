@@ -27,7 +27,3 @@ Broadcast::channel('Chat.{session}', function ($user, Session $session) {
     }
     return false;
 });
-
-Broadcast::channel('feed', function ($user) {
-    return true;
-});

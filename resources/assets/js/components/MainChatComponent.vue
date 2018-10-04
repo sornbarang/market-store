@@ -11,10 +11,10 @@
             <div class="center d-flex content-justify-center align-items-center"> 
                 <Row class-name="text-center w-100"> 
                     <Col span="24">
-                        <h5 v-if="friend!=null" v-text="friend.name"></h5>  
+                        <h5 v-if="userInfor!=null" v-text="userInfor.name"></h5>  
                     </Col> 
                     <Col span="24">
-                        <p v-if="friend!=null" v-text="friend.email"></p>
+                        <p v-if="userInfor!=null" v-text="userInfor.email"></p>
                     </Col> 
                 </Row>
             </div>     
@@ -78,29 +78,31 @@
                 </Sider>
                 <!-- <div v-for="i in 200" :key="i">item</div> -->
             </div>
-            <div class="center border-left border-right">
-                <send-message-component v-if="friend!=null" @close="close(friend)" :friends="friend" v-on:chatMsg="chatMsg" :chatMsg="chats"></send-message-component>
-                <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div> 
+            <div class="center border-left border-right"> 
+                <span v-for="friend in friends" :key="friend.id" v-if="friend.session"> 
+                    <send-message-component v-if="friend.session.open" @close="close(friend)" :friend=friend></send-message-component>
+                </span> 
+                <!-- <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div>  -->
             </div>    
             <div class="right">
-                <Row class-name="pl-2 pr-2 pt-2 c-right-container"  v-if="friend!=null">
+                <Row class-name="pl-2 pr-2 pt-2 c-right-container"  v-if="userInfor!=null">
                     <Card :bordered="false" :padding="0" :dis-hover="true">
                         <div class="text-center">
                             <Avatar size="large" src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
-                            <h4 class="m-0 pt-1 text-capitalize" v-text="friend.name"></h4>  
-                            <p class="m-0 p-0" v-text="friend.email"></p>
+                            <h4 class="m-0 pt-1 text-capitalize" v-text="userInfor.name"></h4>  
+                            <p class="m-0 p-0" v-text="userInfor.email"></p>
                         </div>
                     </Card>
                     <Row>
                         <Col span="24" class-name="p-2" v-text="'Shared photos'"/>  
-                        <Col span="12" v-for="(media,key) in friend.randommediaproduct" :key="key" v-if="friend.randommediaproduct.length > 0">
+                        <Col span="12" v-for="(media,key) in userInfor.randommediaproduct" :key="key" v-if="userInfor.randommediaproduct.length > 0">
                             <Card :bordered="false" :padding="0" :dis-hover="true">
                                 <div style="text-align:center">
                                     <img @click="openlink(media.link)" class="img-fluid" alt="Responsive image" :src="media.media">
                                 </div>
                             </Card>
                         </Col> 
-                        <div v-if="friend.randommediaproduct.length == 0" class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-sad" /></div> 
+                        <div v-if="userInfor.randommediaproduct.length == 0" class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-sad" /></div> 
 
                     </Row>
                 </Row>
@@ -110,259 +112,200 @@
     </div>
 </template>
 <script>
-    export default {
-        data () {
-            return { 
-                show:false,
-                value:'',
-                btnsend:false,
-                friends: [],
-                friend:null,
-                searchStr:'',
-                friendsFull:[],
-                users:[],
-                actived:undefined,
-                chats:[]
-            }
-        }, 
-        computed: {
-            auth: function () {
-                return window.auth
-            },
-            activeUser:{
-                get(){ 
-                    return this.$activeUser;
-                },
-                set(v){
-                    return localStorage.setItem('activeUser',JSON.stringify(v));
-                }
-            }
-        },
-        watch:{
-            searchStr(val,oldVal){
-                let this_=this;
-                const data = {
-                    keyword:val
-                }
-                // console.log('new: %s, old: %s', val, oldVal);
-                if(val){
-                    axios.get('search', {
-                        params: {
-                            keyword: val
-                        }
-                    })
-                    .then(function (response) {
-                        if(response.status==200 && response.data.data.length > 0){
-                            let users = response.data.data;
-                            _.forEach(this_.friends,function(f,kf){
-                                _.forEach(users,function(usr,kusr){
-                                    if(f.id==usr.id){
-                                        users[kusr].online=f.online
-                                    }
-                                });
-                            }); 
-                            this_.friends = users 
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-                    .then(function () {
-                        // always executed
-                    });  
-                }else{
-                    axios.post("getFriends").then(res => {
-                        this.friends = res.data.data;  
-                        this.friends.forEach(friend => {
-                        this.users.forEach(user => {
-                            if (user.id == friend.id) {
-                                    friend.online = true;
-                                }
-                            });
+import SendMessageComponent from "./SendMessageComponent";
+export default {
+  data() {
+    return {
+        friends: [],
+        show:false,   
+        searchStr:'', 
+        actived:undefined,
+        friend:undefined,
+        value:'',
+        userInfor:null, 
+        users:[]
+    };
+  },
+    computed: {
+        auth: function () {
+            return window.auth
+        }
+    },
+    watch:{
+        searchStr(val,oldVal){ 
+            // console.log('new: %s, old: %s', val, oldVal);
+            if(val){
+                // var users = [
+                //     { 'user': 'barney',  'age': 36, 'active': true },
+                //     { 'user': 'fred',    'age': 40, 'active': false },
+                //     { 'user': 'febbles', 'age': 1,  'active': true }
+                //     ];
+                //     //  var newItem = users.filter(obj => /^[a-zA-Z]/.test(obj.user));
+                //     function search(str, data) {
+                //         const searchStr = str.toLowerCase(); 
+                //         // Only return the entries that contain a matched value
+                //         return _.filter(data, (users) => {
+                //             // Check if name matches
+                //             return _.includes(users.name.toLowerCase(), searchStr)
+                //         });
+                //     }
+
+                //     console.log(search(val, this.friends))
+                var valObj = this.friends.filter(function(elem){
+                    return _.includes(elem.name.toLowerCase(),val.toLowerCase())
+                });
+
+                if(valObj.length > 0)
+                   _.forEach(this.friends,function(f,kf){
+                        _.forEach(valObj,function(usr,kusr){
+                            if(f.id==usr.id){
+                                valObj[kusr].online=f.online
+                            }
                         });
-                    });  
-                }
-            }
-        },
-        methods: {
-            openlink(link){
-                window.open(link, '_blank');
-                console.log(link);
-            },
-            read(f) {
-                axios.post(`session/${f.session.id}/read`);
-            },
-            // method working from emit send message component
-            chatMsg(v){
-                console.log('receive emit');
-                console.log(v);
-                console.log(this.friend); 
-                // come and get new message and return back one object
-                Echo.private(`Chat.${v.session.id}`).listen(
-                    "PrivateChatEvent",
-                    e => {  
-                        if(this.friend.session.id === e.chat.session_id){
-                            v.session.open ? this.read(v) : "";
-                            console.log('push back to sub component');
-                            this.chats.push({ message: e.content, type: 1, sent_at: "Just Now" });
-                        }
-                    }
-                );
-                // read event
-                Echo.private(`Chat.${v.session.id}`).listen("MsgReadEvent", e =>
-                    {
-                        console.log('read');
-                        console.log(this.chats);
-                        this.chats.forEach(
-                            chat => (chat.id == e.chat.id ? (chat.read_at = e.chat.read_at) : "")
-                        )
-                    }
-                );
-            },
-            getLogout(){
-                axios.post("logout").then(res => {
-                    if(res.status==200){
-                        localStorage.removeItem('activeUser');
-                        location.reload();
-                    }
-                });
-                // console.log(window.axios.defaults.headers.common['X-CSRF-TOKEN']);
-            },
-            keyup(){ 
-                if(this.value!=''){
-                    this.btnsend=true
-                }else{
-                    this.btnsend=false
-                }
-            },
-            keyenter(event){
-                console.log(this.value);
-                // console.log(event.target.value);
-            },
-            handleReachBottom () {
-                // return new Promise(resolve => {
-                //     setTimeout(() => {
-                //         const last = this.list1[this.list1.length - 1];
-                //         for (let i = 1; i < 11; i++) {
-                //             this.list1.push(last + i);
-                //         }
-                //         resolve();
-                //     }, 2000);
-                // });
-            },
-            hideEmoji(){ 
-                if(this.show){
-                    this.show=false;
-                }
-            },
-            addEmoji(emoji){  
-                this.value +=emoji.native;
-            },
-            close(friend) {
-                friend.session.open = false;
-            },
-            getFriends() { 
+                    }); 
+                    // console.log();
+                    this.friends=valObj;
+                    
+            }else{
                 axios.post("getFriends").then(res => {
-                    console.log('get friends');
-                    // var getFs=[];
-                    // // remove empty array 
-                    // _.forEach(res.data.data,function(v,k){
-                    //     if(_.isUndefined(v.length)){
-                    //         getFs.push(res.data.data[k])
-                    //     }
-                    // });  
-                    // this.friends = getFs
-                    this.friends = res.data.data
-                    this.friends.forEach(
-                        friend => (friend.session ? this.listenForEverySession(friend) : "")
-                    );
-                   
-
-                    // if(this.activeUser){
-                    //     this.friends.forEach(user => {
-                    //         if (user.id == this.activeUser.id) {
-                    //             this.activeUser.online = true;
-                    //         }
-                    //     }); 
-                    //     this.openChat(this.activeUser);
-                    // }
-                }); 
-            },
-            openChat(friend) { 
-                this.actived=friend.id;
-                // set active user to computed property
-                // this.activeUser=friend
-                if (friend.session) {
-                    console.log('open chat');
-                    console.log(friend);
-                    this.friends.forEach(
-                        friend => (friend.session ? (friend.session.open = false) : "")
-                    );
-                    friend.session.open = true;
-                    friend.session.unreadCount = 0; 
-                    this.friend=friend  
-                    this.read(friend);
-                } else { 
-                    this.createSession(friend);
-                }
-            },
-            createSession(friend) {
-                axios.post("session/create", { friend_id: friend.id }).then(res => {
-                    (friend.session = res.data.data), (friend.session.open = true);
-                    this.openChat(friend); // modify by vitou
-                });
-            },
-            listenForEverySession(friend) {  
-                Echo.private(`Chat.${friend.session.id}`).listen(
-                    "PrivateChatEvent",
-                    e => (friend.session.open ? "" : friend.session.unreadCount++)
-                );
-            }
-        },
-        created() {    
-            // set param to active user
-            this.getFriends(); 
-            Echo.channel("Chat").listen("SessionEvent", e => { 
-                let friend = this.friends.find(friend => friend.id == e.session_by);
-                friend.session = e.session;
-                this.listenForEverySession(friend);
-            });
-
-            Echo.join("Chat")
-            // users get user online and self
-            .here(users => {
-                // set user online and self
-                this.users=users
-                // this.friend get all users not own self
-                this.friends.forEach(friend => {
-                    users.forEach(user => {
+                    this.friends = res.data.data;  
+                    this.friends.forEach(friend => {
+                        this.users.forEach(user => {
                         if (user.id == friend.id) {
-                            friend.online = true;
-                        }
+                                friend.online = true;
+                            }
+                        });
                     });
                 }); 
-            })
-            // broardcase when user join chat 
-            .joining(user => { 
-                // push new user if joining mean login
-                this.users.push(user);
-                this.friends.forEach(
-                    friend => (user.id == friend.id ? (friend.online = true) : "")
-                );
-                console.log(this.users);
-            })
-            // broardcase when user leaving
-            .leaving(user => { 
-                let usrarr=this.users
-                // remove user if leave
-                _.pullAllWith(usrarr, [user], _.isEqual);
-                this.users=usrarr
-                this.friends.forEach(
-                    friend => (user.id == friend.id ? (friend.online = false) : "")
-                );
-            });
+            }
         },
-    }
+    },
+    methods: {
+        openlink(link){
+            window.open(link, '_blank');
+            console.log(link);
+        }, 
+        getLogout(){
+            axios.post("logout").then(res => {
+                if(res.status==200){
+                    localStorage.removeItem('activeUser');
+                    location.reload();
+                }
+            });
+            // console.log(window.axios.defaults.headers.common['X-CSRF-TOKEN']);
+        },
+        keyup(){ 
+            if(this.value!=''){
+                this.btnsend=true
+            }else{
+                this.btnsend=false
+            }
+        },
+        keyenter(event){
+            console.log(this.value);
+            // console.log(event.target.value);
+        },
+        handleReachBottom () {
+            // return new Promise(resolve => {
+            //     setTimeout(() => {
+            //         const last = this.list1[this.list1.length - 1];
+            //         for (let i = 1; i < 11; i++) {
+            //             this.list1.push(last + i);
+            //         }
+            //         resolve();
+            //     }, 2000);
+            // });
+        },
+        hideEmoji(){ 
+            if(this.show){
+                this.show=false;
+            }
+        },
+        addEmoji(emoji){  
+            this.value +=emoji.native;
+        },
+        close(friend) { 
+        friend.session.open = false;
+        },
+        getFriends() {
+        axios.post("getFriends").then(res => {
+            this.friends = res.data.data;
+            this.friends.forEach(
+            friend => (friend.session ? this.listenForEverySession(friend) : "")
+            );
+        });
+        },
+        openChat(friend) {
+            if (friend.session) {
+                this.friends.forEach(
+                    friend => (friend.session ? (friend.session.open = false) : "")
+                );
+                friend.session.open = true;
+                friend.session.unreadCount = 0;
+                this.userInfor = friend
+            } else {
+                this.createSession(friend);
+            }
+        },
+        createSession(friend) {
+            axios.post("session/create", { friend_id: friend.id }).then(res => {
+                (friend.session = res.data.data), (friend.session.open = true);
+                // this.friend = friend
+                this.friends.forEach(
+                    friend => (friend.session ? (friend.session.open = false) : "")
+                );
+                friend.session.open = true;
+                friend.session.unreadCount = 0;
+                this.userInfor = friend 
+            }); 
+            
+        },
+        listenForEverySession(friend) {
+        Echo.private(`Chat.${friend.session.id}`).listen(
+            "PrivateChatEvent",
+            e => (friend.session.open ? "" : friend.session.unreadCount++)
+        );
+        }
+    },
+    created() {
+        this.getFriends();
+
+        Echo.channel("Chat").listen("SessionEvent", e => {
+            console.log('session event');
+            console.log(e);
+        let friend = this.friends.find(friend => friend.id == e.session_by);
+        friend.session = e.session;
+        console.log('After session event');
+            console.log(e);
+        this.listenForEverySession(friend);
+        });
+
+        Echo.join(`Chat`)
+        .here(users => {
+            this.friends.forEach(friend => {
+                users.forEach(user => {
+                    if (user.id == friend.id) {
+                    friend.online = true;
+                    }
+                });
+            });
+            this.users=users
+        })
+        .joining(user => {
+            // push new user if joining mean login
+            this.users.push(user);
+            this.friends.forEach(
+            friend => (user.id == friend.id ? (friend.online = true) : "")
+            );
+        })
+        .leaving(user => {
+            this.friends.forEach(
+            friend => (user.id == friend.id ? (friend.online = false) : "")
+            );
+        });
+    },
+    components: { SendMessageComponent }
+};
 </script>
 <style lange="css">
 .lightgray{
@@ -430,8 +373,12 @@
     float:left;
     overflow-y: auto;
 }
+.block-box{
+    height:5vh;
+    width: 60vw;
+}
 .chat-body{
-    height:82vh;
+    height:77vh;
     width: 60vw; 
     overflow-y: auto;
 } 

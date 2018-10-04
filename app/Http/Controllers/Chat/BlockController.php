@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Chat;
 
+use App\Http\Controllers\Controller;
+
 use App\Models\Session;
 use App\Events\BlockEvent;
 
