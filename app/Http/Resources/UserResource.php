@@ -21,12 +21,20 @@ class UserResource extends JsonResource
         foreach($products as $v){
             $media[]=['media'=>Storage::url($v->getFirstMedia()->id.'/'.$v->getFirstMedia()->file_name),'link'=>route('market.productdetail',$v->slug)];
         } 
+        $medias = $this->profile->getMedia(); 
+        $avatar=null;
+        foreach($medias as $val){   
+            if($this->profile->avatar == $val->id){
+                $avatar=Storage::url($val->id.'/'.$val->file_name);  
+            }
+        } 
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'randommediaproduct'=> $media,
             'online' => false,
+            'profile'=>$avatar,
             'session' => $this->session_details($this->id)
         ];
     }

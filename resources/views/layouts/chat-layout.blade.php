@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
-        window.auth = {!!auth()->user()!!}
+        window.auth = {!!auth()->user()!!} 
+        // call from helper
+        window['auth'].profile = "{{profile()}}"
+        window['auth'].infoProfile = "{{route('market.myprofile')}}"
     </script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

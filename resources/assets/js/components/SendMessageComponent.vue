@@ -7,8 +7,9 @@
             <Row type="flex" justify="center" align="middle" class-name="h-100"> 
                 <Col span="24" class-name="text-right"> 
                     <Icon @click.prevent="clear" size="24" type="ios-trash-outline"/>
-                    <Icon @click.prevent="block" v-if="!session.block" size="24" type="md-lock"/>
-                    <Icon v-if="session.block && can" @click.prevent="unblock" size="24" type="md-unlock"/>
+                    <!-- <Icon @click.prevent="block" v-if="!session.block" size="24" type="ios-lock" color="red"/> -->
+                    <!-- <Icon v-if="session.block && can" @click.prevent="unblock" size="24" type="ios-unlock"/> -->
+                    <Icon @click.prevent="blockUnblock" size="24" :color="!session.block?'red':''" :type="session.block && can?!session.block?'ios-lock':'ios-unlock':'ios-lock'" :data-icon="session.block && can?!session.block?'ios-lock':'ios-unlock':'ios-lock'"/>
                 </Col> 
             </Row>
         </div>
@@ -55,18 +56,23 @@
             </Row>
         </div>
         
-        <div class="send-box border-bottom border-top">
+        <div class="send-box border-bottom border-top" v-if="session.block">
             <Row type="flex" justify="center" align="middle" class-name="h-100"> 
-                <Col span="4" push="20" class-name="text-center">
-                    <Icon @click="show = !show" size="24" type="ios-happy-outline" /> 
-                    <Icon size="24" type="md-thumbs-up" v-if="!btnsend"/>
-                    <Icon @click="send" size="24" type="md-send" v-else/>
-                    <Icon @click="open(true)" size="24" type="md-images"/>
+                <Col span="4" push="20" class-name="text-center" >
+                    <Icon class="c-happy" size="24" @click="show = !show" type="ios-happy-outline" /> 
+                    <Icon class="c-like" size="24" type="md-thumbs-up" v-if="!btnsend"/>
+                    <Icon class="c-send" @click="send" size="24" type="md-send" v-else/>
+                    <Icon class="c-image" @click="open(true)" size="24" type="md-images"/>
                     <picker @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
                 </Col>
                 <Col span="20" pull="4">
-                    <Input :disabled="session.block" @on-keyup="keyup" ref="input" @on-enter="send" v-model="message" :placeholder="isTyping ?'is Typing . . .':'Type a message...'" element-id="no-border"/>
+                    <Input  @on-keyup="keyup" ref="input" @on-enter="send" v-model="message" :placeholder="isTyping ?'is Typing . . .':'Type a message...'" element-id="no-border"/>
                 </Col>
+            </Row>
+        </div>
+        <div class="send-box border-bottom border-top" v-else>
+            <Row type="flex" justify="center" align="middle" class-name="h-100">
+                This user you have been block
             </Row>
         </div>
     </div>
@@ -161,17 +167,22 @@ export default {
         .post(`session/${this.friend.session.id}/clear`)
         .then(res => (this.chats = []));
     },
-    block() {
-      this.session.block = true;
+    blockUnblock(event){
+      if(event.target.getAttribute('data-icon')=='ios-lock'){
+        this.block()
+      }else{
+        this.unblock()
+      }
+    },
+    block() { 
       axios
         .post(`session/${this.friend.session.id}/block`)
-        .then(res => (this.session.blocked_by = auth.id));
+        .then(res => (this.session.blocked_by = auth.id),this.session.block = true);
     },
-    unblock() {
-      this.session.block = false;
+    unblock() { 
       axios
         .post(`session/${this.friend.session.id}/unblock`)
-        .then(res => (this.session.blocked_by = null));
+        .then(res => (this.session.blocked_by = null),this.session.block = false);
     },
     getAllMessages() {
       this.loading = true
@@ -232,5 +243,8 @@ export default {
 }
 .card-body {
   overflow-y: scroll;
+}
+.c-happy,.c-like,.c-image,.c-send{
+  font-size:1.8vw;
 }
 </style>

@@ -21,7 +21,8 @@
             <div class="right d-flex content-justify-center align-items-center">
                 <Row type="flex" justify="end" align="middle" class-name="w-100">
                     <Col span="6" push="18" class-name="pr-2">
-                        <Avatar size="large"  src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                        <Avatar size="large"  :src="auth.profile" v-if="auth.profile"/>
+                        <Avatar size="large" icon="ios-person" v-else/>
                     </Col>
                     <Col span="18" pull="6" align="end" class-name="pr-2 text-dark">
                         <Dropdown trigger="click">
@@ -29,6 +30,7 @@
                                 <Icon color="black" type="md-cog" :size="18"/> Hi,{{auth.name}}
                             </a>
                             <DropdownMenu slot="list">
+                                <DropdownItem align="center" @click.native="goToProfile">Profile</DropdownItem>
                                 <DropdownItem align="center" @click.native="getLogout">Logout</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
@@ -50,10 +52,12 @@
                                 <Row  @click.native="openChat(friend)" :key="friend.id" v-for="friend in friends" :class-name="actived===friend.id?'p-2 c-user active':'p-2 c-user'">
                                     <Col span="4"> 
                                         <Badge overflow-count="9999" :count="friend.session.unreadCount"  type="error" v-if="friend.session && (friend.session.unreadCount > 0)"> 
-                                            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" /> 
+                                            <Avatar :src="friend.profile" v-if="friend.profile"/> 
+                                            <Avatar icon="ios-person" v-else/>
                                         </Badge>
                                         <Badge  :count="0" type="error" v-else> 
-                                            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" /> 
+                                            <Avatar :src="friend.profile" v-if="friend.profile"/> 
+                                            <Avatar icon="ios-person" v-else/>
                                         </Badge>
                                     </Col> 
                                     <Col span="20" class-name="pl-1"> 
@@ -88,7 +92,8 @@
                 <Row class-name="pl-2 pr-2 pt-2 c-right-container"  v-if="userInfor!=null">
                     <Card :bordered="false" :padding="0" :dis-hover="true">
                         <div class="text-center">
-                            <Avatar size="large" src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                            <Avatar size="large" :src="userInfor.profile" v-if="userInfor.profile"/>
+                            <Avatar size="large" icon="ios-person" v-else/>
                             <h4 class="m-0 pt-1 text-capitalize" v-text="userInfor.name"></h4>  
                             <p class="m-0 p-0" v-text="userInfor.email"></p>
                         </div>
@@ -185,6 +190,9 @@ export default {
             window.open(link, '_blank');
             console.log(link);
         }, 
+        goToProfile(){ 
+            window.open(auth.infoProfile,'_blank');
+        },
         getLogout(){
             axios.post("logout").then(res => {
                 if(res.status==200){
@@ -231,8 +239,9 @@ export default {
         axios.post("getFriends").then(res => {
             this.friends = res.data.data;
             this.friends.forEach(
-            friend => (friend.session ? this.listenForEverySession(friend) : "")
+                friend => (friend.session ? this.listenForEverySession(friend) : "")
             );
+            console.log(this.friends);
         });
         },
         openChat(friend) {
@@ -267,9 +276,8 @@ export default {
         );
         }
     },
-    created() {
+    created() { 
         this.getFriends();
-
         Echo.channel("Chat").listen("SessionEvent", e => {
             console.log('session event');
             console.log(e);
