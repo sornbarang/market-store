@@ -83,9 +83,9 @@
                 <!-- <div v-for="i in 200" :key="i">item</div> -->
             </div>
             <div class="center border-left border-right"> 
-                <span v-for="friend in friends" :key="friend.id" v-if="friend.session"> 
+                <div v-for="friend in friends" :key="friend.id" v-if="friend.session"> 
                     <send-message-component v-if="friend.session.open" @close="close(friend)" :friend=friend></send-message-component>
-                </span> 
+                </div> 
                 <!-- <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div>  -->
             </div>    
             <div class="right">

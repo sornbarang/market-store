@@ -12,13 +12,8 @@ class SessionController extends Controller
 {
     public function create(Request $request)
     {
-        // $session = new Session;
-        // $session->user1_id =auth()->id();
-        // $session->user2_id =$request->friend_id;
-        // $session->save();
-        // $session = Session::find($user->id)
         $session = Session::create(['user1_id' => auth()->id(), 'user2_id' => $request->friend_id]);
-        $session = Session::find($session->id); 
+        $session = Session::findOrFail($session->id); 
         if($session)
             $modifiedSession = new SessionResource($session);
             broadcast(new SessionEvent($modifiedSession, auth()->id()));

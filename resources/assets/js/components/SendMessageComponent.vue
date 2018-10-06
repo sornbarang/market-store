@@ -9,7 +9,10 @@
                     <Icon @click.prevent="clear" size="24" type="ios-trash-outline"/>
                     <!-- <Icon @click.prevent="block" v-if="!session.block" size="24" type="ios-lock" color="red"/> -->
                     <!-- <Icon v-if="session.block && can" @click.prevent="unblock" size="24" type="ios-unlock"/> -->
-                    <Icon @click.prevent="blockUnblock" size="24" :color="!session.block?'red':''" :type="session.block && can?!session.block?'ios-lock':'ios-unlock':'ios-lock'" :data-icon="session.block && can?!session.block?'ios-lock':'ios-unlock':'ios-lock'"/>
+                    <!-- <a class="dropdown-item" href="#" v-if="session.block && can" @click.prevent="unblock">UnBlock</a> -->
+                    <!-- <a class="dropdown-item" href="#" @click.prevent="block" v-if="!session.block">Block</a> -->
+                    <Icon @click.prevent="blockUnblock" size="24" :color="!session.block?'red':''" type="ios-unlock" data-icon="ios-unlock" v-if="session.block && can"/>
+                    <Icon @click.prevent="blockUnblock" size="24" :color="!session.block?'red':''" type="ios-lock" data-icon="ios-lock" v-if="!session.block"/>
                 </Col> 
             </Row>
         </div>
@@ -31,14 +34,16 @@
                               </Row>
                           </Col> 
                           <Col span="1">
-                              <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                              <Avatar :src="chat.profile" v-if="chat.profile"/>
+                              <Avatar icon="ios-person" v-else/>
                           </Col>
                       </Row> 
                   </Card>
                   <Card :dis-hover="true" shadow v-else> 
                       <Row>
                           <Col span="1">
-                              <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                              <Avatar :src="friend.profile" v-if="friend.profile"/>
+                              <Avatar icon="ios-person" v-else/>
                           </Col>
                           <Col span="21" class-name="pl-2">
                               <Row>
@@ -55,8 +60,7 @@
                 </Col> 
             </Row>
         </div>
-        
-        <div class="send-box border-bottom border-top" v-if="session.block">
+        <div class="send-box border-bottom border-top" v-if="!session.block">
             <Row type="flex" justify="center" align="middle" class-name="h-100"> 
                 <Col span="4" push="20" class-name="text-center" >
                     <Icon class="c-happy" size="24" @click="show = !show" type="ios-happy-outline" /> 
@@ -71,8 +75,8 @@
             </Row>
         </div>
         <div class="send-box border-bottom border-top" v-else>
-            <Row type="flex" justify="center" align="middle" class-name="h-100">
-                This user you have been block
+            <Row type="flex" justify="center" align="middle" class-name="h-100"> 
+                <Icon color="#0000001f" :size="40" type="ios-outlet" />&nbsp; Blocked
             </Row>
         </div>
     </div>
@@ -96,6 +100,7 @@ export default {
       return this.friend.session;
     },
     can() {
+      // if blocked_by user is the same current user login show unlock icon otherwish don't show
       return this.session.blocked_by == auth.id;
     }
   },
@@ -151,12 +156,13 @@ export default {
         this.message = null;
       }
     },
-    pushToChats(message) { 
+    pushToChats(message) {  
       this.chats.push({
         message: message,
         type: 0,
         read_at: null,
-        sent_at: "Just Now"
+        sent_at: "Just Now",
+        profile:auth.profile
       });
     },
     close() {
@@ -207,7 +213,7 @@ export default {
         console.log(window.auth);
         // if(this.friend.session.id === e.chat.session_id){ 
             this.friend.session.open ? this.read() : "";
-            this.chats.push({ message: e.content, type: 1, sent_at: "Just Now" });
+            this.chats.push({ message: e.content, type: 1, sent_at: "Just Now",'profile':e.profile });
         // }
         
       }
