@@ -93,7 +93,7 @@
                                     @foreach($cats['product'] as $lpk => $getprops)
                                         @php 
                                             $avatar='';  
-                                            $media = $getprops->user->profile->getMedia(); 
+                                            $media = $getprops->user->profile->getMedia()??[]; 
                                             if(isset($media) && !empty($media)){
                                                 foreach($media as $val){   
                                                     if($getprops->user->profile->avatar == $val->id){
