@@ -17,10 +17,14 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         $avatar=null;
+        $img = null;
         $media=[];
         $products= ProductsAds::where('user_id',$this->id)->latest()->limit(5)->inRandomOrder()->get();
         foreach($products as $v){
-            $media[]=['media'=>Storage::url($v->getFirstMedia()->id.'/'.$v->getFirstMedia()->file_name),'link'=>route('market.productdetail',$v->slug)];
+            if($v->getFirstMedia()){
+                $img = Storage::url($v->getFirstMedia()->id.'/'.$v->getFirstMedia()->file_name);
+            }
+            $media[]=['media'=>$img,'link'=>route('market.productdetail',$v->slug)];
         } 
         if(null !== $this->profile){
             $medias = $this->profile->getMedia();  
