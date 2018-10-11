@@ -94,16 +94,20 @@
                     @foreach($data['products'] as $val) 
                         @php
                             $avatar='';
-                            $media = $val->user->profile->getMedia(); 
-                            foreach($media as $m){   
-                                if($val->user->profile->avatar == $m->id){
-                                    $avatar= Storage::url($m->id.'/'.$m->file_name);
-                                }
-                            } 
+                            if(null !==$val->user->profile){
+                                $media = $val->user->profile->getMedia(); 
+                                foreach($media as $m){   
+                                    if($val->user->profile->avatar == $m->id){
+                                        $avatar= Storage::url($m->id.'/'.$m->file_name);
+                                    }
+                                } 
+                            }
                             $img=''; 
                             $getFirstMedia = $val->getFirstMedia(); 
                             if($getFirstMedia){
                                 $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                            }else{
+                                $img = asset('imgs/default/conversions/default.jpg');
                             }
                         @endphp
                         <div class="col-md-4 col-sm-6">

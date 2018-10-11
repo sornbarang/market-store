@@ -280,7 +280,9 @@
                                 $getFirstMedia = $val->getFirstMedia(); 
                                 if($getFirstMedia){
                                     $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-                                } 
+                                }else{
+                                    $img = asset('imgs/default/conversions/default.jpg');
+                                }
                             @endphp 
                         <div class="col-lg-6 col-md-6">
                             <!-- start .single-product -->

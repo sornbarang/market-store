@@ -1616,6 +1616,7 @@ h6 {
 
 .author-card .author-infos .author-badges ul li {
   margin: 0 0px 10px 0px;
+  width:60px;
 }
 
 .author-card .author-infos .author-badges ul li img {

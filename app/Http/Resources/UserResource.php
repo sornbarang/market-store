@@ -16,18 +16,20 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $products= ProductsAds::where('user_id',$this->id)->latest()->limit(5)->inRandomOrder()->get();
+        $avatar=null;
         $media=[];
+        $products= ProductsAds::where('user_id',$this->id)->latest()->limit(5)->inRandomOrder()->get();
         foreach($products as $v){
             $media[]=['media'=>Storage::url($v->getFirstMedia()->id.'/'.$v->getFirstMedia()->file_name),'link'=>route('market.productdetail',$v->slug)];
         } 
-        $medias = $this->profile->getMedia(); 
-        $avatar=null;
-        foreach($medias as $val){   
-            if($this->profile->avatar == $val->id){
-                $avatar=Storage::url($val->id.'/'.$val->file_name);  
-            }
-        } 
+        if(null !== $this->profile){
+            $medias = $this->profile->getMedia();  
+            foreach($medias as $val){   
+                if($this->profile->avatar == $val->id){
+                    $avatar=Storage::url($val->id.'/'.$val->file_name);  
+                }
+            } 
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
