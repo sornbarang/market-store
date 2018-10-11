@@ -262,16 +262,27 @@
                     
                     <div class="item-preview"> 
                         <div class="item__preview-slider"> 
-                            @foreach( $media as $val)
+                            @if(count($media) > 0)
+                                @foreach($media as $val)
+                                    <div class="prev-slide">
+                                        <div class="price p-1 m-0 c-price text-center col-md-12">
+                                            <h1>
+                                                <span> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
+                                            </h1>
+                                        </div>  
+                                        <img class="w-100" src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                    </div>
+                                @endforeach
+                            @else
                                 <div class="prev-slide">
-                                <div class="price p-1 m-0 c-price text-center col-md-12">
-                                    <h1>
-                                    <span> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
-                                    </h1>
-                                </div> 
-                                    <img class="w-100" src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                    <div class="price p-1 m-0 c-price text-center col-md-12">
+                                        <h1>
+                                            <span> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
+                                        </h1>
+                                    </div>  
+                                    <img class="w-100" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                 </div>
-                            @endforeach
+                            @endif 
                         </div><!-- end /.item--preview-slider -->
                         
                         <div class="item__preview-thumb">
@@ -807,7 +818,9 @@
                                 $getFirstMedia = $val->getFirstMedia(); 
                                 if($getFirstMedia){
                                     $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-                                } 
+                                }else{
+                                    $img = asset('imgs/default/conversions/default.jpg');
+                                }
                             @endphp   
                             <div class="partner">
                                 <!-- start .single-product -->

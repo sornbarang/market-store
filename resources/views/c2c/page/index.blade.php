@@ -103,16 +103,13 @@
                                             }
                                             $img='';
                                             $newsItem=App\Models\ProductsAds::find($getprops->products_ads_id); 
-                                            $mediaItems = $newsItem->getMedia(); 
-                                            // foreach($mediaItems as $val){   
-                                            //    if($getprops->user->profile->avatar == $val->id){
-                                            //        $avatar=$val->id.'/'.$val->file_name;  
-                                            //    }
-                                            //} 
+                                            $mediaItems = $newsItem->getMedia();
                                             $getFirstMedia = $newsItem->getFirstMedia();   
                                             if($getFirstMedia){
                                                 $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-                                            }  
+                                            }else{
+                                                $img = asset('imgs/default/conversions/default.jpg');
+                                            } 
                                         @endphp
                                         <div class="partner">
                                             <!-- start .single-product -->
