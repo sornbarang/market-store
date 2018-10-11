@@ -255,7 +255,7 @@
                                             </div>
 
                                             <div class="link_field">
-                                                <input value="{{Auth::user()->profile->facebook_link}}" name="facebook" type="text" class="text_field" placeholder="ex: www.facebook.com/aazztech">
+                                                <input type="url" value="{{Auth::user()->profile->facebook_link}}" name="facebook" type="text" class="text_field" placeholder="ex: www.facebook.com/aazztech">
                                             </div>
                                         </div>
                                         <!-- end /.social__single -->
@@ -266,7 +266,7 @@
                                             </div>
 
                                             <div class="link_field">
-                                                <input value="{{Auth::user()->profile->twitter_link}}" name="twitter" type="text" class="text_field" placeholder="ex: www.twitter.com/aazztech">
+                                                <input type="url" value="{{Auth::user()->profile->twitter_link}}" name="twitter" type="text" class="text_field" placeholder="ex: www.twitter.com/aazztech">
                                             </div>
                                         </div>
                                         <!-- end /.social__single --> 
@@ -276,7 +276,7 @@
                                             </div>
 
                                             <div class="link_field">
-                                                <input value="{{Auth::user()->profile->instagram_link}}" name="instagram" type="text" class="text_field" placeholder="ex: www.instagram.com/aazztech">
+                                                <input type="url" value="{{Auth::user()->profile->instagram_link}}" name="instagram" type="text" class="text_field" placeholder="ex: www.instagram.com/aazztech">
                                             </div>
                                         </div>
                                         <!-- end /.social__single --> 

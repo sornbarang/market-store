@@ -729,9 +729,9 @@
 
                                 <div class="social social--color--filled">
                                     <ul>
-                                        <li><a target="_blank" href="{{null !=$data['product']->user->profile?$data['product']->user->profile->facebook_link:'javascript:void(0)'}}"><span class="fa fa-facebook"></span></a></li>
-                                        <li><a target="_blank" href="{{null !=$data['product']->user->profile?$data['product']->user->profile->twitter_link:'javascript:void(0)'}}"><span class="fa fa-twitter"></span></a></li>
-                                        <li><a target="_blank" href="{{null !=$data['product']->user->profile?$data['product']->user->profile->instagram_link:'javascript:void(0)'}}"><span class="fa fa-instagram"></span></a></li>
+                                        <li><a target="_blank" href="{{$data['product']->user->profile->facebook_link??'javascript:void(0)'}}"><span class="fa fa-facebook"></span></a></li>
+                                        <li><a target="_blank" href="{{$data['product']->user->profile->twitter_link??'javascript:void(0)'}}"><span class="fa fa-twitter"></span></a></li>
+                                        <li><a target="_blank" href="{{$data['product']->user->profile->instagram_link??'javascript:void(0)'}}"><span class="fa fa-instagram"></span></a></li>
                                     </ul>
                                 </div><!-- end /.social -->
 
