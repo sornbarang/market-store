@@ -94,11 +94,13 @@
                                         @php 
                                             $avatar='';  
                                             $media = $getprops->user->profile->getMedia(); 
-                                            foreach($media as $val){   
-                                                if($getprops->user->profile->avatar == $val->id){
-                                                    $avatar=$val->id.'/'.$val->file_name;  
-                                                }
-                                            } 
+                                            if(isset($media) && !empty($media)){
+                                                foreach($media as $val){   
+                                                    if($getprops->user->profile->avatar == $val->id){
+                                                        $avatar=$val->id.'/'.$val->file_name;  
+                                                    }
+                                                } 
+                                            }
                                             $img='';
                                             $newsItem=App\Models\ProductsAds::find($getprops->products_ads_id); 
                                             $mediaItems = $newsItem->getMedia(); 
