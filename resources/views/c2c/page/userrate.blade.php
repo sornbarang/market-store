@@ -4,12 +4,14 @@
      
         @php  
             $avatar='';
-            $media = $val->user->profile->getMedia(); 
-            foreach($media as $m){   
-                if($val->user->profile->avatar == $m->id){ 
-                    $avatar=$m->id.'/avatar100.png';
-                }
-            } 
+            if(null !== $val->user->profile){
+                $media = $val->user->profile->getMedia(); 
+                foreach($media as $m){   
+                    if($val->user->profile->avatar == $m->id){ 
+                        $avatar=$m->id.'/avatar100.png';
+                    }
+                } 
+            }
         @endphp 
         <li class="single-thread">
             <div class="media">

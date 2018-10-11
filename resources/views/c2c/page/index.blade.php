@@ -92,15 +92,23 @@
                                 @if(count($cats['product']) > 0) 
                                     @foreach($cats['product'] as $lpk => $getprops)
                                         @php 
-                                            $avatar='';   
+                                            $avatar='';  
+                                            if(null !== $getprops->user->profile){ 
+                                                $media = $getprops->user->profile->getMedia(); 
+                                                foreach($media as $val){   
+                                                    if($getprops->user->profile->avatar == $val->id){
+                                                        $avatar=$val->id.'/'.$val->file_name;  
+                                                    }
+                                                } 
+                                            }
                                             $img='';
                                             $newsItem=App\Models\ProductsAds::find($getprops->products_ads_id); 
                                             $mediaItems = $newsItem->getMedia(); 
-                                            foreach($mediaItems as $val){   
-                                                if($getprops->user->profile->avatar == $val->id){
-                                                    $avatar=$val->id.'/'.$val->file_name;  
-                                                }
-                                            } 
+                                            // foreach($mediaItems as $val){   
+                                            //    if($getprops->user->profile->avatar == $val->id){
+                                            //        $avatar=$val->id.'/'.$val->file_name;  
+                                            //    }
+                                            //} 
                                             $getFirstMedia = $newsItem->getFirstMedia();   
                                             if($getFirstMedia){
                                                 $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
