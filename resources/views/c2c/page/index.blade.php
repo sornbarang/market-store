@@ -74,7 +74,7 @@
                                                             $firstRoute=$val['dynamiccat'];
                                                         @endphp
                                                     @endif
-                                                    <a id="getProductOfCategory" data-routepro="{{$val['dynamiccat']}}" data-route="{{$val['link']}}" href="javascript:void(0)" style="color:#000;" class="{{$key==0?'activecat':''}}">{{$val['name']}}</a>
+                                                    <a id="getProductOfCategory" data-routepro="{{$val['dynamiccat']}}" data-route="{{$val['link']}}" href="javascript:void(0)" style="color:#000;" class="text-capitalize {{$key==0?'activecat':''}}">{{$val['name']}}</a>
                                                 </li>
                                             @endforeach
                                             <li style="float:right;"> 
