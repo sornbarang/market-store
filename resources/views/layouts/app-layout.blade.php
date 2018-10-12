@@ -990,27 +990,28 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             
         });
         if($('.tree li.parent_li').hasClass('d-collape')){   
-            $('.tree li.parent_li.d-collape ul > li').attr('style','');
+            $('.tree li.parent_li.d-collape ul > li').attr('style','display: list-item;');
         }
         // List explore category
         $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
-        $('.tree li.parent_li > span').on('click', function (e) { 
+        $(document).on('click','.tree li.parent_li > span', function (e) { 
+            var rootP=$(this).parents('li.parent_li.d-collape');
             var children = $(this).parent('li.parent_li').find(' > ul > li');
-            if($(this).parent('li.parent_li').hasClass('d-collape')){  
-                $(this).parent('li.parent_li').removeClass('d-collape');
+            if(rootP.length){  
+                rootP.removeClass('d-collape');
                 children.hide('fast');
             }else{
                 if (children.is(":visible")) {
-                children.hide('fast');
-                if(!$(this).hasClass( "parent_root" )){
-                    $(this).attr('title', 'Expand this branch').find(' > i').removeClass('fa-minus-square').addClass('fa-plus-square');
-                } 
-            } else {
-                children.show('fast');
-                if(!$(this).hasClass( "parent_root" )){
-                    $(this).attr('title', 'Collapse this branch').find(' > i').removeClass('fa-plus-square').addClass('fa-minus-square');
+                        children.hide('fast');
+                    if(!$(this).hasClass( "parent_root" )){
+                        $(this).attr('title', 'Expand this branch').find(' > i').removeClass('fa-minus-square').addClass('fa-plus-square');
+                    } 
+                } else {
+                    children.show('fast');
+                    if(!$(this).hasClass( "parent_root" )){
+                        $(this).attr('title', 'Collapse this branch').find(' > i').removeClass('fa-plus-square').addClass('fa-minus-square');
+                    }
                 }
-            }
             }
             e.stopPropagation();
         });
