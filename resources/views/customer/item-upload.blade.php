@@ -105,7 +105,7 @@
                                             <label for="exlicense">@lang('profileitemupload.price')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input name="price" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                                <input step="0.01" min="0" max="999999999" name="price" type="number" id="exlicense" class="text_field" placeholder="00.00">
                                             </div>
                                         </div>
                                     </div>
@@ -113,8 +113,8 @@
                                         <div class="col-md-12">
                                             <label for="exlicense">@lang('profileitemupload.discount')</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon">$</span>
-                                                <input step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                                <span class="input-group-addon">%</span>
+                                                <input step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="0">
                                             </div>
                                         </div>
                                     </div>

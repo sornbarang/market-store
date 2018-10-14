@@ -4,171 +4,183 @@
     END FEATURED PRODUCT AREA
 =================================-->
 
-@include('elements.search')
-    @if(count($data['searchpros']) > 0)
-    <!--================================
-        START FILTER AREA
-    =================================-->
-    <div class="filter-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="filter-bar">
-                        <div class="filter__option filter--dropdown">
-                            <a href="#" id="drop1" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
-                                <span class="lnr lnr-chevron-down"></span>
-                            </a>
-                            <ul class="custom_dropdown custom_drop2 dropdown-menu" aria-labelledby="drop1">
-                                <li>
-                                    <a href="#">Wordpress
-                                        <span>35</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">Landing Page
-                                        <span>45</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">Psd Template
-                                        <span>13</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">Plugins
-                                        <span>08</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">HTML Template
-                                        <span>34</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">Components
-                                        <span>78</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end /.filter__option -->
-
-                        <div class="filter__option filter--dropdown">
-                            <a href="#" id="drop2" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By
-                                <span class="lnr lnr-chevron-down"></span>
-                            </a>
-                            <ul class="custom_dropdown dropdown-menu" aria-labelledby="drop2">
-                                <li>
-                                    <a href="#">Trending items</a>
-                                </li>
-                                <li>
-                                    <a href="#">Popular items</a>
-                                </li>
-                                <li>
-                                    <a href="#">New items </a>
-                                </li>
-                                <li>
-                                    <a href="#">Best seller </a>
-                                </li>
-                                <li>
-                                    <a href="#">Best rating </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- end /.filter__option -->
-
-                        <div class="filter__option filter--dropdown filter--range">
-                            <a href="#" id="drop3" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Price Range
-                                <span class="lnr lnr-chevron-down"></span>
-                            </a>
-                            <div class="custom_dropdown dropdown-menu" aria-labelledby="drop3">
-                                <div class="range-slider price-range"></div>
-
-                                <div class="price-ranges">
-                                    <span class="from rounded">$0</span>
-                                    <span class="to rounded">$0</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end /.filter__option -->
-
-                        <div class="filter__option filter--select">
-                            <div class="select-wrap">
-                                <!-- Request::url() get current url -->
-                                <!-- Request::query('searchstr') is get param  -->
-                                <form action="{{ Request::url() }}" method="get">
-                                    <input type="hidden" value="{{ Request::query('record') ?? 25 }}" name="record">
-                                    <input type="hidden" value="{{ Request::query('searchstr') ?? '' }}" name="searchstr">
-                                    <select name="price"> 
-                                        <option value="low" {{$data['order']=='asc'?'selected':''}}>Price : Low to High</option>
-                                        <option value="high" {{$data['order']=='desc'?'selected':''}}>Price : High to low</option>
-                                    </select>
-                                    <span class="lnr lnr-chevron-down"></span>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- end /.filter__option -->
-
-                        <div class="filter__option filter--select">
-                            <div class="select-wrap">
-                                <!-- Request::url() get current url -->
-                                <form action="{{ Request::url() }}">
-                                <!-- Request::query('searchstr') is get param  -->
-                                <input type="hidden" value="{{ Request::query('searchstr') ?? '' }}" name="searchstr">
-                                <input type="hidden" value="{{ Request::query('price') ?? 'low' }}" name="price">
-                                    <select name="record">
-                                        <option value="12" {{$data['record']==12?'selected':''}}>12 Items per page</option>
-                                        <option value="15" {{$data['record']==15?'selected':''}}>15 Items per page</option>
-                                        <option value="25" {{$data['record']==25?'selected':''}}>25 Items per page</option>
-                                    </select>
-                                    <span class="lnr lnr-chevron-down"></span>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- end /.filter__option -->
-
-                        <div class="filter__option filter--layout">
-                            <a href="javascript:void(0)">
-                                <div class="svg-icon">
-                                    <img class="svg" src="{{asset('/')}}images/svg/grid.svg" alt="it's just a layout control folks!">
-                                </div>
-                            </a>
-                            <a href="javascript:void(0)">
-                                <div class="svg-icon">
-                                    <img class="svg" src="{{asset('/')}}images/svg/list.svg" alt="it's just a layout control folks!">
-                                </div>
-                            </a>
-                        </div>
-                        <!-- end /.filter__option -->
+@include('elements.search') 
+<!--================================
+    START FILTER AREA
+=================================-->
+<div class="filter-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filter-bar">
+                    <div class="filter__option filter--dropdown">
+                        <a href="#" id="drop1" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories
+                            <span class="lnr lnr-chevron-down"></span>
+                        </a>
+                        <ul class="custom_dropdown custom_drop2 dropdown-menu" aria-labelledby="drop1">
+                            <li>
+                                <a href="#">Wordpress
+                                    <span>35</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Landing Page
+                                    <span>45</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Psd Template
+                                    <span>13</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Plugins
+                                    <span>08</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">HTML Template
+                                    <span>34</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Components
+                                    <span>78</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <!-- end /.filter-bar -->
-                </div>
-                <!-- end /.col-md-12 -->
-            </div>
-            <!-- end filter-bar -->
-        </div>
-    </div>
-    <!-- end /.filter-area -->
+                    <!-- end /.filter__option -->
 
-    <!--================================
-        END FILTER AREA
-    =================================-->
-    <!--================================
-        START PRODUCTS AREA
-    =================================-->
-    <section class="products pt-5">
+                    <div class="filter__option filter--dropdown">
+                        <a href="#" id="drop2" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By
+                            <span class="lnr lnr-chevron-down"></span>
+                        </a>
+                        <ul class="custom_dropdown dropdown-menu" aria-labelledby="drop2">
+                            <li>
+                                <a href="#">Trending items</a>
+                            </li>
+                            <li>
+                                <a href="#">Popular items</a>
+                            </li>
+                            <li>
+                                <a href="#">New items </a>
+                            </li>
+                            <li>
+                                <a href="#">Best seller </a>
+                            </li>
+                            <li>
+                                <a href="#">Best rating </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end /.filter__option -->
+
+                    <div class="filter__option filter--dropdown filter--range">
+                        <a href="#" id="drop3" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Price Range
+                            <span class="lnr lnr-chevron-down"></span>
+                        </a>
+                        <div class="custom_dropdown dropdown-menu" aria-labelledby="drop3">
+                            <div class="range-slider price-range"></div>
+
+                            <div class="price-ranges">
+                                <span class="from rounded">$0</span>
+                                <span class="to rounded">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end /.filter__option -->
+
+                    <div class="filter__option filter--select">
+                        <div class="select-wrap">
+                            <!-- Request::url() get current url -->
+                            <!-- Request::query('searchstr') is get param  -->
+                            <form action="{{ Request::url() }}" method="get">
+                                <input type="hidden" value="{{ Request::query('record') ?? 25 }}" name="record">
+                                <input type="hidden" value="{{ Request::query('searchstr') ?? '' }}" name="searchstr">
+                                <select name="price"> 
+                                    <option value="low" {{$data['order']=='asc'?'selected':''}}>Price : Low to High</option>
+                                    <option value="high" {{$data['order']=='desc'?'selected':''}}>Price : High to low</option>
+                                </select>
+                                <span class="lnr lnr-chevron-down"></span>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end /.filter__option -->
+
+                    <div class="filter__option filter--select">
+                        <div class="select-wrap">
+                            <!-- Request::url() get current url -->
+                            <form action="{{ Request::url() }}">
+                            <!-- Request::query('searchstr') is get param  -->
+                            <input type="hidden" value="{{ Request::query('searchstr') ?? '' }}" name="searchstr">
+                            <input type="hidden" value="{{ Request::query('price') ?? 'low' }}" name="price">
+                                <select name="record">
+                                    <option value="12" {{$data['record']==12?'selected':''}}>12 Items per page</option>
+                                    <option value="15" {{$data['record']==15?'selected':''}}>15 Items per page</option>
+                                    <option value="25" {{$data['record']==25?'selected':''}}>25 Items per page</option>
+                                </select>
+                                <span class="lnr lnr-chevron-down"></span>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end /.filter__option -->
+
+                    <div class="filter__option filter--layout">
+                        <a href="javascript:void(0)">
+                            <div class="svg-icon">
+                                <img class="svg" src="{{asset('/')}}images/svg/grid.svg" alt="it's just a layout control folks!">
+                            </div>
+                        </a>
+                        <a href="javascript:void(0)">
+                            <div class="svg-icon">
+                                <img class="svg" src="{{asset('/')}}images/svg/list.svg" alt="it's just a layout control folks!">
+                            </div>
+                        </a>
+                    </div>
+                    <!-- end /.filter__option -->
+                </div>
+                <!-- end /.filter-bar -->
+            </div>
+            <!-- end /.col-md-12 -->
+        </div>
+        <!-- end filter-bar -->
+    </div>
+</div>
+<!-- end /.filter-area -->
+
+<!--================================
+    END FILTER AREA
+=================================-->
+<!--================================
+    START PRODUCTS AREA
+=================================-->
+@if(count($data['searchpros']) > 0)
+<section class="products pt-5">
+    <!-- start container -->
+    <div class="container searchcontainer"> 
+        @include('elements.search-items')
+    </div>
+    <!-- end /.container -->
+</section>
+@else
+    <section class="products">
         <!-- start container -->
-        <div class="container searchcontainer"> 
-            @include('elements.search-items')
+        <div class="container">  
+            <div class="row w-100 text-center">
+                <div class="col-12 display-1 text-white">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    <p class="text-center text-white">@lang('frontlabel.norecord') {{request()->searchstr??''}}</p>
+                </div>
+            </div>
+            
         </div>
         <!-- end /.container -->
-    </section>
-    <!--================================
-        END PRODUCTS AREA
-    =================================-->
-    @else
-        <h6 class="text-center">No records of {{$data['strsearch']}}</h6>
-    @endif
+    </section> 
+@endif
+<!--================================
+    END PRODUCTS AREA
+=================================--> 
 <!--================================
     START COUNTER UP AREA
 =================================-->

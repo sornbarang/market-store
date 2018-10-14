@@ -187,10 +187,27 @@
 
                                                 </div>
                                                 <!-- end /.product-desc -->
-
-                                                <div class="product-purchase">
+                                                <div class="product-purchase"> 
+                                                    <div class="w-100 text-price pt-1 pb-1">
+                                                        @if(null !==$getprops->discount && is_numeric($getprops->discount) && (int)$getprops->discount !=0)
+                                                            <div class="row">
+                                                                <div class="col-6 text-truncate text-left text-danger">
+                                                                    {{round($getprops->discount, 2)}}% Off
+                                                                </div>
+                                                                <div class="col-6 text-truncate text-right"> 
+                                                                    <span title="${{null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price}}">${{null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price}}</span> 
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            &nbsp;
+                                                        @endif
+                                                    </div>
                                                     <div class="price_love">
-                                                        <span title="${{$getprops->price??''}}">${{$getprops->price??''}}</span>
+                                                    @if(null !==$getprops->discount && is_numeric($getprops->discount) && (int)$getprops->discount !=0)
+                                                        <span title="${{$getprops->price??0}}"><del>${{$getprops->price??0}}<del></span> 
+                                                    @else
+                                                        <span title="${{$getprops->price??0}}">${{$getprops->price??0}}</span> 
+                                                    @endif
                                                     </div>
                                                     <a href="javascript:void(0)">
                                                         <div class="rateproduct" data-rating="{{$getprops->averageRating}}">
@@ -204,7 +221,7 @@
                                         </div> 
                                     @endforeach 
                                 @else
-                                    <p>No product</p>
+                                    <p>@lang('frontlabel.norecord')</p>
                                 @endif
                             </div>
 

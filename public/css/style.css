@@ -16188,7 +16188,7 @@ form#frmUploadFront .info_wrap,form#frmUpdateFront .info_wrap{
   width:100%;
 }
 .child_li{
-  padding: 0px 8px !important;
+  padding: 0px 15px !important;
 }
 .child_li > a{
   line-height: inherit !important;
@@ -16294,4 +16294,9 @@ div.rateproduct.cproduct img{
 }
 .container{
   max-width: 95vw !important;
+}
+.text-price{
+  color:#56a72d;
+  font-size: 15px;
+  font-weight: 500;
 }

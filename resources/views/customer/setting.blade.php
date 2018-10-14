@@ -125,31 +125,31 @@
                                                     <div class="select-wrap select-wrap2">
                                                     <select id="location" data-placeholder="Select a City/Province" name="location">
                                                     <option value="">Select a City/Province</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='phnom penh'?'selected':''}} value="Phnom Penh">Phnom Penh</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='preah sihanouk'?'selected':''}} value="Preah Sihanouk">Preah Sihanouk</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='preah sihanouk'?'selected':''}} value="Kampong Cham">Kampong Cham</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='siem reap'?'selected':''}} value="Siem Reap">Siem Reap</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='battambang'?'selected':''}} value="Battambang">Battambang</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kandal'?'selected':''}} value="Kandal">Kandal</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='banteay meanchey'?'selected':''}} value="Banteay Meanchey">Banteay Meanchey</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampong chhnang'?'selected':''}} value="Kampong Chhnang">Kampong Chhnang</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampong speu'?'selected':''}} value="Kampong Speu">Kampong Speu</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampong thom'?'selected':''}} value="Kampong Thom">Kampong Thom</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kampot'?'selected':''}} value="Kampot">Kampot</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kep'?'selected':''}} value="Kep">Kep</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='koh kong'?'selected':''}} value="Koh Kong">Koh Kong</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='kratie'?'selected':''}} value="Kratie">Kratie</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='mondulkiri'?'selected':''}} value="Mondulkiri">Mondulkiri</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='oddar meanchey'?'selected':''}} value="Oddar Meanchey">Otdar Meanchey</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='pailin'?'selected':''}} value="Pailin">Pailin</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='preah vihear'?'selected':''}} value="Preah Vihear">Preah Vihear</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='prey veng'?'selected':''}} value="Prey Veng">Prey Veng</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='pursat'?'selected':''}} value="Pursat">Pursat</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='ratanakiri'?'selected':''}} value="Ratanakiri">Ratanakiri</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='stung treng'?'selected':''}} value="Stung Treng">Stung Treng</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='svay rieng'?'selected':''}} value="Svay Rieng">Svay Rieng</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='takeo'?'selected':''}} value="Takeo">Takeo</option>
-                                                    <option {{trim(strtolower(Auth::user()->profile->location))=='tboung khmum'?'selected':''}} value="Tboung Khmum">Tboung Khmum</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='phnom penh'?'selected':''}} value="Phnom Penh">Phnom Penh</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='preah sihanouk'?'selected':''}} value="Preah Sihanouk">Preah Sihanouk</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='preah sihanouk'?'selected':''}} value="Kampong Cham">Kampong Cham</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='siem reap'?'selected':''}} value="Siem Reap">Siem Reap</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='battambang'?'selected':''}} value="Battambang">Battambang</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kandal'?'selected':''}} value="Kandal">Kandal</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='banteay meanchey'?'selected':''}} value="Banteay Meanchey">Banteay Meanchey</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kampong chhnang'?'selected':''}} value="Kampong Chhnang">Kampong Chhnang</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kampong speu'?'selected':''}} value="Kampong Speu">Kampong Speu</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kampong thom'?'selected':''}} value="Kampong Thom">Kampong Thom</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kampot'?'selected':''}} value="Kampot">Kampot</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kep'?'selected':''}} value="Kep">Kep</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='koh kong'?'selected':''}} value="Koh Kong">Koh Kong</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kratie'?'selected':''}} value="Kratie">Kratie</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='mondulkiri'?'selected':''}} value="Mondulkiri">Mondulkiri</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='oddar meanchey'?'selected':''}} value="Oddar Meanchey">Otdar Meanchey</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='pailin'?'selected':''}} value="Pailin">Pailin</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='preah vihear'?'selected':''}} value="Preah Vihear">Preah Vihear</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='prey veng'?'selected':''}} value="Prey Veng">Prey Veng</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='pursat'?'selected':''}} value="Pursat">Pursat</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='ratanakiri'?'selected':''}} value="Ratanakiri">Ratanakiri</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='stung treng'?'selected':''}} value="Stung Treng">Stung Treng</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='svay rieng'?'selected':''}} value="Svay Rieng">Svay Rieng</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='takeo'?'selected':''}} value="Takeo">Takeo</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='tboung khmum'?'selected':''}} value="Tboung Khmum">Tboung Khmum</option>
                                                     </select>
                                                         <span class="lnr lnr-chevron-down"></span>
                                                     </div>
@@ -159,7 +159,7 @@
                                         
                                         <div class="form-group">
                                             <label for="authbio">@lang('profilesetting.authbio')</label>
-                                            <textarea name="author_bio" id="authbio" class="text_field" placeholder="Short brief about yourself or your account...">{{Auth::user()->profile->bio}}</textarea>
+                                            <textarea name="author_bio" id="authbio" class="text_field" placeholder="Short brief about yourself or your account...">{{null !==Auth::user()->profile?Auth::user()->profile->bio:''}}</textarea>
                                         </div>
                                     </div><!-- end /.information_wrapper -->
                                 </div><!-- end /.information__set -->
@@ -183,17 +183,19 @@
                                             @php
                                                 $avatar=''; 
                                                 $cover=''; 
-                                                $media = Auth::user()->profile->getMedia(); 
-                                                foreach($media as $val){  
-                                                    if(Auth::user()->profile->avatar==$val->id){
-                                                        $avatar=$val->id.'/'.$val->file_name; 
-                                                        $mediaavatarid=$val->id??''; 
-                                                    }
-                                                    if(Auth::user()->profile->cover_image==$val->id){
-                                                        $cover=$val->id.'/'.$val->file_name; 
-                                                        $mediacoverid=$val->id??''; 
-                                                    }
-                                                }   
+                                                if(null !==Auth::user()->profile){
+                                                    $media = Auth::user()->profile->getMedia(); 
+                                                    foreach($media as $val){  
+                                                        if(Auth::user()->profile->avatar==$val->id){
+                                                            $avatar=$val->id.'/'.$val->file_name; 
+                                                            $mediaavatarid=$val->id??''; 
+                                                        }
+                                                        if(Auth::user()->profile->cover_image==$val->id){
+                                                            $cover=$val->id.'/'.$val->file_name; 
+                                                            $mediacoverid=$val->id??''; 
+                                                        }
+                                                    }   
+                                                }
                                             @endphp
                                             <div class="col-md-12">
                                                 <div class="avatar-upload" style="margin:0 auto;">
@@ -255,7 +257,7 @@
                                             </div>
 
                                             <div class="link_field">
-                                                <input type="url" value="{{Auth::user()->profile->facebook_link}}" name="facebook" type="text" class="text_field" placeholder="ex: www.facebook.com/aazztech">
+                                                <input type="url" value="{{null!==Auth::user()->profile?Auth::user()->profile->facebook_link:''}}" name="facebook" type="text" class="text_field" placeholder="ex: www.facebook.com/aazztech">
                                             </div>
                                         </div>
                                         <!-- end /.social__single -->
@@ -266,7 +268,7 @@
                                             </div>
 
                                             <div class="link_field">
-                                                <input type="url" value="{{Auth::user()->profile->twitter_link}}" name="twitter" type="text" class="text_field" placeholder="ex: www.twitter.com/aazztech">
+                                                <input type="url" value="{{null!==Auth::user()->profile?Auth::user()->profile->twitter_link:''}}" name="twitter" type="text" class="text_field" placeholder="ex: www.twitter.com/aazztech">
                                             </div>
                                         </div>
                                         <!-- end /.social__single --> 
@@ -276,7 +278,7 @@
                                             </div>
 
                                             <div class="link_field">
-                                                <input type="url" value="{{Auth::user()->profile->instagram_link}}" name="instagram" type="text" class="text_field" placeholder="ex: www.instagram.com/aazztech">
+                                                <input type="url" value="{{null!==Auth::user()->profile?Auth::user()->profile->instagram_link:''}}" name="instagram" type="text" class="text_field" placeholder="ex: www.instagram.com/aazztech">
                                             </div>
                                         </div>
                                         <!-- end /.social__single --> 

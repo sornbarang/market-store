@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 @php
-header('refresh: 5; url=market');
+header('refresh: 3; url=market');
 @endphp
 
 <div class="container-fluid" style="margin:auto;text-align:center;"> 

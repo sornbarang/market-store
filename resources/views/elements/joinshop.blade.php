@@ -8,7 +8,7 @@
                 <div class="call-to-wrap">
                     <h1 class="text--white">@lang('frontlabel.joinourshop')</h1>
                     <h4 class="text--white">@lang('frontlabel.memberjoin')</h4>
-                    <a href="#" class="btn btn--lg btn--round btn--white callto-action-btn">@lang('frontlabel.joinus')</a>
+                    <a href="{{route('register')}}" class="btn btn--lg btn--round btn--white callto-action-btn">@lang('frontlabel.joinus')</a>
                 </div>
             </div>
         </div>

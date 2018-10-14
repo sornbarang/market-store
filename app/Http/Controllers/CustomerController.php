@@ -314,7 +314,7 @@ class CustomerController extends Controller
             } 
             $name = $request->name;
             $price = $request->price;
-            $discount = $request->discount;
+            $discount = $request->discount??0;
             $active = (int)$request->active ? 1 : 0;
             $description= $request->sumernotehidden;
             // $imgappend=[];

@@ -39,3 +39,9 @@
         }
         return $avatar;
     }
+    function getDiscount($p,$d){
+      if($d!='' && is_numeric($d)){ 
+        return str_limit($p - ($p * ($d / 100)),8);
+      }
+      return str_limit($p,8);
+    }

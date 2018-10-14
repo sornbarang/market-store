@@ -60,7 +60,7 @@
                                             <span>Cam</span>
                                         </p>
                                     </div>
-                                    <div class="col col-md-7">
+                                    <div class="col col-md-7 text-right">
                                         <p> 
                                             <span>Phnom penh</span>
                                         </p>                                                                 
@@ -72,9 +72,27 @@
                     </div><!-- end /.product-desc -->
 
                     <div class="product-purchase">
-                        <div class="price_love">
-                            <span title="${{$val->price??''}}">${{str_limit($val->price,10)??''}}</span>
+                        <div class="w-100 text-price pt-1 pb-1">
+                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                <div class="row">
+                                    <div class="col-6 text-truncate text-left text-danger">
+                                        {{round($val->discount, 2)}}% Off
+                                    </div>
+                                    <div class="col-6 text-truncate text-right"> 
+                                        <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}</span> 
+                                    </div>
+                                </div>
+                            @else
+                                &nbsp;
+                            @endif
                         </div>
+                        <div class="price_love">
+                        @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                            <span title="${{$val->price??0}}"><del>${{str_limit($val->price,10)??''}}<del></span> 
+                        @else
+                            <span title="${{$val->price??0}}">${{str_limit($val->price,10)??''}}</span> 
+                        @endif
+                        </div> 
                         <a href="javascript:void(0)">
                             <div class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
                                 <input  type="hidden" name="score">
