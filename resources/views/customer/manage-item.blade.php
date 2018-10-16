@@ -113,7 +113,9 @@
                         <div class="col-md-4 col-sm-6">
                             <!-- start .single-product -->
                             <div class="product product--card cProfileProduct">
-
+                                <div class="hot position-absolute text-white bg-danger p-1 font-weight-bold rounded-0" style="z-index:9;max-width:100px;">
+                                    HOT
+                                </div>
                                 <div class="product__thumbnail"> 
                                     <figure class="figure">
                                         <img  src="{{$img}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
@@ -166,36 +168,55 @@
                                 </div><!-- end /.product-desc -->
 
                                 <div class="product-purchase">
-                                    @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
-                                        <div class="row">
-                                            <div class="col-12 text-truncate text-right text-danger">
-                                                {{round($val->discount, 2)}}% Off
+                                    {{--
+                                    <div class="w-100 text-price pt-1 pb-1">
+                                        @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                            <div class="row">
+                                                <div class="col-6 text-truncate text-left text-danger">
+                                                    {{round($val->discount, 2)}}% Off
+                                                </div>
+                                                <div class="col-6 text-truncate text-right"> 
+                                                    <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}</span> 
+                                                </div>
+                                            </div>
+                                        @else
+                                            &nbsp;
+                                        @endif
+                                    </div>--}}
+                                    <div class="row no-gutters d-flex content-justify-center align-items-center">
+                                        <div class="col-8 text-truncate">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-8">
+                                                        @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                                        <div class="w-100 text-price text-center">
+                                                            <span title="${{$val->price??0}}"><del>${{str_limit($val->price??0,5)}}<del></span> 
+                                                        </div>
+                                                    @else
+                                                        <div class="w-100">
+                                                            &nbsp;
+                                                        </div>
+                                                    @endif
+                                                    <div class="w-100">
+                                                        <div class="price_love w-100 text-center">
+                                                            <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{str_limit(null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price,5)}}</span> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="white-space:normal;" class="col-md-4 text-center align-self-center text-danger font-weight-bold">
+                                                    @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                                        {{round($val->discount, 2)}} % Off
+                                                    @else
+                                                        &nbsp;
+                                                    @endif
+                                                </div>
                                             </div> 
                                         </div>
-                                    @else
-                                        &nbsp;
-                                    @endif
-                                    <div class="row">
-                                        <div class="col text-md-left col-xs-12 col-sm-6 col-md-8 text-price">
-                                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
-                                                <span title="${{$val->price??0}}" style="font-size:13px;"><del>${{str_limit($val->price,8)??0}}<del></span> 
-                                                <div class="price_love">
-                                                    <span title="{{$val->price}}">$ {{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}</span> 
-                                                </div>
-                                            @else
-                                                <div class="price_love">
-                                                    <span title="{{$val->price}}">$ {{str_limit($val->price,8)??0}}</span> 
-                                                </div>
-                                            @endif 
-                                        </div>
-                                        <div class="cflexcenter col text-xs-center  col-xs-12 col-sm-12 col-md-4">
-                                        <div class="sell">
+                                        <div class="col-4 text-truncate"> 
                                             <a href="javascript:void(0)">
-                                               <div class="rateproductmanage" data-rating="{{$val->averageRating}}">
+                                                <div class="rateproductmanage" data-rating="{{$val->averageRating}}">
                                                     <input  type="hidden" name="score">
-                                                </div> 
+                                                </div>
                                             </a>
-                                        </div>
                                         </div>
                                     </div>
                                 </div><!-- end /.product-purchase -->

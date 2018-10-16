@@ -73,8 +73,8 @@ class RegisterController extends Controller
                 ]);
 
         $user->profile()->create([
-            'phone' => $data['phone'],
-            'location' => $data['address'],
+            'phone' => $data['phone']??'',
+            'location' => $data['address']??'',
         ]);
 
         $verifyUser = VerifyUser::create([

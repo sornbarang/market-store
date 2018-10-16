@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" class="needs-validation" novalidate>
                     @csrf
                     <div class="cardify signup_form">
                         <div class="login--header">
@@ -40,31 +40,42 @@
                         <div class="login--form">
 
                             <div class="form-group">
-                                <label for="urname">@lang('authlabel.name')</label>
+                                <label for="urname">@lang('authlabel.name') <span class="text-danger">  *</span></label>
                                 <input id="name" type="text" class="text_field form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus placeholder="@lang('authlabel.name')">
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
+                                @else
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                <label for="email_ad">@lang('authlabel.email')</label>
-                                <input id="email" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="@lang('authlabel.emailplaceholder')">
+                                <label for="email_ad">@lang('authlabel.email') <span class="text-danger">  *</span></label>
+                                <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="email" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required  placeholder="@lang('authlabel.emailplaceholder')">
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
+                                @else
+                                    <div class="invalid-feedback">
+                                        Please check your email address.
+                                    </div> 
                                 @endif
                             </div>
-
+                            {{--
                             <div class="form-group">
-                                <label for="user_name">@lang('authlabel.username')</label>
-                                <input name="username" id="user_name" type="text" class="text_field" placeholder="@lang('authlabel.usrplaceholder')">
-                            </div>
+                                <label for="user_name">@lang('authlabel.username') <span class="text-danger">  *</span></label>
+                                <input name="username" id="user_name" type="text" class="text_field" placeholder="@lang('authlabel.usrplaceholder')" require>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div> 
                             <div class="form-group">
                                 <label for="user_phone">@lang('authlabel.phone')</label>
                                 <input name="phone" id="user_phone" type="text" class="text_field" placeholder="@lang('authlabel.phoneplaceholder')">
@@ -72,23 +83,34 @@
                             <div class="form-group">
                                 <label for="address">@lang('authlabel.address')</label>
                                 <input name="address" id="address" type="text" class="text_field" placeholder="@lang('authlabel.addressplaceholder')">
-                            </div>
+                            </div>--}}
                             <div class="form-group">
-                                <label for="password">@lang('authlabel.password')</label>
+                                <label for="password">@lang('authlabel.password') <span class="text-danger">  *</span></label>
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="@lang('authlabel.passplaceholder')">
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
+                                @else 
+                                    <div class="invalid-feedback">
+                                        Please enter your password.
+                                    </div>
                                 @endif
                             </div>
 
                             <div class="form-group"> 
-                                <label for="con_pass">@lang('authlabel.conpass')</label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="@lang('authlabel.conpass')"> 
+                                <label for="con_pass">@lang('authlabel.conpass') <span class="text-danger">  *</span></label>
+                                <input require id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="@lang('authlabel.conpass')"> 
+                                <div class="invalid-feedback">
+                                    Please enter your password.
+                                </div>
                             </div>
-
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customTermCon" required>
+                                <label class="custom-control-label" for="customTermCon">Agree to terms and conditions</label>
+                                <div class="invalid-feedback">You must agree before submitting.</div>
+                            </div> 
                             <button class="btn btn--md btn--round register_btn" type="submit">@lang('authlabel.register')</button>
 
                             <div class="login_assist">
@@ -126,5 +148,5 @@
 </section>--}}
 <!--================================
     END CALL TO ACTION AREA
-=================================-->
+=================================--> 
 @stop

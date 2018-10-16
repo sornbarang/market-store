@@ -181,18 +181,22 @@
                         <!--end /.author-author__info-->
                         @else
                             <div class="row h-100">
-                            <form class="frmlogincustom" method="POST" action="{{ route('login') }}">
+                            <form class="frmlogincustom needs-validation" method="POST" action="{{ route('login') }}"  novalidate>
                             @csrf
                                 <div class="row"> 
                                     <div class="col-md-10">
                                          <div class="row">
                                             <div class="col-md-6">
                                                <label for="exampleInputEmail1" class="m-0 p-0 text-white">@lang('authlabel.email')</label>
-                                               <input style="height:40px;" id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="@lang('authlabel.email')" name="email" value="{{ old('email') }}" required autofocus>
+                                               <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" style="height:40px;" id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="@lang('authlabel.email')" name="email" value="{{ old('email') }}" required autofocus>
                                                 @if ($errors->has('email'))
                                                     <span class="invalid-feedback text-white">
                                                         <strong>{{ $errors->first('email') }}</strong>
                                                     </span>
+                                                @else
+                                                    <div class="invalid-feedback text-white">
+                                                        <strong> Please check your email address.</strong>
+                                                    </div> 
                                                 @endif
                                             </div>
                                             <div class="col-md-6">
@@ -207,6 +211,10 @@
                                                     <span class="invalid-feedback text-white">
                                                         <strong>{{ $errors->first('password') }}</strong>
                                                     </span>
+                                                @else 
+                                                    <div class="invalid-feedback">
+                                                        Please enter your password.
+                                                    </div>
                                                 @endif
                                                 <h6 class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ? or <a href="{{ route('register') }}" class="text-white">@lang('authlabel.signup')</a></small></h6> 
                                             </div>  
@@ -625,7 +633,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.js"></script>
 @yield('cusomescript')
 <script> 
-var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
+(function() {
+'use strict';
+    window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            alert();
+            if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+        });
+    }, false);
+})();
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');  
     $(document).on('click', '#deletepro', function(e) {
         $('#frmdeleteproduct').attr('action',$(this).data('route'));
     });

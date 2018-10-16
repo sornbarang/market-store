@@ -131,9 +131,16 @@ class CustomerController extends Controller
         // echo $request->name;exit();
         $user = User::findOrFail($id);
         if($user){  
-            $profile = Profile::where('user_id',$user->id)->first(); 
+            $profile = Profile::where('user_id',$user->id)->first();
+            //  check if user profile doen't exist
+            if(!$profile){
+                $profile = new Profile;
+                $profile->location = 'Phnom Penh';
+                $profile->user_id =$user->id;
+                $profile->save();
+            }
             // check if have new input file image to update
-            if($request->hasFile('profile')){
+            if($request->hasFile('profile')){ 
                 $file = $request->file('profile'); 
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension();

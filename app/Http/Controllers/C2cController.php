@@ -26,7 +26,7 @@ class C2cController extends Controller
             $pro[$va->name]['product']=Product::categorized($va)->latest('products_ads.id')->limit(7)->get();
             // get one lavel of parent
             $pro [$va->name]['childreen']= $va->getDescendantsAndSelf(1);
-        } 
+        }
         $data['listcats']=$pro;   
         // return $data['listcats'];
         // loop root category push icon

@@ -56,6 +56,14 @@ class ProductsAds extends Model implements HasMedia,Reportable
     {
         return $this->belongsTo('App\Models\User');
     }
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = is_numeric($value)?$value:0;
+    }
+    public function setDiscountAttribute($value)
+    {
+        $this->attributes['discount'] = is_numeric($value)?$value:0;
+    }
     /**
      * Searchable rules.
      *

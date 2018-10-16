@@ -28,7 +28,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate>
                 @csrf
                     <div class="cardify login">
                         <div class="login--header">
@@ -50,24 +50,33 @@
                             @endif
 
                             <div class="form-group">
-                                <label for="user_name">@lang('authlabel.username')</label>
-                                <input id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Enter your username..." name="email" value="{{ old('email') }}" required autofocus>
+                                <label for="user_name">@lang('authlabel.email') <span class="text-danger">  *</span></label>
+                                <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Enter your username..." name="email" value="{{ old('email') }}" required autofocus>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
+                                @else
+                                <div class="invalid-feedback">
+                                    Please check your email address.
+                                </div>
+
                                 @endif
                             </div>
 
                             <div class="form-group">
-                                <label for="pass">@lang('authlabel.password')</label>
+                                <label for="pass">@lang('authlabel.password') <span class="text-danger">  *</span></label>
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
+                                @else
+                                    <div class="invalid-feedback">
+                                        Please enter your password.
+                                    </div>
+                                @endif 
                             </div>
 
                             <div class="form-group">

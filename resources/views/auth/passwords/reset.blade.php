@@ -8,7 +8,7 @@
                 <div class="card-header">Reset Password</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.request') }}">
+                    <form method="POST" action="{{ route('password.request') }}" class="needs-validation" novalidate>
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
@@ -17,12 +17,16 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email or old('email') }}" required autofocus>
+                                <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email or old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
+                                @else
+                                    <div class="invalid-feedback">
+                                        Please check your email address.
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -37,6 +41,10 @@
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
+                                @else
+                                    <div class="invalid-feedback">
+                                        Please enter your password.
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -50,6 +58,10 @@
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
+                                @else
+                                    <div class="invalid-feedback">
+                                        Please enter your password.
+                                    </div>
                                 @endif
                             </div>
                         </div>

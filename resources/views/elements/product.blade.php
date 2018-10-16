@@ -34,6 +34,9 @@
             <div class="col-md-4 col-sm-6">
                 <!-- start .single-product -->
                 <div class="product product--card product--card-small">
+                    <div class="hot position-absolute text-white bg-danger p-1 font-weight-bold rounded-0" style="z-index:9;max-width:100px;">
+                        HOT
+                    </div>
                     <div class="product__thumbnail">
                         <img src="{{$img}}" alt="Product Image">
                         <div class="prod_btn">
@@ -72,6 +75,7 @@
                     </div><!-- end /.product-desc -->
 
                     <div class="product-purchase">
+                        {{--
                         <div class="w-100 text-price pt-1 pb-1">
                             @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
                                 <div class="row">
@@ -85,19 +89,44 @@
                             @else
                                 &nbsp;
                             @endif
-                        </div>
-                        <div class="price_love">
-                        @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
-                            <span title="${{$val->price??0}}"><del>${{str_limit($val->price,10)??''}}<del></span> 
-                        @else
-                            <span title="${{$val->price??0}}">${{str_limit($val->price,10)??''}}</span> 
-                        @endif
-                        </div> 
-                        <a href="javascript:void(0)">
-                            <div class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
-                                <input  type="hidden" name="score">
+                        </div>--}}
+                        <div class="row no-gutters d-flex content-justify-center align-items-center">
+                            <div class="col-8 text-truncate">
+                                <div class="row no-gutters">
+                                    <div class="col-md-8">
+                                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                            <div class="w-100 text-price text-center">
+                                                <span title="${{$val->price??0}}"><del>${{str_limit($val->price??0,5)}}<del></span> 
+                                            </div>
+                                        @else
+                                            <div class="w-100">
+                                                &nbsp;
+                                            </div>
+                                        @endif
+                                        <div class="w-100">
+                                            <div class="price_love w-100 text-center">
+                                                <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{str_limit(null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price,5)}}</span> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="white-space:normal;" class="col-md-4 text-center align-self-center text-danger font-weight-bold">
+                                        @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                            {{round($val->discount, 2)}} % Off
+                                        @else
+                                            &nbsp;
+                                        @endif
+                                    </div>
+                                </div> 
                             </div>
-                        </a>
+                            <div class="col-4 text-truncate"> 
+                                <a href="javascript:void(0)">
+                                    <div class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
+                                        <input  type="hidden" name="score">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                         
                     </div>
                 </div><!-- end /.single-product -->
             </div><!-- end /.col-md-4 -->

@@ -34,7 +34,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('password.email') }}" class="needs-validation" novalidate>
                         @csrf
                         <div class="cardify recover_pass">
                             <div class="login--header">
@@ -44,15 +44,18 @@
                             <div class="login--form">
                                 <div class="form-group">
                                     <label for="email_ad">@lang('authlabel.email')</label>
-                                    <input id="email_ad" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="@lang('authlabel.emailplaceholder')">
+                                    <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="email_ad" type="email" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required placeholder="@lang('authlabel.emailplaceholder')">
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback">
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </span>
+                                    @else
+                                        <div class="invalid-feedback">
+                                            Please check your email address.
+                                        </div>
                                     @endif
                                 </div>
-
-                                <button class="btn btn--md btn--round register_btn" type="submit">@lang('authlabel.register')</button>
+                                <button class="btn btn--md btn--round register_btn" type="submit">@lang('authlabel.emailplaceholder')</button>
                             </div><!-- end .login--form -->
                         </div><!-- end .cardify -->
                     </form>

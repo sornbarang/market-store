@@ -2295,11 +2295,11 @@ h6 {
   display: inline-block;
   padding: 0 5px;
   color: #56a72d;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   font-size: 15px;
   font-weight: 500;
   -webkit-border-radius: 100px;
-  border-radius: 100px;
+  border-radius: 5px;
   width:80px;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -2878,7 +2878,11 @@ h6 {
   color: #fff;
   padding: 0 7px;
 }
-
+div.dashboard__title div.breadcrumb > ul > li:nth-last-child(2):after{
+  content:normal;
+  color: #fff;
+  padding: 0 7px;
+}
 .breadcrumb ul li a {
   font-size: 15px;
   line-height: 70px;
@@ -16239,16 +16243,33 @@ ul.titlebtm > li:nth-of-type(2) p{font-size:13px;}
   line-height: 25px !important;
 }
 .c-price{
-  position: absolute;
+  /* position: absolute; */
   z-index: 9999;
-  right: 0;
+  /* right: 0; */
   max-width: 250px;
   /* background: #fff; */
   -webkit-border-radius: 0px 4px 0 0;
   border-radius:0px 4px 0 0; 
   background-color:rgba(86,167,45, 0.5);
 }
-.c-price span {
+/* .c-price span {
+  font-weight: 500;
+    font-size: 30px;
+    line-height: 30px;
+    color: #fff;
+    
+} */
+.c-hot{
+  position: absolute;
+  z-index: 9999;
+  left: 0;
+  max-width: 250px;
+  /* background: #fff; */
+  -webkit-border-radius: 0px 4px 0 0;
+  border-radius:0px 4px 0 0; 
+  background-color:rgba(86,167,45, 0.5);
+}
+.c-hot span {
   font-weight: 500;
     font-size: 36px;
     line-height: 30px;

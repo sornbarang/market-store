@@ -114,7 +114,7 @@
                                             <label for="exlicense">@lang('profileitemupload.discount')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
-                                                <input step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="0">
+                                                <input min="1" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="0">
                                             </div>
                                         </div>
                                     </div>

@@ -107,7 +107,7 @@
                                                 <label for="exlicense">@lang('profileitemupload.discount')</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">$</span>
-                                                    <input value="{{$data['product']->discount}}" step="0.01" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                                    <input value="{{$data['product']->discount}}" min="1" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
                                                 </div>
                                             </div>
                                         </div>

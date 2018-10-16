@@ -46,21 +46,57 @@
                         <p>{{ !empty($val->user->profile->bio) ? $val->user->profile->bio : '' }}</p>
                     </div>
                     <!-- end /.product-desc --> 
-                    <div class="product-purchase">
-                        <div class="row">
-                            <div class="col text-md-left col-xs-12 col-sm-6 col-md-6">
-                                <div class="price_love">
-                                    <span title="{{$val->price}}">$ {{str_limit($val->price,10)??0}}</span> 
+                    <div class="product-purchase"> 
+
+                        {{--
+                        <div class="w-100 text-price pt-1 pb-1">
+                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                <div class="row">
+                                    <div class="col-6 text-truncate text-left text-danger">
+                                        {{round($val->discount, 2)}}% Off
+                                    </div>
+                                    <div class="col-6 text-truncate text-right"> 
+                                        <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}</span> 
+                                    </div>
                                 </div>
+                            @else
+                                &nbsp;
+                            @endif
+                        </div>--}}
+                        <div class="row no-gutters d-flex content-justify-center align-items-center">
+                            <div class="col-8 text-truncate">
+                                <div class="row no-gutters">
+                                    <div class="col-md-8">
+                                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                            <div class="w-100 text-price text-center">
+                                                <span title="${{$val->price??0}}"><del>${{str_limit($val->price??0,5)}}<del></span> 
+                                            </div>
+                                        @else
+                                            <div class="w-100">
+                                                &nbsp;
+                                            </div>
+                                        @endif
+                                        <div class="w-100">
+                                            <div class="price_love w-100 text-center">
+                                                <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{str_limit(null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price,5)}}</span> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="white-space:normal;" class="col-md-4 text-center align-self-center text-danger font-weight-bold">
+                                        @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                            {{round($val->discount, 2)}} % Off
+                                        @else
+                                            &nbsp;
+                                        @endif
+                                    </div>
+                                </div> 
                             </div>
-                            <div class="cflexcenter col text-xs-right  col-xs-12 col-sm-6 col-md-6">
-                            <div class="sell">
+                            <div class="col-4 text-truncate"> 
                                 <a href="javascript:void(0)">
                                     <div class="raty rateproduct" data-rating="{{$val->averageRating}}">
                                         <input  type="hidden" name="score">
                                     </div>
                                 </a>
-                            </div>
                             </div>
                         </div>
                     </div><!-- end /.product-purchase --> 
