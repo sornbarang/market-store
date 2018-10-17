@@ -641,7 +641,6 @@
         // Loop over them and prevent submission
         var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
-            alert();
             if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
