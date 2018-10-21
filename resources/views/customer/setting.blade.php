@@ -68,6 +68,18 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label for="firstname">@lang('profilesetting.firstname')</label>
+                                                    <input name="firstname" value="{{Auth::user()->first_name??''}}" type="text" id="firstname" class="text_field" placeholder="@lang('profilesetting.firstname')">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="lastname">@lang('profilesetting.lastname')</label>
+                                                    <input name="lastname" value="{{Auth::user()->last_name??''}}" type="text" id="lastname" class="text_field" placeholder="@lang('profilesetting.lastname')"> 
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label for="acname">@lang('profilesetting.name')</label>
                                                     <input name="acname" value="{{Auth::user()->name}}" type="text" id="acname" class="text_field" placeholder="@lang('profilesetting.name')">
                                                 </div>
@@ -100,13 +112,18 @@
                                                 <div class="form-group">
                                                     <label for="password">@lang('profilesetting.password') <sup>*</sup></label>
                                                     <input name="password" type="password" id="password" class="text_field" placeholder="@lang('profilesetting.password')" >
+                                                    @if ($errors->has('password'))
+                                                        <span class="invalid-feedback">
+                                                            <strong>{{ $errors->first('password') }}</strong>
+                                                        </span> 
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="conpassword">@lang('profilesetting.conpass') <sup>*</sup></label>
-                                                    <input type="password" id="conpassword" class="text_field" placeholder="@lang('profilesetting.conpass')" >
+                                                    <label for="password_confirmation">@lang('profilesetting.conpass') <sup>*</sup></label>
+                                                    <input name="password_confirmation" type="password" id="password_confirmation" class="text_field" placeholder="@lang('profilesetting.conpass')" >
                                                     <div id="notmatch"><p>Your password not match</p></div>
                                                 </div>
                                                
@@ -127,7 +144,7 @@
                                                     <option value="">Select a City/Province</option>
                                                     <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='phnom penh'?'selected':''}} value="Phnom Penh">Phnom Penh</option>
                                                     <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='preah sihanouk'?'selected':''}} value="Preah Sihanouk">Preah Sihanouk</option>
-                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='preah sihanouk'?'selected':''}} value="Kampong Cham">Kampong Cham</option>
+                                                    <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kampong cham'?'selected':''}} value="Kampong Cham">Kampong Cham</option>
                                                     <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='siem reap'?'selected':''}} value="Siem Reap">Siem Reap</option>
                                                     <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='battambang'?'selected':''}} value="Battambang">Battambang</option>
                                                     <option {{trim(strtolower(null!==Auth::user()->profile?Auth::user()->profile->location:''))=='kandal'?'selected':''}} value="Kandal">Kandal</option>

@@ -29,7 +29,7 @@
                 <div class="col-lg-4">
                     <aside class="sidebar sidebar_author">
                         <div class="author-card sidebar-card">
-                            <div class="author-infos">
+                            <div class="author-infos mb-0 pb-0">
                                 <div class="author_avatar">
                                     @if(isset($avatar) && !empty($avatar))
                                         <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D">
@@ -122,11 +122,11 @@
                                 <!-- end /.social -->
 
 
-                                <div class="author-btn">
+                                <!-- <div class="author-btn">
 
                                     <a href="#" class="btn btn--md btn--round">@lang('profile.follow')</a>
 
-                                </div>
+                                </div> -->
                                 <!-- end /.author-btn -->
                             </div>
                             <!-- end /.author-infos -->

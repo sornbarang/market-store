@@ -49,9 +49,9 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form method="post" action="{{route('market.myitemupload')}}" id="frmUploadFront" enctype="multipart/form-data">
+                        <form method="post" action="{{route('market.myitemupload')}}" id="frmUploadFront" enctype="multipart/form-data" class="needs-validation" novalidate>
                             @csrf
-                            <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
+                            <input value="{{ old('sumernotehidden') }}" type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <input type="hidden" name="lastchildid" id="lastchildid">
                             <div class="upload_modules"> 
                                 <div class="modules__content">
@@ -82,30 +82,29 @@
                                     </div>
                                     <!-- end sub cat -->
                                     <div class="form-group">
-                                        <label for="product_name">@lang('profileitemupload.productname') <span>(Max 100 characters)</span></label>
-                                        <input required type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')">
-                                        @if ($errors->any())
+                                        <label for="product_name">@lang('profileitemupload.productname') <span class="text-danger">*</span> <span>(Max 100 characters)</span></label>
+                                        <input class="form-control" min="1" max="100" value="{{ old('name') }}" type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')" required>
+                                        <div class="invalid-feedback">
+                                            Please privice product name.
+                                        </div>
+                                        @if ($errors->has('name'))
                                             <div class="alert alert-danger" style="margin:0 !important;padding:0;">
                                                 <ul>
-                                                    <li>{{ $errors->getBag('default')->first('name') }}</li> 
-                                                    {{--
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach --}}
+                                                    <li>{{ $errors->first('name') }}</li>
                                                 </ul>
-                                            </div>
+                                            </div> 
                                         @endif
-                                    </div>
+                                    </div> 
                                     <div class="form-group no-margin">
                                         <p class="label">@lang('profileitemupload.productdes')</p>
-                                        <div id="trumbowyg-demo"></div>
+                                        <div id="trumbowyg-demo">{!! old('sumernotehidden') !!}</div>
                                     </div> 
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label for="exlicense">@lang('profileitemupload.price')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input step="0.01" min="0" max="999999999" name="price" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                                <input value="{{ old('price') }}" step="0.01" min="0" max="999999999" name="price" type="number" id="exlicense" class="text_field" placeholder="00.00">
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +113,7 @@
                                             <label for="exlicense">@lang('profileitemupload.discount')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
-                                                <input min="1" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="0">
+                                                <input value="{{ old('discount') }}" min="1" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="0">
                                             </div>
                                         </div>
                                     </div>
@@ -124,6 +123,13 @@
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploadfile') </h3> 
                                     <span>750 x 430 (width,height) is standard</span>
+                                    @if ($errors->has('photos'))
+                                        <div class="alert alert-danger" style="margin:0 !important;padding:0;">
+                                            <ul>
+                                                <li>{{ $errors->first('photos') }}</li>  
+                                            </ul>
+                                        </div>
+                                    @endif 
                                 </div><!-- end /.module_title -->
                                 <div class="row">
                                     @for($i=0;$i<4;$i++)
@@ -131,7 +137,7 @@
                                             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="avatar-upload">
                                                     <div class="avatar-edit">
-                                                        <input name="photos[]" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                        <input name="photos[]" type='file' id="imageUpload"  />
                                                         <label for="imageUpload"></label>
                                                     </div>
                                                     <div class="avatar-preview">
@@ -144,7 +150,7 @@
                                             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="avatar-upload">
                                                     <div class="avatar-edit">
-                                                        <input name="photos[]" type='file' id="imageUpload{{$i}}" accept=".png, .jpg, .jpeg" />
+                                                        <input name="photos[]" type='file' id="imageUpload{{$i}}"  />
                                                         <label for="imageUpload{{$i}}"></label>
                                                     </div>
                                                     <div class="avatar-preview">
@@ -154,7 +160,7 @@
                                                 </div>
                                             </div>
                                         @endif 
-                                    @endfor 
+                                    @endfor  
                                 </div>
                             </div>
                             <!-- submit button -->

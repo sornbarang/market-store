@@ -122,6 +122,7 @@ class CustomerController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:100',
             'email' => 'required',
+            // 'password' => 'required|confirmed|min:6'
         ]); 
         if ($validator->fails()) {
             return redirect('market/mysetting')
@@ -192,10 +193,13 @@ class CustomerController extends Controller
                 } 
             }
             $user->name = $request->name??'';
+            $user->first_name = $request->firstname??'';
+            $user->last_name = $request->lastname??'';
             $user->slug = $request->name??'';
             if( ! $request->password == ''){
                 $user->password=$request->password;
             }
+            // dd( $request->location);
             $user->profile()->update([
                 'phone' => $request->phone,
                 'location' => $request->location,
@@ -312,7 +316,8 @@ class CustomerController extends Controller
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
-                // 'body' => 'required',
+                'photos' => 'required', 
+                'photos.*' => 'mimes:jpg,jpeg,png'
             ]); 
             if ($validator->fails()) {
                 return redirect('market/myitemupload')
@@ -412,11 +417,10 @@ class CustomerController extends Controller
         $data['category'] = $this->getParentsCategory();  
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
-                'name' => 'required|max:100',
-                // 'body' => 'required',
+                'name' => 'required|max:100'
             ]); 
             if ($validator->fails()) {
-                return redirect('market/myEditItem/'.$id)
+                return redirect('market/mymanageitem')
                     ->withErrors($validator)
                     ->withInput();
             } 

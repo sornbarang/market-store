@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.css">
     <!-- endinject -->
-
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon/favicon-96x96.png') }}">
 </head>
@@ -641,9 +640,9 @@
         // Loop over them and prevent submission
         var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+            if (form.checkValidity() === false) { 
+                event.preventDefault();
+                event.stopPropagation();
             }
             form.classList.add('was-validated');
         }, false);
@@ -679,7 +678,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     });
     $(document).on('click', 'form#frmupdateprofile button[type=submit]', function(e) {
         var pass=$('form#frmupdateprofile #password').val();
-        var cpass=$('form#frmupdateprofile #conpassword').val();
+        var cpass=$('form#frmupdateprofile #password_confirmation').val();
         if(pass != cpass){
             $('form#frmupdateprofile #notmatch').focus().show();
             e.preventDefault(); 

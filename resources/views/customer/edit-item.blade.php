@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form method="post" action="{{route('market.edititem',$data['product']->slug)}}" id="frmUpdateFront" enctype="multipart/form-data">
+                        <form method="post" action="{{route('market.edititem',$data['product']->slug)}}" id="frmUpdateFront" enctype="multipart/form-data" class="needs-validation" novalidate>
                             @csrf
                             <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <input type="hidden" name="lastchildid" id="lastchildid">
@@ -73,18 +73,17 @@
                                         </div>
                                         <!-- end sub cat -->
                                         <div class="form-group">
-                                            <label for="product_name">@lang('profileitemupload.productname') <span>(Max 100 characters)</span></label>
-                                            <input value="{{$data['product']->name}}" required type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')">
-                                            @if ($errors->any())
+                                            <label for="product_name">@lang('profileitemupload.productname') <span class="text-danger">*</span> <span>(Max 100 characters)</span></label>
+                                            <input min="1" max="100" value="{{$data['product']->name}}" required type="text" id="product_name" name="name" class="form-control text_field" placeholder="@lang('profileitemupload.productname')">
+                                            <div class="invalid-feedback">
+                                                Please privice product name.
+                                            </div>
+                                            @if ($errors->has('name'))
                                                 <div class="alert alert-danger" style="margin:0 !important;padding:0;">
                                                     <ul>
-                                                        <li>{{ $errors->getBag('default')->first('name') }}</li> 
-                                                        {{--
-                                                        @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                        @endforeach --}}
+                                                        <li>{{ $errors->first('name') }}</li>
                                                     </ul>
-                                                </div>
+                                                </div> 
                                             @endif
                                         </div>
                                         <div class="form-group no-margin">
@@ -107,7 +106,7 @@
                                                 <label for="exlicense">@lang('profileitemupload.discount')</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">$</span>
-                                                    <input value="{{$data['product']->discount}}" min="1" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
+                                                    <input value="{{$data['product']->discount}}" min="0" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="00.00">
                                                 </div>
                                             </div>
                                         </div>
@@ -126,6 +125,13 @@
                                     $img3=isset($mediaItems[3])?$mediaItems[3]->id.'/'.$mediaItems[3]->file_name:''; 
                                 @endphp
                                     <h3>@lang('profileitemupload.uploadfile')</h3>
+                                    @if ($errors->has('photos'))
+                                        <div class="alert alert-danger" style="margin:0 !important;padding:0;">
+                                            <ul>
+                                                <li>{{ $errors->first('photos') }}</li>  
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </div><!-- end /.module_title -->
                                 <div class="row"> 
                                     <div class="col-md-4">
