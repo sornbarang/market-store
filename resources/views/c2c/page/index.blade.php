@@ -21,16 +21,16 @@
                                     <a href="{{route('market.dynamiccat',$val->slug)}}">
                                         <div class="statement_info_card pr-0 pl-0 p-lg-4" >
                                             <div class="info_wrap">
-                                            @php 
-                                                if(isset($val->icon)){
-                                                    $padding = '';
-                                                    if(strpos($val->icon, 'fa-bolt') !== false){
-                                                        $padding='padding:20px 27px';
-                                                    }else if( strpos($val->icon, 'fa-ellipsis-h') ){
-                                                        $padding='padding:20px 24px';
+                                                @php 
+                                                    if(isset($val->icon)){
+                                                        $padding = '';
+                                                        if(strpos($val->icon, 'fa-bolt') !== false){
+                                                            $padding='padding:20px 27px';
+                                                        }else if( strpos($val->icon, 'fa-ellipsis-h') ){
+                                                            $padding='padding:20px 24px';
+                                                        }
                                                     }
-                                                }
-                                            @endphp 
+                                                @endphp 
                                                 
                                                 @if(isset($val->img))
                                                 <div data-toggle="tooltip" data-placement="bottom" title="{{ucfirst($val->slug)}}" class="icon greenbackground" style="padding: 16px 23px;">
@@ -209,7 +209,7 @@
                                                         <div class="col-8 text-truncate">
                                                             <div class="row no-gutters">
                                                                 <div class="col-md-8">
-                                                                     @if(null !==$getprops->discount && is_numeric($getprops->discount) && (int)$getprops->discount !=0)
+                                                                    @if(null !==$getprops->discount && is_numeric($getprops->discount) && (int)$getprops->discount !=0)
                                                                         <div class="w-100 text-price text-center">
                                                                             <span title="${{$getprops->price??0}}"><del>${{str_limit($getprops->price??0,5)}}<del></span> 
                                                                         </div>

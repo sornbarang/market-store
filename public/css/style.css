@@ -16321,3 +16321,6 @@ div.rateproduct.cproduct img{
   font-size: 15px;
   font-weight: 500;
 }
+#getProductOfCategory{
+  text-transform: capitalize;
+}

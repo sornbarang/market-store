@@ -78,11 +78,14 @@ class C2cController extends Controller
             if($getFirstMedia){
                 $pros[$key]['image']= Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
             } 
+            $pros[$key]['avatar']='';
             // get avatar
-            $media = $val->user->profile->getMedia(); 
-            foreach($media as $m){   
-                if($val->user->profile->avatar == $m->id){
-                    $pros[$key]['avatar']=Storage::url($m->id.'/'.$m->file_name);  
+            if(null !==$val->user->profile){
+                $media = $val->user->profile->getMedia(); 
+                foreach($media as $m){   
+                    if($val->user->profile->avatar == $m->id){
+                        $pros[$key]['avatar']=Storage::url($m->id.'/'.$m->file_name);  
+                    }
                 }
             }
             $pros[$key]['rateavg']=$val->averageRating();
