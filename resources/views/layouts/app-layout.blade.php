@@ -610,7 +610,7 @@
 <!-- inject:js -->
 <script src="{{ asset('js/vendor/jquery/jquery-1.12.3.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/4.13.0/bodymovin.js" type="text/javascript"></script>
 <script src="{{ asset('js/vendor/jquery/uikit.min.js') }}"></script>
 <script src="{{ asset('js/vendor/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/vendor/chart.bundle.min.js') }}"></script>
@@ -649,6 +649,17 @@
         });
     }, false);
 })();
+function lottie(json,elm,option){ 
+    var animation = bodymovin.loadAnimation({
+        container: elm[0], // Required
+        path:json, // Required
+        renderer: 'svg/canvas/html', // Required
+        loop: true, // Optional
+        autoplay: true, // Optional,
+        name: "Hello World", // Name for future reference. Optional.
+    });
+    return animation;
+}
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');  
     $(document).on('click', '#deletepro', function(e) {
         $('#frmdeleteproduct').attr('action',$(this).data('route'));
@@ -722,7 +733,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         // e.preventDefault();
         $(this).submit(); 
     });
-    $(document).ready(function(){ 
+    $(document).ready(function(){  
         var xhr=null;  
         var isMobile = false; //initiate as false
         // device detection
@@ -916,35 +927,27 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             xhr=$.ajax({
                 url: this_.data('route'),
                 type: 'GET', 
+                datatype: "html",
+                beforeSend: function()
+                { 
+                    var elm = this_.parents('.blog-explor-breadcrum').next().find('#lottie');
+                        elm.show();
+                    var anim= lottie('{{asset("json/zoom_when_loading_data.json")}}',elm,'play'); 
+                        anim.setSpeed(1.5);
+                },
                 headers: {
                     'X-CSRF-Token':CSRF_TOKEN,
-                },
-                success: function( response ) {  
-                    console.log(response);
-                    var owl=this_.parent().parent().parent().parent().parent().parent().parent().next().children().find('.partners');
-                    var pushroute=this_.parent().parent().find('#exploreCategory');
-                    if(response.length > 0){ 
+                }, 
+                success: function( response ) {   
+                    var elm = this_.parents('.blog-explor-breadcrum').next().find('#lottie');
+                        elm.hide();
+                    var anim=lottie('{{asset("json/zoom_when_loading_data.json")}}',elm,'destroy'); 
+                       anim.destroy();
+                       this_.parents('.blog-explor-breadcrum').next().find('#lottie').hide();
+                    var owl=this_.parents('.blog-explor-breadcrum').next().children().find('.partners');
                         owl.empty();
                         owl.trigger('destroy.owl.carousel');
-                        $.each( response, function( key, value ) {  
-                            var route='{{route("market.productdetail")}}/'+value.slug;
-                            if(value.avatar==''){
-                                var avatar="{{asset('images/auth3.jpg')}}";
-                            }else{
-                                var avatar=value.avatar;
-                            }
-                            if(value.image==undefined){
-                                var image ="{{asset('imgs/default/conversions/default.jpg')}}";
-                            }else{
-                                var image = value.image;
-                            }
-                            owl.append('<div class="owl-item" style="width: 198px; margin-right: 30px;"><div class="partner"> <!-- start .single-product --> <div class="product product--card product--card-small"><div class="hot position-absolute text-white bg-danger p-1 font-weight-bold rounded-0" style="z-index:9;max-width:100px;"> HOT </div> <div class="product__thumbnail"> <img src="'+image+'" alt="Product Image"> <div class="prod_btn"> <a href="'+route+'" class="transparent btn--sm btn--round">More Info</a> </div> <!-- end /.prod_btn --> </div> <!-- end /.product__thumbnail --> <div class="product-desc"> <a href="#" class="product_title"> <h4 class="trucate text-capitalize" title="'+value.name+'">'+value.name+'</h4> </a> <ul class="titlebtm"> <li> <img class="auth-img" src="'+avatar+'" alt="author image"> <p> <a href="#">'+value.user.name+'</a> </p> </li> <li class="out_of_class_name"> <div class="row no-gutters"> <div class="col col-md-4"> <p> <span class="flag-icon flag-icon-kh"></span> <span>Cam</span> </p> </div> <div class="col col-md-8 text-right"> <p> <span>Phnom penh</span> </p> </div> </div> </li> </li> </ul> </div> <!-- end /.product-desc --> <div class="product-purchase"> <div class="price_love"> <span title="$'+value.price+'">$'+value.price+'</span> </div> <a href="javascript:void(0)"> <div class="rateproduct" data-rating="'+value.rateavg+'"><input  type="hidden" name="score"></div> </a> </div> <!-- end /.product-purchase --> </div> <!-- end /.single-product --> </div></div>');
-                        });  
-                        if(response.length > 5){
-                           $('.owl-nav').show();
-                        }else{
-                            $('.owl-nav').hide();
-                        } 
+                        owl.html(response); 
                         $('div.rateproduct').raty(
                             { 
                                 starOff   :"{{asset('imgs/no.png')}}",
@@ -995,13 +998,6 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                                 }
                             }
                         }); 
-                        pushroute.attr('href',this_.data('routepro'));
-                    }else{
-                        owl.empty();
-                        owl.append('<p>No product</p>');
-                        pushroute.attr('href','javascript:void(0)');
-                        $('.owl-nav').hide();
-                    }
                 },
                 error: function( data ) {
                     console.log(data);

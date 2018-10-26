@@ -16324,3 +16324,6 @@ div.rateproduct.cproduct img{
 #getProductOfCategory{
   text-transform: capitalize;
 }
+#lottie{
+  display:none;
+}
