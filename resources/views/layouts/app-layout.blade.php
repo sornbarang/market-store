@@ -649,6 +649,11 @@
         });
     }, false);
 })();
+var elm = $('.container .blog-explor-breadcrum .roket');
+$(elm).each(function(e){ 
+    var anim= lottie('{{asset("json/bms-rocket.json")}}',$(this),'play'); 
+        anim.setSpeed(1.5);
+})
 function lottie(json,elm,option){ 
     var animation = bodymovin.loadAnimation({
         container: elm[0], // Required
@@ -1006,7 +1011,7 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         }
         $( document ).on( ios_devices, "#getProductOfCategory", function(e){  
             $(this).parent().parent().find('li').first().children().attr('class','');
-            $(this).parent().parent().find('li').children().attr('class','');
+            $(this).parent().parent().find('li:not(:last-child)').children().attr('class','');
             $(this).attr('class','activecat'); 
             e.preventDefault(); 
             if (e.type == "click") documentClick = true; 

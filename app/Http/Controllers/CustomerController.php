@@ -50,7 +50,7 @@ class CustomerController extends Controller
             $data['product']=$post;
         }
 
-        $isFollowed = $user->isFollowedBy(Auth::user());
+        $isFollowed = $user->isFollowedBy($user);
         $data['isFollowed'] = $isFollowed;
 
         $data['breadcrub']='store';

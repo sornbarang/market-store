@@ -77,8 +77,9 @@
                                                     <a id="getProductOfCategory" data-routepro="{{$val['dynamiccat']}}" data-route="{{$val['link']}}" href="javascript:void(0)" style="color:#000;" class="text-capitalize {{$key==0?'activecat':''}}">{{$val['name']}}</a>
                                                 </li>
                                             @endforeach
-                                            <li style="float:right;"> 
-                                                <a  href="{{$firstRoute}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <span style="font-size:20px;color:#56a72d" class="lnr lnr-rocket"></span></a>
+                                            <li style="float:right;">   
+                                                {{--<a  href="{{$firstRoute}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <span style="font-size:20px;color:#56a72d" class="lnr lnr-rocket"></span></a>--}}
+                                                <a  class="d-flex justify-content-center align-items-center" href="{{$firstRoute}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <div class="position-relative roket" style="width:35px;height:35px;float:right"></div> </a>
                                             </li>
                                         </ul>
                                     </div> 

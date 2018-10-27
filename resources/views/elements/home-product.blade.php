@@ -1,9 +1,11 @@
 @if(count($cats['product']) > 0) 
     @foreach($cats['product'] as $lpk => $getprops)
         @php 
-            $avatar='';  
+            $avatar='';
+            $location='N/A';  
             if(null !== $getprops->user->profile){ 
                 $media = $getprops->user->profile->getMedia(); 
+                $location = $getprops->user->profile->location;
                 foreach($media as $val){   
                     if($getprops->user->profile->avatar == $val->id){
                         $avatar=$val->id.'/'.$val->file_name;  
@@ -61,7 +63,7 @@
                                 </div>
                                 <div class="col col-md-8 text-right">
                                     <p> 
-                                        <span>Phnom penh</span>
+                                        <span>{{$location}}</span>
                                     </p>                                                                 
                                 </div>
                             </div>
