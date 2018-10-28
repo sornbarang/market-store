@@ -83,11 +83,11 @@
                         
                     @if (Route::has('login'))
                         @auth 
-                        <a class="btn btn--xs mr-3 align-self-center" href="{{ route('logout') }}"
+                        {{-- <a class="btn btn--xs mr-3 align-self-center" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
+                        document.getElementById('logout-form').submit();"> 
                         @lang('authlabel.logout')
-                        </a> 
+                        </a> --}}
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
