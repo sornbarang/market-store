@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProductsAds as Product;
 
 class FeedController extends Controller
 {
@@ -13,7 +14,9 @@ class FeedController extends Controller
      */
     public function index()
     {
-        return view('feed');
+        $products = Product::get();
+        // dd($products[0]->getFirstMedia()->file_name);
+        return view('feed', compact('products'));
     }
 
     /**

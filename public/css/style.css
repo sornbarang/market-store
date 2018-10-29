@@ -15989,6 +15989,9 @@ span.counter {
     width: 100%;
   }
 }
+#feed-custom-container {
+  max-width: 81vw !important;
+}
 .myfeedback{
   font-size: 15px;
   color: #555555;
