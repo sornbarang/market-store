@@ -59,11 +59,52 @@
                                 </div> 
                                 <div class="author">
                                     <h4>{{$data['user']->name}}</h4>
-                                    <p>Phone: {{$data['user']->profile->phone}}</p>
-                                    <p>Signed Up: {{$data['user']->created_at}}</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="no-gutters row d-flex justify-content-center align-items-center">
+                                                <div class="col-md-12 text-center">Phone : {{$data['user']->profile->phone??'N/A'}}</div>
+                                            </div>
+                                             @php 
+                                                if($data['totalRate'] >=4){
+                                                    $totalRate=3;
+                                                }else if($data['totalRate'] < 4 && $data['totalRate'] >= 2 ){
+                                                    $totalRate=2;
+                                                }else if($data['totalRate'] < 2 && $data['totalRate'] >= 1 ){
+                                                    $totalRate=1;
+                                                }else{
+                                                    $totalRate=2;
+                                                }
+                                            @endphp
+                                            <div class="no-gutters row d-flex justify-content-center align-items-center">
+                                                <div class="col-md-6 text-right">
+                                                    Total rates :
+                                                </div>
+                                                <div class="col-md-6 d-flex justify-content-start align-items-center"> 
+                                                    <div class="raty total"></div>&nbsp; ({{$data['totalRate']??'0'}})
+                                                </div>
+                                            </div>
+                                            <div class="no-gutters row d-flex justify-content-center align-items-center">
+                                                <div class="col-md-12 text-center">Signed Up : {{$data['user']->created_at}}</div> 
+                                            </div>
+                                        </div>  
+                                    </div>  
+                                    <div class="row p-2 no-gutters">
+                                        <div class="col-md-6 pr-1">
+                                            <div class="author-info pcolorbg mb-0">
+                                                <p>Total Follower</p>
+                                                <h3>36,957</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 pl-1">
+                                            <div class="author-info mcolorbg4 mb-0">
+                                                <p>Total Pro</p>
+                                                <h3>{{count($data['product'])}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- end /.author -->
-
+                                {{--
                                 <div class="author-badges">
                                     <ul class="list-unstyled">
                                         <li>
@@ -117,7 +158,7 @@
                                             </span>
                                         </li>
                                     </ul>
-                                </div>
+                                </div>--}}
                                 <!-- end /.author-badges -->
 
                                 <div class="social social--color--filled">
@@ -152,14 +193,17 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
-
-                                    @if(!$data['isFollowed'])
-                                            <a href="{{ route('user.follow', $data['user']->id) }}" class="btn btn--md btn--round">Follow</a>
-                                    @else
-                                            <a href="{{ route('user.unfollow', $data['user']->id) }}" class="btn btn--md btn--round">UnFollow</a>
-                                    @endif
-
-
+                                    @if (Route::has('login'))
+                                        @auth 
+                                            @if($data['user']->id!=Auth::user()->id)
+                                                @if(!$data['isFollowed'])
+                                                    <a href="{{ route('user.follow', $data['user']->id) }}" class="btn btn--md btn--round">Follow</a>
+                                                @else
+                                                    <a href="{{ route('user.unfollow', $data['user']->id) }}" class="btn btn--md btn--round">UnFollow</a>
+                                                @endif
+                                            @endif 
+                                        @endauth
+                                    @endif 
                                 </div>
                                 <!-- end /.author-btn -->
                             </div>
@@ -233,6 +277,7 @@
 
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
+                        {{--
                         <div class="col-md-4 col-sm-4"> 
                             <div class="author-info pcolorbg">
                                 <p>Total Follower</p>
@@ -273,7 +318,7 @@
                             </div>
                         </div>
                         <!-- end /.col-md-4 -->
-
+                        --}}             
                         <div class="col-md-12 col-sm-12">
                             <div class="author_module">
                                 @if(isset($cover) && !empty($cover))

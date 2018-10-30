@@ -92,7 +92,7 @@ export default {
       isTyping: false,
       loading:false,
       show:false,
-       btnsend:false,
+      btnsend:false,
     };
   },
   computed: {
@@ -211,10 +211,10 @@ export default {
         console.log(this.friend);
         console.log(e);
         console.log(window.auth);
-        // if(this.friend.session.id === e.chat.session_id){ 
+        if(window.auth.id === e.touser){ 
             this.friend.session.open ? this.read() : "";
             this.chats.push({ message: e.content, type: 1, sent_at: "Just Now",'profile':e.profile });
-        // }
+        }
         
       }
     );

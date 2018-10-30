@@ -359,6 +359,9 @@ a {
 .scolor {
   color: #7347c1;
 }
+.lnr-heart,.lnr-bubble{
+  font-size:20px;
+}
 
 /* Background Image */
 .bgimage {
@@ -16283,7 +16286,7 @@ ul.titlebtm > li:nth-of-type(2) p{font-size:13px;}
   color:#fff;
 }
 .rateproduct img,.raty.rateproduct img{
-  max-width:16px;
+  max-width:18px;
   display:inline !important
 }
 .raty img,.rateproductmanage img,.rateproductprofile img,.staronly img,.userrateproduct img,.totalrate img{
@@ -16328,4 +16331,7 @@ div.rateproduct.cproduct img{
 }
 #lottie{
   display:none;
+}
+form.frmlogincustom .form-control:focus{
+  box-shadow:inherit !important;
 }

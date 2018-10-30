@@ -20,7 +20,7 @@ class ChatController extends Controller
 
         $message->createForReceive($session->id, $request->to_user);
 
-        broadcast(new PrivateChatEvent($message->content, $chat));
+        broadcast(new PrivateChatEvent($message->content, $chat,$request->to_user));
 
         return response($chat->id, 200);
     }

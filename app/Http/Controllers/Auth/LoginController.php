@@ -19,7 +19,48 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    protected function credentials(Request $request)
+    { 
+        $field = $this->field($request);
 
+        return [
+            $field => $request->get($this->username()),
+            'password' => $request->get('password'),
+            'verified' => 1,
+        ];
+    }
+    /**
+     * Determine if the request field is email or username.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string
+     */
+    public function field(Request $request)
+    {
+        $email = $this->username();
+
+        return filter_var($request->get($email), FILTER_VALIDATE_EMAIL) ? $email : 'name';
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $field = $this->field($request);
+
+        $messages = ["{$this->username()}.exists" => 'Account is not activated or disabled.'];
+
+        // dd('redirect');
+        $this->validate($request, [
+            $this->username() => "required|exists:users,{$field},verified,1",
+            'password' => 'required',
+        ], $messages);
+
+    }
     protected function authenticated(Request $request, $user)
     {
         if (!$user->verified) {

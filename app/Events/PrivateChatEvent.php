@@ -13,16 +13,18 @@ class PrivateChatEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $content;
     public $chat;
+    public $touser;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($content, $chat)
+    public function __construct($content, $chat,$touser)
     {
         $this->content = $content;
         $this->chat = $chat;
+        $this->touser=$touser;
         $this->dontBroadcastToCurrentUser();
     }
 

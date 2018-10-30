@@ -266,7 +266,7 @@
                                     <div class="prev-slide">
                                         <div class="row position-absolute w-100 no-gutters">
                                             <div class="col-3 text-center">
-                                                 <div class="hot text-white bg-danger p-2 font-weight-bold rounded-0" style="z-index:9;max-width:100px;font-size:25px;">
+                                                 <div class="hot text-white bg-danger p-2 font-weight-bold rounded-0" style="z-index:9;max-width:100px;font-size:20px;">
                                                     HOT
                                                 </div>
                                             </div>
@@ -276,7 +276,7 @@
                                                 @endif
                                                 <h1>
                                                     @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
-                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup>{{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}} <del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{str_limit($data['product']->price,6)??0}} </del></span>
+                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup><del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{str_limit($data['product']->price,6)??0}} </del> {{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}} </span>
                                                     @else
                                                         <span class="c-price text-white" title="${{$data['product']->price??0}}"> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
                                                     @endif
@@ -300,7 +300,7 @@
                                                 @endif
                                                 <h1>
                                                     @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
-                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup>{{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}} <del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{str_limit($data['product']->price,6)??0}} </del></span>
+                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup> <del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{str_limit($data['product']->price,6)??0}} </del> {{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}</span>
                                                     @else
                                                         <span class="c-price text-white" title="${{$data['product']->price??0}}"> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
                                                     @endif
@@ -771,7 +771,50 @@
 
                         </div><!-- end /.author-card -->
                         <div class="sidebar-card card--metadata">
-                            <ul class="data">
+                            <div class="row">
+                                <div class="col-md-4 text-center border-right">
+                                    <div class="row">
+                                        <div class="col-md-12 pb-3">
+                                            <span class="lnr lnr-heart scolor"></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span>35</span>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-4 text-center border-right">
+                                    <div class="row">
+                                        <div class="col-md-12 pb-3">
+                                            <span class="lnr lnr-bubble mcolor3"></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span>{{$data['getUserRateOfProduct']->count()??0}}</span>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    @php 
+                                        if($data['totalAvg'] >=4){
+                                            $totalAvg=3;
+                                        }else if($data['totalAvg'] < 4 && $data['totalAvg'] >= 2 ){
+                                            $totalAvg=2;
+                                        }else if($data['totalAvg'] < 2 && $data['totalAvg'] >= 1 ){
+                                            $totalAvg=1;
+                                        }else{
+                                            $totalAvg=2;
+                                        }
+                                    @endphp
+                                    <div class="row">
+                                        <div class="col-md-12 pb-3">
+                                            <div class="raty" data-score="{{$totalAvg??2}}"></div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <span>{{number_format($data['totalAvg'], 2, '.', ',')}} ( {{$data['totalRate']}} )</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           {{-- <ul class="data">
                                 <li class="p-2">
                                     <p>
                                         <span class="lnr lnr-heart scolor"></span>@lang('frontlabel.favourites')</p>
@@ -788,7 +831,8 @@
                                     <span>6,589</span>
                                 </li> 
                             </ul>
-                            <div class="row p-2">
+                            --}}
+                            {{--<div class="row p-2">
                                 @php 
                                     if($data['totalAvg'] >=4){
                                         $totalAvg=3;
@@ -803,6 +847,7 @@
                                 <div class="col-7 col-md-6"><div class="raty" data-score="{{$totalAvg??2}}"></div></div>
                                 <div class="col-5 col-md-6  text-right"><b>{{number_format($data['totalAvg'], 2, '.', ',')}} ( {{$data['totalRate']}} Votes )</b></div>
                             </div>
+                            --}}
                         </div>
                         <!-- end /.sidebar-card --> 
                     </aside><!-- end /.aside -->

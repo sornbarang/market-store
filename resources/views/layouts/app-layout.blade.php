@@ -65,7 +65,7 @@
                 <div class="col-lg-8 offset-lg-1 col-md-9 col-6 v_middle align-self-center">
                     <!-- start .author-area -->
                     <!-- d-flex justify-content-center align-items-center -->
-                    <div class="author-area h-100 d-lg-flex">  
+                    <div class="author-area h-100 d-md-flex">  
                     <!--start .author__notification_area -->
                     @if (Route::has('login')) 
                         @auth
@@ -174,54 +174,83 @@
                                             </ul>
                                         </div>
                                     @endauth
-                                @endif
-
+                                @endif 
                         </div>
                         <!--end /.author-author__info-->
-                        @else
-                            <div class="row h-100">
-                            <form class="frmlogincustom needs-validation" method="POST" action="{{ route('login') }}"  novalidate>
-                            @csrf
-                                <div class="row"> 
-                                    <div class="col-md-10">
-                                         <div class="row">
-                                            <div class="col-md-6">
-                                               <label for="exampleInputEmail1" class="m-0 p-0 text-white">@lang('authlabel.email')</label>
-                                               <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" style="height:40px;" id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="@lang('authlabel.email')" name="email" value="{{ old('email') }}" required autofocus>
-                                                @if ($errors->has('email'))
-                                                    <span class="invalid-feedback text-white">
-                                                        <strong>{{ $errors->first('email') }}</strong>
-                                                    </span>
-                                                @else
-                                                    <div class="invalid-feedback text-white">
-                                                        <strong> Please check your email address.</strong>
+                        @else 
+                            @if (\Request::route()->getName() != 'login')  
+                                
+                                <div class="row h-100">
+                                    <form class="frmlogincustom needs-validation" method="POST" action="{{ route('login') }}"  novalidate>
+                                    @csrf
+                                        <div class="row"> 
+                                            <div class="col-md-10">
+                                                <div class="row">
+                                                    <div class="col-md-6"> 
+                                                        <label for="validationTooltipUsername" class="m-0 p-0 text-white">@lang('authlabel.email')</label>
+                                                        <div class="input-group"> 
+                                                                <input  style="height:40px;" id="user_name" type="text" class="rounded-right bg-white text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Email Or Name" name="email" value="{{ old('email') }}" required autofocus>
+                                                                
+                                                                @if ($errors->has('email'))
+                                                                    <span class="invalid-tooltip text-white w-100">
+                                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                                    </span>
+                                                                @else
+                                                                    <div class="invalid-tooltip w-100">
+                                                                        <strong> Please login a unique and valid username or email.</strong>
+                                                                    </div> 
+                                                                @endif
+                                                        </div>
                                                     </div> 
-                                                @endif
-                                            </div>
-                                            <div class="col-md-6">
-                                               <label for="exampleInputEmail1" class="m-0 p-0 text-white">@lang('authlabel.password')</label>
-                                               <div class="row d-flex flex-nowrap">
-                                                    <div class="col-md-12">
-                                                        <input placeholder="@lang('authlabel.password')" style="height:40px;" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                                                    </div>
-                                                    <button  type="submit" class="btn btn-primary btn-sm">@lang('authlabel.login')</button>
-                                               </div>
-                                                @if ($errors->has('password'))
-                                                    <span class="invalid-feedback text-white">
-                                                        <strong>{{ $errors->first('password') }}</strong>
-                                                    </span>
-                                                @else 
-                                                    <div class="invalid-feedback">
-                                                        Please enter your password.
-                                                    </div>
-                                                @endif
-                                                <h6 class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ? or <a href="{{ route('register') }}" class="text-white">@lang('authlabel.signup')</a></small></h6> 
-                                            </div>  
+                                                    <div class="col-md-6">
+                                                        <div class="row d-flex flex-nowrap">
+                                                            <div class="col-md-12">
+                                                                <label for="validationTooltipUsername" class="m-0 p-0 text-white">@lang('authlabel.password')</label>
+                                                                <div class="input-group"> 
+                                                                    <input name="password" style="height:40px;" class="border-0 form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" type="password" placeholder="@lang('authlabel.password')" aria-describedby="validationTooltipUsernamePrepend" required>
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text bg-white border-0 rounded-right" id="password">
+                                                                        @if ($errors->has('password'))
+                                                                             <i class="text-danger fa fa-lg fa-exclamation-circle" aria-hidden="true"></i>
+                                                                        @else 
+                                                                            &nbsp;
+                                                                        @endif 
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="invalid-tooltip text-white w-100">
+                                                                        <strong> Please choose  valid @lang('authlabel.password').</strong>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button  type="submit" class="align-self-end btn btn-primary btn-sm">@lang('authlabel.login')</button>
+                                                        </div>
+                                                        
+                                                        {{--
+                                                        <label for="exampleInputEmail1" class="m-0 p-0 text-white">@lang('authlabel.password')</label>
+                                                        <div class="row d-flex flex-nowrap">
+                                                            <div class="col-md-12">
+                                                                <input placeholder="@lang('authlabel.password')" style="height:40px;" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                                            </div>
+                                                            <button  type="submit" class="btn btn-primary btn-sm">@lang('authlabel.login')</button>
+                                                        </div>
+                                                        @if ($errors->has('password'))
+                                                            <span class="invalid-feedback text-white">
+                                                                <strong>{{ $errors->first('password') }}</strong>
+                                                            </span>
+                                                        @else 
+                                                            <div class="invalid-feedback">
+                                                                Please enter your password.
+                                                            </div>
+                                                        @endif
+                                                        --}}
+                                                        <h6 class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ? or <a href="{{ route('register') }}" class="text-white">@lang('authlabel.signup')</a></small></h6> 
+                                                    </div>  
+                                                </div>
+                                            </div> 
                                         </div>
-                                    </div> 
+                                    </form>
                                 </div>
-                            </form>
-                        </div>
+                            @endif
                         @endauth 
                     @endif
                     </div>
@@ -641,6 +670,9 @@
         var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
             if (form.checkValidity() === false) { 
+                if($(this).find('#password').val()==''){
+                    $(this).find('#password').next().find('span#password').html('<i class="text-danger fa fa-lg fa-exclamation-circle" aria-hidden="true"></i>');
+                }
                 event.preventDefault();
                 event.stopPropagation();
             }

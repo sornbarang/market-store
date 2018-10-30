@@ -303,7 +303,7 @@ export default {
             // push new user if joining mean login
             this.users.push(user);
             this.friends.forEach(
-            friend => (user.id == friend.id ? (friend.online = true) : "")
+                friend => (user.id == friend.id ? (friend.online = true) : "")
             );
         })
         .leaving(user => {
