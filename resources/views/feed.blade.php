@@ -1,145 +1,66 @@
 @extends('layouts.app-layout') 
 @section('content')
 
-<section class="blog_area section--padding2" style="background: #3b7a5e;">
-    <div class="container">
+<section class="blog_area section--padding2" style="background: #3b7a5e; margin-top:102px;">
+    <div class="container" id="feed-custom-container">
         <div class="row">
             <div class="col-lg-8">
+                @foreach ($products as $product)
                 <div class="single_blog blog--default">
-                    <div class="price p-1 m-0 c-price text-center" style="right:15px;">
-                        <h1>
-                            <span> <sup>$</sup> 55.00</span>
-                        </h1>
+                        <div class="price p-1 m-0 c-price text-center" style="right:15px;">
+                            <h1>
+                            <span> <sup>$</sup> {{ $product->price }}</span>
+                            </h1>
+                        </div>
+                        <figure>
+                            @php
+                              $thumbnail = $product->getFirstMedia(); 
+                                if($thumbnail){
+                                    $img = Storage::url($thumbnail->id.'/conversions/'.$thumbnail->file_name);
+                                }else{
+                                    $img = asset('imgs/default/conversions/default.jpg');
+                                }  
+                            @endphp
+
+                            <img src="{{$img}}" alt="Blog image">
+    
+                            <figcaption>
+                                <div class="blog__content">
+                                    <a href="#" class="blog__title">
+                                        <h4>{{$product->name}}</h4>
+                                    </a>
+    
+                                    <div class="blog__meta">
+                                            <div class="comment_view">
+                                                    <p class="comment">
+                                                        <span class="lnr lnr-heart scolor"></span>220 Likes
+                                                        <span class="lnr lnr-bubble mcolor3"></span>45 Comments</p>
+                                                    <p class="view">
+                                                </div>
+                                        
+                                        <!--<div class="date_time">
+                                            <span class="lnr lnr-clock"></span>
+                                            <p>13 HOURS AGO</p>
+                                        </div>-->
+                                        <div class="author">
+                                                <span class="lnr lnr-user"></span>
+                                                <p>by
+                                                <a href="#">{{$product->user->name}}</a>
+                                                </p>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+    
+                                <div class="btn_text">
+    
+                                </div>
+                            </figcaption>
+                        </figure>
                     </div>
-                    <figure>
-
-                        <img src="{{asset('images/bb1.jpg')}}" alt="Blog image">
-
-                        <figcaption>
-                            <div class="blog__content">
-                                <a href="#" class="blog__title">
-                                    <h4>Top Web Design Trends You Must Know in 2017</h4>
-                                </a>
-
-                                <div class="blog__meta">
-                                        <div class="comment_view">
-                                                <p class="comment">
-                                                    <span class="lnr lnr-heart scolor"></span>220 Likes
-                                                    <span class="lnr lnr-bubble mcolor3"></span>45 Comments</p>
-                                                <p class="view">
-                                            </div>
-                                    
-                                    <div class="date_time">
-                                        <span class="lnr lnr-clock"></span>
-                                        <p>13 HOURS AGO</p>
-                                    </div>
-                                    <div class="author">
-                                            <span class="lnr lnr-user"></span>
-                                            <p>by
-                                                <a href="#">Admin</a>
-                                            </p>
-                                        </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="btn_text">
-
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                <!-- end /.single_blog -->
-
-                <div class="single_blog blog--default">
-                        <div class="price p-1 m-0 c-price text-center" style="right:15px;">
-                                <h1>
-                                    <span> <sup>$</sup> 24.00</span>
-                                </h1>
-                            </div>
-                    <figure>
-                        <img src="{{asset('images/bb2.jpg')}}" alt="Blog image">
-
-                        <figcaption>
-                            <div class="blog__content">
-                                <a href="#" class="blog__title">
-                                    <h4>50+ Best Free Responsive WordPress Themes in 2017</h4>
-                                </a>
-
-                                <div class="blog__meta">
-                                        <div class="comment_view">
-                                                <p class="comment">
-                                                    <span class="lnr lnr-heart scolor"></span>220 Likes
-                                                    <span class="lnr lnr-bubble mcolor3"></span>45 Comments</p>
-                                                <p class="view">
-                                            </div>
-                                    
-                                    <div class="date_time">
-                                        <span class="lnr lnr-clock"></span>
-                                        <p>13 HOURS AGO</p>
-                                    </div>
-                                    <div class="author">
-                                            <span class="lnr lnr-user"></span>
-                                            <p>by
-                                                <a href="#">Admin</a>
-                                            </p>
-                                        </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="btn_text">
-
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                <!-- end /.single_blog -->
-
-                <div class="single_blog blog--default">
-                        <div class="price p-1 m-0 c-price text-center" style="right:15px;">
-                                <h1>
-                                    <span> <sup>$</sup> 45.00</span>
-                                </h1>
-                            </div>
-                    <figure>
-                        <img src="{{asset('images/bb3.jpg')}}" alt="Blog image">
-
-                        <figcaption>
-                            <div class="blog__content">
-                                <a href="#" class="blog__title">
-                                    <h4>20+ Best Free HTML Resume Templates</h4>
-                                </a>
-
-                                <div class="blog__meta">
-                                        <div class="comment_view">
-                                                <p class="comment">
-                                                    <span class="lnr lnr-heart scolor"></span>220 Likes
-                                                    <span class="lnr lnr-bubble mcolor3"></span>45 Comments</p>
-                                                <p class="view">
-                                            </div>
-                                    
-                                    <div class="date_time">
-                                        <span class="lnr lnr-clock"></span>
-                                        <p>13 HOURS AGO</p>
-                                    </div>
-                                    <div class="author">
-                                            <span class="lnr lnr-user"></span>
-                                            <p>by
-                                                <a href="#">Admin</a>
-                                            </p>
-                                        </div>
-                                    
-                                </div>
-                            </div>
-
-                            <div class="btn_text">
-
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                <!-- end /.single_blog -->
+                    <!-- end /.single_blog -->
+                @endforeach
+                
             </div>
             <!-- end /.col-md-8 -->
 

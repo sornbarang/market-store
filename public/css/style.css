@@ -2805,6 +2805,7 @@ h6 {
 /*****************************
 	--- BREADCRUMB
 *****************************/
+
 .breadcrumb-area {
   padding-top: 52px !important;
   padding-bottom: 50px;
@@ -7130,6 +7131,13 @@ ul.nav-tabs.nav--tabs2 li a::before {
 /*****************************
 	START MENU AREA
 *****************************/
+.menu-area {
+  /* fix menu area on scroll */
+  position: fixed;
+  width: 100%;
+  z-index: 9;
+  top: 0;
+}
 .top-menu-area {
   
   /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
@@ -7137,6 +7145,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
   opacity: 1;
   position: relative; */
   background: #3b7a5e;
+
 }
 .top-menu-area:before{
   /* content: '';
@@ -8745,6 +8754,10 @@ span.counter {
 /***************************************
 	START SEARCH AREA2
 ****************************************/
+.search-wrapper, .breadcrumb-area{
+  margin-top: 102px;
+}
+
 .search-area2, .breadcrumb-area {
   position: relative;
   padding-top: 64px;
@@ -13936,6 +13949,9 @@ span.counter {
 /*this is responsive scss*/
 /* 992 TO 1199 */
 @media (min-width: 992px) and (max-width: 1199px) {
+  .search-wrapper, .breadcrumb-area{
+    margin-top: 62px;
+  }
   /* menu area scss */
   .mainmenu__menu .navbar-nav > li {
     margin-right: 20px;
@@ -14137,6 +14153,9 @@ span.counter {
 
 /* 991 */
 @media (max-width: 991px) {
+  .search-wrapper, .breadcrumb-area{
+    margin-top: 62px;
+  }
   .search_box form {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
@@ -15972,6 +15991,9 @@ span.counter {
   .badges.community-badges .author-badges .badge-single {
     width: 100%;
   }
+}
+#feed-custom-container {
+  max-width: 81vw !important;
 }
 .myfeedback{
   font-size: 15px;
