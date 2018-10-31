@@ -428,8 +428,8 @@ class CustomerController extends Controller
             $product = Product::where('user_id',Auth::id())->findOrFail($id);
             if($product){   
                 $name = $request->name;
-                $price = $request->price;
-                $discount = $request->discount;
+                $price = is_numeric($request->price)?$request->price:0;
+                $discount = is_numeric($request->discount)?$request->discount:0;
                 $active = (int)$request->active ? 1 : 0;
                 $description= $request->sumernotehidden;
                 // $imgappend=[];
