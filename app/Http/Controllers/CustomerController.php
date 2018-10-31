@@ -34,7 +34,7 @@ class CustomerController extends Controller
      */
     public function myStore($id)
     {
-
+        $isFollowed=false;
         $user= User::findOrFail($id);
         $post= Product::where('user_id',$id)->latest()->paginate(9);
         $getAllPro= Product::where('user_id',$id)->get();
@@ -49,10 +49,11 @@ class CustomerController extends Controller
         if($post){
             $data['product']=$post;
         }
-
-        $isFollowed = $user->isFollowedBy($user);
-        $data['isFollowed'] = $isFollowed;
-
+        if (Auth::check()) { 
+            $isFollowed = $user->isFollowedBy(Auth::user());
+        }
+        $data['totalFollower']=$user->followers()->count()??0;
+        $data['isFollowed'] = $isFollowed; 
         $data['breadcrub']='store';
         return view('customer.store',compact('data'));
     }
@@ -186,7 +187,7 @@ class CustomerController extends Controller
                         ->toMediaCollection();
                         $cropPath = storage_path('app/public/'.$cover->id.'/cover.png'); 
                         Image::load($cover->getPath())
-                        ->fit(Manipulations::FIT_CROP, 750, 370)
+                        ->fit(Manipulations::FIT_CROP, 800, 370)
                         ->format(Manipulations::FORMAT_PNG)
                         ->save($cropPath);
                     // $this->mediaconvert($media); 
@@ -325,8 +326,8 @@ class CustomerController extends Controller
                     ->withInput();
             } 
             $name = $request->name;
-            $price = $request->price;
-            $discount = $request->discount??0;
+            $price = is_numeric($request->price)?$request->price:0;
+            $discount = is_numeric($request->discount)?$request->discount:0;
             $active = (int)$request->active ? 1 : 0;
             $description= $request->sumernotehidden;
             // $imgappend=[];

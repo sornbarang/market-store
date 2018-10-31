@@ -252,7 +252,7 @@
                                                 </div>
                                             </div> 
                                             <div class="upload_title">
-                                                <p>JPG, GIF or PNG 750x370 px</p>
+                                                <p>JPG, GIF or PNG 800 x 370px</p>
                                             </div>
                                         </div>
                                     </div>

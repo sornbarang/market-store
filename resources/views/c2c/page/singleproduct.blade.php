@@ -255,7 +255,7 @@
 <!--============================================
         START SINGLE PRODUCT DESCRIPTION AREA
     ==============================================-->
-    <section class="single-product-desc">
+    <section class="single-product-desc pb-0">
         <div class="container">
             <div class="row">
                 <div class="col-md-8"> 
@@ -345,8 +345,7 @@
                                     <img src="{{ asset('images/svg/share.svg') }}" alt="This is share svg">
                                     <span>@lang('frontlabel.shareitem')</span>
                                 </p>
-                                @php 
-                                    
+                                @php  
                                     $socialLink = route('market.productdetail',$data['product']->slug); 
                                     $socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
                                 @endphp
@@ -772,7 +771,7 @@
                         </div><!-- end /.author-card -->
                         <div class="sidebar-card card--metadata">
                             <div class="row">
-                                <div class="col-md-4 text-center border-right">
+                                <div class="col-4 text-center border-right">
                                     <div class="row">
                                         <div class="col-md-12 pb-3">
                                             <span class="lnr lnr-heart scolor"></span>
@@ -782,7 +781,7 @@
                                         </div>
                                     </div> 
                                 </div>
-                                <div class="col-md-4 text-center border-right">
+                                <div class="col-4 text-center border-right">
                                     <div class="row">
                                         <div class="col-md-12 pb-3">
                                             <span class="lnr lnr-bubble mcolor3"></span>
@@ -792,7 +791,7 @@
                                         </div>
                                     </div>  
                                 </div>
-                                <div class="col-md-4 text-center">
+                                <div class="col-4 text-center">
                                     @php 
                                         if($data['totalAvg'] >=4){
                                             $totalAvg=3;

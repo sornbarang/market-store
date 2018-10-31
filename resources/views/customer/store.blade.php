@@ -32,8 +32,8 @@
     <!--================================
         START AUTHOR AREA
     =================================-->
-    @php 
-        $media = $data['user']->profile->getMedia(); 
+    @php   
+        $media = ($data['user']->profile != null) ? $data['user']->profile->getMedia() : [];
         foreach($media as $val){  
             if($data['user']->profile->avatar==$val->id){
                 $avatar=$val->id.'/avatar100.png';  
@@ -76,10 +76,10 @@
                                                 }
                                             @endphp
                                             <div class="no-gutters row d-flex justify-content-center align-items-center">
-                                                <div class="col-md-6 text-right">
+                                                <div class="col-6 text-right">
                                                     Total rates :
                                                 </div>
-                                                <div class="col-md-6 d-flex justify-content-start align-items-center"> 
+                                                <div class="col-6 d-flex justify-content-start align-items-center"> 
                                                     <div class="raty total"></div>&nbsp; ({{$data['totalRate']??'0'}})
                                                 </div>
                                             </div>
@@ -89,16 +89,16 @@
                                         </div>  
                                     </div>  
                                     <div class="row p-2 no-gutters">
-                                        <div class="col-md-6 pr-1">
+                                        <div class="col-6 pr-1">
                                             <div class="author-info pcolorbg mb-0">
                                                 <p>Total Follower</p>
-                                                <h3>36,957</h3>
+                                                <h3 class="text-truncate" title="{{$data['totalFollower']??0}}">{{$data['totalFollower']??0}}</h3>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 pl-1">
+                                        <div class="col-6 pl-1">
                                             <div class="author-info mcolorbg4 mb-0">
-                                                <p>Total Pro</p>
-                                                <h3>{{count($data['product'])}}</h3>
+                                                <p>Total Products</p>
+                                                <h3 class="text-truncate" title="{{$data['product']->count()??0}}">{{$data['product']->count()??0}}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -164,18 +164,18 @@
                                 <div class="social social--color--filled">
                                     <ul>
                                         <li>
-                                            <a href="#">
+                                            <a href="{{$data['product']->user->profile->facebook_link??'javascript:void(0)'}}">
                                                 <span class="fa fa-facebook"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="{{$data['product']->user->profile->twitter_link??'javascript:void(0)'}}">
                                                 <span class="fa fa-twitter"></span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <span class="fa fa-dribbble"></span>
+                                            <a href="{{$data['product']->user->profile->instagram_link??'javascript:void(0)'}}">
+                                                <span class="fa fa-instagram"></span>
                                             </a>
                                         </li>
                                     </ul>
@@ -193,7 +193,7 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
-                                    @if (Route::has('login'))
+                                    @if (Route::has('login')) 
                                         @auth 
                                             @if($data['user']->id!=Auth::user()->id)
                                                 @if(!$data['isFollowed'])
@@ -322,7 +322,7 @@
                         <div class="col-md-12 col-sm-12">
                             <div class="author_module">
                                 @if(isset($cover) && !empty($cover))
-                                    <img src="{{Storage::url($cover)}}" alt="Presenting the broken author avatar :D">
+                                    <img src="{{Storage::url($cover)}}" class="img-fluid w-100" alt="Responsive image"> 
                                 @else
                                     <img src="{{ asset('images/authcvr.jpg') }}" alt="author image">
                                 @endif
@@ -331,9 +331,9 @@
 
                             <div class="author_module about_author">
                                 <h2>About
-                                    <span>{{$data['user']->name}}</span>
+                                    <span>{{$data['user']->name??''}}</span>
                                 </h2>
-                                <p>{{$data['user']->profile->bio}}</p>
+                                <p>{{$data['user']->profile->bio??''}}</p>
                             </div>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                         @foreach($data['product'] as $val)
                             @php 
                                 $avatar='';  
-                                $media = $val->user->profile->getMedia(); 
+                                $media = ($val->user->profile != null) ? $val->user->profile->getMedia() : [];
                                 foreach($media as $m){   
                                     if($val->user->profile->avatar == $m->id){
                                         $avatar=$m->id.'/'.$m->file_name;  
@@ -372,7 +372,9 @@
                                 <div class="col-lg-4 col-md-6 cStoreProduct">
                                     <!-- start .single-product -->
                                     <div class="product product--card product--card-small">
-
+                                        <div class="hot position-absolute text-white bg-danger p-1 font-weight-bold rounded-0" style="z-index:9;max-width:100px;">
+                                            HOT
+                                        </div>
                                         <div class="product__thumbnail">
                                             <img src="{{ $img }}" alt="Product Image">
                                             <div class="prod_btn">
@@ -399,7 +401,7 @@
                                                     </p>
                                                 </li>
                                                 <li class="out_of_class_name">
-                                                    <div class="row">
+                                                    <div class="row no-gutters">
                                                         <div class="col">
                                                             <p>
                                                                 <span class="flag-icon flag-icon-kh"></span>
@@ -408,7 +410,7 @@
                                                         </div>
                                                         <div class="col">
                                                             <p> 
-                                                                <span>Phnom penh</span>
+                                                                <span>{{null !== $val->user->profile && !empty($val->user->profile->location)?$val->user->profile->location:'N/A'}}</span>
                                                             </p>                                                                 
                                                         </div>
                                                     </div>
@@ -447,14 +449,42 @@
                                         <!-- end /.product-desc -->
 
                                         <div class="product-purchase">
-                                            <div class="price_love">
-                                                <span>$ {{$val->price??'0'}}</span>
-                                            </div>
-                                            <a href="javascript:void(0)">
-                                                <div class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
-                                                    <input  type="hidden" name="score">
+                                            <div class="row no-gutters d-flex content-justify-center align-items-center">
+                                                <div class="col-8 text-truncate">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-md-8">
+                                                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                                                <div class="w-100 text-price text-center">
+                                                                    <span title="${{$val->price??0}}"><del>${{str_limit($val->price??0,5)}}<del></span> 
+                                                                </div>
+                                                            @else
+                                                                <div class="w-100">
+                                                                    &nbsp;
+                                                                </div>
+                                                            @endif
+                                                            <div class="w-100">
+                                                                <div class="price_love w-100 text-center">
+                                                                    <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{str_limit(null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price,5)}}</span> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="white-space:normal;" class="col-md-4 text-center align-self-center text-danger font-weight-bold">
+                                                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
+                                                                {{round($val->discount, 2)}} % Off
+                                                            @else
+                                                                &nbsp;
+                                                            @endif
+                                                        </div>
+                                                    </div> 
                                                 </div>
-                                            </a>
+                                                <div class="col-4 text-truncate"> 
+                                                    <a href="javascript:void(0)">
+                                                        <div class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
+                                                            <input  type="hidden" name="score">
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>  
                                         </div>
                                         <!-- end /.product-purchase -->
                                     </div>

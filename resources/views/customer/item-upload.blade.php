@@ -113,7 +113,10 @@
                                             <label for="exlicense">@lang('profileitemupload.discount')</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">%</span>
-                                                <input value="{{ old('discount') }}" min="1" max="100" name="discount" type="number" id="exlicense" class="text_field" placeholder="0">
+                                                <input value="{{ old('discount') }}" min="1" max="100"  name="discount" type="number" id="exlicense" class="text_field" placeholder="0">
+                                                <div class="invalid-feedback">
+                                                    Please privice product name.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

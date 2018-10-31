@@ -42,9 +42,8 @@
 @endphp
 <!--================================
         START MENU AREA
-    =================================-->
-<!-- start menu-area -->
-<div class="menu-area">
+    =================================--> 
+<div class="menu-area sticky-top">
     <!-- start .top-menu-area -->
     <div class="top-menu-area">
         <!-- start .container -->
@@ -476,13 +475,12 @@
     </div>
     <!-- end /.mainmenu-->
     --}}
-</div>
-<!-- end /.menu-area -->
+</div> 
 <!--================================
     END MENU AREA
 =================================-->
 
-    @yield('content')
+@yield('content')
 
 <!--================================
     START FOOTER AREA

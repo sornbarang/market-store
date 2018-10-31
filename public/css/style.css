@@ -7135,7 +7135,7 @@ ul.nav-tabs.nav--tabs2 li a::before {
   /* fix menu area on scroll */
   position: fixed;
   width: 100%;
-  z-index: 9;
+  z-index: 99;
   top: 0;
 }
 .top-menu-area {
@@ -9133,6 +9133,7 @@ span.counter {
   -webkit-border-radius: 4px;
           border-radius: 4px;
   background: #fff;
+  margin-bottom:30px ;
 }
 
 .item-info .tab-content-wrapper {
@@ -11953,7 +11954,7 @@ span.counter {
 }
 
 .login, .signup_form, .recover_pass {
-  padding: 60px 0;
+  padding: 20px;
 }
 
 .login .login--header, .signup_form .login--header, .recover_pass .login--header {
@@ -16356,4 +16357,7 @@ div.rateproduct.cproduct img{
 }
 form.frmlogincustom .form-control:focus{
   box-shadow:inherit !important;
+}
+.signup_area.section--padding2,.pass_recover_area.section--padding2,.login_area.section--padding2{
+  margin-top:102px;
 }
