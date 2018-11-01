@@ -7133,10 +7133,10 @@ ul.nav-tabs.nav--tabs2 li a::before {
 *****************************/
 .menu-area {
   /* fix menu area on scroll */
-  position: fixed;
+  /* position: fixed;
   width: 100%;
-  z-index: 99;
-  top: 0;
+  z-index: 9999;
+  top: 0; */
 }
 .top-menu-area {
   
@@ -11954,7 +11954,7 @@ span.counter {
 }
 
 .login, .signup_form, .recover_pass {
-  padding: 20px;
+  padding: 60px 0;
 }
 
 .login .login--header, .signup_form .login--header, .recover_pass .login--header {

@@ -24,7 +24,7 @@
 <!--================================
         START LOGIN AREA
 =================================-->
-<section class="login_area section--padding2">
+<section class="login_area section--padding2 mt-0">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3">

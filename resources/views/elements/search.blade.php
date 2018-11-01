@@ -1,7 +1,7 @@
 <!--================================
         START SEARCH AREA
     =================================-->
-    <section class="search-wrapper">
+    <section class="search-wrapper mt-0">
     <div class="search-area2 bgimage">
         <div class="bg_image_holder">
             <img src="{{asset('/')}}images/search.jpg" alt="">

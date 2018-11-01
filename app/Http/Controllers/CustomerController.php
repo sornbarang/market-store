@@ -55,6 +55,7 @@ class CustomerController extends Controller
         $data['totalFollower']=$user->followers()->count()??0;
         $data['isFollowed'] = $isFollowed; 
         $data['breadcrub']='store';
+        $data['totalProducts']=Product::where('user_id',$id)->count();
         return view('customer.store',compact('data'));
     }
     /**

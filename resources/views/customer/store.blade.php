@@ -3,7 +3,7 @@
     <!--================================
         START BREADCRUMB AREA
     =================================-->
-    <section class="breadcrumb-area">
+    <section class="breadcrumb-area mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -98,7 +98,7 @@
                                         <div class="col-6 pl-1">
                                             <div class="author-info mcolorbg4 mb-0">
                                                 <p>Total Products</p>
-                                                <h3 class="text-truncate" title="{{$data['product']->count()??0}}">{{$data['product']->count()??0}}</h3>
+                                                <h3 class="text-truncate" title="{{$data['totalProducts']??0}}">{{$data['totalProducts']??0}}</h3>
                                             </div>
                                         </div>
                                     </div>

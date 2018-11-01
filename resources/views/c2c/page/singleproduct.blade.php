@@ -763,7 +763,7 @@
 
                                 <div class="author-btn">
                                     <a href="{{route('market.mystore',$data['product']->user->id)}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
-                                    <a href="{{url('chat')}}" class="btn btn--sm btn--round" id="sendMessage" data-id="{{$data['product']->user->id}}">@lang('frontlabel.sentmessage')</a>
+                                    <a target="_blank" href="{{url('chat')}}" class="btn btn--sm btn--round" id="sendMessage" data-id="{{$data['product']->user->id}}">@lang('frontlabel.sentmessage')</a>
                                 </div><!-- end /.author-btn -->
                             </div><!-- end /.author-infos -->
 

@@ -338,7 +338,10 @@
                                 <div class="card_content">
                                     <div class="card_info">
                                         <h4>@lang('profileedititemupload.imageupload')</h4>
-                                        <p>Nunc placerat mi id nisi interdum mollis. Praesent there pharetra, justo ut sceleris que the mattis interdum.</p>
+                                        <p>
+                                            Everything your post please follow the rule of required don't try to post every bad we are watching everytime if we are seeing your contents post not relation your bussiness we will ban your account or delete your contents immediately. <br>
+                                            Thank u.
+                                        </p>
                                     </div>
                                 </div>
                             </div><!-- end /.sidebar-card -->
@@ -349,15 +352,10 @@
                                 </div>
 
                                 <div class="card_content">
-                                    <p>Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut sceler isque the mattis, leo quam aliquet congue.</p>
+                                    <p>If have problem with your upload relate with product , please report to use about your problem by email or phone belove.</p>
                                     <ul>
-                                        <li>Consectetur elit, sed do eiusmod the
-                                            labore et dolore magna.</li>
-                                        <li>Consectetur elit, sed do eiusmod the
-                                            labore et dolore magna.</li>
-                                        <li>Consectetur elit, sed do eiusmod the
-                                            labore et dolore magna.</li>
-                                        <li>Consectetur elit, sed do eiusmod the</li>
+                                        <li>Email: admin@mail.com</li>
+                                        <li>Phone: xxxxxxx</li> 
                                     </ul>
                                 </div>
                             </div><!-- end /.sidebar-card --> 
