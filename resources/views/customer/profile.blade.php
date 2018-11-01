@@ -139,13 +139,13 @@
                                     <a href="author.html">@lang('profile.profile')</a>
                                 </li>--}}
                                 <li>
-                                    <a class="active" href="author-items.html">@lang('profile.authitems')</a>
+                                    <a class="active" href="#">@lang('profile.authitems')</a>
                                 </li>
                                 {{--<li>
                                     <a href="author-reviews.html">Customer Reviews</a>
                                 </li>
                                 <li>
-                                    <a href="author-followers.html">Followers (67)</a>
+                                    <a href="#">Followers (67)</a>
                                 </li>
                                 <li>
                                     <a href="author-following.html">Following (39)</a>

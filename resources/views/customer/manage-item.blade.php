@@ -110,16 +110,15 @@
                                 $img = asset('imgs/default/conversions/default.jpg');
                             }
                         @endphp
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-lg-3 col-sm-6">
                             <!-- start .single-product -->
                             <div class="product product--card cProfileProduct">
                                 <div class="hot position-absolute text-white bg-danger p-1 font-weight-bold rounded-0" style="z-index:9;max-width:100px;">
                                     HOT
                                 </div>
-                                <div class="product__thumbnail"> 
-                                    <figure class="figure">
-                                        <img  src="{{$img}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
-                                    </figure>
+                                <div class="product__thumbnail">  
+                                    <img  src="{{$img}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
+                                     
                                     <div class="prod_option">
                                         <a href="#" id="drop2" class="dropdown-trigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <span class="lnr lnr-cog setting-icon"></span>

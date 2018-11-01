@@ -1026,7 +1026,7 @@
     <!--================================
         START CALL TO ACTION AREA
     =================================-->
-    @include('elements.joinshop')
+    {{--@include('elements.joinshop')--}}
 
     <!--================================
         END CALL TO ACTION AREA
