@@ -763,7 +763,7 @@
 
                                 <div class="author-btn">
                                     <a href="{{route('market.mystore',$data['product']->user->id)}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
-                                    <a target="_blank" href="{{url('chat')}}" class="btn btn--sm btn--round" id="sendMessage" data-id="{{$data['product']->user->id}}">@lang('frontlabel.sentmessage')</a>
+                                    <a  class="btn btn--sm btn--round" id="sendMessage" data-id="{{$data['product']->user->id}}">@lang('frontlabel.sentmessage')</a>
                                 </div><!-- end /.author-btn -->
                             </div><!-- end /.author-infos -->
 
@@ -1234,17 +1234,19 @@
     }); 
     $(document).on('click','#sendMessage',function(){
         $.ajax({
-            url: "{{url('createsession')}}",
-            type: 'GET', 
+            url: "{{route('chat.createsession')}}",
+            type: 'POST', 
             data:{friend_id:$(this).data('id')},
             headers: {
                 'X-CSRF-Token':CSRF_TOKEN,
             },
             success: function( response ) {  
-                console.log(response.data);
-                if(response.data.length > 0){
-                    localStorage.setItem('activeUser',JSON.stringify(response.data[0]));
-                    window.location.replace("{{url('chat')}}");
+                console.log(response); 
+                if(response){
+                    // localStorage.setItem('activeUser',JSON.stringify(response.data[0]));
+                    window.open("{{url('chat')}}", '_blank');
+                }else{
+                    window.reload();
                 }
             },
             error: function( data ) {

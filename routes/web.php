@@ -47,7 +47,7 @@ function()
 
     // Route::get('/chat', 'Chat\HomeController@index')->name('chat');
     Route::get('/chat',['as'=>'chat.home', 'uses'=> 'Chat\HomeController@index'])->name('chat');
-    Route::get('/createsession',['as'=>'chat.createsession', 'uses'=> 'Chat\HomeController@createSession'])->name('updateHistory');
+    Route::post('/createsession',['as'=>'chat.createsession', 'uses'=> 'Chat\HomeController@createSession']);
     // end blog chat
 
     //feeds
