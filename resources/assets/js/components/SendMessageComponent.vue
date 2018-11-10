@@ -211,8 +211,8 @@ export default {
         console.log(this.friend);
         console.log(e);
         console.log(window.auth);
-        if(window.auth.id === e.touser){ 
-            this.friend.session.open ? this.read() : "";
+        if(this.friend.id === e.chat.user_id){ 
+            this.friend.session.open ? this.read() : this.friend.session.unreadCount++;  
             this.chats.push({ message: e.content, type: 1, sent_at: "Just Now",'profile':e.profile });
         }
         

@@ -84,8 +84,8 @@
             </div>
             <div class="center border-left border-right"> 
                 <div v-for="friend in friends" :key="friend.id" v-if="friend.session"> 
-                    <send-message-component v-if="friend.session.open" @close="close(friend)" :friend=friend></send-message-component>
-                </div> 
+                    <send-message-component v-if="friend.session.open" @close="close(friend)" :friend="friend"></send-message-component>
+                </div>  
                 <!-- <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div>  -->
             </div>    
             <div class="right">
@@ -233,18 +233,22 @@ export default {
             this.value +=emoji.native;
         },
         close(friend) { 
-        friend.session.open = false;
+            friend.session.open = false;
         },
         getFriends() {
-        axios.post("getFriends").then(res => {
-            this.friends = res.data.data;
-            this.friends.forEach(
-                friend => (friend.session ? this.listenForEverySession(friend) : "")
-            );
-            console.log(this.friends);
-        });
+            axios.post("getFriends").then(res => {
+                this.friends = res.data.data;
+                this.friends.forEach(
+                    friend => (friend.session ? this.listenForEverySession(friend) : "")
+                );
+                console.log('get friends');
+            });
         },
         openChat(friend) {
+            console.log('open');
+            console.log(friend);
+            console.log(friend.session);
+            console.log(this.friends);
             if (friend.session) {
                 this.friends.forEach(
                     friend => (friend.session ? (friend.session.open = false) : "")
@@ -253,10 +257,14 @@ export default {
                 friend.session.unreadCount = 0;
                 this.userInfor = friend
             } else {
+                console.log('create new session');
                 this.createSession(friend);
             }
         },
         createSession(friend) {
+            // console.log('create');
+            console.log(friend);
+            console.log(this.friends);
             axios.post("session/create", { friend_id: friend.id }).then(res => {
                 (friend.session = res.data.data), (friend.session.open = true);
                 // this.friend = friend
@@ -266,26 +274,33 @@ export default {
                 friend.session.open = true;
                 friend.session.unreadCount = 0;
                 this.userInfor = friend 
+                console.log('after create');
+                console.log(friend);
+                console.log(this.friends);
+                 
             }); 
             
         },
-        listenForEverySession(friend) {
-        Echo.private(`Chat.${friend.session.id}`).listen(
-            "PrivateChatEvent",
-            e => (friend.session.open ? "" : friend.session.unreadCount++)
-        );
+        listenForEverySession(friend) {  
+            console.log('listen every time');
+            console.log(friend);
+            Echo.private(`Chat.${friend.session.id}`).listen(
+                "PrivateChatEvent",
+                e =>{
+                    friend.session.open ? "" : friend.session.unreadCount++; 
+                }
+            ); 
         }
     },
     created() { 
         this.getFriends();
         Echo.channel("Chat").listen("SessionEvent", e => {
-            console.log('session event');
-            console.log(e);
-        let friend = this.friends.find(friend => friend.id == e.session_by);
-        friend.session = e.session;
-        console.log('After session event');
-            console.log(e);
-        this.listenForEverySession(friend);
+            // check if current user chat to user is onlines
+            if(e.to_user==this.auth.id){
+                let friend = this.friends.find(friend => friend.id == e.session_by);
+                    friend.session = e.session;  
+                this.listenForEverySession(friend);
+            }
         });
 
         Echo.join(`Chat`)

@@ -51,7 +51,8 @@
 
                             <div class="form-group">
                                 <label for="user_name">@lang('authlabel.email') <span class="text-danger">  *</span></label>
-                                <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Enter your username..." name="email" value="{{ old('email') }}" required autofocus>
+                                {{-- <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Enter your username..." name="email" value="{{ old('email') }}" required autofocus> --}}
+                                <input id="user_name" type="text" class="text_field form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  placeholder="Enter your username..." name="email" value="{{ old('email') }}" required autofocus>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>

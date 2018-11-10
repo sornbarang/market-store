@@ -13,16 +13,18 @@ class SessionEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $session;
     public $session_by;
+    public $to_user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($session, $session_by)
+    public function __construct($session, $session_by, $to_user)
     {
         $this->session = $session;
         $this->session_by = $session_by;
+        $this->to_user = $to_user;
         $this->dontBroadcastToCurrentUser();
     }
 
