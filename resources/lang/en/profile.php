@@ -14,6 +14,8 @@ return [
     */
     'profile' => 'Profile',
     'authitems' => 'My items',
+    'feed' => 'Feeds',
+    'chat' => 'Chat',
     'monthlysale' => 'Monthly Sales',
     'yearsale' => 'Yearly Sales',
     'lifetimesale' => 'Lifetime Sales',

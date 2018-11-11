@@ -38,6 +38,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'location'=>isset($this->profile->location) && !empty($this->profile->location)?$this->profile->location:'',
             'randommediaproduct'=> $media,
             'online' => false,
             'profile'=>$avatar,

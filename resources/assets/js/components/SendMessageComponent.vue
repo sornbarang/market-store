@@ -67,7 +67,7 @@
                     <Icon class="c-like" size="24" type="md-thumbs-up" v-if="!btnsend"/>
                     <Icon class="c-send" @click="send" size="24" type="md-send" v-else/>
                     <Icon class="c-image" @click="open(true)" size="24" type="md-images"/>
-                    <picker @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
+                    <picker @mouseleave="mouseOut" @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
                 </Col>
                 <Col span="20" pull="4">
                     <Input  @on-keyup="keyup" ref="input" @on-enter="send" v-model="message" :placeholder="isTyping ?'is Typing . . .':'Type a message...'" element-id="no-border"/>
@@ -92,7 +92,7 @@ export default {
       isTyping: false,
       loading:false,
       show:false,
-      btnsend:false,
+      btnsend:false
     };
   },
   computed: {
@@ -114,6 +114,9 @@ export default {
     }
   },
   methods: {
+    mouseOut(emoji){
+      alert();
+    },
     open(nodesc){
       this.$Notice.error({
           title: 'In development mode',
@@ -126,6 +129,7 @@ export default {
         }
     },
     addEmoji(emoji){  
+        console.log(emoji);
         if(this.message==null){
           this.$nextTick(function () {
             this.message='';
@@ -208,9 +212,9 @@ export default {
     Echo.private(`Chat.${this.friend.session.id}`).listen(
       "PrivateChatEvent",
       e => { 
-        console.log(this.friend);
-        console.log(e);
-        console.log(window.auth);
+        // console.log(this.friend);
+        // console.log(e);
+        // console.log(window.auth);
         if(this.friend.id === e.chat.user_id){ 
             this.friend.session.open ? this.read() : this.friend.session.unreadCount++;  
             this.chats.push({ message: e.content, type: 1, sent_at: "Just Now",'profile':e.profile });

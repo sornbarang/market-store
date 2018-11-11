@@ -21,35 +21,41 @@
                     <div class="col-md-12">
                         <div class="dashboard_title_area">
                             <div class="dashboard__title">
-                                <h3>@lang('profilesetting.as')</h3>
-                                @if ($errors->any())
-                                <div class="alert alert-danger" style="margin:0 !important;padding:0;">
-                                    <ul>
-                                        {{--<li>{{ $errors->getBag('default')->first('name') }}</li> --}}
-                                        
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                @endif
-                                @if (session('success')) 
-                                <div class="alert alert-success" role="alert" style="margin:0 !important;padding:0;">
-                                    <span class="alert_icon lnr lnr-checkmark-circle"></span>
-                                    {{ session('success') }}.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span class="lnr lnr-cross" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                @elseif(session('error'))
-                                    <div class="alert alert-danger" role="alert" style="margin:0 !important;padding:0;">
-                                        <span class="alert_icon lnr lnr-warning"></span>
-                                            {{ session('success') }}.
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span class="lnr lnr-cross" aria-hidden="true"></span>
-                                        </button>
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-auto p-2">
+                                        <div class="dashboard__title">
+                                            <h3>@lang('profilesetting.as')</h3>
+                                        </div>
                                     </div>
-                                @endif
+                                    <div class="p-2">
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger mb-0">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        @if (session('success')) 
+                                        <div class="alert alert-success mb-0" role="alert">
+                                            <span class="alert_icon lnr lnr-checkmark-circle"></span>
+                                            {{ session('success') }}.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                        @elseif(session('error'))
+                                            <div class="alert alert-danger mb-0" role="alert">
+                                                <span class="alert_icon lnr lnr-warning"></span>
+                                                    {{ session('error') }}.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        @endif
+                                    </div> 
+                                </div>
                             </div>
                         </div>
                     </div><!-- end /.col-md-12 -->
@@ -195,7 +201,7 @@
                                         <div class="profile_image_area"> 
                                             <div class="img_info">
                                                 <p class="bold">Profile Image</p>
-                                                <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
+                                                <p class="subtitle">JPG, JPEG or PNG 100x100 px</p>
                                             </div>
                                             @php
                                                 $avatar=''; 
@@ -242,17 +248,17 @@
                                                     </div>
                                                     <div class="avatar-preview" style="width:100%;height:360px;border-radius:inherit;">
                                                     @if(isset($cover) && !empty($cover)) 
-                                                        <div  title="Choose image" class="imagePreview" style="background-image: url('{{Storage::url($cover)}}');border-radius: inherit;">
+                                                        <div  title="Choose image" class="imagePreview rounded-0" style="background-image: url('{{Storage::url($cover)}}');border-radius: inherit;">
                                                         </div> 
                                                         <input name="mediacoverid" type="hidden" value="{{$mediacoverid}}">
                                                     @else
-                                                        <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
+                                                        <div alt="No image" title="Choose image" class="imagePreview rounded-0" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
                                                     @endif
                                                     </div>
                                                 </div>
                                             </div> 
                                             <div class="upload_title">
-                                                <p>JPG, GIF or PNG 800 x 370px</p>
+                                                <p>JPG, JPEG or PNG 800 x 370px</p>
                                             </div>
                                         </div>
                                     </div>
@@ -325,7 +331,7 @@
     <!--================================
         START CALL TO ACTION AREA
     =================================-->
-    @include('elements.joinshop')
+    {{-- @include('elements.joinshop')--}}
     <!--================================
         END CALL TO ACTION AREA
     =================================-->

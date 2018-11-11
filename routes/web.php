@@ -46,7 +46,7 @@ function()
     Route::get('/search', ['as' => 'chat.search', 'uses' =>'Chat\SearchController@index']);
 
     // Route::get('/chat', 'Chat\HomeController@index')->name('chat');
-    Route::get('/chat',['as'=>'chat.home', 'uses'=> 'Chat\HomeController@index'])->name('chat');
+    Route::get('/chat',['as'=>'chat.home', 'uses'=> 'Chat\HomeController@index']);
     Route::post('/createsession',['as'=>'chat.createsession', 'uses'=> 'Chat\HomeController@createSession']);
     // end blog chat
 

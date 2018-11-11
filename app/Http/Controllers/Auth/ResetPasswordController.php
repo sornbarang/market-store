@@ -40,6 +40,7 @@ class ResetPasswordController extends Controller
     {
         $user->forceFill([
             'password' => $password,
+            'verified' => 1,
             'remember_token' => str_random(60),
         ])->save();
 

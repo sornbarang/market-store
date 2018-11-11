@@ -119,6 +119,14 @@
                                                         <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                                 </li>
                                                 <li>
+                                                    <a href="{{url('feeds')}}">
+                                                        <span class="fa fa-rss"></span>@lang('profile.feed')</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{route('chat.home')}}">
+                                                        <span class="fa fa-comments-o"></span>@lang('profile.chat')</a>
+                                                </li>
+                                                <li>
                                                     <a href="{{route('market.mysetting')}}">
                                                         <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
                                                 </li>
@@ -349,6 +357,14 @@
                                         <li>
                                             <a href="{{route('market.myprofile')}}">
                                                 <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('feeds')}}">
+                                                    <span class="fa fa-rss"></span>@lang('profile.feed')</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('chat.home')}}">
+                                                    <span class="fa fa-comments-o"></span>@lang('profile.chat')</a>
                                             </li>
                                             <li>
                                                 <a href="{{route('market.mysetting')}}">

@@ -71,7 +71,7 @@
                                         </Row>
                                         <Row>
                                             <Col span="24">
-                                                <h6 class="btn-sm p-0 m-0 lightgray">Keep forward</h6>
+                                                <h6 class="btn-sm p-0 m-0 lightgray">{{friend.location}}</h6>
                                             </Col> 
                                         </Row>
                                     </Col> 
@@ -241,14 +241,11 @@ export default {
                 this.friends.forEach(
                     friend => (friend.session ? this.listenForEverySession(friend) : "")
                 );
-                console.log('get friends');
+            console.log(this.friends);
             });
         },
         openChat(friend) {
-            console.log('open');
-            console.log(friend);
-            console.log(friend.session);
-            console.log(this.friends);
+            // check if user session have 
             if (friend.session) {
                 this.friends.forEach(
                     friend => (friend.session ? (friend.session.open = false) : "")
@@ -256,34 +253,26 @@ export default {
                 friend.session.open = true;
                 friend.session.unreadCount = 0;
                 this.userInfor = friend
-            } else {
-                console.log('create new session');
+            } else { 
                 this.createSession(friend);
             }
         },
+        // this method will be go to create session comunication
         createSession(friend) {
-            // console.log('create');
-            console.log(friend);
-            console.log(this.friends);
             axios.post("session/create", { friend_id: friend.id }).then(res => {
-                (friend.session = res.data.data), (friend.session.open = true);
-                // this.friend = friend
+                (friend.session = res.data.data), (friend.session.open = true); 
                 this.friends.forEach(
                     friend => (friend.session ? (friend.session.open = false) : "")
                 );
                 friend.session.open = true;
                 friend.session.unreadCount = 0;
-                this.userInfor = friend 
-                console.log('after create');
-                console.log(friend);
-                console.log(this.friends);
+                this.userInfor = friend
                  
             }); 
             
         },
+        // this method will work when create session done and if friend it's open box will increase count number
         listenForEverySession(friend) {  
-            console.log('listen every time');
-            console.log(friend);
             Echo.private(`Chat.${friend.session.id}`).listen(
                 "PrivateChatEvent",
                 e =>{
@@ -294,6 +283,7 @@ export default {
     },
     created() { 
         this.getFriends();
+        // this broadcase fire when create session done and eventSession broardcasting back
         Echo.channel("Chat").listen("SessionEvent", e => {
             // check if current user chat to user is onlines
             if(e.to_user==this.auth.id){

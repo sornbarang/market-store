@@ -19,12 +19,56 @@
                 <div class="row pb-3">
                     <div class="col-md-12">
                         <div class="dashboard_title_area">
+                            <div class="d-flex align-items-center">
+                                <div class="mr-auto p-2">
+                                    <div class="dashboard__title">
+                                        <h3>@lang('profileitemupload.uploaditem')</h3> 
+                                    </div>
+                                </div>
+                                <div class="p-2">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger mb-0">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @if (session('success')) 
+                                        <div class="alert alert-success" role="alert" style="margin:0 !important;padding:0;">
+                                            <span class="alert_icon lnr lnr-checkmark-circle"></span>
+                                            {{ session('success') }}.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    @elseif(session('error'))
+                                        <div class="alert alert-danger" role="alert" style="margin:0 !important;padding:0;">
+                                            <span class="alert_icon lnr lnr-warning"></span>
+                                                {{ session('error') }}.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span class="lnr lnr-cross" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    @endif  
+                                </div> 
+                            {{--
                             <div class="pull-left">
                                 <div class="dashboard__title">
                                     <h3>@lang('profileitemupload.uploaditem')</h3> 
                                 </div>
                             </div>
-                            <div class="pull-right">
+                            <div class="pull-right"> 
+                            @if ($errors->any())
+                                <div class="alert alert-danger mb-0">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             @if (session('success')) 
                                 <div class="alert alert-success" role="alert" style="margin:0 !important;padding:0;">
                                     <span class="alert_icon lnr lnr-checkmark-circle"></span>
@@ -36,12 +80,13 @@
                             @elseif(session('error'))
                                 <div class="alert alert-danger" role="alert" style="margin:0 !important;padding:0;">
                                     <span class="alert_icon lnr lnr-warning"></span>
-                                        {{ session('success') }}.
+                                        {{ session('error') }}.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span class="lnr lnr-cross" aria-hidden="true"></span>
                                     </button>
                                 </div>
                             @endif  
+                            --}}
                             </div>
                         </div>
                     </div><!-- end /.col-md-12 -->
@@ -85,7 +130,7 @@
                                         <label for="product_name">@lang('profileitemupload.productname') <span class="text-danger">*</span> <span>(Max 100 characters)</span></label>
                                         <input class="form-control" min="1" max="100" value="{{ old('name') }}" type="text" id="product_name" name="name" class="text_field" placeholder="@lang('profileitemupload.productname')" required>
                                         <div class="invalid-feedback">
-                                            Please privice product name.
+                                            Please privide product name.
                                         </div>
                                         @if ($errors->has('name'))
                                             <div class="alert alert-danger" style="margin:0 !important;padding:0;">
@@ -125,14 +170,7 @@
                             <div class="upload_modules upload_modules_blog">
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploadfile') </h3> 
-                                    <span>750 x 430 (width,height) is standard</span>
-                                    @if ($errors->has('photos'))
-                                        <div class="alert alert-danger" style="margin:0 !important;padding:0;">
-                                            <ul>
-                                                <li>{{ $errors->first('photos') }}</li>  
-                                            </ul>
-                                        </div>
-                                    @endif 
+                                    <span>750 x 430 (width,height) is standard</span> 
                                 </div><!-- end /.module_title -->
                                 <div class="row">
                                     @for($i=0;$i<4;$i++)
@@ -219,5 +257,37 @@
     <!--================================
         END CALL TO ACTION AREA
     =================================-->
-    
+    @section('cusomescript')
+        <script> 
+        (function() {
+        'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        var errorElements = document.querySelectorAll(
+                                "input.form-control:invalid,select.form-control:invalid,input.custom-control-input:invalid");
+                            errorElements.forEach(function(element) {
+                                element.parentNode.childNodes.forEach(function(node) {
+                                    if (node.className == 'valid-feedback') {
+                                        node.className = 'invalid-feedback';
+                                    }
+                                });
+                            }); 
+                            $('html, body').animate({
+                                scrollTop: $('#product_name').focus().top
+                            }, 500);
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+                });
+            }, false);
+        })();
+        </script>                       
+    @endsection
 @stop

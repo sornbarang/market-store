@@ -119,11 +119,13 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
+    {  
         $allowedfileExtension=['jpg','jpeg','png'];
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:100',
             'email' => 'required',
+            'profile'=>'mimes:jpg,jpeg,png|dimensions:min_width=100,min_height=100',
+            'cover'=>'mimes:jpg,jpeg,png|dimensions:min_width=800,min_height=370'
             // 'password' => 'required|confirmed|min:6'
         ]); 
         if ($validator->fails()) {
@@ -319,7 +321,7 @@ class CustomerController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
                 'photos' => 'required', 
-                'photos.*' => 'mimes:jpg,jpeg,png'
+                'photos.*' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430'
             ]); 
             if ($validator->fails()) {
                 return redirect('market/myitemupload')
@@ -360,7 +362,7 @@ class CustomerController extends Controller
                         $files = $request->file('photos'); 
                         foreach($files as $file){
                             $filename = $file->getClientOriginalName();
-                            $extension = $file->getClientOriginalExtension();
+                            $extension = $file->getClientOriginalExtension(); 
                             $check=in_array($extension,$allowedfileExtension);
                             if($check){
                                 // if($check){
@@ -414,15 +416,18 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function myEditItem(Request $request,ProductTranslate $slug)
-    { 
+    {  
         $id=$slug->products_ads_id;
         $data['category'] = $this->getParentsCategory();  
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
-                'name' => 'required|max:100'
+                'name' => 'required|max:100', 
+                'photos' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430',
+                'photos2' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430',
+                'photos3' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430'
             ]); 
             if ($validator->fails()) {
-                return redirect('market/mymanageitem')
+                return redirect()->route('market.edititem',$slug)
                     ->withErrors($validator)
                     ->withInput();
             } 
