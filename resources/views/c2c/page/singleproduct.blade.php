@@ -1,10 +1,6 @@
 @extends('layouts.app-layout')
 @section('content')
 <!--================================
-    END FEATURED PRODUCT AREA
-=================================-->
-
-<!--================================
         START BREADCRUMB AREA
     =================================-->
 @include('elements.customer-breadcrumb')
@@ -56,7 +52,7 @@
                     <h3 class="modal-title" id="rating_modal">Rating this Item</h3>
                     <h4>Product Enquiry Extension</h4>
                     <p>by
-                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{$data['product']->user->name}}</a>
+                        <a href="{{isset($val->user)?route('market.mystore',$data['product']->user->id):''}}">{{isset($data['product']->user)?$data['product']->user->name:''}}</a>
                     </p>
                 </div>
                 <!-- end /.modal-header -->
@@ -135,7 +131,7 @@
                     <h3 class="modal-title" id="rating_modal">Give Feedback on This Post</h3>
                     <h4>Product</h4>
                     <p>by
-                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{$data['product']->user->name}}</a>
+                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{isset($data['product']->user)?$data['product']->user->name:''}}</a>
                     </p>
                 </div>
                 <div class="container"> 
@@ -243,7 +239,7 @@
 @php 
     $media = $data['product']->getMedia(); 
     $avatar='';
-    if(null !== $data['product']->user->profile){
+    if(isset($data['product']->user->profile) && !empty(isset($data['product']->user->profile))){
         $profile = $data['product']->user->profile->getMedia(); 
         foreach($profile as $val){  
             if($data['product']->user->profile->avatar==$val->id){
@@ -272,7 +268,7 @@
                                             </div>
                                             <div class="col-9 text-right"> 
                                                 @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
-                                                    <p class="m-0 p-0" style="line-height:inherit;color:#fff;font-weight:bold;font-size:20px;">{{round($data['product']->discount, 2)}}% Off</p>
+                                                    <p class="m-0 p-0" style="line-height:inherit;color:#fff;font-weight:bold;font-size:20px;" title="{{round($data['product']->discount, 2)}}% Off">{{round($data['product']->discount, 2)}}% Off</p>
                                                 @endif
                                                 <h1>
                                                     @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
@@ -739,18 +735,27 @@
                         <!-- end /.sidebar--card -->
                         <div class="author-card sidebar-card "> 
                             <div class="author-infos">
-                                <div class="author_avatar">
-                                    <a href="{{route('market.mystore',$data['product']->user->id)}}">
-                                        @if(isset($avatar) && !empty($avatar))
-                                            <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
-                                        @else
-                                            <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
-                                        @endif
-                                    </a>
+                                <div class="author_avatar"> 
+                                    @if(isset($data['product']->user))
+                                        <a href="{{route('market.mystore',$data['product']->user->id)}}">
+                                            @if(isset($avatar) && !empty($avatar))
+                                                <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                            @else
+                                                <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
+                                            @endif
+                                        </a>
+                                    @else
+                                        <a href="javascript:void(0)">
+                                            @if(isset($avatar) && !empty($avatar))
+                                                <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                            @else
+                                                <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
+                                            @endif
+                                        </a>
+                                    @endif
                                 </div>
                                 <div class="author">
-                                    <h4>{{ucfirst($data['product']->user->name)}}</h4>
-                                    <!-- <p>Signed Up: {{$data['product']->user->created_at}}</p> -->
+                                    <h4>{{isset($data['product']->user)?ucfirst($data['product']->user->name??''):''}}</h4> 
                                 </div><!-- end /.author -->
 
                                 <div class="social social--color--filled">
@@ -762,8 +767,8 @@
                                 </div><!-- end /.social -->
 
                                 <div class="author-btn">
-                                    <a href="{{route('market.mystore',$data['product']->user->id)}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
-                                    <a  class="btn btn--sm btn--round" id="sendMessage" data-id="{{$data['product']->user->id}}">@lang('frontlabel.sentmessage')</a>
+                                    <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
+                                    <a  class="btn btn--sm btn--round text-white" id="sendMessage" data-id="{{isset($data['product']->user)?$data['product']->user->id:''}}">@lang('frontlabel.sentmessage')</a>
                                 </div><!-- end /.author-btn -->
                             </div><!-- end /.author-infos -->
 
@@ -868,7 +873,7 @@
                 <!-- start col-md-12 -->
                 <div class="col-md-12"> 
                     <div class="section-title">
-                        <h1>@lang('frontlabel.moreitems') <span class="highlighted"> {{ucfirst($data['product']->user->name)}}</span></h1>
+                        <h1>@lang('frontlabel.moreitems') <span class="highlighted"> {{isset($data['product']->user)?ucfirst($data['product']->user->name??''):''}}</span></h1>
                     </div>
                 </div><!-- end /.col-md-12 -->  
                 <div class="col-md-12"> 
@@ -876,7 +881,7 @@
                         @foreach($data['relateProByUser'] as $val)
                             @php
                                 $avatar=''; 
-                                if(null !== $val->user->profile){
+                                if(isset($val->user->profile)){
                                     $media = $val->user->profile->getMedia(); 
                                     foreach($media as $m){   
                                         if($val->user->profile->avatar == $m->id){
@@ -921,7 +926,7 @@
                                                     <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                                 @endif 
                                                 <p>
-                                                    <a href="#">{{ucfirst(str_limit($val->user->name,15))}}</a>
+                                                    <a href="#">{{isset($val->user)?ucfirst(str_limit($val->user->name,15)):''}}</a>
                                                 </p>
                                             </li>
                                             <li class="out_of_class_name">

@@ -3,7 +3,7 @@
         @php 
             $avatar='';
             $location='N/A';  
-            if(null !== $getprops->user->profile){ 
+            if(isset($getprops->user->profile)){ 
                 $media = $getprops->user->profile->getMedia(); 
                 $location = $getprops->user->profile->location;
                 foreach($media as $val){   
@@ -40,7 +40,7 @@
 
                 <div class="product-desc">
                     <a href="javascript:void(0)" class="product_title">
-                        <h4 class="trucate" title="{{$getprops->name}}">{{$getprops->name}}</h4>
+                        <h4 class="trucate" title="{{$getprops->name}}">{{$getprops->name??''}}</h4>
                     </a>
                     <ul class="titlebtm">
                         <li>
@@ -50,7 +50,7 @@
                                 <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                             @endif 
                             <p>
-                                <a href="#">{{$getprops->user->name}}</a>
+                                <a href="#">{{$getprops->user->name??''}}</a>
                             </p>
                         </li>
                         <li class="out_of_class_name">

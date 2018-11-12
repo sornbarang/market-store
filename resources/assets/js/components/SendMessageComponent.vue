@@ -64,10 +64,10 @@
             <Row type="flex" justify="center" align="middle" class-name="h-100"> 
                 <Col span="4" push="20" class-name="text-center" >
                     <Icon class="c-happy" size="24" @click="show = !show" type="ios-happy-outline" /> 
-                    <Icon class="c-like" size="24" type="md-thumbs-up" v-if="!btnsend"/>
+                    <Icon @click="addLike" class="c-like" size="24" type="md-thumbs-up" v-if="!btnsend"/>
                     <Icon class="c-send" @click="send" size="24" type="md-send" v-else/>
                     <Icon class="c-image" @click="open(true)" size="24" type="md-images"/>
-                    <picker @mouseleave="mouseOut" @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
+                    <picker emoji="point_up"  title="Emoji TreeWB" @mouseleave="mouseOut" @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
                 </Col>
                 <Col span="20" pull="4">
                     <Input  @on-keyup="keyup" ref="input" @on-enter="send" v-model="message" :placeholder="isTyping ?'is Typing . . .':'Type a message...'" element-id="no-border"/>
@@ -127,6 +127,10 @@ export default {
         if(this.show){
           this.show=false;
         }
+    },
+    addLike(){
+      let emoji ={"id":"+1","name":"Thumbs Up Sign","colons":":+1::skin-tone-6:","emoticons":[],"unified":"1f44d-1f3ff","skin":6,"native":"👍🏿"};
+      this.pushToChats(emoji.native);
     },
     addEmoji(emoji){  
         console.log(emoji);

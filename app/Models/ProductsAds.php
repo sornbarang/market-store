@@ -42,6 +42,7 @@ class ProductsAds extends Model implements HasMedia,Reportable
         return $query->with('categories_ads')->select('*','products_ads_categories_ads.products_ads_id as id')
           ->join('products_ads_categories_ads', 'products_ads_categories_ads.products_ads_id', '=', 'products_ads.id')
           ->join('products_ads_translations', 'products_ads_translations.products_ads_id', '=', 'products_ads.id')
+          ->join('users', 'users.id', '=', 'products_ads.user_id')
           ->where('products_ads_translations.locale',app()->getLocale())
           ->whereIn('products_ads_categories_ads.categories_ads_id', $categoryIds);
     }
