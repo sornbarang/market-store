@@ -45,7 +45,7 @@
                                         <div class="author">
                                                 <span class="lnr lnr-user"></span>
                                                 <p>by
-                                                <a href="#">{{$product->user->name}}</a>
+                                                <a href="#">{{isset($product->user)?$product->user->name:''}}</a>
                                                 </p>
                                             </div>
                                         
