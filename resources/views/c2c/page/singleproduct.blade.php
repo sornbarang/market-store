@@ -239,8 +239,10 @@
 @php 
     $media = $data['product']->getMedia(); 
     $avatar='';
+    $firstMedia=asset('imgs/default/conversions/crop.png');
     if(isset($data['product']->user->profile) && !empty(isset($data['product']->user->profile))){
         $profile = $data['product']->user->profile->getMedia(); 
+        $firstMedia = Storage::url($data['product']->getFirstMedia()->id.'/conversions/crop.png'); 
         foreach($profile as $val){  
             if($data['product']->user->profile->avatar==$val->id){
                 $avatar=$val->id.'/avatar100.png';  
@@ -258,7 +260,7 @@
                     <div class="item-preview"> 
                         <div class="item__preview-slider"> 
                             @if(count($media) > 0)
-                                @foreach($media as $val)
+                                @foreach($media as $val) 
                                     <div class="prev-slide">
                                         <div class="row position-absolute w-100 no-gutters">
                                             <div class="col-3 text-center">
@@ -342,11 +344,12 @@
                                     <span>@lang('frontlabel.shareitem')</span>
                                 </p>
                                 @php  
+
                                     $socialLink = route('market.productdetail',$data['product']->slug); 
-                                    $socials=Share::load($socialLink,$data['product']->name,'http://127.0.0.1:8000/storage/106/conversions/crop.png')->services('facebook', 'linkedin', 'twitter');
-                                @endphp
+                                    $socials=Share::load($socialLink,$data['product']->name,asset($firstMedia))->services('facebook', 'linkedin', 'twitter');
+                                @endphp 
                                 <div class="social social--color--filled">
-                                @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' => 'http://127.0.0.1:8000/storage/106/conversions/crop.png'])
+                                @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' => asset($firstMedia)])
 
                                 </div>
                                 <!-- end /.social-->

@@ -25,10 +25,29 @@
                               <Row class-name="text-right" >
                                   <Col span="24" class-name="text-right"><strong class="color-green">You </strong> {{chat.read_at}}</Col>
                                   <Row class-name="text-right">
-                                      <Col span="21" offset="3">
+                                      <Col span="21" offset="3" v-if="chat.message!='file'">
                                           <p>
                                               {{chat.message}}
                                           </p>
+                                      </Col>
+                                      <Col span="21" offset="3" v-else>
+                                        <Row type="flex" justify="end" class="code-row-bg" v-if="chat.images">
+                                            <Col  span="8" class="p-2">
+                                              <viewer :options="options" :images="chat.images"
+                                                      @inited="inited"
+                                                      class="viewer" ref="viewer"
+                                              >
+                                                <template slot-scope="scope">
+                                                  <img v-for="src in scope.images" :src="src" :key="src" class="float-right img-fluid rounded" alt="Responsive image"> 
+                                                </template>
+                                              </viewer> 
+                                            </Col> 
+                                        </Row> 
+                                        <Row type="flex" justify="end" class="code-row-bg" v-else>
+                                            <Col span="24">
+                                                No image
+                                            </Col> 
+                                        </Row>
                                       </Col>
                                   </Row>
                               </Row>
@@ -48,10 +67,29 @@
                           <Col span="21" class-name="pl-2">
                               <Row>
                                   <Col span="24"><strong> {{friend.name}} </strong><small>{{chat.sent_at}}</small></Col>
-                                  <Col span="24">
+                                  <Col span="24" v-if="chat.message!='file'">
                                       <p>
                                           {{chat.message}}
                                       </p>
+                                  </Col>
+                                  <Col span="24" v-else>
+                                    <Row type="flex" justify="start" class="code-row-bg" v-if="chat.images">
+                                        <Col span="8">
+                                            <viewer :options="options" :images="chat.images"
+                                                    @inited="inited"
+                                                    class="viewer" ref="viewer"
+                                            >
+                                              <template slot-scope="scope">
+                                                <img v-for="src in scope.images" :src="src" :key="src" class="float-right img-fluid rounded" alt="Responsive image"> 
+                                              </template>
+                                            </viewer> 
+                                        </Col> 
+                                    </Row> 
+                                    <Row type="flex" justify="start" class="code-row-bg" v-else>
+                                        <Col span="24">
+                                            No image
+                                        </Col> 
+                                    </Row>
                                   </Col>
                               </Row>
                           </Col> 
@@ -66,8 +104,9 @@
                     <Icon class="c-happy" size="24" @click="show = !show" type="ios-happy-outline" /> 
                     <Icon @click="addLike" class="c-like" size="24" type="md-thumbs-up" v-if="!btnsend"/>
                     <Icon class="c-send" @click="send" size="24" type="md-send" v-else/>
-                    <Icon class="c-image" @click="open(true)" size="24" type="md-images"/>
-                    <picker emoji="point_up"  title="Emoji TreeWB" @mouseleave="mouseOut" @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
+                    <Icon class="c-image" @click="chooseFile" size="24" type="md-images"/>
+                    <input ref="file" type="file" @change="onFlieChange" id="file" class="d-none" accept="image/png, image/jpeg, image/jpg" multiple>
+                    <picker emoji="point_up"  title="Emoji TreeWB" @select="addEmoji" set="messenger" v-show="show" :style="{ position: 'absolute', bottom: '40px', right: '20px','z-index':'9' }"/>
                 </Col>
                 <Col span="20" pull="4">
                     <Input  @on-keyup="keyup" ref="input" @on-enter="send" v-model="message" :placeholder="isTyping ?'is Typing . . .':'Type a message...'" element-id="no-border"/>
@@ -83,17 +122,28 @@
 </template>
 
 <script>
+import 'viewerjs/dist/viewer.css'
+import Viewer from "v-viewer/src/component.vue"
 export default {
   props: ["friend"],
   data() {
     return {
       chats: [],
       message: null,
+      errors:{}, 
+      title:'',
       isTyping: false,
       loading:false,
       show:false,
-      btnsend:false
+      files: '',
+      btnsend:false,
+      type:4,
+      options:{ "inline": false, "button": true, "navbar": true, "title": true, "toolbar": true, "tooltip": false, "movable": true, "zoomable": true, "rotatable": true, "scalable": true, "transition": true, "fullscreen": true, "keyboard": true, "url": "data-source" },
+      allowedExtensions:['jpg','jpeg','png'],
     };
+  },
+  components: {
+    Viewer
   },
   computed: {
     session() {
@@ -114,14 +164,99 @@ export default {
     }
   },
   methods: {
-    mouseOut(emoji){
-      alert();
-    },
-    open(nodesc){
+    inited (viewer) {
+        this.$viewer = viewer
+      },
+    // open(nodesc){
+    //   this.$Notice.error({
+    //       title: 'In development mode',
+    //       desc: nodesc ? '' : 'Here is the notification description. Here is the notification description. '
+    //   });
+    // },
+    showError(title,msg){
       this.$Notice.error({
-          title: 'In development mode',
-          desc: nodesc ? '' : 'Here is the notification description. Here is the notification description. '
+          title:title,
+          desc: msg
       });
+    },
+    /**
+      * to validate file size
+      * @param  {integer} filesize
+      * @return {boolean}         
+      */
+    validateSize(filesize) {
+        // 2*1024*1024 = 2097152 = 2mb
+        if(filesize > 2097152) { 
+            this.showError("File size limit exceed!","Please upload file less than 2MB.");
+            return false;
+        }
+        return true;
+    },
+    /**
+      * to validate file extension
+      * @param  {string} extension
+      * @return {bolean}          
+      */
+    validateExtension(extension) {
+        if($.inArray(extension, this.allowedExtensions) !== -1) {
+            return true;
+        } else { 
+            this.showError("Invalid file!","Please upload jpg,png,pdf or zip file only.");
+            return false;
+        }
+    },
+    /**
+      * find extension of uploaded file
+      * @param  {string} filename
+      * @return {string}         
+      */
+    findExtension(filename) {
+        return filename.split('.').pop().toLowerCase();
+    },
+    /**
+      * validate file
+      * @param  {integer} filesize 
+      * @param  {string} extension
+      * @return {boolean}
+      */
+    validateFile(filesize,extension) {
+        if(this.validateSize(filesize) && this.validateExtension(extension)) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    chooseFile() {
+        $("#file").click();
+    },
+    onFlieChange(file) {
+      this.files = file.target.files || file.dataTransfer.files; 
+      let data = new FormData(); 
+      const config = {
+        headers: { 'content-type': 'multipart/form-data' }
+      }
+      if(this.files.length > 0) { 
+        for( var i = 0; i < this.files.length; i++ ){
+          let file = this.files[i]; 
+          let extension = this.findExtension(file.name); 
+          if(this.validateFile(file.size,extension)) {
+            data.append('files[' + i + ']', file);
+          }
+        }
+        data.append('to_user',this.friend.id)
+        axios.post(`send/${this.friend.session.id}`+'/upload',data,config).then( response=> {
+          if(response.status == 200){
+            this.chats.push({
+              message: 'file',
+              type: 0,
+              images:response.data,
+              read_at: null,
+              sent_at: "Just Now",
+              profile:auth.profile
+            });
+          }
+        }); 
+      }  
     },
     hideEmoji(){
         if(this.show){
@@ -130,10 +265,10 @@ export default {
     },
     addLike(){
       let emoji ={"id":"+1","name":"Thumbs Up Sign","colons":":+1::skin-tone-6:","emoticons":[],"unified":"1f44d-1f3ff","skin":6,"native":"👍🏿"};
-      this.pushToChats(emoji.native);
+      this.message=emoji.native 
+      this.send();
     },
-    addEmoji(emoji){  
-        console.log(emoji);
+    addEmoji(emoji){   
         if(this.message==null){
           this.$nextTick(function () {
             this.message='';
@@ -209,6 +344,7 @@ export default {
     }
   },
   created() { 
+    console.log(this.friend);
     this.read();
 
     this.getAllMessages();
@@ -217,11 +353,17 @@ export default {
       "PrivateChatEvent",
       e => { 
         // console.log(this.friend);
-        // console.log(e);
+        console.log(e);
         // console.log(window.auth);
         if(this.friend.id === e.chat.user_id){ 
             this.friend.session.open ? this.read() : this.friend.session.unreadCount++;  
-            this.chats.push({ message: e.content, type: 1, sent_at: "Just Now",'profile':e.profile });
+            this.chats.push({ 
+              message: e.content,
+              type: 1,
+              images:e.images,
+              sent_at: "Just Now",
+              'profile':e.profile 
+            });
         }
         
       }

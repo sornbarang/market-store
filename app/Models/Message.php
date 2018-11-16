@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Message extends Model
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+class Message extends Model implements HasMedia
 {
+    use HasMediaTrait;
+    
     protected $guarded = [];
 
     public function chats()

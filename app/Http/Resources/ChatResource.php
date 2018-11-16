@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use Illuminate\Support\Facades\Storage;
 class ChatResource extends JsonResource
 {
     /**
@@ -14,10 +14,16 @@ class ChatResource extends JsonResource
      */
     public function toArray($request)
     {
+        $mediaItems = $this->message->getMedia();
+        $images=[];
+        foreach ($mediaItems as $key => $media) {
+            $images[]=asset(Storage::url($media->id.'/'.$media->file_name)); 
+        } 
         return [
             'message' => $this->message['content'],
             'id' => $this->id,
             'type' => $this->type,
+            'images'=>$images,
             'read_at' => $this->read_at_timing($this),
             'send_at' => $this->created_at->diffForHumans()
         ];

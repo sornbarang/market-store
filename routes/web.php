@@ -38,6 +38,7 @@ function()
     Route::post('/getFriends', 'Chat\HomeController@getFriends');
     Route::post('/session/create', 'Chat\SessionController@create');
     Route::post('/session/{session}/chats', 'Chat\ChatController@chats');
+    Route::post('/send/{session}/upload', 'Chat\ChatController@upload');
     Route::post('/session/{session}/read', 'Chat\ChatController@read');
     Route::post('/session/{session}/clear', 'Chat\ChatController@clear');
     Route::post('/session/{session}/block', 'Chat\BlockController@block');
