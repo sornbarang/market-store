@@ -124,7 +124,7 @@ export default {
         friends: [],
         show:false,   
         searchStr:'', 
-        actived:undefined,
+        actived:parseInt(localStorage.getItem('activeUser')),
         friend:undefined,
         value:'',
         userInfor:null, 
@@ -240,11 +240,17 @@ export default {
                 this.friends = res.data.data;
                 this.friends.forEach(
                     friend => (friend.session ? this.listenForEverySession(friend) : "")
-                );
-            console.log(this.friends);
+                ); 
+                let uac= this.actived
+                let getActiveUser = _.find(this.friends, function(o) { return o.id == uac; });
+                if( getActiveUser!='' && getActiveUser !=undefined ){
+                    this.openChat(getActiveUser);
+                } 
             });
         },
         openChat(friend) {
+            localStorage.setItem('activeUser',friend.id)
+            this.actived = friend.id
             // check if user session have 
             if (friend.session) {
                 this.friends.forEach(

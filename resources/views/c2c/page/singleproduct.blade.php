@@ -238,11 +238,13 @@
 
 @php 
     $media = $data['product']->getMedia(); 
-    $avatar='';
     $firstMedia=asset('imgs/default/conversions/crop.png');
-    if(isset($data['product']->user->profile) && !empty(isset($data['product']->user->profile))){
-        $profile = $data['product']->user->profile->getMedia(); 
+    if($media->count() > 0){
         $firstMedia = Storage::url($data['product']->getFirstMedia()->id.'/conversions/crop.png'); 
+    }
+    $avatar='';
+    if(isset($data['product']->user->profile) && !empty(isset($data['product']->user->profile))){
+        $profile = $data['product']->user->profile->getMedia();  
         foreach($profile as $val){  
             if($data['product']->user->profile->avatar==$val->id){
                 $avatar=$val->id.'/avatar100.png';  
@@ -770,8 +772,20 @@
                                 </div><!-- end /.social -->
 
                                 <div class="author-btn">
-                                    <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
-                                    <a  class="btn btn--sm btn--round text-white" id="sendMessage" data-id="{{isset($data['product']->user)?$data['product']->user->id:''}}">@lang('frontlabel.sentmessage')</a>
+                                    @if (Route::has('login')) 
+                                        @auth
+                                            @if(isset($data['product']->user) && $data['product']->user->id==auth()->user()->id)
+                                                <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>     
+                                            @else
+                                                <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
+                                                <a  class="btn btn--sm btn--round text-white" id="sendMessage" data-id="{{isset($data['product']->user)?$data['product']->user->id:''}}">@lang('frontlabel.sentmessage')</a>
+                                            @endif
+                                        @else
+                                            <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
+                                            <a  class="btn btn--sm btn--round text-white" id="sendMessage" data-id="{{isset($data['product']->user)?$data['product']->user->id:''}}">@lang('frontlabel.sentmessage')</a>
+                                        @endauth 
+                                    @endif 
+                                    
                                 </div><!-- end /.author-btn -->
                             </div><!-- end /.author-infos -->
 
@@ -1249,9 +1263,9 @@
                 'X-CSRF-Token':CSRF_TOKEN,
             },
             success: function( response ) {  
-                console.log(response); 
-                if(response){
-                    // localStorage.setItem('activeUser',JSON.stringify(response.data[0]));
+                // console.log(response); 
+                if(response){ 
+                    localStorage.setItem('activeUser',JSON.stringify(response.user2_id));
                     window.open("{{url('chat')}}", '_blank');
                 }else{
                     window.reload();

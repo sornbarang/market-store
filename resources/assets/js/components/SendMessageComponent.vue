@@ -403,4 +403,10 @@ export default {
 .c-happy,.c-like,.c-image,.c-send{
   font-size:1.8vw;
 }
+.viewer img{
+  cursor: pointer;
+}
+.ivu-col i{
+  cursor: pointer;
+}
 </style>
