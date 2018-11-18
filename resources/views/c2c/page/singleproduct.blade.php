@@ -1255,26 +1255,31 @@
         } 
     }); 
     $(document).on('click','#sendMessage',function(){
-        $.ajax({
-            url: "{{route('chat.createsession')}}",
-            type: 'POST', 
-            data:{friend_id:$(this).data('id')},
-            headers: {
-                'X-CSRF-Token':CSRF_TOKEN,
-            },
-            success: function( response ) {  
-                // console.log(response); 
-                if(response){ 
-                    localStorage.setItem('activeUser',JSON.stringify(response.user2_id));
-                    window.open("{{url('chat')}}", '_blank');
-                }else{
-                    window.reload();
+        var userId= $(this).data('id'),
+            chkLogin="{{Auth::id()}}"; 
+        if(chkLogin !='' && chkLogin!=undefined){
+            $.ajax({
+                url: "{{route('chat.createsession')}}",
+                type: 'POST', 
+                data:{friend_id:userId},
+                headers: {
+                    'X-CSRF-Token':CSRF_TOKEN,
+                },
+                success: function( response ) {
+                    if(response){ 
+                        localStorage.setItem('activeUser',JSON.stringify(response.user2_id));
+                        window.open("{{url('chat')}}", '_blank');
+                    }else{
+                        window.reload();
+                    }
+                },
+                error: function( data ) {
+                    console.log(data);
                 }
-            },
-            error: function( data ) {
-                console.log(data);
-            }
-        });
+            });
+        }else{
+            window.location.replace('{{url("login")}}');
+        }
     });
 
 } ) ( jQuery );
