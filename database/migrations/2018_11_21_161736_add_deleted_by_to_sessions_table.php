@@ -15,7 +15,7 @@ class AddDeletedByToSessionsTable extends Migration
     {
         Schema::table('sessions', function (Blueprint $table) {
             if (!Schema::hasColumn('sessions', 'deleted_by')) {
-                $table->char('deleted_by',100)->nullable()->after('order');	
+                $table->char('deleted_by',100)->nullable();	
             }
         });
     }
