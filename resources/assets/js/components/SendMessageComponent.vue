@@ -66,7 +66,7 @@
                           </Col>
                           <Col span="21" class-name="pl-2">
                               <Row>
-                                  <Col span="24"><strong> {{friend.name}} </strong><small>{{chat.sent_at}}</small></Col>
+                                  <Col span="24" class-name="text-capitalize"><strong> {{friend.name}} </strong><small>{{chat.sent_at}}</small></Col>
                                   <Col span="24" v-if="chat.message!='file'">
                                       <p>
                                           {{chat.message}}
@@ -297,6 +297,7 @@ export default {
           })
           .then(res => (this.chats[this.chats.length - 1].id = res.data));
         this.message = null;
+        this.$emit('order',this.friend.id);
       }
     },
     pushToChats(message) {  

@@ -1268,6 +1268,7 @@
                 success: function( response ) {
                     if(response){ 
                         localStorage.setItem('activeUser',JSON.stringify(response.user2_id));
+                        // window.location.href="{{url('chat')}}";
                         window.open("{{url('chat')}}", '_blank');
                     }else{
                         window.reload();

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0f83c3a08bf45e9c3bba2f0a85bb782",
+    "content-hash": "097ca1588ec4f510dff421506444c90e",
     "packages": [
         {
             "name": "adumskis/laravel-advert",
@@ -47,7 +47,7 @@
                 }
             ],
             "description": "Advertising helper for laravel",
-            "time": "2017-10-23T06:06:23+00:00"
+            "time": "2017-10-23 06:06:23"
         },
         {
             "name": "aws/aws-sdk-php",
@@ -2424,6 +2424,45 @@
                 "zip"
             ],
             "time": "2018-02-09T09:26:57+00:00"
+        },
+        {
+            "name": "marktopper/doctrine-dbal-timestamp-type",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marktopper/doctrine-dbal-timestamp-type.git",
+                "reference": "e028dda876204e271d0fc921f013544d58770638"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marktopper/doctrine-dbal-timestamp-type/zipball/e028dda876204e271d0fc921f013544d58770638",
+                "reference": "e028dda876204e271d0fc921f013544d58770638",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^2.5",
+                "php": ">=5.6.4"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "MarkTopper\\DoctrineDBALTimestampType\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Add the timestamp type for Doctrine/DBAL",
+            "keywords": [
+                "database",
+                "dbal",
+                "doctrine",
+                "laravel",
+                "mysql",
+                "timestamp"
+            ],
+            "time": "2018-11-11T09:54:26+00:00"
         },
         {
             "name": "mcamara/laravel-localization",

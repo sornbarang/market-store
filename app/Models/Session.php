@@ -41,4 +41,9 @@ class Session extends Model
         $this->blocked_by = null;
         $this->save();
     }
+    public function chatAt()
+    {
+        $this->chat_at = '';
+        $this->save();
+    }
 }

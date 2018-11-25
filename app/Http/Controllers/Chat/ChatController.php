@@ -17,13 +17,18 @@ class ChatController extends Controller
     public function send(Session $session, Request $request)
     {
         $message = $session->messages()->create(['content' => $request->content]);
-
         $chat = $message->createForSend($session->id);
-
         $message->createForReceive($session->id, $request->to_user);
-
+        // save to updated_at make it order in conversation
+        $session->updated_at=Carbon::now();
+        $session->save();
+        // if deleted exist update to null cos some user deleted this conversation need to update to null to comunication again
+        $session = Session::where('id',$session->id)->where('deleted_by','like','%'.$request->to_user.'%')->first();
+        if($session){  
+            $session->deleted_by ='';
+            $session->save();
+        }
         broadcast(new PrivateChatEvent($message->content, $chat,$request->to_user));
-
         return response($chat->id, 200);
     }
     public function mediaconvert($media){

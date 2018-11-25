@@ -37,6 +37,7 @@ function()
     // Block chat
     Route::post('/getFriends', 'Chat\HomeController@getFriends');
     Route::post('/session/create', 'Chat\SessionController@create');
+    Route::post('/session/remove/{id}', 'Chat\SessionController@removeSession');
     Route::post('/session/{session}/chats', 'Chat\ChatController@chats');
     Route::post('/send/{session}/upload', 'Chat\ChatController@upload');
     Route::post('/session/{session}/read', 'Chat\ChatController@read');

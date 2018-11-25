@@ -1,5 +1,8 @@
 <template> 
     <div class="grid"> 
+        <Modal ok-text="ok" cancel-text="Cancel" @on-ok="deleteSuccess" v-model="modal" draggable scrollable title="Are you sure?">
+            <div>Noted: we can not recovery these coversation if you complated deleted.</div>
+        </Modal>
         <div @click="hideEmoji" v-show="show" style="position: absolute;z-index: 8; width: 100vw;height: 100vh;"></div>
         <div class="header border-bottom">
             <div class="left d-flex content-justify-center align-items-center">
@@ -48,8 +51,8 @@
                     </Row>
                     <Row class-name="main-scroll-container">
                         <Col span="24">
-                            <Scroll :on-reach-bottom="handleReachBottom">
-                                <Row  @click.native="openChat(friend)" :key="friend.id" v-for="friend in friends" :class-name="actived===friend.id?'p-2 c-user active':'p-2 c-user'">
+                            <Scroll :on-reach-bottom="handleReachBottom" ref="contents">
+                                <Row  @click.native="openChat(friend)" :key="inx" v-for="(friend,inx) in friends" :class-name="actived===friend.id?'p-2 c-user active':'p-2 c-user'">
                                     <Col span="4"> 
                                         <Badge overflow-count="9999" :count="friend.session.unreadCount"  type="error" v-if="friend.session && (friend.session.unreadCount > 0)"> 
                                             <Avatar :src="friend.profile" v-if="friend.profile"/> 
@@ -70,9 +73,12 @@
                                             </Col>
                                         </Row>
                                         <Row>
-                                            <Col span="24">
-                                                <h6 class="btn-sm p-0 m-0 lightgray">{{friend.location}}</h6>
+                                            <Col span="20">
+                                                <h6 class="btn-sm p-0 m-0 lightgray">{{friend.location?friend.location:'N/A'}}</h6>
                                             </Col> 
+                                            <Col span="4" class-name="text-right setting"> 
+                                                <Icon @click="remove(inx,friend.session.id)" type="ios-close" :size="18" />
+                                            </Col>
                                         </Row>
                                     </Col> 
                                 </Row>
@@ -83,8 +89,8 @@
                 <!-- <div v-for="i in 200" :key="i">item</div> -->
             </div>
             <div class="center border-left border-right"> 
-                <div v-for="friend in friends" :key="friend.id" v-if="friend.session"> 
-                    <send-message-component v-if="friend.session.open" @close="close(friend)" :friend="friend"></send-message-component>
+                <div v-for="(friend,inx) in friends" :key="inx" v-if="friend.session"> 
+                    <send-message-component v-if="friend.session.open" @close="close(friend)" :friend="friend" v-on:order="chkOrder"></send-message-component>
                 </div>  
                 <!-- <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div>  -->
             </div>    
@@ -126,9 +132,12 @@ export default {
         searchStr:'', 
         actived:parseInt(localStorage.getItem('activeUser')),
         friend:undefined,
+        rmConversation:undefined,
+        session_id:undefined,
         value:'',
         userInfor:null, 
-        users:[]
+        users:[],
+        modal:false
     };
   },
     computed: {
@@ -139,27 +148,10 @@ export default {
     watch:{
         searchStr(val,oldVal){ 
             // console.log('new: %s, old: %s', val, oldVal);
-            if(val){
-                // var users = [
-                //     { 'user': 'barney',  'age': 36, 'active': true },
-                //     { 'user': 'fred',    'age': 40, 'active': false },
-                //     { 'user': 'febbles', 'age': 1,  'active': true }
-                //     ];
-                //     //  var newItem = users.filter(obj => /^[a-zA-Z]/.test(obj.user));
-                //     function search(str, data) {
-                //         const searchStr = str.toLowerCase(); 
-                //         // Only return the entries that contain a matched value
-                //         return _.filter(data, (users) => {
-                //             // Check if name matches
-                //             return _.includes(users.name.toLowerCase(), searchStr)
-                //         });
-                //     }
-
-                //     console.log(search(val, this.friends))
+            if(val){ 
                 var valObj = this.friends.filter(function(elem){
                     return _.includes(elem.name.toLowerCase(),val.toLowerCase())
-                });
-
+                }); 
                 if(valObj.length > 0)
                    _.forEach(this.friends,function(f,kf){
                         _.forEach(valObj,function(usr,kusr){
@@ -167,10 +159,8 @@ export default {
                                 valObj[kusr].online=f.online
                             }
                         });
-                    }); 
-                    // console.log();
-                    this.friends=valObj;
-                    
+                    });  
+                    this.friends=valObj; 
             }else{
                 axios.post("getFriends").then(res => {
                     this.friends = res.data.data;  
@@ -186,6 +176,31 @@ export default {
         },
     },
     methods: {
+        chkOrder(friend_id){ 
+            this.friends = _.sortBy(this.friends, function(item) {
+                return item.id === friend_id ? 0 : 1;
+            });
+        },
+        remove(inx,session_id){  
+            this.rmConversation=inx;
+            this.session_id=session_id;
+            this.modal = true;
+        },
+        deleteSuccess(){ 
+            axios.post("session/remove/"+this.session_id).then(res => {
+                console.log(res);
+                if(res.status==200){
+                    this.friends.splice(this.rmConversation,1)
+                    this.$Notice.success({
+                        title: 'Delete successful.'
+                    });
+                }
+            }).catch(error => {
+                this.$Notice.error({
+                    title: 'Can not delete this conversation.'
+                });
+            }); 
+        },
         openlink(link){
             window.open(link, '_blank');
             console.log(link);
@@ -245,7 +260,8 @@ export default {
                 let getActiveUser = _.find(this.friends, function(o) { return o.id == uac; });
                 if( getActiveUser!='' && getActiveUser !=undefined ){
                     this.openChat(getActiveUser);
-                } 
+                }
+                console.log(this.friends);
             });
         },
         openChat(friend) {

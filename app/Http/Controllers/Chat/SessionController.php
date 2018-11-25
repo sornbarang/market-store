@@ -19,4 +19,24 @@ class SessionController extends Controller
             broadcast(new SessionEvent($modifiedSession, auth()->id(),$request->friend_id));
             return $modifiedSession;
     }
+    public function removeSession($id){
+        $session = Session::findOrFail($id); 
+        if($session){
+            $deletedBy = $session->deleted_by;
+            if(!empty($deletedBy)){
+                $expDeletedBy=explode(',',$deletedBy);
+                if(is_array($expDeletedBy) && count($expDeletedBy) > 0){
+                    array_push($expDeletedBy,auth()->id()); 
+                    $pushDeletedBy = array_unique($expDeletedBy);
+                    $pushDeletedBy = implode(',',$pushDeletedBy);
+                }
+            }else{
+                $pushDeletedBy = auth()->id();
+            }
+            $session->deleted_by =$pushDeletedBy;
+            $session->save();
+            return response()->json($session);
+        }
+        return response()->json([]);
+    }
 }
