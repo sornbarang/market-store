@@ -70,26 +70,6 @@ class C2cController extends Controller
     public function getProductOfCategory(CategoryTranslate $slug,Request $request){
         $node = Category::findOrFail($slug->categories_ads_id); 
         $cats['product']=Product::categorized($node)->latest('products_ads.id')->limit(7)->get();
-        // foreach($pros as $key => $val){ 
-        //     // get media 
-        //     $newsItem=Product::find($val->products_ads_id); 
-        //     $mediaItems = $newsItem->getMedia(); 
-        //     $getFirstMedia = $newsItem->getFirstMedia();   
-        //     if($getFirstMedia){
-        //         $pros[$key]['image']= Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
-        //     } 
-        //     $pros[$key]['avatar']='';
-        //     // get avatar
-        //     if(null !==$val->user->profile){
-        //         $media = $val->user->profile->getMedia(); 
-        //         foreach($media as $m){   
-        //             if($val->user->profile->avatar == $m->id){
-        //                 $pros[$key]['avatar']=Storage::url($m->id.'/'.$m->file_name);  
-        //             }
-        //         }
-        //     }
-        //     $pros[$key]['rateavg']=$val->averageRating();
-        // } 
         if ($request->ajax()) {
             return view('elements.home-product', compact('cats'));
         }
