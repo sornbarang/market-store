@@ -321,7 +321,8 @@ class CustomerController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
                 'photos' => 'required', 
-                'photos.*' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430'
+                // 'photos.*' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430'
+                'photos.*' => 'mimes:jpg,jpeg,png'
             ]); 
             if ($validator->fails()) {
                 return redirect('market/myitemupload')
@@ -422,9 +423,12 @@ class CustomerController extends Controller
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100', 
-                'photos' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430',
-                'photos2' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430',
-                'photos3' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430'
+                // 'photos' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430',
+                // 'photos2' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430',
+                // 'photos3' => 'mimes:jpg,jpeg,png|dimensions:min_width=750,min_height=430'
+                'photos' => 'mimes:jpg,jpeg,png',
+                'photos2' => 'mimes:jpg,jpeg,png',
+                'photos3' => 'mimes:jpg,jpeg,png'
             ]); 
             if ($validator->fails()) {
                 return redirect()->route('market.edititem',$slug)

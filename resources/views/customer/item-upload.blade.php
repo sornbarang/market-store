@@ -1,7 +1,6 @@
 @extends('layouts.app-layout')
-@section('content') 
-
-<!--================================
+@section('content')  
+    <!--================================
         START BREADCRUMB AREA
     =================================-->
     @include('elements.customer-breadcrumb')
@@ -12,6 +11,14 @@
     <!--================================
             START DASHBOARD AREA
     =================================-->
+    @php  
+    $r='market.';
+    @endphp 
+    @if(isset($data['type']) && $data['type']=='shop')
+        @php 
+            $r='shop.';
+        @endphp
+    @endif
     <section class="dashboard-area">
         @include('elements.customer-menu') 
         <div class="dashboard_contents">
@@ -94,7 +101,7 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form method="post" action="{{route('market.myitemupload')}}" id="frmUploadFront" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <form method="post" action="{{route($r.'myitemupload')}}" id="frmUploadFront" enctype="multipart/form-data" class="needs-validation" novalidate>
                             @csrf
                             <input value="{{ old('sumernotehidden') }}" type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <input type="hidden" name="lastchildid" id="lastchildid">

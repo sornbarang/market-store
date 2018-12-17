@@ -13,7 +13,7 @@
     <div class="shortcode_wrapper">
         <div class="container"> 
             <div class="row callCategory p-3">
-                @include('elements.top-category')         
+                @include('elements.top-category')
             </div>
             @if(count($data['listcats']) > 0)
                 @foreach($data['listcats'] as $key =>  $cats)
@@ -22,7 +22,7 @@
                     @endphp
                     @foreach($cats['childreen'] as $k =>  $getsub)
                         @php  
-                            $subcat[]=array('dynamiccat'=>route('market.dynamiccat',$getsub->slug),'link'=>route('market.getproductofcategory',$getsub->slug),'name'=>$getsub->name);
+                            $subcat[]=array('dynamiccat'=>route('shop.dynamiccat',$getsub->slug),'link'=>route('shop.getproductofcategory',$getsub->slug),'name'=>$getsub->name);
                         @endphp 
                     @endforeach
                     <div class="row blog-explor-breadcrum">
@@ -331,7 +331,7 @@
 @section('cusomescript')
 <script type="text/javascript">
     $(document).ready(function(){ 
-        $('div.rateproduct,div.rateproducthover').raty(
+        $('div.rateproduct').raty(
             { 
                 starOff   :"{{asset('imgs/no.png')}}",
                 iconRange: [            

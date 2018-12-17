@@ -32,5 +32,6 @@ return [
     'comments'=>'Comments',      
     'views'=>'Views',
     'shareitem'=>'Share this item',
-    'norecord'=>'No product of'
+    'norecord'=>'No product of',
+    'addtocard'=>'Add to card'
 ];

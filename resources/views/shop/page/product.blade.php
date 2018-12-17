@@ -85,9 +85,10 @@
             <!-- start .row -->
             <div class="row">
                 <!-- start .col-md-3 -->
-                <div class="col-md-3">
+                <div class="col-md-3"> 
                     @include('elements.aside')
                 </div><!-- end /.col-md-3 -->
+
                 <!-- start col-md-9 -->
                 <div class="col-md-9 cAllProducts"> 
                     @include('elements.product')

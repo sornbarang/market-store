@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\CategoriesAds as Category ;
 use App\Models\ProductsAds as Product;
-
+use App\Models\CategoriesAdsTranslation as CategoryTranslate ;
 class CategoryController extends Controller
 {
     /**
@@ -56,9 +56,64 @@ class CategoryController extends Controller
         $tree = collect($tree)->sortBy('order'); 
         $data['root']=$tree;   
         $data['type']='shop';   
-        return view('c2c.page.index',compact('data'));
+        return view('shop.page.index',compact('data'));
     }
-
+    public function getProductOfCategory(CategoryTranslate $slug,Request $request){
+        $node = Category::findOrFail($slug->categories_ads_id); 
+        $cats['product']=Product::categorized($node)->latest('products_ads.id')->limit(7)->get();
+        $data['type']='shop';
+        if ($request->ajax()) {
+            return view('elements.home-product', compact('cats','data'));
+        }
+        return response()->json($pros);   
+    }
+    public function getSlugCategory(Request $request,CategoryTranslate $slug){
+        
+        // return $slug->categories_ads_id;
+        // get all category with tree relate with app/helpers.php 
+        $data['nest'] = Category::all()->toHierarchy();
+        $order='';
+        $record=9;
+        if(isset($request->price) && $request->price=='high'){
+            $order='desc';
+        }elseif(isset($request->price) && $request->price=='low'){
+            $order='asc';
+        }
+        if(isset($request->record) && !empty($request->record)){
+            if($request->record==12){
+                $record=12;
+            }else if(isset($request->record) && $request->record==15){
+                $record=15;
+            }else if(isset($request->record) && $request->record==25){
+                $record=25;
+            }
+        }  
+        $node = Category::findOrFail($slug->categories_ads_id); 
+        $data['cnode']=$node->id; 
+        $data['cnodeName']=$node->name; 
+        if ($request->ajax()) {    
+            // get all product->orderBy('products_ads.price', $order)
+            if(isset($request->from) && isset($request->to)){
+                $data['product']=Product::categorized($node)->whereBetween('price', [$request->from, $request->to])->paginate($record);   
+            }else{
+                $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);   
+            }
+            return \Response::json(\View::make('elements.product',compact('data'))->render());
+        }  
+        $data['bread']=$node->getAncestorsAndSelf();
+        $slugName=$node->getRoot()->slug; 
+        $data['order']=$order;
+        $data['record']=$record; 
+        if($order !=''){
+            // get all product
+            $data['product']=Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record); 
+        }else{
+            // get all product->orderBy('products_ads.price', $order)
+            $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);       
+        } 
+        $data['type']='shop';
+        return view('shop.page.product',compact('data','slugName'));
+    }
     /**
      * Show the form for creating a new resource.
      *

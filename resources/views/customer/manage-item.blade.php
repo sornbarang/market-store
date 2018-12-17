@@ -35,6 +35,14 @@
     <!--================================
             START DASHBOARD AREA
     =================================-->
+    @php  
+    $r='market.';
+    @endphp 
+    @if(isset($data['type']) && $data['type']=='shop')
+        @php 
+            $r='shop.';
+        @endphp
+    @endif
     <section class="dashboard-area dashboard-edit">
         @include('elements.customer-menu')
 
@@ -126,10 +134,10 @@
 
                                         <div class="options dropdown-menu" aria-labelledby="drop2">
                                             <ul>
-                                                <li><a href="{{route('market.edititem',$val->slug)}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
-                                                <li><a target="_blank" href="{{ route('market.productdetail',$val->slug) }}"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.view')</a></li>
+                                                <li><a href="{{route($r.'edititem',$val->slug)}}"><span class="lnr lnr-pencil"></span>@lang('profilemanageitem.edit')</a></li>
+                                                <li><a target="_blank" href="{{ route($r.'productdetail',$val->slug) }}"><span class="lnr lnr-eye"></span>@lang('profilemanageitem.view')</a></li>
                                                 <li>
-                                                    <a data-route="{{route('market.deleteproduct',$val->slug)}}" href="#" data-toggle="modal" data-target="#myModal2" class="delete" id="deletepro">
+                                                    <a data-route="{{route($r.'deleteproduct',$val->slug)}}" href="#" data-toggle="modal" data-target="#myModal2" class="delete" id="deletepro">
                                                         <span class="lnr lnr-trash"></span>@lang('profilemanageitem.delete')
                                                     </a>
                                                 </li>
@@ -147,7 +155,7 @@
                                             @else
                                                 <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
                                             @endif
-                                            <p><a href="{{route('market.myprofile')}}">
+                                            <p><a href="{{route($r.'myprofile')}}">
                                             @if (Route::has('login'))
                                                 @auth
                                                     {{ ucfirst(Auth::user()->name) }}

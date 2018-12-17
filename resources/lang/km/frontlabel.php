@@ -32,6 +32,6 @@ return [
     'comments'=>'យោបល់',      
     'views'=>'មើល',
     'shareitem'=>'ចែករំលែក',
-    'norecord'=>'ពំុមានផលិតផល នៃ'
-
+    'norecord'=>'ពំុមានផលិតផល នៃ',
+    'addtocard'=>'ដាក់ចូលកន្ត្រក'
 ];

@@ -31,7 +31,7 @@
                     $img = asset('imgs/default/conversions/default.jpg');
                 }
             @endphp
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-3 col-sm-6">
                 <!-- start .single-product -->
                 <div class="product product--card product--card-small">
                     <div class="hot position-absolute text-white bg-danger p-1 font-weight-bold rounded-0" style="z-index:9;max-width:100px;">
@@ -40,7 +40,62 @@
                     <div class="product__thumbnail">
                         <img src="{{$img}}" alt="Product Image">
                         <div class="prod_btn">
-                            <a href="{{ route('market.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                            {{--
+                            @if(isset($data['type']) && $data['type']=='shop')
+                                <a href="{{ route('shop.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+
+                            @else
+                                <a href="{{ route('market.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
+                            @endif
+                            --}}
+                            <div class="row no-gutters">
+                                <div class="col-md-12">
+                                    @if(isset($data['type']) && $data['type']=='shop')
+                                        <a href="{{route('shop.productdetail',$val->slug)}}" class="transparent btn--sm btn--round">More Info</a>
+                                    @else
+                                        <a href="{{route('market.productdetail',$val->slug)}}" class="transparent btn--sm btn--round">More Info</a>
+                                    @endif
+                                </div>
+                                <div class="col-md-12 pt-3">
+                                    <div class="row no-gutters ">
+                                        <div class="col-4">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-12">
+                                                    <span class="lnr lnr-heart scolor"></span>
+                                                </div>
+                                                <div class="col-md-12 text-white font-weight-bold">
+                                                    <span>35</span>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <span class="lnr lnr-bubble mcolor3"></span>
+                                                </div>
+                                                <div class="col-md-12 text-white font-weight-bold">
+                                                    @php 
+                                                        $getUserRateOfProduct = \willvincent\Rateable\Rating::distinct()->where('rateable_id',$val->id); 
+                                                    @endphp
+                                                    <span>{{$getUserRateOfProduct->count()??0}}</span>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <div class="col-md-12"> 
+                                                    <div style="padding-bottom:3px;" class="rateproduct cproduct" data-rating="{{$val->averageRating}}">
+                                                        <input  type="hidden" name="score">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 text-white font-weight-bold"> 
+                                                    <span>{{number_format($val->averageRating, 2, '.', ',')}} ({{$val->sumRating}})</span>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
                         </div><!-- end /.prod_btn -->
                     </div><!-- end /.product__thumbnail -->
@@ -74,22 +129,7 @@
 
                     </div><!-- end /.product-desc -->
 
-                    <div class="product-purchase">
-                        {{--
-                        <div class="w-100 text-price pt-1 pb-1">
-                            @if(null !==$val->discount && is_numeric($val->discount) && (int)$val->discount !=0)
-                                <div class="row">
-                                    <div class="col-6 text-truncate text-left text-danger">
-                                        {{round($val->discount, 2)}}% Off
-                                    </div>
-                                    <div class="col-6 text-truncate text-right"> 
-                                        <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}</span> 
-                                    </div>
-                                </div>
-                            @else
-                                &nbsp;
-                            @endif
-                        </div>--}}
+                    <div class="product-purchase pb-1"> 
                         <div class="row no-gutters d-flex content-justify-center align-items-center">
                             <div class="col-8 text-truncate">
                                 <div class="row no-gutters">
@@ -126,7 +166,15 @@
                                 </a>
                             </div>
                         </div>
-                         
+                        @if(isset($data['type']) && $data['type']=='shop')
+                            <div class="row no-gutters">
+                                <div class="col-md-12">
+                                    <button style="line-height:inherit;" class="btn btn--icon btn-sm float-right p-2">
+                                        <span class="lnr lnr-cart"></span>@lang('frontlabel.addtocard')
+                                    </button>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div><!-- end /.single-product -->
             </div><!-- end /.col-md-4 -->

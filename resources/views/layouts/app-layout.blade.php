@@ -39,7 +39,13 @@
 <body class="home3">
 @php 
     $avatar='';
-@endphp
+    $r='market.';
+@endphp 
+@if(isset($data['type']) && $data['type']=='shop')
+    @php 
+        $r='shop.';
+    @endphp
+@endif
 <!--================================
         START MENU AREA
     =================================--> 
@@ -53,7 +59,15 @@
                 <!-- start .col-md-3 -->
                 <div class="col-lg-3 col-md-3 col-6 v_middle">
                     <div class="logo">
-                        <a href="{{ route('market') }}">
+                        @php 
+                            $home = route('market');
+                        @endphp
+                        @if(isset($data['type']) && $data['type']=='shop')
+                            @php 
+                                $home = route('shop');
+                            @endphp
+                        @endif
+                        <a href="{{ $home }}">
                             <img src="{{asset('/')}}images/logo.png" alt="logo" class="img-fluid">
                         </a> 
                     </div>
@@ -115,7 +129,7 @@
                                         <div class="dropdown dropdown--author">
                                             <ul>
                                                 <li>
-                                                    <a href="{{route('market.myprofile')}}">
+                                                    <a href="{{route($r.'myprofile')}}">
                                                         <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                                 </li>
                                                 <li>
@@ -127,7 +141,7 @@
                                                         <span class="fa fa-comments-o"></span>@lang('profile.chat')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('market.mysetting')}}">
+                                                    <a href="{{route($r.'mysetting')}}">
                                                         <span class="lnr lnr-cog"></span> @lang('profile.setting')</a>
                                                 </li>
                                                 {{--
@@ -150,11 +164,11 @@
                                                 </li>
                                                 --}}
                                                 <li>
-                                                    <a href="{{route('market.myitemupload')}}">
+                                                    <a href="{{route($r.'myitemupload')}}">
                                                         <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{route('market.mymanageitem')}}">
+                                                    <a href="{{route($r.'mymanageitem')}}">
                                                         <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
                                                 </li>
                                                 @if (Route::has('login'))
@@ -185,7 +199,7 @@
                         </div>
                         <!--end /.author-author__info-->
                         @else 
-                            @if (\Request::route()->getName() != 'login')  
+                            @if (null !== request()->route() && request()->route()->getName() != 'login')  
                                 
                                 <div class="row h-100">
                                     <form class="frmlogincustom needs-validation" method="POST" action="{{ route('login') }}"  novalidate>
@@ -355,7 +369,7 @@
                                     <div class="dropdown dropdown--author">
                                         <ul>
                                         <li>
-                                            <a href="{{route('market.myprofile')}}">
+                                            <a href="{{route($r.'myprofile')}}">
                                                 <span class="lnr lnr-user"></span>@lang('profile.profile')</a>
                                             </li>
                                             <li>
@@ -389,11 +403,11 @@
                                             </li>
                                             --}}
                                             <li>
-                                                <a href="{{route('market.myitemupload')}}">
+                                                <a href="{{route($r.'myitemupload')}}">
                                                     <span class="lnr lnr-upload"></span>@lang('profile.uploaditems')</a>
                                             </li>
                                             <li>
-                                                <a href="{{route('market.mymanageitem')}}">
+                                                <a href="{{route($r.'mymanageitem')}}">
                                                     <span class="lnr lnr-book"></span>@lang('profile.manageitems')</a>
                                             </li> 
                                             <li>
@@ -608,10 +622,16 @@
                         <div class="go_top">
                             <span class="lnr lnr-chevron-up"></span>
                         </div>
-                        <div class="sticky-menu-right">
-                            <a href="{{ route('shop') }}">
-                                <span class="lnr lnr-pointer-right"></span> Go to shop
-                            </a>
+                        <div class="sticky-menu-right pl-1 pr-1" style="width:auto;">
+                            @if(isset($data['type']) && $data['type']=='shop')
+                                <a href="{{ route('market') }}">
+                                    <span class="lnr lnr-pointer-right font-weight-bold"></span> Go to market
+                                </a>
+                            @else 
+                                <a href="{{ route('shop') }}" >
+                                    <span class="lnr lnr-pointer-right font-weight-bold"></span> Go to shop
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -991,15 +1011,15 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 }, 
                 success: function( response ) {   
                     var elm = this_.parents('.blog-explor-breadcrum').next().find('#lottie');
-                        elm.hide();
-                    var anim=lottie('{{asset("json/zoom_when_loading_data.json")}}',elm,'destroy'); 
-                       anim.destroy();
+                        elm.hide(),
+                        anim=lottie('{{asset("json/zoom_when_loading_data.json")}}',elm,'destroy'); 
+                        anim.destroy();
                        this_.parents('.blog-explor-breadcrum').next().find('#lottie').hide();
                     var owl=this_.parents('.blog-explor-breadcrum').next().children().find('.partners');
                         owl.empty();
                         owl.trigger('destroy.owl.carousel');
                         owl.html(response); 
-                        $('div.rateproduct').raty(
+                        $('div.rateproduct,div.rateproducthover').raty(
                             { 
                                 starOff   :"{{asset('imgs/no.png')}}",
                                 iconRange: [            

@@ -30,9 +30,61 @@
                 </div>
                 <div class="product__thumbnail">
                     <img src="{{ $img }}" alt="Product Image">
-                    <div class="prod_btn">
-                        <a href="{{route('market.productdetail',$getprops->slug)}}" class="transparent btn--sm btn--round">More Info</a>
-                        {{--<a href="single-product.html" class="transparent btn--sm btn--round">Live Demo</a>--}}
+                    <div class="prod_btn d-flex content-justify-center align-items-center">
+                        {{--
+                        @if(isset($data['type']) && $data['type']=='shop')
+                            <a href="{{route('shop.productdetail',$getprops->slug)}}" class="transparent btn--sm btn--round">More Info</a>
+                        @else
+                            <a href="{{route('market.productdetail',$getprops->slug)}}" class="transparent btn--sm btn--round">More Info</a>
+                        @endif--}}
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                @if(isset($data['type']) && $data['type']=='shop')
+                                    <a href="{{route('shop.productdetail',$getprops->slug)}}" class="transparent btn--sm btn--round">More Info</a>
+                                @else
+                                    <a href="{{route('market.productdetail',$getprops->slug)}}" class="transparent btn--sm btn--round">More Info</a>
+                                @endif
+                            </div>
+                            <div class="col-md-12 pt-3">
+                                <div class="row no-gutters ">
+                                    <div class="col-4">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-12">
+                                                <span class="lnr lnr-heart scolor"></span>
+                                            </div>
+                                            <div class="col-md-12 text-white font-weight-bold">
+                                                <span>35</span>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span class="lnr lnr-bubble mcolor3"></span>
+                                            </div>
+                                            <div class="col-md-12 text-white font-weight-bold">
+                                                @php 
+                                                    $getUserRateOfProduct = \willvincent\Rateable\Rating::distinct()->where('rateable_id',$getprops->id); 
+                                                @endphp
+                                                <span>{{$getUserRateOfProduct->count()??0}}</span>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-md-12"> 
+                                                <div style="padding-bottom:3px;" class="rateproduct" data-rating="{{$getprops->averageRating}}">
+                                                    <input  type="hidden" name="score">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-white font-weight-bold"> 
+                                                <span>{{number_format($getprops->averageRating, 2, '.', ',')}} ({{$getprops->sumRating}})</span>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- end /.prod_btn -->
                 </div>
@@ -95,12 +147,13 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>--}}
+                        </li>
+                        --}}
                     </ul>
 
                 </div>
                 <!-- end /.product-desc -->
-                <div class="product-purchase"> 
+                <div class="product-purchase pb-1"> 
                     {{--
                     <div class="w-100 text-price pt-1 pb-1">
                         @if(null !==$getprops->discount && is_numeric($getprops->discount) && (int)$getprops->discount !=0)
@@ -115,7 +168,8 @@
                         @else
                             &nbsp;
                         @endif
-                    </div>--}}
+                    </div>
+                    --}}
                     <div class="row no-gutters d-flex content-justify-center align-items-center">
                         <div class="col-8 text-truncate">
                             <div class="row no-gutters">
@@ -151,7 +205,16 @@
                                 </div>
                             </a>
                         </div>
-                    </div>  
+                    </div>
+                    @if(isset($data['type']) && $data['type']=='shop')
+                        <div class="row no-gutters">
+                            <div class="col-md-12">
+                                <button style="line-height:inherit;" class="btn btn--icon btn-sm float-right p-2">
+                                    <span class="lnr lnr-cart"></span>@lang('frontlabel.addtocard')
+                                </button>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <!-- end /.product-purchase -->
             </div>

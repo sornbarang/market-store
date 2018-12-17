@@ -60,21 +60,47 @@ function()
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
 //    b2c route
     Route::group([
-        'prefix'    => 'shop',
-        'namespace'  => 'Shop',
+        'prefix'    => 'shop'
     ], function() {
-        Route::get('/', ['as' => 'shop', 'uses' => 'CategoryController@index']);
+        Route::get('search', ['as' => 'shop.search', 'uses' =>'SearchController@filter']); 
+        Route::group([ 
+            'namespace'  => 'Shop',
+        ], function() {
+            Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'Admin\CategoryAdsController@getSubCategory']);
+            Route::get('/', ['as' => 'shop', 'uses' => 'CategoryController@index']);
+            Route::get('productdetail/{slug?}', ['as' => 'shop.productdetail', 'uses' => 'ProductController@getproductdetail']);   
+            Route::get('mystore/{id}', ['as' => 'shop.mystore', 'uses' => 'CustomerController@myStore']);
+            Route::get('cart', ['as' => 'shop.cart', 'uses' => 'CustomerController@getCart']);
+            Route::get('checkout', ['as' => 'shop.checkout', 'uses' => 'CustomerController@getCheckout']);
+            // require login
+            Route::group( ['middleware' => 'auth' ], function()
+            {
+                Route::get('myprofile', ['as' => 'shop.myprofile', 'uses' => 'CustomerController@myProfile']);
+                Route::post('ratemarket', ['as' => 'shop.ratemarket', 'uses' => 'ProductController@makeRateAble']);
+                Route::get('mysetting', ['as' => 'shop.mysetting', 'uses' => 'CustomerController@mySetting']);
+                Route::any('myitemupload', ['as' => 'shop.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
+                Route::get('mymanageitem', ['as' => 'shop.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
+                Route::delete('destroyproduct/{slug}', ['as' => 'shop.destroyproduct', 'uses' => 'Market\ProductController@destroy']);
+                Route::delete('mydestroypro/{slug}', ['as' => 'shop.deleteproduct', 'uses' => 'CustomerController@myDeletePro']);
+                Route::any('myEditItem/{slug?}', ['as' => 'shop.edititem', 'uses' => 'CustomerController@myEditItem']);
 
-        Route::get('cart', ['as' => 'shop.cart', 'uses' => 'CustomerController@getCart']);
-        Route::get('checkout', ['as' => 'shop.checkout', 'uses' => 'CustomerController@getCheckout']);
-
-//        require login
-        Route::group( ['middleware' => 'auth' ], function()
-        {
-            Route::get('profile/{profileId}/follow', 'ProfileController@followUser')->name('user.follow');
-            Route::get('profile/{profileId}/unfollow', 'ProfileController@unFollowUser')->name('user.unfollow');
-
-        });
+                Route::resource('customer', 'CustomerController',['names' =>
+                    [
+                        'index' => 'shop.customer.index',
+                        'create' => 'shop.customer.create',
+                        'update' => 'shop.customer.update',
+                        'edit' => 'shop.customer.edit',
+                        'store' => 'shop.customer.store',
+                        'show' => 'shop.customer.show',
+                        'destroy' => 'shop.customer.destroy',
+                    ]
+                ]);
+                Route::get('profile/{profileId}/follow', 'ProfileController@followUser')->name('user.follow');
+                Route::get('profile/{profileId}/unfollow', 'ProfileController@unFollowUser')->name('user.unfollow');
+            });
+            Route::get('{slug?}', ['as' => 'shop.dynamiccat', 'uses' =>'CategoryController@getSlugCategory']);
+            Route::get('json/{slug?}', ['as' => 'shop.getproductofcategory', 'uses' =>'CategoryController@getProductOfCategory']);
+        });     
     });
 
 

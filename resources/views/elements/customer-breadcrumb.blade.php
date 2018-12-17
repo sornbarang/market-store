@@ -2,20 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="breadcrumb">
-                    <ul>
-                        <li><a href="{{route('market')}}">@lang('menu.home')</a></li>
-                        @if(isset($data['bread']))
-                            @foreach($data['bread'] as $bread)
-                                @foreach($bread->translations as $v)
-                                    @if($v->locale==app()->getLocale()) 
-                                        <li class="{{$data['cnode']==$v->categories_ads_id?'active':''}}"><a href="{{route('market.dynamiccat',$v->slug)}}">{{$v->name}}</a></li> 
-                                    @endif
-                                @endforeach
-                            @endforeach
-                        @endif
-                    </ul>
-                </div> 
+                @include('elements.breadcrumb') 
                 <h1 class="page-title">
                     @if (Route::has('login'))
                         @auth

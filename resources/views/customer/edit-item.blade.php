@@ -11,6 +11,14 @@
     <!--================================
             START DASHBOARD AREA
     =================================--> 
+    @php  
+    $r='market.';
+    @endphp 
+    @if(isset($data['type']) && $data['type']=='shop')
+        @php 
+            $r='shop.';
+        @endphp
+    @endif
     <section class="dashboard-area">
         @include('elements.customer-menu')
 
@@ -61,7 +69,7 @@
 
                 <div class="row">
                     <div class="col-md-8 col-sm-7">
-                        <form method="post" action="{{route('market.edititem',$data['product']->slug)}}" id="frmUpdateFront" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <form method="post" action="{{route($r.'edititem',$data['product']->slug)}}" id="frmUpdateFront" enctype="multipart/form-data" class="needs-validation" novalidate>
                             @csrf
                             <input type="hidden" name="sumernotehidden" id="trumbowyg-demoe-hidden">
                             <input type="hidden" name="lastchildid" id="lastchildid">

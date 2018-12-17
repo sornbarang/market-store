@@ -1,8 +1,8 @@
 @extends('layouts.app-layout')
 @section('content')
 <!--================================
-        START BREADCRUMB AREA
-    =================================-->
+    START BREADCRUMB AREA
+=================================-->
 @include('elements.customer-breadcrumb')
 <!--================================
     END BREADCRUMB AREA
@@ -23,7 +23,7 @@
                                 </button>
                             </div>
                             <!-- end /.modal-header -->
-                            <form action="{{route('market.destroyproduct',$data['product']->slug)}}" method="POST"> 
+                            <form action="{{route('shop.destroyproduct',$data['product']->slug)}}" method="POST"> 
                                 {{ method_field('DELETE') }}
                                 @csrf
                                 <div class="modal-body">
@@ -52,7 +52,7 @@
                     <h3 class="modal-title" id="rating_modal">Rating this Item</h3>
                     <h4>Product Enquiry Extension</h4>
                     <p>by
-                        <a href="{{isset($val->user)?route('market.mystore',$data['product']->user->id):''}}">{{isset($data['product']->user)?$data['product']->user->name:''}}</a>
+                        <a href="{{isset($val->user)?route('shop.mystore',$data['product']->user->id):''}}">{{isset($data['product']->user)?$data['product']->user->name:''}}</a>
                     </p>
                 </div>
                 <!-- end /.modal-header -->
@@ -131,7 +131,7 @@
                     <h3 class="modal-title" id="rating_modal">Give Feedback on This Post</h3>
                     <h4>Product</h4>
                     <p>by
-                        <a href="{{route('market.mystore',$data['product']->user->id)}}">{{isset($data['product']->user)?$data['product']->user->name:''}}</a>
+                        <a href="{{route('shop.mystore',$data['product']->user->id)}}">{{isset($data['product']->user)?$data['product']->user->name:''}}</a>
                     </p>
                 </div>
                 <div class="container"> 
@@ -347,7 +347,7 @@
                                 </p>
                                 @php  
 
-                                    $socialLink = route('market.productdetail',$data['product']->slug); 
+                                    $socialLink = route('shop.productdetail',$data['product']->slug); 
                                     $socials=Share::load($socialLink,$data['product']->name,asset($firstMedia))->services('facebook', 'linkedin', 'twitter');
                                 @endphp 
                                 <div class="social social--color--filled">
@@ -404,7 +404,7 @@
                                 --}}
                                 <li>
                                     <a href="#product-review" aria-controls="product-review" role="tab" data-toggle="tab">Reviews
-                                        <span>({{$data['getUserRateOfProduct']->total()??0}})</span>
+                                        <span>({{count($data['getUserRateOfProduct'])}})</span>
                                     </a>
                                 </li>
                                 {{--
@@ -742,7 +742,7 @@
                             <div class="author-infos">
                                 <div class="author_avatar"> 
                                     @if(isset($data['product']->user))
-                                        <a href="{{route('market.mystore',$data['product']->user->id)}}">
+                                        <a href="{{route('shop.mystore',$data['product']->user->id)}}">
                                             @if(isset($avatar) && !empty($avatar))
                                                 <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
                                             @else
@@ -775,13 +775,13 @@
                                     @if (Route::has('login')) 
                                         @auth
                                             @if(isset($data['product']->user) && $data['product']->user->id==auth()->user()->id)
-                                                <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>     
+                                                <a href="{{isset($data['product']->user)?route('shop.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>     
                                             @else
-                                                <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
+                                                <a href="{{isset($data['product']->user)?route('shop.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
                                                 <a  class="btn btn--sm btn--round text-white" id="sendMessage" data-id="{{isset($data['product']->user)?$data['product']->user->id:''}}">@lang('frontlabel.sentmessage')</a>
                                             @endif
                                         @else
-                                            <a href="{{isset($data['product']->user)?route('market.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
+                                            <a href="{{isset($data['product']->user)?route('shop.mystore',$data['product']->user->id):'javascript:void(0)'}}" class="btn btn--sm btn--round">@lang('frontlabel.viewprofile')</a>
                                             <a  class="btn btn--sm btn--round text-white" id="sendMessage" data-id="{{isset($data['product']->user)?$data['product']->user->id:''}}">@lang('frontlabel.sentmessage')</a>
                                         @endauth 
                                     @endif 
@@ -809,7 +809,7 @@
                                             <span class="lnr lnr-bubble mcolor3"></span>
                                         </div>
                                         <div class="col-md-12">
-                                            <span>{{$data['getUserRateOfProduct']->total()??0}}</span>
+                                            <span>{{$data['getUserRateOfProduct']->count()??0}}</span>
                                         </div>
                                     </div>  
                                 </div>
@@ -1064,7 +1064,7 @@
         var rateComment=$('#rating_field').val();
         var proId=$('#proId').val();
         xhr=$.ajax({
-            url: "{{route('market.ratemarket')}}",
+            url: "{{route('shop.ratemarket')}}",
             type: 'POST',
             data:{id:proId,rate:rateNum,comments:rateComment},
             headers: {

@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\ProductsAds as Product;
 class SearchController extends Controller
 {
-    public function filter(Request $request){
-        
+    public function filter(Request $request){ 
+        if($request->route()->getName()=='shop.search'){
+            $data['type']='shop';
+        }
         $data['searchpros']=[]; 
         $order='asc';
         $record=9;
