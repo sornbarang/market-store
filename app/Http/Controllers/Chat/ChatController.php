@@ -76,7 +76,7 @@ class ChatController extends Controller
     }
     public function chats(Session $session)
     {
-        return ChatResource::collection($session->chats->where('user_id', auth()->id()));
+        return ChatResource::collection($session->chats()->where('user_id', auth()->id())->whereDate('chats.created_at',\Carbon\Carbon::today())->orWhereDate('chats.created_at',\Carbon\Carbon::yesterday())->get());
     }
 
     public function read(Session $session)

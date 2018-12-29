@@ -59,6 +59,7 @@ class HomeController extends Controller
     public function getFriends()
     { 
         $session = Session::select('user1_id','user2_id','deleted_by')->where('user1_id',auth()->id())->orWhere('user2_id',auth()->id())->orderBy('updated_at','desc')->get();
+        // dd($session);
         $friends = [];   
         $multiplied = $session->map(function ($item, $key) { 
             if(!empty($item->deleted_by)){
@@ -77,7 +78,11 @@ class HomeController extends Controller
         });
         // biding multi array to one array Using collapse and unique
         $friends = $multiplied->collapse()->unique();
-        $implodeF = $multiplied->collapse()->unique()->implode(',');
-        return UserResource::collection(User::where('id', '!=', auth()->id())->whereIn('id',$friends)->orderByRaw('FIELD(id,'.$implodeF.')')->get());
+        $query = User::where('id', '!=', auth()->id())->whereIn('id',$friends);
+        $implodeF = $multiplied->collapse()->unique()->implode(','); 
+        if($implodeF!=''){
+            $query->orderByRaw('FIELD(id,'.$implodeF.')');
+        }
+        return UserResource::collection( $query->get());
     }
 } 

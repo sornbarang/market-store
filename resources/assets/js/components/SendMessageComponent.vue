@@ -16,7 +16,7 @@
                 </Col> 
             </Row>
         </div>
-        <div class="chat-body pl-2 pr-2" v-chat-scroll>
+        <div class="chat-body pl-2 pr-2" v-chat-scroll="{always: false, smooth: true,scrollonremoved:true}">
             <Row class-name="pt-2 pb-2" v-for="chat in chats" :key="chat.id"> 
                 <Col span="24">
                   <Card :dis-hover="true" :bordered="false" v-if="chat.type == 0"> 
@@ -161,6 +161,11 @@ export default {
           name: auth.name
         });
       }
+    },
+    friend(v){
+      this.read();
+
+      this.getAllMessages();
     }
   },
   methods: {
@@ -345,7 +350,6 @@ export default {
     }
   },
   created() { 
-    console.log(this.friend);
     this.read();
 
     this.getAllMessages();

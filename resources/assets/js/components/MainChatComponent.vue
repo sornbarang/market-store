@@ -1,7 +1,7 @@
 <template> 
     <div class="grid"> 
         <Modal ok-text="ok" cancel-text="Cancel" @on-ok="deleteSuccess" v-model="modal" draggable scrollable title="Are you sure?">
-            <div>Noted: we can not recovery these coversation if you complated deleted.</div>
+            <div>Noted: we can not recovery these coversation if you delete.</div>
         </Modal>
         <div @click="hideEmoji" v-show="show" style="position: absolute;z-index: 8; width: 100vw;height: 100vh;"></div>
         <div class="header border-bottom">
@@ -11,13 +11,13 @@
                     <Col span="6" pull="18"  align="center"><Avatar size="large"  src="/imgs/logo.png" /></Col>
                 </Row>
             </div>
-            <div class="center d-flex content-justify-center align-items-center"> 
-                <Row class-name="text-center w-100"> 
+            <div class="center d-flex content-justify-center align-items-center">
+                <Row class-name="text-center w-100" v-if="userInfor!=null">  
                     <Col span="24">
-                        <h5 v-if="userInfor!=null" v-text="userInfor.name"></h5>  
+                        <h5 v-text="userInfor.name"></h5>  
                     </Col> 
                     <Col span="24">
-                        <p v-if="userInfor!=null" v-text="userInfor.email"></p>
+                        <p v-if="userInfor.online" class="text-primary">Online</p>
                     </Col> 
                 </Row>
             </div>     
@@ -88,11 +88,14 @@
                 </Sider>
                 <!-- <div v-for="i in 200" :key="i">item</div> -->
             </div>
-            <div class="center border-left border-right"> 
-                <div v-for="(friend,inx) in friends" :key="inx" v-if="friend.session"> 
+            <div class="center border-left border-right">  
+                <div v-if="getFsession.session">
+                    <send-message-component v-if="getFsession.session.open" @close="close(getFsession)" v-bind:friend="getFsession" v-on:order="chkOrder"></send-message-component>
+                </div> 
+                <!-- <div v-for="(friend,inx) in friends" :key="inx" v-if="friend.session"> 
                     <send-message-component v-if="friend.session.open" @close="close(friend)" :friend="friend" v-on:order="chkOrder"></send-message-component>
-                </div>  
-                <!-- <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div>  -->
+                </div>   -->
+                <div v-else class="w-100 h-100 d-flex justify-content-center align-items-center" ><Icon color="#0000001f" :size="100" type="ios-send-outline" /></div> 
             </div>    
             <div class="right">
                 <Row class-name="pl-2 pr-2 pt-2 c-right-container"  v-if="userInfor!=null">
@@ -101,7 +104,7 @@
                             <Avatar size="large" :src="userInfor.profile" v-if="userInfor.profile"/>
                             <Avatar size="large" icon="ios-person" v-else/>
                             <h4 class="m-0 pt-1 text-capitalize" v-text="userInfor.name"></h4>  
-                            <p class="m-0 p-0" v-text="userInfor.email"></p>
+                            <!-- <p class="m-0 p-0" v-text="userInfor.email"></p> -->
                         </div>
                     </Card>
                     <Row>
@@ -137,7 +140,9 @@ export default {
         value:'',
         userInfor:null, 
         users:[],
-        modal:false
+        modal:false,
+        loading:false,
+        getFsession:{session:false}
     };
   },
     computed: {
@@ -260,22 +265,26 @@ export default {
                 let getActiveUser = _.find(this.friends, function(o) { return o.id == uac; });
                 if( getActiveUser!='' && getActiveUser !=undefined ){
                     this.openChat(getActiveUser);
-                }
-                console.log(this.friends);
+                } 
             });
         },
-        openChat(friend) {
+        openChat(friend) { 
             localStorage.setItem('activeUser',friend.id)
             this.actived = friend.id
-            // check if user session have 
-            if (friend.session) {
-                this.friends.forEach(
-                    friend => (friend.session ? (friend.session.open = false) : "")
-                );
-                friend.session.open = true;
-                friend.session.unreadCount = 0;
+            // check if user have session 
+            if(friend.session){
+                // this.friends.forEach(
+                //     friend => (friend.session ? (friend.session.open = false) : "")
+                // );
+                var getF = _.filter(this.friends, function(o) { return o.id==friend.id; });
+                getF[0].session.open = true;
+                getF[0].session.unreadCount = 0;
+                this.getFsession =getF[0];
+                console.log(getF[0]);
+                // friend.session.open = true;
+                // friend.session.unreadCount = 0;
                 this.userInfor = friend
-            } else { 
+            }else{
                 this.createSession(friend);
             }
         },
