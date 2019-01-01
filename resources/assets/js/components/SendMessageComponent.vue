@@ -17,6 +17,12 @@
             </Row>
         </div>
         <div class="chat-body pl-2 pr-2" v-chat-scroll="{always: false, smooth: true,scrollonremoved:true}">
+            <Row class-name="text-center p-2" v-show="chats.length > 0">
+                <Col span="24">
+                  <Icon v-on:click="moreChat" color="green" :size="15" type="ios-arrow-up" />
+                </Col>
+                <Col v-on:click="moreChat" span="24">More</Col>
+            </Row>
             <Row class-name="pt-2 pb-2" v-for="chat in chats" :key="chat.id"> 
                 <Col span="24">
                   <Card :dis-hover="true" :bordered="false" v-if="chat.type == 0"> 
@@ -169,6 +175,30 @@ export default {
     }
   },
   methods: {
+    // Get more past of chat
+    moreChat(){
+      let mythis =this;
+      if(this.chats.length > 0){
+        let minBy = _.minBy(this.chats,'date.date');
+        this.loading = true
+        axios.post(`session/${this.friend.session.id}/chats`,{date:minBy.date.date})
+        .then(function (res) {
+          console.log(res);
+          // handle success
+          if(res.status == 200 && res.data.data.length > 0){
+            _.forEach(res.data.data, function(value) {
+              // push object of the beginning
+              mythis.chats.unshift(value);
+            });
+          }
+          mythis.loading = false
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+      }
+    },
     inited (viewer) {
         this.$viewer = viewer
       },
@@ -339,10 +369,14 @@ export default {
         .post(`session/${this.friend.session.id}/unblock`)
         .then(res => (this.session.blocked_by = null),this.session.block = false);
     },
-    getAllMessages() {
+    getAllMessages(date=null) {
+      // let url = `session/${this.friend.session.id}/chats`;
+      // if(date !=null){
+      //   let d = date
+      // }
       this.loading = true
       axios
-        .post(`session/${this.friend.session.id}/chats`)
+        .post(`session/${this.friend.session.id}/chats`,{date:date})
         .then(res => (this.chats = res.data.data),this.loading = false);
     },
     read() {

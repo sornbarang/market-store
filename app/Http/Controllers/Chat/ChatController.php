@@ -74,9 +74,19 @@ class ChatController extends Controller
         // return response($chat->id, 200);
         return $images;
     }
-    public function chats(Session $session)
+    public function chats(Session $session,Request $request)
     {
+        if(isset($request->date) && $request->date !=''){
+            $preD1 = Carbon::createFromFormat('Y-m-d H:i:s.u', $request->date)->subDays(1);
+            $preD1 = $preD1->format('Y-m-d');
+            $preD2 = Carbon::createFromFormat('Y-m-d H:i:s.u', $request->date)->subDays(2);
+            $preD2 = $preD2->format('Y-m-d');
+            // dd($preD2,$preD1,\Carbon\Carbon::today());
+            return ChatResource::collection($session->chats()->where('user_id', auth()->id())->whereDate('chats.created_at',$preD2)->orWhereDate('chats.created_at',$preD1)->orderBy('chats.created_at','desc')->get());
+
+        }
         return ChatResource::collection($session->chats()->where('user_id', auth()->id())->whereDate('chats.created_at',\Carbon\Carbon::today())->orWhereDate('chats.created_at',\Carbon\Carbon::yesterday())->get());
+        // return ChatResource::collection($session->chats->where('user_id', auth()->id()));
     }
 
     public function read(Session $session)
