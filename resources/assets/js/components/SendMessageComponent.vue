@@ -128,6 +128,7 @@
 </template>
 
 <script>
+let mythis;
 import 'viewerjs/dist/viewer.css'
 import Viewer from "v-viewer/src/component.vue"
 export default {
@@ -146,6 +147,7 @@ export default {
       type:4,
       options:{ "inline": false, "button": true, "navbar": true, "title": true, "toolbar": true, "tooltip": false, "movable": true, "zoomable": true, "rotatable": true, "scalable": true, "transition": true, "fullscreen": true, "keyboard": true, "url": "data-source" },
       allowedExtensions:['jpg','jpeg','png'],
+      next:null
     };
   },
   components: {
@@ -170,38 +172,53 @@ export default {
     },
     friend(v){
       this.read();
-
+      
       this.getAllMessages();
     }
   },
   methods: {
     // Get more past of chat
     moreChat(){
-      let mythis =this;
-      if(this.chats.length > 0){
-        let minBy = _.minBy(this.chats,'date.date');
-        this.loading = true
-        axios.post(`session/${this.friend.session.id}/chats`,{date:minBy.date.date})
-        .then(function (res) {
-          console.log(res);
-          // handle success
-          if(res.status == 200 && res.data.data.length > 0){
-            _.forEach(res.data.data, function(value) {
-              // push object of the beginning
-              mythis.chats.unshift(value);
-            });
-          }
-          mythis.loading = false
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
+      if(this.next){
+        mythis =this;
+        axios.post(this.next).then(res => {
+            if(res.status==200){
+                if(res.data.links.next === null){
+                    this.next = null;
+                }
+                _.forEach(res.data.data, function(moreC) {
+                    mythis.chats.unshift(moreC)
+                });
+            }
+        });
+      }else{
+        this.showSuccess('Chats','No more chat...');
       }
+
+      // if(this.chats.length > 0){
+      //   let minBy = _.minBy(this.chats,'date.date');
+      //   this.loading = true
+      //   axios.post(`session/${this.friend.session.id}/chats`,{date:minBy.date.date})
+      //   .then(function (res) {
+      //     console.log(res);
+      //     // handle success
+      //     if(res.status == 200 && res.data.data.length > 0){
+      //       _.forEach(res.data.data, function(value) {
+      //         // push object of the beginning
+      //         mythis.chats.unshift(value);
+      //       });
+      //     }
+      //     mythis.loading = false
+      //   })
+      //   .catch(function (error) {
+      //     // handle error
+      //     console.log(error);
+      //   })
+      // }
     },
     inited (viewer) {
-        this.$viewer = viewer
-      },
+      this.$viewer = viewer
+    },
     // open(nodesc){
     //   this.$Notice.error({
     //       title: 'In development mode',
@@ -210,6 +227,12 @@ export default {
     // },
     showError(title,msg){
       this.$Notice.error({
+          title:title,
+          desc: msg
+      });
+    },
+    showSuccess(title,msg){
+      this.$Notice.success({
           title:title,
           desc: msg
       });
@@ -369,15 +392,22 @@ export default {
         .post(`session/${this.friend.session.id}/unblock`)
         .then(res => (this.session.blocked_by = null),this.session.block = false);
     },
-    getAllMessages(date=null) {
-      // let url = `session/${this.friend.session.id}/chats`;
-      // if(date !=null){
-      //   let d = date
-      // }
+    getAllMessages() {
+      mythis =this;
       this.loading = true
-      axios
-        .post(`session/${this.friend.session.id}/chats`,{date:date})
-        .then(res => (this.chats = res.data.data),this.loading = false);
+      axios.post(`session/${this.friend.session.id}/chats`).then(res => {
+          if(res.status==200){
+            console.log(res);
+              if(res.data.links.next){
+                  this.next = res.data.links.next;
+              }
+              mythis.chats = _.reverse(res.data.data);
+              mythis.loading = false
+          }
+      });
+      // axios
+      //   .post(`session/${this.friend.session.id}/chats`,{date:date})
+      //   .then(res => (this.chats = res.data.data),this.loading = false);
     },
     read() {
       axios.post(`session/${this.friend.session.id}/read`);

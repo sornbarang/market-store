@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ProductsAds; 
 class ChatResource extends JsonResource
 {
     /**
@@ -14,16 +15,29 @@ class ChatResource extends JsonResource
      */
     public function toArray($request)
     {
-        $mediaItems = $this->message->getMedia();
+        $avatar=null; 
+        if(null !== $this->user->profile){
+            $medias = $this->user->profile->getMedia();  
+            foreach($medias as $val){   
+                if($this->user->profile->avatar == $val->id){
+                    $avatar=Storage::url($val->id.'/'.$val->file_name);  
+                }
+            } 
+        }
         $images=[];
-        foreach ($mediaItems as $key => $media) {
-            $images[]=asset(Storage::url($media->id.'/'.$media->file_name)); 
-        } 
+        if($this->message['content']=='file'){
+            $mediaItems = $this->message->getMedia();
+            // dd($mediaItems);
+            foreach ($mediaItems as $key => $media) {
+                $images[]=asset(Storage::url($media->id.'/'.$media->file_name)); 
+            } 
+        }
         return [
             'message' => $this->message['content'],
             'id' => $this->id,
             'type' => $this->type,
             'images'=>$images,
+            'profile'=>$avatar,
             'date'=>$this->created_at,
             'read_at' => $this->read_at_timing($this),
             'send_at' => $this->created_at->diffForHumans()

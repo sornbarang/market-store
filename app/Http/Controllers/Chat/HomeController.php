@@ -83,6 +83,6 @@ class HomeController extends Controller
         if($implodeF!=''){
             $query->orderByRaw('FIELD(id,'.$implodeF.')');
         }
-        return UserResource::collection( $query->get());
+        return UserResource::collection( $query->simplePaginate(10));
     }
 } 

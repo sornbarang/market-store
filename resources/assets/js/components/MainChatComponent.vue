@@ -7,8 +7,8 @@
         <div class="header border-bottom">
             <div class="left d-flex content-justify-center align-items-center">
                 <Row type="flex" justify="start" align="middle" class-name="w-100">
-                    <Col span="18" push="6" class-name="pr-2">TreeWb Messager</Col>
-                    <Col span="6" pull="18"  align="center"><Avatar size="large"  src="/imgs/logo.png" /></Col>
+                    <Col span="18" push="6" class-name="pr-2">TreeWb Messenger</Col>
+                    <Col span="6" pull="18"  align="center"><Avatar @click.native="goHome" size="large"  src="/imgs/logo.png" /></Col>
                 </Row>
             </div>
             <div class="center d-flex content-justify-center align-items-center">
@@ -126,24 +126,26 @@
     </div>
 </template>
 <script>
+let mythis;
 import SendMessageComponent from "./SendMessageComponent";
 export default {
-  data() {
-    return {
-        friends: [],
-        show:false,   
-        searchStr:'', 
-        actived:parseInt(localStorage.getItem('activeUser')),
-        friend:undefined,
-        rmConversation:undefined,
-        session_id:undefined,
-        value:'',
-        userInfor:null, 
-        users:[],
-        modal:false,
-        loading:false,
-        getFsession:{session:false}
-    };
+    data() {
+        return {
+            friends: [],
+            show:false,   
+            searchStr:'', 
+            actived:parseInt(localStorage.getItem('activeUser')),
+            friend:undefined,
+            rmConversation:undefined,
+            session_id:undefined,
+            value:'',
+            userInfor:null, 
+            users:[],
+            modal:false,
+            loading:false,
+            getFsession:{session:false},
+            next:null
+        };
   },
     computed: {
         auth: function () {
@@ -181,6 +183,10 @@ export default {
         },
     },
     methods: {
+        goHome(){
+            console.log(myHome);
+            window.location.href=myHome
+        },
         chkOrder(friend_id){ 
             this.friends = _.sortBy(this.friends, function(item) {
                 return item.id === friend_id ? 0 : 1;
@@ -234,15 +240,42 @@ export default {
             // console.log(event.target.value);
         },
         handleReachBottom () {
-            // return new Promise(resolve => {
-            //     setTimeout(() => {
-            //         const last = this.list1[this.list1.length - 1];
-            //         for (let i = 1; i < 11; i++) {
-            //             this.list1.push(last + i);
-            //         }
-            //         resolve();
-            //     }, 2000);
-            // });
+            mythis = this
+            return new Promise(resolve => {
+                // setTimeout(() => {
+                //     console.log(this.next);
+                //     if(this.next){
+                //         this.getMoreFriends(this.next);
+                //     }
+                    // resolve();
+                // }, 2000);
+                if(this.next){
+                    axios.post(this.next).then(res => {
+                        if(res.status==200){
+                            resolve();
+                            if(res.data.links.next == null){
+                                this.next = null;
+                            }
+                            _.forEach(res.data.data, function(moreF) {
+                                mythis.friends.push(moreF)
+                            });
+                        }
+                    });
+                }
+            });
+        },
+        getMoreFriends(next){ 
+            mythis = this
+            axios.post(next).then(res => {
+                if(res.status==200){
+                    if(res.data.links.next == null){
+                        this.next = null;
+                    }
+                    _.forEach(res.data.data, function(moreF) {
+                        mythis.friends.push(moreF)
+                    });
+                }
+            });
         },
         hideEmoji(){ 
             if(this.show){
@@ -257,15 +290,20 @@ export default {
         },
         getFriends() {
             axios.post("getFriends").then(res => {
-                this.friends = res.data.data;
-                this.friends.forEach(
-                    friend => (friend.session ? this.listenForEverySession(friend) : "")
-                ); 
-                let uac= this.actived
-                let getActiveUser = _.find(this.friends, function(o) { return o.id == uac; });
-                if( getActiveUser!='' && getActiveUser !=undefined ){
-                    this.openChat(getActiveUser);
-                } 
+                if(res.status==200){
+                    if(res.data.links.next != ''){
+                        this.next = res.data.links.next;
+                    }
+                    this.friends = res.data.data;
+                        this.friends.forEach(
+                            friend => (friend.session ? this.listenForEverySession(friend) : "")
+                        ); 
+                        let uac= this.actived
+                        let getActiveUser = _.find(this.friends, function(o) { return o.id == uac; });
+                        if( getActiveUser!='' && getActiveUser !=undefined ){
+                            this.openChat(getActiveUser);
+                        } 
+                    }
             });
         },
         openChat(friend) { 
@@ -462,5 +500,8 @@ export default {
 }
 .color-green{
     color:#56a72d;
+}
+.ivu-avatar-image,.ivu-card-body img{
+    cursor: pointer;
 }
 </style>

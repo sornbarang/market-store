@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
         window.auth = {!!auth()->user()!!} 
+        window.myHome ="{{route('shop')}}";
         // call from helper
         window['auth'].profile = "{{profile()}}"
         window['auth'].infoProfile = "{{route('market.myprofile')}}"
