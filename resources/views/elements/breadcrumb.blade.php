@@ -1,3 +1,19 @@
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb d-flex justify-content-center align-items-center">
+    <li class="breadcrumb-items">
+        <a href="#">
+            <div data-lottie="{{asset('json/notification.json')}}" class="position-relative feed" style="width:60px;height:60px;">
+            </div> 
+        </a>
+    </li>
+    <li class="breadcrumb-items">
+        <a href="#">
+            <div data-lottie="{{asset('json/19-SendButton.json')}}" class="position-relative chat" style="width:60px;height:60px;">
+            </div> 
+        </a>
+    </li>
+  </ol>
+</nav> -->
 <div class="breadcrumb">
     <ul>
         <li><a href="{{isset($data['type']) && $data['type']=='shop'?route('shop'):route('market')}}">@lang('menu.home')</a></li>

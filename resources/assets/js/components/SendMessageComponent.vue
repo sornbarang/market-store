@@ -32,9 +32,8 @@
                                   <Col span="24" class-name="text-right"><strong class="color-green">You </strong> {{chat.read_at}}</Col>
                                   <Row class-name="text-right">
                                       <Col span="21" offset="3" v-if="chat.message!='file'">
-                                          <p>
-                                              {{chat.message}}
-                                          </p>
+                                        <!-- Will return link if u share link -->
+                                        <div v-html="chat.message" v-linkified />
                                       </Col>
                                       <Col span="21" offset="3" v-else>
                                         <Row type="flex" justify="end" class="code-row-bg" v-if="chat.images">

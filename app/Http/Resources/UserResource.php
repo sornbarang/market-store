@@ -42,6 +42,7 @@ class UserResource extends JsonResource
             'randommediaproduct'=> $media,
             'online' => false,
             'profile'=>$avatar,
+            'store'=>route('shop.mystore',$this->id),
             'session' => $this->session_details($this->id)
         ];
     }

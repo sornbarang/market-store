@@ -46,7 +46,7 @@
                                             @endforeach
                                             <li style="float:right;">   
                                                 {{--<a  href="{{$firstRoute}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <span style="font-size:20px;color:#56a72d" class="lnr lnr-rocket"></span></a>--}}
-                                                <a  class="d-flex justify-content-center align-items-center" href="{{$firstRoute}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <div class="position-relative roket" style="width:35px;height:35px;float:right"></div> </a>
+                                                <a  class="d-flex justify-content-center align-items-center" href="{{$firstRoute}}" id="exploreCategory" style="color:#000;">Explore &nbsp; <div data-lottie="{{asset('json/bms-rocket.json')}}" class="position-relative roket" style="width:35px;height:35px;float:right"></div> </a>
                                             </li>
                                         </ul>
                                     </div> 

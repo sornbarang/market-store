@@ -716,10 +716,13 @@
     }, false);
 })();
 var elm = $('.container .blog-explor-breadcrum .roket');
-$(elm).each(function(e){ 
-    var anim= lottie('{{asset("json/bms-rocket.json")}}',$(this),'play'); 
-        anim.setSpeed(1.5);
-})
+playLottie(elm);
+function playLottie(elm){
+        $(elm).each(function(e){
+            var anim= lottie($(this).data('lottie'),$(this),'play'); 
+                anim.setSpeed(1.5);
+        })
+}
 function lottie(json,elm,option){ 
     var animation = bodymovin.loadAnimation({
         container: elm[0], // Required

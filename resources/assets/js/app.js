@@ -13,6 +13,8 @@ import { Picker } from 'emoji-mart-vue'
 import { Modal,Notice,Col, Row, Avatar, Input, Icon, Badge, Card, Scroll, Spin, Dropdown, DropdownMenu, DropdownItem, Layout, Header, Menu, MenuItem, Footer, Sider } from 'iview';
 import 'iview/dist/styles/iview.css';
 import _ from 'lodash';
+import linkify from 'vue-linkify'
+Vue.directive('linkified', linkify)
 Vue.use(VueChatScroll);
 /**
  *   
