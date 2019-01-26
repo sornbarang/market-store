@@ -715,7 +715,8 @@
         });
     }, false);
 })();
-var elm = $('.container .blog-explor-breadcrum .roket');
+var elm = $('.container .blog-explor-breadcrum .roket,.feed');
+console.log(elm);
 playLottie(elm);
 function playLottie(elm){
         $(elm).each(function(e){

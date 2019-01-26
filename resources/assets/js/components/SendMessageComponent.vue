@@ -16,28 +16,71 @@
                 </Col> 
             </Row>
         </div>
-        <div class="chat-body pl-2 pr-2" v-chat-scroll="{always: false, smooth: true,scrollonremoved:true}">
-            <Row class-name="text-center p-2" v-show="chats.length > 0">
-                <Col span="24">
-                  <Icon v-on:click="moreChat" color="green" :size="15" type="ios-arrow-up" />
-                </Col>
-                <Col v-on:click="moreChat" span="24">More</Col>
-            </Row>
-            <Row class-name="pt-2 pb-2" v-for="chat in chats" :key="chat.id"> 
-                <Col span="24">
-                  <Card :dis-hover="true" :bordered="false" v-if="chat.type == 0"> 
-                      <Row type="flex" justify="end" class-name="pt-2 pb-2"> 
-                          <Col span="21" class-name="pr-2">
-                              <Row class-name="text-right" >
-                                  <Col span="24" class-name="text-right"><strong class="color-green">You </strong> {{chat.read_at}}</Col>
-                                  <Row class-name="text-right">
-                                      <Col span="21" offset="3" v-if="chat.message!='file'">
-                                        <!-- Will return link if u share link -->
-                                        <div v-html="chat.message" v-linkified />
-                                      </Col>
-                                      <Col span="21" offset="3" v-else>
-                                        <Row type="flex" justify="end" class="code-row-bg" v-if="chat.images">
-                                            <Col  span="8" class="p-2">
+        <div class="chat-body pl-2 pr-2 position-relative">
+            <div class="blog-chat-body" v-chat-scroll="{always: false, smooth: true,scrollonremoved:true}">
+              <Row class-name="text-center p-2" v-show="chats.length > 0">
+                  <Col span="24">
+                    <Icon v-on:click="moreChat" color="green" :size="15" type="ios-arrow-up" />
+                  </Col>
+                  <Col v-on:click="moreChat" span="24">More</Col>
+              </Row>
+              <Row class-name="pt-2 pb-2" v-for="chat in chats" :key="chat.id"> 
+                  <Col span="24">
+                    <Card :dis-hover="true" :bordered="false" v-if="chat.type == 0"> 
+                        <Row type="flex" justify="end" class-name="pt-2 pb-2"> 
+                            <Col span="21" class-name="pr-2">
+                                <Row class-name="text-right" >
+                                    <Col span="24" class-name="text-right"><strong class="color-green">You </strong> {{chat.read_at}}</Col>
+                                    <Row class-name="text-right">
+                                        <Col span="21" offset="3" v-if="chat.message!='file'">
+                                          <!-- Will return link if u share link -->
+                                          <div v-html="chat.message" v-linkified />
+                                        </Col>
+                                        <Col span="21" offset="3" v-else>
+                                          <Row type="flex" justify="end" class="code-row-bg" v-if="chat.images">
+                                              <Col  span="8" class="p-2">
+                                                <viewer :options="options" :images="chat.images"
+                                                        @inited="inited"
+                                                        class="viewer" ref="viewer"
+                                                >
+                                                  <template slot-scope="scope">
+                                                    <img v-for="src in scope.images" :src="src" :key="src" class="float-right img-fluid rounded" alt="Responsive image"> 
+                                                  </template>
+                                                </viewer> 
+                                              </Col> 
+                                          </Row> 
+                                          <Row type="flex" justify="end" class="code-row-bg" v-else>
+                                              <Col span="24">
+                                                  No image
+                                              </Col> 
+                                          </Row>
+                                        </Col>
+                                    </Row>
+                                </Row>
+                            </Col> 
+                            <Col span="1">
+                                <Avatar :src="chat.profile" v-if="chat.profile"/>
+                                <Avatar icon="ios-person" v-else/>
+                            </Col>
+                        </Row> 
+                    </Card>
+                    <Card :dis-hover="true" shadow v-else> 
+                        <Row>
+                            <Col span="1">
+                                <Avatar :src="friend.profile" v-if="friend.profile"/>
+                                <Avatar icon="ios-person" v-else/>
+                            </Col>
+                            <Col span="21" class-name="pl-2">
+                                <Row>
+                                    <Col span="24" class-name="text-capitalize"><strong> {{friend.name}} </strong><small>{{chat.sent_at}}</small></Col>
+                                    <Col span="24" v-if="chat.message!='file'">
+                                        <p>
+                                            <div v-html="chat.message" v-linkified />
+                                        </p>
+                                    </Col>
+                                    <Col span="24" v-else>
+                                      <Row type="flex" justify="start" class="code-row-bg" v-if="chat.images">
+                                          <Col span="8">
                                               <viewer :options="options" :images="chat.images"
                                                       @inited="inited"
                                                       class="viewer" ref="viewer"
@@ -46,61 +89,32 @@
                                                   <img v-for="src in scope.images" :src="src" :key="src" class="float-right img-fluid rounded" alt="Responsive image"> 
                                                 </template>
                                               </viewer> 
-                                            </Col> 
-                                        </Row> 
-                                        <Row type="flex" justify="end" class="code-row-bg" v-else>
-                                            <Col span="24">
-                                                No image
-                                            </Col> 
-                                        </Row>
-                                      </Col>
-                                  </Row>
-                              </Row>
-                          </Col> 
-                          <Col span="1">
-                              <Avatar :src="chat.profile" v-if="chat.profile"/>
-                              <Avatar icon="ios-person" v-else/>
-                          </Col>
-                      </Row> 
-                  </Card>
-                  <Card :dis-hover="true" shadow v-else> 
-                      <Row>
-                          <Col span="1">
-                              <Avatar :src="friend.profile" v-if="friend.profile"/>
-                              <Avatar icon="ios-person" v-else/>
-                          </Col>
-                          <Col span="21" class-name="pl-2">
-                              <Row>
-                                  <Col span="24" class-name="text-capitalize"><strong> {{friend.name}} </strong><small>{{chat.sent_at}}</small></Col>
-                                  <Col span="24" v-if="chat.message!='file'">
-                                      <p>
-                                          {{chat.message}}
-                                      </p>
-                                  </Col>
-                                  <Col span="24" v-else>
-                                    <Row type="flex" justify="start" class="code-row-bg" v-if="chat.images">
-                                        <Col span="8">
-                                            <viewer :options="options" :images="chat.images"
-                                                    @inited="inited"
-                                                    class="viewer" ref="viewer"
-                                            >
-                                              <template slot-scope="scope">
-                                                <img v-for="src in scope.images" :src="src" :key="src" class="float-right img-fluid rounded" alt="Responsive image"> 
-                                              </template>
-                                            </viewer> 
-                                        </Col> 
-                                    </Row> 
-                                    <Row type="flex" justify="start" class="code-row-bg" v-else>
-                                        <Col span="24">
-                                            No image
-                                        </Col> 
-                                    </Row>
-                                  </Col>
-                              </Row>
-                          </Col> 
-                      </Row> 
-                  </Card>
-                </Col> 
+                                          </Col> 
+                                      </Row> 
+                                      <Row type="flex" justify="start" class="code-row-bg" v-else>
+                                          <Col span="24">
+                                              No image
+                                          </Col> 
+                                      </Row>
+                                    </Col>
+                                </Row>
+                            </Col> 
+                        </Row> 
+                    </Card>
+                    
+                  </Col> 
+              </Row>
+            </div>
+            <Row :class-name="position">
+              <Col span="24">
+              <vue-dropzone 
+                  ref="myVueDropzone"
+                  :options="dropzoneOptions"
+                  @vdropzone-drop="drop($event)"
+                  @vdropzone-drag-enter="dropEnter($event)"
+                  id="customdropzone">
+                </vue-dropzone>
+              </Col>
             </Row>
         </div>
         <div class="send-box border-bottom border-top" v-if="!session.block">
@@ -130,6 +144,7 @@
 let mythis;
 import 'viewerjs/dist/viewer.css'
 import Viewer from "v-viewer/src/component.vue"
+import vue2Dropzone from 'vue2-dropzone'
 export default {
   props: ["friend"],
   data() {
@@ -145,12 +160,19 @@ export default {
       btnsend:false,
       type:4,
       options:{ "inline": false, "button": true, "navbar": true, "title": true, "toolbar": true, "tooltip": false, "movable": true, "zoomable": true, "rotatable": true, "scalable": true, "transition": true, "fullscreen": true, "keyboard": true, "url": "data-source" },
-      allowedExtensions:['jpg','jpeg','png'],
-      next:null
+      allowedExtensions:['jpg','jpeg','png','webp'],
+      next:null,
+      dropzoneOptions: {
+          url: 'https://httpbin.org/post',
+          clickable:false,
+          dictDefaultMessage: ""
+        },
+      position:'fixed-bottom position-absolute'
     };
   },
   components: {
-    Viewer
+    Viewer:Viewer,
+    vueDropzone: vue2Dropzone
   },
   computed: {
     session() {
@@ -171,11 +193,23 @@ export default {
     },
     friend(v){
       this.read();
-      
       this.getAllMessages();
     }
   },
   methods: {
+    drop(e){
+      this.onFlieChange(e);
+    },
+    dropEnter(e){
+      this.$refs.myVueDropzone.$el.style.height="200px"
+      this.$refs.myVueDropzone.$el.style.backgroundColor="#dbdbdb"
+    },
+    removeAllFiles(){
+      this.$refs.myVueDropzone.$el.innerHTML =""
+      // this.$refs.myVueDropzone.removeAllFiles()
+      this.$refs.myVueDropzone.$el.style.height="20px"
+      this.$refs.myVueDropzone.$el.style.backgroundColor="#ffffff"
+    },
     // Get more past of chat
     moreChat(){
       if(this.next){
@@ -245,6 +279,8 @@ export default {
         // 2*1024*1024 = 2097152 = 2mb
         if(filesize > 2097152) { 
             this.showError("File size limit exceed!","Please upload file less than 2MB.");
+            // remove file from drop zone
+            this.removeAllFiles();
             return false;
         }
         return true;
@@ -256,10 +292,12 @@ export default {
       */
     validateExtension(extension) {
         if($.inArray(extension, this.allowedExtensions) !== -1) {
-            return true;
+          return true;
         } else { 
-            this.showError("Invalid file!","Please upload jpg,png,pdf or zip file only.");
-            return false;
+          this.removeAllFiles();
+          this.showError("Invalid file!","Please upload jpg,png,jpeg,webp file only.");
+          // remove file from drop zone
+          return false;
         }
     },
     /**
@@ -278,9 +316,9 @@ export default {
       */
     validateFile(filesize,extension) {
         if(this.validateSize(filesize) && this.validateExtension(extension)) {
-            return true;
+          return true;
         } else {
-            return false;
+          return false;
         }
     },
     chooseFile() {
@@ -298,21 +336,25 @@ export default {
           let extension = this.findExtension(file.name); 
           if(this.validateFile(file.size,extension)) {
             data.append('files[' + i + ']', file);
+            data.append('to_user',this.friend.id)
+            axios.post(`send/${this.friend.session.id}`+'/upload',data,config).then( response=> {
+              if(response.status == 200){
+                // remove file from drop zone
+                this.removeAllFiles();
+                this.chats.push({
+                  message: 'file',
+                  type: 0,
+                  images:response.data,
+                  read_at: null,
+                  sent_at: "Just Now",
+                  profile:auth.profile
+                });
+              }else{
+                this.removeAllFiles();
+              }
+            }); 
           }
         }
-        data.append('to_user',this.friend.id)
-        axios.post(`send/${this.friend.session.id}`+'/upload',data,config).then( response=> {
-          if(response.status == 200){
-            this.chats.push({
-              message: 'file',
-              type: 0,
-              images:response.data,
-              read_at: null,
-              sent_at: "Just Now",
-              profile:auth.profile
-            });
-          }
-        }); 
       }  
     },
     hideEmoji(){
@@ -477,4 +519,43 @@ export default {
 .ivu-col i{
   cursor: pointer;
 }
+#customdropzone {
+    background-color:#ffffff;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.2px;
+    color: #777;
+    transition: background-color .2s linear;
+    height: 20px;
+    /*padding: 40px; */
+    text-align: center;
+  }
+
+  #customdropzone .dz-preview {
+    width: 160px;
+    display: inline-block
+  }
+ #customdropzone .dz-preview .dz-image {
+    width: 80px;
+    height: 80px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+  }
+  #customdropzone .dz-preview .dz-image > div {
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    background-size: contain;
+  }
+  #customdropzone .dz-preview .dz-image > img {
+    width: 100%;
+  }
+
+   #customdropzone .dz-preview .dz-details {
+    color: white;
+    transition: opacity .2s linear;
+    text-align: center;
+  }
+  #customdropzone .dz-success-mark, .dz-error-mark, .dz-remove {
+    display: none;
+  }
 </style>

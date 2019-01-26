@@ -37,8 +37,8 @@ class ChatController extends Controller
         // $name = $media->name; 
         $id = $media->id; 
         // get crop image
-        $cropPath = storage_path('app/public/'.$id.'/chats/'.$file_name);
-        $cropPathFit = storage_path('app/public/'.$id.'/chats/crop.png');
+        $cropPath = storage_path('app/public/chats/'.$id.'/'.$file_name);
+        $cropPathFit = storage_path('app/public/chats/'.$id.'/crop.png');
         Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);
         Image::load($getThub)
             ->crop(Manipulations::CROP_TOP, 750, 430)
@@ -51,7 +51,7 @@ class ChatController extends Controller
         $message->createForReceive($session->id, $request->to_user);
         $images=[];
         if($request->hasFile('files')){
-            $allowedfileExtension=['jpg','jpeg','png','zip'];
+            $allowedfileExtension=['jpg','jpeg','png','webp'];
             $files = $request->file('files');  
             foreach($files as $file){
                 $filename = $file->getClientOriginalName();
@@ -63,9 +63,9 @@ class ChatController extends Controller
                     ->sanitizingFileName(function($filename) {
                         return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                     })
-                    ->toMediaCollection(); 
+                    ->toMediaCollection('chats'); 
                     // $this->mediaconvert($media);
-                    $images[]=asset(Storage::url($media->id.'/'.$media->file_name)); 
+                    $images[]=asset(Storage::url('chats/'.$media->id.'/'.$media->file_name)); 
                 }
             }  
         }
@@ -76,16 +76,7 @@ class ChatController extends Controller
     }
     public function chats(Session $session,Request $request)
     {
-        // if(isset($request->date) && $request->date !=''){
-        //     // $preD1 = Carbon::createFromFormat('Y-m-d H:i:s.u', $request->date)->subDays(1);
-        //     // $preD1 = $preD1->format('Y-m-d');
-        //     // $preD2 = Carbon::createFromFormat('Y-m-d H:i:s.u', $request->date)->subDays(2);
-        //     // $preD2 = $preD2->format('Y-m-d');
-        //     // dd($request->date,$preD2,$preD1,\Carbon\Carbon::today());
-        //     return ChatResource::collection($session->chats()->where('user_id', auth()->id())->whereBetween('chats.created_at', [$preD2, $preD1])->orderBy('chats.created_at','desc')->get());
-
-        // }
-        // return ChatResource::collection($session->chats()->where('user_id', auth()->id())->whereBetween('chats.created_at', [\Carbon\Carbon::yesterday(), \Carbon\Carbon::today()])->get());
+        // dd($session->chats()->where('user_id', auth()->id())->orderBy('chats.created_at','desc')->simplePaginate(50));
         return ChatResource::collection($session->chats()->where('user_id', auth()->id())->orderBy('chats.created_at','desc')->simplePaginate(50));
     }
 

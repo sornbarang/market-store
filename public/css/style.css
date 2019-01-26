@@ -14627,7 +14627,7 @@ span.counter {
 /* 767 */
 @media screen and (max-width: 767px) {
   .container {
-    /* width: 450px; */
+    width: 450px;
   }
   .dashboard-area.dashboard_purchase .dashboard_menu,
   .dashboard_menu_area .dashboard_menu {
@@ -16342,7 +16342,7 @@ div.rateproduct.cproduct img{
   color:#fff;
 }
 .container{
-  max-width: 95vw !important;
+  /* max-width: 95vw !important; */
 }
 .text-price{
   color:#56a72d;
@@ -16360,4 +16360,15 @@ form.frmlogincustom .form-control:focus{
 }
 .signup_area.section--padding2,.pass_recover_area.section--padding2,.login_area.section--padding2{
   margin-top:102px;
+}
+.mnu-to-head a{
+  font-size: 15px;
+}
+.mnu-to-head a:after{
+  content: ' |';
+  color: #ddd;
+}
+.mnu-to-head a:last-child:after
+{
+  content: '';
 }

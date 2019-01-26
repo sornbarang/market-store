@@ -26,10 +26,10 @@ class ChatResource extends JsonResource
         }
         $images=[];
         if($this->message['content']=='file'){
-            $mediaItems = $this->message->getMedia();
+            $mediaItems = $this->message->getMedia('chats');
             // dd($mediaItems);
             foreach ($mediaItems as $key => $media) {
-                $images[]=asset(Storage::url($media->id.'/'.$media->file_name)); 
+                $images[]=asset(Storage::url($media->collection_name.'/'.$media->id.'/'.$media->file_name)); 
             } 
         }
         return [

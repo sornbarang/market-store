@@ -11,6 +11,13 @@
                 <div class="col-md-8 offset-md-2">
                     <div class="search">
                         {{--<div class="search__title"><h3><span>35,270</span> website templates from our creative community</h3></div>--}}
+                        <div class="row mnu-to-head">
+                            <div class="col-md-12 p-2"> 
+                                <a title="Feeds" href="{{url('feeds')}}" class="text-white">Feeds
+                                </a>
+                                <a title="Chats" href="{{route('chat.home')}}" class="text-white">Chats</a>
+                            </div>
+                        </div>
                         <div class="search__field">
                             @php 
                                 $route=route('market.search');

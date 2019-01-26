@@ -462,8 +462,13 @@ export default {
 .chat-body{
     height:77vh;
     width: 60vw; 
-    overflow-y: auto;
+    /* overflow-y: auto; */
+    overflow: hidden;
 } 
+.blog-chat-body{
+    height: 100%;
+    overflow-y: auto;
+}
 .send-box{
     height:8vh;
     width: 60vw; 
