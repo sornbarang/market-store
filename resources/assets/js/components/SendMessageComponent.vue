@@ -18,14 +18,16 @@
         </div>
         <div class="chat-body pl-2 pr-2 position-relative">
             <div class="blog-chat-body" v-chat-scroll="{always: false, smooth: true,scrollonremoved:true}">
-              <Row class-name="text-center p-2" v-show="chats.length > 0">
-                  <Col span="24">
-                    <Icon v-on:click="moreChat" color="green" :size="15" type="ios-arrow-up" />
-                  </Col>
-                  <Col v-on:click="moreChat" span="24">More</Col>
+              
+              <Row class-name="text-center p-1 bg-transparent fixed-top position-absolute" v-show="chats.length > 0">
+                <Col span="24">
+                  <Icon v-on:click="moreChat" color="green" :size="15" type="ios-arrow-up" />
+                </Col>
+                <Col v-on:click="moreChat" span="24">More</Col>
               </Row>
               <Row class-name="pt-2 pb-2" v-for="chat in chats" :key="chat.id"> 
                   <Col span="24">
+                    <!-- sender -->
                     <Card :dis-hover="true" :bordered="false" v-if="chat.type == 0"> 
                         <Row type="flex" justify="end" class-name="pt-2 pb-2"> 
                             <Col span="21" class-name="pr-2">
@@ -38,16 +40,26 @@
                                         </Col>
                                         <Col span="21" offset="3" v-else>
                                           <Row type="flex" justify="end" class="code-row-bg" v-if="chat.images">
-                                              <Col  span="8" class="p-2">
+                                              <Col span="24">
+                                                <div class="images" v-viewer="{movable: false}">
+                                                    <Row :gutter="8" type="flex" justify="end">
+                                                      <Col span="8" v-for="src in chat.images" :key="src">
+                                                          <div><img :src="src" class="float-right img-fluid rounded" alt="Responsive image"> </div>
+                                                      </Col>
+                                                    </Row>
+                                                </div>
+                                              </Col>
+                                              <!-- <Col span="8" class="p-2">
                                                 <viewer :options="options" :images="chat.images"
                                                         @inited="inited"
                                                         class="viewer" ref="viewer"
                                                 >
                                                   <template slot-scope="scope">
+                                                    
                                                     <img v-for="src in scope.images" :src="src" :key="src" class="float-right img-fluid rounded" alt="Responsive image"> 
                                                   </template>
                                                 </viewer> 
-                                              </Col> 
+                                              </Col>  -->
                                           </Row> 
                                           <Row type="flex" justify="end" class="code-row-bg" v-else>
                                               <Col span="24">
@@ -64,6 +76,7 @@
                             </Col>
                         </Row> 
                     </Card>
+                    <!-- receiver -->
                     <Card :dis-hover="true" shadow v-else> 
                         <Row>
                             <Col span="1">
@@ -80,7 +93,16 @@
                                     </Col>
                                     <Col span="24" v-else>
                                       <Row type="flex" justify="start" class="code-row-bg" v-if="chat.images">
-                                          <Col span="8">
+                                          <Col span="24">
+                                            <div class="images" v-viewer="{movable: false}">
+                                                <Row :gutter="8" type="flex" justify="start">
+                                                  <Col span="8" v-for="src in chat.images" :key="src">
+                                                      <div><img :src="src" class="float-right img-fluid rounded" alt="Responsive image"> </div>
+                                                  </Col>
+                                                </Row>
+                                            </div>
+                                          </Col>
+                                          <!-- <Col span="8">
                                               <viewer :options="options" :images="chat.images"
                                                       @inited="inited"
                                                       class="viewer" ref="viewer"
@@ -89,7 +111,7 @@
                                                   <img v-for="src in scope.images" :src="src" :key="src" class="float-right img-fluid rounded" alt="Responsive image"> 
                                                 </template>
                                               </viewer> 
-                                          </Col> 
+                                          </Col>  -->
                                       </Row> 
                                       <Row type="flex" justify="start" class="code-row-bg" v-else>
                                           <Col span="24">
@@ -107,12 +129,14 @@
             </div>
             <Row :class-name="position">
               <Col span="24">
-              <vue-dropzone 
+                <vue-dropzone 
                   ref="myVueDropzone"
                   :options="dropzoneOptions"
                   @vdropzone-drop="drop($event)"
                   @vdropzone-drag-enter="dropEnter($event)"
-                  id="customdropzone">
+                  @vdropzone-drag-leave="dropLeave($event)"
+                  @vdropzone-drag-over="moveOver($event)"
+                  id="customdropzone" class="bg-transparent">
                 </vue-dropzone>
               </Col>
             </Row>
@@ -143,7 +167,7 @@
 <script>
 let mythis;
 import 'viewerjs/dist/viewer.css'
-import Viewer from "v-viewer/src/component.vue"
+// import Viewer from "v-viewer/src/component.vue"
 import vue2Dropzone from 'vue2-dropzone'
 export default {
   props: ["friend"],
@@ -171,7 +195,7 @@ export default {
     };
   },
   components: {
-    Viewer:Viewer,
+    // Viewer:Viewer,
     vueDropzone: vue2Dropzone
   },
   computed: {
@@ -199,6 +223,13 @@ export default {
   methods: {
     drop(e){
       this.onFlieChange(e);
+      console.log('drop');
+    },
+    dropLeave(e){
+      this.removeAllFiles();
+    },
+    moveOver(e){
+      e.target.classList.remove('bg-transparent');
     },
     dropEnter(e){
       this.$refs.myVueDropzone.$el.style.height="200px"
@@ -209,6 +240,7 @@ export default {
       // this.$refs.myVueDropzone.removeAllFiles()
       this.$refs.myVueDropzone.$el.style.height="20px"
       this.$refs.myVueDropzone.$el.style.backgroundColor="#ffffff"
+      this.$refs.myVueDropzone.$el.classList.add('bg-transparent');
     },
     // Get more past of chat
     moreChat(){
@@ -336,25 +368,25 @@ export default {
           let extension = this.findExtension(file.name); 
           if(this.validateFile(file.size,extension)) {
             data.append('files[' + i + ']', file);
-            data.append('to_user',this.friend.id)
-            axios.post(`send/${this.friend.session.id}`+'/upload',data,config).then( response=> {
-              if(response.status == 200){
-                // remove file from drop zone
-                this.removeAllFiles();
-                this.chats.push({
-                  message: 'file',
-                  type: 0,
-                  images:response.data,
-                  read_at: null,
-                  sent_at: "Just Now",
-                  profile:auth.profile
-                });
-              }else{
-                this.removeAllFiles();
-              }
-            }); 
+            data.append('to_user',this.friend.id) 
           }
         }
+        axios.post(`send/${this.friend.session.id}`+'/upload',data,config).then( response=> {
+          if(response.status == 200){
+            // remove file from drop zone
+            this.removeAllFiles();
+            this.chats.push({
+              message: 'file',
+              type: 0,
+              images:response.data,
+              read_at: null,
+              sent_at: "Just Now",
+              profile:auth.profile
+            });
+          }else{
+            this.removeAllFiles();
+          }
+        }); 
       }  
     },
     hideEmoji(){

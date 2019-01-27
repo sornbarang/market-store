@@ -14,6 +14,8 @@ import { Modal,Notice,Col, Row, Avatar, Input, Icon, Badge, Card, Scroll, Spin, 
 import 'iview/dist/styles/iview.css';
 import _ from 'lodash';
 import linkify from 'vue-linkify'
+import Viewer from 'v-viewer'
+Vue.use(Viewer)
 Vue.directive('linkified', linkify)
 Vue.use(VueChatScroll);
 /**
