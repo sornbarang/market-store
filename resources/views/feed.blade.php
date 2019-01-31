@@ -1,7 +1,7 @@
 @extends('layouts.app-layout') 
 @section('content')
-
-<section class="blog_area section--padding2" style="background: #3b7a5e; margin-top:102px;">
+@include('elements.search')
+<section class="blog_area section--padding2" style="background: #3b7a5e;">
     <div class="container" id="feed-custom-container">
         <div class="row">
             <div class="col-lg-8">
