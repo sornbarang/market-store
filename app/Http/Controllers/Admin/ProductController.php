@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request; 
-use App\Models\Product;
+use App\Models\ProductsAds as Product;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 

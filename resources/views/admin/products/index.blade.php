@@ -65,10 +65,10 @@
                                     </th>
                                     <th data-orderable="false" class="col-xs-2">Image</th>
                                     <th class="col-xs-2">Product Title</th>
-                                    <th class="col-xs-2">SKU</th>
+                                    <th class="col-xs-2">Post by</th>
                                     <th class="col-xs-2">Price</th>
                                     <th data-orderable="false" class="col-xs-1">Active</th>
-                                    <th class="col-xs-1">Stock</th>
+                                    <th class="col-xs-1">Total rate</th>
                                     <th data-orderable="false" class="col-xs-2">
                                         <button class="btn btn-primary btn-fab  animate-fab" data-toggle="modal" data-target="#product_add_modal"><i class="zmdi zmdi-plus"></i></button>
                                     </th>
@@ -85,7 +85,7 @@
                             @foreach($data['products'] as $val)
                                 @php
                                     $img='';
-                                    $newsItem=App\Models\Product::find($val->id);
+                                    $newsItem=App\Models\ProductsAds::find($val->id);
                                     $mediaItems = $newsItem->getMedia(); 
                                     $getFirstMedia = $newsItem->getFirstMedia(); 
                                     if($getFirstMedia){
@@ -103,7 +103,7 @@
                                     </td> 
                                     <td><img src="{{Storage::url($img)}}" alt="" class="img-thumbnail" /></td>
                                     <td>{{$val->name}}</td>
-                                    <td>#394822</td>
+                                    <td>{{$val->user->name??''}}</td>
                                     <td>${{$val->price}}</td>
                                     <td>
                                         <div class="togglebutton">
@@ -112,7 +112,7 @@
                                         </label>
                                         </div>
                                     </td>
-                                    <td>1,200</td>
+                                    <td>{{$val->sumRating??''}}</td>
                                     <td>
                                         <!-- <a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a> -->
                                         <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_edit_modal" data-id="{{$val->id}}" data-url="{{route('admin.product.edit',['edit'=>$val->id])}}" data-urlupdate="{{route('admin.product.update',[$val->id])}}"><i class="zmdi zmdi-edit"></i></a>
