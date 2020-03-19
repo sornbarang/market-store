@@ -3,103 +3,116 @@
 
 @include('elements.search')
 
-    <!--================================
+<!--================================
         START FILTER AREA
     =================================-->
-    <div class="filter-area">
-        <div class="container">
-            
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="filter-bar filter--bar2">
-                    <div class="pull-left">
-                            <div class="filter__option filter--select">
-                                <div class="select-wrap">
-                                    <!-- Request::url() get current url --> 
-                                    <form action="{{ Request::url() }}" method="get">
-                                        <!-- Request::query('record') is get param  -->
-                                        <input type="hidden" value="{{ Request::query('record') ?? 25 }}" name="record">
-                                        <select name="price"> 
-                                            <option value="low" {{isset($data['order']) ? $data['order']=='asc'?'selected':'':''}}>Price : Low to High</option>
-                                            <option value="high" {{isset($data['order']) ? $data['order']=='desc'?'selected':'':''}}>Price : High to low</option>
-                                        </select>
-                                        <span class="lnr lnr-chevron-down"></span>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="filter__option filter--select">
-                                <div class="select-wrap">
-                                    <!-- Request::url() get current url -->
-                                    <form action="{{ Request::url() }}">
-                                        <!-- Request::query('price') is get param  -->
-                                        <input type="hidden" value="{{ Request::query('price') ?? 'low' }}" name="price">
-                                        <select name="record">
-                                            <option value="12" {{isset($data['record'])?$data['record']==12?'selected':'':''}}>12 Items per page</option>
-                                            <option value="15" {{isset($data['record'])?$data['record']==15?'selected':'':''}}>15 Items per page</option>
-                                            <option value="25" {{isset($data['record'])?$data['record']==25?'selected':'':''}}>25 Items per page</option>
-                                        </select>
-                                        <span class="lnr lnr-chevron-down"></span>
-                                    </form>
-                                </div>
-                            </div> 
-                        </div>
-                        <div class="pull-right">
-                            <div class="filter__option filter--dropdown filter--range">
-                                <a href="#" id="drop3" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Price Range
-                                    <span class="lnr lnr-chevron-down"></span>
-                                </a>
-                                <div class="custom_dropdown dropdown-menu" aria-labelledby="drop3">
-                                    <div class="range-slider price-range"></div>
+<div class="filter-area">
+    <div class="container">
 
-                                    <div class="price-ranges">
-                                        <span class="from rounded">$0</span>
-                                        <span class="to rounded">$0</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="filter__option filter--layout">
-                                <a href="javascript:void(0)">
-                                    <div class="svg-icon"><img class="svg" src="{{asset('images/svg/grid.svg')}}" alt="it's just a layout control folks!"></div>
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <div class="svg-icon"><img class="svg" src="{{asset('images/svg/list.svg')}}" alt="it's just a layout control folks!"></div>
-                                </a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filter-bar filter--bar2">
+                    <div class="pull-left">
+                        <div class="filter__option filter--select">
+                            <div class="select-wrap">
+                                <!-- Request::url() get current url -->
+                                <form action="{{ Request::url() }}" method="get">
+                                    <!-- Request::query('record') is get param  -->
+                                    <input type="hidden" value="{{ Request::query('record') ?? 25 }}" name="record">
+                                    <select name="price">
+                                        <option value="low"
+                                            {{isset($data['order']) ? $data['order']=='asc'?'selected':'':''}}>Price :
+                                            Low to High</option>
+                                        <option value="high"
+                                            {{isset($data['order']) ? $data['order']=='desc'?'selected':'':''}}>Price :
+                                            High to low</option>
+                                    </select>
+                                    <span class="lnr lnr-chevron-down"></span>
+                                </form>
                             </div>
                         </div>
-                    </div><!-- end filter-bar -->
-                </div><!-- end /.col-md-12 -->
-            </div><!-- end filter-bar -->
-        </div>
+                        <div class="filter__option filter--select">
+                            <div class="select-wrap">
+                                <!-- Request::url() get current url -->
+                                <form action="{{ Request::url() }}">
+                                    <!-- Request::query('price') is get param  -->
+                                    <input type="hidden" value="{{ Request::query('price') ?? 'low' }}" name="price">
+                                    <select name="record">
+                                        <option value="12"
+                                            {{isset($data['record'])?$data['record']==12?'selected':'':''}}>12 Items per
+                                            page</option>
+                                        <option value="15"
+                                            {{isset($data['record'])?$data['record']==15?'selected':'':''}}>15 Items per
+                                            page</option>
+                                        <option value="25"
+                                            {{isset($data['record'])?$data['record']==25?'selected':'':''}}>25 Items per
+                                            page</option>
+                                    </select>
+                                    <span class="lnr lnr-chevron-down"></span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="filter__option filter--dropdown filter--range">
+                            <a href="#" id="drop3" class="dropdown-trigger dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Price Range
+                                <span class="lnr lnr-chevron-down"></span>
+                            </a>
+                            <div class="custom_dropdown dropdown-menu" aria-labelledby="drop3">
+                                <div class="range-slider price-range"></div>
+
+                                <div class="price-ranges">
+                                    <span class="from rounded">$0</span>
+                                    <span class="to rounded">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter__option filter--layout">
+                            <a href="javascript:void(0)">
+                                <div class="svg-icon"><img class="svg" src="{{asset('images/svg/grid.svg')}}"
+                                        alt="it's just a layout control folks!"></div>
+                            </a>
+                            <a href="javascript:void(0)">
+                                <div class="svg-icon"><img class="svg" src="{{asset('images/svg/list.svg')}}"
+                                        alt="it's just a layout control folks!"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- end filter-bar -->
+            </div><!-- end /.col-md-12 -->
+        </div><!-- end filter-bar -->
     </div>
-    <!--================================
+</div>
+<!--================================
         END FILTER AREA
     =================================-->
 
 
-    <!--================================
+<!--================================
         START PRODUCTS AREA
-    =================================--> 
-    <section class="products section--padding2">
-        <!-- start container -->
-        <div class="container"> 
-            <!-- start .row -->
-            <div class="row">
-                <!-- start .col-md-3 -->
-                <div class="col-md-3">
-                    @include('elements.aside')
-                </div><!-- end /.col-md-3 -->
-                <!-- start col-md-9 -->
-                <div class="col-md-9 cAllProducts"> 
-                    @include('elements.product')
-                </div><!-- end /.col-md-9 -->
-            </div><!-- end /.row -->
-            
-            
-            
-        </div><!-- end /.container -->
+    =================================-->
+<section class="products section--padding2">
+    <!-- start container -->
+    <div class="container">
+        <!-- start .row -->
+        <div class="row">
+            <!-- start .col-md-3 -->
+            <div class="col-md-3">
+                @include('elements.aside')
+            </div><!-- end /.col-md-3 -->
+            <!-- start col-md-9 -->
+            <div class="col-md-9 cAllProducts">
+                @include('elements.product')
+            </div><!-- end /.col-md-9 -->
+        </div><!-- end /.row -->
 
-    </section>
-    <!--================================
+
+
+    </div><!-- end /.container -->
+
+</section>
+<!--================================
         END PRODUCTS AREA
     =================================-->
 @section('cusomescript')
@@ -204,7 +217,7 @@
     } 
 });
 </script>
-@stop 
+@stop
 <!--================================
     START COUNTER UP AREA
 =================================-->

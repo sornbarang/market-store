@@ -58,7 +58,7 @@ function()
     // OAuth Routes
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')->name('socialite.auth');
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback')->name('socialite.callback');
-//    b2c route
+    //b2c route
     Route::group([
         'prefix'    => 'shop'
     ], function() {

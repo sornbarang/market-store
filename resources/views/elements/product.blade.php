@@ -3,7 +3,7 @@
         @foreach($data['product'] as $val)  
             @php
                 $avatar='';
-                if(null !== $val->user->profile){
+                if(isset($val->user->profile)){
                     $media = $val->user->profile->getMedia(); 
                     foreach($media as $m){   
                         if($val->user->profile->avatar == $m->id){
