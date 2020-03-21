@@ -92,7 +92,7 @@
                                 <div class="social social--color--filled login_assist">
                                     <ul>
                                         <li><a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" title="Sign in with facebook"><span class="fa fa-facebook"></span></a></li> 
-                                        <li><a href="{{ route('socialite.auth', ['provider' => 'google']) }}" title="Sign in with google"><span class="fa fa-google-plus"></span></a></li> 
+                                        {{-- <li><a href="{{ route('socialite.auth', ['provider' => 'google']) }}" title="Sign in with google"><span class="fa fa-google-plus"></span></a></li>  --}}
                                     </ul>
                                 </div>
                             <!-- </div> -->
