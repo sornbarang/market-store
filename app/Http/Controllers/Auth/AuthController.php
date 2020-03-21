@@ -57,11 +57,8 @@ class AuthController extends Controller
      */
     public function findOrCreateUser($user, $provider)
     {
-        if(empty($user->email))
-            return redirect()->route('register');
-
+        if(empty($user->email)) return redirect()->route('register');
         $authUser = User::where('email', $user->email)->first();
-
         if ($authUser) {
             if($authUser->provider_id != $user->id && $authUser->provider != $provider){
 

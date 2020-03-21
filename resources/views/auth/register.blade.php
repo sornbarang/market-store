@@ -111,8 +111,13 @@
                                 <label class="custom-control-label" for="customTermCon">Agree to terms and conditions</label>
                                 <div class="invalid-feedback">You must agree before submitting.</div>
                             </div> 
-                            <button class="btn btn--md btn--round register_btn" type="submit">@lang('authlabel.register')</button>
-
+                            <button class="btn btn--md btn--round register_btn m-0" type="submit">@lang('authlabel.register')</button>
+                            <div class="social social--color--filled login_assist">
+                                <ul>
+                                    <li><a href="{{ route('socialite.auth', ['provider' => 'facebook']) }}" title="Sign in with facebook"><span class="fa fa-facebook"></span></a></li> 
+                                    <li><a href="{{ route('socialite.auth', ['provider' => 'google']) }}" title="Sign in with google"><span class="fa fa-google-plus"></span></a></li> 
+                                </ul>
+                            </div>
                             <div class="login_assist">
                                 <p>@lang('authlabel.noaccount') <a href="{{url( app()->getLocale().'/login')}}">@lang('authlabel.login')</a></p>
                             </div>
