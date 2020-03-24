@@ -278,7 +278,7 @@
                                                     @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
                                                         <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup><del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{str_limit($data['product']->price,6)??0}} </del> {{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}} </span>
                                                     @else
-                                                        <span class="c-price text-white" title="${{$data['product']->price??0}}"> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
+                                                        <span class="c-price text-white" title="${{number_format($data['product']->price)}}"> <sup>$</sup>{{number_format($data['product']->price)}}</span>
                                                     @endif
                                                 </h1>
                                             </div>

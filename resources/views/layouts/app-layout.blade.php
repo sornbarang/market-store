@@ -264,7 +264,7 @@
                                                             </div>
                                                         @endif
                                                         --}}
-                                                        <h6 class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ? or <a href="{{ route('register') }}" class="text-white">@lang('authlabel.signup')</a></small></h6> 
+                                                        <div class="text-white">@lang('authlabel.lost') <small><a href="{{ route('password.request') }}"><a class="text-white" href="{{ route('password.request') }}">@lang('authlabel.password')</a> ? or <a href="{{ route('register') }}" class="text-white">@lang('authlabel.signup')</a></small></div> 
                                                     </div>  
                                                 </div>
                                             </div> 
