@@ -20,7 +20,7 @@ class CategoryController extends Controller
         $pro=[]; 
         foreach($tree as $k => $va){
             // get product of parent limit 7
-            $pro[$va->name]['product']=Product::categorized($va)->latest('products_ads.id')->limit(7)->get();
+            $pro[$va->name]['product']=Product::has('user.profile')->categorized($va)->latest('products_ads.id')->limit(7)->get();
             // get one lavel of parent
             $pro [$va->name]['childreen']= $va->getDescendantsAndSelf(1);
         }
@@ -60,7 +60,7 @@ class CategoryController extends Controller
     }
     public function getProductOfCategory(CategoryTranslate $slug,Request $request){
         $node = Category::findOrFail($slug->categories_ads_id); 
-        $cats['product']=Product::categorized($node)->latest('products_ads.id')->limit(7)->get();
+        $cats['product']=Product::has('user.profile')->categorized($node)->latest('products_ads.id')->limit(7)->get();
         $data['type']='shop';
         if ($request->ajax()) {
             return view('elements.home-product', compact('cats','data'));
@@ -94,9 +94,9 @@ class CategoryController extends Controller
         if ($request->ajax()) {    
             // get all product->orderBy('products_ads.price', $order)
             if(isset($request->from) && isset($request->to)){
-                $data['product']=Product::categorized($node)->whereBetween('price', [$request->from, $request->to])->paginate($record);   
+                $data['product']=Product::has('user.profile')->categorized($node)->whereBetween('price', [$request->from, $request->to])->paginate($record);   
             }else{
-                $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);   
+                $data['product']=Product::has('user.profile')->categorized($node)->latest('products_ads.id')->paginate($record);   
             }
             return \Response::json(\View::make('elements.product',compact('data'))->render());
         }  
@@ -106,10 +106,10 @@ class CategoryController extends Controller
         $data['record']=$record; 
         if($order !=''){
             // get all product
-            $data['product']=Product::categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record); 
+            $data['product']=Product::has('user.profile')->categorized($node)->orderBy('products_ads.price', $order)->latest('products_ads.id')->paginate($record); 
         }else{
             // get all product->orderBy('products_ads.price', $order)
-            $data['product']=Product::categorized($node)->latest('products_ads.id')->paginate($record);       
+            $data['product']=Product::has('user.profile')->categorized($node)->latest('products_ads.id')->paginate($record);       
         } 
         $data['type']='shop';
         return view('shop.page.product',compact('data','slugName'));
