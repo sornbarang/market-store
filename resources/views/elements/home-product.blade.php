@@ -29,7 +29,7 @@
                     HOT
                 </div>
                 <div class="product__thumbnail">
-                    <img src="{{ $img }}" alt="Product Image">
+                    <img src="{{ $img }}" onerror="this.src='{{ asset('imgs/default/conversions/default.jpg') }}';"  alt="Product Image">
                     <div class="prod_btn d-flex content-justify-center align-items-center">
                         {{--
                         @if(isset($data['type']) && $data['type']=='shop')
