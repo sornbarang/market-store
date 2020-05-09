@@ -113,7 +113,7 @@
                             $img=''; 
                             $getFirstMedia = $val->getFirstMedia(); 
                             if($getFirstMedia){
-                                $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                $img = Storage::disk('dospace')->url($getFirstMedia->id.'/'.$getFirstMedia->file_name);
                             }else{
                                 $img = asset('imgs/default/conversions/default.jpg');
                             }
@@ -124,7 +124,7 @@
                                 <div class="hot position-absolute text-white bg-danger p-1 font-weight-bold rounded-0" style="z-index:9;max-width:100px;">
                                     HOT
                                 </div>
-                                <div class="product__thumbnail">  
+                                <div class="product__thumbnail" style="height:160px">  
                                     <img  src="{{$img}}" class="figure-img img-fluid" alt="A generic square placeholder image with rounded corners in a figure.">
                                      
                                     <div class="prod_option">

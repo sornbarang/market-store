@@ -6,7 +6,27 @@
 @include('elements.customer-breadcrumb')
 <!--================================
     END BREADCRUMB AREA
-=================================-->
+=================================--> 
+<style>
+/* these styles are for the demo, but are not required for the plugin */
+.zoom {
+			position: relative;
+		}
+		
+		/* magnifying glass icon */
+		.zoom:after {
+			content:'';
+			display:block; 
+			width:33px; 
+			height:33px; 
+			position:absolute; 
+			top:0;
+			right:0;
+			background:url(icon.png);
+		} 
+
+		.zoom img::selection { background-color: transparent; }
+</style>
 @if (Route::has('login'))
     @auth 
         @if(isset(Auth::user()->roles->pluck('name')[0])) 
@@ -240,7 +260,7 @@
     $media = $data['product']->getMedia(); 
     $firstMedia=asset('imgs/default/conversions/crop.png');
     if($media->count() > 0){
-        $firstMedia = Storage::url($data['product']->getFirstMedia()->id.'/conversions/crop.png'); 
+        $firstMedia = Storage::disk('dospace')->url($data['product']->getFirstMedia()->id.'/'.$data['product']->getFirstMedia()->file_name);
     }
     $avatar='';
     if(isset($data['product']->user->profile) && !empty(isset($data['product']->user->profile))){
@@ -263,7 +283,7 @@
                         <div class="item__preview-slider"> 
                             @if(count($media) > 0)
                                 @foreach($media as $val) 
-                                    <div class="prev-slide">
+                                    <div class="prev-slide" style="height:418px;">
                                         <div class="row position-absolute w-100 no-gutters">
                                             <div class="col-3 text-center">
                                                  <div class="hot text-white bg-danger p-2 font-weight-bold rounded-0" style="z-index:9;max-width:100px;font-size:20px;">
@@ -276,14 +296,16 @@
                                                 @endif
                                                 <h1>
                                                     @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
-                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup><del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{str_limit($data['product']->price,6)??0}} </del> {{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}} </span>
+                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup><del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{number_format($data['product']->price, 2, '.', '')??0}} </del> {{number_format(null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price, 2, '.', '')}} </span>
                                                     @else
-                                                        <span class="c-price text-white" title="${{number_format($data['product']->price)}}"> <sup>$</sup>{{number_format($data['product']->price)}}</span>
+                                                        <span class="c-price text-white" title="${{number_format($data['product']->price)}}"> <sup>$</sup>{{number_format($data['product']->price, 2, '.', '')}}</span>
                                                     @endif
                                                 </h1>
                                             </div>
                                         </div>    
-                                        <img class="w-100" src="{{Storage::url($val->id.'/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                        <span class="zoom" id="zoomImage">
+                                        <img class="w-100" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                        </span>
                                     </div>
                                 @endforeach
                             @else
@@ -300,14 +322,16 @@
                                                 @endif
                                                 <h1>
                                                     @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
-                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup> <del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{str_limit($data['product']->price,6)??0}} </del> {{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}</span>
+                                                        <span class="c-price text-white font-weight-bold" title="${{null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price}}"> <sup>$</sup> <del style="font-size:18px;" title="{{$data['product']->price??0}}"> {{number_format($data['product']->price, 2, '.', '')??0}} </del> {{number_format(null !==$data['product']->discount && is_numeric($data['product']->discount)?getDiscount($data['product']->price,$data['product']->discount):$data['product']->price, 2, '.', '')}}</span>
                                                     @else
-                                                        <span class="c-price text-white" title="${{$data['product']->price??0}}"> <sup>$</sup> {{str_limit($data['product']->price,6)??0}}</span>
+                                                        <span class="c-price text-white" title="${{$data['product']->price??0}}"> <sup>$</sup> {{number_format($data['product']->price, 2, '.', '')??0}}</span>
                                                     @endif
                                                 </h1>
                                             </div>
                                         </div>    
-                                    <img class="w-100" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                        <span class="zoom" id="zoomImage">
+                                            <img class="w-100" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                        </span>
                                 </div>
                             @endif 
                         </div><!-- end /.item--preview-slider -->
@@ -316,7 +340,7 @@
                             <div class="prev-thumb">
                                 <div class="thumb-slider">
                                     @foreach( $media as $key => $val)
-                                        <div class="item-thumb"><img src="{{Storage::url($val->id.'/conversions/'.$val->file_name)}}" alt="This is the thumbnail of the item"></div>
+                                        <div class="item-thumb" style="height:105px"><img src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="This is the thumbnail of the item"></div>
                                     @endforeach
                                 </div><!-- end /.thumb-slider -->
 
@@ -897,8 +921,9 @@
     =================================-->
 @stop
 @section('cusomescript')
-<script type="text/javascript">
 
+<script type="text/javascript">
+    
     ( function($) {
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'); 
         var xhr=null;
@@ -1126,5 +1151,11 @@
     });
 
 } ) ( jQuery );
+$(document).ready(function(){
+    $('#zoomImage').zoom(); 
+    $('.item-thumb img').on('click',function(){
+        $('.slick-active').find('#zoomImage').zoom(); 
+    })
+});
 </script>
 @stop 

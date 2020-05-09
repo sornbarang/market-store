@@ -173,7 +173,7 @@
                                             </div>
                                             <div class="avatar-preview">
                                                 @if($img)
-                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img)}}')">
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::disk('dospace')->url($img)}}')">
                                                     </div>
                                                     <input name="mediaid" type="hidden" value="{{$mediaItems[0]->id}}">
                                                 @else
@@ -191,7 +191,7 @@
                                             <div class="avatar-preview">
                                                 
                                                 @if($img1)
-                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img1)}}');">
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::disk('dospace')->url($img1)}}');">
                                                     </div>
                                                     <input name="mediaid1" type="hidden" value="{{$mediaItems[1]->id}}">
                                                 @else
@@ -209,7 +209,7 @@
                                             <div class="avatar-preview">
                                                 
                                                 @if($img2)
-                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img2)}}');">
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::disk('dospace')->url($img2)}}');">
                                                     </div>
                                                     <input name="mediaid2" type="hidden" value="{{$mediaItems[2]->id}}">
                                                 @else
@@ -228,7 +228,7 @@
                                             <div class="avatar-preview">
                                                 
                                                 @if($img3)
-                                                    <div class="imagePreview" style="background-image: url('{{Storage::url($img3)}}');"></div>
+                                                    <div class="imagePreview" style="background-image: url('{{Storage::disk('dospace')->url($img3)}}');"></div>
                                                     <input name="mediaid3" type="hidden" value="{{$mediaItems[3]->id}}">
                                                 @else
                                                     <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>

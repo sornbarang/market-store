@@ -313,7 +313,6 @@ class CustomerController extends Controller
     public function myItemUpload(Request $request) 
     {
         
-        
         $data['category'] = $this->getParentsCategory();
         $data['breadcrub']='upload item';
 
@@ -478,7 +477,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                    $this->mediaconvert($media); 
+                    // $this->mediaconvert($media); 
                 } 
             }
             if($request->hasFile('photos1')){
@@ -497,7 +496,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection(); 
-                    $this->mediaconvert($media);
+                    // $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos2')){
@@ -518,7 +517,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                    $this->mediaconvert($media);
+                    // $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos3')){
@@ -536,7 +535,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                    $this->mediaconvert($media);
+                    // $this->mediaconvert($media);
                 } 
             }
             
@@ -578,8 +577,8 @@ class CustomerController extends Controller
         // $name = $media->name; 
         $id = $media->id; 
         // get crop image
-        $cropPath = storage_path('app/public/'.$id.'/conversions/'.$file_name);
-        $cropPathFit = storage_path('app/public/'.$id.'/conversions/crop.png');
+        $cropPath = storage_path($id.'/conversions/'.$file_name);
+        $cropPathFit = storage_path($id.'/conversions/crop.png');
         Image::load($getThub)->crop(Manipulations::CROP_TOP, 361, 230)->save($cropPath);
         Image::load($getThub)
             ->crop(Manipulations::CROP_TOP, 750, 430)

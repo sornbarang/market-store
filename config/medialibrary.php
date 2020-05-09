@@ -6,7 +6,7 @@ return [
      * The disk on which to store added files and derived images by default. Choose
      * one or more of the disks you've configured in config/filesystems.php.
      */
-    'disk_name' => 'public',
+    'disk_name' => 'dospace',
 
     /*
      * The maximum file size of an item in bytes.
@@ -25,11 +25,11 @@ return [
      */
     'media_model' => Spatie\MediaLibrary\Models\Media::class,
 
-    's3' => [
+    'dospace' => [ 
         /*
          * The domain that should be prepended when generating urls.
          */
-        'domain' => 'https://'.env('AWS_BUCKET').'.s3.amazonaws.com',
+        'domain' => env('SPACE_ENDPOINT',''),
     ],
 
     'remote' => [
@@ -43,6 +43,7 @@ return [
          */
         'extra_headers' => [
             'CacheControl' => 'max-age=604800',
+            'visibility' => 'public',
         ],
     ],
 

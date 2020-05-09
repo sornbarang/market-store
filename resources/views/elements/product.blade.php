@@ -26,7 +26,7 @@
                     } 
                 } 
                 if($getFirstMedia){
-                    $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                    $img = Storage::disk('dospace')->url($getFirstMedia->id.'/'.$getFirstMedia->file_name);
                 }else{
                     $img = asset('imgs/default/conversions/default.jpg');
                 }
@@ -145,7 +145,7 @@
                                         @endif
                                         <div class="w-100">
                                             <div class="price_love w-100 text-center">
-                                                <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{str_limit(null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price,5)}}</span> 
+                                                <span title="${{null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price}}">${{number_format(null !==$val->discount && is_numeric($val->discount)?getDiscount($val->price,$val->discount):$val->price, 2, '.', '')}}</span> 
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@
                         @if(isset($data['type']) && $data['type']=='shop')
                             <div class="row no-gutters">
                                 <div class="col-md-12">
-                                    <button style="line-height:inherit;" class="btn btn--icon btn-sm float-right p-2">
+                                    <button style="line-height:inherit;" class="w-100 btn btn--icon btn-sm float-right p-2">
                                         <span class="lnr lnr-cart"></span>@lang('frontlabel.addtocard')
                                     </button>
                                 </div>

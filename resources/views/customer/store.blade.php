@@ -368,7 +368,7 @@
                                 $img='';
                                 $getFirstMedia = $val->getFirstMedia(); 
                                 if($getFirstMedia){
-                                    $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                    $img = Storage::disk('dospace')->url($getFirstMedia->id.'/'.$getFirstMedia->file_name);
                                 }else{
                                     $img = asset('imgs/default/conversions/default.jpg');
                                 } 

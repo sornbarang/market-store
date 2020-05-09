@@ -120,13 +120,11 @@
                                     </ul>
                                 </div>
                                 <!-- end /.social -->
-
-
-                                <!-- <div class="author-btn">
+                                {{-- <div class="author-btn">
 
                                     <a href="#" class="btn btn--md btn--round">@lang('profile.follow')</a>
 
-                                </div> -->
+                                </div> --}}
                                 <!-- end /.author-btn -->
                             </div>
                             <!-- end /.author-infos -->
@@ -279,7 +277,7 @@
                                 $img='';
                                 $getFirstMedia = $val->getFirstMedia(); 
                                 if($getFirstMedia){
-                                    $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                                    $img = Storage::disk('dospace')->url($getFirstMedia->id.'/'.$getFirstMedia->file_name);
                                 }else{
                                     $img = asset('imgs/default/conversions/default.jpg');
                                 }

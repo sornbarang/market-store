@@ -63,7 +63,14 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
-
+        'dospace' => [
+            'driver' => 's3',
+            'key' => env('SPACE_KEY',''),
+            'secret' => env('SPACE_SECRET',''),
+            'region' => env('SPACE_REGION',''),
+            'bucket' => env('SPACE_BUCKET',''),
+            'endpoint' => env('SPACE_ENDPOINT',''),
+        ],
     ],
 
 ];

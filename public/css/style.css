@@ -16372,3 +16372,7 @@ form.frmlogincustom .form-control:focus{
 {
   content: '';
 }
+.product__thumbnail{
+  height: 126.14px;
+  overflow: hidden;
+}

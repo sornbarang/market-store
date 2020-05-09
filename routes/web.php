@@ -23,7 +23,9 @@ App::setLocale($lang);
 Route::get('/', function () {
     return view('page');
 })->name(trans('routes.home'));
-
+Route::get('check-php',function(){ 
+    echo phpinfo();
+});
 Route::get('testing-mail', 'Demo\MailController@index');
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 
@@ -64,7 +66,7 @@ function()
     ], function() {
         Route::get('search', ['as' => 'shop.search', 'uses' =>'SearchController@filter']); 
         Route::group([ 
-            'namespace'  => 'Shop',
+            'namespace'  => 'shop',
         ], function() {
             Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'Admin\CategoryAdsController@getSubCategory']);
             Route::get('/', ['as' => 'shop', 'uses' => 'CategoryController@index']);

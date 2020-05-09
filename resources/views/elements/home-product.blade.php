@@ -17,7 +17,7 @@
             $mediaItems = $newsItem->getMedia();
             $getFirstMedia = $newsItem->getFirstMedia();   
             if($getFirstMedia){
-                $img = Storage::url($getFirstMedia->id.'/conversions/'.$getFirstMedia->file_name);
+                $img = Storage::disk('dospace')->url($getFirstMedia->id.'/'.$getFirstMedia->file_name);
             }else{
                 $img = asset('imgs/default/conversions/default.jpg');
             } 
@@ -29,7 +29,7 @@
                     HOT
                 </div>
                 <div class="product__thumbnail">
-                    <img src="{{ $img }}" onerror="this.src='{{ asset('imgs/default/conversions/default.jpg') }}';"  alt="Product Image">
+                    <img class="img-fluid" src="{{ $img }}" onerror="this.src='{{ asset('imgs/default/conversions/default.jpg') }}';"  alt="Product Image">
                     <div class="prod_btn d-flex content-justify-center align-items-center">
                         {{--
                         @if(isset($data['type']) && $data['type']=='shop')
@@ -185,7 +185,7 @@
                                     @endif
                                     <div class="w-100">
                                         <div class="price_love w-100 text-center">
-                                            <span title="${{null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price}}">${{str_limit(null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price,5)}}</span> 
+                                            <span title="${{null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price}}">${{number_format(null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price, 2, '.', '')}}</span> 
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
                     @if(isset($data['type']) && $data['type']=='shop')
                         <div class="row no-gutters">
                             <div class="col-md-12">
-                                <button style="line-height:inherit;" class="btn btn--icon btn-sm float-right p-2">
+                                <button style="line-height:inherit;" class="btn w-100 btn--icon btn-sm float-right p-2">
                                     <span class="lnr lnr-cart"></span>@lang('frontlabel.addtocard')
                                 </button>
                             </div>
