@@ -163,16 +163,16 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection(); 
-                        $cropPath = storage_path('app/public/'.$avatar->id.'/avatar.png'); 
-                        $cropPath100 = storage_path('app/public/'.$avatar->id.'/avatar100.png'); 
-                        Image::load($avatar->getPath())
-                        ->fit(Manipulations::FIT_CROP, 50, 50)
-                        ->format(Manipulations::FORMAT_PNG)
-                        ->save($cropPath);
-                        Image::load($avatar->getPath())
-                        ->fit(Manipulations::FIT_CROP, 100, 100)
-                        ->format(Manipulations::FORMAT_PNG)
-                        ->save($cropPath100);
+                        // $cropPath = storage_path('app/public/'.$avatar->id.'/avatar.png'); 
+                        // $cropPath100 = storage_path('app/public/'.$avatar->id.'/avatar100.png'); 
+                        // Image::load($avatar->getPath())
+                        // ->fit(Manipulations::FIT_CROP, 50, 50)
+                        // ->format(Manipulations::FORMAT_PNG)
+                        // ->save($cropPath);
+                        // Image::load($avatar->getPath())
+                        // ->fit(Manipulations::FIT_CROP, 100, 100)
+                        // ->format(Manipulations::FORMAT_PNG)
+                        // ->save($cropPath100);
                     // $this->mediaconvert($media); 
                 } 
             }
@@ -191,11 +191,11 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                        $cropPath = storage_path('app/public/'.$cover->id.'/cover.png'); 
-                        Image::load($cover->getPath())
-                        ->fit(Manipulations::FIT_CROP, 800, 370)
-                        ->format(Manipulations::FORMAT_PNG)
-                        ->save($cropPath);
+                        // $cropPath = storage_path('app/public/'.$cover->id.'/cover.png'); 
+                        // Image::load($cover->getPath())
+                        // ->fit(Manipulations::FIT_CROP, 800, 370)
+                        // ->format(Manipulations::FORMAT_PNG)
+                        // ->save($cropPath);
                     // $this->mediaconvert($media); 
                 } 
             }
@@ -379,7 +379,7 @@ class CustomerController extends Controller
                                     return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                                  })
                                 ->toMediaCollection(); 
-                                $this->mediaconvert($media);
+                                // $this->mediaconvert($media);
                             }
                         }
                     }
@@ -483,7 +483,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                    $this->mediaconvert($media); 
+                    // $this->mediaconvert($media); 
                 } 
             }
             if($request->hasFile('photos1')){
@@ -502,7 +502,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection(); 
-                    $this->mediaconvert($media);
+                    // $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos2')){
@@ -523,7 +523,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                    $this->mediaconvert($media);
+                    // $this->mediaconvert($media);
                 } 
             }
             if($request->hasFile('photos3')){
@@ -541,7 +541,7 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                    $this->mediaconvert($media);
+                    // $this->mediaconvert($media);
                 } 
             }
             

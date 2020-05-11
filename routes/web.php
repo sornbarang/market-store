@@ -65,15 +65,16 @@ function()
         'prefix'    => 'shop'
     ], function() {
         Route::get('search', ['as' => 'shop.search', 'uses' =>'SearchController@filter']); 
-        Route::group([ 
-            'namespace'  => 'shop',
-        ], function() {
+        
             Route::post('getsubcategory', ['as' => 'getsubcategory', 'uses' => 'Admin\CategoryAdsController@getSubCategory']);
-            Route::get('/', ['as' => 'shop', 'uses' => 'CategoryController@index']);
-            Route::get('productdetail/{slug?}', ['as' => 'shop.productdetail', 'uses' => 'ProductController@getproductdetail']);   
-            Route::get('mystore/{id}', ['as' => 'shop.mystore', 'uses' => 'CustomerController@myStore']);
-            Route::get('cart', ['as' => 'shop.cart', 'uses' => 'CustomerController@getCart']);
-            Route::get('checkout', ['as' => 'shop.checkout', 'uses' => 'CustomerController@getCheckout']);
+            Route::get('/', ['as' => 'shop', 'uses' => 'Shop\CategoryController@index']);
+            Route::get('productdetail/{slug?}', ['as' => 'shop.productdetail', 'uses' => 'Shop\ProductController@getproductdetail']);   
+            Route::get('mystore/{id}', ['as' => 'shop.mystore', 'uses' => 'Shop\CustomerController@myStore']);
+            Route::get('cart', ['as' => 'shop.cart', 'uses' => 'Shop\CustomerController@getCart']);
+            Route::get('checkout', ['as' => 'shop.checkout', 'uses' => 'Shop\CustomerController@getCheckout']);
+            Route::group([ 
+                'namespace'  => 'shop',
+            ], function() {
             // require login
             Route::group( ['middleware' => 'auth' ], function()
             {
