@@ -185,7 +185,7 @@
                                     @endif
                                     <div class="w-100">
                                         <div class="price_love w-100 text-center">
-                                            <span title="${{null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price}}">${{number_format(null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price, 2, '.', '')}}</span> 
+                                            <span title="${{null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price}}">${{null !==$getprops->discount && is_numeric($getprops->discount)?getDiscount($getprops->price,$getprops->discount):$getprops->price}}</span> 
                                         </div>
                                     </div>
                                 </div>
