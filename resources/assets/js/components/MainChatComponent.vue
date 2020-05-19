@@ -289,7 +289,7 @@ export default {
             friend.session.open = false;
         },
         getFriends() {
-            axios.post("getFriends").then(res => {
+            axios.get("getFriends").then(res => {
                 if(res.status==200){
                     if(res.data.links.next != ''){
                         this.next = res.data.links.next;

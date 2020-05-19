@@ -22,7 +22,7 @@ class UserResource extends JsonResource
         $products= ProductsAds::where('user_id',$this->id)->latest()->limit(5)->inRandomOrder()->get();
         foreach($products as $v){
             if($v->getFirstMedia()){
-                $img = Storage::url($v->getFirstMedia()->id.'/'.$v->getFirstMedia()->file_name);
+                $img = Storage::disk('dospace')->url($v->getFirstMedia()->id.'/'.$v->getFirstMedia()->file_name);
             }
             $media[]=['media'=>$img,'link'=>route('market.productdetail',$v->slug)];
         } 
@@ -30,7 +30,7 @@ class UserResource extends JsonResource
             $medias = $this->profile->getMedia();  
             foreach($medias as $val){   
                 if($this->profile->avatar == $val->id){
-                    $avatar=Storage::url($val->id.'/'.$val->file_name);  
+                    $avatar=Storage::disk('dospace')->url($val->id.'/'.$val->file_name);  
                 }
             } 
         }

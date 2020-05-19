@@ -20,7 +20,7 @@ class ChatResource extends JsonResource
             $medias = $this->user->profile->getMedia();  
             foreach($medias as $val){   
                 if($this->user->profile->avatar == $val->id){
-                    $avatar=Storage::url($val->id.'/'.$val->file_name);  
+                    $avatar=Storage::disk('dospace')->url($val->id.'/'.$val->file_name);  
                 }
             } 
         }
@@ -29,7 +29,7 @@ class ChatResource extends JsonResource
             $mediaItems = $this->message->getMedia('chats');
             // dd($mediaItems);
             foreach ($mediaItems as $key => $media) {
-                $images[]=asset(Storage::url($media->collection_name.'/'.$media->id.'/'.$media->file_name)); 
+                $images[]=asset(Storage::disk('dospace')->url($media->collection_name.'/'.$media->id.'/'.$media->file_name)); 
             } 
         }
         return [
