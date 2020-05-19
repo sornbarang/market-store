@@ -374,7 +374,7 @@ class CustomerController extends Controller
                                     return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                                  })
                                 ->toMediaCollection(); 
-                                $this->mediaconvert($media);
+                                // $this->mediaconvert($media);
                             }
                         }
                     }

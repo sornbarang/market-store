@@ -303,8 +303,8 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                        <span class="zoom" id="zoomImage">
-                                        <img class="w-100" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                        <span class="zoom" id="zoomImage{{$loop->iteration}}">
+                                            <img class="w-100" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                         </span>
                                     </div>
                                 @endforeach
@@ -1152,10 +1152,10 @@
 
 } ) ( jQuery );
 $(document).ready(function(){
-    $('#zoomImage').zoom(); 
-    $('.item-thumb img').on('click',function(){
-        $('.slick-active').find('#zoomImage').zoom(); 
-    })
+    $('#zoomImage1').zoom(); 
+    $('#zoomImage2').zoom(); 
+    $('#zoomImage3').zoom(); 
+    $('#zoomImage4').zoom();
 });
 </script>
 @stop 
