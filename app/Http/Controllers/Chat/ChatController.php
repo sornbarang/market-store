@@ -65,7 +65,8 @@ class ChatController extends Controller
                     })
                     ->toMediaCollection('chats'); 
                     // $this->mediaconvert($media);
-                    $images[]=asset(Storage::url('chats/'.$media->id.'/'.$media->file_name)); 
+                    // $images[]=asset(Storage::url('chats/'.$media->id.'/'.$media->file_name)); 
+                    $images[]=Storage::disk('dospace')->url('chats/'.$media->id.'/'.$media->file_name);
                 }
             }  
         }
