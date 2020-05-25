@@ -72,6 +72,12 @@ function()
             Route::get('mystore/{id}', ['as' => 'shop.mystore', 'uses' => 'Shop\CustomerController@myStore']);
             Route::get('cart', ['as' => 'shop.cart', 'uses' => 'Shop\CustomerController@getCart']);
             Route::get('checkout', ['as' => 'shop.checkout', 'uses' => 'Shop\CustomerController@getCheckout']);
+            // require login
+            Route::group( ['middleware' => 'auth' ], function()
+            { 
+                Route::get('profile/{profileId}/follow', 'Shop\ProfileController@followUser')->name('user.follow');
+                Route::get('profile/{profileId}/unfollow', 'Shop\ProfileController@unFollowUser')->name('user.unfollow');
+            });
             Route::group([ 
                 'namespace'  => 'shop',
             ], function() {
@@ -98,9 +104,7 @@ function()
                         'destroy' => 'shop.customer.destroy',
                     ]
                 ]);
-                Route::get('profile/{profileId}/follow', 'ProfileController@followUser')->name('user.follow');
-                Route::get('profile/{profileId}/unfollow', 'ProfileController@unFollowUser')->name('user.unfollow');
-            });
+            });  
             Route::get('{slug?}', ['as' => 'shop.dynamiccat', 'uses' =>'CategoryController@getSlugCategory']);
             Route::get('json/{slug?}', ['as' => 'shop.getproductofcategory', 'uses' =>'CategoryController@getProductOfCategory']);
         });     
