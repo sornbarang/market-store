@@ -8,24 +8,14 @@
     END BREADCRUMB AREA
 =================================--> 
 <style>
-/* these styles are for the demo, but are not required for the plugin */
-.zoom {
-			position: relative;
-		}
-		
-		/* magnifying glass icon */
-		.zoom:after {
-			content:'';
-			display:block; 
-			width:33px; 
-			height:33px; 
-			position:absolute; 
-			top:0;
-			right:0;
-			background:url(icon.png);
-		} 
-
-		.zoom img::selection { background-color: transparent; }
+#zoomImage-ZoomContainer{
+    height: 81.6406px !important;
+    width: 142.578px !important;
+}
+.zoomLens{
+    height: 100px !important;
+    width: 100px !important;
+}
 </style>
 @if (Route::has('login'))
     @auth 
@@ -284,13 +274,13 @@
                             @if(count($media) > 0)
                                 @foreach($media as $val) 
                                     <div class="prev-slide" style="height:418px;">
-                                        <div class="row position-absolute w-100 no-gutters">
+                                        <div class="row position-absolute w-100 no-gutters" style="z-index:9;">
                                             <div class="col-3 text-center">
-                                                 <div class="hot text-white bg-danger p-2 font-weight-bold rounded-0" style="z-index:9;max-width:100px;font-size:20px;">
+                                                 <div class="hot text-white bg-danger p-2 font-weight-bold rounded-0" style="max-width:100px;font-size:20px;">
                                                     HOT
                                                 </div>
                                             </div>
-                                            <div class="col-9 text-right"> 
+                                            <div class="col-9 text-right" > 
                                                 @if(null !==$data['product']->discount && is_numeric($data['product']->discount) && (int)$data['product']->discount !=0) 
                                                     <p class="m-0 p-0" style="line-height:inherit;color:#fff;font-weight:bold;font-size:20px;" title="{{round($data['product']->discount, 2)}}% Off">{{round($data['product']->discount, 2)}}% Off</p>
                                                 @endif
@@ -303,9 +293,7 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                        <span class="zoom" id="zoomImage{{$loop->iteration}}">
-                                            <img class="w-100" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
-                                        </span>
+                                        <img style="height:418px;z-index:0;" data-zoom-image="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" id="zoomImage" class="w-100" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                     </div>
                                 @endforeach
                             @else
@@ -329,9 +317,7 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                        <span class="zoom" id="zoomImage">
-                                            <img class="w-100" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
-                                        </span>
+                                        <img id="zoomImage"  class="w-100" data-zoom-image="{{asset('imgs/default/conversions/crop.png')}}" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                 </div>
                             @endif 
                         </div><!-- end /.item--preview-slider -->
@@ -340,7 +326,7 @@
                             <div class="prev-thumb">
                                 <div class="thumb-slider">
                                     @foreach( $media as $key => $val)
-                                        <div class="item-thumb" style="height:105px"><img src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="This is the thumbnail of the item"></div>
+                                        <div class="item-thumb" id="gallery_01" style="height:105px"><img id="zoomImage" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="This is the thumbnail of the item"></div>
                                     @endforeach
                                 </div><!-- end /.thumb-slider -->
 
@@ -1152,10 +1138,17 @@
 
 } ) ( jQuery );
 $(document).ready(function(){
-    $('#zoomImage1').zoom(); 
-    $('#zoomImage2').zoom(); 
-    $('#zoomImage3').zoom(); 
-    $('#zoomImage4').zoom();
+    $('#zoomImage').ezPlus({ 
+        easing: true, 
+        gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+        imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+    });
+
+    //pass the images to Fancybox
+    $(document).on('click','#gallery_01 #zoomImage,.nav-right,.nav-left', function (e) {
+        // console.log($(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img'));
+        $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true});
+    }); 
 });
 </script>
 @stop 

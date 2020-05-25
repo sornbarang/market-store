@@ -7,6 +7,16 @@
 <!--================================
     END BREADCRUMB AREA
 =================================-->
+<style>
+#zoomImage-ZoomContainer{
+    height: 81.6406px !important;
+    width: 142.578px !important;
+}
+.zoomLens{
+    height: 100px !important;
+    width: 100px !important;
+}
+</style>
 @if (Route::has('login'))
     @auth 
         @if(isset(Auth::user()->roles->pluck('name')[0])) 
@@ -264,7 +274,7 @@
                             @if(count($media) > 0)
                                 @foreach($media as $val) 
                                     <div class="prev-slide" style="height:418px;">
-                                        <div class="row position-absolute w-100 no-gutters">
+                                        <div class="row position-absolute w-100 no-gutters" style="z-index:99;">
                                             <div class="col-3 text-center">
                                                  <div class="hot text-white bg-danger p-2 font-weight-bold rounded-0" style="z-index:9;max-width:100px;font-size:20px;">
                                                     HOT
@@ -283,9 +293,7 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                        <span class="zoom" id="zoomImage{{$loop->iteration}}">
-                                            <img class="w-100" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
-                                        </span>
+                                        <img class="w-100" style="height:418px;z-index:0;" data-zoom-image="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" id="zoomImage" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                     </div>
                                 @endforeach
                             @else
@@ -309,7 +317,7 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                    <img class="w-100" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                    <img id="zoomImage"  class="w-100" data-zoom-image="{{asset('imgs/default/conversions/crop.png')}}" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                 </div>
                             @endif 
                         </div><!-- end /.item--preview-slider -->
@@ -318,7 +326,7 @@
                             <div class="prev-thumb">
                                 <div class="thumb-slider">
                                     @foreach( $media as $key => $val)
-                                        <div class="item-thumb" style="height:105px;"><img src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="This is the thumbnail of the item"></div>
+                                        <div class="item-thumb" style="height:105px;" id="gallery_01"><img id="zoomImage" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="This is the thumbnail of the item"></div>
                                     @endforeach
                                 </div><!-- end /.thumb-slider -->
 
@@ -1129,10 +1137,17 @@
 
 } ) ( jQuery );
 $(document).ready(function(){
-    $('#zoomImage1').zoom(); 
-    $('#zoomImage2').zoom(); 
-    $('#zoomImage3').zoom(); 
-    $('#zoomImage4').zoom();
+    $('#zoomImage').ezPlus({ 
+        easing: true, 
+        gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+        imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+    });
+
+    //pass the images to Fancybox
+    $(document).on('click','#gallery_01 #zoomImage,.nav-right,.nav-left', function (e) {
+        // console.log($(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img'));
+        $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true});
+    }); 
 });
 </script>
 @stop 

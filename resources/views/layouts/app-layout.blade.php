@@ -694,6 +694,7 @@
 <script src="{{ asset('js/map.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.8.0/jquery.raty.js"></script>
 <script src='{{ asset('js/jquery.zoom.js') }}'></script>
+<script src="https://cdn.jsdelivr.net/gh/igorlino/elevatezoom-plus@1.2.3/src/jquery.ez-plus.js"></script>
 @yield('cusomescript')
 <script> 
 (function() {
