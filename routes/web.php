@@ -72,28 +72,22 @@ function()
             Route::get('mystore/{id}', ['as' => 'shop.mystore', 'uses' => 'Shop\CustomerController@myStore']);
             Route::get('cart', ['as' => 'shop.cart', 'uses' => 'Shop\CustomerController@getCart']);
             Route::get('checkout', ['as' => 'shop.checkout', 'uses' => 'Shop\CustomerController@getCheckout']);
-            // require login
-            Route::group( ['middleware' => 'auth' ], function()
-            { 
-                Route::get('profile/{profileId}/follow', 'Shop\ProfileController@followUser')->name('user.follow');
-                Route::get('profile/{profileId}/unfollow', 'Shop\ProfileController@unFollowUser')->name('user.unfollow');
-            });
-            Route::group([ 
-                'namespace'  => 'shop',
-            ], function() {
+            // Route::group([ 
+            //     'namespace'  => 'shop',
+            // ], function() {
             // require login
             Route::group( ['middleware' => 'auth' ], function()
             {
-                Route::get('myprofile', ['as' => 'shop.myprofile', 'uses' => 'CustomerController@myProfile']);
-                Route::post('ratemarket', ['as' => 'shop.ratemarket', 'uses' => 'ProductController@makeRateAble']);
-                Route::get('mysetting', ['as' => 'shop.mysetting', 'uses' => 'CustomerController@mySetting']);
-                Route::any('myitemupload', ['as' => 'shop.myitemupload', 'uses' => 'CustomerController@myItemUpload']);
-                Route::get('mymanageitem', ['as' => 'shop.mymanageitem', 'uses' => 'CustomerController@myManageItem']);
+                Route::get('myprofile', ['as' => 'shop.myprofile', 'uses' => 'Shop\CustomerController@myProfile']);
+                Route::post('ratemarket', ['as' => 'shop.ratemarket', 'uses' => 'Shop\ProductController@makeRateAble']);
+                Route::get('mysetting', ['as' => 'shop.mysetting', 'uses' => 'Shop\CustomerController@mySetting']);
+                Route::any('myitemupload', ['as' => 'shop.myitemupload', 'uses' => 'Shop\CustomerController@myItemUpload']);
+                Route::get('mymanageitem', ['as' => 'shop.mymanageitem', 'uses' => 'Shop\CustomerController@myManageItem']);
                 Route::delete('destroyproduct/{slug}', ['as' => 'shop.destroyproduct', 'uses' => 'Market\ProductController@destroy']);
-                Route::delete('mydestroypro/{slug}', ['as' => 'shop.deleteproduct', 'uses' => 'CustomerController@myDeletePro']);
-                Route::any('myEditItem/{slug?}', ['as' => 'shop.edititem', 'uses' => 'CustomerController@myEditItem']);
+                Route::delete('mydestroypro/{slug}', ['as' => 'shop.deleteproduct', 'uses' => 'Shop\CustomerController@myDeletePro']);
+                Route::any('myEditItem/{slug?}', ['as' => 'shop.edititem', 'uses' => 'Shop\CustomerController@myEditItem']);
 
-                Route::resource('customer', 'CustomerController',['names' =>
+                Route::resource('customer', 'Shop\CustomerController',['names' =>
                     [
                         'index' => 'shop.customer.index',
                         'create' => 'shop.customer.create',
@@ -104,7 +98,9 @@ function()
                         'destroy' => 'shop.customer.destroy',
                     ]
                 ]);
-            });  
+                Route::get('profile/{profileId}/follow', 'Shop\ProfileController@followUser')->name('user.follow');
+                Route::get('profile/{profileId}/unfollow', 'Shop\ProfileController@unFollowUser')->name('user.unfollow');
+            // });
             Route::get('{slug?}', ['as' => 'shop.dynamiccat', 'uses' =>'CategoryController@getSlugCategory']);
             Route::get('json/{slug?}', ['as' => 'shop.getproductofcategory', 'uses' =>'CategoryController@getProductOfCategory']);
         });     
