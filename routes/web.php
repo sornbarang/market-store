@@ -101,8 +101,8 @@ function()
                 Route::get('profile/{profileId}/follow', 'Shop\ProfileController@followUser')->name('user.follow');
                 Route::get('profile/{profileId}/unfollow', 'Shop\ProfileController@unFollowUser')->name('user.unfollow');
             // });
-            Route::get('{slug?}', ['as' => 'shop.dynamiccat', 'uses' =>'CategoryController@getSlugCategory']);
-            Route::get('json/{slug?}', ['as' => 'shop.getproductofcategory', 'uses' =>'CategoryController@getProductOfCategory']);
+            Route::get('{slug?}', ['as' => 'shop.dynamiccat', 'uses' =>'Shop\CategoryController@getSlugCategory']);
+            Route::get('json/{slug?}', ['as' => 'shop.getproductofcategory', 'uses' =>'Shop\CategoryController@getProductOfCategory']);
         });     
     });
 
