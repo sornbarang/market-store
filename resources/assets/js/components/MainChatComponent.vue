@@ -1,5 +1,5 @@
 <template> 
-    <div class="grid"> 
+    <div class="grid" id="app"> 
         <Modal ok-text="ok" cancel-text="Cancel" @on-ok="deleteSuccess" v-model="modal" draggable scrollable title="Are you sure?">
             <div>Noted: we can not recovery these coversation if you delete.</div>
         </Modal>

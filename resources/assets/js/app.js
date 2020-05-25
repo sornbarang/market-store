@@ -33,7 +33,8 @@ Vue.filter('isEmpty', function (value) {
     return false
 });
 // Vue.component('chat-component', require('./components/ChatComponent.vue'));
-Vue.component('main-chat-component', require('./components/MainChatComponent.vue'));
+import App from './components/MainChatComponent.vue';
+
 Vue.component('Col', Col);
 Vue.component('Row', Row);
 Vue.component('Avatar', Avatar);
@@ -58,5 +59,6 @@ let activeUser = localStorage.getItem('activeUser');
 Vue.prototype.$activeUser = JSON.parse(activeUser);
 Vue.prototype.$Notice = Notice;
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    render: h => h(App)
 });
