@@ -362,9 +362,9 @@
                                 @endphp 
                                     
                                     @section('meta')
-                                    <meta property="og:title" content="{{$data['product']->name}}">
-                                    <meta property="og:image" content="{{asset($firstMedia)}}">
-                                    <meta name="description" content="MartPlace - Complete Online Multipurpose Marketplace HTML Template">
+                                        <meta property="og:title" content="{{$data['product']->name}}">
+                                        <meta property="og:image" content="{{asset($firstMedia)}}">
+                                        <meta name="description" content="MartPlace - Complete Online Multipurpose Marketplace HTML Template">
                                     @stop
 
                                 <div class="social social--color--filled">
