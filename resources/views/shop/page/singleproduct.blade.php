@@ -250,7 +250,7 @@
     $media = $data['product']->getMedia(); 
     $firstMedia=asset('imgs/default/conversions/crop.png');
     if($media->count() > 0){
-        $firstMedia = Storage::disk('dospace')->url($data['product']->getFirstMedia()->id.'/'.$data['product']->getFirstMedia()->first_name); 
+        $firstMedia = Storage::disk('dospace')->url($data['product']->getFirstMedia()->id.'/'.$data['product']->getFirstMedia()->file_name); 
     }
     $avatar='';
     if(isset($data['product']->user->profile) && !empty(isset($data['product']->user->profile))){
@@ -317,7 +317,7 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                    <img id="zoomImage"  class="w-100" data-zoom-image="{{asset('imgs/default/conversions/crop.png')}}" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                    <img id="zoomImage" class="w-100" data-zoom-image="{{asset('imgs/default/conversions/crop.png')}}" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                 </div>
                             @endif 
                         </div><!-- end /.item--preview-slider -->
@@ -358,10 +358,12 @@
                                 @php  
 
                                     $socialLink = route('shop.productdetail',$data['product']->slug); 
-                                    $socials=Share::load($socialLink,$data['product']->name,asset($firstMedia))->services('facebook', 'linkedin', 'twitter');
+                                    $socials = Share::load($socialLink,$data['product']->name,asset($firstMedia))->services('facebook', 'linkedin', 'twitter');
                                 @endphp 
+                                    
+
                                 <div class="social social--color--filled">
-                                @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' => asset($firstMedia)])
+                                @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' =>asset($firstMedia),'socails'=>$socials])
 
                                 </div>
                                 <!-- end /.social-->

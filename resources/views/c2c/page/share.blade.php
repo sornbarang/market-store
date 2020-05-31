@@ -1,6 +1,6 @@
 <ul> 
     <li> 
-        <a href='https://www.facebook.com/sharer/sharer.php?u={{ rawurlencode($url) }}{{ $sep }}title={{ rawurlencode("Check this out! $title. See it here: $url") }}{{ $sep }}media=["{{rawurlencode($image)}}"]' target="_blank">
+        <a href='{{$socials['facebook']??'javascript:void(0)'}}' target="_blank">
             <span class="fa fa-facebook"></span>
         </a>
     </li>
