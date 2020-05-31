@@ -1,4 +1,4 @@
-@extends('layouts.app-layout')
+@extends('layouts.app-layout') 
 @section('content')
 <!--================================
     START BREADCRUMB AREA
@@ -361,6 +361,11 @@
                                     $socials = Share::load($socialLink,$data['product']->name,asset($firstMedia))->services('facebook', 'linkedin', 'twitter');
                                 @endphp 
                                     
+                                    @section('meta')
+                                    <meta property="og:title" content="{{$data['product']->name}}">
+                                    <meta property="og:image" content="{{asset($firstMedia)}}">
+                                    <meta name="description" content="MartPlace - Complete Online Multipurpose Marketplace HTML Template">
+                                    @stop
 
                                 <div class="social social--color--filled">
                                 @include('c2c.page.share', ['sep'=>'&','url' => request()->fullUrl(),'title' =>$data['product']->name,'image' =>asset($firstMedia),'socails'=>$socials])
