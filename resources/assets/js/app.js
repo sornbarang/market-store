@@ -58,4 +58,4 @@ Vue.component('Modal', Modal);
 let activeUser = localStorage.getItem('activeUser');
 Vue.prototype.$activeUser = JSON.parse(activeUser);
 Vue.prototype.$Notice = Notice;
-const app = new Vue({}).$mount('#app')
+const app = new Vue({}).$mount('#appmain')

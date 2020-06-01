@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <div id="app"> 
+    <div id="appmain"> 
         <main-chat-component/>
     </div>
 </body>
