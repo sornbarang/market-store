@@ -1209,7 +1209,7 @@ $(document).ready(function(){
         if(windowWidth <=736){
             $('#zoomImage').ezPlus({ 
                 easing: true, 
-                zoomWindowWidth: 250,zoomWindowHeight: 250,
+                zoomWindowWidth: 400,zoomWindowHeight: 400,
                 zoomWindowPosition: 7,
                 gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
                 imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
@@ -1217,7 +1217,7 @@ $(document).ready(function(){
         }else{
             $('#zoomImage').ezPlus({ 
                 easing: true, 
-                zoomWindowWidth: 250,zoomWindowHeight: 250,
+                zoomWindowWidth: 400,zoomWindowHeight: 400,
                 zoomWindowPosition: 1,
                 gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
                 imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
@@ -1230,7 +1230,7 @@ $(document).ready(function(){
         $('#zoomImage').ezPlus({ 
             easing: true, 
             zoomWindowPosition: 7,
-            zoomWindowWidth: 250,zoomWindowHeight: 250,
+            zoomWindowWidth: 400,zoomWindowHeight: 400,
             gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
             imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
         });
@@ -1238,7 +1238,7 @@ $(document).ready(function(){
         $('#zoomImage').ezPlus({ 
             easing: true, 
             zoomWindowPosition: 1,
-            zoomWindowWidth: 250,zoomWindowHeight: 250,
+            zoomWindowWidth: 400,zoomWindowHeight: 400,
             gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
             imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
         });
@@ -1249,10 +1249,10 @@ $(document).ready(function(){
     $(document).on('click','#gallery_01 #zoomImage,.nav-right,.nav-left', function (e) {
         var windowWidth = $( window ).width();
         if(windowWidth <=736){
-            $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true,zoomWindowPosition: 7,zoomWindowWidth: 250,zoomWindowHeight: 250,});
+            $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true,zoomWindowPosition: 7,zoomWindowWidth: 400,zoomWindowHeight: 400,});
         }else{ 
             // console.log($(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img'));
-            $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true,zoomWindowPosition: 1,zoomWindowWidth: 250,zoomWindowHeight: 250,});
+            $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true,zoomWindowPosition: 1,zoomWindowWidth: 400,zoomWindowHeight: 400,});
         }
     }); 
 });
