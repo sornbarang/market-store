@@ -30,7 +30,7 @@
 
 <body>
     <div id="app"> 
-        <main-chat-component></main-chat-component> 
+        <main-chat-component/>
     </div>
 </body>
 
