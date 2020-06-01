@@ -30,9 +30,7 @@
 
 <body>
     <div id="app"> 
-        <main>
-            @yield('content')
-        </main>
+        <main-chat-component></main-chat-component> 
     </div>
 </body>
 
