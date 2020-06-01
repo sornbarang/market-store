@@ -5,8 +5,8 @@
 
     <!-- viewport meta -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     @yield('meta')
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <meta name="keywords" content="app, app landing, product landing, digital, material, html5">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

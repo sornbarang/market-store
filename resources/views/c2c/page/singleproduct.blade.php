@@ -16,6 +16,65 @@
     height: 100px !important;
     width: 100px !important;
 }
+/*Default*/
+#responsive_img {
+    width:800px ;
+}
+
+.responsive_default {
+    display:inline-block;
+    color: #159957;
+}
+.responsive_100, .responsive_600, .responsive_800 {
+    display:none;
+    color: #159957;
+}
+
+/*Target devices 100-599px*/
+@media only screen and  (min-width: 100px) and (max-width: 599px) {
+
+    #responsive_img {
+        width:300px ;
+    }
+
+    .responsive_100 {
+        display:inline-block;
+    }
+    .responsive_default {
+        display:none;
+    }
+
+}
+/*Target devices 600-799 width*/
+@media only screen and (min-width: 600px) and (max-width: 799px) {
+
+    #responsive_img {
+        width:450px;
+    }
+
+    .responsive_600 {
+        display:inline-block;
+    }
+    .responsive_default {
+        display:none;
+    }
+}
+
+/*Target devices 800-1199px*/
+@media only screen and  (min-width: 800px) and (max-width: 1199px) {
+
+    #responsive_img {
+        width:600px ;
+    }
+
+    .responsive_800 {
+        display:inline-block;
+    }
+    .responsive_default {
+        display:none;
+    }
+
+}
 </style>
 @if (Route::has('login'))
     @auth 
@@ -361,6 +420,8 @@
                                     $socials=Share::load($socialLink,$data['product']->name,asset($firstMedia))->services('facebook', 'linkedin', 'twitter');
                                 @endphp 
                                 @section('meta')
+                                    <meta name="viewport" content="width=1024">
+
                                     <meta property="og:title" content="{{$data['product']->name}}">
                                     <meta property="og:image" content="{{asset($firstMedia)}}">
                                     <meta name="description" content="MartPlace - Complete Online Multipurpose Marketplace HTML Template">
@@ -1142,16 +1203,57 @@
 
 } ) ( jQuery );
 $(document).ready(function(){
-    $('#zoomImage').ezPlus({ 
-        easing: true, 
-        gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
-        imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+    //Triggered when window width is changed.
+    $( window ).on( "resize", function() {
+        var windowWidth = $( window ).width();
+        if(windowWidth <=736){
+            $('#zoomImage').ezPlus({ 
+                easing: true, 
+                zoomWindowWidth: 250,zoomWindowHeight: 250,
+                zoomWindowPosition: 7,
+                gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+                imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+            });
+        }else{
+            $('#zoomImage').ezPlus({ 
+                easing: true, 
+                zoomWindowWidth: 250,zoomWindowHeight: 250,
+                zoomWindowPosition: 1,
+                gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+                imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+            });
+        }
+        location.reload()
     });
+    var windowWidth = $( window ).width();
+    if(windowWidth <=736){
+        $('#zoomImage').ezPlus({ 
+            easing: true, 
+            zoomWindowPosition: 7,
+            zoomWindowWidth: 250,zoomWindowHeight: 250,
+            gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+            imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+        });
+    }else{
+        $('#zoomImage').ezPlus({ 
+            easing: true, 
+            zoomWindowPosition: 1,
+            zoomWindowWidth: 250,zoomWindowHeight: 250,
+            gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active',
+            imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+        });
+    }
+    
 
     //pass the images to Fancybox
     $(document).on('click','#gallery_01 #zoomImage,.nav-right,.nav-left', function (e) {
-        // console.log($(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img'));
-        $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true});
+        var windowWidth = $( window ).width();
+        if(windowWidth <=736){
+            $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true,zoomWindowPosition: 7,zoomWindowWidth: 250,zoomWindowHeight: 250,});
+        }else{ 
+            // console.log($(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img'));
+            $(this).parents('.item__preview-thumb').parents('.item-preview').find('.item__preview-slider').find('.slick-active img').ezPlus({easing: true,zoomWindowPosition: 1,zoomWindowWidth: 250,zoomWindowHeight: 250,});
+        }
     }); 
 });
 </script>
