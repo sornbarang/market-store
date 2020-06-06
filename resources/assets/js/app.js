@@ -32,8 +32,8 @@ Vue.filter('isEmpty', function (value) {
     }
     return false
 });
-Vue.component('main-chat-component', require('./components/MainChatComponent.vue'));
-// import App from './components/MainChatComponent.vue';
+// Vue.component('main-chat-component', require('./components/MainChatComponent.vue'));
+import App from './components/MainChatComponent.vue';
 
 Vue.component('Col', Col);
 Vue.component('Row', Row);
@@ -58,4 +58,7 @@ Vue.component('Modal', Modal);
 let activeUser = localStorage.getItem('activeUser');
 Vue.prototype.$activeUser = JSON.parse(activeUser);
 Vue.prototype.$Notice = Notice;
-const app = new Vue({}).$mount('#appmain')
+const app = new Vue({
+    el:'#app',
+    render: h => h (App)
+});
