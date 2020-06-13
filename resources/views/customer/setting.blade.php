@@ -236,7 +236,7 @@ $r='market.';
                                                 </div>
                                                 <div class="avatar-preview"> 
                                                     @if(isset($avatar) && !empty($avatar))
-                                                        <div class="imagePreview" style="background-image: url('{{Storage::url($avatar)}}');"></div>
+                                                        <div class="imagePreview" style="background-image: url('{{Storage::disk('dospace')->url($avatar)}}');"></div>
                                                         <input name="mediaavatarid" type="hidden" value="{{$mediaavatarid}}">
                                                     @else
                                                         <div alt="No image" title="Choose image" class="imagePreview" style="background-image: url('{{asset('imgs/no_image.png')}}');"></div>
@@ -256,7 +256,7 @@ $r='market.';
                                                 </div>
                                                 <div class="avatar-preview" style="width:100%;height:360px;border-radius:inherit;">
                                                 @if(isset($cover) && !empty($cover)) 
-                                                    <div  title="Choose image" class="imagePreview rounded-0" style="background-image: url('{{Storage::url($cover)}}');border-radius: inherit;">
+                                                    <div  title="Choose image" class="imagePreview rounded-0" style="background-image: url('{{Storage::disk('dospace')->url($cover)}}');border-radius: inherit;">
                                                     </div> 
                                                     <input name="mediacoverid" type="hidden" value="{{$mediacoverid}}">
                                                 @else

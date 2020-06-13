@@ -16,7 +16,7 @@
                             @php
                               $thumbnail = $product->getFirstMedia(); 
                                 if($thumbnail){
-                                    $img = Storage::url($thumbnail->id.'/conversions/'.$thumbnail->file_name);
+                                    $img = Storage::disk('dospace')->url($thumbnail->id.'/conversions/'.$thumbnail->file_name);
                                 }else{
                                     $img = asset('imgs/default/conversions/default.jpg');
                                 }  

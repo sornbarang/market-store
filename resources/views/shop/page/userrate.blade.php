@@ -17,7 +17,7 @@
             <div class="media">
                 <div class="media-left">
                     @if(isset($avatar) && !empty($avatar))
-                        <img style="max-width:70px;" class="media-object rounded-circle" src="{{Storage::url($avatar)}}" alt="Commentator Avatar">
+                        <img style="max-width:70px;" class="media-object rounded-circle" src="{{Storage::disk('dospace')->url($avatar)}}" alt="Commentator Avatar">
                     @else
                         <a href="#">
                             <img class="media-object rounded-circle" src="{{asset('/')}}images/m1.png" alt="Commentator Avatar">

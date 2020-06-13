@@ -1039,7 +1039,7 @@ $(document).ready(function() {
                     // console.log(imgs);
                     for(var i=0;i<response.data.media.length;i++){  
                         // var img = imgs[i].replace('public/','');
-                        var url ="{{Storage::url('')}}"+response.data.media[i].id+'/'+response.data.media[i].file_name; 
+                        var url ="{{Storage::disk('dospace')->url('')}}"+response.data.media[i].id+'/'+response.data.media[i].file_name; 
                         if(i==0){
                             // $('#editProduct #file').next().children().first().val(url)
                             $('#editProduct #image_upload_preview').parent().append('<input name="mediaid" type="hidden" value="'+response.data.media[i].id+'">');

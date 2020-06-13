@@ -257,7 +257,7 @@
         $profile = $data['product']->user->profile->getMedia();  
         foreach($profile as $val){  
             if($data['product']->user->profile->avatar==$val->id){
-                $avatar=$val->id.'/avatar100.png';  
+                $avatar=$val->id.'/'.$val->file_name;  
             } 
         }    
     }
@@ -764,7 +764,7 @@
                                     @if(isset($data['product']->user))
                                         <a href="{{route('shop.mystore',$data['product']->user->id)}}">
                                             @if(isset($avatar) && !empty($avatar))
-                                                <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                                <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
                                             @else
                                                 <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
                                             @endif
@@ -772,7 +772,7 @@
                                     @else
                                         <a href="javascript:void(0)">
                                             @if(isset($avatar) && !empty($avatar))
-                                                <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                                <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
                                             @else
                                                 <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
                                             @endif
@@ -1167,7 +1167,7 @@ $(document).ready(function(){
                 imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
             });
         }
-        location.reload()
+        // location.reload()
     });
     var windowWidth = $( window ).width();
     if(windowWidth <=736){

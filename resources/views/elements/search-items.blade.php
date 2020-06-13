@@ -3,15 +3,36 @@
     @if(null !==$data['searchpros'] && $data['searchpros']->count() > 0)
         @foreach($data['searchpros'] as $val)
             @php
-                $img=''; 
-                $getFirstMedia = $val->getFirstMedia();  
-                //$getUrlThum=$getFirstMedia->getUrl('thumb');  
+                $avatar='';
+                if(isset($val->user->profile)){
+                    $media = $val->user->profile->getMedia(); 
+                    foreach($media as $m){   
+                        if($val->user->profile->avatar == $m->id){
+                            $avatar=$m->id.'/'.$m->file_name;  
+                        }
+                    } 
+                }
+                $img='';  
+                $getFirstMedia='';
+                $mediaItems = $val->getMedia(); 
+                if(count($mediaItems) > 0){
+                    $getFirstMedia = $val->getFirstMedia();
+                }else{
+                    try {
+                        $newsItem=App\Models\ProductsAds::findOrFail($val->products_ads_id); 
+                        $mediaItems = $newsItem->getMedia(); 
+                        $getFirstMedia = $newsItem->getFirstMedia(); 
+                    } catch (Exception $e) {
+                        echo 'Caught exception: ',  $e->getMessage(), "\n";
+                    } 
+                } 
                 if($getFirstMedia){
                     $img = Storage::disk('dospace')->url($getFirstMedia->id.'/'.$getFirstMedia->file_name);
                 }else{
                     $img = asset('imgs/default/conversions/default.jpg');
                 }
             @endphp
+           
             <!-- start .col-md-4 -->
             <div class="col-lg-3 col-md-6">
                 <!-- start .single-product -->
@@ -85,7 +106,11 @@
                         </a>
                         <ul class="titlebtm">
                             <li>
-                                <img class="auth-img" src="{{asset('/')}}images/auth.jpg" alt="author image">
+                                @if(isset($avatar) && !empty($avatar))
+                                    <img class="auth-img" src="{{Storage::disk('dospace')->url($avatar)}}" alt="author image">
+                                @else
+                                    <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
+                                @endif 
                                 <p>
                                     <a href="#">{{$val->user->name??''}}</a>
                                 </p>

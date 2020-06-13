@@ -174,7 +174,7 @@
                         {{--<div class="author-author__info inline has_dropdown">
                             <div class="author__avatar">
                             @if(isset($avatar) && !empty($avatar))
-                                <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
+                                <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="user avatar" style="border-radius:50%;">
                             @else
                                 <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
                             @endif 
@@ -296,7 +296,7 @@
                             <div class="author-author__info">
                                 <div class="author__avatar v_middle">
                                     @if(isset($avatar) && !empty($avatar))
-                                        <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
+                                        <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="user avatar" style="border-radius:50%;">
                                     @else
                                     <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
                                     @endif

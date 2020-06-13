@@ -33,7 +33,7 @@
           $media = auth()->user()->profile->getMedia(); 
           foreach($media as $val){   
               if(auth()->user()->profile->avatar == $val->id){
-                  $avatar=Storage::url($val->id.'/'.$val->file_name);  
+                  $avatar=Storage::disk('dospace')->url($val->id.'/'.$val->file_name);  
               }
           } 
         }

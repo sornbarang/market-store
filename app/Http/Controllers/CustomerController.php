@@ -124,8 +124,10 @@ class CustomerController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:100',
             'email' => 'required',
-            'profile'=>'mimes:jpg,jpeg,png|dimensions:min_width=100,min_height=100',
-            'cover'=>'mimes:jpg,jpeg,png|dimensions:min_width=800,min_height=370'
+            'profile'=>'mimes:jpg,jpeg,png',
+            'cover'=>'mimes:jpg,jpeg,png'
+            // 'profile'=>'mimes:jpg,jpeg,png|dimensions:min_width=100,min_height=100',
+            // 'cover'=>'mimes:jpg,jpeg,png|dimensions:min_width=800,min_height=370'
             // 'password' => 'required|confirmed|min:6'
         ]); 
         if ($validator->fails()) {
@@ -160,16 +162,17 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection(); 
-                        $cropPath = storage_path('app/public/'.$avatar->id.'/avatar.png'); 
-                        $cropPath100 = storage_path('app/public/'.$avatar->id.'/avatar100.png'); 
-                        Image::load($avatar->getPath())
-                        ->fit(Manipulations::FIT_CROP, 50, 50)
-                        ->format(Manipulations::FORMAT_PNG)
-                        ->save($cropPath);
-                        Image::load($avatar->getPath())
-                        ->fit(Manipulations::FIT_CROP, 100, 100)
-                        ->format(Manipulations::FORMAT_PNG)
-                        ->save($cropPath100);
+                        // $cropPath = storage_path('app/public/'.$avatar->id.'/avatar.png'); 
+                        // $cropPath100 = storage_path('app/public/'.$avatar->id.'/avatar100.png'); 
+                        // dd($avatar->getPath());
+                        // Image::load($avatar->getPath())
+                        // ->fit(Manipulations::FIT_CROP, 50, 50)
+                        // ->format(Manipulations::FORMAT_PNG)
+                        // ->save($cropPath);
+                        // Image::load($avatar->getPath())
+                        // ->fit(Manipulations::FIT_CROP, 100, 100)
+                        // ->format(Manipulations::FORMAT_PNG)
+                        // ->save($cropPath100);
                     // $this->mediaconvert($media); 
                 } 
             }
@@ -188,11 +191,11 @@ class CustomerController extends Controller
                             return strtolower(str_replace(['#', '/', '\\', ' '], '-', $filename));
                         })
                         ->toMediaCollection();
-                        $cropPath = storage_path('app/public/'.$cover->id.'/cover.png'); 
-                        Image::load($cover->getPath())
-                        ->fit(Manipulations::FIT_CROP, 800, 370)
-                        ->format(Manipulations::FORMAT_PNG)
-                        ->save($cropPath);
+                        // $cropPath = storage_path('app/public/'.$cover->id.'/cover.png'); 
+                        // Image::load($cover->getPath())
+                        // ->fit(Manipulations::FIT_CROP, 800, 370)
+                        // ->format(Manipulations::FORMAT_PNG)
+                        // ->save($cropPath);
                     // $this->mediaconvert($media); 
                 } 
             }

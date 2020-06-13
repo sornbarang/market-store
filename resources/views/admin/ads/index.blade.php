@@ -80,7 +80,7 @@
                             </label>
                         </span>
                         </td>
-                        <td><img style="max-height:100px;" src="{{Storage::url($ads->image_url)}}" alt="" class="img-thumbnail" /></td>
+                        <td><img style="max-height:100px;" src="{{Storage::disk('dospace')->url($ads->image_url)}}" alt="" class="img-thumbnail" /></td>
                         <td>{{$ads->alt}}</td>
                         <td>{{$ads->url}}</td>
                         <td>$32</td>
