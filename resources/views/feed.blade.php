@@ -1,4 +1,4 @@
-@extends('layouts.app-layout') 
+@extends('layouts.app-layout',['home_page'=>'feeds']) 
 @section('content')
 <section class="blog_area section--padding2" style="background: #3b7a5e;">
     <div class="container">
