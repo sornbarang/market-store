@@ -64,7 +64,7 @@
                             if(isset($data['type']) && $data['type']=='shop'){
                                 $home = route('shop');
                             }else{
-                                if($home_page)
+                                if(isset($home_page))
                                     $home = route($home_page);
                             }
                         @endphp
