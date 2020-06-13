@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 @php
-header('refresh: 1; url=market');
+header('refresh: 1; url=feeds');
 @endphp
 
 <div class="container-fluid" style="margin:auto;text-align:center;"> 
@@ -11,7 +11,7 @@ header('refresh: 1; url=market');
     <br/>  
     <br/>  
     <h6>
-        {{-- Go to Market after <span id="countdown">5</span> seconds --}}
+        {{-- Go to Market after <span id="countdown">50</span> seconds --}}
     </h6>
     {{--
         <div class="d-flex justify-content-center">

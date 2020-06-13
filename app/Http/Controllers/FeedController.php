@@ -14,9 +14,10 @@ class FeedController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
-        // dd($products[0]->getFirstMedia()->file_name);
-        return view('feed', compact('products'));
+        //random product show
+        $products = Product::inRandomOrder()->paginate(15);
+        $last_products = Product::limit(5)->get();
+        return view('feed', compact(['products','last_products']));
     }
 
     /**

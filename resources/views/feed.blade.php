@@ -25,15 +25,15 @@
     
                             <figcaption>
                                 <div class="blog__content">
-                                    <a href="#" class="blog__title">
+                                    <a href="{{route('market.productdetail',$product->slug)}}" class="blog__title">
                                         <h4>{{$product->name}}</h4>
                                     </a>
     
                                     <div class="blog__meta">
                                             <div class="comment_view">
                                                     <p class="comment">
-                                                        <span class="lnr lnr-heart scolor"></span>220 Likes
-                                                        <span class="lnr lnr-bubble mcolor3"></span>45 Comments</p>
+                                                        <span class="lnr lnr-heart scolor"></span>0 Likes
+                                                        <span class="lnr lnr-bubble mcolor3"></span>0 Comments</p>
                                                     <p class="view">
                                                 </div>
                                         
@@ -44,7 +44,7 @@
                                         <div class="author">
                                                 <span class="lnr lnr-user"></span>
                                                 <p>by
-                                                <a href="#">{{isset($product->user)?$product->user->name:''}}</a>
+                                                <a href="{{route('market.mystore',$product->user->id)}}">{{isset($product->user)?$product->user->name:''}}</a>
                                                 </p>
                                             </div>
                                         
@@ -84,62 +84,32 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active fade show" id="popular" aria-labelledby="popular-tab">
                                     <ul class="post-list">
+                                    @foreach ($last_products as $last_product)
+                                    @php
+                                    $last_p_thumbnail = $last_product->getFirstMedia(); 
+                                        if($last_p_thumbnail){
+                                            $last_p_img = Storage::disk('dospace')->url($last_p_thumbnail->id.'/'.$last_p_thumbnail->file_name);
+                                        }else{
+                                            $last_p_img = asset('imgs/default/conversions/default.jpg');
+                                        }  
+                                    @endphp
                                         <li>
                                             <div class="thumbnail_img">
-                                                <img src="{{asset('images/blog_thumb1.jpg')}}" alt="blog thumbnail">
+                                                <img src="{{$last_p_img}}" alt="blog thumbnail">
                                             </div>
+                                            
                                             <div class="title_area">
-                                                <a href="#">
-                                                    <h4>5 best jQuery form validation plugins you must try</h4>
+                                                <a href="{{route('market.productdetail',$last_product->slug)}}">
+                                                    <h4>{{$last_product->name}}</h4>
                                                 </a>
-                                                <div class="date_time">
+                                                <!-- <div class="date_time">
                                                     <span class="lnr lnr-clock"></span>
                                                     <p>24 Feb 2017</p>
-                                                </div>
+                                                </div> -->
                                             </div>
+                                            
                                         </li>
-                                        <li>
-                                            <div class="thumbnail_img">
-                                                <img src="{{asset('images/blog_thumb2.jpg')}}" alt="blog thumbnail">
-                                            </div>
-                                            <div class="title_area">
-                                                <a href="#">
-                                                    <h4>Best free jQuery image gallery plugins 2017</h4>
-                                                </a>
-                                                <div class="date_time">
-                                                    <span class="lnr lnr-clock"></span>
-                                                    <p>24 Feb 2017</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="thumbnail_img">
-                                                <img src="{{asset('images/blog_thumb2.jpg')}}" alt="blog thumbnail">
-                                            </div>
-                                            <div class="title_area">
-                                                <a href="#">
-                                                    <h4>10 Free Joomla! Templates</h4>
-                                                </a>
-                                                <div class="date_time">
-                                                    <span class="lnr lnr-clock"></span>
-                                                    <p>24 Feb 2017</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="thumbnail_img">
-                                                <img src="{{asset('images/blog_thumb2.jpg')}}" alt="blog thumbnail">
-                                            </div>
-                                            <div class="title_area">
-                                                <a href="#">
-                                                    <h4>10 Free Joomla! Templates</h4>
-                                                </a>
-                                                <div class="date_time">
-                                                    <span class="lnr lnr-clock"></span>
-                                                    <p>24 Feb 2017</p>
-                                                </div>
-                                            </div>
-                                        </li>
+                                    @endforeach
                                     </ul>
                                     <!-- end /.post-list -->
                                 </div>
@@ -147,7 +117,7 @@
 
                                 <div role="tabpanel" class="tab-pane fade" id="latest" aria-labelledby="latest-tab">
                                     <ul class="post-list">
-                                        <li>
+                                        <!-- <li>
                                             <div class="thumbnail_img">
                                                 <img src="{{asset('images/blog_thumb2.jpg')}}" alt="blog thumbnail">
                                             </div>
@@ -160,49 +130,8 @@
                                                     <p>24 Feb 2017</p>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li>
-                                            <div class="thumbnail_img">
-                                                <img src="{{asset('images/blog_thumb1.jpg')}}" alt="blog thumbnail">
-                                            </div>
-                                            <div class="title_area">
-                                                <a href="#">
-                                                    <h4>5 best jQuery form validation plugins you must try</h4>
-                                                </a>
-                                                <div class="date_time">
-                                                    <span class="lnr lnr-clock"></span>
-                                                    <p>24 Feb 2017</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="thumbnail_img">
-                                                <img src="{{asset('images/blog_thumb1.jpg')}}" alt="blog thumbnail">
-                                            </div>
-                                            <div class="title_area">
-                                                <a href="#">
-                                                    <h4>The story of revolution</h4>
-                                                </a>
-                                                <div class="date_time">
-                                                    <span class="lnr lnr-clock"></span>
-                                                    <p>24 Feb 2017</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="thumbnail_img">
-                                                <img src="{{asset('images/blog_thumb1.jpg')}}" alt="blog thumbnail">
-                                            </div>
-                                            <div class="title_area">
-                                                <a href="#">
-                                                    <h4>The story of revolution</h4>
-                                                </a>
-                                                <div class="date_time">
-                                                    <span class="lnr lnr-clock"></span>
-                                                    <p>24 Feb 2017</p>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        </li> -->
+                                        
                                     </ul>
                                     <!-- end /.post-list -->
                                 </div>
@@ -214,7 +143,7 @@
                     </div>
                     <!-- end /.sidebar-card -->
 
-                    <div class="sidebar-card card--blog_sidebar card--tags">
+                    <!-- <div class="sidebar-card card--blog_sidebar card--tags">
                         <div class="card-title">
                             <h4>Categories</h4>
                         </div>
@@ -223,39 +152,18 @@
                             <li>
                                 <a href="#">Branding</a>
                             </li>
-                            <li>
-                                <a href="#">Design</a>
-                            </li>
-                            <li>
-                                <a href="#">Marketing</a>
-                            </li>
-                            <li>
-                                <a href="#">Development</a>
-                            </li>
-                            <li>
-                                <a href="#">Branding</a>
-                            </li>
-                            <li>
-                                <a href="#">Design</a>
-                            </li>
-                            <li>
-                                <a href="#">Marketing</a>
-                            </li>
-                            <li>
-                                <a href="#">Development</a>
-                            </li>
                         </ul>
-                        <!-- end /.tags -->
-                    </div>
+                    </div> -->
                     <!-- end /.sidebar-card -->
 
-                    <div class="banner">
+                    <!-- <div class="banner">
                         <img src="{{asset('images/banner.jpg')}}" alt="Banner">
                         <div class="banner_content">
                             <h1>Banner</h1>
                             <p>360x270</p>
                         </div>
-                    </div>
+                    </div> -->
+
                     <!-- end /.banner -->
                 </aside>
                 <!-- end /.aside -->
