@@ -40,10 +40,10 @@
         $media = ($data['user']->profile != null) ? $data['user']->profile->getMedia() : [];
         foreach($media as $val){  
             if($data['user']->profile->avatar==$val->id){
-                $avatar=$val->id.'/avatar100.png';  
+                $avatar=$val->id.'/'.$val->file_name;  
             } 
             if($data['user']->profile->cover_image==$val->id){
-                $cover=$val->id.'/cover.png';  
+                $cover=$val->id.'/'.$val->file_name; 
             }
         }   
     @endphp
@@ -56,7 +56,7 @@
                             <div class="author-infos">
                                 <div class="author_avatar">
                                     @if(isset($avatar) && !empty($avatar))
-                                        <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                        <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
                                     @else
                                         <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
                                     @endif
@@ -324,9 +324,9 @@
                         <!-- end /.col-md-4 -->
                         --}}             
                         <div class="col-md-12 col-sm-12">
-                            <div class="author_module">
+                            <div class="author_module"  style=" border-radius:5px;   width: 730px;height: 360px;overflow: hidden;">
                                 @if(isset($cover) && !empty($cover))
-                                    <img src="{{Storage::url($cover)}}" class="img-fluid w-100" alt="Responsive image"> 
+                                    <img src="{{Storage::disk('dospace')->url($cover)}}" class="img-fluid w-100" alt="Responsive image"> 
                                 @else
                                     <img src="{{ asset('images/authcvr.jpg') }}" alt="author image">
                                 @endif
@@ -448,7 +448,7 @@
                                             <ul class="titlebtm">
                                                 <li>
                                                     @if(isset($avatar) && !empty($avatar))
-                                                        <img class="auth-img" src="{{Storage::url($avatar)}}" alt="author image"> 
+                                                        <img class="auth-img" src="{{Storage::disk('dospace')->url($avatar)}}" alt="author image"> 
                                                     @else
                                                         <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                                     @endif 

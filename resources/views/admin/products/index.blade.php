@@ -101,7 +101,7 @@
                                         </label>
                                         </span>
                                     </td> 
-                                    <td><img src="{{Storage::url($img)}}" alt="" class="img-thumbnail" /></td>
+                                    <td><img src="{{Storage::disk('dospace')->url($img)}}" alt="" class="img-thumbnail" /></td>
                                     <td>{{$val->name}}</td>
                                     <td>{{$val->user->name??''}}</td>
                                     <td>${{$val->price}}</td>

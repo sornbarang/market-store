@@ -16,7 +16,7 @@
         $media = (Auth::user()->profile != null) ? Auth::user()->profile->getMedia() : [];
         foreach($media as $val){  
             if(Auth::user()->profile->avatar==$val->id){
-                $avatar=$val->id.'/avatar100.png';  
+                $avatar=$val->id.'/'.$val->file_name;  
             } 
             if(Auth::user()->profile->cover_image==$val->id){
                 $cover=$val->id.'/cover.png';  
@@ -32,7 +32,7 @@
                             <div class="author-infos mb-0 pb-0">
                                 <div class="author_avatar">
                                     @if(isset($avatar) && !empty($avatar))
-                                        <img src="{{Storage::url($avatar)}}" alt="Presenting the broken author avatar :D">
+                                        <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D">
                                     @else
                                         <img src="{{asset('/')}}images/author-avatar.jpg" alt="Presenting the broken author avatar :D">
                                     @endif 

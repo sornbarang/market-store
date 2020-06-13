@@ -32,7 +32,7 @@
                 </div>
             </div>--}}
             <div class="form-group">
-                <img style="margin:0 auto;" id="image_upload_preview"  alt="Your ads" src="{{Storage::url($data['advert']->image_url)}}" />
+                <img style="margin:0 auto;" id="image_upload_preview"  alt="Your ads" src="{{Storage::disk('dospace')->url($data['advert']->image_url)}}" />
                 <div class="rmbtn">
                     <a href="javascript:void(0)" class="btn btn-danger btn-flat">Remove</a>
                 </div>

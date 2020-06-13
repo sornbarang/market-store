@@ -86,7 +86,9 @@
                                 $media = (Auth::user()->profile != null) ? Auth::user()->profile->getMedia() : [];
                                 foreach($media as $val){
                                     if(Auth::user()->profile->avatar==$val->id){
-                                        $avatar=$val->id.'/avatar.png';
+                                        // dump($val);
+                                        $avatar=$val->id.'/'.$val->file_name;
+                                        // $avatar=$val->id.'/avatar.png';
                                     }
                                 }
                             @endphp
@@ -109,7 +111,7 @@
                             @if (Route::has('login'))
                                 <div class="author__avatar">
                                     @if(isset($avatar) && !empty($avatar))
-                                        <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
+                                        <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="user avatar" style="border-radius:50%;max-width:50px;">
                                     @else
                                         <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
                                     @endif
@@ -312,7 +314,7 @@
                             <div class="author-author__info">
                                 <div class="author__avatar v_middle">
                                     @if(isset($avatar) && !empty($avatar))
-                                        <img src="{{Storage::url($avatar)}}" alt="user avatar" style="border-radius:50%;">
+                                        <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="user avatar" style="border-radius:50%;">
                                     @else
                                     <img src="{{asset('/')}}images/usr_avatar.png" alt="user avatar">
                                     @endif

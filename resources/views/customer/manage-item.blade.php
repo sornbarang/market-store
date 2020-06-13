@@ -106,7 +106,7 @@
                                 $media = $val->user->profile->getMedia(); 
                                 foreach($media as $m){   
                                     if($val->user->profile->avatar == $m->id){
-                                        $avatar= Storage::url($m->id.'/'.$m->file_name);
+                                        $avatar= Storage::disk('dospace')->url($m->id.'/'.$m->file_name);
                                     }
                                 } 
                             }

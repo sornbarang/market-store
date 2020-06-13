@@ -104,7 +104,7 @@
                         <ul class="titlebtm">
                             <li>
                                 @if(isset($avatar) && !empty($avatar))
-                                    <img class="auth-img" src="{{Storage::url($avatar)}}" alt="author image">
+                                    <img class="auth-img" src="{{Storage::disk('dospace')->url($avatar)}}" alt="author image">
                                 @else
                                     <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                 @endif 
