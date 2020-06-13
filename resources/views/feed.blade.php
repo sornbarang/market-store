@@ -1,8 +1,7 @@
 @extends('layouts.app-layout') 
 @section('content')
-@include('elements.search')
 <section class="blog_area section--padding2" style="background: #3b7a5e;">
-    <div class="container" id="feed-custom-container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 @foreach ($products as $product)
@@ -16,7 +15,7 @@
                             @php
                               $thumbnail = $product->getFirstMedia(); 
                                 if($thumbnail){
-                                    $img = Storage::url($thumbnail->id.'/conversions/'.$thumbnail->file_name);
+                                    $img = Storage::disk('dospace')->url($thumbnail->id.'/'.$thumbnail->file_name);
                                 }else{
                                     $img = asset('imgs/default/conversions/default.jpg');
                                 }  
@@ -71,10 +70,10 @@
                             <!-- Nav tabs -->
                             <ul class="nav post-tab" role="tablist">
                                 <li>
-                                    <a href="#popular" class="active" id="popular-tab" aria-controls="popular" role="tab" data-toggle="tab" aria-selected="true">Popular Posts</a>
+                                    <a href="#popular" class="active" id="popular-tab" aria-controls="popular" role="tab" data-toggle="tab" aria-selected="true">Latest Posts</a>
                                 </li>
                                 <li>
-                                    <a href="#latest" id="latest-tab" aria-controls="latest" role="tab" data-toggle="tab" aria-selected="false">Latest Posts</a>
+                                    <a href="#latest" id="latest-tab" aria-controls="latest" role="tab" data-toggle="tab" aria-selected="false">For You</a>
                                 </li>
                             </ul>
                         </div>
