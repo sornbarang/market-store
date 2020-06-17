@@ -88,7 +88,7 @@
                 seconds = seconds - 1;
                 if (seconds < 0) {
                     // Chnage your redirection link here
-                    window.location = "{{route('market')}}";
+                    window.location = "{{route('feeds')}}";
                 } else {
                     // Update remaining seconds
                     document.getElementById("countdown").innerHTML = seconds;

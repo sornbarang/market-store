@@ -61,12 +61,13 @@
                     <div class="logo">
                         @php 
                             $home = route('market');
-                        @endphp
-                        @if(isset($data['type']) && $data['type']=='shop')
-                            @php 
+                            if(isset($data['type']) && $data['type']=='shop'){
                                 $home = route('shop');
-                            @endphp
-                        @endif
+                            }else{
+                                if(isset($home_page))
+                                    $home = route($home_page);
+                            }
+                        @endphp
                         <a href="{{ $home }}">
                             <img src="{{asset('/')}}images/logo.png" alt="logo" class="img-fluid">
                         </a> 
