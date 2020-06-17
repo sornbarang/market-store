@@ -1,4 +1,4 @@
-<div class="content-body">
+{{-- <div class="content-body">
     <div id="dashboard_content" class="tab-content">
         <div class="tab-pane fade active in" id="dashboard1">
             <div class="row">
@@ -735,4 +735,4 @@
         </div>
     </div>
     <!-- ENDS $dashboard_content -->
-</div>
+</div> --}}

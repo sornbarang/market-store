@@ -110,7 +110,12 @@ class ProductController extends Controller
     {
         $product= Product::find($id); 
         $product->getFirstMedia();
-        if($product){
+
+        if($product){ 
+            $product->media->map(function($v){
+                $v['full_url']=Storage::disk('dospace')->url($v->id).'/'.$v->file_name;
+                return $v;
+            }); 
             return response()->json(['status'=>true,'data'=>$product]);   
         }
         return response()->json(['status'=>false,'data'=>[]]);
@@ -143,10 +148,10 @@ class ProductController extends Controller
                 if($check){
                     // Storage::move('old/file.jpg',$file->store('public'));
                     // $imgappend[] = $file->store('public');
-                    if(null !== $request->get('mediaid') && !empty($request->get('mediaid'))){
-                        // $imgappend[] = $file->store('public');
-                        $product->deleteMedia((int)$request->get('mediaid'));
-                    } 
+                    // if(null !== $request->get('mediaid') && !empty($request->get('mediaid'))){
+                    //     // $imgappend[] = $file->store('public');
+                    //     $product->deleteMedia((int)$request->get('mediaid'));
+                    // } 
                     $product
                         ->addMedia($file)
                         ->toMediaCollection();
@@ -158,10 +163,10 @@ class ProductController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){
-                    if(null !== $request->get('mediaid1') && !empty($request->get('mediaid1'))){
-                        // $imgappend[] = $file->store('public');
-                        $product->deleteMedia((int)$request->get('mediaid1'));
-                    } 
+                    // if(null !== $request->get('mediaid1') && !empty($request->get('mediaid1'))){
+                    //     // $imgappend[] = $file->store('public');
+                    //     $product->deleteMedia((int)$request->get('mediaid1'));
+                    // } 
                     $product
                         ->addMedia($file)
                         ->toMediaCollection(); 
@@ -174,10 +179,10 @@ class ProductController extends Controller
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){
                     // $imgappend[] = $file->store('public');
-                    if(null !== $request->get('mediaid2') && !empty($request->get('mediaid2'))){
-                        // $imgappend[] = $file->store('public');
-                        $product->deleteMedia((int)$request->get('mediaid2')); 
-                    } 
+                    // if(null !== $request->get('mediaid2') && !empty($request->get('mediaid2'))){
+                    //     // $imgappend[] = $file->store('public');
+                    //     $product->deleteMedia((int)$request->get('mediaid2')); 
+                    // } 
                    
                     $product
                         ->addMedia($file)
@@ -190,9 +195,9 @@ class ProductController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $check=in_array($extension,$allowedfileExtension);
                 if($check){ 
-                    if(null !== $request->get('mediaid3') && !empty($request->get('mediaid3'))){
-                        $product->deleteMedia((int)$request->get('mediaid3')); 
-                    } 
+                    // if(null !== $request->get('mediaid3') && !empty($request->get('mediaid3'))){
+                    //     $product->deleteMedia((int)$request->get('mediaid3')); 
+                    // } 
                     $product    
                         ->addMedia($file)
                         ->toMediaCollection();

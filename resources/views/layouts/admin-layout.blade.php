@@ -1029,6 +1029,7 @@ $(document).ready(function() {
             url: url, 
             dataType:'json',
             success: function(response){
+                console.log(response);
                 // clear image to empty before set new attribute
                 $('#image_upload_preview,#image_upload_preview1,#image_upload_preview2,#image_upload_preview3').attr('src','');
                 // display css none
@@ -1039,7 +1040,7 @@ $(document).ready(function() {
                     // console.log(imgs);
                     for(var i=0;i<response.data.media.length;i++){  
                         // var img = imgs[i].replace('public/','');
-                        var url ="{{Storage::disk('dospace')->url('')}}"+response.data.media[i].id+'/'+response.data.media[i].file_name; 
+                        var url =response.data.media[i].full_url;
                         if(i==0){
                             // $('#editProduct #file').next().children().first().val(url)
                             $('#editProduct #image_upload_preview').parent().append('<input name="mediaid" type="hidden" value="'+response.data.media[i].id+'">');
