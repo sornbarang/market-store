@@ -16376,3 +16376,6 @@ form.frmlogincustom .form-control:focus{
   height: 126.14px;
   overflow: hidden;
 }
+.slick-track{
+  background: #00000008 !important;
+}

@@ -619,7 +619,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="copyright-text">
-                            <p>&copy; 2018 <a href="#">TreeWB</a>. All rights reserved. Created by <a href="#">TreeWB</a></p>
+                            
+                            <p>{{env('TREE_WB_FOOTER','2020 TreeWB. All rights reserved. Created by TreeWB')}}</p>
                         </div>
                         
                         <div class="go_top">

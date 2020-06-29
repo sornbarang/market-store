@@ -293,7 +293,7 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                        <img class="w-100" style="height:418px;z-index:0;" data-zoom-image="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" id="zoomImage" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                        <img class="w-100 " style="height:418px;z-index:0; object-fit: contain;" data-zoom-image="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" id="zoomImage" src="{{Storage::disk('dospace')->url($val->id.'/'.$val->file_name)}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                     </div>
                                 @endforeach
                             @else
@@ -317,7 +317,7 @@
                                                 </h1>
                                             </div>
                                         </div>    
-                                    <img id="zoomImage" class="w-100" data-zoom-image="{{asset('imgs/default/conversions/crop.png')}}" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
+                                    <img id="zoomImage" class="w-100 cropped" data-zoom-image="{{asset('imgs/default/conversions/crop.png')}}" src="{{asset('imgs/default/conversions/crop.png')}}" alt="Keep calm this isn't the end of the world, the preview is just missing.">
                                 </div>
                             @endif 
                         </div><!-- end /.item--preview-slider -->
@@ -362,12 +362,10 @@
                                 @endphp 
                                     
                                     @section('meta')
-                                        <meta name="viewport" content="width=1024">
-
-
+                                        <meta name="viewport" content="width=1024"> 
                                         <meta property="og:title" content="{{$data['product']->name}}">
                                         <meta property="og:image" content="{{asset($firstMedia)}}">
-                                        <meta name="description" content="MartPlace - Complete Online Multipurpose Marketplace HTML Template">
+                                        <meta name="description" content="{{$data['product']->short_description}}">
                                     @stop
 
                                 <div class="social social--color--filled">

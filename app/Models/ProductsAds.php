@@ -31,8 +31,8 @@ class ProductsAds extends Model implements HasMedia,Reportable
     use SoftDeletes;
     protected $table = 'products_ads';
     protected $dates = ['deleted_at'];
-    public $translatedAttributes = ['name', 'description', 'slug'];
-    protected $fillable = ['name','price','discount','description','active','user_id'];
+    public $translatedAttributes = ['name', 'description', 'slug','short_description'];
+    protected $fillable = ['name','price','discount','description','active','user_id','short_description'];
     public function categories_ads() {
         return $this->belongsToMany('App\Models\CategoriesAds', 'products_ads_categories_ads', 'products_ads_id', 'categories_ads_id');
     }

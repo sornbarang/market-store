@@ -336,6 +336,7 @@ class CustomerController extends Controller
             $discount = is_numeric($request->discount)?$request->discount:0;
             $active = (int)$request->active ? 1 : 0;
             $description= $request->sumernotehidden;
+            $shortDescription= $request->get('short_description',null);
             // $imgappend=[];
             // dd($imgappend);
             // print_r(Auth::user()->id);exit();
@@ -344,14 +345,16 @@ class CustomerController extends Controller
                 'price' => $price,
                 'discount' => $discount,
                 'active' => $active,
+                'active' => $active,
                 'user_id'=>Auth::id(),
                 // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
-                'description'=>$description
+                'description'=>$description,
                 ]);   
                 if($product){ 
                     foreach (['en', 'km'] as $locale) {
                         $product->translateOrNew($locale)->name = $name;
                         $product->translateOrNew($locale)->description = $description;
+                        $product->translateOrNew($locale)->short_description = $shortDescription;
                     }
                     $product->save();
                     // save product to relation table between product and cateogry
@@ -444,6 +447,7 @@ class CustomerController extends Controller
                 $discount = is_numeric($request->discount)?$request->discount:0;
                 $active = (int)$request->active ? 1 : 0;
                 $description= $request->sumernotehidden;
+                $short_description= $request->get('short_description');
                 // $imgappend=[];
                 // dd($imgappend);
                 // print_r(Auth::user()->id);exit();
@@ -452,6 +456,7 @@ class CustomerController extends Controller
                 $product->discount = $discount;
                 $product->active = $active;
                 $product->description=$description;
+                $product->short_description=$short_description;
                 $product->save();
                 // check last child have try to delete and new insert
                 if(isset($request->lastchildid) && !empty($request->lastchildid)){ 

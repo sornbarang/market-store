@@ -148,6 +148,10 @@
                                         @endif
                                     </div> 
                                     <div class="form-group no-margin">
+                                        <p class="label">@lang('profileitemupload.shortdes')</p>
+                                        <input type="text" id="short_description" name="short_description" value="{{ old('short_description') }}" placeholder="@lang('profileitemupload.shortdes')">
+                                    </div> 
+                                    <div class="form-group no-margin">
                                         <p class="label">@lang('profileitemupload.productdes')</p>
                                         <div id="trumbowyg-demo">{!! old('sumernotehidden') !!}</div>
                                     </div> 
@@ -177,7 +181,7 @@
                             <div class="upload_modules upload_modules_blog">
                                 <div class="modules__title">
                                     <h3>@lang('profileitemupload.uploadfile') </h3> 
-                                    <span>750 x 430 (width,height) is standard</span> 
+                                    <span>730 x 418 (width,height) is standard</span> 
                                 </div><!-- end /.module_title -->
                                 <div class="row">
                                     @for($i=0;$i<4;$i++)
@@ -241,8 +245,8 @@
                                 <div class="card_content">
                                     <p>If have problem with your upload relate with product , please report to use about your problem by email or phone belove.</p>
                                     <ul>
-                                        <li>Email: admin@mail.com</li>
-                                        <li>Phone: xxxxxxx</li> 
+                                        <li>Email: treewb7@gmail.com</li>
+                                        <li>Phone: 098805508</li> 
                                     </ul>
                                 </div>
                             </div><!-- end /.sidebar-card --> 

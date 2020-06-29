@@ -125,6 +125,10 @@
                                             @endif
                                         </div>
                                         <div class="form-group no-margin">
+                                            <p class="label">@lang('profileitemupload.shortdes')</p>
+                                            <input type="text" id="short_description" name="short_description" value="{{$data['product']->translations[0]->short_description }}" placeholder="@lang('profileitemupload.shortdes')">
+                                        </div> 
+                                        <div class="form-group no-margin">
                                             <p class="label">@lang('profileitemupload.productdes')</p>
                                             <div id="trumbowyg-demo">
                                                 {!!$data['product']->translations[0]->description!!}
