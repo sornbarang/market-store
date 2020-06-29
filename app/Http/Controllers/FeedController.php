@@ -15,7 +15,7 @@ class FeedController extends Controller
     public function index()
     {
         //random product show
-        $products = Product::inRandomOrder()->paginate(15);
+        $products = Product::inRandomOrder()->get();
         $last_products = Product::limit(5)->get();
         return view('feed', compact(['products','last_products']));
     }
