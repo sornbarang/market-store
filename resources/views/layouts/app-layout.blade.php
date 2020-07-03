@@ -629,11 +629,11 @@
                         <div class="sticky-menu-right pl-1 pr-1" style="width:auto;">
                             @if(isset($data['type']) && $data['type']=='shop')
                                 <a href="{{ route('market') }}">
-                                    <span class="lnr lnr-pointer-right font-weight-bold"></span> Go to market
+                                    <span class="lnr lnr-pointer-right font-weight-bold"></span> Online Shop
                                 </a>
                             @else 
                                 <a href="{{ route('shop') }}" >
-                                    <span class="lnr lnr-pointer-right font-weight-bold"></span> Go to shop
+                                    <span class="lnr lnr-pointer-right font-weight-bold"></span> TreeWB Store
                                 </a>
                             @endif
                         </div>
