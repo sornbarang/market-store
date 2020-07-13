@@ -43,7 +43,6 @@
                             {{--
                             @if(isset($data['type']) && $data['type']=='shop')
                                 <a href="{{ route('shop.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
-
                             @else
                                 <a href="{{ route('market.productdetail',$val->slug) }}" class="transparent btn--sm btn--round">@lang('frontlabel.moreinfo')</a>
                             @endif
@@ -64,7 +63,7 @@
                                                     <span class="lnr lnr-heart scolor"></span>
                                                 </div>
                                                 <div class="col-md-12 text-white font-weight-bold">
-                                                    <span>35</span>
+                                                    <span>0</span>
                                                 </div>
                                             </div> 
                                         </div>
@@ -100,17 +99,17 @@
                         </div><!-- end /.prod_btn -->
                     </div><!-- end /.product__thumbnail -->
                     <div class="product-desc">
-                        <a href="#" class="product_title"><h4 title="{{$val->name}}">{{str_limit($val->name,35)}}</h4></a>
+                        <a href="#" class="product_title"><h4 class="trucate" title="{{$val->name}}">{{str_limit($val->name,35)}}</h4></a>
                         <ul class="titlebtm">
-                            <li>
+                            <!-- <li>
                                 @if(isset($avatar) && !empty($avatar))
                                     <img class="auth-img" src="{{Storage::disk('dospace')->url($avatar)}}" alt="author image">
                                 @else
                                     <img class="auth-img" src="{{asset('images/auth3.jpg')}}" alt="author image">
                                 @endif 
                                 <p><a href="#">{{str_limit($val->user->name,15)}}</a></p>
-                            </li> 
-                            <li class="out_of_class_name">
+                            </li>  -->
+                            <!-- <li class="out_of_class_name">
                                 <div class="row no-gutters">
                                     <div class="col col-md-5">
                                         <p>
@@ -124,7 +123,7 @@
                                         </p>                                                                 
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
 
                     </div><!-- end /.product-desc -->

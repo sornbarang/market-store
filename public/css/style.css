@@ -2400,7 +2400,7 @@ h6 {
 .cStoreProduct .product--card-small .product-desc .product_title h4,.cAllProducts .product--card-small .product-desc .product_title h4 ,.relationPro .product--card-small .product-desc .product_title h4{
   font-size: 18px;
   line-height: 22px;
-  height: 45px;
+  /* height: 45px; */
   overflow: hidden;
 }
 
@@ -16373,7 +16373,7 @@ form.frmlogincustom .form-control:focus{
   content: '';
 }
 .product__thumbnail{
-  height: 126.14px;
+  /* height: 126.14px; */
   overflow: hidden;
 }
 .slick-track{
