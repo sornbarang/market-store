@@ -53,7 +53,7 @@
                                                 <span class="lnr lnr-heart scolor"></span>
                                             </div>
                                             <div class="col-md-12 text-white font-weight-bold">
-                                                <span>35</span>
+                                                <span>0</span>
                                             </div>
                                         </div> 
                                     </div>
@@ -90,7 +90,7 @@
                 </div>
                 <!-- end /.product__thumbnail -->
 
-                <div class="product-desc">
+                <!-- <div class="product-desc">
                     <a href="javascript:void(0)" class="product_title">
                         <h4 class="trucate" title="{{$getprops->name}}">{{$getprops->name??''}}</h4>
                     </a>
@@ -151,7 +151,7 @@
                         --}}
                     </ul>
 
-                </div>
+                </div> -->
                 <!-- end /.product-desc -->
                 <div class="product-purchase pb-1"> 
                     {{--

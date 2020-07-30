@@ -61,7 +61,7 @@
                                                                     <span class="lnr lnr-heart scolor"></span>
                                                                 </div>
                                                                 <div class="col-md-12 text-white font-weight-bold">
-                                                                    <span>35</span>
+                                                                    <span>0</span>
                                                                 </div>
                                                             </div> 
                                                         </div>
@@ -103,7 +103,7 @@
                                         <a href="#" class="product_title">
                                             <h4>{{str_limit($val->name,30)}}</h4>
                                         </a>
-                                        <ul class="titlebtm">
+                                        <!-- <ul class="titlebtm">
                                             <li>
                                                 @if(isset($avatar) && !empty($avatar))
                                                     <img class="auth-img" src="{{Storage::disk('dospace')->url($avatar)}}" alt="author image"> 
@@ -129,7 +129,7 @@
                                                     </div>
                                                 </div>
                                             </li> 
-                                        </ul>
+                                        </ul> -->
 
                                     </div>
                                     <!-- end /.product-desc -->
