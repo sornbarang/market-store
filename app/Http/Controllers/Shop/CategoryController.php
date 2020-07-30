@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $tree = Category::roots()->get();  
+        // $tree = Category::roots()->get(); 
+        $tree = [];
         $pro=[]; 
         foreach($tree as $k => $va){
             // get product of parent limit 7
