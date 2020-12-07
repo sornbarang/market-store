@@ -56,9 +56,9 @@
                             <div class="author-infos">
                                 <div class="author_avatar">
                                     @if(isset($avatar) && !empty($avatar))
-                                        <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                        <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D" class="cus-author-avatar">
                                     @else
-                                        <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
+                                        <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D" class="cus-author-avatar">
                                     @endif
                                 </div> 
                                 <div class="author">

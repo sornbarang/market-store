@@ -1,4 +1,4 @@
-@extends('layouts.app-layout') 
+@extends('layouts.app-layout')
 @section('content')
 <!--================================
     START BREADCRUMB AREA
@@ -762,9 +762,9 @@
                                     @if(isset($data['product']->user))
                                         <a href="{{route('shop.mystore',$data['product']->user->id)}}">
                                             @if(isset($avatar) && !empty($avatar))
-                                                <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D" style="border-radius:50%;">
+                                                <img src="{{Storage::disk('dospace')->url($avatar)}}" alt="Presenting the broken author avatar :D" class="cus-author-avatar">
                                             @else
-                                                <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D">
+                                                <img src="{{ asset('images/author-avatar.jpg') }}" alt="Presenting the broken author avatar :D" class="cus-author-avatar">
                                             @endif
                                         </a>
                                     @else

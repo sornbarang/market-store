@@ -2,9 +2,9 @@
 @section('content')
     @if(isset($view) && !empty($view))
         @if(isset($data))
-            {!! View($view)->with('data',$data) !!}
+            @includeIf($view, ['data' => $data])
         @else
-        {!! View($view) !!}
+            @includeIf($view)
         @endif
     @else
         @include('admin.elements.dashboard')

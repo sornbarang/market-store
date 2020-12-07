@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\ProductsAds as Product;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Auth;
+use View;
 
 class ProductController extends Controller
 {
@@ -17,9 +19,11 @@ class ProductController extends Controller
     public function index()
     {
         $data['products']= Product::get();
-        $data['active']= 'product';
+        // $data['active']= 'product';
         $view="admin.products.index";
+        // dd($data['products'][0]->description);
         return view('admin.index',compact('view','data'));
+        // return View::make('admin.index')->with(['view'=>$view,'data'=>$data]);
     }
 
     /**
@@ -49,6 +53,7 @@ class ProductController extends Controller
             'name' => $name,
             'price' => $price,
             'active' => $active,
+            'user_id' => Auth::user()->id,
             // 'image' => isset($imgappend) && !empty($imgappend)?implode(',',$imgappend):'',
             'description'=>$description
             ]);

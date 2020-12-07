@@ -1,4 +1,3 @@
-
 @if (session('success')) 
     <div class="alert alert-success" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -9,7 +8,7 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <strong>{{ session('error') }}.</strong>
     </div>
-@endif 
+@endif
 <div class="content-body">
     <div class="row">
         <div class="col-xs-12">
@@ -75,23 +74,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {{--$publicUrl = $mediaItems[0]->getUrl();
-                                    $getFullUrl = $mediaItems[0]->getFullUrl();
-                                    $publicPath = $mediaItems[0]->getPath();
-                                    $publicFullUrl = $mediaItems[0]->getFullUrl(); 
-                                    echo $publicPath;
-                                    echo $publicUrl;
-                                    echo $getFullUrl."\n";--}}
+                           
                             @foreach($data['products'] as $val)
                                 @php
+                                    
                                     $img='';
                                     $newsItem=App\Models\ProductsAds::find($val->id);
                                     $mediaItems = $newsItem->getMedia(); 
-                                    $getFirstMedia = $newsItem->getFirstMedia(); 
+                                    $getFirstMedia = $newsItem->getFirstMedia();
                                     if($getFirstMedia){
                                         $img = $getFirstMedia->id.'/'.$getFirstMedia->file_name;
-                                    } 
+                                    }
+                                    
                                 @endphp
+                                
                                 <tr>
                                     <td class="checkbox-cell">
                                         <span class="checkbox">
@@ -101,21 +97,22 @@
                                         </label>
                                         </span>
                                     </td> 
-                                    <td><img src="{{Storage::disk('dospace')->url($img)}}" alt="" class="img-thumbnail" /></td>
-                                    <td>{{$val->name}}</td>
-                                    <td>{{$val->user->name??''}}</td>
-                                    <td>${{$val->price}}</td>
+                                    <td><img src="{{ $img ? Storage::disk('dospace')->url($img) : ''}}" alt="" class="img-thumbnail" /></td>
+                                    <td>{{ $val->name }}</td>
+                                    <td>{{ $val->user->name }}</td>
+                                    <td>{{ $val->price }}</td>
+                                    
+
                                     <td>
                                         <div class="togglebutton">
                                         <label>
-                                            <input type="checkbox" class="toggle-info" {{$val->active==1?'checked':''}}>
+                                            <input type="checkbox" class="toggle-info" {{ $val->active == 1 ? 'checked':'' }}>
                                         </label>
                                         </div>
                                     </td>
-                                    <td>{{$val->sumRating??''}}</td>
+                                    <td>{{ $val->sumRating??'' }}</td>
                                     <td>
-                                        <!-- <a href="javascript:void(0)" class="icon edit-product" data-drawer="open-right-lg"><i class="zmdi zmdi-edit"></i></a> -->
-                                        <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_edit_modal" data-id="{{$val->id}}" data-url="{{route('admin.product.edit',['edit'=>$val->id])}}" data-urlupdate="{{route('admin.product.update',[$val->id])}}"><i class="zmdi zmdi-edit"></i></a>
+                                        <a href="javascript:void(0)" class="icon edit-product" data-toggle="modal" data-target="#product_edit_modal" data-id="{{ $val->id }}" data-url="{{ route('admin.product.edit',['edit'=>$val->id]) }}" data-urlupdate="{{route('admin.product.update',[$val->id])}}"><i class="zmdi zmdi-edit"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -126,7 +123,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>    
 <!-- Add mode -->
 <form  id="addProduct" method="post" action="{{route('admin.product.store')}}" enctype="multipart/form-data">
 @csrf
@@ -255,7 +252,7 @@
                             <input name="active" type="checkbox" id="inlineCheckbox1" value="0"> Active
                         </label>
                     </div>
-                    {{--<div class="chips chips-placeholder"></div>--}}
+                    <!-- <div class="chips chips-placeholder"></div> -->
                     <!-- </form>  -->
                 </div>
                 </div>

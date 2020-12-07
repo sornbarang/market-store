@@ -170,12 +170,17 @@ class ProductController extends Controller
                 $data['allowUserRate']='false';
             }
         }  
+
+        $data['cnode']= null;
+        $data['bread'] = null; 
         $post = Product::findOrFail($slug->products_ads_id);
-        $node = Category::find($post->categories_ads[0]->id);  
-        $data['bread'] = $node->getAncestorsAndSelf();  
+        $node = Category::find(isset($post->categories_ads[0]) ? $post->categories_ads[0]->id : 0); 
+        if(!is_null($node) ) {
+            $data['cnode']= $node->id;
+            $data['bread'] = $node->getAncestorsAndSelf();
+        }
         $data['totalRate'] =$post->sumRating;
-        $data['totalAvg'] =$post->averageRating;
-        $data['cnode']=$node->id;  
+        $data['totalAvg'] =$post->averageRating;  
         if($post->user_id !=null){ 
             $data['relateProByUser'] = Product::where('user_id',$post->user_id)->latest()->limit(7)->get();  
         }if($post){
